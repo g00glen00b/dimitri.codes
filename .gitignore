@@ -1,0 +1,10 @@
+npm-debug.log
+node_modules/
+.env
+.env.development
+.env.production
+.DS_Store
+.cache/
+.idea/
+*.iml
+public/
