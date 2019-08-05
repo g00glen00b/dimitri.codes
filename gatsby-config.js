@@ -1,4 +1,6 @@
 const readingTime = require('reading-time');
+const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+require('dotenv').config({path: `.env.${environment}`});
 
 module.exports = {
   siteMetadata: {
@@ -34,11 +36,11 @@ module.exports = {
           `**/taxonomies`
         ],
         excludedRoutes: [],
-        normalizer: ({entities}) => entities.map(wordNormalizer).map(urlNormalizer)
+        normalizer: ({entities}) => entities.map(normalize)
       }
     },
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: `gatsby-plugin-google-analytics`,
       trackingId: process.env.GOOGLE_TRACKING_ID,
       head: false,
       anonymize: true,
@@ -53,12 +55,13 @@ module.exports = {
   ],
 };
 
-const wordNormalizer = ({content, ...rest}) => {
-  if (content != null) return {content, ...rest, readingTime: readingTime(content)};
-  else return {...rest};
-};
-
-const urlNormalizer = ({content, ...rest}) => {
-  if (content != null) return {content: content.replace(new RegExp(process.env.URL_REPLACEMENT), `${process.env.siteUrl}/`), ...rest};
-  else return {...rest};
+const normalize = ({content, ...rest}) => {
+  if (content != null) {
+    const newContent = content
+      .replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO)
+      .replace(new RegExp(process.env.IMAGE_REPLACEMENT_FROM, 'g'), process.env.IMAGE_REPLACEMENT_TO);
+    return {content: newContent, readingTime: readingTime(content), ...rest};
+  } else {
+    return {...rest};
+  }
 };
