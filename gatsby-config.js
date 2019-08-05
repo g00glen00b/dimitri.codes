@@ -2,6 +2,49 @@ const readingTime = require('reading-time');
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 require('dotenv').config({path: `.env.${environment}`});
 
+const siteMetadataQuery = `{
+  site {
+    siteMetadata {
+      title
+      description
+      siteUrl
+      site_url: siteUrl
+    }
+  }
+}`;
+
+const feedItemQuery = `{
+  allWordpressPost(sort: {fields: [date], order:DESC}) {
+    edges {
+      node {
+        excerpt
+        slug
+        title
+        date
+      }
+    }
+  }
+}`;
+
+const getFeedItem = (siteMetadata, node) => ({
+  description: node.excerpt,
+  date: node.date,
+  url: siteMetadata.siteUrl + node.slug,
+  guid: siteMetadata.siteUrl + node.slug
+});
+
+
+const normalize = ({content, ...rest}) => {
+  if (content != null) {
+    const newContent = content
+      .replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO)
+      .replace(new RegExp(process.env.IMAGE_REPLACEMENT_FROM, 'g'), process.env.IMAGE_REPLACEMENT_TO);
+    return {content: newContent, readingTime: readingTime(content), ...rest};
+  } else {
+    return {...rest};
+  }
+};
+
 module.exports = {
   siteMetadata: {
     title: `Dimitri's tutorials`,
@@ -39,6 +82,35 @@ module.exports = {
         normalizer: ({entities}) => entities.map(normalize)
       }
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-advanced-sitemap`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: siteMetadataQuery,
+        feeds: [{
+          serialize: ({query: {site, allWordpressPost}}) => allWordpressPost.edges.map(({node}) => getFeedItem(site, node)),
+          query: feedItemQuery,
+          output: `/rss.xml`,
+          title: `Dimitri's tutorial RSS feed`
+        }]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Dimitri's tutorials`,
+        short_name: `Dimitri\'s tutorials`,
+        start_url: `/`,
+        background_color: `#FFFFFF`,
+        theme_color: `#55BABF`,
+        display: `standalone`,
+        icon: `src/images/logo.png`
+      }
+    },
+    // `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       trackingId: process.env.GOOGLE_TRACKING_ID,
@@ -46,22 +118,5 @@ module.exports = {
       anonymize: true,
       respectDNT: true
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-advanced-sitemap`,
-    `gatsby-plugin-offline`,
-    // `gatsby-plugin-feed`,
   ],
-};
-
-const normalize = ({content, ...rest}) => {
-  if (content != null) {
-    const newContent = content
-      .replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO)
-      .replace(new RegExp(process.env.IMAGE_REPLACEMENT_FROM, 'g'), process.env.IMAGE_REPLACEMENT_TO);
-    return {content: newContent, readingTime: readingTime(content), ...rest};
-  } else {
-    return {...rest};
-  }
 };
