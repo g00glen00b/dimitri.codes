@@ -12,7 +12,7 @@ export const PostTags = ({tags}) => (
       idx > 0 && ', ',
       <Tag key={id}>
         <SimpleLink
-          to={`/tag/${slug}/page/1`}
+          to={`/tag/${slug}`}
           title={`View all ${name} posts`}>
           {name}
         </SimpleLink>

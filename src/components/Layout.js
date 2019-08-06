@@ -10,6 +10,7 @@ import {SiteFooter} from './site/SiteFooter';
 const Container = styled.div`
   max-width: ${maxWidth};
   margin: 0 auto;
+  padding: 0 20px;
 `;
 
 export const Layout = ({ children }) => {
@@ -41,8 +42,7 @@ export const Layout = ({ children }) => {
             color: ${textColor};
           }
           
-          h3 {
-            font-size: 2em;
+          h1, h2, h3, h4, h5, h6 {
             font-weight: 500;
           }
           
@@ -58,21 +58,21 @@ export const Layout = ({ children }) => {
           .aligncenter {
             text-align: center;
           }
+          
+          article h2, article h3 {
+            font-size: 30px;
+          }
+          
+          article p, article li {
+            line-height: 1.7em;
+            font-size: 18px;
+          }
       `}
       />
-     <SiteNav title={data.site.siteMetadata.title}/>
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <SiteDivider/>
-        <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
-      </div>
+      <SiteNav title={data.site.siteMetadata.title}/>
+      <main>{children}</main>
+      <SiteDivider/>
+      <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
     </Container>
   );
 };

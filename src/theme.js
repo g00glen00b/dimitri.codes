@@ -9,8 +9,8 @@ export const primaryColor = '#55BABF';
 export const primaryColorLight = '#E6FEFF';
 export const primaryColorDark = '#458083';
 export const secondaryColor = '#D34A3A';
-export const textFont = 'Lato, sans-serif';
-export const codeFont = 'Menlo, monospace';
+export const textFont = 'Roboto, sans-serif';
+export const codeFont = 'Roboto Mono, monospace';
 
 export const SiteDivider = styled.hr`
   width: 100px;
@@ -30,7 +30,7 @@ export const PostMeta = styled.small`
 export const NavItemLink = styled(props => <Link {...props}/>)`
   text-decoration: none;
   margin: 0 1em;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 export const NavTitleLink = styled(props => <Link {...props}/>)`
@@ -51,6 +51,10 @@ export const Message = styled.p`
   background-color: ${primaryColorLight};
   color: ${primaryColorDark};
   padding: 2em 4em;
+  
+  @media (max-width: 800px) {
+    padding: 2em;
+  }
 `;
 
 export const SimpleLink = styled(props => <Link {...props}/>)`
@@ -64,18 +68,19 @@ export const LinkButton = styled(props => <Link {...props}/>)`
   padding: 0.8em;
   border-radius: 3px;
   transition: background .3s;
+  text-align: center;
   
   &:hover {
     background-color: ${primaryColorDark};
   }
   
   &:active {
-  background-color: ${primaryColorDark};
+    background-color: ${primaryColorDark};
+  }
 `;
 
 
 export const PageTitle = styled.h1`
   margin-bottom: 0.2em;
-  font-size: 2em;
-  font-weight: 300;
+  font-size: 40px;
 `;

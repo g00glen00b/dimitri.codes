@@ -47,7 +47,7 @@ const allPostsQuery = `{
 const createPaginationPages = (component, totalItems, base, context, createPage) => {
   const pageSize = 10;
   const pageCount = Math.ceil(totalItems / pageSize);
-  return Array.from({length: pageCount}).map((_, index) => createPage({
+  const pages = Array.from({length: pageCount}).map((_, index) => createPage({
     path: `${base}/page/${index + 1}`,
     component,
     context: {
@@ -59,6 +59,19 @@ const createPaginationPages = (component, totalItems, base, context, createPage)
       ...context
     },
   }));
+  const firstPage = createPage({
+    path: base,
+    component,
+    context: {
+      base,
+      limit: pageSize,
+      skip: 0,
+      pageCount,
+      currentPage: 1,
+      ...context
+    }
+  });
+  return [...pages, firstPage];
 };
 
 const createPostPages = ({allWordpressPost}, createPage) => {

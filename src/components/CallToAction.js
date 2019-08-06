@@ -7,6 +7,10 @@ export const ActionDiv = styled.div`
   padding: 2em 4em;
   display: flex;
   align-items: center;
+  
+  @media (max-width: 800px) {
+    padding: 2em;
+  }
 `;
 
 export const CallToAction = ({description, action, link}) => (

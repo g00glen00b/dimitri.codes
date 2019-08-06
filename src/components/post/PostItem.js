@@ -13,12 +13,16 @@ const PostArticle = styled.article`
   margin-bottom: 2em;
 `;
 
+const PostExcerpt = styled.div`
+  opacity: 0.7;
+`;
+
 export const PostItem = ({title, slug, readingTime: {text}, excerpt, tags, date}) => (
   <PostArticle>
     <header>
-      <PostTitle><PostTitleLink to={`/${slug}`} dangerouslySetInnerHTML={{__html: title}}/></PostTitle>
+      <PostTitle><PostTitleLink to={`/${slug}`}>{title}</PostTitleLink></PostTitle>
       <PostMeta>{date} | {text} | <PostTags tags={tags}/></PostMeta>
     </header>
-    <div dangerouslySetInnerHTML={{__html: excerpt}}/>
+    <PostExcerpt dangerouslySetInnerHTML={{__html: excerpt}}/>
   </PostArticle>
 );

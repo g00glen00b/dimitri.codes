@@ -10,6 +10,7 @@ export const SiteNav = ({title}) => (
     <Spacer />
     <Link to={"/"}/>
     <NavItemLink to="/">Home</NavItemLink>
+    <NavItemLink to="/category/t">Tutorials</NavItemLink>
     <NavItemLink to="/about-me">About</NavItemLink>
   </PrimaryNav>
 );

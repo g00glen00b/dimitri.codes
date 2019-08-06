@@ -50,7 +50,7 @@ const IndexPage = () => {
       <CallToAction
         description="There's more... I've been blogging for quite a while!"
         action="View all articles"
-        link="/category/t/page/1"/>
+        link="/category/t"/>
     </Layout>
   );
 };

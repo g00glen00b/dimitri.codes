@@ -1,11 +1,11 @@
 import React from 'react';
-import {PageTitle, PostTitleLink} from '../../theme';
+import {PageTitle} from '../../theme';
 
 
-export const PageDetail = ({title, slug, content}) => (
+export const PageDetail = ({title, content}) => (
   <article>
     <header>
-      <PageTitle><PostTitleLink to={`/${slug}`} dangerouslySetInnerHTML={{__html: title}}/></PageTitle>
+      <PageTitle>{title}</PageTitle>
     </header>
     <div dangerouslySetInnerHTML={{__html: content}}/>
   </article>

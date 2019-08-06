@@ -72,6 +72,7 @@ export const SiteFooter = ({origin}) => (
     </SocialLinks>
     <Copyright>
       &copy; {origin} - {new Date().getFullYear()} &mdash; Dimitri 'g00glen00b' Mestdagh.<br />
-      Content licensed under <OutboundLink href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">cc by-sa 4.0</OutboundLink> with attribution required.</Copyright>
+      Content licensed under <OutboundLink href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">cc by-sa 4.0</OutboundLink> with attribution required.
+    </Copyright>
   </Footer>
 );
