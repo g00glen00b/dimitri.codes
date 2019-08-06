@@ -8,6 +8,6 @@ export const PostDetail = ({title, slug, readingTime: {text}, content, tags, dat
       <PageTitle><PostTitleLink to={`/${slug}`} dangerouslySetInnerHTML={{__html: title}}/></PageTitle>
       <PostMeta>{date} | {text} | <PostTags tags={tags}/></PostMeta>
     </header>
-    <p dangerouslySetInnerHTML={{__html: content}}/>
+    <div dangerouslySetInnerHTML={{__html: content}}/>
   </article>
 );

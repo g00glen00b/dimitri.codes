@@ -7,6 +7,6 @@ export const PageDetail = ({title, slug, content}) => (
     <header>
       <PageTitle><PostTitleLink to={`/${slug}`} dangerouslySetInnerHTML={{__html: title}}/></PageTitle>
     </header>
-    <p dangerouslySetInnerHTML={{__html: content}}/>
+    <div dangerouslySetInnerHTML={{__html: content}}/>
   </article>
 );

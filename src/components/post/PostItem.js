@@ -19,6 +19,6 @@ export const PostItem = ({title, slug, readingTime: {text}, excerpt, tags, date}
       <PostTitle><PostTitleLink to={`/${slug}`} dangerouslySetInnerHTML={{__html: title}}/></PostTitle>
       <PostMeta>{date} | {text} | <PostTags tags={tags}/></PostMeta>
     </header>
-    <p dangerouslySetInnerHTML={{__html: excerpt}}/>
+    <div dangerouslySetInnerHTML={{__html: excerpt}}/>
   </PostArticle>
 );

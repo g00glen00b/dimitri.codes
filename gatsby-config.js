@@ -50,7 +50,8 @@ module.exports = {
     title: `Dimitri's tutorials`,
     description: `Dimitri's tutorials about software development with Java and JavaScript`,
     author: `@g00glen00b`,
-    siteUrl: process.env.SITE_URL
+    siteUrl: process.env.SITE_URL,
+    siteOrigin: new Date('2012-07-01')
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -110,7 +111,7 @@ module.exports = {
         icon: `src/images/logo.png`
       }
     },
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       trackingId: process.env.GOOGLE_TRACKING_ID,
