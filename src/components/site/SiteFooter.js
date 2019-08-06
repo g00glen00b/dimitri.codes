@@ -7,7 +7,20 @@ import {OutboundLink} from 'gatsby-plugin-google-analytics';
 
 const Footer = styled.footer`
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const Copyright = styled.p`
+  opacity: 0.8;
+  text-align: center;
+  font-size: 0.8em;
 `;
 
 const FooterLink = styled(props => <OutboundLink {...props}/>)`
@@ -15,8 +28,9 @@ const FooterLink = styled(props => <OutboundLink {...props}/>)`
     margin: 0 0.5em;
 `;
 
-export const SiteFooter = () => (
+export const SiteFooter = ({origin}) => (
   <Footer>
+    <SocialLinks>
       <IconContext.Provider value={{ color: iconColor, size: '1.6em' }}>
         <FooterLink
           href="https://twitter.com/g00glen00b"
@@ -55,5 +69,9 @@ export const SiteFooter = () => (
           <FaSpeakerDeck/>
         </FooterLink>
       </IconContext.Provider>
+    </SocialLinks>
+    <Copyright>
+      &copy; {origin} - {new Date().getFullYear()} &mdash; Dimitri 'g00glen00b' Mestdagh.<br />
+      Content licensed under <OutboundLink href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">cc by-sa 4.0</OutboundLink> with attribution required.</Copyright>
   </Footer>
 );

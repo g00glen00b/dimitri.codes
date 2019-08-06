@@ -28,6 +28,7 @@ const feedItemQuery = `{
 
 const getFeedItem = (siteMetadata, node) => ({
   description: node.excerpt,
+  title: node.title,
   date: node.date,
   url: siteMetadata.siteUrl + node.slug,
   guid: siteMetadata.siteUrl + node.slug

@@ -18,6 +18,7 @@ export const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          siteOrigin(formatString: "YYYY")
         }
       }
     }
@@ -70,7 +71,7 @@ export const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <SiteDivider/>
-        <SiteFooter/>
+        <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
       </div>
     </Container>
   );
