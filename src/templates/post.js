@@ -6,8 +6,22 @@ import {PostDetail} from '../components/post/PostDetail';
 import {Message} from '../theme';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
 
-const getTagMetadata = tags => tags.map(({name}) => ({name: 'article:tag', content: name}));
-const getSectionMetadata = categories => categories.map(({name}) => ({name: 'article:section', content: name}));
+const getTagMetadata = tags => {
+  if (tags == null) {
+    return [];
+  } else {
+    return tags.map(({name}) => ({name: 'article:tag', content: name}));
+  }
+};
+
+const getSectionMetadata = categories => {
+  if (categories == null) {
+    return [];
+  } else {
+    return categories.map(({name}) => ({name: 'article:section', content: name}));
+  }
+};
+
 const getTimeMetadata = (publishedAt, modifiedAt) => [
   {name: `og:updated_time`, content: modifiedAt},
   {name: `article:published_time`, content: publishedAt},
