@@ -13,7 +13,7 @@ const feedItemQuery = `{
   allWordpressPost(sort: {fields: [date], order:DESC}) {
     edges {
       node {
-        excerpt
+        simpleExcerpt
         slug
         title
         date

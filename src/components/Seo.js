@@ -1,88 +1,63 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import {graphql, useStaticQuery} from "gatsby"
+import {Location} from '@reach/router';
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
+const siteMetadataQuery = graphql`
+  query {
+    file(relativePath: {eq: "logo.png"}) {
+      publicURL
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        siteUrl
       }
-    `
-  )
+    }
+  }
+`;
 
+const getOpenGraphMetadata = (site, title, metaDescription, location, image) => [
+  {property: `og:title`, content: title},
+  {property: `og:description`, content: metaDescription},
+  {property: `og.site_name`, content: site.siteMetadata.title},
+  {property: `og:type`, content: `website`},
+  {property: `og:locale`, content: `en_US`},
+  {property: `og:url`, content: `${site.siteMetadata.siteUrl}${location.pathname}`},
+  {property: `og:image`, content: `${site.siteMetadata.siteUrl}${image}`},
+  {property: `og:image:secure_url`, content: `${site.siteMetadata.siteUrl}${image}`},
+];
+
+const getTwitterMetadata = (site, title, metaDescription, image) => [
+  {name: `twitter:card`, content: `summary`},
+  {name: `twitter:creator`, content: site.siteMetadata.author},
+  {name: `twitter:title`, content: title},
+  {name: `twitter:description`, content: metaDescription},
+  {name: `twitter:site`, content: site.siteMetadata.siteUrl},
+  {name: `twitter:image`, content: `${site.siteMetadata.siteUrl}${image}`},
+];
+
+export const SEO = ({description, lang = '', meta = [], title, image}) => {
+  const {site, file} = useStaticQuery(siteMetadataQuery);
   const metaDescription = description || site.siteMetadata.description;
+  const metaImage = image || file.publicURL;
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <Location>
+      {({location}) => (
+        <Helmet
+          htmlAttributes={{lang}}
+          title={title}
+          titleTemplate={`%s | ${site.siteMetadata.title}`}
+          meta={[
+            {name: `description`, content: metaDescription},
+            ...getOpenGraphMetadata(site, title, metaDescription, location, metaImage),
+            ...getTwitterMetadata(site, title, metaDescription, metaImage),
+            ...meta,
+          ]}/>
+      )}
+    </Location>
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-}
-
-export default SEO
+};

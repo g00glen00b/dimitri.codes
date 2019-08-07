@@ -1,6 +1,6 @@
 import React from "react"
 import {graphql, useStaticQuery} from "gatsby"
-import SEO from "../components/Seo"
+import {SEO} from "../components/Seo"
 import {Layout} from '../components/Layout';
 import {SiteIntro} from '../components/site/SiteIntro';
 import {PostItem} from '../components/post/PostItem';

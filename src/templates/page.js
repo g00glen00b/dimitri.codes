@@ -1,5 +1,5 @@
 import React from 'react';
-import SEO from '../components/Seo';
+import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {graphql} from 'gatsby';
 import {PageDetail} from '../components/page/PageDetail';

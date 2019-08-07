@@ -1,8 +1,9 @@
 const readingTime = require('reading-time');
 const he = require('he');
+const striptags = require('striptags');
 
 const normalize = entity => {
-  const normalizers = [normalizeContentUrls, normalizeReadingTime, normalizeTitleEntities];
+  const normalizers = [normalizeContentUrls, normalizeReadingTime, normalizeTitleEntities, normalizeExcerpt];
   return normalizers.reduce((entity, normalizer) => normalizer(entity), entity);
 };
 
@@ -29,6 +30,14 @@ const normalizeTitleEntities = ({title, ...rest}) => {
   if (title != null) {
     const newTitle = he.decode(title);
     return {title: newTitle, ...rest};
+  } else {
+    return {...rest};
+  }
+};
+
+const normalizeExcerpt = ({excerpt, ...rest}) => {
+  if (excerpt != null) {
+    return {excerpt, simpleExcerpt: he.decode(striptags(excerpt)), ...rest};
   } else {
     return {...rest};
   }
