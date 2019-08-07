@@ -28,7 +28,7 @@ export const PostImage = ({src, alt}) => {
   const image = allWordpressWpMedia.edges.find(({node}) => node.source_url === originalSource);
 
   return image == null ? (
-    <span>Not found '{src}'</span>
+    <img src={src} alt={alt}/>
   ) : (
     <Img fluid={image.node.localFile.childImageSharp.fluid} alt={alt}/>
     );
