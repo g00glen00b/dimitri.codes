@@ -25,12 +25,14 @@
     "gatsby-wordpress-inline-images": "^1.0.0",
     "he": "^1.2.0",
     "highlight.js": "^9.15.9",
+    "html-react-parser": "^0.9.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
-    "reading-time": "^1.2.0"
+    "reading-time": "^1.2.0",
+    "striptags": "^3.1.1"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
