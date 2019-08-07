@@ -27,7 +27,7 @@ export const PostImage = ({src, alt}) => {
   const originalSource = src.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$3');
   const image = allWordpressWpMedia.edges.find(({node}) => node.source_url === originalSource);
 
-  return image == null ? (
+  return image == null || image.node.localFile.childImageSharp == null ? (
     <img src={src} alt={alt}/>
   ) : (
     <Img fluid={image.node.localFile.childImageSharp.fluid} alt={alt}/>
