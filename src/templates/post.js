@@ -20,7 +20,7 @@ const Post = ({data}) => {
       <SEO
         title={data.wordpressPost.title}
         description={data.wordpressPost.simpleExcerpt}
-        image={data.wordpressPost.featured_media.localFile.publicURL}
+        image={data.wordpressPost.featured_media != null ? data.wordpressPost.featured_media.localFile.publicURL : null}
         meta={[
           ...getTimeMetadata(data.wordpressPost.iso, data.wordpressPost.modified),
           ...getTagMetadata(data.wordpressPost.tags),
