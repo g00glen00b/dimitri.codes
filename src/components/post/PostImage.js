@@ -1,7 +1,6 @@
-import {graphql, Link, useStaticQuery} from 'gatsby';
+import {graphql, useStaticQuery} from 'gatsby';
 import Img from 'gatsby-image';
 import React from 'react';
-import styled from '@emotion/styled';
 
 const allMedia = graphql`
   query {
