@@ -56,6 +56,9 @@ export const SEO = ({description, lang = '', meta = [], title, image}) => {
             ...getOpenGraphMetadata(site, title, metaDescription, location, metaImage),
             ...getTwitterMetadata(site, title, metaDescription, metaImage),
             ...meta,
+          ]}
+          link={[
+            {rel: `alternate`, type: `application/rss+xml`, title: `Feed`, href: `${site.siteMetadata.siteUrl}/rss.xml`}
           ]}/>
       )}
     </Location>
