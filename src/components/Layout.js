@@ -67,6 +67,11 @@ export const Layout = ({ children }) => {
             line-height: 1.7em;
             font-size: 18px;
           }
+          
+          article a[href$=png], article a[href$=jpg], article a[href$=gif], article a[href$=jpeg] {
+            display: flex;
+            justify-content: center;
+          }
       `}
       />
       <SiteNav title={data.site.siteMetadata.title}/>

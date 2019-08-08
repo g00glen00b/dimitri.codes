@@ -34,7 +34,8 @@ hljs.registerLanguage('sql', sql);
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('yaml', yaml);
 
-export const onRouteUpdate = () => {
+export const initializeHightlighting = () => {
+  console.log(document.querySelectorAll('pre code').length);
   document
     .querySelectorAll('pre code')
     .forEach(block => hljs.highlightBlock(block));
@@ -45,3 +46,6 @@ export const onRouteUpdate = () => {
     .querySelectorAll('pre.prettyprint')
     .forEach(block => hljs.highlightBlock(block));
 };
+
+export const onRouteUpdate = initializeHightlighting;
+export const onClientEntry = initializeHightlighting;
