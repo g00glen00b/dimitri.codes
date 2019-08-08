@@ -22,12 +22,12 @@ const feedItemQuery = `{
   }
 }`;
 
-const getFeedItem = (siteMetadata, node) => ({
+const getFeedItem = (site, node) => ({
   description: node.excerpt,
   title: node.title,
   date: node.date,
-  url: siteMetadata.siteUrl + node.slug,
-  guid: siteMetadata.siteUrl + node.slug
+  url: site.siteMetadata.siteUrl + node.slug,
+  guid: site.siteMetadata.siteUrl + node.slug
 });
 
 module.exports = [
