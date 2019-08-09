@@ -5,6 +5,16 @@ import parse, {domToReact} from 'html-react-parser';
 import {PostImage} from './PostImage';
 import {PostCode} from './PostCode';
 
+const wordpressClasses = [
+  'wp-block-code',
+  'prettyprint',
+  'linenums',
+  'inline:true',
+  'decode:1',
+  'pre-scrollable',
+  'lang:default'
+];
+
 const replaceMedia = node => {
   if (node.name === 'img') {
     return <PostImage src={node.attribs.src} alt={node.attribs.alt} width={node.attribs.width}/>;
@@ -14,7 +24,6 @@ const replaceMedia = node => {
 };
 
 const getLanguage = node => {
-  const wordpressClasses = ['wp-block-code', 'prettyprint', 'linenums', 'inline:true', 'decode:1'];
   if (node.attribs.class != null) {
     const result = node.attribs.class
       .split(' ')
