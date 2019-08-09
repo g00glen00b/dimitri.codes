@@ -19,7 +19,7 @@ const replaceMedia = node => {
   if (node.name === 'img') {
     return <PostImage src={node.attribs.src} alt={node.attribs.alt} width={node.attribs.width}/>;
   } else if (node.name === 'pre') {
-    return <PostCode language={getLanguage(node)}>{domToReact(getCode(node))}</PostCode>
+    return node.children.length > 0 && <PostCode language={getLanguage(node)}>{domToReact(getCode(node))}</PostCode>;
   }
 };
 
