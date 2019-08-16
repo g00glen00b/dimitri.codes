@@ -10,13 +10,6 @@ import {CallToAction} from '../components/CallToAction';
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      site {
-        siteMetadata {
-          title
-          description
-        }
-      }
-      
       allWordpressPost(sort: {fields: [date], order:DESC}, limit: 5) {
         edges {
           node {
@@ -42,7 +35,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home"/>
-      <SiteIntro {...data.site.siteMetadata}/>
+      <SiteIntro />
       <SiteDivider/>
       {data.allWordpressPost.edges.map(({node}) => (
         <PostItem key={node.id} {...node} />

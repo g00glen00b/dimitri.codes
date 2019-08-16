@@ -10,7 +10,7 @@ import {SiteDivider} from '../theme';
 const Posts = ({data, pageContext}) => (
   <Layout>
     <SEO title={`${pageContext.name} posts`}/>
-    <SiteIntro title={`${pageContext.name} posts`}/>
+    <SiteIntro/>
     <SiteDivider/>
     {data.allWordpressPost.edges.map(({node}) => (
       <PostItem key={node.id} {...node} />
@@ -21,13 +21,6 @@ const Posts = ({data, pageContext}) => (
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $id: String!) {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
-    
     allWordpressPost(sort: {fields: [date], order:DESC}, limit: $limit, skip: $skip, filter: {tags: {elemMatch: {id: {eq: $id}}}}) {
       edges {
         node {

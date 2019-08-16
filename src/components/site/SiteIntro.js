@@ -1,26 +1,34 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {secondaryColor, textFont} from '../../theme';
+import {textColor, textFont} from '../../theme';
 
 const SiteIntroTitle = styled.h1`
-  text-align: center;
   font-family: ${textFont};
-  text-transform: uppercase;
   font-size: 3em;
-  color: ${secondaryColor};
+  color: ${textColor};
+  margin: 20px 0 0;
+`;
+
+const SiteIntroHello = styled.small`
+  font-size: 0.5em;
+  color: ${textColor};
+  font-weight: 300;
+  display: block;
 `;
 
 const SiteIntroDescription = styled.h2`
-  text-align: center;
+  margin: 10px 0 20px;
   font-family: ${textFont};
+  color: ${textColor};
   font-weight: 300;
-  max-width: 400px;
-  margin: 0 auto 20px;
 `;
 
-export const SiteIntro = ({title, description}) => (
+export const SiteIntro = ({description}) => (
   <>
-    <SiteIntroTitle>{title}</SiteIntroTitle>
-    <SiteIntroDescription>{description}</SiteIntroDescription>
+    <SiteIntroTitle>
+      <SiteIntroHello>👋 Hey there,</SiteIntroHello>
+      I'm Dimitri
+    </SiteIntroTitle>
+    <SiteIntroDescription>I like trying out new frameworks and writing about them. Below you can find the latest articles I wrote.</SiteIntroDescription>
   </>
 );

@@ -11,6 +11,7 @@ export const SiteNav = ({title}) => (
     <Link to={"/"}/>
     <NavItemLink to="/">Home</NavItemLink>
     <NavItemLink to="/category/t">Tutorials</NavItemLink>
+    <NavItemLink to="/speaking">Speaking</NavItemLink>
     <NavItemLink to="/about-me">About</NavItemLink>
   </PrimaryNav>
 );
