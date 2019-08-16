@@ -1,4 +1,4 @@
-# WordPress powered Gatsby blog
+# WordPress powered Gatsby blog [![Netlify Status](https://api.netlify.com/api/v1/badges/7d74b2f7-8c18-46cc-8d56-477fc30997fd/deploy-status)](https://app.netlify.com/sites/dimitrim/deploys)
 This is my first project using [Gatsby](https://www.gatsbyjs.org/), using [gatsby-source-wordpress](https://www.gatsbyjs.org/packages/gatsby-source-wordpress/) to seed data from [my personal website](https://g00glen00b.be/).
 
 ## Set up

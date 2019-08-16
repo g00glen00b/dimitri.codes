@@ -1,7 +1,81 @@
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+const readingTime = require('reading-time');
+const he = require('he');
+const striptags = require('striptags');
 require('dotenv').config({path: `.env.${environment}`});
-const gatsbyWordpress = require('./config/gatsby-wordpress');
-const gatsbySeo = require('./config/gatsby-seo');
+
+const siteMetadataQuery = `{
+  site {
+    siteMetadata {
+      title
+      description
+      siteUrl
+      site_url: siteUrl
+    }
+  }
+}`;
+
+const feedItemQuery = `{
+  allWordpressPost(sort: {fields: [date], order:DESC}) {
+    edges {
+      node {
+        simpleExcerpt
+        slug
+        title
+        date
+      }
+    }
+  }
+}`;
+
+const getFeedItem = (site, node) => ({
+  description: node.excerpt,
+  title: node.title,
+  date: node.date,
+  url: site.siteMetadata.siteUrl + node.slug,
+  guid: site.siteMetadata.siteUrl + node.slug
+});
+
+const normalize = entity => {
+  const normalizers = [normalizeContentUrls, normalizeReadingTime, normalizeTitleEntities, normalizeExcerpt];
+  return normalizers.reduce((entity, normalizer) => normalizer(entity), entity);
+};
+
+const normalizeContentUrls = ({content, ...rest}) => {
+  if (content != null) {
+    const newContent = content
+      .replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO)
+      .replace(new RegExp(process.env.IMAGE_REPLACEMENT_FROM, 'g'), process.env.IMAGE_REPLACEMENT_TO);
+    return {content: newContent, ...rest};
+  } else {
+    return {...rest};
+  }
+};
+
+const normalizeReadingTime = ({content, ...rest}) => {
+  if (content != null) {
+    return {content, readingTime: readingTime(content), ...rest};
+  } else {
+    return {...rest};
+  }
+};
+
+const normalizeTitleEntities = ({title, ...rest}) => {
+  if (title != null) {
+    const newTitle = he.decode(title);
+    return {title: newTitle, ...rest};
+  } else {
+    return {...rest};
+  }
+};
+
+const normalizeExcerpt = ({excerpt, ...rest}) => {
+  if (excerpt != null) {
+    return {excerpt, simpleExcerpt: he.decode(striptags(excerpt)), ...rest};
+  } else {
+    return {...rest};
+  }
+};
 
 module.exports = {
   siteMetadata: {
@@ -20,10 +94,76 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    ...gatsbyWordpress,
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        baseUrl: process.env.WORDPRESS_API_HOST,
+        protocol: process.env.WORDPRESS_API_PROTOCOL,
+        hostingWPCOM: false,
+        useACF: false,
+        perPage: 100,
+        concurrentRequests: 10,
+        includedRoutes: [
+          `**/categories`,
+          `**/posts`,
+          `**/pages`,
+          `**/media`,
+          `**/tags`,
+          `**/taxonomies`
+        ],
+        excludedRoutes: [],
+        normalizer: ({entities}) => entities.map(normalize)
+      }
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
-    ...gatsbySeo
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [{
+          family: `Roboto`,
+          variants: [`300`, `400`, `500`]
+        }, {
+          family: `Roboto Mono`,
+          variants: [`400`, `700`]
+        }]
+      }
+    },
+    `gatsby-plugin-advanced-sitemap`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: siteMetadataQuery,
+        feeds: [{
+          serialize: ({query: {site, allWordpressPost}}) => allWordpressPost.edges.map(({node}) => getFeedItem(site, node)),
+          query: feedItemQuery,
+          output: `/rss.xml`,
+          title: `Dimitri's tutorial RSS feed`
+        }]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Dimitri's tutorials`,
+        short_name: `Dimitri\'s tutorials`,
+        start_url: `/`,
+        background_color: `#FFFFFF`,
+        theme_color: `#55BABF`,
+        display: `standalone`,
+        icon: `src/images/logo.png`
+      }
+    },
+    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_TRACKING_ID,
+        head: false,
+        anonymize: true,
+        respectDNT: true
+      }
+    },
   ],
 };
