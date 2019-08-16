@@ -40,11 +40,17 @@ export const NavTitleLink = styled(props => <Link {...props}/>)`
 
 export const PrimaryNav = styled.nav`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
-export const Spacer = styled.div`
-  flex-grow: 1;
+export const SiteIdentity = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Message = styled.p`

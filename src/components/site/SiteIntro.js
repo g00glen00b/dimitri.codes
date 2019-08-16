@@ -23,12 +23,14 @@ const SiteIntroDescription = styled.h2`
   font-weight: 300;
 `;
 
-export const SiteIntro = ({description}) => (
+export const SiteIntro = () => (
   <>
     <SiteIntroTitle>
       <SiteIntroHello>👋 Hey there,</SiteIntroHello>
       I'm Dimitri
     </SiteIntroTitle>
-    <SiteIntroDescription>I like trying out new frameworks and writing about them. Below you can find the latest articles I wrote.</SiteIntroDescription>
+    <SiteIntroDescription>
+      I like trying out new frameworks and writing about them. Below you can find the latest articles I wrote.
+    </SiteIntroDescription>
   </>
 );
