@@ -9,6 +9,7 @@
     "@emotion/styled": "^10.0.14",
     "dotenv": "^8.0.0",
     "gatsby": "^2.13.42",
+    "gatsby-cli": "^2.7.30",
     "gatsby-image": "^2.2.7",
     "gatsby-plugin-advanced-sitemap": "^1.4.0",
     "gatsby-plugin-emotion": "^4.1.2",

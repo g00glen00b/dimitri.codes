@@ -43,9 +43,7 @@ const normalize = entity => {
 
 const normalizeContentUrls = ({content, ...rest}) => {
   if (content != null) {
-    const newContent = content
-      .replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO)
-      .replace(new RegExp(process.env.IMAGE_REPLACEMENT_FROM, 'g'), process.env.IMAGE_REPLACEMENT_TO);
+    const newContent = content.replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO);
     return {content: newContent, ...rest};
   } else {
     return {...rest};
