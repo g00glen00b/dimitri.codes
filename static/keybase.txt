@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/g00glen00b
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://dimitr.im
+  * I am g00glen00b (https://keybase.io/g00glen00b) on keybase.
+  * I have a public key ASAu_UHJ0xQcg2dDXidxiHegHVBZIiEP0wMp_8hbftwxOAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01202efd41c9d3141c8367435e27718877a01d505922210fd30329ffc85b7edc31380a",
+      "host": "keybase.io",
+      "kid": "01202efd41c9d3141c8367435e27718877a01d505922210fd30329ffc85b7edc31380a",
+      "uid": "28017589aecd3e22495633414d233e19",
+      "username": "g00glen00b"
+    },
+    "merkle_root": {
+      "ctime": 1566918191,
+      "hash": "3c2efe14dfbb82c724bdd263de04e175bf9eb3ecef3383bd9c6798a9f0a935930892dea108e8a68b9679ccb95b6600abe7d504cbb28333f95a7e6102e8f5a930",
+      "hash_meta": "ec7873571e56369d8688558ab85bb7459db8d8c89059e2fe26fbcd4e2db68426",
+      "seqno": 6110272
+    },
+    "service": {
+      "entropy": "FBF3g7qpUjN90N6cunuZ5c65",
+      "hostname": "dimitr.im",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.3.2"
+  },
+  "ctime": 1566918199,
+  "expire_in": 504576000,
+  "prev": "5e0bd7491e6a32baec9050e0aef78bc856c9bb5114e1948a07a77a5c37c1798a",
+  "seqno": 16,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgLv1BydMUHINnQ14ncYh3oB1QWSIhD9MDKf/IW37cMTgKp3BheWxvYWTESpcCEMQgXgvXSR5qMrrskFDgrveLyFbJu1EU4ZSKB6d6XDfBeYrEIBsjo1BcLsMmV+4HpzjQXHAwK/wvNjCE0BaVomvz3BUeAgHCo3NpZ8RAgNAnelHjMbWxQFmIgarO45QbAi3bpnPtQa/JVPZ4jVUsbfrVWannrKr9WpL7JT23mogSE0MU+sd2TCowb2GXDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIMbZVXrf+36+E8PIPmdVc9ANMd/a6FVMe1Q/J3g54ccUo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/g00glen00b
+
+==================================================================
