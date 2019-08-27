@@ -1,14 +1,16 @@
 import React from 'react';
-import {SEO} from '../components/Seo';
-import {Layout} from '../components/Layout';
 import {graphql} from 'gatsby';
 import {PageDetail} from '../components/page/PageDetail';
+import {Layout} from '../components/shared/Layout';
+import {SEO} from '../components/shared/Seo';
 
 const Post = ({data}) => {
   return (
     <Layout>
       <SEO title={data.wordpressPage.title}/>
-      <PageDetail {...data.wordpressPage}/>
+      <PageDetail
+        content={data.wordpressPage.content}
+        title={data.wordpressPage.title}/>
     </Layout>
   );
 };

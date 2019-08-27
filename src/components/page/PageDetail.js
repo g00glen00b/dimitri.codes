@@ -1,5 +1,5 @@
 import React from 'react';
-import {PageTitle} from '../../theme';
+import {PageTitle} from './PageTitle';
 
 
 export const PageDetail = ({title, content}) => (

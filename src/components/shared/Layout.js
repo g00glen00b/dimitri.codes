@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {graphql, useStaticQuery} from 'gatsby';
-import {SiteNav} from './site/SiteNav';
 import {css, Global} from '@emotion/core';
 import styled from '@emotion/styled';
-import {codeFont, maxWidth, SiteDivider, textColor, textFont} from '../theme';
-import {SiteFooter} from './site/SiteFooter';
+import {codeFont, maxWidth, textColor, textFont} from './theme';
+import {SiteNav} from '../site/SiteNav';
+import {SiteDivider} from '../site/SiteDivider';
+import {SiteFooter} from '../site/SiteFooter';
 
 const Container = styled.div`
   max-width: ${maxWidth};

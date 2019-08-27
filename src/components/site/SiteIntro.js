@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {textColor, textFont} from '../../theme';
+import {textColor, textFont} from '../shared/theme';
 
 const SiteIntroTitle = styled.h1`
   font-family: ${textFont};
@@ -26,7 +26,10 @@ const SiteIntroDescription = styled.h2`
 export const SiteIntro = () => (
   <>
     <SiteIntroTitle>
-      <SiteIntroHello>👋 Hey there,</SiteIntroHello>
+      <SiteIntroHello>
+        <span role="img" aria-label="Waving">👋</span>
+        Hey there,
+      </SiteIntroHello>
       I'm Dimitri
     </SiteIntroTitle>
     <SiteIntroDescription>

@@ -1,7 +1,10 @@
 import {SiteLogo} from './SiteLogo';
 import React from 'react';
 import {Link} from 'gatsby';
-import {NavItemLink, NavTitleLink, PrimaryNav, SiteIdentity} from '../../theme';
+import {PrimaryNav} from '../navigation/PrimaryNav';
+import {SiteIdentity} from './SiteIdentity';
+import {NavTitleLink} from '../navigation/NavTitleLink';
+import {NavItemLink} from '../navigation/NavItemLink';
 
 export const SiteNav = ({title}) => (
   <PrimaryNav>

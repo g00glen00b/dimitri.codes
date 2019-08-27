@@ -1,10 +1,10 @@
 import React from 'react';
-import {SEO} from '../components/Seo';
-import {Layout} from '../components/Layout';
 import {graphql} from 'gatsby';
 import {PostDetail} from '../components/post/PostDetail';
-import {Message} from '../theme';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
+import {Message} from '../components/shared/Message';
+import {Layout} from '../components/shared/Layout';
+import {SEO} from '../components/shared/Seo';
 
 const getTagMetadata = tags => {
   if (tags == null) {
@@ -40,7 +40,12 @@ const Post = ({data}) => {
           ...getTagMetadata(data.wordpressPost.tags),
           ...getSectionMetadata(data.wordpressPost.categories)
         ]}/>
-      <PostDetail {...data.wordpressPost}/>
+      <PostDetail
+        title={data.wordpressPost.title}
+        readingTime={data.wordpressPost.readingTime}
+        tags={data.wordpressPost.tags}
+        date={data.wordpressPost.date}
+        content={data.wordpressPost.content}/>
       <Message>
         Anything not clear?
         Feel free to contact me on <OutboundLink href="https://twitter.com/g00glen00b" target="_blank">Twitter</OutboundLink> or <OutboundLink href="https://keybase.io/g00glen00b" target="_blank">Keybase</OutboundLink>.

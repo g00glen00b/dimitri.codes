@@ -1,11 +1,11 @@
 import React from "react"
 import {graphql, useStaticQuery} from "gatsby"
-import {SEO} from "../components/Seo"
-import {Layout} from '../components/Layout';
 import {SiteIntro} from '../components/site/SiteIntro';
 import {PostItem} from '../components/post/PostItem';
-import {SiteDivider} from '../theme';
-import {CallToAction} from '../components/CallToAction';
+import {Layout} from '../components/shared/Layout';
+import {SEO} from '../components/shared/Seo';
+import {SiteDivider} from '../components/site/SiteDivider';
+import {CallToAction} from '../components/shared/CallToAction';
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -38,7 +38,14 @@ const IndexPage = () => {
       <SiteIntro />
       <SiteDivider/>
       {data.allWordpressPost.edges.map(({node}) => (
-        <PostItem key={node.id} {...node} />
+        <PostItem
+          key={node.id}
+          date={node.date}
+          tags={node.tags}
+          readingTime={node.readingTime}
+          title={node.title}
+          slug={node.slug}
+          excerpt={node.excerpt}/>
       ))}
       <CallToAction
         description="There's more... I've been blogging for quite a while!"

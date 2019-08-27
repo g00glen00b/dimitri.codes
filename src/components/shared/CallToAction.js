@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {LinkButton} from '../theme';
+import {LinkButton} from './LinkButton';
 
 export const ActionDiv = styled.div`
   background-color: rgba(0, 0, 0, .05);

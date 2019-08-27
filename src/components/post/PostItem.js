@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {PostTags} from './PostTags';
-import {PostMeta, PostTitleLink} from '../../theme';
+import {PostTitleLink} from './PostTitleLink';
+import {PostMeta} from './PostMeta';
 
 const PostTitle = styled.h2`
   margin-bottom: 0.2em;
@@ -17,12 +17,18 @@ const PostExcerpt = styled.div`
   opacity: 0.7;
 `;
 
-export const PostItem = ({title, slug, readingTime: {text}, excerpt, tags, date}) => (
+export const PostItem = ({title, slug, readingTime, excerpt, tags, date}) => (
   <PostArticle>
     <header>
-      <PostTitle><PostTitleLink to={`/${slug}`}>{title}</PostTitleLink></PostTitle>
-      <PostMeta>{date} | {text} | <PostTags tags={tags}/></PostMeta>
+      <PostTitle>
+        <PostTitleLink to={`/${slug}`}>{title}</PostTitleLink>
+      </PostTitle>
+      <PostMeta
+        readingTime={readingTime}
+        tags={tags}
+        date={date}/>
     </header>
-    <PostExcerpt dangerouslySetInnerHTML={{__html: excerpt}}/>
+    <PostExcerpt
+      dangerouslySetInnerHTML={{__html: excerpt}}/>
   </PostArticle>
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import {FaCodepen, FaGithub, FaKeybase, FaSpeakerDeck, FaStackOverflow, FaTwitter} from 'react-icons/fa';
 import {IconContext} from "react-icons";
 import styled from '@emotion/styled';
-import {iconColor} from '../../theme';
+import {iconColor} from '../shared/theme';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
 
 const Footer = styled.footer`

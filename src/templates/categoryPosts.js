@@ -1,11 +1,11 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {SEO} from "../components/Seo"
-import {Layout} from '../components/Layout';
 import {PostItem} from '../components/post/PostItem';
-import {Pagination} from '../components/Pagination';
 import {SiteIntro} from '../components/site/SiteIntro';
-import {SiteDivider} from '../theme';
+import {Layout} from '../components/shared/Layout';
+import {SiteDivider} from '../components/site/SiteDivider';
+import {Pagination} from '../components/shared/Pagination';
+import {SEO} from '../components/shared/Seo';
 
 const Posts = ({data, pageContext}) => (
   <Layout>
@@ -15,7 +15,10 @@ const Posts = ({data, pageContext}) => (
     {data.allWordpressPost.edges.map(({node}) => (
       <PostItem key={node.id} {...node} />
     ))}
-    <Pagination {...pageContext}/>
+    <Pagination
+      pageCount={pageContext.pageCount}
+      currentPage={pageContext.currentPage}
+      base={pageContext.base}/>
   </Layout>
 );
 

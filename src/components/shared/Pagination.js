@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {SimpleLink} from '../theme';
+import {SimpleLink} from './SimpleLink';
 
 const PaginationNav = styled.nav`
   display: flex;

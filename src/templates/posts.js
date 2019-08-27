@@ -1,19 +1,29 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {SEO} from "../components/Seo";
-import {Layout} from '../components/Layout';
 import {PostItem} from '../components/post/PostItem';
-import {Pagination} from '../components/Pagination';
 import {SiteIntro} from '../components/site/SiteIntro';
+import {SEO} from '../components/shared/Seo';
+import {Pagination} from '../components/shared/Pagination';
+import {Layout} from '../components/shared/Layout';
 
 const Posts = ({data, pageContext}) => (
   <Layout>
     <SEO title="Posts"/>
     <SiteIntro/>
     {data.allWordpressPost.edges.map(({node}) => (
-      <PostItem key={node.id} {...node} />
+      <PostItem
+        key={node.id}
+        date={node.date}
+        tags={node.tags}
+        readingTime={node.readingTime}
+        title={node.title}
+        excerpt={node.excerpt}
+        slug={node.slug} />
     ))}
-    <Pagination {...pageContext}/>
+    <Pagination
+      pageCount={pageContext.pageCount}
+      currentPage={pageContext.currentPage}
+      base={pageContext.base}/>
   </Layout>
 );
 

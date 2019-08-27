@@ -1,9 +1,9 @@
 import React from 'react';
-import {PostTags} from './PostTags';
-import {PageTitle, PostMeta} from '../../theme';
 import parse, {domToReact} from 'html-react-parser';
 import {PostImage} from './PostImage';
 import {PostCode} from './PostCode';
+import {PageTitle} from '../page/PageTitle';
+import {PostMeta} from './PostMeta';
 
 const wordpressClasses = [
   'wp-block-code',
@@ -43,12 +43,15 @@ const getCode = node => {
   }
 };
 
-export const PostDetail = ({title, readingTime: {text}, content, tags, date}) => {
+export const PostDetail = ({title, readingTime, content, tags, date}) => {
   return (
     <article>
       <header>
         <PageTitle>{title}</PageTitle>
-        <PostMeta>{date} | {text} | <PostTags tags={tags}/></PostMeta>
+        <PostMeta
+          readingTime={readingTime}
+          tags={tags}
+          date={date}/>
       </header>
       <div>{parse(content, {replace: replaceMedia})}</div>
     </article>
