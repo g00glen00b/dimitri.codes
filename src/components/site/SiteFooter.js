@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaCodepen, FaGithub, FaKeybase, FaSpeakerDeck, FaStackOverflow, FaTwitter} from 'react-icons/fa';
+import {FaCodepen, FaGithub, FaKeybase, FaRss, FaSpeakerDeck, FaStackOverflow, FaTwitter} from 'react-icons/fa';
 import {IconContext} from "react-icons";
 import styled from '@emotion/styled';
 import {iconColor} from '../shared/theme';
@@ -28,7 +28,7 @@ const FooterLink = styled(props => <OutboundLink {...props}/>)`
     margin: 0 0.5em;
 `;
 
-export const SiteFooter = ({origin}) => (
+export const SiteFooter = ({origin, siteUrl}) => (
   <Footer>
     <SocialLinks>
       <IconContext.Provider value={{ color: iconColor, size: '1.6em' }}>
@@ -67,6 +67,12 @@ export const SiteFooter = ({origin}) => (
           title="Speaker Deck"
           target="_blank">
           <FaSpeakerDeck/>
+        </FooterLink>
+        <FooterLink
+          href="./rss.xml"
+          title="RSS feed"
+          target="_blank">
+          <FaRss/>
         </FooterLink>
       </IconContext.Provider>
     </SocialLinks>
