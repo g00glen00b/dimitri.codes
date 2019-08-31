@@ -101,6 +101,10 @@ module.exports = {
         useACF: false,
         perPage: 100,
         concurrentRequests: 10,
+        auth: {
+          htaccess_user: process.env.WORDPRESS_API_USER,
+          htaccess_pass: process.env.WORDPRESS_API_PASS
+        },
         includedRoutes: [
           `**/categories`,
           `**/posts`,
