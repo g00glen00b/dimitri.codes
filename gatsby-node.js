@@ -56,7 +56,7 @@ const createPaginationPages = (component, totalItems, base, context, createPage)
       ...context
     },
   }));
-  const firstPage = createPage({
+  const firstPage = pageCount > 0 && createPage({
     path: base,
     component,
     context: {
