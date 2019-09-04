@@ -1,5 +1,4 @@
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
-const readingTime = require('reading-time');
 const he = require('he');
 const striptags = require('striptags');
 require('dotenv').config({path: `.env.${environment}`});
@@ -37,7 +36,7 @@ const getFeedItem = (site, node) => ({
 });
 
 const normalize = entity => {
-  const normalizers = [normalizeContentUrls, normalizeReadingTime, normalizeTitleEntities, normalizeExcerpt];
+  const normalizers = [normalizeContentUrls, normalizeTitleEntities, normalizeExcerpt];
   return normalizers.reduce((entity, normalizer) => normalizer(entity), entity);
 };
 
@@ -45,14 +44,6 @@ const normalizeContentUrls = ({content, ...rest}) => {
   if (content != null) {
     const newContent = content.replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO);
     return {content: newContent, ...rest};
-  } else {
-    return {...rest};
-  }
-};
-
-const normalizeReadingTime = ({content, ...rest}) => {
-  if (content != null) {
-    return {content, readingTime: readingTime(content), ...rest};
   } else {
     return {...rest};
   }
@@ -114,7 +105,10 @@ module.exports = {
           `**/taxonomies`
         ],
         excludedRoutes: [],
-        normalizer: ({entities}) => entities.map(normalize)
+        normalizer: ({entities}) => entities.map(normalize),
+        plugins: [
+          `gatsby-wordpress-reading-time`
+        ]
       }
     },
     `gatsby-transformer-sharp`,

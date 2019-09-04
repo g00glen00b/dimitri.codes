@@ -23,8 +23,10 @@ const IndexPage = () => {
               slug
               name
             }
-            readingTime {
-              text
+            fields {
+              readingTime {
+                text
+              }
             }
           }
         }
@@ -42,7 +44,7 @@ const IndexPage = () => {
           key={node.id}
           date={node.date}
           tags={node.tags}
-          readingTime={node.readingTime}
+          readingTime={node.fields.readingTime}
           title={node.title}
           slug={node.slug}
           excerpt={node.excerpt}/>

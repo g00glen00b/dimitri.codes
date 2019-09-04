@@ -23,6 +23,7 @@
     "gatsby-source-filesystem": "^2.1.6",
     "gatsby-source-wordpress": "^3.1.11",
     "gatsby-transformer-sharp": "^2.2.5",
+    "gatsby-wordpress-reading-time": "^1.0.2",
     "he": "^1.2.0",
     "html-react-parser": "^0.9.1",
     "prop-types": "^15.7.2",
@@ -31,7 +32,6 @@
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
     "react-syntax-highlighter": "^11.0.2",
-    "reading-time": "^1.2.0",
     "striptags": "^3.1.1"
   },
   "devDependencies": {

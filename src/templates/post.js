@@ -42,7 +42,7 @@ const Post = ({data}) => {
         ]}/>
       <PostDetail
         title={data.wordpressPost.title}
-        readingTime={data.wordpressPost.readingTime}
+        readingTime={data.wordpressPost.fields.readingTime}
         tags={data.wordpressPost.tags}
         date={data.wordpressPost.date}
         content={data.wordpressPost.content}/>
@@ -84,8 +84,10 @@ export const query = graphql`
         slug
         name
       }
-      readingTime {
-        text
+      fields {
+        readingTime {
+          text
+        }
       }
     }
   }

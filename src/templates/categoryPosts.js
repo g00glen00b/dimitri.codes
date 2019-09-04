@@ -13,7 +13,14 @@ const Posts = ({data, pageContext}) => (
     <SiteIntro/>
     <SiteDivider/>
     {data.allWordpressPost.edges.map(({node}) => (
-      <PostItem key={node.id} {...node} />
+      <PostItem
+        key={node.id}
+        title={node.title}
+        tags={node.tags}
+        slug={node.slug}
+        readingTime={node.fields.readingTime}
+        excerpt={node.excerpt}
+        date={node.date} />
     ))}
     <Pagination
       pageCount={pageContext.pageCount}
@@ -37,8 +44,10 @@ export const query = graphql`
             slug
             name
           }
-          readingTime {
-            text
+          fields {
+            readingTime {
+              text
+            }
           }
         }
       }

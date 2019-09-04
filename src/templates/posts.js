@@ -15,7 +15,7 @@ const Posts = ({data, pageContext}) => (
         key={node.id}
         date={node.date}
         tags={node.tags}
-        readingTime={node.readingTime}
+        readingTime={node.fields.readingTime}
         title={node.title}
         excerpt={node.excerpt}
         slug={node.slug} />
@@ -42,8 +42,10 @@ export const query = graphql`
             slug
             name
           }
-          readingTime {
-            text
+          fields {
+            readingTime {
+              text
+            }
           }
         }
       }
