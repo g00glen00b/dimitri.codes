@@ -26,6 +26,7 @@ const allPostsQuery = `{
         id
         count
         slug
+        name
       }
     }
   }
@@ -36,6 +37,7 @@ const allPostsQuery = `{
         id
         count
         slug
+        name
       }
     }
   }  
