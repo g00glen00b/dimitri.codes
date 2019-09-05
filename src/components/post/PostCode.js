@@ -1,10 +1,10 @@
 import React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import {github} from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {ghcolors} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export const PostCode = ({language, children}) => (
   <SyntaxHighlighter
-    style={github}
+    style={ghcolors}
     language={language}>
     {children}
   </SyntaxHighlighter>
