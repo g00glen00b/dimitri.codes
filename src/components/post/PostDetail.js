@@ -15,9 +15,23 @@ const wordpressClasses = [
   'lang:default'
 ];
 
-const replaceMedia = node => {
+const getImage = node => {
   if (node.name === 'img') {
-    return <PostImage src={node.attribs.src} alt={node.attribs.alt} width={node.attribs.width}/>;
+    return node;
+  } else if (node.children != null) {
+    for (let index = 0; index < node.children.length; index++) {
+      let image = getImage(node.children[index]);
+      if (image != null) return image;
+    }
+  }
+};
+
+const replaceMedia = node => {
+  if (node.name === 'p') {
+    const image = getImage(node);
+    if (image != null) {
+      return <PostImage src={image.attribs.src} alt={image.attribs.alt} width={image.attribs.width}/>;
+    }
   } else if (node.name === 'pre') {
     return node.children.length > 0 && <PostCode language={getLanguage(node)}>{domToReact(getCode(node))}</PostCode>;
   }
