@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import {Link} from 'gatsby';
 import React from 'react';
-import {primaryColor, primaryColorDark} from './theme';
 
 export const LinkButton = styled(props => <Link {...props}/>)`
   text-decoration: none;
-  background-color: ${primaryColor};
+  background-color: ${({theme}) => theme.primaryColor};
   color: white;
   padding: 0.8em;
   border-radius: 3px;
@@ -13,10 +12,10 @@ export const LinkButton = styled(props => <Link {...props}/>)`
   text-align: center;
   
   &:hover {
-    background-color: ${primaryColorDark};
+    background-color: ${({theme}) => theme.primaryColorDark};
   }
   
   &:active {
-    background-color: ${primaryColorDark};
+    background-color: ${({theme}) => theme.primaryColorDark};
   }
 `;

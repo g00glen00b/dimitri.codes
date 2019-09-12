@@ -8,6 +8,7 @@
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "dotenv": "^8.0.0",
+    "emotion-theming": "^10.0.17",
     "gatsby": "^2.13.42",
     "gatsby-cli": "^2.7.30",
     "gatsby-image": "^2.2.7",
@@ -33,6 +34,8 @@
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
     "react-syntax-highlighter": "^11.0.2",
+    "react-use-localstorage": "^3.2.1",
+    "react-use-media": "^0.3.0",
     "striptags": "^3.1.1"
   },
   "devDependencies": {

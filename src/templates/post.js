@@ -1,10 +1,9 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import {PostDetail} from '../components/post/PostDetail';
-import {OutboundLink} from 'gatsby-plugin-google-analytics';
-import {Message} from '../components/shared/Message';
 import {Layout} from '../components/shared/Layout';
 import {SEO} from '../components/shared/Seo';
+import {PostFooter} from '../components/post/PostFooter';
 
 const getTagMetadata = tags => {
   if (tags == null) {
@@ -28,31 +27,27 @@ const getTimeMetadata = (publishedAt, modifiedAt) => [
   {name: `article:modified_time`, content: modifiedAt}
 ];
 
-const Post = ({data}) => {
-  return (
-    <Layout>
-      <SEO
-        title={data.wordpressPost.title}
-        description={data.wordpressPost.simpleExcerpt}
-        image={data.wordpressPost.featured_media != null ? data.wordpressPost.featured_media.localFile.publicURL : null}
-        meta={[
-          ...getTimeMetadata(data.wordpressPost.iso, data.wordpressPost.modified),
-          ...getTagMetadata(data.wordpressPost.tags),
-          ...getSectionMetadata(data.wordpressPost.categories)
-        ]}/>
-      <PostDetail
-        title={data.wordpressPost.title}
-        readingTime={data.wordpressPost.fields.readingTime}
-        tags={data.wordpressPost.tags}
-        date={data.wordpressPost.date}
-        content={data.wordpressPost.content}/>
-      <Message>
-        Anything not clear?
-        Feel free to contact me on <OutboundLink href="https://twitter.com/g00glen00b" target="_blank">Twitter</OutboundLink> or <OutboundLink href="https://keybase.io/g00glen00b" target="_blank">Keybase</OutboundLink>.
-      </Message>
-    </Layout>
-  );
-};
+const Post = ({data}) => (
+  <Layout>
+    <SEO
+      title={data.wordpressPost.title}
+      description={data.wordpressPost.simpleExcerpt}
+      image={data.wordpressPost.featured_media != null ? data.wordpressPost.featured_media.localFile.publicURL : null}
+      meta={[
+        ...getTimeMetadata(data.wordpressPost.iso, data.wordpressPost.modified),
+        ...getTagMetadata(data.wordpressPost.tags),
+        ...getSectionMetadata(data.wordpressPost.categories)
+      ]}/>
+    <PostDetail
+      title={data.wordpressPost.title}
+      readingTime={data.wordpressPost.fields.readingTime}
+      tags={data.wordpressPost.tags}
+      date={data.wordpressPost.date}
+      content={data.wordpressPost.content}/>
+    <PostFooter
+      postUrl={`${data.site.siteMetadata.siteUrl}/${data.wordpressPost.slug}`}/>
+  </Layout>
+);
 
 export const query = graphql`
   query ($id: String!) {
@@ -60,6 +55,7 @@ export const query = graphql`
       siteMetadata {
         title
         description
+        siteUrl
       }
     }
     

@@ -26,8 +26,11 @@ const getImage = node => {
   }
 };
 
+const isImage = node => node.name === 'p'
+  || (node.attribs != null && node.attribs.class != null && node.attribs.class.includes('wp-block-image'));
+
 const replaceMedia = node => {
-  if (node.name === 'p') {
+  if (isImage(node)) {
     const image = getImage(node);
     if (image != null) {
       return <PostImage src={image.attribs.src} alt={image.attribs.alt} width={image.attribs.width}/>;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {FaCodepen, FaGithub, FaKeybase, FaRss, FaSpeakerDeck, FaStackOverflow, FaTwitter} from 'react-icons/fa';
-import {IconContext} from "react-icons";
+import {IconContext} from 'react-icons';
 import styled from '@emotion/styled';
-import {iconColor} from '../shared/theme';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
+import {withTheme} from 'emotion-theming';
 
 const Footer = styled.footer`
     display: flex;
@@ -28,10 +28,16 @@ const FooterLink = styled(props => <OutboundLink {...props}/>)`
     margin: 0 0.5em;
 `;
 
-export const SiteFooter = ({origin, siteUrl}) => (
+const ThemeIconContext = withTheme(({theme, children}) => (
+  <IconContext.Provider value={{color: theme.iconColor, size: '1.6em'}}>
+    {children}
+  </IconContext.Provider>
+));
+
+export const SiteFooter = ({origin}) => (
   <Footer>
     <SocialLinks>
-      <IconContext.Provider value={{ color: iconColor, size: '1.6em' }}>
+      <ThemeIconContext>
         <FooterLink
           href="https://twitter.com/g00glen00b"
           title="Twitter"
@@ -74,7 +80,7 @@ export const SiteFooter = ({origin, siteUrl}) => (
           target="_blank">
           <FaRss/>
         </FooterLink>
-      </IconContext.Provider>
+      </ThemeIconContext>
     </SocialLinks>
     <Copyright>
       &copy; {origin} - {new Date().getFullYear()} &mdash; Dimitri 'g00glen00b' Mestdagh.<br />

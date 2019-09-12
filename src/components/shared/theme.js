@@ -1,9 +1,28 @@
-export const maxWidth = '800px';
-export const textColor = '#222222';
-export const iconColor = '#444444';
-export const primaryColor = '#55BABF';
-export const primaryColorLight = '#E6FEFF';
-export const primaryColorDark = '#458083';
-export const secondaryColor = '#D34A3A';
-export const textFont = 'Roboto, sans-serif';
-export const codeFont = 'Roboto Mono, monospace';
+export default {
+  light: {
+    maxWidth: '800px',
+    textColor: '#222222',
+    iconColor: '#444444',
+    primaryColor: '#55BABF',
+    primaryColorLight: '#E6FEFF',
+    primaryColorDark: '#458083',
+    secondaryColor: '#D34A3A',
+    backgroundColor: '#FFFFFF',
+    secondaryBackgroundColor: 'rgba(0, 0, 0, .05)',
+    textFont: 'Roboto, sans-serif',
+    codeFont: 'Roboto Mono, monospace'
+  },
+  dark: {
+    maxWidth: '800px',
+    textColor: '#E5E5E5',
+    iconColor: '#E5E5E5',
+    primaryColor: '#55BABF',
+    primaryColorLight: '#E6FEFF',
+    primaryColorDark: '#458083',
+    secondaryColor: '#D34A3A',
+    backgroundColor: '#444444',
+    secondaryBackgroundColor: 'rgba(255, 255, 255, .05)',
+    textFont: 'Roboto, sans-serif',
+    codeFont: 'Roboto Mono, monospace'
+  }
+};

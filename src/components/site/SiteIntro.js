@@ -1,25 +1,24 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {textColor, textFont} from '../shared/theme';
 
 const SiteIntroTitle = styled.h1`
-  font-family: ${textFont};
+  font-family: ${({theme}) => theme.textFont};
   font-size: 3em;
-  color: ${textColor};
+  color: ${({theme}) => theme.textColor};
   margin: 20px 0 0;
 `;
 
 const SiteIntroHello = styled.small`
   font-size: 0.5em;
-  color: ${textColor};
+  color: ${({theme}) => theme.textColor};
   font-weight: 300;
   display: block;
 `;
 
 const SiteIntroDescription = styled.h2`
   margin: 10px 0 20px;
-  font-family: ${textFont};
-  color: ${textColor};
+  font-family: ${({theme}) => theme.textFont};
+  color: ${({theme}) => theme.textColor};
   font-weight: 300;
 `;
 

@@ -7,6 +7,7 @@ const PaginationNav = styled.nav`
   justify-content: space-between;
   font-size: 0.8em;
   opacity: 0.8;
+  color: ${({theme}) => theme.textColor};
 `;
 
 export const Pagination = ({currentPage, pageCount, base}) => (

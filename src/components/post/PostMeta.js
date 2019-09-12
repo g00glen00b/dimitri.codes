@@ -4,6 +4,7 @@ import React from 'react';
 
 const PostMetaSmall = styled.small`
   opacity: 0.8;
+  color: ${({theme}) => theme.textColor}
 `;
 
 export const PostMeta = ({date, readingTime, tags}) => (
