@@ -42,6 +42,15 @@ const GlobalStyles = withTheme(({theme}) => (
       color: ${theme.textColor};
     }
     
+    p > code {
+      background-color: ${theme.secondaryBackgroundColor};
+      padding: 0 3px;
+    } 
+    
+    strong {
+      font-weight: 500;
+    }
+    
     a {
       color: ${theme.primaryColor};
     }
