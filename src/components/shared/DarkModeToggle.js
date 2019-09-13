@@ -18,6 +18,7 @@ const DarkModeLabel = styled.label`
   width: 40px;
   padding: 1px;
   position: relative;
+  cursor: pointer;
   
   &:before {
     content: '';
@@ -29,7 +30,6 @@ const DarkModeLabel = styled.label`
     border-radius: 10px;
     transition: margin .3s;
     z-index: 101;
-    cursor: pointer;
   }
   
   *:checked+&::before {

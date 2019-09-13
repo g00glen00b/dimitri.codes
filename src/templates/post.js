@@ -4,6 +4,7 @@ import {PostDetail} from '../components/post/PostDetail';
 import {Layout} from '../components/shared/Layout';
 import {SEO} from '../components/shared/Seo';
 import {PostFooter} from '../components/post/PostFooter';
+import {PostCard} from '../components/post/PostCard';
 
 const getTagMetadata = tags => {
   if (tags == null) {
@@ -46,6 +47,7 @@ const Post = ({data}) => (
       content={data.wordpressPost.content}/>
     <PostFooter
       postUrl={`${data.site.siteMetadata.siteUrl}/${data.wordpressPost.slug}`}/>
+    <PostCard/>
   </Layout>
 );
 
