@@ -71,6 +71,7 @@ module.exports = {
     title: `Dimitri's tutorials`,
     description: `Dimitri's tutorials about software development with Java and JavaScript`,
     author: `@g00glen00b`,
+    bio: `Dimitri "g00glen00b" Mestdagh is a consultant at Cronos and tech lead at Aquafin. Usually you can find him trying out new libraries and technologies. Loves both Java and JavaScript.`,
     siteUrl: process.env.SITE_URL,
     siteOrigin: new Date('2012-07-01')
   },

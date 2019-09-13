@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Img from 'gatsby-image';
 import React from 'react';
 
-const PostCardContainer = styled.div`
+const AuthorCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,26 +12,29 @@ const PostCardContainer = styled.div`
   margin: 2em 0;
 `;
 
-const PostCardImageWrapper = styled.div`
+const AuthorImageWrapper = styled.div`
   width: 64px;
   height: 64px;
   margin-right: 2em;
 `;
 
-const PostCardInfo = styled.p`
+const AuthorInfo = styled.p`
   flex: auto;
   margin: 0;
 `;
 
-const PostCardImage = styled(props => <Img {...props}/>)`
+const AuthorImage = styled(props => <Img {...props}/>)`
   border-radius: 50%;
 `;
 
-
-
-export const PostCard = () => {
+export const AuthorCard = () => {
   const data = useStaticQuery(graphql`
     query {
+      site {
+        siteMetadata {
+          bio
+        }
+      }
       profileImage: file(relativePath: { eq: "profile.jpeg" }) {
         childImageSharp {
           fixed(width: 64) {
@@ -43,16 +46,15 @@ export const PostCard = () => {
   `);
 
   return (
-    <PostCardContainer>
-      <PostCardImageWrapper>
-        <PostCardImage
+    <AuthorCardContainer>
+      <AuthorImageWrapper>
+        <AuthorImage
           fixed={data.profileImage.childImageSharp.fixed}
           alt="Profile picture"/>
-      </PostCardImageWrapper>
-      <PostCardInfo>
-        Dimitri "g00glen00b" Mestdagh is a consultant at Cronos and tech lead at Aquafin.<br/>
-        Usually you can find him trying out new libraries and technologies. Loves both Java and JavaScript.
-      </PostCardInfo>
-    </PostCardContainer>
+      </AuthorImageWrapper>
+      <AuthorInfo>
+        {data.site.siteMetadata.bio}
+      </AuthorInfo>
+    </AuthorCardContainer>
   );
 };
