@@ -3,8 +3,7 @@ import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import React from 'react';
 import styled from '@emotion/styled';
 
-const LinkContainer = styled.nav`
-  display: flex;
+const LinkContainer = styled.p`
   margin: 2em 0 0;
 `;
 
