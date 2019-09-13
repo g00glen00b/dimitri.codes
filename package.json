@@ -34,8 +34,6 @@
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
     "react-syntax-highlighter": "^11.0.2",
-    "react-use-localstorage": "^3.2.1",
-    "react-use-media": "^0.3.0",
     "striptags": "^3.1.1"
   },
   "devDependencies": {

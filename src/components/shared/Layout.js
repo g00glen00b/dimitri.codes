@@ -89,11 +89,6 @@ export const Layout = ({ children }) => (
   <ThemeProvider theme={themes.light}>
     <Container>
       <GlobalStyles/>
-      <ToggleContainer>
-        <DarkModeToggle
-          useDarkMode={isDark}
-          onChange={darkMode => setTheme(darkMode ? 'dark' : 'light')}/>
-      </ToggleContainer>
       <SiteNav title={data.site.siteMetadata.title}/>
       <main>{children}</main>
       <SiteDivider/>
