@@ -6,12 +6,7 @@ import {SiteNav} from '../site/SiteNav';
 import {SiteDivider} from '../site/SiteDivider';
 import {SiteFooter} from '../site/SiteFooter';
 import {ThemeProvider, withTheme} from 'emotion-theming';
-import {DarkModeToggle} from './DarkModeToggle';
-
-const ToggleContainer = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-`;
+import {graphql, useStaticQuery} from 'gatsby';
 
 const Container = styled.div`
   max-width: ${props => props.theme.maxWidth};
@@ -85,14 +80,27 @@ const GlobalStyles = withTheme(({theme}) => (
   `}/>
 ));
 
-export const Layout = ({ children }) => (
-  <ThemeProvider theme={themes.light}>
-    <Container>
-      <GlobalStyles/>
-      <SiteNav title={data.site.siteMetadata.title}/>
-      <main>{children}</main>
-      <SiteDivider/>
-      <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
-    </Container>
-  </ThemeProvider>
-);
+export const Layout = ({ children }) => {
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+          siteOrigin(formatString: "YYYY")
+        }
+      }
+    }
+  `);
+
+  return (
+    <ThemeProvider theme={themes.light}>
+      <Container>
+        <GlobalStyles/>
+        <SiteNav title={data.site.siteMetadata.title}/>
+        <main>{children}</main>
+        <SiteDivider/>
+        <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
+      </Container>
+    </ThemeProvider>
+  );
+};

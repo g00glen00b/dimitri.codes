@@ -4,7 +4,7 @@ import {PageDetail} from '../components/page/PageDetail';
 import {Layout} from '../components/shared/Layout';
 import {SEO} from '../components/shared/Seo';
 
-const Post = ({data}) => {
+const Page = ({data}) => {
   return (
     <Layout>
       <SEO title={data.wordpressPage.title}/>
@@ -32,4 +32,4 @@ export const query = graphql`
   }
 `;
 
-export default Post;
+export default Page;
