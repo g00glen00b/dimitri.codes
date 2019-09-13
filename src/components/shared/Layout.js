@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
 import {css, Global} from '@emotion/core';
 import styled from '@emotion/styled';
@@ -88,10 +88,25 @@ const GlobalStyles = withTheme(({theme}) => (
   `}/>
 ));
 
+const usePrefersDarkMode = () => {
+  if (window && window.matchMedia) return useMedia({prefersColorScheme: 'dark'});
+  else return false;
+};
+
+const useLocalStorageSafe = key => {
+  if (window && window.localStorage) return useLocalStorage(key);
+  else return useState('');
+};
+
+const useDarkMode = () => {
+  const prefersDarkMode = usePrefersDarkMode();
+  const [theme, setTheme] = useLocalStorageSafe('theme');
+  const isDark = theme === '' ? prefersDarkMode : theme === 'dark';
+  return [isDark, setTheme];
+};
+
 export const Layout = ({ children }) => {
-  const isDarkPreferred = useMedia({prefersColorScheme: 'dark'});
-  const [theme, setTheme] = useLocalStorage('theme');
-  const isDark = theme === '' ? isDarkPreferred : theme === 'dark';
+  const [isDark, setTheme] = useDarkMode();
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
