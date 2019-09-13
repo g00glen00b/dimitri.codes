@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {graphql, useStaticQuery} from 'gatsby';
+import React from 'react';
 import {css, Global} from '@emotion/core';
 import styled from '@emotion/styled';
 import themes from './theme';
@@ -8,8 +7,6 @@ import {SiteDivider} from '../site/SiteDivider';
 import {SiteFooter} from '../site/SiteFooter';
 import {ThemeProvider, withTheme} from 'emotion-theming';
 import {DarkModeToggle} from './DarkModeToggle';
-import useLocalStorage from 'react-use-localstorage';
-import {useMedia} from 'react-use-media';
 
 const ToggleContainer = styled.div`
   display: flex;
@@ -88,50 +85,19 @@ const GlobalStyles = withTheme(({theme}) => (
   `}/>
 ));
 
-const usePrefersDarkMode = () => {
-  if (window && window.matchMedia) return useMedia({prefersColorScheme: 'dark'});
-  else return false;
-};
-
-const useLocalStorageSafe = key => {
-  if (window && window.localStorage) return useLocalStorage(key);
-  else return useState('');
-};
-
-const useDarkMode = () => {
-  const prefersDarkMode = usePrefersDarkMode();
-  const [theme, setTheme] = useLocalStorageSafe('theme');
-  const isDark = theme === '' ? prefersDarkMode : theme === 'dark';
-  return [isDark, setTheme];
-};
-
-export const Layout = ({ children }) => {
-  const [isDark, setTheme] = useDarkMode();
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-          siteOrigin(formatString: "YYYY")
-        }
-      }
-    }
-  `);
-
-  return (
-    <ThemeProvider theme={isDark ? themes.dark : themes.light}>
-      <Container>
-        <GlobalStyles/>
-        <ToggleContainer>
-          <DarkModeToggle
-            useDarkMode={isDark}
-            onChange={darkMode => setTheme(darkMode ? 'dark' : 'light')}/>
-        </ToggleContainer>
-        <SiteNav title={data.site.siteMetadata.title}/>
-        <main>{children}</main>
-        <SiteDivider/>
-        <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
-      </Container>
-    </ThemeProvider>
-  );
-};
+export const Layout = ({ children }) => (
+  <ThemeProvider theme={themes.light}>
+    <Container>
+      <GlobalStyles/>
+      <ToggleContainer>
+        <DarkModeToggle
+          useDarkMode={isDark}
+          onChange={darkMode => setTheme(darkMode ? 'dark' : 'light')}/>
+      </ToggleContainer>
+      <SiteNav title={data.site.siteMetadata.title}/>
+      <main>{children}</main>
+      <SiteDivider/>
+      <SiteFooter origin={data.site.siteMetadata.siteOrigin}/>
+    </Container>
+  </ThemeProvider>
+);
