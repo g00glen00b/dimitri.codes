@@ -10,5 +10,9 @@ export const NavItemLink = styled(props => <SimpleLink {...props}/>)`
   &:last-of-type {
     margin-right: 0;
   }
+  
+  @media (max-width: 800px) {
+    margin: 0 .5em;
+  }
 `;
 

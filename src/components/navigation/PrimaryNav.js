@@ -5,7 +5,7 @@ export const PrimaryNav = styled.nav`
   justify-content: space-between;
   align-items: center;
   
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     flex-direction: column;
   }
 `;
