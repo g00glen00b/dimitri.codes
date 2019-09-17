@@ -32,12 +32,13 @@ export const PostImage = ({src, alt, width}) => {
       alt={alt}
       style={{width: width ? width : '100%'}}/>
   ) : (
-    <Img
-      fluid={image.node.localFile.childImageSharp.fluid}
-      alt={alt}
-      style={{
-        width: width ? width + 'px' : '100%',
-        maxWidth: '100%'
-      }}/>
+    <div style={{
+      width: width ? width + 'px' : '100%',
+      maxWidth: '100%'
+    }}>
+      <Img
+        fluid={image.node.localFile.childImageSharp.fluid}
+        alt={alt}/>
+    </div>
   );
 };
