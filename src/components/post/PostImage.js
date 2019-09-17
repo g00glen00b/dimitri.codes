@@ -22,18 +22,20 @@ const allMedia = graphql`
   }
 `;
 
-export const PostImage = ({src, alt, width}) => {
+export const PostImage = ({src, alt, width, sizes}) => {
   const {allWordpressWpMedia} = useStaticQuery(allMedia);
   const originalSource = src.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$3');
   const image = allWordpressWpMedia.edges.find(({node}) => node.source_url === originalSource);
+  const sizesWidth = sizes == null ? null : sizes.split(', ')[1];
+  const actualWidth = sizesWidth == null ? sizes : (width != null ? width + 'px' : '100%');
   return image == null || image.node.localFile.childImageSharp == null ? (
     <img
       src={src}
       alt={alt}
-      style={{width: width ? width : '100%'}}/>
+      style={{width: actualWidth}}/>
   ) : (
     <div style={{
-      width: width ? width + 'px' : '100%',
+      width: actualWidth,
       maxWidth: '100%'
     }}>
       <Img
