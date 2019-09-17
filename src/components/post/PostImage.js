@@ -36,7 +36,8 @@ export const PostImage = ({src, alt, width, sizes}) => {
   ) : (
     <div style={{
       width: actualWidth,
-      maxWidth: '100%'
+      maxWidth: '100%',
+      margin: '0 auto'
     }}>
       <Img
         fluid={image.node.localFile.childImageSharp.fluid}
