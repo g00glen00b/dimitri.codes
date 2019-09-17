@@ -27,7 +27,7 @@ export const PostImage = ({src, alt, width, sizes}) => {
   const originalSource = src.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$3');
   const image = allWordpressWpMedia.edges.find(({node}) => node.source_url === originalSource);
   const sizesWidth = sizes == null ? null : sizes.split(', ')[1];
-  const actualWidth = sizesWidth == null ? sizes : (width != null ? width + 'px' : '100%');
+  const actualWidth = sizesWidth == null ? (width != null ? width + 'px' : '100%') : sizesWidth;
   return image == null || image.node.localFile.childImageSharp == null ? (
     <img
       src={src}
