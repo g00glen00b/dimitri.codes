@@ -11,11 +11,9 @@ WORDPRESS_API_PROTOCOL=
 GOOGLE_TRACKING_ID=
 URL_REPLACEMENT_FROM=
 URL_REPLACEMENT_TO=
-IMAGE_REPLACEMENT_FROM=
-IMAGE_REPLACEMENT_TO=
 ```
 
-While most of these are self-explanatory, the `URL_REPLACEMENT_FROM` and `URL_REPLACEMENT_TO` properties are used to rewrite links within each blogpost to properly match the new location (aka the Gatsby blog). Additionally, I'm using `IMAGE_REPLACEMENT_FROM` to rewrite the URL of the images, since my blog contains some images that aren't served over SSL, and could be used in the future to actually host these images on a CDN.
+While most of these are self-explanatory, the `URL_REPLACEMENT_FROM` and `URL_REPLACEMENT_TO` properties are used to rewrite links within each blogpost to properly match the new location (aka the Gatsby blog).
 
 After that, you can use the following commands to run the project:
 
