@@ -54,7 +54,7 @@ const normalizeExcerpt = ({excerpt, ...rest}) => ({
 });
 
 const normalizeSourceUrl = ({source_url, ...rest}) => ({
-  source_url: source_url != null && source_url.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$2'),
+  source_url: source_url != null && source_url.replace(/^(https?:\/\/.*)-e\d+\.(.+?)$/g, '$1.$2'),
   ...rest
 });
 
