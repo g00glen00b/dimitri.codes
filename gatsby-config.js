@@ -27,6 +27,8 @@ const feedItemQuery = `{
   }
 }`;
 
+const contentUrlRegex = new RegExp(process.env.URL_REPLACEMENT_FROM, 'g');
+
 const getFeedItem = (site, node) => ({
   description: node.excerpt,
   title: node.title,
@@ -35,36 +37,29 @@ const getFeedItem = (site, node) => ({
   guid: `${site.siteMetadata.siteUrl}/${node.slug}`
 });
 
-const normalize = entity => {
-  const normalizers = [normalizeContentUrls, normalizeTitleEntities, normalizeExcerpt];
-  return normalizers.reduce((entity, normalizer) => normalizer(entity), entity);
-};
+const normalizeContentUrls = ({content, ...rest}) => ({
+  content: content != null && content.replace(contentUrlRegex, process.env.URL_REPLACEMENT_TO),
+  ...rest
+});
 
-const normalizeContentUrls = ({content, ...rest}) => {
-  if (content != null) {
-    const newContent = content.replace(new RegExp(process.env.URL_REPLACEMENT_FROM, 'g'), process.env.URL_REPLACEMENT_TO);
-    return {content: newContent, ...rest};
-  } else {
-    return {...rest};
-  }
-};
+const normalizeTitleEntities = ({title, ...rest}) => ({
+  title: title != null && he.decode(title),
+  ...rest
+});
 
-const normalizeTitleEntities = ({title, ...rest}) => {
-  if (title != null) {
-    const newTitle = he.decode(title);
-    return {title: newTitle, ...rest};
-  } else {
-    return {...rest};
-  }
-};
+const normalizeExcerpt = ({excerpt, ...rest}) => ({
+  excerpt,
+  simpleExcerpt: excerpt != null && he.decode(striptags(excerpt)),
+  ...rest
+});
 
-const normalizeExcerpt = ({excerpt, ...rest}) => {
-  if (excerpt != null) {
-    return {excerpt, simpleExcerpt: he.decode(striptags(excerpt)), ...rest};
-  } else {
-    return {...rest};
-  }
-};
+const normalizeSourceUrl = ({source_url, ...rest}) => ({
+  source_url: source_url != null && source_url.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$2'),
+  ...rest
+});
+
+const normalizers = [normalizeContentUrls, normalizeTitleEntities, normalizeExcerpt, normalizeSourceUrl];
+const normalize = entity => normalizers.reduce((entity, normalizer) => normalizer(entity), entity);
 
 module.exports = {
   siteMetadata: {
