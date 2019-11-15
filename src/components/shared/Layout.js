@@ -64,8 +64,16 @@ const GlobalStyles = withTheme(({theme}) => (
       text-align: center;
     }
     
-    article h2, article h3 {
+    article h2 {
+      font-size: 35px;
+    }
+  
+    article h3 {
       font-size: 30px;
+    }
+  
+    article h4 {
+      font-size: 23px;
     }
     
     article p, article li {
