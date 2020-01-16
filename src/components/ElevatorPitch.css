@@ -1,0 +1,31 @@
+.elevator-pitch {
+  display: grid;
+  grid-template-columns: 150px auto;
+  grid-template-rows: 50px auto;
+  margin-bottom: 80px;
+  background-color: #EEE;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.elevator-pitch__image {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column: 1;
+  border-radius: 50%;
+  align-self: center;
+}
+
+.elevator-pitch__title {
+  font-weight: 400;
+  font-size: 32px;
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.elevator-pitch__bio {
+  font-size: 18px;
+  line-height: 30px;
+  grid-row: 2;
+  grid-column: 2;
+}

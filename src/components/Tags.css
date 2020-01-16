@@ -1,0 +1,28 @@
+.tags {
+    padding: 0;
+    list-style-type: none;
+    display: inline;
+}
+
+.tags > li {
+    display: inline;
+}
+
+.tags > li > a {
+    color: #777;
+    font-weight: 300;
+    text-decoration: none;
+    background-color: #E5E5E5;
+    border-radius: 1px;
+    padding: 4px 8px;
+    margin-right: 10px;
+    border: none;
+}
+
+/*.tags > li > a::after {*/
+/*    content: ', ';*/
+/*}*/
+
+/*.tags > li:last-child > a::after {*/
+/*    content: none;*/
+/*}*/

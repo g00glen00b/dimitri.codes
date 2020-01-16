@@ -1,0 +1,20 @@
+import React from 'react';
+import Logo from '../images/logo.svg';
+import {Link} from 'gatsby';
+import './Header.css';
+
+export const Header = () => {
+  return (
+    <header className="header">
+      <Link to="/" className="header__logo">
+        <Logo/>
+      </Link>
+      <nav className="header__navigation">
+        <Link to="/home">Home</Link>
+        <Link to="/category/t">Tutorials</Link>
+        <Link to="/speaking">Speaking</Link>
+        <Link to="/about">About me</Link>
+      </nav>
+    </header>
+  );
+};

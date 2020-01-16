@@ -1,0 +1,29 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.container__content a {
+    color: #3E84CB;
+    text-decoration: none;
+    padding: 5px 0;
+    border-bottom: solid 2px #B2CEEA;
+    font-weight: 500;
+    transition: background-color .3s, color .3s, border-bottom-color .3s;
+}
+
+.container__content a:hover {
+    color: #2B5C8E;
+    background-color: #ECF3FA;
+    border-bottom-color: #8BB5E0;
+}

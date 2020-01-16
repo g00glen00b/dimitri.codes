@@ -1,0 +1,34 @@
+.action-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.action-title__text {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.action-title .action-title__button {
+  border-bottom: none;
+  margin-left: 10px;
+  background-color: #ECF3FA;
+  color: #3E84CB;
+  border-radius: 3px;
+  padding: 8px 10px;
+  font-weight: 400;
+  border-bottom: solid 4px #3E84CB;
+  margin-bottom: -4px;
+}
+
+.action-title .action-title__button:hover {
+  background-color: #B2CEEA;
+  color: #3E84CB;
+  border-bottom: solid 4px #3E84CB;
+}
+
+.action-title .action-title__button:active {
+  border-bottom-width: 2px;
+}

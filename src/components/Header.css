@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.header__logo > svg {
+  width: 100px;
+  height: auto;
+}
+
+.header__navigation > a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #777;
+  transition: color .3s;
+}
+
+.header__navigation > a:hover {
+  color: #222;
+}
