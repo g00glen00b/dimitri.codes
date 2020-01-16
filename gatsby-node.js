@@ -117,7 +117,7 @@ const createTagPostsPages = ({allWordpressTag}, createPage) => {
   ));
 };
 
-exports.createPages = ({ graphql, actions: {createPage} }) => {
+exports.createPages = ({graphql, actions: {createPage}}) => {
   return graphql(allPostsQuery).then(({errors, data}) => {
     if (errors) throw errors;
     else {
