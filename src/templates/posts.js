@@ -1,30 +1,18 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {PostItem} from '../components/post/PostItem';
-import {SiteIntro} from '../components/site/SiteIntro';
-import {SEO} from '../components/shared/Seo';
-import {Pagination} from '../components/shared/Pagination';
-import {Layout} from '../components/shared/Layout';
+import {SEO} from '../components/Seo';
 
 const Posts = ({data, pageContext}) => (
-  <Layout>
+  <main>
     <SEO title="Posts"/>
-    <SiteIntro/>
     {data.allWordpressPost.edges.map(({node}) => (
-      <PostItem
-        key={node.id}
-        date={node.date}
-        tags={node.tags}
-        readingTime={node.fields.readingTime}
-        title={node.title}
-        excerpt={node.excerpt}
-        slug={node.slug} />
+      <p key={node.id}>{node.excerpt}</p>
     ))}
-    <Pagination
-      pageCount={pageContext.pageCount}
-      currentPage={pageContext.currentPage}
-      base={pageContext.base}/>
-  </Layout>
+    {/*<Pagination*/}
+    {/*  pageCount={pageContext.pageCount}*/}
+    {/*  currentPage={pageContext.currentPage}*/}
+    {/*  base={pageContext.base}/>*/}
+  </main>
 );
 
 export const query = graphql`

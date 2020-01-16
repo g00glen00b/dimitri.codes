@@ -1,11 +1,10 @@
 import React from "react"
-import {graphql, useStaticQuery} from "gatsby"
-import {SiteIntro} from '../components/site/SiteIntro';
-import {PostItem} from '../components/post/PostItem';
-import {Layout} from '../components/shared/Layout';
-import {SEO} from '../components/shared/Seo';
-import {SiteDivider} from '../components/site/SiteDivider';
-import {CallToAction} from '../components/shared/CallToAction';
+import {graphql, Link, useStaticQuery} from "gatsby"
+import {SEO} from '../components/Seo';
+import {Layout} from '../components/Layout';
+import {PostExcerpt} from '../components/PostExcerpt';
+import {ActionTitle} from '../components/ActionTitle';
+import {ElevatorPitch} from '../components/ElevatorPitch';
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -14,7 +13,13 @@ const IndexPage = () => {
         edges {
           node {
             id
-            date(formatString: "MMMM Do, YYYY")
+            categories {
+              id
+              name
+              slug
+            }
+            actualDate: date(formatString: "MMMM Do, YYYY")
+            daysAgo: date(difference: "days")
             title
             excerpt
             slug
@@ -37,24 +42,25 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home"/>
-      <SiteIntro />
-      <SiteDivider/>
+      <ElevatorPitch/>
+      <ActionTitle
+        title="Latest posts"
+        actionLink="/category/t"
+        actionText="View all"/>
       {data.allWordpressPost.edges.map(({node}) => (
-        <PostItem
-          key={node.id}
-          date={node.date}
-          tags={node.tags}
+        <PostExcerpt
+          actualDate={node.actualDate}
+          categories={node.categories}
+          dateString={node.dateString}
+          excerpt={node.excerpt}
+          isNew={node.daysAgo < 20}
           readingTime={node.fields.readingTime}
-          title={node.title}
           slug={node.slug}
-          excerpt={node.excerpt}/>
+          tags={node.tags}
+          title={node.title}/>
       ))}
-      <CallToAction
-        description="There's more... I've been blogging for quite a while!"
-        action="View all articles"
-        link="/category/t"/>
     </Layout>
   );
 };
 
-export default IndexPage
+export default IndexPage;

@@ -1,10 +1,6 @@
 import React from 'react';
 import {graphql} from 'gatsby';
-import {PostDetail} from '../components/post/PostDetail';
-import {Layout} from '../components/shared/Layout';
-import {SEO} from '../components/shared/Seo';
-import {PostFooter} from '../components/post/PostFooter';
-import {AuthorCard} from '../components/post/AuthorCard';
+import {SEO} from '../components/Seo';
 
 const getTagMetadata = tags => {
   if (tags == null) {
@@ -29,7 +25,7 @@ const getTimeMetadata = (publishedAt, modifiedAt) => [
 ];
 
 const Post = ({data}) => (
-  <Layout>
+  <main>
     <SEO
       title={data.wordpressPost.title}
       description={data.wordpressPost.simpleExcerpt}
@@ -39,16 +35,8 @@ const Post = ({data}) => (
         ...getTagMetadata(data.wordpressPost.tags),
         ...getSectionMetadata(data.wordpressPost.categories)
       ]}/>
-    <PostDetail
-      title={data.wordpressPost.title}
-      readingTime={data.wordpressPost.fields.readingTime}
-      tags={data.wordpressPost.tags}
-      date={data.wordpressPost.date}
-      content={data.wordpressPost.content}/>
-    <PostFooter
-      postUrl={`${data.site.siteMetadata.siteUrl}/${data.wordpressPost.slug}`}/>
-    <AuthorCard/>
-  </Layout>
+    <div dangerouslySetInnerHTML={{__html: data.wordpressPost.content}}/>
+  </main>
 );
 
 export const query = graphql`

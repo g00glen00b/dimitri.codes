@@ -1,17 +1,13 @@
 import React from 'react';
 import {graphql} from 'gatsby';
-import {PageDetail} from '../components/page/PageDetail';
-import {Layout} from '../components/shared/Layout';
-import {SEO} from '../components/shared/Seo';
+import {SEO} from '../components/Seo';
 
 const Page = ({data}) => {
   return (
-    <Layout>
+    <main>
       <SEO title={data.wordpressPage.title}/>
-      <PageDetail
-        content={data.wordpressPage.content}
-        title={data.wordpressPage.title}/>
-    </Layout>
+      <div dangerouslySetInnerHTML={{__html: data.wordpressPage.content}}/>
+    </main>
   );
 };
 
