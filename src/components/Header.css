@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin: 0 auto 50px;
+  max-width: 760px;
 }
 
 .header__logo > svg {

@@ -1,0 +1,36 @@
+.footer {;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
+  align-items: center;
+}
+
+.footer__social {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.footer__social--link {
+  margin-right: 15px;
+}
+
+.footer__social svg {
+  fill: #444444;
+}
+
+.footer__links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__links > a {
+  text-decoration: none;
+  color: #777;
+  font-size: 14px;
+  margin-left: 15px;
+}
