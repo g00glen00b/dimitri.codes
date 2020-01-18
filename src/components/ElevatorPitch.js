@@ -8,7 +8,7 @@ const profileImageQuery = graphql`
   {
     profileImage: file(relativePath: {eq: "profile.jpeg"}) {
       childImageSharp {
-        fixed(width: 120) {
+        fixed(width: 100) {
           ...GatsbyImageSharpFixed
         }
       }
@@ -25,8 +25,7 @@ export const ElevatorPitch = () => {
         <span role="img" aria-label="Waving emoji">👋</span> Hey there, I'm Dimitri
       </h1>
       <p className="elevator-pitch__bio">
-        I'm a passionate full-stack developer at Optis.
-        You can often find me <OutboundLink href="https://github.com/g00glen00b">testing out</OutboundLink> new and interesting frameworks and <Link to="/category/t">blogging</Link> about them.
+        I'm a full-stack developer who likes <OutboundLink href="https://github.com/g00glen00b">testing out</OutboundLink> new and interesting frameworks and <Link to="/category/t">blogging</Link> about them.
       </p>
     </div>
   );

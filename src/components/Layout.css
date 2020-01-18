@@ -27,3 +27,13 @@ main {
     background-color: #ECF3FA;
     border-bottom-color: #8BB5E0;
 }
+
+.page__title {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.page__title > strong {
+    font-weight: 500;
+    text-decoration: underline;
+}

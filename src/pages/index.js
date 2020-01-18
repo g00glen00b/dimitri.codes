@@ -18,7 +18,6 @@ const IndexPage = () => {
               name
               slug
             }
-            actualDate: date(formatString: "MMMM Do, YYYY")
             daysAgo: date(difference: "days")
             title
             excerpt
@@ -49,9 +48,7 @@ const IndexPage = () => {
         actionText="View all"/>
       {data.allWordpressPost.edges.map(({node}) => (
         <PostExcerpt
-          actualDate={node.actualDate}
           categories={node.categories}
-          dateString={node.dateString}
           excerpt={node.excerpt}
           isNew={node.daysAgo < 20}
           readingTime={node.fields.readingTime}

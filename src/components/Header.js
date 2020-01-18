@@ -10,10 +10,10 @@ export const Header = () => {
         <Logo/>
       </Link>
       <nav className="header__navigation">
-        <Link to="/home">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/category/t">Tutorials</Link>
         <Link to="/speaking">Speaking</Link>
-        <Link to="/about">About me</Link>
+        <Link to="/about-me">About me</Link>
       </nav>
     </header>
   );

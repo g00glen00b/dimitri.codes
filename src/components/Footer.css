@@ -13,10 +13,13 @@
   list-style-type: none;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .footer__social--link {
   margin-right: 15px;
+  display: block;
+  height: 28px;
 }
 
 .footer__social svg {
@@ -33,4 +36,9 @@
   color: #777;
   font-size: 14px;
   margin-left: 15px;
+  transition: color .3s;
+}
+
+.footer__links > a:hover {
+  color: #222;
 }

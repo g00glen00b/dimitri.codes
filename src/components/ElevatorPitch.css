@@ -1,6 +1,6 @@
 .elevator-pitch {
   display: grid;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 120px auto;
   grid-template-rows: 50px auto;
   margin-bottom: 80px;
   background-color: #F1F1F1;

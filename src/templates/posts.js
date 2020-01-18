@@ -1,18 +1,31 @@
 import React from "react"
 import {graphql} from "gatsby"
 import {SEO} from '../components/Seo';
+import {Pagination} from '../components/Pagination';
+import {Layout} from '../components/Layout';
+import {PostExcerpt} from '../components/PostExcerpt';
 
 const Posts = ({data, pageContext}) => (
-  <main>
+  <Layout>
+    <h1 className="page__title">
+      Posts
+    </h1>
     <SEO title="Posts"/>
     {data.allWordpressPost.edges.map(({node}) => (
-      <p key={node.id}>{node.excerpt}</p>
+      <PostExcerpt
+        categories={node.categories}
+        excerpt={node.excerpt}
+        isNew={node.daysAgo < 20}
+        readingTime={node.fields.readingTime}
+        slug={node.slug}
+        tags={node.tags}
+        title={node.title}/>
     ))}
-    {/*<Pagination*/}
-    {/*  pageCount={pageContext.pageCount}*/}
-    {/*  currentPage={pageContext.currentPage}*/}
-    {/*  base={pageContext.base}/>*/}
-  </main>
+    <Pagination
+      pageCount={pageContext.pageCount}
+      currentPage={pageContext.currentPage}
+      base={pageContext.base}/>
+  </Layout>
 );
 
 export const query = graphql`
@@ -21,7 +34,12 @@ export const query = graphql`
       edges {
         node {
           id
-          date(formatString: "MMMM Do, YYYY")
+          categories {
+            id
+            name
+            slug
+          }
+          daysAgo: date(difference: "days")
           title
           excerpt
           slug
