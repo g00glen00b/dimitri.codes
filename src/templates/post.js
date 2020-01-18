@@ -1,6 +1,8 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import {SEO} from '../components/Seo';
+import {DangerousContent} from '../components/DangerousContent';
+import {Layout} from '../components/Layout';
 
 const getTagMetadata = tags => {
   if (tags == null) {
@@ -25,7 +27,7 @@ const getTimeMetadata = (publishedAt, modifiedAt) => [
 ];
 
 const Post = ({data}) => (
-  <main>
+  <Layout>
     <SEO
       title={data.wordpressPost.title}
       description={data.wordpressPost.simpleExcerpt}
@@ -35,8 +37,9 @@ const Post = ({data}) => (
         ...getTagMetadata(data.wordpressPost.tags),
         ...getSectionMetadata(data.wordpressPost.categories)
       ]}/>
-    <div dangerouslySetInnerHTML={{__html: data.wordpressPost.content}}/>
-  </main>
+    <h1 className="page__title">{data.wordpressPost.title}</h1>
+      <DangerousContent content={data.wordpressPost.content}/>
+  </Layout>
 );
 
 export const query = graphql`

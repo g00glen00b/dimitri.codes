@@ -28,6 +28,11 @@ main {
     border-bottom-color: #8BB5E0;
 }
 
+.container__content p {
+    line-height: 30px;
+    font-size: 18px;
+}
+
 .page__title {
     font-size: 32px;
     font-weight: 400;

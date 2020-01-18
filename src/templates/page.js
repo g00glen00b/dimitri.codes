@@ -1,13 +1,16 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import {SEO} from '../components/Seo';
+import {Layout} from '../components/Layout';
+import {DangerousContent} from '../components/DangerousContent';
 
 const Page = ({data}) => {
   return (
-    <main>
+    <Layout>
       <SEO title={data.wordpressPage.title}/>
-      <div dangerouslySetInnerHTML={{__html: data.wordpressPage.content}}/>
-    </main>
+      <h1 className="page__title">{data.wordpressPage.title}</h1>
+      <DangerousContent content={data.wordpressPage.content}/>
+    </Layout>
   );
 };
 

@@ -44,7 +44,7 @@ export const Footer = () => (
       <Link to="/privacy-policy">Privacy policy</Link>
       <OutboundLink href="https://github.com/g00glen00b/gatsby-blog/issues">Post an idea</OutboundLink>
       <Link to="/contact">Contact</Link>
-      <Link to="https://dimitr.im/rss.xml">RSS</Link>
+      <OutboundLink href="https://dimitr.im/rss.xml">RSS</OutboundLink>
     </nav>
   </footer>
 );
