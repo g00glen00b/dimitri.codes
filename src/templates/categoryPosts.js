@@ -13,6 +13,7 @@ const Posts = ({data, pageContext}) => (
     </h1>
     {data.allWordpressPost.edges.map(({node}) => (
       <PostExcerpt
+        key={node.id}
         categories={node.categories}
         excerpt={node.excerpt}
         isNew={node.daysAgo < 20}

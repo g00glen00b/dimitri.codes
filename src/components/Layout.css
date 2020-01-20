@@ -1,7 +1,35 @@
+:root {
+    --primary-color: #3E84CB;
+    --primary-color-light-1: #8BB5E0;
+    --primary-color-light-2: #B2CEEA;
+    --primary-color-light-3: #ECF3FA;
+    --primary-color-dark-1: #2B5C8E;
+    --primary-color-dark-2: #1f4266;
+    --secondary-color: #CB6335;
+    --secondary-color-light-1: #F5E0D7;
+    --background-color: #FFFFFF;
+    --background-color-dark-1: #F1F1F1;
+    --background-color-dark-2: #E5E5E5;
+    --text-color: #222222;
+    --text-color-light-1: #444444;
+    --text-color-light-2: #777777;
+}
+
+:root[data-theme=dark] {
+    --background-color: #222222;
+    --background-color-dark-1: #444444;
+    --background-color-dark-2: #777777;
+    --text-color: #E5E5E5;
+    --text-color-light-1: #999999;
+    --text-color-light-2: #777777;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
 }
 
 * {
@@ -14,21 +42,30 @@ main {
 }
 
 .container__content a {
-    color: #3E84CB;
+    color: var(--primary-color);
     text-decoration: none;
     padding: 5px 0;
-    border-bottom: solid 2px #B2CEEA;
+    border-bottom: solid 2px var(--primary-color-light-2);
     font-weight: 500;
     transition: background-color .3s, color .3s, border-bottom-color .3s;
 }
 
 .container__content a:hover {
-    color: #2B5C8E;
-    background-color: #ECF3FA;
-    border-bottom-color: #8BB5E0;
+    color: var(--primary-color-dark-1);
+    background-color: var(--primary-color-light-3);
+    border-bottom-color: var(--primary-color-light-1);
 }
 
-.container__content p {
+:root[data-theme=dark] .container__content a {
+    color: var(--primary-color);
+}
+
+:root[data-theme=dark] .container__content a:hover {
+    background-color: transparent;
+    color: var(--primary-color-dark-1);
+}
+
+.container__content p, li {
     line-height: 30px;
     font-size: 18px;
 }
@@ -41,4 +78,14 @@ main {
 .page__title > strong {
     font-weight: 500;
     text-decoration: underline;
+}
+
+.container__content h2 {
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.container__content h3 {
+    font-size: 24px;
+    font-weight: 400;
 }

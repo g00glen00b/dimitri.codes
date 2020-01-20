@@ -9,20 +9,21 @@
 }
 
 .tags > li > a {
-    color: #777;
+    color: var(--text-color-light-2);
     font-weight: 300;
     text-decoration: none;
-    background-color: #E5E5E5;
+    background-color: var(--background-color-dark-2);
     border-radius: 1px;
     padding: 4px 8px;
     margin-right: 10px;
     border: none;
 }
 
-/*.tags > li > a::after {*/
-/*    content: ', ';*/
-/*}*/
+:root[data-theme=dark] .tags > li > a {
+    color: var(--text-color);
+}
 
-/*.tags > li:last-child > a::after {*/
-/*    content: none;*/
-/*}*/
+:root[data-theme=dark] .tags > li > a:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-color-light-3);
+}

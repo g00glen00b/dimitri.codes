@@ -14,21 +14,32 @@
 .action-title .action-title__button {
   border-bottom: none;
   margin-left: 10px;
-  background-color: #ECF3FA;
-  color: #3E84CB;
+  background-color: var(--primary-color-light-3);
+  color: var(--primary-color);
   border-radius: 3px;
   padding: 8px 10px;
   font-weight: 400;
-  border-bottom: solid 4px #3E84CB;
+  border-bottom: solid 4px var(--primary-color);
   margin-bottom: -4px;
 }
 
 .action-title .action-title__button:hover {
-  background-color: #B2CEEA;
-  color: #3E84CB;
-  border-bottom: solid 4px #3E84CB;
+  background-color: var(--primary-color-light-2);
+  color: var(--primary-color);
+  border-bottom: solid 4px var(--primary-color);
 }
 
 .action-title .action-title__button:active {
   border-bottom-width: 2px;
+}
+
+:root[data-theme=dark] .action-title .action-title__button {
+  background-color: var(--primary-color);
+  color: var(--primary-color-light-3);
+  border-color: var(--primary-color-dark-2);
+}
+
+:root[data-theme=dark] .action-title .action-title__button:hover {
+  background-color: var(--primary-color-dark-1);
+  color: var(--primary-color-light-3);
 }

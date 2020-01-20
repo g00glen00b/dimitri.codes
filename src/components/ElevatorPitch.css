@@ -3,7 +3,7 @@
   grid-template-columns: 120px auto;
   grid-template-rows: 50px auto;
   margin-bottom: 80px;
-  background-color: #F1F1F1;
+  background-color: var(--background-color-dark-1);
   padding: 20px;
   border-radius: 5px;
 }

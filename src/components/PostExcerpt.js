@@ -23,7 +23,7 @@ export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, r
       </div>
       <div className="excerpt__content" dangerouslySetInnerHTML={{__html: excerpt}}/>
       <div className="excerpt__more">
-        <Link to={slug}>Read more</Link>
+        <Link to={`/${slug}`}>Read more</Link>
       </div>
     </article>
   );

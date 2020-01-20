@@ -13,6 +13,7 @@ const Posts = ({data, pageContext}) => (
     <SEO title="Posts"/>
     {data.allWordpressPost.edges.map(({node}) => (
       <PostExcerpt
+        key={node.id}
         categories={node.categories}
         excerpt={node.excerpt}
         isNew={node.daysAgo < 20}

@@ -9,15 +9,24 @@
 .header__logo > svg {
   width: 100px;
   height: auto;
+  fill: var(--text-color);
 }
 
 .header__navigation > a {
   margin-left: 15px;
   text-decoration: none;
-  color: #777;
+  color: var(--text-color-light-2);
   transition: color .3s;
 }
 
 .header__navigation > a:hover {
-  color: #222;
+  color: var(--text-color);
+}
+
+:root[data-theme=dark] .header__navigation > a {
+  color: var(--text-color);
+}
+
+:root[data-theme=dark] .header__navigation > a:hover {
+  color: var(--text-color-light-2);
 }
