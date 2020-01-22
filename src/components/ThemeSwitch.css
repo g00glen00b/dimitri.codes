@@ -1,0 +1,19 @@
+.theme-switch__button {
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  padding: 3px 5px;
+  font-weight: 400;
+  margin-bottom: -4px;
+  border: none;
+  transition: background-color .3s;
+  margin-left: 15px;
+  outline: none;
+}
+
+.theme-switch__button:hover {
+  background-color: var(--primary-color-dark-1);
+}
+
+.theme-switch__button > svg {
+  fill: yellow;
+}

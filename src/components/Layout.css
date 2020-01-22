@@ -30,6 +30,7 @@ html, body {
     font-family: 'Roboto', sans-serif;
     background: var(--background-color);
     color: var(--text-color);
+    transition: background .3s, color .3s;
 }
 
 * {

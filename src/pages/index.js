@@ -48,6 +48,7 @@ const IndexPage = () => {
         actionText="View all"/>
       {data.allWordpressPost.edges.map(({node}) => (
         <PostExcerpt
+          key={node.id}
           categories={node.categories}
           excerpt={node.excerpt}
           isNew={node.daysAgo < 20}

@@ -12,6 +12,11 @@
   fill: var(--text-color);
 }
 
+.header__navigation {
+  display: flex;
+  align-items: center;
+}
+
 .header__navigation > a {
   margin-left: 15px;
   text-decoration: none;
