@@ -3,7 +3,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto 50px;
-  max-width: 760px;
+  max-width: 800px;
+  padding: 0 20px;
 }
 
 .header__logo > svg {
@@ -34,4 +35,10 @@
 
 :root[data-theme=dark] .header__navigation > a:hover {
   color: var(--text-color-light-2);
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+  }
 }

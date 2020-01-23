@@ -1,9 +1,9 @@
 .footer {;
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding: 30px 0;
+  padding: 30px 20px;
   align-items: center;
 }
 
@@ -54,4 +54,14 @@
 
 :root[data-theme=dark] .footer__links > a:hover {
   color: var(--text-color-light-2);
+}
+
+@media (max-width: 640px) {
+  .footer {
+    flex-direction: column;
+  }
+
+  .footer__social {
+    margin-bottom: 20px;
+  }
 }
