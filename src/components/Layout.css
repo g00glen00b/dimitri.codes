@@ -45,7 +45,7 @@ main {
 .container__content a {
     color: var(--primary-color);
     text-decoration: none;
-    padding: 5px 0;
+    padding: 3px 0;
     border-bottom: solid 2px var(--primary-color-light-2);
     font-weight: 500;
     transition: background-color .3s, color .3s, border-bottom-color .3s;
@@ -89,4 +89,18 @@ main {
 .container__content h3 {
     font-size: 24px;
     font-weight: 400;
+}
+
+.container__content p > code,
+.container__content li > code,
+.container__content a > code {
+    background-color: var(--background-color-dark-1);
+    padding: 2px 5px;
+    font-family: 'Roboto Mono', monospace;
+    border-radius: 1px;
+}
+
+.container__content p > strong,
+.container__content li > strong {
+    font-weight: 500;
 }

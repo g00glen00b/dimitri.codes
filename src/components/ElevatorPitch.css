@@ -21,6 +21,8 @@
   font-size: 32px;
   grid-row: 1;
   grid-column: 2;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .elevator-pitch__bio {
@@ -28,4 +30,5 @@
   line-height: 30px;
   grid-row: 2;
   grid-column: 2;
+  margin-top: 0;
 }

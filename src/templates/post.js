@@ -3,6 +3,7 @@ import {graphql} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {DangerousContent} from '../components/DangerousContent';
 import {Layout} from '../components/Layout';
+import {PostFooter} from '../components/PostFooter';
 
 const getTagMetadata = tags => {
   if (tags == null) {
@@ -38,7 +39,8 @@ const Post = ({data}) => (
         ...getSectionMetadata(data.wordpressPost.categories)
       ]}/>
     <h1 className="page__title">{data.wordpressPost.title}</h1>
-      <DangerousContent content={data.wordpressPost.content}/>
+    <DangerousContent content={data.wordpressPost.content}/>
+    <PostFooter url={`${data.site.siteMetadata.siteUrl}/${data.wordpressPost.slug}`}/>
   </Layout>
 );
 

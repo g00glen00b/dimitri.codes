@@ -25,7 +25,21 @@ export const ElevatorPitch = () => {
         <span role="img" aria-label="Waving emoji">👋</span> Hey there, I'm Dimitri
       </h1>
       <p className="elevator-pitch__bio">
-        I'm a full-stack developer who likes <OutboundLink href="https://github.com/g00glen00b">testing out</OutboundLink> new and interesting frameworks and <Link to="/category/t">blogging</Link> about them.
+        I'm a full-stack developer who likes
+        {` `}
+        <OutboundLink
+          href="https://github.com/g00glen00b"
+          target="_blank"
+          rel="noopener noreferrer">
+          testing out
+        </OutboundLink>
+        {` `}
+        new and interesting frameworks and
+        {` `}
+        <Link to="/category/t">blogging</Link>
+        {` `}
+        about them.
+        I prefer working with <strong>Java</strong> and <strong>JavaScript</strong>.
       </p>
     </div>
   );

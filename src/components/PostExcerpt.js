@@ -10,8 +10,10 @@ export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, r
         {firstCategory && firstCategory.name}
       </span>
       <h2 className="excerpt__title">
-        {isNew && <span className="excerpt__title--new">New!</span>}
-        {title}
+        {isNew && <span className="excerpt__title--new">New</span>}
+        <Link to={`/${slug}`}>
+          {title}
+        </Link>
       </h2>
       <div className="excerpt__time">
         <span className="excerpt__time--estimation">

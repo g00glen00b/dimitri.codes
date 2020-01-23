@@ -4,7 +4,7 @@ import './ThemeSwitch.css';
 
 function useLocalTheme(initialTheme) {
   const [theme, setTheme] = useState(initialTheme);
-  useEffect(() => setTheme(localStorage.getItem('theme') || initialTheme));
+  useEffect(() => setTheme(localStorage.getItem('theme') || initialTheme), [initialTheme, setTheme]);
   return [theme, newTheme => {
     localStorage.setItem('theme', newTheme);
     setTheme(newTheme);

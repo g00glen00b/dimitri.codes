@@ -26,6 +26,21 @@
   font-size: 28px;
 }
 
+.excerpt__title > a,
+:root[data-theme=dark] .excerpt__title > a {
+  color: var(--text-color);
+  border-bottom: none;
+  padding: 0;
+  font-weight: 400;
+}
+
+.excerpt__title > a:hover,
+:root[data-theme=dark] .excerpt__title > a:hover {
+  color: var(--text-color);
+  background: none;
+  text-decoration: underline;
+}
+
 .excerpt__title--new {
   background-color: var(--secondary-color-light-1);
   color: var(--secondary-color);
