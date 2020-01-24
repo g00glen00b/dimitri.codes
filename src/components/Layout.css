@@ -39,15 +39,15 @@ html, body {
 
 main {
     max-width: 800px;
-    padding: 0 20px;
+    padding: 0 1rem;
     margin: 0 auto;
 }
 
 .container__content a {
     color: var(--primary-color);
     text-decoration: none;
-    padding: 3px 0;
-    border-bottom: solid 2px var(--primary-color-light-2);
+    padding: 0.2rem 0;
+    border-bottom: solid 0.1rem var(--primary-color-light-2);
     font-weight: 500;
     transition: background-color .3s, color .3s, border-bottom-color .3s;
 }
@@ -68,12 +68,12 @@ main {
 }
 
 .container__content p, li {
-    line-height: 30px;
-    font-size: 18px;
+    line-height: 1.8rem;
+    font-size: 1.1rem;
 }
 
 .page__title {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 400;
 }
 
@@ -83,29 +83,29 @@ main {
 }
 
 .page__title + .page__metadata {
-    margin-top: -30px;
-    margin-bottom: 30px;
-    font-size: 14px;
+    margin-top: -1.8rem;
+    margin-bottom: 1.8rem;
+    font-size: 0.85rem;
     color: var(--text-color-light-2);
 }
 
 .page__metadata + .tags {
-    margin-top: -20px;
-    margin-bottom: 20px;
+    margin-top: -1.2rem;
+    margin-bottom: 1.2rem;
 }
 
 .container__content h2 {
-    font-size: 28px;
+    font-size: 1.8rem;
     font-weight: 500;
 }
 
 .container__content h3 {
-    font-size: 24px;
+    font-size: 1.6rem;
     font-weight: 500;
 }
 
 .container__content h4 {
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight: 500;
 }
 
@@ -115,7 +115,7 @@ main {
     background-color: var(--background-color-dark-1);
     padding: 2px 5px;
     font-family: 'Roboto Mono', monospace;
-    border-radius: 1px;
+    border-radius: 0.1rem;
 }
 
 .container__content p > strong,

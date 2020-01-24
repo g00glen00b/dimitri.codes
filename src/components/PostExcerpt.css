@@ -1,8 +1,8 @@
 .excerpt {
   margin-bottom: 60px;
   display: grid;
-  grid-template-columns: auto 150px;
-  grid-template-rows: 25px auto 25px auto 40px;
+  grid-template-columns: auto 10rem;
+  grid-template-rows: 1.6rem auto 1.6rem auto 2.6rem;
   align-items: center;
 }
 
@@ -12,18 +12,18 @@
   grid-row: 1;
   grid-column-start: 1;
   grid-column-end: 3;
-  font-size: 14px;
+  font-size: 0.85rem;
 }
 
 .excerpt__title {
   grid-row: 2;
   grid-column: 1;
-  margin: 0 0 20px;
+  margin: 0 0 1.2rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 1.6rem;
 }
 
 .excerpt__title > a,
@@ -44,11 +44,11 @@
 .excerpt__title--new {
   background-color: var(--secondary-color-light-1);
   color: var(--secondary-color);
-  font-size: 14px;
+  font-size: 0.85rem;
   font-weight: 500;
-  padding: 5px 7px;
-  border-radius: 3px;
-  margin-right: 10px;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  margin-right: 0.6rem;
 }
 
 :root[data-theme=dark] .excerpt__title--new {
@@ -61,7 +61,7 @@
   grid-column: 2;
   text-align: right;
   vertical-align: middle;
-  margin: 0 0 20px;
+  margin: 0 0 1.2rem;
   color: var(--text-color-light-2);
 }
 

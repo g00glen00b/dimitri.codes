@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
 .action-title__text {
   margin: 0;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 400;
 }
 
 .action-title__button {
-  margin-left: 10px;
+  margin-left: 0.8rem;
 }

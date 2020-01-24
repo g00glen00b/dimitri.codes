@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto 50px;
+  margin: 0 auto 2.5rem;
   max-width: 800px;
-  padding: 0 20px;
+  padding: 0 1rem;
 }
 
 .header__logo > svg {
@@ -19,7 +19,7 @@
 }
 
 .header__navigation > a {
-  margin-left: 15px;
+  margin-left: 1rem;
   text-decoration: none;
   color: var(--text-color-light-2);
   transition: color .3s;
