@@ -82,6 +82,17 @@ main {
     text-decoration: underline;
 }
 
+.page__title + .page__metadata {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.page__metadata + .tags {
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
 .container__content h2 {
     font-size: 28px;
     font-weight: 400;

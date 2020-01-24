@@ -1,0 +1,53 @@
+button.button,
+a.button,
+:root[data-theme=dark] button.button,
+:root[data-theme=dark] a.button {
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  font-weight: 400;
+  transition: background-color .3s;
+  outline: none;
+}
+
+button.button__normal,
+a.button__link,
+:root[data-theme=dark] button.button__normal,
+:root[data-theme=dark] a.button__link {
+  border-bottom: none;
+  color: var(--primary-color-light-3);
+  padding: 8px 10px;
+  border-bottom: solid 4px var(--primary-color-dark-2);
+  margin-bottom: -4px;
+  font-size: 16px;
+}
+
+button.button__normal:hover,
+a.button__link:hover,
+:root[data-theme=dark] button.button__normal:hover,
+:root[data-theme=dark] a.button__link:hover {
+  color: var(--primary-color-light-3);
+  background-color: var(--primary-color-dark-1);
+  border-bottom-color: var(--primary-color-dark-2);
+}
+
+button.button__normal:focus,
+a.button__link:active,
+:root[data-theme=dark] button.button__normal:focus,
+:root[data-theme=dark] a.button__link:active {
+  border-bottom-width: 2px;
+}
+
+button.button__normal--simple,
+a.button__link--simple,
+:root[data-theme=dark] button.button__normal--simple,
+:root[data-theme=dark] a.button__link--simple {
+  padding: 3px 5px;
+  border: none;
+}
+
+button.button__normal--simple:hover,
+a.button__link--simple:hover,
+:root[data-theme=dark] button.button__normal--simple:hover,
+:root[data-theme=dark] a.button__link--simple:hover {
+  background-color: var(--primary-color-dark-1);
+}

@@ -1,7 +1,7 @@
 .tags {
     padding: 0;
     list-style-type: none;
-    display: inline;
+    display: block;
 }
 
 .tags > li {

@@ -5,13 +5,13 @@ import {Pagination} from '../components/Pagination';
 import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
 
-const Posts = ({data, pageContext}) => (
+const Posts = ({data: {allWordpressPost}, pageContext}) => (
   <Layout>
     <h1 className="page__title">
       Posts
     </h1>
     <SEO title="Posts"/>
-    {data.allWordpressPost.edges.map(({node}) => (
+    {allWordpressPost.edges.map(({node}) => (
       <PostExcerpt
         key={node.id}
         categories={node.categories}

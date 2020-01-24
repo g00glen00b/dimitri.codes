@@ -6,37 +6,39 @@ import {PostExcerpt} from '../components/PostExcerpt';
 import {ActionTitle} from '../components/ActionTitle';
 import {ElevatorPitch} from '../components/ElevatorPitch';
 
-const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allWordpressPost(sort: {fields: [date], order:DESC}, limit: 5) {
-        edges {
-          node {
+const allWordpressPostQuery = graphql`
+  query {
+    allWordpressPost(sort: {fields: [date], order:DESC}, limit: 5) {
+      edges {
+        node {
+          id
+          categories {
             id
-            categories {
-              id
-              name
-              slug
-            }
-            daysAgo: date(difference: "days")
-            title
-            excerpt
+            name
             slug
-            tags {
-              id
-              slug
-              name
-            }
-            fields {
-              readingTime {
-                text
-              }
+          }
+          daysAgo: date(difference: "days")
+          title
+          excerpt
+          slug
+          tags {
+            id
+            slug
+            name
+          }
+          fields {
+            readingTime {
+              text
             }
           }
         }
       }
     }
-  `);
+  }
+`;
+
+const IndexPage = () => {
+  const {allWordpressPost} = useStaticQuery(allWordpressPostQuery);
 
   return (
     <Layout>
@@ -46,7 +48,7 @@ const IndexPage = () => {
         title="Latest posts"
         actionLink="/category/t"
         actionText="View all"/>
-      {data.allWordpressPost.edges.map(({node}) => (
+      {allWordpressPost.edges.map(({node}) => (
         <PostExcerpt
           key={node.id}
           categories={node.categories}

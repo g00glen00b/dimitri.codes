@@ -4,25 +4,18 @@ import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {DangerousContent} from '../components/DangerousContent';
 
-const Page = ({data}) => {
+const Page = ({data: {wordpressPage}}) => {
   return (
     <Layout>
-      <SEO title={data.wordpressPage.title}/>
-      <h1 className="page__title">{data.wordpressPage.title}</h1>
-      <DangerousContent content={data.wordpressPage.content}/>
+      <SEO title={wordpressPage.title}/>
+      <h1 className="page__title">{wordpressPage.title}</h1>
+      <DangerousContent content={wordpressPage.content}/>
     </Layout>
   );
 };
 
 export const query = graphql`
   query ($id: String!) {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
-    
     wordpressPage(id: {eq: $id}) {
       title
       content

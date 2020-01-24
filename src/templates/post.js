@@ -4,43 +4,29 @@ import {SEO} from '../components/Seo';
 import {DangerousContent} from '../components/DangerousContent';
 import {Layout} from '../components/Layout';
 import {PostFooter} from '../components/PostFooter';
+import {Tags} from '../components/Tags';
+import {PostAuthor} from '../components/PostAuthor';
+import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
 
-const getTagMetadata = tags => {
-  if (tags == null) {
-    return [];
-  } else {
-    return tags.map(({name}) => ({name: 'article:tag', content: name}));
-  }
-};
-
-const getSectionMetadata = categories => {
-  if (categories == null) {
-    return [];
-  } else {
-    return categories.map(({name}) => ({name: 'article:section', content: name}));
-  }
-};
-
-const getTimeMetadata = (publishedAt, modifiedAt) => [
-  {name: `og:updated_time`, content: modifiedAt},
-  {name: `article:published_time`, content: publishedAt},
-  {name: `article:modified_time`, content: modifiedAt}
-];
-
-const Post = ({data}) => (
+const Post = ({data: {wordpressPost}, site}) => (
   <Layout>
     <SEO
-      title={data.wordpressPost.title}
-      description={data.wordpressPost.simpleExcerpt}
-      image={data.wordpressPost.featured_media != null ? data.wordpressPost.featured_media.localFile.publicURL : null}
+      title={wordpressPost.title}
+      description={wordpressPost.simpleExcerpt}
+      image={wordpressPost.featured_media != null ? wordpressPost.featured_media.localFile.publicURL : null}
       meta={[
-        ...getTimeMetadata(data.wordpressPost.iso, data.wordpressPost.modified),
-        ...getTagMetadata(data.wordpressPost.tags),
-        ...getSectionMetadata(data.wordpressPost.categories)
+        ...getTimeMetadata(wordpressPost.iso, wordpressPost.modified),
+        ...getTagMetadata(wordpressPost.tags),
+        ...getSectionMetadata(wordpressPost.categories)
       ]}/>
-    <h1 className="page__title">{data.wordpressPost.title}</h1>
-    <DangerousContent content={data.wordpressPost.content}/>
-    <PostFooter url={`${data.site.siteMetadata.siteUrl}/${data.wordpressPost.slug}`}/>
+    <h1 className="page__title">{wordpressPost.title}</h1>
+    <p className="page__metadata">
+      {wordpressPost.date}, {wordpressPost.fields.readingTime.text}
+    </p>
+    <Tags tags={wordpressPost.tags}/>
+    <DangerousContent content={wordpressPost.content}/>
+    <PostFooter url={`${site.siteMetadata.siteUrl}/${wordpressPost.slug}`}/>
+    <PostAuthor/>
   </Layout>
 );
 
@@ -48,8 +34,6 @@ export const query = graphql`
   query ($id: String!) {
     site {
       siteMetadata {
-        title
-        description
         siteUrl
       }
     }

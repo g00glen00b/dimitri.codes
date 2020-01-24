@@ -11,26 +11,6 @@
   font-weight: 400;
 }
 
-.action-title .action-title__button,
-:root[data-theme=dark] .action-title .action-title__button {
-  border-bottom: none;
+.action-title__button {
   margin-left: 10px;
-  background-color: var(--primary-color);
-  color: var(--primary-color-light-3);
-  border-radius: 3px;
-  padding: 8px 10px;
-  font-weight: 400;
-  border-bottom: solid 4px var(--primary-color-dark-2);
-  margin-bottom: -4px;
-}
-
-.action-title .action-title__button:hover,
-:root[data-theme=dark] .action-title .action-title__button:hover{
-  color: var(--primary-color-light-3);
-  background-color: var(--primary-color-dark-1);
-  border-bottom-color: var(--primary-color-dark-2);
-}
-
-.action-title .action-title__button:active {
-  border-bottom-width: 2px;
 }
