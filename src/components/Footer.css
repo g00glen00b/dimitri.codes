@@ -17,18 +17,22 @@
 }
 
 .footer__social--link {
-  margin-right: 1rem;
+  margin-right: 0.8rem;
   display: block;
-  height: 28px;
+  height: 38px;
+  width: 38px;
+  padding: 0.52em;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  transition: background-color .3s;
 }
 
 .footer__social svg {
-  fill: var(--text-color-light-1);
-  transition: fill .3s;
+  fill: var(--background-color);
 }
 
-.footer__social--link:hover svg {
-  fill: var(--primary-color);
+.footer__social--link:hover {
+  background-color: var(--primary-color-dark-1);
 }
 
 .footer__links {

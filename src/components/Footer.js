@@ -14,7 +14,7 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           title="Twitter">
-          <FaTwitter size={28}/>
+          <FaTwitter size={20}/>
         </OutboundLink>
       </li>
       <li>
@@ -24,7 +24,7 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           title="GitHub">
-          <FaGithub size={28}/>
+          <FaGithub size={20}/>
         </OutboundLink>
       </li>
       <li>
@@ -34,7 +34,7 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           title="Speaker Deck">
-          <FaSpeakerDeck size={28}/>
+          <FaSpeakerDeck size={20}/>
         </OutboundLink>
       </li>
       <li>
@@ -44,7 +44,7 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           title="CodePen">
-          <FaCodepen size={28}/>
+          <FaCodepen size={20}/>
         </OutboundLink>
       </li>
     </ul>
