@@ -9,7 +9,7 @@
 }
 
 .tags > li > a {
-    color: var(--text-color-light-2);
+    color: var(--text-color-light-1);
     font-weight: 300;
     text-decoration: none;
     background-color: var(--background-color-dark-2);

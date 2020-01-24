@@ -6,7 +6,7 @@ import {getOpenGraphMetadata, getTwitterMetadata} from '../helpers/metadataHelpe
 
 const siteMetadataQuery = graphql`
   query {
-    file(relativePath: {eq: "logo.png"}) {
+    file(relativePath: {eq: "logo-square.png"}) {
       publicURL
     }
     site {

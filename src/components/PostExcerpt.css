@@ -62,6 +62,7 @@
   text-align: right;
   vertical-align: middle;
   margin: 0 0 20px;
+  color: var(--text-color-light-2);
 }
 
 .excerpt__tags {

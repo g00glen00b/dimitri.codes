@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {ImageContext} from '../imageProvider';
 import Img from 'gatsby-image';
-import {getImageFile, getImageWidth} from './contentHelpers';
+import {getImageFile, getImageWidth} from '../helpers/contentHelpers';
 
 export const ContentImage = ({src, alt, width, sizes}) => {
   const {images} = useContext(ImageContext);

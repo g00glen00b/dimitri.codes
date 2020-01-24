@@ -148,9 +148,9 @@ module.exports = {
         short_name: `Dimitri\'s tutorials`,
         start_url: `/`,
         background_color: `#FFFFFF`,
-        theme_color: `#55BABF`,
+        theme_color: `#3E84CB`,
         display: `standalone`,
-        icon: `src/images/logo.png`
+        icon: `src/images/logo-square.png`
       }
     },
     `gatsby-plugin-offline`,

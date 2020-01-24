@@ -2,7 +2,7 @@ import React from 'react';
 import parse, {domToReact} from 'html-react-parser';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {darcula} from 'react-syntax-highlighter/dist/esm/styles/prism';
-import {getCode, getCodeLanguage, getImageNode, isCode, isImage} from './contentHelpers';
+import {getCode, getCodeLanguage, getImageNode, isCode, isImage} from '../helpers/contentHelpers';
 import {ContentImage} from './ContentImage';
 
 function replace(node) {

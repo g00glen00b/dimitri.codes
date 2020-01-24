@@ -5,10 +5,10 @@ import {DangerousContent} from '../components/DangerousContent';
 import {Layout} from '../components/Layout';
 import {PostFooter} from '../components/PostFooter';
 import {Tags} from '../components/Tags';
-import {PostAuthor} from '../components/PostAuthor';
 import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
+import {ElevatorPitch} from '../components/ElevatorPitch';
 
-const Post = ({data: {wordpressPost}, site}) => (
+const Post = ({data: {wordpressPost, site}}) => (
   <Layout>
     <SEO
       title={wordpressPost.title}
@@ -26,7 +26,7 @@ const Post = ({data: {wordpressPost}, site}) => (
     <Tags tags={wordpressPost.tags}/>
     <DangerousContent content={wordpressPost.content}/>
     <PostFooter url={`${site.siteMetadata.siteUrl}/${wordpressPost.slug}`}/>
-    <PostAuthor/>
+    <ElevatorPitch/>
   </Layout>
 );
 
