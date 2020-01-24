@@ -24,6 +24,8 @@
   align-items: center;
   font-weight: 400;
   font-size: 1.6rem;
+  line-height: 1.8rem;
+  letter-spacing: -0.025rem;
 }
 
 .excerpt__title > a,
@@ -46,7 +48,7 @@
   color: var(--secondary-color);
   font-size: 0.85rem;
   font-weight: 500;
-  padding: 0.3rem 0.5rem;
+  padding: 0 0.5rem;
   border-radius: 0.3rem;
   margin-right: 0.6rem;
 }
