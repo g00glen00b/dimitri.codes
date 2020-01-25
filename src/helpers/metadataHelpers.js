@@ -1,9 +1,9 @@
 export function getTagMetadata(tags = []) {
-  return tags.map(({name}) => ({name: 'article:tag', content: name}));
+  return tags != null ? tags.map(({name}) => ({name: 'article:tag', content: name})) : [];
 }
 
 export function getSectionMetadata(categories = []) {
-  return categories.map(({name}) => ({name: 'article:section', content: name}));
+  return categories != null ? categories.map(({name}) => ({name: 'article:section', content: name})) : [];
 }
 
 export function getTimeMetadata(publishedAt, modifiedAt) {
