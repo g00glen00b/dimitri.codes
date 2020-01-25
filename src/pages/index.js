@@ -1,5 +1,5 @@
-import React from "react"
-import {graphql, useStaticQuery} from "gatsby"
+import React from 'react';
+import {graphql, useStaticQuery} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
