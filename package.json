@@ -2,7 +2,7 @@
   "name": "g00glen00b-gatsby",
   "private": true,
   "description": "Dimitri's blog",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "g00glen00b",
   "dependencies": {
     "@emotion/core": "^10.0.14",
