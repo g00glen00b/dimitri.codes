@@ -44,7 +44,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "GATSBY_CONCURRENT_DOWNLOAD=50 npm run develop",
     "serve": "gatsby serve",
-    "develop-any": "gatsby develop -H 0.0.0.0"
+    "develop-any": "GATSBY_CONCURRENT_DOWNLOAD=50 gatsby develop -H 0.0.0.0"
   },
   "repository": {
     "type": "git",

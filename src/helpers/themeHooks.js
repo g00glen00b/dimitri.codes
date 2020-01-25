@@ -15,8 +15,18 @@ export function usePreferredTheme(initialTheme) {
   useEffect(() => {
     const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
     updateMatch(mediaQueryList);
-    mediaQueryList.addEventListener('change', updateMatch);
-    return () => mediaQueryList.removeEventListener('change', updateMatch);
+    if (mediaQueryList.addEventListener != null) {
+      mediaQueryList.addEventListener('change', updateMatch);
+    } else if (mediaQueryList.addListener != null) {
+      mediaQueryList.addListener(updateMatch);
+    }
+    return () => {
+      if (mediaQueryList.removeEventListener != null) {
+        mediaQueryList.removeEventListener('change', updateMatch);
+      } else if (mediaQueryList.removeListener != null) {
+        mediaQueryList.removeListener(updateMatch);
+      }
+    }
   }, [initialTheme]);
   return [theme];
 }
