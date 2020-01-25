@@ -17,7 +17,7 @@ export default function HTML(props) {
       <script dangerouslySetInnerHTML={{__html: `
         (function() {
           var theme = localStorage.getItem('theme');
-          var systemTheme = window.matchMedia('(prefers-color-scheme: dark)') ? 'dark' : 'light';
+          var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', theme || systemTheme);
         }());
       `}}/>
