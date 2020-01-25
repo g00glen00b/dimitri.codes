@@ -80,14 +80,21 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: /images\/.+?\.svg$/
+        }
+      }
+    },
+    {
       resolve: `gatsby-source-wordpress`,
       options: {
         baseUrl: process.env.WORDPRESS_API_HOST,
         protocol: process.env.WORDPRESS_API_PROTOCOL,
-        hostingWPCOM: false,
         useACF: false,
         perPage: 100,
-        concurrentRequests: 10,
+        concurrentRequests: 1,
         auth: {
           htaccess_user: process.env.WORDPRESS_API_USER,
           htaccess_pass: process.env.WORDPRESS_API_PASS
@@ -109,7 +116,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
@@ -142,9 +148,9 @@ module.exports = {
         short_name: `Dimitri\'s tutorials`,
         start_url: `/`,
         background_color: `#FFFFFF`,
-        theme_color: `#55BABF`,
+        theme_color: `#3E84CB`,
         display: `standalone`,
-        icon: `src/images/logo.png`
+        icon: `src/images/logo-square.png`
       }
     },
     `gatsby-plugin-offline`,

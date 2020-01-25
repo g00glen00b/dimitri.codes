@@ -1,0 +1,36 @@
+.tags {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tags > li {
+    display: inline;
+    margin-bottom: 10px;
+}
+
+.tags > li > a {
+    color: var(--text-color-light-1);
+    font-weight: 300;
+    text-decoration: none;
+    background-color: var(--background-color-dark-2);
+    border-radius: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.6rem;
+    border: none;
+    white-space: nowrap;
+}
+
+.tags > li > a > strong {
+    font-weight: 500;
+}
+
+:root[data-theme=dark] .tags > li > a {
+    color: var(--text-color);
+}
+
+:root[data-theme=dark] .tags > li > a:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-color-light-3);
+}

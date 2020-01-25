@@ -1,0 +1,127 @@
+:root {
+    --primary-color: #3E84CB;
+    --primary-color-light-1: #8BB5E0;
+    --primary-color-light-2: #B2CEEA;
+    --primary-color-light-3: #ECF3FA;
+    --primary-color-dark-1: #2B5C8E;
+    --primary-color-dark-2: #1F4266;
+    --secondary-color: #CB6335;
+    --secondary-color-light-1: #F5E0D7;
+    --background-color: #FFFFFF;
+    --background-color-dark-1: #E3E5E7;
+    --background-color-dark-2: #DBE2E5;
+    --text-color: #181C22;
+    --text-color-light-1: #3C4044;
+    --text-color-light-2: #6D6F77;
+}
+
+:root[data-theme=dark] {
+    --background-color: #242931;
+    --background-color-dark-1: #3D4A54;
+    --background-color-dark-2: #636977;
+    --text-color: #E5E5E5;
+    --text-color-light-1: #8B9099;
+    --text-color-light-2: #667277;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    transition: background .3s, color .3s;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    max-width: 800px;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+.container__content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.2rem 0;
+    border-bottom: solid 0.1rem var(--primary-color-light-2);
+    font-weight: 500;
+    transition: background-color .3s, color .3s, border-bottom-color .3s;
+}
+
+.container__content a:hover {
+    color: var(--primary-color-dark-1);
+    background-color: var(--primary-color-light-3);
+    border-bottom-color: var(--primary-color-light-1);
+}
+
+:root[data-theme=dark] .container__content a {
+    color: var(--primary-color);
+}
+
+:root[data-theme=dark] .container__content a:hover {
+    background-color: transparent;
+    color: var(--primary-color-dark-1);
+}
+
+.container__content p, li {
+    line-height: 1.8rem;
+    font-size: 1.1rem;
+}
+
+.page__title {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.page__title > strong {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.page__title + .page__metadata {
+    margin-top: -1.8rem;
+    margin-bottom: 1.8rem;
+    font-size: 0.85rem;
+    color: var(--text-color-light-2);
+}
+
+.page__metadata + .tags {
+    margin-top: -1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.container__content h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -0.025rem;
+}
+
+.container__content h3 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.025rem;
+}
+
+.container__content h4 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: -0.025rem;
+}
+
+.container__content p > code,
+.container__content li > code,
+.container__content a > code {
+    background-color: var(--background-color-dark-1);
+    padding: 2px 5px;
+    font-family: 'Roboto Mono', monospace;
+    border-radius: 0.1rem;
+}
+
+.container__content p > strong,
+.container__content li > strong {
+    font-weight: 500;
+}

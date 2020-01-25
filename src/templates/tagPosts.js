@@ -1,26 +1,26 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {PostItem} from '../components/post/PostItem';
-import {SiteIntro} from '../components/site/SiteIntro';
-import {Layout} from '../components/shared/Layout';
-import {SEO} from '../components/shared/Seo';
-import {SiteDivider} from '../components/site/SiteDivider';
-import {Pagination} from '../components/shared/Pagination';
+import {SEO} from '../components/Seo';
+import {Layout} from '../components/Layout';
+import {PostExcerpt} from '../components/PostExcerpt';
+import {Pagination} from '../components/Pagination';
 
-const Posts = ({data, pageContext}) => (
+const Posts = ({data: {allWordpressPost}, pageContext}) => (
   <Layout>
     <SEO title={`${pageContext.name} posts`}/>
-    <SiteIntro/>
-    <SiteDivider/>
-    {data.allWordpressPost.edges.map(({node}) => (
-      <PostItem
+    <h1 className="page__title">
+      Posts tagged with <strong>{pageContext.name}</strong>
+    </h1>
+    {allWordpressPost.edges.map(({node}) => (
+      <PostExcerpt
         key={node.id}
-        date={node.date}
+        categories={node.categories}
         excerpt={node.excerpt}
+        isNew={node.daysAgo < 20}
         readingTime={node.fields.readingTime}
         slug={node.slug}
         tags={node.tags}
-        title={node.title} />
+        title={node.title}/>
     ))}
     <Pagination
       base={pageContext.base}
@@ -35,7 +35,12 @@ export const query = graphql`
       edges {
         node {
           id
-          date(formatString: "MMMM Do, YYYY")
+          categories {
+            id
+            name
+            slug
+          }
+          daysAgo: date(difference: "days")
           title
           excerpt
           slug
