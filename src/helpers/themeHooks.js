@@ -15,18 +15,8 @@ export function usePreferredTheme(initialTheme) {
   useEffect(() => {
     const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
     updateMatch(mediaQueryList);
-    if (mediaQueryList.addEventListener != null) {
-      mediaQueryList.addEventListener('change', updateMatch);
-    } else if (mediaQueryList.addListener != null) {
-      mediaQueryList.addListener(updateMatch);
-    }
-    return () => {
-      if (mediaQueryList.removeEventListener != null) {
-        mediaQueryList.removeEventListener('change', updateMatch);
-      } else if (mediaQueryList.removeListener != null) {
-        mediaQueryList.removeListener(updateMatch);
-      }
-    }
+    addListener(mediaQueryList, updateMatch);
+    return () => removeListener(mediaQueryList, updateMatch);
   }, [initialTheme]);
   return [theme];
 }
@@ -35,4 +25,20 @@ export function useAttributeTheme(theme) {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+}
+
+function addListener(mediaQueryList, listener) {
+  if (mediaQueryList.addEventListener != null) {
+    mediaQueryList.addEventListener('change', listener);
+  } else if (mediaQueryList.addListener != null) {
+    mediaQueryList.addListener(listener);
+  }
+}
+
+function removeListener(mediaQueryList, listener) {
+  if (mediaQueryList.removeEventListener != null) {
+    mediaQueryList.removeEventListener('change', listener);
+  } else if (mediaQueryList.removeListener != null) {
+    mediaQueryList.removeListener(listener);
+  }
 }
