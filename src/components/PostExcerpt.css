@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.excerpt.excerpt--tagless {
+  grid-template-rows: 1.6rem auto auto 2.6rem;
+}
+
 .excerpt__category {
   color: var(--secondary-color);
   text-transform: uppercase;
@@ -79,6 +83,10 @@
   grid-column-end: 3;
 }
 
+.excerpt.excerpt--tagless .excerpt__content {
+  grid-row: 3;
+}
+
 .excerpt__content * {
   font-size: 18px;
   line-height: 30px;
@@ -88,4 +96,8 @@
   grid-row: 5;
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+.excerpt.excerpt--tagless .excerpt__more {
+  grid-row: 4;
 }

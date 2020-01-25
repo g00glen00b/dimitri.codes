@@ -5,9 +5,9 @@ import {Layout} from '../components/Layout';
 import {ElevatorPitch} from '../components/ElevatorPitch';
 import {Tags} from '../components/Tags';
 
-const allWordpressTagQuery = graphql`
+const allWordpressCategoryQuery = graphql`
   query {
-    allWordpressTag(filter: {count: {gt: 0}}) {
+    allWordpressCategory(filter: {count: {gt: 0}}) {
       edges {
         node {
           id
@@ -21,16 +21,18 @@ const allWordpressTagQuery = graphql`
 `;
 
 const IndexPage = () => {
-  const {allWordpressTag} = useStaticQuery(allWordpressTagQuery);
+  const {allWordpressCategory} = useStaticQuery(allWordpressCategoryQuery);
 
   return (
     <Layout>
-      <SEO title="Tags"/>
+      <SEO title="Categories"/>
       <ElevatorPitch/>
       <h1 className="page__title">
-        Pick a tag
+        Pick a category
       </h1>
-      <Tags tags={allWordpressTag.edges.map(({node}) => node)}/>
+      <Tags
+        base="/category"
+        tags={allWordpressCategory.edges.map(({node}) => node)}/>
     </Layout>
   );
 };

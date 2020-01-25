@@ -3,9 +3,10 @@ import './PostExcerpt.css';
 import {Tags} from './Tags';
 import {Link} from 'gatsby';
 
-export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, readingTime, slug, tags, title}) => {
+export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, readingTime, slug, tags = [], title}) => {
+  const tagless = tags == null || tags.length === 0;
   return (
-    <article className="excerpt">
+    <article className={`excerpt ${tagless ? 'excerpt--tagless' : ''}`}>
       <span className="excerpt__category">
         {firstCategory && firstCategory.name}
       </span>
@@ -20,9 +21,9 @@ export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, r
           {readingTime != null && readingTime.text}
         </span>
       </div>
-      <div className="excerpt__tags">
+      {!tagless && <div className="excerpt__tags">
         <Tags tags={tags}/>
-      </div>
+      </div>}
       <div className="excerpt__content" dangerouslySetInnerHTML={{__html: excerpt}}/>
       <div className="excerpt__more">
         <Link to={`/${slug}`}>Read more</Link>
