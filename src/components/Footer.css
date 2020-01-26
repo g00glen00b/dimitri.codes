@@ -27,6 +27,10 @@
   transition: background-color .3s;
 }
 
+.footer__social li:last-child .footer__social--link {
+  margin-right: 0;
+}
+
 .footer__social svg {
   fill: var(--background-color);
 }
@@ -46,6 +50,10 @@
   font-size: 0.85rem;
   margin-left: 1rem;
   transition: color .3s;
+}
+
+.footer__links > a:first-child {
+  margin-left: 0;
 }
 
 .footer__links > a:hover {
