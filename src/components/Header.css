@@ -40,5 +40,12 @@
 @media (max-width: 640px) {
   .header {
     flex-direction: column;
+    position: relative;
+  }
+
+  .header .theme-switch__button {
+    position: absolute;
+    top: 0.7rem;
+    right: 1.5rem;
   }
 }
