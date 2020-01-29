@@ -7,7 +7,7 @@ import {ThemeSwitch} from './ThemeSwitch';
 export const Header = () => {
   return (
     <header className="header">
-      <Link to="/" className="header__logo">
+      <Link to="/" className="header__logo" title="Home">
         <Logo/>
       </Link>
       <nav className="header__navigation">
