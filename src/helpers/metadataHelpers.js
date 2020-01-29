@@ -18,7 +18,7 @@ export function getOpenGraphMetadata(site, title, metaDescription, location, ima
   return [
     {property: `og:title`, content: title},
     {property: `og:description`, content: metaDescription},
-    {property: `og.site_name`, content: site.siteMetadata.title},
+    {property: `og:site_name`, content: site.siteMetadata.title},
     {property: `og:type`, content: `website`},
     {property: `og:locale`, content: `en_US`},
     {property: `og:url`, content: `${site.siteMetadata.siteUrl}${location.pathname}`},
