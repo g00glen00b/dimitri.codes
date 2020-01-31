@@ -43,6 +43,10 @@
     position: relative;
   }
 
+  .header__navigation {
+    margin-top: 1.5rem;
+  }
+
   .header .theme-switch__button {
     position: absolute;
     top: 0.7rem;
