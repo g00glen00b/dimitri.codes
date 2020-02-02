@@ -60,7 +60,7 @@ export const Footer = () => (
         Post an idea
       </OutboundLink>
       <Link
-        to="/contact">
+        to="/contact-me">
         Contact
       </Link>
       <OutboundLink
