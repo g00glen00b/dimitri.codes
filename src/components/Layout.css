@@ -67,7 +67,9 @@ main {
     color: var(--primary-color-dark-1);
 }
 
-.container__content p, li {
+.container__content p,
+.container__content li,
+.container__content .alert {
     line-height: 1.8rem;
     font-size: 1.1rem;
 }
