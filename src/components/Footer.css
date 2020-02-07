@@ -18,10 +18,11 @@
 
 .footer__social--link {
   margin-right: 0.8rem;
-  display: block;
+  display: flex;
   height: 38px;
   width: 38px;
-  padding: 0.52em;
+  justify-content: center;
+  align-items: center;
   background-color: var(--primary-color);
   border-radius: 50%;
   transition: background-color .3s;
