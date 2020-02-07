@@ -1,74 +1,93 @@
 import React from 'react';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import {FaCodepen, FaGithub, FaSpeakerDeck, FaTwitter} from 'react-icons/fa';
-import {Link} from 'gatsby';
+import {graphql, Link, useStaticQuery} from 'gatsby';
 import './Footer.css';
 
-export const Footer = () => (
-  <footer className="footer">
-    <ul className="footer__social">
-      <li>
-        <OutboundLink
-          className="footer__social--link"
-          href="https://twitter.com/g00glen00b"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Twitter">
-          <FaTwitter size={20}/>
-        </OutboundLink>
-      </li>
-      <li>
-        <OutboundLink
-          className="footer__social--link"
-          href="https://github.com/g00glen00b"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="GitHub">
-          <FaGithub size={20}/>
-        </OutboundLink>
-      </li>
-      <li>
-        <OutboundLink
-          className="footer__social--link"
-          href="https://speakerdeck.com/g00glen00b"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Speaker Deck">
-          <FaSpeakerDeck size={20}/>
-        </OutboundLink>
-      </li>
-      <li>
-        <OutboundLink
-          className="footer__social--link"
-          href="https://codepen.io/g00glen00b/"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="CodePen">
-          <FaCodepen size={20}/>
-        </OutboundLink>
-      </li>
-    </ul>
-    <nav className="footer__links">
-      <Link
-        to="/privacy-policy">
-        Privacy policy
-      </Link>
-      <OutboundLink
-        href="https://github.com/g00glen00b/gatsby-blog/issues"
-        target="_blank"
-        rel="noopener noreferrer">
-        Post an idea
-      </OutboundLink>
-      <Link
-        to="/contact">
-        Contact
-      </Link>
-      <OutboundLink
-        href="https://dimitr.im/rss.xml"
-        target="_blank"
-        rel="noopener noreferrer">
-        RSS
-      </OutboundLink>
-    </nav>
-  </footer>
-);
+const footerLinksQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        footerLinks {
+          name
+          to
+          outbound
+        }
+        socialNetworks {
+          twitter
+          codepen
+          speakerdeck
+          github
+        }
+      }
+    }
+  }
+`;
+
+export const Footer = () => {
+  const {site: {siteMetadata: {footerLinks = [], socialNetworks = {}} = {}} = {}} = useStaticQuery(footerLinksQuery);
+  return (
+    <footer className="footer">
+      <ul className="footer__social">
+        {socialNetworks.twitter && <li>
+          <OutboundLink
+            className="footer__social--link"
+            href={`https://twitter.com/${socialNetworks.twitter}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Twitter">
+            <FaTwitter size={20}/>
+          </OutboundLink>
+        </li>}
+        {socialNetworks.github && <li>
+          <OutboundLink
+            className="footer__social--link"
+            href={`https://github.com/${socialNetworks.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="GitHub">
+            <FaGithub size={20}/>
+          </OutboundLink>
+        </li>}
+        {socialNetworks.speakerdeck && <li>
+          <OutboundLink
+            className="footer__social--link"
+            href={`https://speakerdeck.com/${socialNetworks.speakerdeck}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Speaker Deck">
+            <FaSpeakerDeck size={20}/>
+          </OutboundLink>
+        </li>}
+        {socialNetworks.codepen && <li>
+          <OutboundLink
+            className="footer__social--link"
+            href={`https://codepen.io/${socialNetworks.codepen}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="CodePen">
+            <FaCodepen size={20}/>
+          </OutboundLink>
+        </li>}
+      </ul>
+      <nav className="footer__links">
+        {footerLinks.map(({name, to, outbound}) => outbound ? (
+            <OutboundLink
+              href={to}
+              key={name}
+              target="_blank"
+              rel="noopener noreferrer">
+              {name}
+            </OutboundLink>
+          ) : (
+            <Link
+              to={to}
+              key={name}>
+              {name}
+            </Link>
+          )
+        )}
+      </nav>
+    </footer>
+  );
+}

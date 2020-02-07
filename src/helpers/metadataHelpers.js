@@ -33,7 +33,7 @@ export function getTwitterMetadata(site, title, metaDescription, image) {
     {name: `twitter:creator`, content: site.siteMetadata.author},
     {name: `twitter:title`, content: title},
     {name: `twitter:description`, content: metaDescription},
-    {name: `twitter:site`, content: site.siteMetadata.siteUrl},
+    {name: `twitter:site`, content: site.siteMetadata.author},
     {name: `twitter:image`, content: `${site.siteMetadata.siteUrl}${image}`},
   ];
 }

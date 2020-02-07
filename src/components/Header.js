@@ -1,20 +1,33 @@
 import React from 'react';
 import Logo from '../images/logo.svg';
-import {Link} from 'gatsby';
+import {graphql, Link, useStaticQuery} from 'gatsby';
 import './Header.css';
 import {ThemeSwitch} from './ThemeSwitch';
 
+const headerLinksQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        headerLinks {
+          name
+          to
+        }
+      }
+    }
+  }
+`;
+
 export const Header = () => {
+  const {site: {siteMetadata: {headerLinks = []} = {}} = {}} = useStaticQuery(headerLinksQuery);
   return (
     <header className="header">
       <Link to="/" className="header__logo" title="Home">
         <Logo/>
       </Link>
       <nav className="header__navigation">
-        <Link to="/">Home</Link>
-        <Link to="/category/t">Tutorials</Link>
-        <Link to="/speaking">Speaking</Link>
-        <Link to="/about-me">About me</Link>
+        {headerLinks.map(({name, to}) => (
+          <Link key={name} to={to}>{name}</Link>
+        ))}
         <ThemeSwitch/>
       </nav>
     </header>
