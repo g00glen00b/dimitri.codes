@@ -52,6 +52,11 @@ main {
     transition: background-color .3s, color .3s, border-bottom-color .3s;
 }
 
+:root[data-theme=dark] .container__content pre {
+    border: solid 0.1rem var(--text-color);
+    border-radius: 0.2rem;
+}
+
 .container__content a:hover {
     color: var(--primary-color-dark-1);
     background-color: var(--primary-color-light-3);
