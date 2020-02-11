@@ -46,7 +46,7 @@ main {
 .container__content a {
     color: var(--primary-color);
     text-decoration: none;
-    padding: 0.2rem 0;
+    padding: 0.1rem 0;
     border-bottom: solid 0.1rem var(--primary-color-light-2);
     font-weight: 500;
     transition: background-color .3s, color .3s, border-bottom-color .3s;
