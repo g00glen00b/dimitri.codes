@@ -22,8 +22,10 @@ export function getImageNode(node) {
 }
 
 export function getImageFile(media, src) {
-  const sourceUrl = src.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$3');
-  return media.find(({node}) => node.source_url === sourceUrl);
+  const sourceUrl = src.replace(/(-e\d+|-\d+x\d+)/g, '');
+  const [firstResult, ...rest] = media.filter(({node}) => node.source_url === sourceUrl);
+  if (rest.length > 0) console.warn(`Multiple target images found for "${src}"`);
+  return firstResult;
 }
 
 export function getImageWidth(sizes, width) {

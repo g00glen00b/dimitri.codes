@@ -13,7 +13,8 @@ function replace(node) {
         src={imageNode.attribs.src}
         alt={imageNode.attribs.alt}
         width={imageNode.attribs.width}
-        sizes={imageNode.attribs.sizes}/>
+        sizes={imageNode.attribs.sizes}
+        fullWidth={imageNode.attribs.class.includes('size-full')}/>
     }
   } else if (isCode(node)) {
     return <SyntaxHighlighter

@@ -132,3 +132,14 @@ main {
 .container__content li > strong {
     font-weight: 500;
 }
+
+.container__content figure.wp-caption {
+    /* Ugly fix to override WordPress setting inline styles */
+    width: auto !important;
+    margin-bottom: 2rem;
+}
+
+.container__content figure.wp-caption > figcaption {
+    color: var(--text-color-light-2);
+    text-align: center;
+}
