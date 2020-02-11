@@ -166,7 +166,8 @@ module.exports = {
         background_color: `#FFFFFF`,
         theme_color: `#3E84CB`,
         display: `standalone`,
-        icon: `src/images/logo-square.png`
+        icon: `src/images/logo-square.svg`,
+        include_favicon: false
       }
     },
     `gatsby-plugin-offline`,

@@ -6,7 +6,7 @@ import {getOpenGraphMetadata, getTwitterMetadata} from '../helpers/metadataHelpe
 
 const siteMetadataQuery = graphql`
   query {
-    file(relativePath: {eq: "logo-square.png"}) {
+    file(relativePath: {eq: "logo-square.svg"}) {
       publicURL
     }
     site {
@@ -39,7 +39,8 @@ export const SEO = ({description, lang = 'en', meta = [], title, image}) => {
             ...meta,
           ]}
           link={[
-            {rel: `alternate`, type: `application/rss+xml`, title: `Feed`, href: `${site.siteMetadata.siteUrl}/rss.xml`}
+            {rel: `alternate`, type: `application/rss+xml`, title: `Feed`, href: `${site.siteMetadata.siteUrl}/rss.xml`},
+            {rel: `icon`, href: file.publicURL}
           ]}/>
       )}
     </Location>
