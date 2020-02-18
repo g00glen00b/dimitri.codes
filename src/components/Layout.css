@@ -5,8 +5,10 @@
     --primary-color-light-3: #ECF3FA;
     --primary-color-dark-1: #2B5C8E;
     --primary-color-dark-2: #1F4266;
-    --secondary-color: #AA522C;
-    --secondary-color-light-1: #FAECEB;
+    --secondary-color: #DCA11D;
+    --secondary-color-dark-1: #6e510f;
+    --secondary-color-light-1: #e7bd61;
+    --secondary-color-light-2: #f5e3bb;
     --background-color: #FFFFFF;
     --background-color-dark-1: #EFF1F1;
     --background-color-dark-2: #DBE2E5;
@@ -17,11 +19,11 @@
 
 :root[data-theme=dark] {
     --background-color: #242931;
-    --background-color-dark-1: #3D4A54;
+    --background-color-dark-1: #383b43;
     --background-color-dark-2: #636977;
     --text-color: #E5E5E5;
     --text-color-light-1: #8B9099;
-    --text-color-light-2: #667277;
+    --text-color-light-2: #9eaaaf;
 }
 
 html, body {
@@ -64,12 +66,12 @@ main {
 }
 
 :root[data-theme=dark] .container__content a {
-    color: var(--primary-color);
+    color: var(--primary-color-light-1);
 }
 
 :root[data-theme=dark] .container__content a:hover {
     background-color: transparent;
-    color: var(--primary-color-dark-1);
+    color: var(--primary-color);
 }
 
 .container__content p,

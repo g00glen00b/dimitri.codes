@@ -11,12 +11,16 @@
 }
 
 .excerpt__category {
-  color: var(--secondary-color);
+  color: var(--secondary-color-dark-1);
   text-transform: uppercase;
   grid-row: 1;
   grid-column-start: 1;
   grid-column-end: 3;
   font-size: 0.85rem;
+}
+
+:root[data-theme=dark] .excerpt__category {
+  color: var(--secondary-color);
 }
 
 .excerpt__title {
@@ -48,8 +52,8 @@
 }
 
 .excerpt__title--new {
-  background-color: var(--secondary-color-light-1);
-  color: var(--secondary-color);
+  background-color: var(--secondary-color-light-2);
+  color: var(--secondary-color-dark-1);
   font-size: 0.85rem;
   font-weight: 500;
   padding: 0 0.5rem;
@@ -58,7 +62,7 @@
 }
 
 :root[data-theme=dark] .excerpt__title--new {
-  color: var(--secondary-color-light-1);
+  color: var(--background-color);
   background-color: var(--secondary-color);
 }
 
