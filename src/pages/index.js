@@ -1,10 +1,10 @@
 import React from 'react';
-import {graphql, useStaticQuery} from 'gatsby';
+import {graphql, Link, useStaticQuery} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
-import {ActionTitle} from '../components/ActionTitle';
 import {ElevatorPitch} from '../components/ElevatorPitch';
+import {ReadMoreBox} from '../components/ReadMoreBox';
 
 const allWordpressPostQuery = graphql`
   query {
@@ -44,10 +44,7 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home"/>
       <ElevatorPitch/>
-      <ActionTitle
-        title="Latest posts"
-        actionLink="/category/t"
-        actionText="View all"/>
+      <h1>Latest posts</h1>
       {allWordpressPost.edges.map(({node}) => (
         <PostExcerpt
           key={node.id}
@@ -59,6 +56,7 @@ const IndexPage = () => {
           tags={node.tags}
           title={node.title}/>
       ))}
+      <ReadMoreBox/>
     </Layout>
   );
 };

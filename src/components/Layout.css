@@ -103,6 +103,11 @@ main {
     margin-bottom: 1.2rem;
 }
 
+.container__content h1 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
 .container__content h2 {
     font-size: 1.8rem;
     font-weight: 500;
