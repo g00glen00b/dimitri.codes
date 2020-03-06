@@ -1,0 +1,28 @@
+.confirm__update {
+  background: #222;
+  color: #FFF;
+  position: fixed;
+  bottom: 2rem;
+  width: 480px;
+  display: flex;
+  padding: 1rem;
+  left: calc(50% - 240px);
+  box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.3);
+  border-radius: 0.2rem;
+}
+
+.confirm__update button {
+  color: var(--primary-color-light-1);
+  text-decoration: none;
+  padding: 0.1rem 0;
+  border: none;
+  font-weight: 500;
+  transition: background-color .3s, color .3s, border-bottom-color .3s;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.confirm__update button:hover {
+  color: var(--primary-color-light-2);
+}

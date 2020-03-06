@@ -109,6 +109,7 @@ module.exports = {
         baseUrl: process.env.WORDPRESS_API_HOST,
         protocol: process.env.WORDPRESS_API_PROTOCOL,
         useACF: false,
+        hostingWPCOM: false,
         perPage: 100,
         concurrentRequests: 1,
         auth: {
@@ -181,5 +182,6 @@ module.exports = {
       }
     },
     `gatsby-plugin-robots-txt`,
+    `gatsby-plugin-netlify`
   ],
 };
