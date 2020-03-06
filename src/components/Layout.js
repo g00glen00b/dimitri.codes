@@ -3,12 +3,12 @@ import './Layout.css';
 import {Header} from './Header';
 import {Footer} from './Footer';
 
-export const Layout = ({children}) => (
+export const Layout = ({children, simple}) => (
   <div className="container">
-    <Header/>
+    {!simple && <Header/>}
     <main className="container__content">
       {children}
     </main>
-    <Footer/>
+    {!simple && <Footer/>}
   </div>
 );
