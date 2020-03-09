@@ -1,4 +1,5 @@
 const path = require('path');
+const workbox = require('workbox-build');
 
 const allPostsQuery = `{
   allWordpressPost {
@@ -117,6 +118,13 @@ const createTagPostsPages = ({allWordpressTag}, createPage) => {
   ));
 };
 
+const createAppShellPage = (createPage) => {
+  return process.env.NODE_ENV === 'production' && createPage({
+    path: `/offline-plugin-app-shell-fallback`,
+    component: path.resolve(`./src/app-shell.js`)
+  });
+};
+
 exports.createPages = ({graphql, actions: {createPage}}) => {
   return graphql(allPostsQuery).then(({errors, data}) => {
     if (errors) throw errors;
@@ -126,8 +134,16 @@ exports.createPages = ({graphql, actions: {createPage}}) => {
         createPostPages(data, createPage),
         createPostsPages(data, createPage),
         createCategoryPostsPages(data, createPage),
-        createTagPostsPages(data, createPage)
+        createTagPostsPages(data, createPage),
+        createAppShellPage(createPage)
       ];
     }
+  });
+};
+
+exports.onPostBuild = () => {
+  return workbox.injectManifest({
+    swSrc: `./src/sw.js`,
+    swDest: `public/sw.js`
   });
 };
