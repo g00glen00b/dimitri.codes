@@ -1,5 +1,5 @@
-const {injectManifest, copyWorkboxLibraries} = require('workbox-build');
-const {createPostPages, createCategoryPostsPages, createPagePages, createPostsPages, createTagPostsPages} = require('./gatsby-node-create-page');
+const path = require('path');
+const workboxBuild = require('workbox-build');
 
 const allPostsQuery = `{
   allWordpressPost {
@@ -44,36 +44,118 @@ const allPostsQuery = `{
   }  
 }`;
 
-
-
-exports.createPages = async ({graphql, actions: {createPage}}) => {
-  const {errors, data} = await graphql(allPostsQuery);
-  if (errors) throw errors;
-  return [
-    createPagePages(data, createPage),
-    createPostPages(data, createPage),
-    createPostsPages(data, createPage),
-    createCategoryPostsPages(data, createPage),
-    createTagPostsPages(data, createPage)
-  ];
+const createPaginationPages = (component, totalItems, base, context, createPage) => {
+  const pageSize = 10;
+  const pageCount = Math.ceil(totalItems / pageSize);
+  const pages = Array.from({length: pageCount}).map((_, index) => createPage({
+    path: `${base}/page/${index + 1}`,
+    component,
+    context: {
+      base,
+      limit: pageSize,
+      skip: index * pageSize,
+      pageCount,
+      currentPage: index + 1,
+      ...context
+    },
+  }));
+  const firstPage = pageCount > 0 && createPage({
+    path: base,
+    component,
+    context: {
+      base,
+      limit: pageSize,
+      skip: 0,
+      pageCount,
+      currentPage: 1,
+      ...context
+    }
+  });
+  return [...pages, firstPage];
 };
 
-exports.onPostBuild = async () => {
-  const path = await copyWorkboxLibraries(`public`);
-  const {count, size, warnings} = await injectManifest({
+const createPostPages = ({allWordpressPost}, createPage) => {
+  return allWordpressPost.edges.map(({node}) => createPage({
+    path: node.slug,
+    component: path.resolve('./src/templates/post.js'),
+    context: {id: node.id}
+  }));
+};
+
+const createPagePages = ({allWordpressPage}, createPage) => {
+  return allWordpressPage.edges.map(({node}) => createPage({
+    path: node.slug,
+    component: path.resolve('./src/templates/page.js'),
+    context: {id: node.id}
+  }));
+};
+
+const createPostsPages = ({allWordpressPost}, createPage) => createPaginationPages(
+  path.resolve('./src/templates/posts.js'),
+  allWordpressPost.edges.length,
+  '/posts',
+  {},
+  createPage
+);
+
+const createCategoryPostsPages = ({allWordpressCategory}, createPage) => {
+  return allWordpressCategory.edges.map(({node}) => createPaginationPages(
+    path.resolve('./src/templates/categoryPosts.js'),
+    node.count,
+    `/category/${node.slug}`,
+    node,
+    createPage
+  ));
+};
+
+const createTagPostsPages = ({allWordpressTag}, createPage) => {
+  return allWordpressTag.edges.map(({node}) => createPaginationPages(
+    path.resolve('./src/templates/tagPosts.js'),
+    node.count,
+    `/tag/${node.slug}`,
+    node,
+    createPage
+  ));
+};
+
+const createAppShellPage = (createPage) => {
+  return process.env.NODE_ENV === 'production' && createPage({
+    path: `/offline-plugin-app-shell-fallback`,
+    component: path.resolve(`./src/app-shell.js`)
+  });
+};
+
+exports.createPages = ({graphql, actions: {createPage}}) => {
+  return graphql(allPostsQuery).then(({errors, data}) => {
+    if (errors) throw errors;
+    else {
+      return [
+        createPagePages(data, createPage),
+        createPostPages(data, createPage),
+        createPostsPages(data, createPage),
+        createCategoryPostsPages(data, createPage),
+        createTagPostsPages(data, createPage),
+        createAppShellPage(createPage)
+      ];
+    }
+  });
+};
+
+exports.onPostBuild = () => {
+  return workboxBuild.injectManifest({
     swSrc: `./src/sw.js`,
     swDest: `public/sw.js`,
-    dontCacheBustURLsMatching: /(\.js$|\.css$|static\/)/,
     globDirectory: `public`,
     globPatterns: [
+      `offline-plugin-app-shell-fallback/index.html`,
       `**/*.woff2`,
       `app-*.js`,
       `commons-*.js`,
       `webpack-runtime-*.js`,
-      `manifest.webmanifest`
-    ],
+      `manifest.webmanifest`,
+      `component---src-app-shell-js-*.js`
+    ]
+  }).then(({ count, size, warnings }) => {
+    if (warnings) warnings.forEach(warning => console.warn(warning));
   });
-  if (warnings) warnings.forEach(warning => console.warn(warning));
-  console.info(`Copied Workbox libraries to ${path}`);
-  console.info(`Generated serviceworker, precaching ${count} files, totaling ${size} bytes`);
 };
