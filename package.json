@@ -30,7 +30,7 @@
     "react-icons": "^3.8.0",
     "react-syntax-highlighter": "^11.0.2",
     "striptags": "^3.1.1",
-    "workbox-build": "^5.0.0"
+    "workbox-build": "^4.3.1"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
@@ -40,6 +40,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "clean": "gatsby clean",
     "build": "GATSBY_CONCURRENT_DOWNLOAD=50 gatsby build",
     "develop": "GATSBY_CONCURRENT_DOWNLOAD=50 gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",

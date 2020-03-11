@@ -1,5 +1,5 @@
 const path = require('path');
-const workbox = require('workbox-build');
+const workboxBuild = require('workbox-build');
 
 const allPostsQuery = `{
   allWordpressPost {
@@ -142,8 +142,20 @@ exports.createPages = ({graphql, actions: {createPage}}) => {
 };
 
 exports.onPostBuild = () => {
-  return workbox.injectManifest({
+  return workboxBuild.injectManifest({
     swSrc: `./src/sw.js`,
-    swDest: `public/sw.js`
+    swDest: `public/sw.js`,
+    globDirectory: `public`,
+    globPatterns: [
+      `offline-plugin-app-shell-fallback/index.html`,
+      `**/*.woff2`,
+      `app-*.js`,
+      `commons-*.js`,
+      `webpack-runtime-*.js`,
+      `manifest.webmanifest`,
+      `component---src-app-shell-js-*.js`
+    ]
+  }).then(({ count, size, warnings }) => {
+    if (warnings) warnings.forEach(warning => console.warn(warning));
   });
 };
