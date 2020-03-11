@@ -171,6 +171,7 @@ module.exports = {
         include_favicon: false
       }
     },
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
