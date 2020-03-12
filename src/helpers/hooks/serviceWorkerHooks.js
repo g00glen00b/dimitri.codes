@@ -46,12 +46,11 @@ export function useServiceWorkerUpdate(registration) {
       if (registration.waiting) onUpdateAvailable(registration.waiting);
       else if (registration.installing) onUpdateFound();
       else registration.addEventListener('updatefound', onUpdateFound);
+      return () => {
+        registration.removeEventListener('updatefound', onUpdateFound);
+        registration.installing.removeEventListener('statechange', onStateChange);
+      };
     }
-
-    return () => {
-      registration.removeEventListener('updatefound', onUpdateFound);
-      registration.installing.removeEventListener('statechange', onStateChange);
-    };
   }, [registration]);
 
   return [serviceWorker, () => setServiceWorker(null)];
