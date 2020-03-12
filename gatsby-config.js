@@ -1,6 +1,7 @@
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 const he = require('he');
 const striptags = require('striptags');
+const path = require('path');
 require('dotenv').config({path: `.env.${environment}`});
 
 const siteMetadataQuery = `{
@@ -174,6 +175,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-offline`,
       options: {
+        appendScript: path.resolve(`./src/sw.js`),
         workboxConfig: {
           // Disables automatically activating a service worker after it has been installed
           skipWaiting: false,
