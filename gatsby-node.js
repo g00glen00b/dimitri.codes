@@ -1,4 +1,4 @@
-const {createPostPages, createCategoryPostsPages, createPagePages, createPostsPages, createTagPostsPages} = require('./src/helpers/createPageHelpers');
+const {createPostPages, createCategoryPostsPages, createPagePages, createPostsPages, createTagPostsPages} = require('./src/helpers/node/createPageHelpers');
 
 const allPostsQuery = `{
   allWordpressPost {

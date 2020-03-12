@@ -1,5 +1,5 @@
-const {normalize} = require('./src/helpers/wordpressNormalizerHelpers');
-const {feedItemQuery, getFeedItem, siteMetadataQuery} = require('./src/helpers/feedHelpers');
+const {normalize} = require('./src/helpers/node/wordpressNormalizerHelpers');
+const {feedItemQuery, getFeedItem, siteMetadataQuery} = require('./src/helpers/node/feedHelpers');
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 const path = require('path');
 
@@ -133,9 +133,9 @@ module.exports = {
             // To still allow immediate live data, without losing much performance, we're using `NetworkFirst` with a timeout of 1 second.
             // If we're unable to fetch the page data within that time, we'll rely on cache.
             // The request will still be executed in the background though, which allows us to refresh when necessary.
-            handler: `NetworkFirst`,
+            handler: `StaleWhileRevalidate`,
             options: {
-              networkTimeoutSeconds: 1,
+              // networkTimeoutSeconds: 1,
               broadcastUpdate: {
                 channelName: `page-updated`
               }
