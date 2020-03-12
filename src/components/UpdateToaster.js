@@ -6,11 +6,10 @@ import {useInterval} from '../helpers/hooks/genericHooks';
 
 export const UpdateToaster = () => {
   const [registration] = useServiceWorker('/sw.js');
-  const isInterval = registration != null && navigator.serviceWorker.controller != null;
   const [updatedServiceWorker, setUpdated] = useServiceWorkerUpdate(registration);
   useServiceWorkerMessage();
 
-  useInterval(() => registration.update(), isInterval ? 1 * 60 * 1000 : null);
+  useInterval(() => registration && registration.update(), 1 * 60 * 1000);
 
   function onUpdate() {
     updatedServiceWorker.postMessage({action: 'skipWaiting'});
