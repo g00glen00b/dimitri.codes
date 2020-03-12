@@ -171,7 +171,34 @@ module.exports = {
         include_favicon: false
       }
     },
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        workboxConfig: {
+          // Disables automatically activating a service worker after it has been installed
+          skipWaiting: false,
+          offlineGoogleAnalytics: true,
+          runtimeCaching: [{
+            urlPattern: /(\.js$|\.css$|static\/)/,
+            handler: `CacheFirst`
+          }, {
+            urlPattern: /^https?:.*\page-data\/.*\/page-data\.json/,
+            // Default is `StaleWhileRevalidate`, which causes stale data to appear
+            // The reason this is applied is to increase performance.
+            // To still allow immediate live data, without losing much performance, we're using `NetworkFirst` with a timeout of 1 second.
+            // If we're unable to fetch the page data within that time, we'll rely on cache.
+            // The request will still be executed in the background though, which allows us to refresh when necessary.
+            handler: `NetworkFirst`,
+            options: {
+              networkTimeoutSeconds: 1,
+              broadcastUpdate: {
+                channelName: `page-updated`
+              }
+            }
+          }]
+        }
+      }
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
