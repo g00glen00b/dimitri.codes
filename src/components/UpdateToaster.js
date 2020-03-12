@@ -9,7 +9,10 @@ export const UpdateToaster = () => {
   const [updatedServiceWorker, setUpdated] = useServiceWorkerUpdate(registration);
   useServiceWorkerMessage();
 
-  useInterval(() => registration && registration.update(), 1 * 60 * 1000);
+  useInterval(() => {
+    console.log('interval', registration);
+    registration && registration.update();
+  }, 1 * 60 * 1000);
 
   function onUpdate() {
     updatedServiceWorker.postMessage({action: 'skipWaiting'});

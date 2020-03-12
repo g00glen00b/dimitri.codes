@@ -29,7 +29,7 @@ export function useServiceWorkerUpdate(registration) {
 
   useEffect(() => {
     function onUpdateAvailable(serviceworker) {
-      console.log('on update available');
+      console.log('on update available', serviceworker);
       setServiceWorker(serviceworker);
     }
 
@@ -39,6 +39,7 @@ export function useServiceWorkerUpdate(registration) {
     }
 
     function onUpdateFound() {
+      console.log('on update found', registration.installing);
       registration.installing.addEventListener('statechange', onStateChange);
     }
 
