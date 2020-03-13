@@ -1,65 +1,8 @@
+const {normalize} = require('./src/helpers/node/wordpressNormalizerHelpers');
+const {feedItemQuery, getFeedItem, siteMetadataQuery} = require('./src/helpers/node/feedHelpers');
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
-const he = require('he');
-const striptags = require('striptags');
+
 require('dotenv').config({path: `.env.${environment}`});
-
-const siteMetadataQuery = `{
-  site {
-    siteMetadata {
-      title
-      description
-      siteUrl
-      site_url: siteUrl
-    }
-  }
-}`;
-
-const feedItemQuery = `{
-  allWordpressPost(sort: {fields: [date], order:DESC}, limit: 10) {
-    edges {
-      node {
-        simpleExcerpt
-        slug
-        title
-        date
-      }
-    }
-  }
-}`;
-
-const contentUrlRegex = new RegExp(process.env.URL_REPLACEMENT_FROM, 'g');
-
-const getFeedItem = (site, node) => ({
-  description: node.excerpt,
-  title: node.title,
-  date: node.date,
-  url: `${site.siteMetadata.siteUrl}/${node.slug}`,
-  guid: `${site.siteMetadata.siteUrl}/${node.slug}`
-});
-
-const normalizeContentUrls = ({content, ...rest}) => ({
-  content: content != null && content.replace(contentUrlRegex, process.env.URL_REPLACEMENT_TO),
-  ...rest
-});
-
-const normalizeTitleEntities = ({title, ...rest}) => ({
-  title: title != null && he.decode(title),
-  ...rest
-});
-
-const normalizeExcerpt = ({excerpt, ...rest}) => ({
-  excerpt,
-  simpleExcerpt: excerpt != null && he.decode(striptags(excerpt)),
-  ...rest
-});
-
-const normalizeSourceUrl = ({source_url, ...rest}) => ({
-  source_url: source_url != null && source_url.replace(/^(https?:\/\/.*)-e\d+\.(.+?)$/g, '$1.$2'),
-  ...rest
-});
-
-const normalizers = [normalizeContentUrls, normalizeTitleEntities, normalizeExcerpt, normalizeSourceUrl];
-const normalize = entity => normalizers.reduce((entity, normalizer) => normalizer(entity), entity);
 
 module.exports = {
   siteMetadata: {
@@ -151,7 +94,28 @@ module.exports = {
         include_favicon: false
       }
     },
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        workboxConfig: {
+          offlineGoogleAnalytics: true,
+          runtimeCaching: [{
+            urlPattern: /(\.js$|\.css$|static\/)/,
+            handler: `CacheFirst`
+          }, {
+            urlPattern: /^https?:.*\page-data\/.*\/page-data\.json/,
+            // Default is `StaleWhileRevalidate`, which causes stale data to appear
+            // The reason this is applied is to increase performance.
+            // To still allow immediate live data, without losing much performance, we're using `NetworkFirst` with a timeout of 1 second.
+            // If we're unable to fetch the page data within that time, we'll rely on cache.
+            handler: `NetworkFirst`,
+            options: {
+              networkTimeoutSeconds: 1
+            }
+          }]
+        }
+      }
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
