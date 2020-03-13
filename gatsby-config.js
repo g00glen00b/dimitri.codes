@@ -129,9 +129,9 @@ module.exports = {
             // To still allow immediate live data, without losing much performance, we're using `NetworkFirst` with a timeout of 1 second.
             // If we're unable to fetch the page data within that time, we'll rely on cache.
             handler: `NetworkFirst`,
-            options: {
-              networkTimeoutSeconds: 1
-            }
+            // options: {
+            //   networkTimeoutSeconds: 1
+            // }
           }]
         }
       }
