@@ -1,6 +1,6 @@
 ---
 title: "Write a widget using Dojo (resources)"
-date: "2014-01-11"
+date: "2014-01-07"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript", "Web"]
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Building mobile apps with Dojo mobile (controller mixin)"
-date: "2013-12-24"
+date: "2013-12-22"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
 ---

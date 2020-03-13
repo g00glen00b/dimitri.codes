@@ -2,6 +2,8 @@
 title: "Writing real time applications using Spring, AngularJS and WebSockets"
 date: "2014-03-09"
 coverImage: "angular.png"
+categories: ["Java", "Tutorials"]
+tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]
 ---
 
 HTML5 made browsers a powerful alternative to desktop applications. However, network traffic (when using AJAX or by simply loading pages) is always in one direction. The client requests a page from the server, which in turn responds with the proper content. With HTML5 WebSockets that's a different story, websockets allow you to setup a full duplex channel between server and client, making it possible to send messages in both ways.
@@ -12,12 +14,12 @@ The reasoning behind this is quite simple: WebSockets are still quite new and no
 
 Frameworks I'm going to use is the recently released **Spring 4** and of course the famous front-end MVC-framework **AngularJS**.
 
-[![angular-orderby-class](images/angular-orderby-class-1024x311.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/03/angular-orderby-class.png)
+![angular-orderby-class](images/angular-orderby-class.png)
 
 ### Writing real time applications using Spring, AngularJS and WebSockets
 
-1. [Project setup and configuration](http://wordpress.g00glen00b.be/spring-websockets-config)
-2. [RESTful webservice and WebSockets (Spring)](http://wordpress.g00glen00b.be/spring-websockets-spring)
-3. [AngularJS front-end](http://wordpress.g00glen00b.be/spring-websockets-angular)
+1. [Project setup and configuration](/spring-websockets-config)
+2. [RESTful webservice and WebSockets (Spring)](/spring-websockets-spring)
+3. [AngularJS front-end](/spring-websockets-angular)
 
 You can also find the complete code example on [Github](https://github.com/g00glen00b/spring-websockets).

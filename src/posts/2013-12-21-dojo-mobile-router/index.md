@@ -1,6 +1,6 @@
 ---
 title: "Building mobile apps with Dojo mobile (router)"
-date: "2013-12-24"
+date: "2013-12-21"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
 ---

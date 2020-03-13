@@ -1,6 +1,6 @@
 ---
 title: "Write a widget using Dojo (behavior)"
-date: "2014-01-11"
+date: "2014-01-09"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript", "Web"]
 ---
@@ -154,7 +154,7 @@ This makes our module complete and so it ends our tutorial. In the next tutorial
 
 ### Write a widget using Dojo series
 
-1. [Application structure, templating and localization](http://wordpress.g00glen00b.be/dojo-widget-resources/)
-2. [Modules, inheritance and object state](http://wordpress.g00glen00b.be/dojo-widget-inheritance/)
-3. [Module behavior](http://wordpress.g00glen00b.be/dojo-widget-behavior/)
-4. [Finishing the application and demo](http://wordpress.g00glen00b.be/dojo-widget-demo/)
+1. [Application structure, templating and localization](/dojo-widget-resources/)
+2. [Modules, inheritance and object state](/dojo-widget-inheritance/)
+3. [Module behavior](/dojo-widget-behavior/)
+4. [Finishing the application and demo](/dojo-widget-demo/)
