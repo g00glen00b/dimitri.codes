@@ -19,9 +19,6 @@ export default function HTML(props) {
           var theme = localStorage.getItem('theme');
           var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', theme || systemTheme);
-          if (navigator != null && navigator.serviceWorker != null) {
-            navigator.serviceWorker.addEventListener('message', event => console.log('SW', event));
-          }
         }());
       `}}/>
         {props.preBodyComponents}

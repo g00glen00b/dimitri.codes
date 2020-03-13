@@ -1,7 +1,6 @@
 const {normalize} = require('./src/helpers/node/wordpressNormalizerHelpers');
 const {feedItemQuery, getFeedItem, siteMetadataQuery} = require('./src/helpers/node/feedHelpers');
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
-const path = require('path');
 
 require('dotenv').config({path: `.env.${environment}`});
 
@@ -118,10 +117,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        appendScript: path.resolve(`./src/sw.js`),
         workboxConfig: {
-          // Disables automatically activating a service worker after it has been installed
-          skipWaiting: false,
           offlineGoogleAnalytics: true,
           runtimeCaching: [{
             urlPattern: /(\.js$|\.css$|static\/)/,
@@ -132,13 +128,9 @@ module.exports = {
             // The reason this is applied is to increase performance.
             // To still allow immediate live data, without losing much performance, we're using `NetworkFirst` with a timeout of 1 second.
             // If we're unable to fetch the page data within that time, we'll rely on cache.
-            // The request will still be executed in the background though, which allows us to refresh when necessary.
-            handler: `StaleWhileRevalidate`,
+            handler: `NetworkFirst`,
             options: {
-              // networkTimeoutSeconds: 1,
-              broadcastUpdate: {
-                channelName: `page-updated`
-              }
+              networkTimeoutSeconds: 1
             }
           }]
         }
