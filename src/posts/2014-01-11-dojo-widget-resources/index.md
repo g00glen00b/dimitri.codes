@@ -1,6 +1,8 @@
 ---
 title: "Write a widget using Dojo (resources)"
 date: "2014-01-11"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Dojo", "JavaScript", "Web"]
 ---
 
 In this simple project I will demonstrate you how you can create your own widget. In this tutorial we will handle several principles/patterns that are commonly used in Dojo. The following topics will be handled:
@@ -27,12 +29,13 @@ The localized folder is a bit different. First you need to create subfolders in 
 
 The last step is to creat our main JavaScript file called `application.js` which should be added to the **app** directory. If you created all these folders and files, your project should look similar to the screenshot below.
 
-[![project-structure](images/project-structure-172x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/01/project-structure.png)
+![project-structure](images/project-structure.png)
 
 ### Template
 
 The easiest part to start with is usually the template (because you know how you want to make your widget look like). In this example I will be creating a stopwatch, so I need a field to display the hours, minutes, seconds and milliseconds. I also want to add a Start/Stop/Resume button and a Reset button. Our entire template will look like this:
 
+```html
 <div class="${baseClass} dijitInline" data-dojo-attach-point="containerNode">
     <p class="dijitInline">
         <span data-dojo-attach-point="hoursNode">00</span> :
@@ -42,10 +45,11 @@ The easiest part to start with is usually the template (because you know how you
     </p>
 
     <button data-dojo-type="dijit/form/ToggleButton" data-dojo-attach-point="startBtn"
-        data-dojo-attach-event="onChange: onStart">${\_\_nls.start}</button>
+        data-dojo-attach-event="onChange: onStart">${__nls.start}</button>
     <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="resetBtn"
-        data-dojo-attach-event="onClick: onReset" data-dojo-props="disabled: true">${\_\_nls.reset}</button>
+        data-dojo-attach-event="onClick: onReset" data-dojo-props="disabled: true">${__nls.reset}</button>
 </div>
+```
 
 Don't worry if you don't get all this stuff, I will explain all of these now. The first thing we need to know is that a widget can only have a single **root DOM node**. In this example I will wrap all my HTML code in a single `&ltdiv>`, which will be our root node. As you can see we gave this `<div>` a class called `dijitInline`. This classname is used to style our widget properly. When you use this classname, the widget will be inline, which means that if you put something after our widget, it will be placed on the same line (otherwise it would start on a new line). Another classname we used is `${baseClass}`. This is actually not a real classname, but it's a placeholder. When rendering the template (to the actual HTML), it will replace all placeholders with properties of the business logic of the module. In this case, it will be replaced by a property called `baseClass`.
 
@@ -65,6 +69,7 @@ For both buttons we will use a placeholder as the name of the button, `${__nls.s
 
 The next part of this tutorial is providing our widget with some localized messages. Our widget will contain a start, stop, reset and resume label for our buttons. The first file we need to change is the JavaScript file in the **nls** directory. It will have the following structure:
 
+```javascript
 define({
     root: {
         start: "Start",
@@ -75,26 +80,31 @@ define({
     nl: true,
     fr: true
 });
+```
 
 As you can see it has several properties, the first one being `root` which contains the default localized labels, in this case in English. Below this property we list all locales we want to implement, in this case **nl** (Dutch) and **fr** (French).
 
 The next file we will edit is the JavaScript file in the **fr** directory. This one will look a bit different to the previous resource file.
 
+```javascript
 define({
     start: "Commence",
     stop: "Arrêt",
     reset: "Remet",
     resume: "Recommence"
 });
+```
 
 This file contains translations of each property we listed before. Be sure that the names of the properties (`start`, `stop`, `reset` and `resume`) are the same. Now we need to do a similar thing in the **nl** directory, but containing our Dutch translations.
 
+```javascript
 define({
     start: "Start",
     stop: "Stop",
     reset: "Reset",
     resume: "Hervatten"
 });
+```
 
 You can repeat this for each locale you want to implement, just make sure that you translate all properties and that you add the locale to the JavaScript file in the **nls** directy, for example `de: true`.
 
@@ -102,7 +112,7 @@ This ends the first part of this tutorial. In the next tutorial we will start wi
 
 ### Write a widget using Dojo series
 
-1. [Application structure, templating and localization](http://wordpress.g00glen00b.be/dojo-widget-resources/)
-2. [Modules, inheritance and object state](http://wordpress.g00glen00b.be/dojo-widget-inheritance/)
-3. [Module behavior](http://wordpress.g00glen00b.be/dojo-widget-behavior/)
-4. [Finishing the application and demo](http://wordpress.g00glen00b.be/dojo-widget-demo/)
+1. [Application structure, templating and localization](/dojo-widget-resources/)
+2. [Modules, inheritance and object state](/dojo-widget-inheritance/)
+3. [Module behavior](/dojo-widget-behavior/)
+4. [Finishing the application and demo](/dojo-widget-demo/)

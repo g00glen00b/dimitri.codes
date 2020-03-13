@@ -1,6 +1,8 @@
 ---
 title: "Write a widget using Dojo (demo)"
 date: "2014-01-11"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Dojo", "JavaScript", "Web"]
 ---
 
 In the previous tutorials we wrote our entire module using Dojo. In this tutorial I will finish the entire application by providing a HTML page and giving a demonstration of the application.
@@ -9,88 +11,89 @@ In the previous tutorials we wrote our entire module using Dojo. In this tutoria
 
 We finally finished to stopwatch module, if you missed anything or you want to make sure your code is correct, you can copy or verify it with the code below.
 
-define(\[
-    "dojo/\_base/declare", "dojo/\_base/lang", "dojo/number",
+```javascipt
+define([
+    "dojo/_base/declare", "dojo/_base/lang", "dojo/number",
     "dojo/text!../views/Stopwatch.html", "dojo/i18n!app/nls/Stopwatch",
-    "dijit/\_WidgetBase", "dijit/\_TemplatedMixin", "dijit/\_WidgetsInTemplateMixin",
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
     "dijit/form/ToggleButton", "dijit/form/Button"
-\], function(declare, lang, NumberUtils, template, nls, \_WidgetBase, \_TemplatedMixin, \_WidgetsInTemplateMixin) {
-    return declare("app.components.Stopwatch", \[\_WidgetBase, \_TemplatedMixin, \_WidgetsInTemplateMixin\], {
+], function(declare, lang, NumberUtils, template, nls, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin) {
+    return declare("app.components.Stopwatch", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
         templateString: template,
         baseClass: "dijitStopwatch",
         declaredClass: "app.componnents.Stopwatch",
         updateRate: 30,
 
-        \_\_SECMS: 1000,
-        \_\_MINMS: 1000 \* 60,
-        \_\_HRSMS: 1000 \* 60 \* 60,
+        __SECMS: 1000,
+        __MINMS: 1000 * 60,
+        __HRSMS: 1000 * 60 * 60,
 
-        \_\_nls: nls,
+        __nls: nls,
 
-        \_\_currentTime: 0,
-        \_\_pauseTime: 0,
-        \_\_timer: null,
-        \_\_started: false,
+        __currentTime: 0,
+        __pauseTime: 0,
+        __timer: null,
+        __started: false,
 
         onStart: function(newValue) {
-            if (newValue && !this.\_\_started) {
-                this.\_\_start();
-            } else if (!newValue && this.\_\_started) {
-                this.\_\_stop();
+            if (newValue && !this.__started) {
+                this.__start();
+            } else if (!newValue && this.__started) {
+                this.__stop();
             } else {
-                this.\_\_resume();
+                this.__resume();
             }
         },
 
         onReset: function() {
-            this.\_\_pauseTime = 0;
-            this.\_\_started = false;
-            this.\_\_render(0);
+            this.__pauseTime = 0;
+            this.__started = false;
+            this.__render(0);
         },
 
-        \_\_getTime: function() {
+        __getTime: function() {
             return new Date().getTime();
         },
-        \_\_start: function() {
-            this.\_\_started = true;
-            this.\_\_currentTime = this.\_\_getTime();
-            this.\_\_startTimer();
+        __start: function() {
+            this.__started = true;
+            this.__currentTime = this.__getTime();
+            this.__startTimer();
         },
-        \_\_startTimer: function() {
-            this.\_\_pauseTime = 0;
+        __startTimer: function() {
+            this.__pauseTime = 0;
             this.startBtn.set("label", nls.stop);
             this.resetBtn.set("disabled", true);
-            this.\_\_timer = setInterval(lang.hitch(this, "\_\_render"), this.\_\_SECMS / this.updateRate);           
+            this.__timer = setInterval(lang.hitch(this, "__render"), this.__SECMS / this.updateRate);           
         },
-        \_\_stop: function() {
-            clearInterval(this.\_\_timer);
+        __stop: function() {
+            clearInterval(this.__timer);
             this.startBtn.set("label", nls.resume);
             this.resetBtn.set("disabled", false);
-            this.\_\_pauseTime = this.\_\_getTime();
+            this.__pauseTime = this.__getTime();
         },
-        \_\_resume: function() {
-            if (this.\_\_pauseTime !== 0) {
-                this.\_\_currentTime += (this.\_\_getTime() - this.\_\_pauseTime);
+        __resume: function() {
+            if (this.__pauseTime !== 0) {
+                this.__currentTime += (this.__getTime() - this.__pauseTime);
             }
-            this.\_\_startTimer();
+            this.__startTimer();
         },
-        \_\_render: function(milli) {
+        __render: function(milli) {
             if (milli === undefined) {
-                milli = this.\_\_getTime() - this.\_\_currentTime;
+                milli = this.__getTime() - this.__currentTime;
             }
-            var hrs = milli / this.\_\_HRSMS;
-            milli = milli % this.\_\_HRSMS;
-            var mins = milli / this.\_\_MINMS;
-            milli = milli % this.\_\_MINMS;
-            var secs = milli / this.\_\_SECMS;
-            milli = milli % this.\_\_SECMS;
+            var hrs = milli / this.__HRSMS;
+            milli = milli % this.__HRSMS;
+            var mins = milli / this.__MINMS;
+            milli = milli % this.__MINMS;
+            var secs = milli / this.__SECMS;
+            milli = milli % this.__SECMS;
 
-            this.hoursNode.innerHTML = this.\_\_format(hrs, "00");
-            this.minutesNode.innerHTML = this.\_\_format(mins, "00");
-            this.secondsNode.innerHTML = this.\_\_format(secs, "00");
-            this.milliNode.innerHTML = this.\_\_format(milli, "000");
+            this.hoursNode.innerHTML = this.__format(hrs, "00");
+            this.minutesNode.innerHTML = this.__format(mins, "00");
+            this.secondsNode.innerHTML = this.__format(secs, "00");
+            this.milliNode.innerHTML = this.__format(milli, "000");
         },
-        \_\_format: function(value, pattern) {
+        __format: function(value, pattern) {
             return NumberUtils.format(value, {
                 pattern: pattern
             });
@@ -98,13 +101,15 @@ define(\[
 
         postCreate: function() {
             this.inherited(arguments);
-            this.\_\_render(0);
+            this.__render(0);
         }
     });
 });
+```
 
 The next step is that we're going to use the widget. First open up your **index.html** file and put the following content in it:
 
+```html
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -117,10 +122,10 @@ The next step is that we're going to use the widget. First open up your **index.
             dojoConfig = {
                 parseOnLoad : true,
                 async: true,
-                packages: \[{
+                packages: [{
                         name: 'app',
-                        location: location.pathname.replace(/\\/\[^/\]+$/, '') + 'app'
-                }\]
+                        location: location.pathname.replace((/\/[^/]+$/, '') + 'app'
+                }]
             }
         </script>
 
@@ -133,10 +138,11 @@ The next step is that we're going to use the widget. First open up your **index.
         <script type="text/javascript" src="app/application.js"></script>
     </body>
 </html>
+```
 
 If we look at the `<head>`, we notice several things, the first thing is that we load a CSS file called **claro.css**. This is one of the [default themes](http://dojotoolkit.org/reference-guide/1.9/dijit/themes.html#available-themes) for Dojo that can be used.
 
-The next thing to notice is that we have a script that initializes a global variable called `dojoConfig`, this actually configures the Dojo loader. We use it to make sure that declarative widgets are automatically loaded when the page is loaded (using `parseOnLoad`), to make sure that modules and other files are called asynchronously (`async`) and we also define our **app** package here. This one is probably the most difficult one. By default, Dojo will look for packages in folder relative to the Dojo loader. However, because we're using a CDN, our package is not relatively positioned to the Dojo loader, so we have to make an absolute URL (containing the hostname as well). To retrieve the hostname, we use a regex: `location.pathname.replace(/\/[^/]+$/, '')` which makes sure that the **app** package can be found.
+The next thing to notice is that we have a script that initializes a global variable called `dojoConfig`, this actually configures the Dojo loader. We use it to make sure that declarative widgets are automatically loaded when the page is loaded (using `parseOnLoad`), to make sure that modules and other files are called asynchronously (`async`) and we also define our **app** package here. This one is probably the most difficult one. By default, Dojo will look for packages in folder relative to the Dojo loader. However, because we're using a CDN, our package is not relatively positioned to the Dojo loader, so we have to make an absolute URL (containing the hostname as well). To retrieve the hostname, we use a regex: `location.pathname.replace((/\/[^/]+$/, '')` which makes sure that the **app** package can be found.
 
 Then the next part is the `<body>`. The first thing to notice is that we added a class called **claro**. To use a Dojo theme, you have to mark a parent with this class name, usually this classname is placed on the `<body>` tag. We then declaratively write our widget by using the `data-dojo-type` attribute (as we did for the buttons). We have two stopwatches here, the first one being the normal one, and the second one is using `data-dojo-props` to override the `updateRate` property of our module so that it will actually only update once every second.
 
@@ -144,7 +150,9 @@ Then the next part is the `<body>`. The first thing to notice is that we added a
 
 We now implemented most files except our main JavaScript file that could be found in the **app** directory. Don't worry, this is actually the smallest file of all:
 
-require(\["app/components/Stopwatch", "dojo/parser"\]);
+```javascipt
+require(["app/components/Stopwatch", "dojo/parser"]);
+```
 
 Just like when we did with the **dijit/form/ToggleButton** and **dijit/form/Button** modules, we have to import the modules we use in our declarative markup, this time being our stopwatch. As you can see here, we use `require()` in stead of `define()`. `define()` is actually only used when defining modules. It allows you to return an object (the module itself) while `require()` doesn't. You always need a main JavaScript file with a `require()`. It's this function that will start loading all depending modules and widgets for the entire application.
 
@@ -154,21 +162,21 @@ The next thing we need is the **dojo/parser** module. This module is actually re
 
 We finally finished our application and we can go and test it out. Just open your browser and open your **index.html** file and you should see something similar as in the screenshot below.
 
-[![stopwatches](images/stopwatches-300x42.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/01/stopwatches.png)
+![stopwatches](images/stopwatches.png)
 
 As you can see, they're both on the same line thanks to the **dijitInline** class. If you open up your inspector or develoer tools (usually **F12**), you will see that it replaced `${baseClass}` and gave your widget an `id` and `widgetid` attribute similar to your `declaredClass`.
 
-[![inspector](images/inspector-300x129.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/01/inspector.png)
+![inspector](images/inspector.png)
 
 Finally we can start playing around with our widgets. You will notice that the second one only updates every second as we defined. But be aware, because our operations take time as well, you will see that it takes a bit longer than 1 second. it will actually try to run the code as soon as the interval is over. If you clicked the start button, you will see that the label of our button changed to **Stop** and that it looks pressed now (it's toggled on). If we click on the **Stop** button, you will notice that it enables the **Reset** button, giving you the option to resume or to reset and start over.
 
-[![stop](images/stop.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/01/stop.png)[![resume](images/resume.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/01/resume.png)
+![stop](images/stop.png)
 
  
 
 If you change the locale/language of your browser, you can see that in other languages the widget will show other labels thanks to the **dojo/i18n** plugin.
 
-[![i18n](images/i18n-300x25.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/01/i18n.png)
+![i18n](images/i18n.png)
 
 #### Achievement: Tutorial finished
 
@@ -176,7 +184,7 @@ This ends our small series about writing a widget using Dojo. If you're interest
 
 ### Write a widget using Dojo series
 
-1. [Application structure, templating and localization](http://wordpress.g00glen00b.be/dojo-widget-resources/)
-2. [Modules, inheritance and object state](http://wordpress.g00glen00b.be/dojo-widget-inheritance/)
-3. [Module behavior](http://wordpress.g00glen00b.be/dojo-widget-behavior/)
-4. [Finishing the application and demo](http://wordpress.g00glen00b.be/dojo-widget-demo/)
+1. [Application structure, templating and localization](/dojo-widget-resources/)
+2. [Modules, inheritance and object state](/dojo-widget-inheritance/)
+3. [Module behavior](/dojo-widget-behavior/)
+4. [Finishing the application and demo](/dojo-widget-demo/)

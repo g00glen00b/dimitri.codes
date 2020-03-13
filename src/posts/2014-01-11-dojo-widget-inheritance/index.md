@@ -1,6 +1,8 @@
 ---
 title: "Write a widget using Dojo (inheritance)"
 date: "2014-01-11"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Dojo", "JavaScript", "Web"]
 ---
 
 In the previous tutorial we did everything we needed to set up our widget like providing our template and the localized messages. In this tutorial I will start writing our widget module by explaining the module system and inheritance.
@@ -21,16 +23,18 @@ The first step when writing your widget is providing a list of required modules 
 
 The code will look like this:
 
-define(\[
-    "dojo/\_base/declare", "dojo/\_base/lang", "dojo/number",
+```javascript
+define([
+    "dojo/_base/declare", "dojo/_base/lang", "dojo/number",
     "dojo/text!../views/Stopwatch.html", "dojo/i18n!app/nls/Stopwatch",
-    "dijit/\_WidgetBase", "dijit/\_TemplatedMixin", "dijit/\_WidgetsInTemplateMixin",
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
     "dijit/form/ToggleButton", "dijit/form/Button"
-\], function(declare, lang, NumberUtils, template, nls, \_WidgetBase, \_TemplatedMixin, \_WidgetsInTemplateMixin) {
-    return declare("app.components.Stopwatch", \[\_WidgetBase, \_TemplatedMixin, \_WidgetsInTemplateMixin\], {
-        /\*\* The widget logic will come here \*/
+], function(declare, lang, NumberUtils, template, nls, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin) {
+    return declare("app.components.Stopwatch", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+        /** The widget logic will come here */
     });
 });
+```
 
 As I told you before, the `define()` function allows us to import all modules we need. When all modules are loaded, the callback function is executed. Each module will be available as a parameter in the callback function. You choose the name yourself, the only thing you have to be sure of is that the order of the modules is the same as the order of the parameters. In this case:
 
@@ -51,25 +55,27 @@ The next part is that we return our actual module, in this case it will be an ob
 
 Just like normal object oriented code, you can define properties (state) and functions (behavior). The first thing we will do now is providing the properties we need. In this case it will be:
 
-return declare("app.components.Stopwatch", \[\_WidgetBase, \_TemplatedMixin, \_WidgetsInTemplateMixin\], {
+```javascript
+return declare("app.components.Stopwatch", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
     templateString: template,
     baseClass: "dijitStopwatch",
     declaredClass: "app.componnents.Stopwatch",
     updateRate: 30,
 
-    \_\_SECMS: 1000,
-    \_\_MINMS: 1000 \* 60,
-    \_\_HRSMS: 1000 \* 60 \* 60,
+    __SECMS: 1000,
+    __MINMS: 1000 * 60,
+    __HRSMS: 1000 * 60 * 60,
 
-    \_\_nls: nls,
+    __nls: nls,
 
-    \_\_currentTime: 0,
-    \_\_pauseTime: 0,
-    \_\_timer: null,
-    \_\_started: false,
+    __currentTime: 0,
+    __pauseTime: 0,
+    __timer: null,
+    __started: false,
 
-    /\*\* Our functions will be written down here \*/
+    /** Our functions will be written down here */
 });
+```
 
 The first property (code>templateString) is defined by **dijit/\_TemplatedMixin** and allows us to pass our template, which was passed in the `templateString` parameter. If you remember from our previous tutorial, we used a placeholder called `${baseClass}`, which will in fact be substituted by the property called `baseClass`. It is commonly used in Dojo to prefix all your classnames with the base class.
 
@@ -87,7 +93,7 @@ This ends the tutorial about Dojo inheritance, in our next tutorial I will finis
 
 ### Write a widget using Dojo series
 
-1. [Application structure, templating and localization](http://wordpress.g00glen00b.be/dojo-widget-resources/)
-2. [Modules, inheritance and object state](http://wordpress.g00glen00b.be/dojo-widget-inheritance/)
-3. [Module behavior](http://wordpress.g00glen00b.be/dojo-widget-behavior/)
-4. [Finishing the application and demo](http://wordpress.g00glen00b.be/dojo-widget-demo/)
+1. [Application structure, templating and localization](/dojo-widget-resources/)
+2. [Modules, inheritance and object state](/dojo-widget-inheritance/)
+3. [Module behavior](/dojo-widget-behavior/)
+4. [Finishing the application and demo](/dojo-widget-demo/)
