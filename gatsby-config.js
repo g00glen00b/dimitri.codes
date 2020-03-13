@@ -96,6 +96,16 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    `gatsby-transformer-remark`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
       resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {
@@ -103,36 +113,6 @@ module.exports = {
         }
       }
     },
-    {
-      resolve: `gatsby-source-wordpress`,
-      options: {
-        baseUrl: process.env.WORDPRESS_API_HOST,
-        protocol: process.env.WORDPRESS_API_PROTOCOL,
-        useACF: false,
-        hostingWPCOM: false,
-        perPage: 100,
-        concurrentRequests: 1,
-        auth: {
-          htaccess_user: process.env.WORDPRESS_API_USER,
-          htaccess_pass: process.env.WORDPRESS_API_PASS
-        },
-        includedRoutes: [
-          `**/categories`,
-          `**/posts`,
-          `**/pages`,
-          `**/media`,
-          `**/tags`,
-          `**/taxonomies`
-        ],
-        excludedRoutes: [],
-        normalizer: ({entities}) => entities.map(normalize),
-        plugins: [
-          `gatsby-wordpress-reading-time`
-        ]
-      }
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {

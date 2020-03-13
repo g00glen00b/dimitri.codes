@@ -21,6 +21,7 @@
     "gatsby-plugin-sharp": "^2.2.9",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-wordpress": "^3.1.57",
+    "gatsby-transformer-remark": "^2.6.58",
     "gatsby-transformer-sharp": "^2.3.7",
     "gatsby-wordpress-reading-time": "^1.0.4",
     "he": "^1.2.0",
