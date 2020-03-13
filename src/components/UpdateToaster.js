@@ -1,18 +1,14 @@
 import React from 'react';
 import {Button} from './Button';
-import {useServiceWorker, useServiceWorkerMessage, useServiceWorkerUpdate} from '../helpers/hooks/serviceWorkerHooks';
+import {useServiceWorker, useServiceWorkerUpdate} from '../helpers/hooks/serviceWorkerHooks';
 import {useInterval} from '../helpers/hooks/genericHooks';
 
 
 export const UpdateToaster = () => {
   const [registration] = useServiceWorker('/sw.js');
   const [updatedServiceWorker, setUpdated] = useServiceWorkerUpdate(registration);
-  useServiceWorkerMessage();
 
-  useInterval(() => {
-    console.log('interval', registration);
-    registration && registration.update();
-  }, 1 * 60 * 1000);
+  useInterval(() => registration && registration.update(), registration != null ? 60 * 1000 : null);
 
   function onUpdate() {
     updatedServiceWorker.postMessage({action: 'skipWaiting'});
