@@ -1,9 +1,10 @@
 ---
 title: "2015: Year overview"
 date: "2016-01-09"
+categories: ["General"]
 ---
 
-The last day of 2015 is almost two weeks ago, time is going fast, that's for sure. Around this time you see a lot of year reviews, awards for that year are being held, ... . Me? I'm going to review what happened on **wordpress.g00glen00b.be** as well.
+The last day of 2015 is almost two weeks ago, time is going fast, that's for sure. Around this time you see a lot of year reviews, awards for that year are being held, ... . Me? I'm going to review what happened on **dimitr.im** as well.
 
 ### A lot more visitors
 

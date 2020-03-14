@@ -2,6 +2,8 @@
 title: "Writing your first Spring webapp with Spring Boot"
 date: "2016-01-05"
 coverImage: "spring-boot-logo.png"
+categories: ["Java", "Tutorials"]
+tags: ["Spring", "Spring boot", "Spring MVC", "Thymeleaf", "Web"]
 ---
 
 Three years ago I wrote this tutorial. Things have changed in the Java and Spring landscape, so let's see how much easier it is now to write a simple Spring webapplication.
@@ -10,9 +12,11 @@ Three years ago I wrote this tutorial. Things have changed in the Java and Sprin
 
 A while back you had to setup your own Maven project, import all the dependencies you need, set the correct Maven plugins, ... . With Spring Boot it's a lot easier. You go to [start.spring.io](http://start.spring.io) and you just select the dependencies you want, you import the project and you're done! Neat, don't you think? According to [Josh Long](https://youtu.be/SFDYdslOvu8?t=10m2s) it is the second greatest place on the web and you should keep it under your pillow!
 
-[![start-spring-io](images/start-spring-io-300x279.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/start-spring-io.png)
+![start-spring-io](images/start-spring-io.png)
 
-Now, since I'm going to create a web project, all I need to do is to enter "Web" in the dependencies textbox and click the **Web** dependency to add it to your application. [![web-dependency](images/web-dependency-300x107.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/web-dependency.png)
+Now, since I'm going to create a web project, all I need to do is to enter "Web" in the dependencies textbox and click the **Web** dependency to add it to your application. 
+
+![web-dependency](images/web-dependency.png)
 
 Do the same now for "Thymeleaf" and then you can generate the project, unzip it and import it in your IDE. You now have a completely working Spring application! You don't even have to download Maven, because it comes with a Maven wrapper (mvnw) that can be executed and will install Maven for you.
 
@@ -20,6 +24,7 @@ Do the same now for "Thymeleaf" and then you can generate the project, unzip it 
 
 For this application I'm going to write a simple model class called **Superhero**, in which I will define four fields with getters/setters and a constructor to initialize the fields:
 
+```java
 public class Superhero {
   private String firstName;
   private String lastName;
@@ -62,6 +67,7 @@ public class Superhero {
     this.good = good;
   }
 }
+```
 
 ### Controller
 
@@ -71,6 +77,7 @@ Another annotation I'm going to add to the class is `@RequestMapping("/superhero
 
 Inside the controller I'm going to write a single method to return two superheroes/villains:
 
+```java
 @RequestMapping
 public ModelAndView getSuperheroes() {
   return new ModelAndView("superheroes", "superheroes", Arrays.asList(
@@ -78,10 +85,11 @@ public ModelAndView getSuperheroes() {
      new Superhero("Siobhan", "McDougal", "Silver Banshee", false)
   ));
 }
+```
 
 Obviously in real life code you will create proper services to encapsulate the data, but in this tutorial I'm just gonna use it this way. We use `ModelAndView` to define:
 
-- the view name, which is the HTML template that we will define later. In this case we use \`"superheroes"\` which will resolve to a file called **superheroes.html** inside the **src/main/resources/public** folder
+- the view name, which is the HTML template that we will define later. In this case we use `"superheroes"` which will resolve to a file called **superheroes.html** inside the **src/main/resources/public** folder
 - The model name, which is the name of the model (in this case the list of superheroes) that can be referred to in the view
 - The model itself, in this case a list of two superheroes/villains.
 
@@ -89,6 +97,7 @@ Obviously in real life code you will create proper services to encapsulate the d
 
 The last part of the application is the view itself. If you used start.spring.io you will already have a folder called **src/main/resources/templates**, create a file called superheroes.html inside it, open it and add the following content:
 
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -112,6 +121,7 @@ The last part of the application is the view itself. If you used start.spring.io
     </div>
   </body>
 </html>
+```
 
 I'm using a simple table here to show the list of heroes and villains. There's nothing special yet in this HTML file. We're just using Twitter Bootstrap here to make our page look a bit decent.
 
@@ -119,6 +129,7 @@ Anyways, inside the `<tbody>` tag we now have to dynamically add rows. With Thym
 
 To show the row I use the following code:
 
+```html
 <tr th:each="hero, status : ${superheroes}">
   <td th:text="${status.count}">1</td>
   <td th:text="${hero.name}">Hero name</td>
@@ -128,6 +139,7 @@ To show the row I use the following code:
     <span class="glyphicon glyphicon-remove" th:unless="${hero.good}"></span>
   </td>
 </tr>
+```
 
 As you can see, we use `th:each` to loop over the superheroes. The name `${superheroes}` comes from the model name, which we provided earlier in the controller. Also, we define `hero` to be the current hero during the loop, and with the `status` object we can easily retrieve extra information, like `${status.count}` to have a counter for each iteration.
 
@@ -135,11 +147,13 @@ The bottom side uses `th:if` and `th:unless` to show a different icon for when t
 
 ### Running the application
 
-Running the `Application` class as a Java application, or executing the `mvn spring-boot:run` command will run the application. For several IDE's you can also download a plugin that allows you to run the application as a Spring boot app. [![run-spring-boot](images/run-spring-boot.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/run-spring-boot.png)
+Running the `Application` class as a Java application, or executing the `mvn spring-boot:run` command will run the application. For several IDE's you can also download a plugin that allows you to run the application as a Spring boot app. 
+
+![run-spring-boot](images/run-spring-boot.png)
 
 If you go to [http://localhost:8080/superhero](http://localhost:8080/superhero), you'll see that the application already works.
 
-[![demo-application](images/demo-application.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/demo-application.png)
+![demo-application](images/demo-application.png)
 
 ### Configuring Spring Boot
 
@@ -149,14 +163,18 @@ Spring Boot does a lot of stuff out of the box, but you can usually configure th
 
 For example, if you look at the **src/main/resources** folder you'll see that there is an application.properties file. If we edit this file and add the following properties:
 
+```
 server.context-path=/my-app
 server.port=9000
+```
 
 And you run the application again, you'll see that the previous URL will no longer work, in stead of that you have to go to [http://localhost:9000/my-app/superhero](http://localhost:9000/my-app/superhero).
 
 Also, Thymeleaf can be strict sometimes, and it caches the templates which makes development a bit harder. To disable caching you can add the following property:
 
+```
 spring.thymeleaf.cache=false
+```
 
 If you don't close a tag (for example `<br>` or `<link rel="" href="">`), or you use a custom element or a custom attribute (like AngularJS directives as `ng-app`, `ng-if`, ...), it will fail to compile. To make it less strict you can use the following property:
 
@@ -164,11 +182,13 @@ spring.thymeleaf.mode=LEGACYHTML5
 
 You will also have to add the **nekhohtml5** dependency:
 
+```xml
 <dependency>
   <groupId>net.sourceforge.nekohtml</groupId>
   <artifactId>nekohtml</artifactId>
   <version>1.9.15</version>
 </dependency>
+```
 
 If you would be using special HTML attributes, or you're not properly closing your elements, then your code will now be working again! You can test it out by changing the `<link />` tag for the Bootstrap CSS, remove the `/>` and simply replace it by `>`. While browsers can perfectly render it, Thymeleaf will throw an error (unless you use **LEGACYHTML5**).
 

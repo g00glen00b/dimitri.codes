@@ -2,6 +2,8 @@
 title: "Mapping beans with MapStruct"
 date: "2016-02-23"
 coverImage: "mapstruct-logo.png"
+categories: ["Java", "Tutorials"]
+tags: ["MapStruct", "Maven", "Spring"]
 ---
 
 Recently, I wrote several tutorials about [Spring boot](http://projects.spring.io/spring-boot/) and [Spring Data](http://projects.spring.io/spring-data/) JPA. A common issue that appears when writing large applications is that you don't want to use your entities on your front-end. The reason behind this is that your entity usually resembles how your database and your tables look like, while your model or your DTO could be entirely different.
@@ -17,14 +19,17 @@ To be able to use MapStruct, you need to add two things:
 
 To do that, open your **pom.xml** and add the following to your dependencies:
 
+```xml
 <dependency>
     <groupId>org.mapstruct</groupId>
     <artifactId>mapstruct-jdk8</artifactId>
     <version>1.0.0.Final</version>
 </dependency>
+```
 
 And finally, add the following to your `<plugins>` section:
 
+```xml
 <plugin>
     <groupId>org.bsc.maven</groupId>
     <artifactId>maven-processor-plugin</artifactId>
@@ -54,6 +59,7 @@ And finally, add the following to your `<plugins>` section:
         </dependency>
     </dependencies>
 </plugin>
+```
 
 If you're like me and you worked with Dozer for a while, you might be confused at first. Dozer is also a mapping framework, but only requires you to add a dependency. The main difference between MapStruct and Dozer is that Dozer does not generate code, it has a very simple Java API, quite some configuration and uses a lot of reflection behind the screens.
 
@@ -67,6 +73,7 @@ If you're using Eclipse you might have to add the **target/generated-sources** f
 
 Now, for the next step we're going to create some DTOs. I'm going to be using the same entity as in my last few tutorials. This would be the `Superhero` entity to start from:
 
+```java
 @Entity
 @Table(name = "superhero")
 public class Superhero {
@@ -74,9 +81,9 @@ public class Superhero {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    @Column(name = "first\_name")
+    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last\_name")
+    @Column(name = "last_name")
     private String lastName;
     @Column(name = "name")
     private String name;
@@ -115,6 +122,7 @@ public class Superhero {
         this.good = good;
     }
 }
+```
 
 The changes compared to the old Thymeleaf template is that I'm using `${hero.identity.firstName + ' ' + hero.identity.lastName}` and that I'm using `${hero.alignment.name() == 'GOOD'}` to validate if the hero is on the good side or not.
 
@@ -124,6 +132,7 @@ For the DTO's on the other hand I'm going to be using some nested objects. In st
 
 In stead of a boolean to represent `good` I'm going to be using an enum called `SuperheroAlignmentDTO`, containing the values `GOOD` and `EVIL`.
 
+```java
 public class SuperheroDTO {
     private Long id;
     private String name;
@@ -168,9 +177,11 @@ public class SuperheroDTO {
         this.alignment = alignment;
     }
 }
+```
 
 As you can see I wrote a setter for the id-property, as explained before, support for immutable properties is not yet implemented.
 
+```java
 public class SuperheroIdentityDTO {
     private String firstName;
     private String lastName;
@@ -201,9 +212,11 @@ public class SuperheroIdentityDTO {
 public enum SuperheroAlignmentDTO {
     GOOD, EVIL;
 }
+```
 
 I'm also going to change my HTML view (**superheroes.html**) already to resemble these DTO's:
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -235,20 +248,24 @@ I'm also going to change my HTML view (**superheroes.html**) already to resemble
 </div>
 </body>
 </html>
+```
 
 ### Writing a mapper
 
 A mapper in MapStruct is quite simple, all you have to do is to create a simple interface like this:
 
+```java
 @Mapper
 public interface SuperheroMapper {
     SuperheroDTO toSuperheroDTO(Superhero superhero);
 }
+```
 
 If we want to enable Spring support, we have to use the `@Mapper(componentModel = "spring")` annotation.
 
 Obviously we have some special cases that we have to handle as well. First of all we want to map a boolean to an enum (`good` to `alignment`). To do that you have to create your own mapper implementation. So create a class called `SuperheroAlignmentMapper`, which should look like this:
 
+```java
 @Component
 public class SuperheroAlignmentMapper {
 
@@ -260,38 +277,47 @@ public class SuperheroAlignmentMapper {
         }
     }
 }
+```
 
 Notice that we made this mapper available as a Spring bean, using `@Component`. Because we defined the component model of the `SuperheroMapper` to be **spring**, you have to create Spring beans for these mappers.
 
 Now, back to the `SuperheroMapper`, we have to mention that this mapper uses the `SuperheroAlignmentMapper`we just defined. To do that, we can simply alter the `@Mapper` annotation:
 
+```java
 @Mapper(uses = { SuperheroAlignmentMapper.class }, componentModel = "spring")
 public interface SuperheroMapper {
     // ...
 }
+```
 
 We also have to hint that the `toSuperheroDTO` method should convert `good` to `alignment`, which you can do using the `@Mapping` annotation:
 
+```java
 @Mappings({
     @Mapping(source = "good", target = "alignment"),
 })
 SuperheroDTO toSuperheroDTO(Superhero superhero);
+```
 
 The next step is to create the `identity`. The issue here is that we want to convert two properties to a single object, containing those properties.
 
 To do that, you can use the expression language that comes with MapStruct:
 
+```java
 @Mappings({
     @Mapping(source = "good", target = "alignment"),
     @Mapping(target = "identity", expression = "java(new be.g00glen00b.dto.SuperheroIdentityDTO(superhero.getFirstName(), superhero.getLastName()))")
 })
 SuperheroDTO toSuperheroDTO(Superhero superhero);
+```
 
 As you can see here, I'm using the constructor I made for `SuperheroIdentityDTO`.
 
 Lastly, if you want to map a collection of `Superhero`'s to a collection of `SuperheroDTO`s, you can do that easily by adding another method to your mapper:
 
+```java
 List<SuperheroDTO> toSuperheroDTOs(List<Superhero> superheroes);
+```
 
 With that in place we're ready to map some entities!
 
@@ -299,6 +325,7 @@ With that in place we're ready to map some entities!
 
 Something I've done in some of my tutorials already is to wrap the repository call in a service, which makes it easier to encapsulate it and add the mapper to it:
 
+```java
 @Service
 public class SuperheroServiceImpl implements SuperheroService {
     @Autowired
@@ -311,6 +338,7 @@ public class SuperheroServiceImpl implements SuperheroService {
         return mapper.toSuperheroDTOs(repository.findAll());
     }
 }
+```
 
 As you can see, mapping the entities to the DTO's is quite easily. However, don't forget to build your code, because the mapper implementation by MapStruct is only generated thanks to the Maven plugin we added.
 
@@ -318,6 +346,7 @@ As you can see, mapping the entities to the DTO's is quite easily. However, don'
 
 MapStruct is a great framework. It doesn't use reflection to access fields/getters or setters, but generates code. The good thing is that the code it generates is pretty clean. For example if I take a look at the **target/generated-sources** folder, I can see the mapper implementation, which looks like:
 
+```java
 @Component
 public class SuperheroMapperImpl implements SuperheroMapper {
 
@@ -355,6 +384,7 @@ public class SuperheroMapperImpl implements SuperheroMapper {
         return list;
     }
 }
+```
 
 This is pretty readable, and if you ever decide to drop MapStruct, you still have some pretty code that works without any framework. However, the disadvantage of this in my opinion is that you have to generate code. Another disadvantage of MapStruct is that it currently has no support for immutable fields (through constructors for example?), which is a big bummer because I use them most of the time. [Here](https://github.com/mapstruct/mapstruct/issues/73) is a ticket that is worth following if you want this feature as well.
 
