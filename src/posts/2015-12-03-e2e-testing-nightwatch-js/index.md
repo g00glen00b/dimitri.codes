@@ -2,9 +2,11 @@
 title: "E2E testing with Nightwatch.js"
 date: "2015-12-03"
 coverImage: "nightwatch.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["E2E", "JavaScript", "Nightwatch.js", "Testing"]
 ---
 
-A while back I wrote some tutorials about [E2E testing with FluentLenium](http://wordpress.g00glen00b.be/spring-boot-selenium/) (Java), [E2E testing for Meteor using Velocity](http://wordpress.g00glen00b.be/e2e-testing-your-meteor-app-with-cucumber-webdriverio-and-chai/) and recently [E2E testing AngularJS applications using Protractor](http://wordpress.g00glen00b.be/e2e-testing-angularjs-applications-with-protractor/). Today I'm also going to test an AngularJS application, but this time I will be using [Nightwatch.js](http://nightwatchjs.org/). While Nightwatch.js is not made specifically for AngularJS applications, you can use this framework as well.
+A while back I wrote some tutorials about [E2E testing with FluentLenium](/spring-boot-selenium/) (Java), [E2E testing for Meteor using Velocity](/e2e-testing-your-meteor-app-with-cucumber-webdriverio-and-chai/) and recently [E2E testing AngularJS applications using Protractor](/e2e-testing-angularjs-applications-with-protractor/). Today I'm also going to test an AngularJS application, but this time I will be using [Nightwatch.js](http://nightwatchjs.org/). While Nightwatch.js is not made specifically for AngularJS applications, you can use this framework as well.
 
 ### Installation
 
@@ -15,24 +17,29 @@ To install Nightwatch.js you need two things:
 
 The first one can be installed by installing **webdriver-manager**, the second one by installing **nightwatch** itself:
 
+```
 npm install -g nightwatch webdriver-manager
+```
 
 Now update and install the Selenium server by executing the following commands:
 
+```
 webdriver-manager update
 webdriver-manager start
+```
 
 ### Set up
 
 This time I'm not going to write/test my own application, but I will be testing the [AngularJS TodoMVC application](http://todomvc.com/examples/angularjs/#/).
 
-[![nightwatch-angular](images/nightwatch-angular.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/10/nightwatch-angular.png)
+![nightwatch-angular](images/nightwatch-angular.png)
 
 Create a new project, and inside it create a folder structure **tests/e2e**. Within the tests folder create a file called **nightwatch.json**. This file will be used to configure Nightwatch for running our tests. Now open the configuration file and add the following JSON configuration:
 
+```json
 {
-  "src\_folders" : \["./tests/e2e"\],
-  "test\_settings" : {
+  "src_folders" : ["./tests/e2e"],
+  "test_settings" : {
     "chrome" : {
       "desiredCapabilities": {
         "browserName": "chrome",
@@ -42,6 +49,7 @@ Create a new project, and inside it create a folder structure **tests/e2e**. Wit
     }
   }
 }
+```
 
 This will tell Nightwatch where to find our tests, and w're also providing a profile called Chrome, which will run the Chrome browser for our tests. If you want to use a different browser or deifferent settings, you best take a look at the [configuration docs](http://nightwatchjs.org/guide#settings-file).
 
@@ -55,12 +63,15 @@ In our first test we're going to check if the footer and task regions are hidden
 
 To create a new test suite, create a new file in the **tests/e2e** folder called **overview.spec.e2e.js**. Since all test files are Node.js modules, we need to use the following export syntax inside that file:
 
+```javascript
 module.exports = {
   // Tests
 };
+```
 
 Now for our first test, to see whether or not the tasks section is visible or not, I wrote the following test:
 
+```javascript
 'Does not show the task list if there are no tasks': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -68,6 +79,7 @@ Now for our first test, to see whether or not the tasks section is visible or no
     .assert.hidden('#main')
     .end();
 },
+```
 
 So, what I'm doing here is, first I'm going to the application page. Then, because the page is loaded through an `ng-view` I'm waiting until that view is visible by waiting for the header on that page (`#header h1`). When that's loaded, I'm testing if the element with the id `#main` is hidden (which should be `true` if there are no tasks). With the `end()` chain I'm going to tell to close the current browser. If you forget to add the `end()`, you'll see that your test still works, but if you write multiple tests in the same file, it will preserve stat, meaning that your tests might fail because the data of earlier tests is not being removed.
 
@@ -77,6 +89,7 @@ Also note that there is also a more BDD assertion API, using the [Expect API](ht
 
 Testing whether or not the footer is visible, is very similar to our previous test and needs no further explanation:
 
+```javascript
 'Does not show the footer if there are no tasks': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -84,9 +97,11 @@ Testing whether or not the footer is visible, is very similar to our previous te
     .assert.hidden('#footer')
     .end();
 },
+```
 
 The next aspect I'm going to test is whether or not the new task input field is focused when opening the application. To do that I can use the `:focus` CSS selector, which should only return focused elements. Apply that to the `#new-todo` input field and your test will only succeed if that element is indeed focused:
 
+```javascript
 'Does initially focus on the input field': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -94,11 +109,13 @@ The next aspect I'm going to test is whether or not the new task input field is 
     .assert.elementPresent('#header #new-todo:focus')
     .end();
 },
+```
 
 With `elementPresent()` we can check whether or not an element exists. It does not have to be visible though.
 
 With the next test we're going to test the behaviour of the application a bit more. When we enter a new task in the input field and submit, a new task should be added to the list. So let's test that:
 
+```javascript
 'Shows todo items': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -108,11 +125,13 @@ With the next test we're going to test the behaviour of the application a bit mo
     .assert.containsText('#todo-list li:first-child label', 'My new task')
     .end();
 },
+```
 
 The first few lines remain the same, but with `setValue()` we set a value to the input field with ID `#new-todo`. After that, we submit the form using `submitForm()` and verify if the `#todo-list` has an item with a label with the same text as the value we entered earlier.
 
 Now, the next test goes even farther, by not only adding a new task, but also by completing the task itself and verifying if it has been stricken through:
 
+```javascript
 'Strikes through completed items': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -123,6 +142,7 @@ Now, the next test goes even farther, by not only adding a new task, but also by
     .assert.cssClassPresent('#todo-list li:first-child', 'completed')
     .end();
 },
+```
 
 We don't really verify if there's a line through the text here, but we verify if the `completed` class is present. The CSS for this class provides the line through the text. To check an element we used the `click()` API to click on the checkbox itself.
 
@@ -130,6 +150,7 @@ Now, we already verified that you can add and complete tasks. With the next test
 
 To do that, we simply add and complete some tasks and verify if the number changes appropriately:
 
+```javascript
 'Shows how many items there are left': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -143,11 +164,13 @@ To do that, we simply add and complete some tasks and verify if the number chang
     .assert.containsText('#todo-count', '1 item left')
     .end();
 },
+```
 
 Nothing new here. We add two elements, verify if the text matches `'2 items left'`, then we complete a task and verify if there is only `'1 item left'`.
 
 For the final test of the overview, we're going to verify if we cannot add a task if we don't enter a value in the textbox or if we only enter spaces:
 
+```javascript
 'Does not add empty or blank tasks': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -160,6 +183,7 @@ For the final test of the overview, we're going to verify if we cannot add a tas
     .assert.containsText('#todo-count', '1 item left')
     .end();
 }
+```
 
 So, what we did here is nothing really new. We add a proper task, then try to submit the form without entering a new value and finally we enter some spaces and try to submit again. In neither of these cases a task should be added. So there should only be 1 item left, the first, and valid, task we added.
 
@@ -171,6 +195,7 @@ I'm going to put these tests in a separate file, so that each feature of the app
 
 For the first test I'm going to add a task and verify if the task is visible when using that filter:
 
+```javascript
 module.exports = {
   'Active filter shows non-completed items': function(client) {
     client
@@ -184,11 +209,13 @@ module.exports = {
 
   // Other tests here
 };
+```
 
 Nothing new here, but notice that we're using a different URL now (`/#/active`). In stead of manually clicking (which is also possible), I directly went to the application using the active filter. So other than using a different URL, this test is very similar to the test we wrote earlier to test if we can add tasks.
 
 For the next test I'm going to verify that there are no tasks visible if there are only completed tasks:
 
+```javascript
 'Active filter hides completed items': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/active')
@@ -199,6 +226,7 @@ For the next test I'm going to verify that there are no tasks visible if there a
     .assert.elementNotPresent('#todo-list li')
     .end();
 },
+```
 
 We simply add and complete a task, and verify there are no items within `#todo-list` by using `elementNotPresent()`. It's very important to understand the different between `elementPresent()`/`elementNotPresent()` and `visible()`/`hidden()`. If we're using directive like `ng-repeat` or `ng-if`, then we're completely creating/destroying DOM nodes if the directive finds a result.
 
@@ -206,6 +234,7 @@ On the other hand, with `ng-show` and `ng-hide` we are not destroying the DOM no
 
 For the completed filter we have 2 tests that are pretty similar to what we did for the active filter, but the opposite:
 
+```javascript
 'Completed filter only contains completed tasks': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -228,6 +257,7 @@ For the completed filter we have 2 tests that are pretty similar to what we did 
     .assert.elementNotPresent('#todo-list li')
     .end();
 }
+```
 
 However, rather than going directly to the page with the filter active, we start with the "All" filter. The reason for this is that, because when we have the completed filter active, new tasks will not be visible unless we complete them. So completing them can only be done using either the "All" or "Active" filter.
 
@@ -247,6 +277,7 @@ There are three separate situations:
 
 So I wrote 3 tests to cover these situations:
 
+```javascript
 module.exports = {
   'Caret down completes all tasks if none selected': function(client) {
     client
@@ -291,6 +322,7 @@ module.exports = {
       .end();
   }
 };
+```
 
 ### Removing tasks
 
@@ -298,6 +330,7 @@ One of the two hardest features to test is the task removal feature. The issue h
 
 To test the remove feature I wrote the following test:
 
+```javascript
 module.exports = {
   'Remove single task': function(client) {
     client
@@ -308,7 +341,7 @@ module.exports = {
       .setValue('#new-todo', 'My other new task')
       .submitForm('#todo-form')
       .execute(function() {
-        document.getElementById('todo-list').children\[0\].children\[0\].children\[2\].click();
+        document.getElementById('todo-list').children[0].children[0].children[2].click();
       })
       .assert.containsText('#todo-count', '1 item left')
       .assert.containsText('#todo-list li:first-child', 'My other new task')
@@ -317,6 +350,7 @@ module.exports = {
 
   // More tests
 };
+```
 
 What happens here is that I add two tasks, and then I execute a script by using the `execute()` API. This script will fetch the remove button for the first child and click it.
 
@@ -329,6 +363,7 @@ Within the same test suite I'm also going to test the clear completed button whi
 
 I wrote the following two tests to verify this behaviour:
 
+```javascript
 'Clear all completed tasks': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -355,6 +390,7 @@ I wrote the following two tests to verify this behaviour:
     .assert.visible('#clear-completed')
     .end();
 }
+```
 
 ### Testing the edit functionality
 
@@ -366,6 +402,7 @@ Anyways, I wrote two tests to cover the edit functionality, which I also placed 
 
 The first test I wrote was to see if the textbox became visible when I double clicked:
 
+```javascript
 module.exports = {
   'Double clicking allows you to edit the task': function(client) {
     client
@@ -377,12 +414,15 @@ module.exports = {
       .assert.visible('#todo-list li:first-child form')
       .end();
 },
+```
 
 The next test was the hard part. The combination of `doubleClick()` and `setValue()` did not work, so to solve that I had to manually send an event, which you can do like this:
 
+```javascript
 var evt = document.createEvent('MouseEvents');
-                evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                document.getElementById('todo-list').children\[0\].children\[0\].children\[1\].dispatchEvent(evt);
+evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+document.getElementById('todo-list').children[0].children[0].children[1].dispatchEvent(evt);
+```
 
 Wrapping this in an `execute()` block did the trick... partly. Setting the value directly with `setValue()` still didn't work, so in stead of doing that I had to simply send some keypresses to the application. Obviously that also requires to send a Return key. To know how to do that you have to look at the [WebDriver specs](http://www.w3.org/TR/webdriver/#character-types) for special characters, where you can see that the Return key is `\uE006`.
 
@@ -390,6 +430,7 @@ Please note that the Enter key (`\uE007`) does not work for submitting that form
 
 Everything together you get:
 
+```javascript
 'Editing changed task description': function(client) {
   client
     .url('http://todomvc.com/examples/angularjs/#/')
@@ -399,26 +440,31 @@ Everything together you get:
     .execute(function() {
       var evt = document.createEvent('MouseEvents');
       evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-      document.getElementById('todo-list').children\[0\].children\[0\].children\[1\].dispatchEvent(evt);
+      document.getElementById('todo-list').children[0].children[0].children[1].dispatchEvent(evt);
      })
-    .keys(\['My other new task', '\\uE006'\])
+    .keys(['My other new task', '\uE006'])
     .assert.containsText('#todo-list li:first-child', 'My other new task')
     .end();
 }
+```
 
 ### Testing it out
 
 To test it out you open your terminal and enter the following command:
 
+```
 nightwatch --config tests/nightwatch.json --env chrome
+```
 
 This will run all tests, and will open Google Chrome several times (once for each test). Eventually you should see the result:
 
-[![nightwatch-run](images/nightwatch-run-300x233.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/10/nightwatch-run.png)
+![nightwatch-run](images/nightwatch-run.png)
 
 If you want to run a test suite, you can use the following command:
 
-nightwatch --config tests/nightwatch.json --env chrome --test tests/e2e/overview.spec.e2e.js 
+```
+nightwatch --config tests/nightwatch.json --env chrome --test tests/e2e/overview.spec.e2e.js
+``` 
 
 With the last command, only the tests within the overview spec will run.
 

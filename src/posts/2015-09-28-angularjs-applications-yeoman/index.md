@@ -2,6 +2,8 @@
 title: "Setting up AngularJS applications with Yeoman"
 date: "2015-09-28"
 coverImage: "yeoman.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "JavaScript", "mashape", "Yeoman"]
 ---
 
 Where are the good ol' days when everyone used 1 JavaScript library at most (usually jQuery). With modern applications you need a modern approach, setting up such a project can be hard sometimes, but why re-invent the wheel if there are probably thousands of people who need the same thing? [Yeoman](http://yeoman.io/) helps you to setup your project by providing configuration and a project skeleton, usually based on best practices.
@@ -10,23 +12,29 @@ In this article I will write a small AngularJS application and use Yeoman to set
 
 To have some more interesting data to display, I'm going to choose one of the thousands of interesting API's at [Mashape](https://market.mashape.com/).
 
-[![main](images/main.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/09/main.png)
+![main](images/main.png)
 
 ### Let's get started
 
 Getting started with Yeoman is not that hard. First of all you need [Node.js](https://nodejs.org/en/). After installing it you need to pop up a terminal and enter the following command:
 
+```
 npm install -g yo
+```
 
 This will install Yo, the Yeoman butler, together with all kind of other tools that will be necessary, such as Bower, Grunt and Gulp.
 
 Yo, the Yeoman butler generators to generate a project. Generators are depending on the technology stack you wish and have to be installed seperately. In this case I'm going to create an AngularJS project, so I'll need the [generator-angular](https://github.com/yeoman/generator-angular). You can install it by using:
 
+```
 npm install -g generator-angular
+```
 
 When you're done, create a new folder, which we'll use as our project folder, navigate to the folder, and enter the following command:
 
+```
 yo angular
+```
 
 This will start the AngularJS generator wizard. This generator has a lot of options, in this tutorial I didn't choose Sass, but I did choose to add the Twitter Bootstrap library. Out of the list of AngularJS modules I only chose to include **angular-resource.js**. After this, the generator will start to generate your project.
 
@@ -34,19 +42,23 @@ Please be aware. Depending on your network speed, generating the project may tak
 
 After that, enter the following command, and you'll see that a browser window will pop up with a small demo application:
 
+```
 grunt serve
+```
 
 As of recently, you might be missing some styling. Since Bootstrap **3.3.5** they decided to remove the Bootstrap CSS file of the `main` file list. This means that the wire dependency plugin will no longer be able to do its job to add the CSS file to the HTML page.
 
 To solve this, you can either downgrade to Bootstrap **3.3.4** by modifying **bower.json** and change the Bootstrap dependency to:
 
+```json
   "bootstrap": "3.3.4",
+```
 
 You'll have to run the `bower install` command to update the dependencies.
 
 Or you can add the CSS file manually, by opening **app/index.html** and to add the Bootstrap CSS to the `<head>` section.
 
-[![demo-application](images/demo-application-300x280.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/09/demo-application.png)
+![demo-application](images/demo-application.png)
 
 ### Signing up for Mashape
 
@@ -61,13 +73,15 @@ The yeoman generator has created quite a lot of files already, but in a differen
 
 I'm going to start with **application.config.js**, so open that file and add the following code:
 
+```javascript
 (function(angular) {
   'use strict';
   
   angular
     .module('dictionaryApp')
-    .value('mashapeKey', /\*\* Your API Key \*/);
+    .value('mashapeKey', /** Your API Key */);
 }(angular));
+```
 
 So, what do we have here? AngularJS makes it very easy to add configuration parameters to your application. In this case we need to provide the Mashape API key somehow, so I'm using this file to do so. Make sure to replace the `/** Your API Key */` comment with your actual Mashape API key.
 
@@ -81,18 +95,20 @@ The next file I'm going to edit is the **application.module.js** file to define 
 
 So eventually, this is the file I ended up with:
 
+```javascript
 (function(angular) {
   'use strict';
 
-  angular.module('dictionaryApp.services', \['ngResource'\]);
-  angular.module('dictionaryApp.feature.browse', \['dictionaryApp.services'\]);
-  angular.module('dictionaryApp', \[
-    /\*\* Core \*/
+  angular.module('dictionaryApp.services', ['ngResource']);
+  angular.module('dictionaryApp.feature.browse', ['dictionaryApp.services']);
+  angular.module('dictionaryApp', [
+    /** Core */
     'dictionaryApp.services',
-    /\*\* Features \*/
+    /** Features */
     'dictionaryApp.feature.browse'
-  \]);
+  ]);
 }(angular));
+```
 
 While doing this looks like quite some overhead for small applications, I think that you can still benefit from this structured module design. This feature-based design makes it easier to separately create features without depending on each others code.
 
@@ -102,6 +118,7 @@ The next part of the code I'm going to write is the dictionary service to look u
 
 So, to create our service we need to inject two things, `$resource` and `mashapeKey`, the API key we configured earlier on.
 
+```javascript
 (function(angular) {
   'use strict';
 
@@ -117,12 +134,13 @@ So, to create our service we need to inject two things, `$resource` and `mashape
     });
   }
 
-  Dictionary.$inject = \['$resource', 'mashapeKey'\];
+  Dictionary.$inject = ['$resource', 'mashapeKey'];
 
   angular
     .module('dictionaryApp.services')
     .factory('Dictionary', Dictionary);
 }(angular));
+```
 
 So, using `$resource` I can easily create a factory with certain methods, that are mapped to specific endpoints of the REST API. In this case we have only 1 endpoint, called `https://montanaflynn-dictionary.p.mashape.com/define`.
 
@@ -132,12 +150,13 @@ The last thing I need is to create an AngularJS controller. Here I'm also going 
 
 Inside this file I'm going to write the following code:
 
+```javascript
 (function(angular) {
   'use strict';
 
   function BrowseController(Dictionary) {
     var vm = this;
-    vm.definitions = \[\];
+    vm.definitions = [];
     vm.search = search;
 
     ////////
@@ -149,12 +168,13 @@ Inside this file I'm going to write the following code:
     }
   }
 
-  BrowseController.$inject = \['Dictionary'\];
+  BrowseController.$inject = ['Dictionary'];
 
   angular
     .module('dictionaryApp.feature.browse')
     .controller('BrowseController', BrowseController);
 }(angular));
+```
 
 The AngularJS styleguide of John Papa recommends to put all functions below the model. So in this case `vm.search` and `vm.definitions` are both part of the model, while the logic behind the `vm.search` function on the model will be placed at the bottom of the file.
 
@@ -166,6 +186,7 @@ Now, by writing our controller we finished up writing all our JavaScript code. T
 
 Now, change the value in the `ng-app` attribute on the `<body>` tag to `dictionaryApp`. Inside the `<body>` tag, you add the following:
 
+```html
 <div class="container" ng-controller="BrowseController as vm">
   <h1><span class="glyphicon glyphicon-book text-info"></span> Dictionary</h1>
   <form role="form" ng-submit="vm.search(vm.word)">
@@ -187,6 +208,7 @@ Now, change the value in the `ng-app` attribute on the `<body>` tag to `dictiona
     </blockquote>
   </div>
 </div>
+```
 
 First of all we have a form with a text field, which we bind to the `vm.word` model. When the input is being changed, we also clear the `vm.definitions` model, because this is the list of possible meaning of the given word, but as soon as you change the word, the previously given definitions are no longer correct.
 
@@ -196,10 +218,12 @@ We also want to make sure that, if there are no definitions, the list and the ti
 
 Finally, at the bottom of the file, between the `<!-- build:js({.tmp,app}) scripts/scripts.js -->` and `<!-- endbuild -->` comments, we add our scripts:
 
+```html
 <script src="scripts/application.module.js"></script>
 <script src="scripts/application.config.js"></script>
 <script src="scripts/services/dictionary.service.js"></script>
 <script src="scripts/feature-browse/browse.controller.js"></script>
+```
 
 ### JSHint
 
@@ -215,11 +239,11 @@ grunt serve
 
 And you should see Grunt into action in the terminal, and after a while your favourite web browser should pop up with your application.
 
-[![grunt-serve](images/grunt-serve.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/09/grunt-serve.png)
+![grunt-serve](images/grunt-serve.png)
 
 Now you can try it all out, enter a word in the text field and some results should pop up:
 
-[![application-result](images/application-result-294x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/09/application-result.png)
+![application-result](images/application-result-294x300.png)
 
 ### Conclusion
 

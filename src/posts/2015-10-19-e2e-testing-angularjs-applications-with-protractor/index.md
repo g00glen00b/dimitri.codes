@@ -2,9 +2,11 @@
 title: "E2E testing AngularJS applications with Protractor"
 date: "2015-10-19"
 coverImage: "protractor-logo1.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "E2E", "Jasmine", "JavaScript", "Protractor", "Testing"]
 ---
 
-A few weeks ago I wrote a [simple AngularJS application](http://wordpress.g00glen00b.be/angularjs-applications-yeoman/) and [some tests using Jasmine + Sinon.js](http://wordpress.g00glen00b.be/sinonjs-testing-angularjs-applications/). Today we will go into detail about another aspect of testing AngularJS applications, namely end to end testing (E2E).
+A few weeks ago I wrote a [simple AngularJS application](/angularjs-applications-yeoman/) and [some tests using Jasmine + Sinon.js](/sinonjs-testing-angularjs-applications/). Today we will go into detail about another aspect of testing AngularJS applications, namely end to end testing (E2E).
 
 ### What is E2E testing
 
@@ -12,21 +14,25 @@ With unit testing, we try to test/cover small, testable units in our code, like 
 
 With E2E testing on the other hand, we're going to test the entire application and all of its layers at once. In these tests, we're going to test as if we're an end user of your application. You're gonna check what happens when certain elements are clicked, text is entered, ... .
 
-[![angular-protractor](images/angular-protractor.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/10/angular-protractor.png)
+![angular-protractor](images/angular-protractor.png)
 
 A popular framework to do this for AngularJS applications is [Protractor](http://www.protractortest.org/). Protractor, based upon [Selenium/WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs), will make it very easily to write tests that interact with user interface elements. WebDriverJS already allows us to do that, but Protractor adds some useful features for AngularJS applications, like specifying elements based on the bindings, model, repeater, ... .
 
 ### Getting started
 
-Obviously, to get started with Protractor you need an application. So, in this case I'm going to use the application I wrote in my [previous tutorial](http://wordpress.g00glen00b.be/angularjs-applications-yeoman/). You can find the code on [GitHub](https://github.com/g00glen00b/angular-example-dictionary).
+Obviously, to get started with Protractor you need an application. So, in this case I'm going to use the application I wrote in my [previous tutorial](/angularjs-applications-yeoman/). You can find the code on [GitHub](https://github.com/g00glen00b/angular-example-dictionary).
 
 After checking out the source code, it's time to install Protractor. To do that you simply execute the following command:
 
+```
 npm install -g protractor
+```
 
 Like I said before, Protractor is a framework that utilizes Selenium. To setup a Selenium server, you first execute this command to make sure it's up to date:
 
+```
 webdriver-manager update
+```
 
 And after that you can start the Selenium server with the following command:
 
@@ -36,11 +42,13 @@ webdriver-manager start
 
 Just like Karma, Protractor requires a configuration file. Inside the **test/** folder, create a file called **protractor.conf.js** and add the following configuration:
 
+```javascript
 exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: \['\*\*/\*.e2e.spec.js'\],
+  specs: ['**/*.e2e.spec.js'],
   framework: 'jasmine2';
 };
+```
 
 This configuration file tells Protractor where to find the Selenium server (by default it's on port 4444. To differentiate unit tests from E2E tests, I'm going to use a different suffix, called `.e2e.spec.js`. And finally, the testing framework I'm going to be using is [Jasmine](http://jasmine.github.io/).
 
@@ -50,6 +58,7 @@ Inside the **tests/spec/feature-browse/** folder I'm going to create a new file 
 
 To start of a test, we do a similar thing like all Jasmine tests, describing our test suite:
 
+```javascript
 (function() {
   'use strict';
 
@@ -57,22 +66,27 @@ To start of a test, we do a similar thing like all Jasmine tests, describing our
     // This will contain our tests
   });
 }());
+```
 
 Now, before we execute a test, we have to run a web browser and tell the web browser where to go. To do that we write the following code inside the `describe()` scope:
 
+```javascript
 beforeEach(function() {
   browser.get('http://localhost:9000');
 });
+```
 
 Normally you would run this test against your application running in a separate environment, but since we don't have that right now, I'm running these tests locally. To tell the browser where to go, you use the [`browser.get()`](http://www.protractortest.org/#/api?view=Protractor.prototype.get) API.
 
 Now that we have told our test to run a web browser instance, it's time to write an actual test. For the first test case I'm going to check if searching for the word 'Filibuster' results in 6 definitions:
 
+```javascript
 it('should show the results for the given word', function() {
   element(by.model('vm.word')).sendKeys('filibuster');
   element(by.className('btn-primary')).click();
   expect(element.all(by.repeater('definition in vm.definitions.definitions')).count()).toEqual(6);
 });
+```
 
 With plain WebDriverJS code you would have to find elements by using CSS selectors, but with Protractor you can even specify elements by their model binding, simply by using the `by.model()` locator. Our input textfield is bound with `ng-model` to `vm.word`, so that should work properly.
 
@@ -92,17 +106,21 @@ To verify that there are 6 matches, we can use the [`count()`](http://www.protra
 
 Now, if we have our Selenium server running with the `webdriver-manager start` command, it's time to run the application itself to run the tests against. To do that open a command prompt and enter the following command:
 
+```
 grunt serve
+```
 
 With both the Selenium server and the application running, it's time to start Protractor. Open a command prompt and enter the following command:
 
+```
 protractor test/protractor.conf.js
+```
 
 If you run this command, you will quickly see a browser window popping up, this is the browser window we opened in our test (with `browser.get()`). Then, faster than the eye can perceive, it will enter the text in the textbox, press the button and verify if there are 6 results.
 
 The result can be seen in the command prompt, normally your test should pass:
 
-[![protractor-command](images/protractor-command-300x227.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/10/protractor-command.png)
+![protractor-command](images/protractor-command.png)
 
 ### Finishing our test suite
 
@@ -112,42 +130,50 @@ Within our second test we're going to verify that the text of the elements that 
 
 The set up of the test will be quite similar, we need to enter a word again and press the search button. But in stead of using the `count()` function, I'm going to use the [`first()`](http://www.protractortest.org/#/api?view=ElementArrayFinder.prototype.first) function to retrieve the first element that matches. This should be our first result. Then I'm going to check if the text contains the given definition, by using the [`getText()`](http://www.protractortest.org/#/api?view=webdriver.WebElement.prototype.getText) function:
 
+```javascript
 it('should show the meaning of the given word', function() {
   element(by.model('vm.word')).sendKeys('filibuster');
   element(by.className('btn-primary')).click();
   expect(element.all(by.repeater('definition in vm.definitions.definitions')).first().getText())
     .toContain('The use of obstructionist tactics, especially prolonged speechmaking, for the purpose of delaying legislative action.');
 });
+```
 
 Also, with each definition we're showing the source of that definition. To verify that the source is displayed, we can write another test.
 
 In this case I'm no longer going to loop over the elements matching the `by.repeater()` locator, but I'm going to search for all `<footer>` elements. To do that, we can use the [`by.tagName()`](http://www.protractortest.org/#/api?view=webdriver.By.tagName) locator:
 
+```javascript
 it('should show the source of the definition of the given word', function() {
   element(by.model('vm.word')).sendKeys('filibuster');
   element(by.className('btn-primary')).click();
   expect(element.all(by.tagName('footer')).first().getText())
     .toContain('from The American Heritage® Dictionary of the English Language, 4th Edition');
 });
+```
 
 Other than switching the locator this test is very similar to our previous test.
 
 Next to the results we're also showing a title with how many results there are for the given word. We could also write a test to verify if that works correctly:
 
+```javascript
 it('should show the amount of results in the title', function() {
   element(by.model('vm.word')).sendKeys('filibuster');
   element(by.className('btn-primary')).click();
   expect(element(by.tagName('h2')).getText()).toEqual('6 results found for "filibuster"');
 });
+```
 
 Nothing special here, the setup is still the same since we still have to look for a given word. Then we can use the `by.tagName()` locator to get the `<h2>` element and verify that the title matches the given text.
 
 This test will make sure that the title actually contains the text we want, however, if we haven't entered a word yet, the title should not be visible. To verify that we can write another test:
 
+```javascript
 it('should initially not show the title with the amount of results', function() {
   element(by.model('vm.word')).sendKeys('filibuster');
   expect(element(by.tagName('h2')).isDisplayed()).toBeFalsy();
 });
+```
 
 As long as we don't press that search button, the title should not be visible. So, in this case we have a similar setup as before, but we simply remove the line that actually clicks the button. If we look for the title again, and use the [`isDisplayed()`](http://www.protractortest.org/#/api?view=webdriver.WebElement.prototype.isDisplayed) function, we can check if it is visible or not, which should not be in this case.
 
@@ -155,6 +181,7 @@ For our final tests we're going to verify that, as soon as we enter a new word i
 
 With our current knowledge of Protractor we should already be capable of setting up something like this:
 
+```javascript
 it('should hide the results if a new word is entered', function() {
   element(by.model('vm.word')).sendKeys('filibuster');
   element(by.className('btn-primary')).click();
@@ -162,6 +189,7 @@ it('should hide the results if a new word is entered', function() {
   element(by.model('vm.word')).sendKeys('something');
   expect(element(by.css('form + div')).isDisplayed()).toBeFalsy();
 });
+```
 
 So, what happens here is that we verify after searching if the results are displayed. The hardest part here is to find a locator which we can use to specify the `<div>` that holds the results.
 
@@ -173,7 +201,7 @@ Similar to the previous test we can use the `isDisplayed()` function to verify i
 
 With these 6 tests we tested about everything this small application has to offer. If we run our tests again, they should all run fine.
 
-[![protractor-all-tests](images/protractor-all-tests-300x226.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/10/protractor-all-tests.png)
+![protractor-all-tests](images/protractor-all-tests.png)
 
 Now you may ask yourself, was this really useful to test all these things? Well, in large projects you often find yourself doing a lot of repeated testing while development to ensure that a feature works as expected.
 
