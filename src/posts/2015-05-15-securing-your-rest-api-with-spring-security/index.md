@@ -1,13 +1,15 @@
 ---
 title: "Securing your REST API with Spring Security"
 date: "2015-05-15"
+categories: ["Java", "Tutorials"]
+tags: ["Spring", "Spring boot", "Spring security"]
 ---
 
 In the next couple of weeks I'm going to develop a small idea sharing/voting application, using several common concepts in web development. First of all, I'm going to write and secure a REST API with Spring Security.
 
 To start my project I'm going to use [Spring Boot](http://projects.spring.io/spring-boot/) and the [Spring Initializr](http://start.spring.io) online wizard to set up my project. For my project I'm going to use a simple setup using [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) (using an in memory HSQLDB), Spring Web and [Spring Security](http://projects.spring.io/spring-security/).
 
-[![initializr](images/initializr-300x198.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/initializr.png)
+![initializr](images/initializr.png)
 
 After choosing the proper modules, you can generate the project, which should return an archive with a sample project. Import it in your IDE and we're ready to go.
 
@@ -15,11 +17,12 @@ After choosing the proper modules, you can generate the project, which should re
 
 In this example I'm going to create a simple repository using Spring Data JPA, but before we can do that, we need a model/entity class. In this example I'm going to start of with a model called Idea, having properties like a title, description and the date it was created on:
 
+```java
 package be.g00glen00b.model;
 
 import java.util.Date;
 
-import javax.persistence.\*;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -66,6 +69,7 @@ public class Idea {
     return id;
   }
 }
+```
 
 That should do the trick.
 
@@ -75,14 +79,18 @@ For creating an entity with an ID you could create a constructor for initializin
 
 The next step is the repository, which is quite simple, just create an interface that extends from `JpaRepository`:
 
+```java
 @Repository
 public interface IdeaRepository extends JpaRepository<Idea, Long> {
 
 }
+```
 
 Last but not least I'm going to change the **application.properties** file to automatically create the tables in the in memory database based upon our entities. This makes it a lot easier for development, so you don't have to create a new schema manually:
 
+```
 spring.jpa.generate-ddl=true
+```
 
 You won't use this kind of thing in a production environment, so make sure you either remove it or work with Spring profiles so you don't accidently create new tables in the production environment.
 
@@ -92,6 +100,7 @@ So far so good. I'm going to skip the part of creating a service and using prope
 
 A sample controller would be:
 
+```java
 @RestController
 @RequestMapping("/api/ideas")
 public class IdeaController {
@@ -133,6 +142,7 @@ public class IdeaController {
     repository.delete(id);
   }
 }
+```
 
 There's not a lot of error handling here and it isn't really a good practice to put all that login inside your controller, but you get the idea.
 
@@ -146,13 +156,15 @@ Actually, this is all code we need to secure the application. If you run the app
 
 Taking a look at the reference guide ([27\. Security](http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-security.html)), you can see that there is already a default user created with username "user" and a random password. To see the password, we have to change some logging levels, so let's do that by editing **application.properties** and adding the following line:
 
+```
 logging.level.org.springframework.boot.autoconfigure.security=INFO
+```
 
 Yes indeed, you can configure your logging levels from the same file used for configuring your entire application. Make sure to take a look at the documentation ([66\. Logging](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-logging.html)).
 
 If you log in properly, and add a new idea by using a **POST** request, you'll see that it works fine.
 
-[![post-secured](images/post-secured-300x213.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/post-secured.png)
+![post-secured](images/post-secured.png)
 
 This looks already pretty nice to me!
 
@@ -162,8 +174,10 @@ The default settings are already great. It's certainly better than having to mes
 
 First of all, let's set the default password to **password** in stead of a UUID that's being generated each time. You can do this by setting the following properties:
 
+```
 security.user.name=user
 security.user.password=password
+```
 
 You can restart the application now and try it out, you can now log in with using the combination user/password.
 
@@ -171,6 +185,7 @@ The next part is a bit more difficult, but we'll try it anyways! In stead of sec
 
 So, in order to do that, we need to write a new class that extends from `WebSecurityConfigurerAdapter`. We can then override the `configure(HttpSecurity http)` method, allowing us to work with a builder for configuring the security for each path:
 
+```java
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
@@ -178,15 +193,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
       .csrf().disable()
       .authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/api/\*\*").authenticated()
-        .antMatchers(HttpMethod.PUT, "/api/\*\*").authenticated()
-        .antMatchers(HttpMethod.DELETE, "/api/\*\*").authenticated()
+        .antMatchers(HttpMethod.POST, "/api/**").authenticated()
+        .antMatchers(HttpMethod.PUT, "/api/**").authenticated()
+        .antMatchers(HttpMethod.DELETE, "/api/**").authenticated()
         .anyRequest().permitAll()
         .and()
       .httpBasic().and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 }
+```
 
 What happens here is that we configure all POST/PUT/DELETE requests for everything beneath **/api/\*\*** to be allowed only for people that are authenticated. All other requests are permitted by everyone.
 
@@ -194,7 +210,7 @@ What happens here is that we configure all POST/PUT/DELETE requests for everythi
 
 So, now we changed the configuration quite a bit, so it's time to test it out. Run your application and try to send a POST request for creating a new idea:
 
-[![post-secured-2](images/post-secured-2-300x240.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/post-secured-2.png)
+![post-secured-2](images/post-secured-2.png)
 
 This should give you another prompt, which makes sense because adding is only allowed for authenticated users. So, either enter the prompt or add the following header:
 
@@ -204,7 +220,7 @@ This is the same thing that happens when you enter your credentials, it will add
 
 Now let's try a request that shouldn't be secured, for example getting a list of all ideas. As you can see in the screenshot below, it works as expected. You can send a request without having the Authentication header and it will still return the proper response.
 
-[![get-unsecured](images/get-unsecured-300x224.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/get-unsecured.png)
+![get-unsecured](images/get-unsecured.png)
 
 #### Achievement: Secured your REST service with Spring Security
 

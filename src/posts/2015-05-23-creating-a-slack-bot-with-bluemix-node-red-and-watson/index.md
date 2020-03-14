@@ -2,6 +2,8 @@
 title: "Creating a Slack bot with Bluemix, Node-RED and Watson"
 date: "2015-05-23"
 coverImage: "bluemix-logo.jpg"
+categories: ["Other", "Tutorials"]
+tags: ["Bluemix", "Node-RED", "Slack", "Watson"]
 ---
 
 If you're just like me and you're over 20 years, you might have spent several years on IRC and you probably interacted with hundreds of bots over the years. You may have written your own bot, just like I did. Well, with todays frameworks, API's and tools it's a lot easier to write such a bot... in the cloud.
@@ -12,7 +14,7 @@ Let's start with an introduction first. In this tutorial I'm not going to write 
 
 The great part of Slack is that it has many possible ways of integrating existing tools in Slack, this is just a small part of the big list of integrations:
 
-[![slack-integrations](images/slack-integrations-300x234.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/slack-integrations.png)
+![slack-integrations](images/slack-integrations.png)
 
 ### Watson
 
@@ -26,13 +28,13 @@ The way Node-RED works is that you can put together entire flows by just adding 
 
 The screenshot below is an example of how my Slack bot eventually looks like.
 
-[![node-red](images/node-red-300x241.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/node-red.png)
+![node-red](images/node-red.png)
 
 ### Bluemix
 
 The last five to ten years the cloud was one of the trending topics in the world of IT. IBM is very well aware of that and invested quite a lot in creating their own PaaS (Platform as a Service) and created [Bluemix](https://bluemix.net/). Nearly a year ago (30 june 2014) Bluemix went public with their first release. So in a month Bluemix will have its first anniversary.
 
-[![bluemix-catalog](images/bluemix-catalog-300x195.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/bluemix-catalog.png)
+![bluemix-catalog](images/bluemix-catalog.png)
 
 ### Setting up your Node-RED application
 
@@ -41,20 +43,20 @@ So, after registering for Slack and Bluemix (you can get a free trial for 30 day
 - A [Cloudant](https://cloudant.com/) database
 - A tool for analytics and monitoring
 
-[![bluemix-create](images/bluemix-create-300x171.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/bluemix-create.png)
+![bluemix-create](images/bluemix-create.png)
 
 In this example I'm not going to use that tool, so after creating the application I chose to unbind/delete the service and I added two other services in stead:
 
 - Watson: Personality insights
 - Watson: Question and Answer
 
-[![bluemix-watson](images/bluemix-watson.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/bluemix-watson.png)
+![bluemix-watson](images/bluemix-watson.png)
 
 Make sure you connect both of them to your application.
 
 After staging the application you can visit the provided URL and you will get an empty/white Node-RED dashboard to play with. Let's start by creating your first node, a **HTTP **node. Double click on the node to get the configuration wizard of that node, in this case you should add something like:
 
-[![http-node](images/http-node-300x158.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/http-node.png)
+![http-node](images/http-node-300x158.png)
 
 Remember the URL, because we're going to use that URL to configure the outgoing webhook.
 
@@ -73,7 +75,7 @@ Fo the incoming webhook you will have to configure the channel as well (**#gener
 
 Now let's get back to Node-RED. Create a **HTTP request** node and double click on it. This will communicate with the incoming webhook of Slack, so paste the URL you copied earlier and set the method to POST.
 
-[![http-request](images/http-request-300x200.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/http-request.png)
+![http-request](images/http-request.png)
 
 Let's start of with a simple bot that allows you to throw a coin. The first node we're going to create is a **switch**. Just like the old IRC bots, we're going to create several commands like !coin, !travel, !personality and !sentiment, to split up our workflow based on those commands, we use a switch.
 
@@ -81,34 +83,38 @@ First of all you have to know that the HTTP node we created earlier, has a `msg.
 
 The first rule will check if any text matches the regular expression `^!coin`. This means that the text should start with !coin and can be followed by anything else.
 
-[![switch-node](images/switch-node-300x246.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/switch-node.png)
+![switch-node](images/switch-node.png)
 
 The next part is to create a **function** node, with these functions we can write specific logic (in JavaScript) to create a new message payload. In our case we're going to use `Math.random()` to either display Tails or Heads. So double click the node and add the following function:
 
+```javascript
 return {
     payload: Math.random() >= 0.5 ? "Heads" : "Tails"
 };
+```
 
 So now we already have the output, now we have to write another function node that converts that output to the output that the Slack webhook needs (read their documentation for more info). So I converted the payload to have a username, an avatar and the text that the bot will display:
 
+```javascript
 var text = {
     text: msg.payload,
     username: "Watson",
-    icon\_url: "https://pbs.twimg.com/profile\_images/521373680501149696/YXWVjs82.jpeg"
+    icon_url: "https://pbs.twimg.com/profile_images/521373680501149696/YXWVjs82.jpeg"
 };
 return {
     payload: JSON.stringify(text)
 };
+```
 
 The `icon_url` property actually contains the Twitter profile picture of [@IBMWatson](https://twitter.com/ibmwatson). Obviously, this command has nothing to do with Watson, but the next commands will be, so that's why I created this node separately, to reuse it for other flows/commands.
 
 Anyways, those are all the nodes we need, connect the last function to the **HTTP request** node and we're done.
 
-[![nodered-coin-flow](images/nodered-coin-flow-1024x172.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/nodered-coin-flow.png)
+![nodered-coin-flow](images/nodered-coin-flow.png)
 
 Press the **Deploy** button on the top right corner of Node-RED, go back to Slack and enter **!coin** in the **#general** channel, which should already be working:
 
-[![slack-coins](images/slack-coins-146x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/slack-coins.png)
+![slack-coins](images/slack-coins.png)
 
 ### Adding Watson to the flow
 
@@ -116,18 +122,20 @@ So, after writing our first Node-RED flow, it's time for some more! Open the **
 
 The following function will strip away the travel command itself from the beginning of the string:
 
+```javascript
 var msg = msg.payload.text;
 return {
-    payload: msg.replace(/^!travel\\s\*/, "")
+    payload: msg.replace(/^!travel\s*/, "")
 };
+```
 
 So now our payload is ready to be used by the Watson Q&A service, so let's add a **Watson Q and A** node to the flow. Double click it and configure it to use the travel service (or the healthcare service if you prefer):
 
-[![watson-qa-node](images/watson-qa-node-300x157.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/watson-qa-node.png)
+![watson-qa-node](images/watson-qa-node.png)
 
 This node will output the highest scoring answer as payload, so connect it to the node that converts the payload to a Slack message (with the Watson username + profile picture). If you did that and redeployed the Node-RED flow, you can start by asking Watson some traveling questions:
 
-[![slack-travel](images/slack-travel-1024x238.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/slack-travel.png)
+![slack-travel](images/slack-travel.png)
 
 ### Analyzing your personality
 
@@ -142,11 +150,11 @@ If you're done, there should be two additional connector dots. Now add the **Clo
 
 Now double click the Cloudant node and configure it like this:
 
-[![cloudant-node](images/cloudant-node-300x201.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/cloudant-node.png)
+![cloudant-node](images/cloudant-node.png)
 
 It is possible that you may have to create the database manually (though if I remember correctly that happens automatically). Anyways, if you want to view the Cloudant database you can go to your Bluemix dashboard and click on the **Cloudant storage** service. This will open a new window with a Launch button on the top right corner.
 
-[![cloudant-dashboard](images/cloudant-dashboard-1024x558.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/cloudant-dashboard.png)
+![cloudant-dashboard](images/cloudant-dashboard.png)
 
 Now open the Cloudant dashboard by pressing the Launch button and you can view the databases and add new ones as well.
 
@@ -154,31 +162,36 @@ Anyways.. back to Node-RED. Connect the last connector of the switch to the Clou
 
 Now, for the other flow that is triggered when we say "!personality", we have to create a function first that creates a query that searches for all messages posted by that user in Cloudant. Quite easy, this is the function:
 
+```javascript
 return {
     payload: "username:" + msg.payload.username
 };
+```
 
 Now connect that function to the third dot on the switch and create another **Cloudant** storage node, but this time use the one that has the dot on the left side and the right side. Connect it to the function we just made and double click on it to configure it so it uses the same database as we used for storing the messages.
 
-[![cloudant-query-node](images/cloudant-query-node-300x181.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/cloudant-query-node.png)
+![cloudant-query-node](images/cloudant-query-node.png)
 
 The personality node takes one message, so we will have to create a **function** node that converts all these stored messages to a single string, for example:
 
+```javascript
 var messagesStr = "";
 if (msg.payload != null) {
     for (var idx = 0; idx < msg.payload.length; idx++) {
-        messagesStr += msg.payload\[idx\].text;
+        messagesStr += msg.payload[idx].text;
         messagesStr += " ";
     }
 }
 return {
     payload: messagesStr
 };
+```
 
 If you created such a function and connected it to the Cloudant node, then you can create a Watson **Personality insights** node. Connect it to the function we just made and that it, no other configuration is necessary.
 
 This API gives a lot of information as a result, so we'll have to write a function that actually converts it to a simple message that can be posted on Slack. The API returns an entire tree of personality characteristics, values and needs. I chose to write a function that displays all characteristics that score above 50% and group them by their category (personality, values or needs). So let's add another function node and write the following:
 
+```javascript
 function getInsights(insights, min) {
     var data = {
         personality: "",
@@ -186,9 +199,9 @@ function getInsights(insights, min) {
         values: ""
     };
     for (var idx = 0; idx < insights.length; idx++) {
-         var insight = insights\[idx\];
+         var insight = insights[idx];
          if (insight.percentage != null && insight.percentage > min && insight.percentage < 1) {
-            data\[insight.category\] += insight.name + ": " + Math.round(insight.percentage \* 100, 0) + "%, ";
+            data[insight.category] += insight.name + ": " + Math.round(insight.percentage * 100, 0) + "%, ";
         }
         if (insight.children != null) {
             var children = getInsights(insight.children, min);   
@@ -201,13 +214,14 @@ function getInsights(insights, min) {
 }
 
 var data = getInsights(msg.insights.children, 0.5);
-var msg = "\*Personality\*:\\r\\n  " +  data.personality.substring(0, data.personality.length - 2);
-msg += "\\r\\n\*Needs\*:\\r\\n " + data.needs.substring(0, data.needs.length - 2);
-msg += "\\r\\n\*Values\*:\\r\\n " + data.values.substring(0, data.values.length - 2);
+var msg = "*Personality*:r\n  " +  data.personality.substring(0, data.personality.length - 2);
+msg += "\r\n*Needs*:\r\n " + data.needs.substring(0, data.needs.length - 2);
+msg += "\r\n*Values*:\r\n " + data.values.substring(0, data.values.length - 2);
 
 return {
     payload: msg
 };
+```
 
 It's a bit long, but what it actually does is that it loops recursively over the tree and adds all characteristics that score more than a given threshold (50%) to a single string and formats it later on.
 
@@ -215,13 +229,15 @@ That message is ready to be consumed by the function that converts the payload t
 
 To test your flows you actually have to enter some text first, so make sure you entered at least one hundred words before you call the !personality command.
 
-[![personality-slack](images/personality-slack-1024x258.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/personality-slack.png)
+![personality-slack](images/personality-slack.png)
 
 At the first try I forgot to deploy my Node-RED flow, so obviously I didn't get a result. Anyways, we built a pretty cool bot using Slack, IBM Bluemix, Node-RED and IBM Watson.
 
 I even had so much fun (and it's quite easily), so I added some extra API's as well using [Mashape](https://www.mashape.com/dashboard) and the [Internet Chuck Norris Database API](http://www.icndb.com/api/):
 
-[![slack-apis](images/slack-apis.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/slack-apis.png)It's probably not the most useful usecase of using Node-RED, Slack, IBM Watson and Bluemix, but I think it illustrates the power of their APIs/capabilities well enough.
+![slack-apis](images/slack-apis.png)
+
+It's probably not the most useful usecase of using Node-RED, Slack, IBM Watson and Bluemix, but I think it illustrates the power of their APIs/capabilities well enough.
 
 ### Adding Chuck Norris to your bot
 
@@ -231,28 +247,32 @@ First of all, we have to change the switch node a bit, create a new rule that li
 
 After altering the switch node, create a new **HTTP request** node, and make sure the URL points to [http://api.icndb.com/jokes/random](http://api.icndb.com/jokes/random).
 
-[![chuck-norris-node](images/chuck-norris-node-300x223.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/chuck-norris-node.png)
+![chuck-norris-node](images/chuck-norris-node.png)
 
 After connecting the switch to the new HTTP request node, create a function node that will extract the random joke from the response, and serve it as payload:
 
+```javascript
 return {
     payload: msg.payload.value.joke
 };
+```
 
 The last step is that we have to send a message to the Slack webhook, but we don't want it to be posted as Watson, do we? So create a new **function** node (or duplicate the function we use for posting messages as Watson) and alter it to have "Chuck Norris" as the name and choose an appropriate picture:
 
+```javascript
 var text = {
     text: msg.payload,
     username: "Chuck Norris",
-    icon\_url: "http://static-files1.modthesims2.com/customavatars/avatar7265094\_1.gif"
+    icon_url: "http://static-files1.modthesims2.com/customavatars/avatar7265094_1.gif"
 };
 return {
     payload: JSON.stringify(text)
 };
+```
 
 After doing that, you can connect it to the Slack incoming webhook node and you're ready to test it. Hit the deploy button and enter the **!chuck **command.
 
-[![chuck-slack](images/chuck-slack-1024x141.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/05/chuck-slack.png)
+![chuck-slack](images/chuck-slack.png)
 
 And there you have it, your own Chuck Norris bot!
 

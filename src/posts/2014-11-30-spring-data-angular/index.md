@@ -1,6 +1,8 @@
 ---
 title: "Building modern webapps using Spring Data REST and AngularJS"
 date: "2014-11-30"
+categories: ["Java", "Tutorials"]
+tags: ["AngularJS", "Spring", "Spring Data"]
 ---
 
 Recently I wrote several "exotic" applications using WebSockets. If you're not into WebSockets, but you're interested in using Spring and AngularJS, this article may suite you. In this example I will setup a web project using the Spring framework and an in memory embedded HSQL database. The client-side of the application will be written using AngularJS. Let's start!
@@ -9,6 +11,7 @@ Recently I wrote several "exotic" applications using WebSockets. If you're not i
 
 I'm gonna start of with a simple Maven webproject, in my **pom.xml** I will have to add the following dependencies:
 
+```xml
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>
@@ -40,9 +43,11 @@ I'm gonna start of with a simple Maven webproject, in my **pom.xml** I will hav
     <version>3.1.0</version>
     <scope>provided</scope>
 </dependency>
+```
 
 I will also need several front-end dependencies, I will use Bower to manage them:
 
+```json
 {
     "name": "ng-spring-data",
     "dependencies": {
@@ -52,6 +57,7 @@ I will also need several front-end dependencies, I will use Bower to manage them
         "lodash": "~2.4.1"
     }
 }
+```
 
 To change the location of where Bower installs the libraries, I'm also going to add a **.bowerrc** folder to the root of my project, containing the following:
 
@@ -80,6 +86,7 @@ Then we're also using several front-end libraries:
 
 Modern webapps no longer contain files like web descriptors or Spring bean configuration files. With JavaConfig you can properly replace your web descriptor with a class. The contents will look similar to those of a web descriptor though:
 
+```java
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
   @Override
@@ -89,27 +96,28 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
   }
 
   @Override
-  protected Class<?>\[\] getRootConfigClasses() {
-    return new Class<?>\[\] { AppConfig.class };
+  protected Class<?>[] getRootConfigClasses() {
+    return new Class<?>[] { AppConfig.class };
   }
 
   @Override
-  protected Class<?>\[\] getServletConfigClasses() {
-    return new Class<?>\[\] { WebConfig.class };
+  protected Class<?>[] getServletConfigClasses() {
+    return new Class<?>[] { WebConfig.class };
   }
 
   @Override
-  protected String\[\] getServletMappings() {
-    return new String\[\] { "/" };
+  protected String[] getServletMappings() {
+    return new String[] { "/" };
   }
 
   @Override
-  protected Filter\[\] getServletFilters() {
+  protected Filter[] getServletFilters() {
     CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-    characterEncodingFilter.setEncoding(StandardCharsets.UTF\_8.name());
-    return new Filter\[\] { characterEncodingFilter };
+    characterEncodingFilter.setEncoding(StandardCharsets.UTF_8.name());
+    return new Filter[] { characterEncodingFilter };
   }
 }
+```
 
 We still have servlets, mappings and filters. In this case I'm gonna map a servlet to the root path and have the class `WebConfig` handle the web context (similar to what `springmvc-servlet.xml` did in the past). The application context is also replaced and now we have a class called `AppConfig` which replaces the `applicationContext.xml` file.
 
@@ -119,6 +127,7 @@ Finally I also added a filter that makes sure that everything is encoded as **UT
 
 We have to implement two other configuration files called `AppConfig` and `WebConfig`. The first one, `AppConfig`, contains mostly the configuration for setting up the datasource and the entity manager:
 
+```java
 @Configuration
 @EnableJpaRepositories(basePackages = { "be.g00glen00b.repository" })
 @ComponentScan(basePackages = "be.g00glen00b", excludeFilters = {
@@ -173,10 +182,11 @@ public class AppConfig extends RepositoryRestMvcConfiguration {
   @Bean
   public Properties jpaProperties() {
     Properties properties = new Properties();
-    properties.put(HBM2DDL\_AUTO, "create-drop");
+    properties.put(HBM2DDL_AUTO, "create-drop");
     return properties;
   }
 }
+```
 
 Let's see what this class contains. Starting from the top we notice several annotations to enable features in our application. First of all we have `@EnableJpaRepositories` to indicate we're going to use Spring Data JPA and that we have our repositories inside the package `be.g00glen00b.repository`.
 
@@ -192,6 +202,7 @@ The other methods like `dataSource()`, `jpaVendorAdapter()`, `entityManagerFacto
 
 We're now able to create RESTful webservices, however, our application also has a user interface, so we will have to configure our web context as well using `WebConfig`:
 
+```java
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "be.g00glen00b.controller")
@@ -223,9 +234,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/libs/\*\*").addResourceLocations("/libs/");
-    registry.addResourceHandler("/app/\*\*").addResourceLocations("/app/");
-    registry.addResourceHandler("/assets/\*\*").addResourceLocations("/assets/");
+    registry.addResourceHandler("/libs/**").addResourceLocations("/libs/");
+    registry.addResourceHandler("/app/**").addResourceLocations("/app/");
+    registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
   }
 
   @Override
@@ -233,6 +244,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     registry.addInterceptor(webContentInterceptor());
   }
 }
+```
 
 Starting from the top again, you can see that we use the `#EnableWebMvc` annotation to indicate that we're using Spring Web MVC.
 
@@ -248,6 +260,7 @@ Speaking of a controller... let's implement it now we're busy. Make sure that yo
 
 The controller itself is quite easy, it has only one method, used to load the main application page:
 
+```java
 @Controller
 @RequestMapping("/")
 public class AppController {
@@ -257,6 +270,7 @@ public class AppController {
     return "index";
   }
 }
+```
 
 As you can see, it's a quite simple method, that only returns the string `"index"`. Returning in a string means that we're using a view called **index** which matches the file **/WEB-INF/views/index.jsp** thanks to the `getInternalResourceViewResolver()` bean in our configuration.
 
@@ -266,8 +280,9 @@ The application I'm going to build will be a simple todo application, but if you
 
 A todo item can have a description and it can be checked or unchecked. We also need to add an ID, which will be used to know which todo item we're talking about.
 
-THe model will eventually look like this:
+The model will eventually look like this:
 
+```java
 @Entity
 public class Item {
 
@@ -305,6 +320,7 @@ public class Item {
     this.description = description;
   }
 }
+```
 
 Make sure you add this class to the `be.g00glen00b.model` package, because this is the only package we said to scan inside the `entityManagerFactory`.
 
@@ -312,10 +328,12 @@ Make sure you add this class to the `be.g00glen00b.model` package, because this 
 
 All we have to do now is to create a repository based upon the model. Creating a repository with the Spring Data JPA framework is quite easy though, we only have to define a simple interface like this:
 
+```java
 @RepositoryRestResource(collectionResourceRel = "items", path = "items")
 public interface ItemRepository extends PagingAndSortingRepository<Item, Integer> {
 
 }
+```
 
 This adds our JPA repository and enables it for REST as well. If you deploy your application now and open your web browser, you can already access the REST API by going to:
 
@@ -323,12 +341,13 @@ http://localhost:8080/ng-spring-data/api/items
 
 In this case **/ng-spring-data** is my content root and I'm running my web container on **http://localhost:8080**.
 
-[![rest-response](images/rest-response-300x171.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/rest-response.png)
+![rest-response](images/rest-response.png)
 
 ### Working at the front-end
 
 Before we start with writing JavaScript code, we have to create the HTML page first. As I mentioned before, we mapped the controller so that when the application is opened, the **/WEB-INF/views/index.jsp** file is used as the view. So, let's write that file. The content is quite simple:
 
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -376,6 +395,7 @@ Before we start with writing JavaScript code, we have to create the HTML page fi
     <script type="text/javascript" src="./app/services.js"></script>
   </body>
 </html>
+```
 
 As you can see, most of it is simple HTML with some Twitter Bootstrap classes. However, you will also notice some other attributes like `ng-app` and <code>ng-controller. These are AngularJS directives which contain the logic for translating this HTML template into the actual HTML visible in the application.
 
@@ -411,10 +431,11 @@ As you may have noticed from the JSP page, we're including three scripts we didn
 
 In `controllers.js` we will define our controller, the `AppController`:
 
+```javascript
 (function(angular) {
   var AppController = function($scope, Item) {
     Item.query(function(response) {
-      $scope.items = response ? response : \[\];
+      $scope.items = response ? response : [];
     });
     
     $scope.addItem = function(description) {
@@ -438,9 +459,10 @@ In `controllers.js` we will define our controller, the `AppController`:
     };
   };
   
-  AppController.$inject = \['$scope', 'Item'\];
+  AppController.$inject = ['$scope', 'Item'];
   angular.module("myApp.controllers").controller("AppController", AppController);
 }(angular));
+```
 
 As you can see here, we can find all the methods we used in our JSP page. For example, we have the functions `updateItem()`, `deleteItem()` and `addItem()` which we used in the event handling.
 
@@ -456,8 +478,9 @@ As you can see, most of the things we do, have to do with the `Item` object. Thi
 
 What you may have noticed when viewing the REST API is that you get a lot of additional data, for example:
 
+```json
 {
-  "\_links" : {
+  "_links" : {
     "self" : {
       "href" : "http://localhost:8080/ng-spring-data/api/items{?page,size,sort}",
       "templated" : true
@@ -470,6 +493,7 @@ What you may have noticed when viewing the REST API is that you get a lot of add
     "number" : 0
   }
 }
+```
 
 This is called HATEOAS (Hypermedia as the Engine of Application State). Like I said before, AngularJS does not have support for this out of the box (nor in their **angular-resource** project).
 
@@ -479,8 +503,9 @@ The code of this factory is a bit more complex, so let's split it into smaller p
 
 First of all we have to create the module itself, for example:
 
+```javascript
 (function(angular) {
-  var HATEOAS\_URL = './api/items';
+  var HATEOAS_URL = './api/items';
   var ItemFactory = function($http, SpringDataRestAdapter) {
     function Item(item) {
       return item;
@@ -489,9 +514,10 @@ First of all we have to create the module itself, for example:
     return Item;
   };
   
-  ItemFactory.$inject = \['$http', 'SpringDataRestAdapter'\];
+  ItemFactory.$inject = ['$http', 'SpringDataRestAdapter'];
   angular.module("myApp.services").factory("Item", ItemFactory);
 }(angular));
+```
 
 This looks quite similar to the setup of the controller, except the fact that we're using a function prototype here called `Item`.
 
@@ -499,15 +525,17 @@ This looks quite similar to the setup of the controller, except the fact that we
 
 Before we start implementing the prototype, I'm going to add a "static" function called `query()` which will access the API and return a list of items:
 
+```javascript
 Item.query = function(callback) {
-  var deferred = $http.get(HATEOAS\_URL);
+  var deferred = $http.get(HATEOAS_URL);
   return SpringDataRestAdapter.processWithPromise(deferred).then(function(data) {
-    Item.resources = data.\_resources("self");
-    callback && callback(\_.map(data.\_embeddedItems, function(item) {
+    Item.resources = data._resources("self");
+    callback && callback(_.map(data._embeddedItems, function(item) {
       return new Item(item);
     }));
   });
 };
+```
 
 Item.resources = null;
 
@@ -525,8 +553,9 @@ To make a difference between these two, we verify if the item has resources, by 
 
 So if we look at the `Item` prototype it will have this structure:
 
+```javascript
 function Item(item) {     
-  if (item.\_resources) {
+  if (item._resources) {
     item.save = function(callback) { };
         
     item.remove = function(callback) { };
@@ -536,6 +565,7 @@ function Item(item) {
 
   return item;
 }
+```
 
 #### Saving new items
 
@@ -543,6 +573,7 @@ First of all, let's write the `save()` function in case there are no resources. 
 
 So, we came up with writing something like this:
 
+```javascript
 item.save = function(callback) {
   Item.resources.save(item, function(item, headers) {
     var deferred = $http.get(headers().location);
@@ -551,6 +582,7 @@ item.save = function(callback) {
     });
   });
 };
+```
 
 It uses the `Item.resources`, because these resources tell us what the URL is for saving new items. After saving, we use the headers to retrieve the location header, by using `headers().location` and we use `$http` to call it using AJAX.
 
@@ -560,7 +592,8 @@ The response has to be promised using **angular-spring-data-rest, similar to how
 
 Each item individually has separate `_resources`, which will tell us what URL to use to update and delete the songs. So, updating and deleting is quite simple:
 
-item.resources = item.\_resources("self", {}, {
+```javascript
+item.resources = item._resources("self", {}, {
   update: {
     method: 'PUT'
   }
@@ -576,16 +609,18 @@ item.remove = function(callback) {
     callback && callback(item);
   });
 };
+```
 
 Putting everything together in the factory we get:
 
+```javascript
 (function(angular) {
-  var HATEOAS\_URL = './api/items';
+  var HATEOAS_URL = './api/items';
   var ItemFactory = function($http, SpringDataRestAdapter) {
     function Item(item) {
       
-      if (item.\_resources) {
-        item.resources = item.\_resources("self", {}, {
+      if (item._resources) {
+        item.resources = item._resources("self", {}, {
           update: {
             method: 'PUT'
           }
@@ -616,10 +651,10 @@ Putting everything together in the factory we get:
     }
     
     Item.query = function(callback) {
-      var deferred = $http.get(HATEOAS\_URL);
+      var deferred = $http.get(HATEOAS_URL);
       return SpringDataRestAdapter.processWithPromise(deferred).then(function(data) {
-        Item.resources = data.\_resources("self");
-        callback && callback(\_.map(data.\_embeddedItems, function(item) {
+        Item.resources = data._resources("self");
+        callback && callback(_.map(data._embeddedItems, function(item) {
           return new Item(item);
         }));
       });
@@ -630,19 +665,22 @@ Putting everything together in the factory we get:
     return Item;
   };
   
-  ItemFactory.$inject = \['$http', 'SpringDataRestAdapter'\];
+  ItemFactory.$inject = ['$http', 'SpringDataRestAdapter'];
   angular.module("myApp.services").factory("Item", ItemFactory);
 }(angular));
+```
 
 ### Defining the application packages
 
 The last file that's left is the `app.js` file, defining the packages `myApp`, `myApp.controllers` and `myApp.services`:
 
+```javascript
 (function(angular) {
-  angular.module("myApp.controllers", \[\]);
-  angular.module("myApp.services", \[\]);
-  angular.module("myApp", \["ngResource", "spring-data-rest", "myApp.controllers", "myApp.services"\]);
+  angular.module("myApp.controllers", []);
+  angular.module("myApp.services", []);
+  angular.module("myApp", ["ngResource", "spring-data-rest", "myApp.controllers", "myApp.services"]);
 }(angular));
+```
 
 The name of the `myApp` module is the same name we have to enter when bootstrapping the application (`ng-app="myApp"`). The array we're using as the second parameters is the list of module it depends on. In this case the controllers and services are not depending on any other modules, however, the application itself needs the ngResource, spring-data-rest, the controllers and the services modules to work.
 
@@ -652,19 +690,19 @@ That's it for the development of the application. As you can see the amount of J
 
 But let's try out the application. If you deployed it in your web container, you should be able to see the following application in your web browser.
 
-[![checklist-no-items](images/checklist-no-items-300x85.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/checklist-no-items.png)
+![checklist-no-items](images/checklist-no-items.png)
 
 If you add a new item, you will see that two network requests are sent, one for adding the item and another one for retrieving the contents of that item.
 
-[![checklist-item-added](images/checklist-item-added-300x165.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/checklist-item-added.png)
+![checklist-item-added](images/checklist-item-added.png)
 
 Checking or unchecking a task will send a PUT request for updating the item:
 
-[![checklist-item-updated](images/checklist-item-updated-300x164.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/checklist-item-updated.png)
+![checklist-item-updated](images/checklist-item-updated.png)
 
 And finally, deleting will send a DELETE request:
 
-[![checklist-item-deleted](images/checklist-item-deleted-300x160.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/checklist-item-deleted.png)
+![checklist-item-deleted](images/checklist-item-deleted-300x160.png)
 
 That's it for this tutorial. You're now able to write web applications using Spring MVC, Spring Data REST and AngularJS.
 

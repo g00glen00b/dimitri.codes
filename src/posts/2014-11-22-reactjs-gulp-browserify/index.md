@@ -1,6 +1,8 @@
 ---
 title: "Writing apps with React.js: Build using gulp.js and Browserify"
 date: "2014-11-22"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gulp", "JavaScript", "React", "Web"]
 ---
 
 Previous week I went to [Devoxx](http://devoxx.be) and [Pratik Patel](https://twitter.com/prpatel) gave a great talk about [React.js](http://facebook.github.io/react/). This was enough for me to start playing with the library. React.js is a JavaScript library for building user interfaces by writing components. It's a view-oriented library which allows you to write isomorphic components which can be used both in the back-end (to prerender the markup) and in the front-end (to make the user interface adapt to new changes). Since it's a view-oriented library, it can be used within other libraries/frameworks, for example AngularJS.
@@ -9,15 +11,15 @@ The library is not as popular as AngularJS, but is quite popular and used often 
 
 ### Setup
 
-Like I said before, React.js allows you to write components that work both in the browser and the back-end (Node.js). Because of that, it's usually used together with [Browserify](http://browserify.org/), a library that allows you to use `require()` calls and compile it so it works on the front-end. So... when I say compiling, I also say build system! In this example I'm going to use [Gulp.js](http://gulpjs.com/), but if you're a fan of Grunt, I'm quite sure the same can be done as well. Make sure to read my tutorial about [Gulp.js](http://wordpress.g00glen00b.be/gulp-angular/ "How to drink gulp.js") (and even [Grunt](http://wordpress.g00glen00b.be/angular-grunt/ "Making your AngularJS application grunt")) if you haven't read it yet.
+Like I said before, React.js allows you to write components that work both in the browser and the back-end (Node.js). Because of that, it's usually used together with [Browserify](http://browserify.org/), a library that allows you to use `require()` calls and compile it so it works on the front-end. So... when I say compiling, I also say build system! In this example I'm going to use [Gulp.js](http://gulpjs.com/), but if you're a fan of Grunt, I'm quite sure the same can be done as well. Make sure to read my tutorial about [Gulp.js](/gulp-angular/ "How to drink gulp.js") (and even [Grunt](/angular-grunt/ "Making your AngularJS application grunt")) if you haven't read it yet.
 
 So, my initial project structure is the following:
 
-[![project-structure](images/project-structure-84x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/project-structure.png)
+![project-structure](images/project-structure.png)
 
 I made two main folders called **app** and **assets**. The **assets **folder is the easiest, as it only contains a folder called **less** and inside are two Less stylesheets called **general.less** and **style.less**. The **app **folder on the other hand is a bit more complex, as it represents the core of our application. It contains three folders called **components**, **models** and **services**. The application I'm going to build is a song rate application, where a user can enter a song (by artist and title) and vote/delete them later on.
 
-[![application-result](images/application-result-300x145.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/application-result.png)
+[![application-result](images/application-result.png)
 
 There are several user interface components recognizable in this application:
 
@@ -37,6 +39,7 @@ Inside the **app **folder there are some other folders/files as well, like **a
 
 I'm not going to spend a lot of time to this, but with Gulp I'm going to build my application. Before we start with writing our **gulpfile.js**, we have to define the packages we need to load using **package.json**. The packages I'm going to use are the following:
 
+```json
 {
   "name": "react-song-rate",
   "version": "1.0.2",
@@ -56,11 +59,11 @@ I'm not going to spend a lot of time to this, but with Gulp I'm going to build m
     "del": "1.1.1"
   },
   "paths": {
-    "less": "assets/less/\*.less",
-    "js": "./app/\*\*/\*.js",
-    "jsx": "./app/\*\*/\*.jsx",
+    "less": "assets/less/*.less",
+    "js": "./app/**/*.js",
+    "jsx": "./app/**/*.jsx",
     "app": "./app/app.js",
-    "html": "\*.html"
+    "html": "*.html"
   },
   "dest": {
     "style": "style.css",
@@ -68,6 +71,7 @@ I'm not going to spend a lot of time to this, but with Gulp I'm going to build m
     "dist": "dist"
   }
 }
+```
 
 There are several Node.js packages listed here, so let's walk through them:
 
@@ -89,6 +93,7 @@ I also created some extra properties to configure some of the paths that will be
 
 Like I said before, I'm not going to spend a lot of time on the Gulp configuration, because most of it is explained in my other tutorial about Gulp (this configuration file is a modified copy of that file). The entire **gulpfile.js** configuration for this project is:
 
+```javascript
 var gulp = require('gulp'),
     del = require('del'),
     run = require('gulp-run'),
@@ -105,23 +110,23 @@ var gulp = require('gulp'),
     package = require('./package.json'),
     reload = browserSync.reload;
 
-/\*\*
- \* Running Bower
- \*/
+/**
+ * Running Bower
+ */
 gulp.task('bower', function() {
   run('bower install').exec();
 })
 
-/\*\*
- \* Cleaning dist/ folder
- \*/
+/**
+ * Cleaning dist/ folder
+ */
 .task('clean', function(cb) {
-  del(\['dist/\*\*'\], cb);
+  del(['dist/**'], cb);
 })
 
-/\*\*
- \* Running livereload server
- \*/
+/**
+ * Running livereload server
+ */
 .task('server', function() {
   browserSync({
     server: {
@@ -130,9 +135,9 @@ gulp.task('bower', function() {
   });
 })
 
-/\*\*
- \* Less compilation
- \*/
+/**
+ * Less compilation
+ */
 .task('less', function() {
   return gulp.src(package.paths.less)
   .pipe(less())
@@ -147,16 +152,16 @@ gulp.task('bower', function() {
   .pipe(gulp.dest(package.dest.dist));
 })
 
-/\*\*
- \* JSLint/JSHint validation
- \*/
+/**
+ * JSLint/JSHint validation
+ */
 .task('lint', function() {
   return gulp.src(package.paths.js)
   .pipe(jshint())
   .pipe(jshint.reporter('default'));
 })
 
-/\*\* JavaScript compilation \*/
+/** JavaScript compilation */
 .task('js', function() {
   return browserify(package.paths.app)
   .transform(reactify)
@@ -174,23 +179,24 @@ gulp.task('bower', function() {
   .pipe(gulp.dest(package.dest.dist));
 })
 
-/\*\*
- \* Compiling resources and serving application
- \*/
-.task('serve', \['bower', 'clean', 'lint', 'less', 'js', 'server'\], function() {
-  return gulp.watch(\[
+/**
+ * Compiling resources and serving application
+ */
+.task('serve', ['bower', 'clean', 'lint', 'less', 'js', 'server'], function() {
+  return gulp.watch([
     package.paths.js, package.paths.jsx, package.paths.html, package.paths.less
-  \], \[
+  ], [
    'lint', 'less', 'js', browserSync.reload
-  \]);
+  ]);
 })
-.task('serve:minified', \['bower', 'clean', 'lint', 'less:min', 'js:min', 'server'\], function() {
-  return gulp.watch(\[
+.task('serve:minified', ['bower', 'clean', 'lint', 'less:min', 'js:min', 'server'], function() {
+  return gulp.watch([
     package.paths.js, package.paths.jsx, package.paths.html, package.paths.less
-  \], \[
+  ], [
    'lint', 'less:min', 'js:min', browserSync.reload
-  \]);
+  ]);
 });
+```
 
 The only thing that is new in this case is that the JavaScript compilation tasks are a bit different from the previous tutorial. In stead of concatenating all files, we start with our heart of our application called **app.js**. This file will fire up everything, and will be the root of our entire application. It depends on our model and the App.jsx component, which in turn depend on the other components/JavaScript files. So, if we use Browserify to compile app.js, it will chain through and compile everything.
 
@@ -215,6 +221,7 @@ Our application will use several libraries, including **react.js**:
 
 Wait before you start downloading them. I like making it easy, so should you. That's why I'm using Bower to manage my front-end dependencies. Simply make a **bower.json** file, add the following configuration and you're done.
 
+```json
 {
     "name": "react-song-rate",
     "dependencies": {
@@ -225,27 +232,32 @@ Wait before you start downloading them. I like making it easy, so should you. Th
         "font-awesome": "latest"
     }
 }
+```
 
 ### Testing it out
 
 After writing all these files, you only have to add an **index.html** file on the root of your project and you can start testing it out (add a simple hello world or so). Before executing our Gulp configuration, we have to install the necessary command line tools. Both Bower and gulp.js require you to install a CLI tool, but no worries, that tool is installable through npm as well, by executing the following command:
 
+```
 npm install -g gulp bower
+```
 
 Once you did that, you can execute gulp, go to your project root and execute the following command:
 
+```
 gulp serve
+```
 
 If you followed every step properly, your webapplication should pop-up in your favourite browser, for example:
 
-[![hello-world](images/hello-world-300x46.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/hello-world.png)
+![hello-world](images/hello-world.png)
 
 It certainly looks ugly as hell, but hey, we can now a lot faster. For example, if you change your HTML structure and look back at your browser, it should instantly change.
 
-[![changes-instantly](images/changes-instantly-300x53.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/changes-instantly.png)
+![changes-instantly](images/changes-instantly.png)
 
 If you don't believe me, you can always look back at your terminal/console, which should look a bit similar to this:
 
-[![gulp-log](images/gulp-log-300x215.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/gulp-log.png)
+![gulp-log](images/gulp-log.png)
 
-You've set up your entire application structure and build environment, so let's start coding! Read [my next tutorial](http://wordpress.g00glen00b.be/reactjs-jsx/) to read everything you need to know to write your own React.js application.
+You've set up your entire application structure and build environment, so let's start coding! Read [my next tutorial](/reactjs-jsx/) to read everything you need to know to write your own React.js application.

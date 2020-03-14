@@ -1,13 +1,15 @@
 ---
 title: "Using WebSockets with Spring, AngularJS and SockJS"
 date: "2014-10-05"
+categories: ["Java", "Tutorials"]
+tags: ["AngularJS", "Spring", "Spring MVC", "WebSockets"]
 ---
 
 A while ago I wrote a tutorial about writing a web application using Spring, AngularJS and WebSockets. However, that tutorial only used a fraction of what WebSockets could do, so in this tutorial I will explain how you can write a small chat app using the same frameworks; Spring, AngularJS, Stomp.js and SockJS. The entire application will be written using JavaConfig, even the web.xml (what I still kept in my previous tutorial) will be replaced by a `WebAppInitializer`.
 
 The application we're going to write will look like this:
 
-[![app-example](images/app-example-300x120.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/app-example.png)
+![app-example](images/app-example.png)
 
 ### Why WebSockets
 
@@ -23,6 +25,7 @@ Because WebSockets provide a way to communicate in both ways, they're often used
 
 You will need several libraries here, mainly the Spring Web MVC framework for setting up our web application and Spring messaging + WebSockets for the WebSocket part of the application. We also need a JSON serializer like Jackson, because Stomp needs JSON serialization/deserialization, so I'm going to add those to our application as well.
 
+```xml
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>
@@ -70,9 +73,11 @@ You will need several libraries here, mainly the Spring Web MVC framework for se
     <artifactId>jackson-jaxrs-json-provider</artifactId>
     <version>2.3.3</version>
 </dependency>
+```
 
 In the front-end I'm going to need some libraries as well, which I will setup using Bower. If you're not into Bower, you can always download the libraries by yourself.
 
+```json
 {
   "name": "spring-ng-chat",
   "version": "0.0.1-SNAPSHOT",
@@ -83,6 +88,7 @@ In the front-end I'm going to need some libraries as well, which I will setup us
     "lodash": "2.4.1"
   }
 }
+```
 
 The libraries I'm going to use are SockJS + Stomp.js for communication through WebSockets, AngularJS will be used for setting up the client-part of the application and Lo-Dash is a utility library that I will use (a fork of Underscore.js).
 
@@ -92,6 +98,7 @@ The libraries I'm going to use are SockJS + Stomp.js for communication through W
 
 In stead of configuring our application using XML's, I'm going to show you how you could write the same application, without the need of any XML file. The first class we need is the replacement of our web.xml, to bootstrap our web application. In this class we can define our application context(s), our web application context and some other servlet related configuration.
 
+```java
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
   @Override
@@ -101,27 +108,28 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
   }
 
   @Override
-  protected Class< ?>\[\] getRootConfigClasses() {
-    return new Class< ?>\[\] { AppConfig.class, WebSocketConfig.class };
+  protected Class< ?>[] getRootConfigClasses() {
+    return new Class< ?>[] { AppConfig.class, WebSocketConfig.class };
   }
 
   @Override
-  protected Class< ?>\[\] getServletConfigClasses() {
-    return new Class< ?>\[\] { WebConfig.class };
+  protected Class< ?>[] getServletConfigClasses() {
+    return new Class< ?>[] { WebConfig.class };
   }
 
   @Override
-  protected String\[\] getServletMappings() {
-    return new String\[\] { "/" };
+  protected String[] getServletMappings() {
+    return new String[] { "/" };
   }
 
   @Override
-  protected Filter\[\] getServletFilters() {
+  protected Filter[] getServletFilters() {
     CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-    characterEncodingFilter.setEncoding(StandardCharsets.UTF\_8.name());
-    return new Filter\[\] { characterEncodingFilter };
+    characterEncodingFilter.setEncoding(StandardCharsets.UTF_8.name());
+    return new Filter[] { characterEncodingFilter };
   }
 }
+```
 
 Most of this class is quite clear. First of all we have our `getRootConfigClasses()` and `getServletConfigClasses()` which we use to define our bean configuration classes. The `getServletMappings()` and `getServletFilters()` are related to servlet configuration. In this case I'm mapping the application to the context root and I'm adding a filter to make sure all content is in UTF-8.
 
@@ -129,6 +137,7 @@ Then the final method here is the `customizeRegistrion`. This can be quite impor
 
 As you might notice, you will get three compilation errors of classes that are not found. I'm going to define those now, so let's start with `AppConfig`:
 
+```java
 @Configuration
 @ComponentScan(basePackages = "be.g00glen00b", excludeFilters = {
     @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION),
@@ -137,11 +146,13 @@ As you might notice, you will get three compilation errors of classes that are n
 public class AppConfig {
 
 }
+```
 
 Quite empty and useless here, it tells which packages to scan, but excludes all configuration and controller classes (configuration classes are bootstrapped by our WebAppInitializer while Controller classes are bound to our `WebConfig`). Since we will only need a controller, this class will do nothing special, but if you have special services, then they will become spring beans if annoted correctly.
 
 The next class is the `WebConfig`:
 
+```java
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "be.g00glen00b.controller")
@@ -173,9 +184,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/libs/\*\*").addResourceLocations("/libs/");
-    registry.addResourceHandler("/app/\*\*").addResourceLocations("/app/");
-    registry.addResourceHandler("/assets/\*\*").addResourceLocations("/assets/");
+    registry.addResourceHandler("/libs/**").addResourceLocations("/libs/");
+    registry.addResourceHandler("/app/**").addResourceLocations("/app/");
+    registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
   }
 
   @Override
@@ -183,11 +194,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     registry.addInterceptor(webContentInterceptor());
   }
 }
+```
 
 This configuration class bootstraps our web context. It tells us which static resources can be served (with `addResourceHandlers`. It adds a no cache interceptor (`webContentInterceptor()` and `addInterceptors()`) and also tells us the location of our dynamic resources (JSP files) by using the `getInternalResourceViewResolver()` bean.
 
 Then finally we also have the WebSocket configuration:
 
+```java
 @Configuration
 @EnableWebSocketMessageBroker
 @ComponentScan(basePackages = "be.g00glen00b.controller")
@@ -204,6 +217,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     registry.addEndpoint("/chat").withSockJS();
   }
 }
+```
 
 Just like the `WebConfig` it has to scan components in the controller package as well, because we will map our WebSocket traffic onto our controllers. Then we have to configure the message broker (where communication enters and leaves) using `configureMessageBroker` and we also have to configure our endpoints using `registerStompEndpoints`.
 
@@ -215,6 +229,7 @@ Our main communication will happen through WebSockets. To communicate, we will s
 
 First of all, `Message` will contain the chat message itself, and a generated ID, for example:
 
+```java
 public class Message {
 
   private String message;
@@ -245,9 +260,11 @@ public class Message {
     this.id = id;
   }
 }
+```
 
 The `OutputMessage` will extend `Message`, but will also add a timestamp (the current date) to it:
 
+```java
 public class OutputMessage extends Message {
 
     private Date time;
@@ -265,11 +282,13 @@ public class OutputMessage extends Message {
         this.time = time;
     }
 }
+```
 
 ### Spring controller
 
 The final step in the Java-part of our application is the controller itself, with two mappings; one for the HTML/JSP page that contains our application, and the other for the WebSocket traffic:
 
+```java
 @Controller
 @RequestMapping("/")
 public class ChatController {
@@ -285,6 +304,7 @@ public class ChatController {
     return new OutputMessage(message, new Date());
   }
 }
+```
 
 What happens here is quite easy, when we go to the context root, we will see that `viewApplication()` is mapped onto that, so that the index.jsp page is used as the view. The other method, `sendMessage()` allows us to broadcast a message to `/topic/message` when a message entes the messagebroker `/app/chat` (don't forget that we defined the prefix `/app` in `WebSocketConfig`).
 
@@ -292,6 +312,7 @@ What happens here is quite easy, when we go to the context root, we will see tha
 
 Now our entire Java code is already written, let's start by defining the JSP page. This page will contain two main components; the form to add a new message, and the message list itself.
 
+```html
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
@@ -323,6 +344,7 @@ Now our entire Java code is already written, let's start by defining the JSP pag
     <script src="app/services.js" type="text/javascript"></script>
   </body>
 </html>
+```
 
 First of all we're adding the Open Sans font and our own stylesheet (which we will define later in this tutorial). Then we start the body and bootstrap our AngularJS application which we will call `chatApp`. In this application we will have one AngularJS controller, the `ChatCtrl`. Don't confuse this one with our Spring controller!
 
@@ -338,20 +360,23 @@ At the end of our page we load all the libraries we need, and our application Ja
 
 Our first JavaScript file is **app.js**. This file will define all module packages, in this case:
 
-angular.module("chatApp", \[
+```javascript
+angular.module("chatApp", [
   "chatApp.controllers",
   "chatApp.services"
-\]);
+]);
 
-angular.module("chatApp.controllers", \[\]);
-angular.module("chatApp.services", \[\]);
+angular.module("chatApp.controllers", []);
+angular.module("chatApp.services", []);
+```
 
 ### AngularJS controller
 
 The AngularJS controller will be quite easy as well, as it will forward everything to a seperate service we will write later in this tutorial. The controller contains three model related fields, the `message` which will contain the currently typed message in the textbox, the `messages` array which contains all received messages and also `max` the maximum allowed characters in a message, used for the Twitter-look-a-like counter.
 
+```javascript
 angular.module("chatApp.controllers").controller("ChatCtrl", function($scope, ChatService) {
-  $scope.messages = \[\];
+  $scope.messages = [];
   $scope.message = "";
   $scope.max = 140;
 
@@ -364,6 +389,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function($scope, Ch
     $scope.messages.push(message);
   });
 });
+```
 
 We already explained that when the form is submit, the `addMessage` is called, which will forward the message to the service, and which will then empty the field by resetting the message model to an empty string. We also call the service for receiving messages. This part of the service will return a deferred, that each time a message is received, updates the progress part of the directive. The controller will react on that message by adding it to the `messages` array.
 
@@ -371,25 +397,26 @@ We already explained that when the form is submit, the `addMessage` is called, w
 
 The last part of our AngularJS based client application is the service. The service is a bit more complex, since it will contain all WebSocket traffic handling code. The code of this service is as follows:
 
+```javascript
 angular.module("chatApp.services").service("ChatService", function($q, $timeout) {
     
     var service = {}, listener = $q.defer(), socket = {
       client: null,
       stomp: null
-    }, messageIds = \[\];
+    }, messageIds = [];
     
-    service.RECONNECT\_TIMEOUT = 30000;
-    service.SOCKET\_URL = "/spring-ng-chat/chat";
-    service.CHAT\_TOPIC = "/topic/message";
-    service.CHAT\_BROKER = "/app/chat";
+    service.RECONNECT_TIMEOUT = 30000;
+    service.SOCKET_URL = "/spring-ng-chat/chat";
+    service.CHAT_TOPIC = "/topic/message";
+    service.CHAT_BROKER = "/app/chat";
     
     service.receive = function() {
       return listener.promise;
     };
     
     service.send = function(message) {
-      var id = Math.floor(Math.random() \* 1000000);
-      socket.stomp.send(service.CHAT\_BROKER, {
+      var id = Math.floor(Math.random() * 1000000);
+      socket.stomp.send(service.CHAT_BROKER, {
         priority: 9
       }, JSON.stringify({
         message: message,
@@ -401,28 +428,28 @@ angular.module("chatApp.services").service("ChatService", function($q, $timeout)
     var reconnect = function() {
       $timeout(function() {
         initialize();
-      }, this.RECONNECT\_TIMEOUT);
+      }, this.RECONNECT_TIMEOUT);
     };
     
     var getMessage = function(data) {
       var message = JSON.parse(data), out = {};
       out.message = message.message;
       out.time = new Date(message.time);
-      if (\_.contains(messageIds, message.id)) {
+      if (_.contains(messageIds, message.id)) {
         out.self = true;
-        messageIds = \_.remove(messageIds, message.id);
+        messageIds = _.remove(messageIds, message.id);
       }
       return out;
     };
     
     var startListener = function() {
-      socket.stomp.subscribe(service.CHAT\_TOPIC, function(data) {
+      socket.stomp.subscribe(service.CHAT_TOPIC, function(data) {
         listener.notify(getMessage(data.body));
       });
     };
     
     var initialize = function() {
-      socket.client = new SockJS(service.SOCKET\_URL);
+      socket.client = new SockJS(service.SOCKET_URL);
       socket.stomp = Stomp.over(socket.client);
       socket.stomp.connect({}, startListener);
       socket.stomp.onclose = reconnect;
@@ -430,7 +457,8 @@ angular.module("chatApp.services").service("ChatService", function($q, $timeout)
     
     initialize();
     return service;
-  });
+});
+```
 
 So, let's first start with the bottom. At the bottom of the code you can see that we execute the `initialize()` function for setting up the service. This will happen exactly once, since AngularJS services are singletons, meaning that each time the same instance is returned.
 
@@ -452,7 +480,8 @@ The `send()` function on the other hand sends the message as a JSON object (stri
 
 That was all Java and JavaScript code we need, so let's finish our application by giving it some cool styles. I'm using the following CSS code:
 
-body, \* {
+```css
+body, * {
   font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
 }
@@ -463,7 +492,7 @@ body, \* {
   width: 80%;
 }
 
-input\[type=text\] {
+input[type=text] {
   width: 100%;
   border: solid 1px #D4D4D1;
   transition: .7s;
@@ -472,7 +501,7 @@ input\[type=text\] {
   margin: 0.2em 0;
 }
 
-input\[type=text\]:focus {
+input[type=text]:focus {
   -webkit-box-shadow: 0 0 5px 0 rgba(69, 155, 231, .75);
   -moz-box-shadow: 0 0 5px 0 rgba(69, 155, 231, .75);
   box-shadow: 0 0 5px 0 rgba(69, 155, 231, .75);
@@ -560,6 +589,7 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
+```
 
 ### Demo
 
@@ -567,31 +597,31 @@ Before running our application on a webserver, check some things first. First of
 
 Second, if you're running this application from an embedded Tomcat in Eclipse, you may have to add your Maven dependencies to your deployment assembly. You can do this by going to your project properties, clicking on Deployment assembly and by adding the library.
 
-[![deployment-assembly](images/deployment-assembly-300x111.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/deployment-assembly.png)
+![deployment-assembly](images/deployment-assembly.png)
 
 Finally, make sure that the web container you're using, supports the WebSockets Java API. If this isn't the case, you will probably have to update your web container.
 
 If all of that is ready, then you can start running your application, which should look like this:
 
-[![initial-app](images/initial-app-300x57.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/initial-app.png)
+![initial-app](images/initial-app.png)
 
 If you start writing your message, you will see that the button is now enabled and that the counter is running:
 
-[![app-message](images/app-message-300x57.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/app-message.png)
+![app-message](images/app-message.png)
 
 If you go too far, you will see that the button is now disabled again, and the counter is now showing a negative value in a red color:
 
-[![message-limit](images/message-limit-300x53.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/message-limit.png)
+![message-limit](images/message-limit.png)
 
 Once you enter a message and send it, you will see that it appears in the message list as a bold message (because you sent it). You will also see that your current message is reset to an empty string in the text box:
 
-[![message-sent](images/message-sent-300x71.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/message-sent.png)
+![message-sent](images/message-sent.png)
 
 If you open the application in a new window, you should see that it is empty now. WebSockets are real time, so only messages that are received at a given time, will be listed, there is no history.
 
 If you send a message in the other window, you will see that the message appears in both screens. One will have it in bold, while the other one will see it as regular text.
 
-[![multiple-messages](images/multiple-messages-300x33.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/multiple-messages.png)
+![multiple-messages](images/multiple-messages.png)
 
 As you can see, the WebSockets are working properly and you will see the messages appear real time because the client sends the message to the server, which will in turn send the message to all clients.
 

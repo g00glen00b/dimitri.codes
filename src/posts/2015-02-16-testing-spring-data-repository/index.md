@@ -1,22 +1,28 @@
 ---
 title: "Testing your Spring Data JPA repository"
 date: "2015-02-16"
+categories: ["Java", "Tutorials"]
+tags: ["JPA", "Spring", "Testing"]
 ---
 
 With [Spring Data](http://projects.spring.io/spring-data/) JPA, persisting data is quite easy. You no longer need to write complex DAO's or repositories, no, all you need is an interface. If you look at my Spring Boot tutorial, you will see that by writing a few lines of code for creating our interface, we're able to read, update, delete and create new records in our database. This is quite interesting, but Spring Data also allows you to write custom queries, but the question is, how do you test these custom queries? You no logner have to write code, so there's no unit to test.
 
 ### Adding custom queries to your repository
 
-I'm going to start where I left of during the [previous tutorials](http://wordpress.g00glen00b.be/prototyping-spring-boot-angularjs/ "Rapid prototyping with Spring Boot and AngularJS"), namely with a [simple Spring Boot application](https://github.com/g00glen00b/ng-spring-boot/tree/feature-tests). If you take a look at the `ItemRepository` interface, you'll see it's quite empty:
+I'm going to start where I left of during the [previous tutorials](/prototyping-spring-boot-angularjs/ "Rapid prototyping with Spring Boot and AngularJS"), namely with a [simple Spring Boot application](https://github.com/g00glen00b/ng-spring-boot/tree/feature-tests). If you take a look at the `ItemRepository` interface, you'll see it's quite empty:
 
+```java
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 }
+```
 
 Let's change that by adding a method to retrieve all items that are checked. We can do that by writing a simple query using JPQL (JPA Query Language):
 
+```java
 @Query("SELECT i FROM Item i WHERE i.checked=true")
 List findChecked();
+```
 
 If you're not familiar with Spring Data JPA, then yes, this is all you need to write.
 
@@ -30,6 +36,7 @@ Anyways, you don't have to write an implementation, all of that is taken care of
 
 Before we start testing, we have to add a few dependencies. I'm going to use DBUnit for setting up a dataset before each test and a really interesting framework that integrates DBUnit with the Spring testing framework. You can check it out on [Github](http://springtestdbunit.github.io/spring-test-dbunit/).
 
+```xml
 <dependency>
   <groupId>com.github.springtestdbunit</groupId>
   <artifactId>spring-test-dbunit</artifactId>
@@ -41,26 +48,31 @@ Before we start testing, we have to add a few dependencies. I'm going to use DBU
   <artifactId>dbunit</artifactId>
   <version>${dbunit.version}</version>
 </dependency>
+```
 
 I always define my versions as properties (reusability):
 
+```xml
 <dbunit.version>2.5.0</dbunit.version>
 <spring-test-dbunit.version>1.2.1</spring-test-dbunit.version>
+```
 
 With our dependencies ready, it's time to write our test. Inside the **src/test/java** folder, create a package `be.g00glen00b.repository` and inside it, add a class/unit test called `ItemRepositoryIT`. Since there is no unit to test, we will have to test a few layers (Spring repository + database layer), so we're talking about writing integration tests now.
 
 On top of the test, we have to add quite some annotations, this is the final result:
 
+```java
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
   TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @DatabaseSetup(ItemRepositoryIT.DATASET)
-@DatabaseTearDown(type = DatabaseOperation.DELETE\_ALL, value = { ItemRepositoryIT.DATASET })
+@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = { ItemRepositoryIT.DATASET })
 @DirtiesContext
 public class ItemRepositoryIT {
 
 }
+```
 
 What this does is not that difficult. First of all we have to set up Spring test and make it set up all our Spring beans. We can do that by using the `@RunWith` and `@SpringApplicationConfiguration` annotations.
 
@@ -78,6 +90,7 @@ Remember to use at least the `protected` visibility modifier, because we're usin
 
 Now, to test our repository, I'm going to add a dataset containing some checked and unchecked items. I'm using [DBUnit](http://dbunit.sourceforge.net/) for this, so make sure to check their documentation if you run into any problems. Add a folder **datasets** inside **src/test/resources** and inside of this folder create a file called **it-items.xml**. This file will contain our dataset, which will look like:
 
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
   <ITEM id="1" checked="true" description="Item 1" />
@@ -85,6 +98,7 @@ Now, to test our repository, I'm going to add a dataset containing some checked 
   <ITEM id="3" checked="true" description="Item 3" />
   <ITEM id="4" checked="false" description="Item 4" />
 </dataset>
+```
 
 So, we will create 4 items here, two checked ones and two unchecked ones. This should give us enough data for running our tests.
 
@@ -92,23 +106,27 @@ So, we will create 4 items here, two checked ones and two unchecked ones. This s
 
 Let's get back to the `ItemRepositoryIT` class. I'm going to create some fields before starting with the tests. Because Item 1 and Item 3 in our dataset should be returned when calling the `findChecked()` method, I'm going to create some constants that contain the description. I'm also going to autowire the repository itself:
 
-private static final String FIRST\_ITEM = "Item 1";
-private static final String THIRD\_ITEM = "Item 3";
-private static final String DESCRIPTION\_FIELD = "description";
+```java
+private static final String FIRST_ITEM = "Item 1";
+private static final String THIRD_ITEM = "Item 3";
+private static final String DESCRIPTION_FIELD = "description";
 @Autowired
 private ItemRepository repository;
+```
 
 Now, writing a test case is quite simple if you use AssertJ. If you're interested in AssertJ, make sure to read my previous tutorial.
 
 This is my test case:
 
+```java
 @Test
 public void findCheckedShouldReturnTwoItems() {
   assertThat(repository.findChecked())
     .hasSize(2)
-    .extracting(DESCRIPTION\_FIELD)
-    .containsOnly(FIRST\_ITEM, THIRD\_ITEM);
+    .extracting(DESCRIPTION_FIELD)
+    .containsOnly(FIRST_ITEM, THIRD_ITEM);
 }
+```
 
 We assert that the repository should return two items and that the descriptions should only contain "Item 1" and "Item 3", which makes sens, because those are our two checked items.
 

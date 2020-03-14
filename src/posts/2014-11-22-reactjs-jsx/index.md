@@ -2,23 +2,29 @@
 title: "Writing apps with React.js: Writing components using JSX"
 date: "2014-11-22"
 coverImage: "react-logo.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gulp", "JavaScript", "React", "Web"]
 ---
 
-In my [previous tutorial](http://wordpress.g00glen00b.be/reactjs-gulp-browserify/ "Writing apps with React.js: Build using gulp.js and Browserify"), I've set up gulp.js to build my React.js application, now it's time to write that application. Like I said before, the app I'm going to build in this tutorial, is an application where you can add/remove songs and rate those. We have several components to implement, so let's start.
+In my [previous tutorial](/reactjs-gulp-browserify/ "Writing apps with React.js: Build using gulp.js and Browserify"), I've set up gulp.js to build my React.js application, now it's time to write that application. Like I said before, the app I'm going to build in this tutorial, is an application where you can add/remove songs and rate those. We have several components to implement, so let's start.
 
-[![application-result](images/application-result-300x145.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/application-result.png) 
+![application-result](images/application-result.png) 
 
 ### JSX
 
 First of all let's talk about JSX. React.js works with components, and these components contain both the representation (HTML) and the logic behind it. Obviously we have to set up certain objects to render our HTML, and React.js provides two ways to do that. First of all, you can construct objects using a simple JavaScript syntax:
 
+```javascript
 React.createElement('a', {
-  href: 'http://wordpress.g00glen00b.be'
+  href: 'https://dimitr.im'
 }, 'Hello world')
+```
 
 But you can also create objects using JSX, like this:
 
-<a href="http://wordpress.g00glen00b.be">Hello world</a>
+```html
+<a href="">Hello world</a>
+```
 
 Doesn't look so special, but you can mix this with JavaScript code and write components really easily and clean.
 
@@ -26,6 +32,7 @@ Doesn't look so special, but you can mix this with JavaScript code and write com
 
 Let's start with the most important component first, the song component (**Song.jsx**), which will look like this:
 
+```javascript
 (function(React, module, undefined) {
   var Rating = require("./Rating.jsx");
   module.exports = React.createClass({
@@ -52,6 +59,7 @@ Let's start with the most important component first, the song component (**Song.
     }
   });
 }(React, module));
+```
 
 What we do here isn't that difficult, we create a new class/component and fill in the HTML in the `render()` function using JSX. I'm using several placeholders here, like `{this.props.data.artist}`. This data will be provided by the upper components. In React.js there are two kinds of data, you have the state and the properties of a component. The properties of a component represent more static data, while the state will automatically cause the component to trigger the `render()`, so that it updates the user interface.
 
@@ -61,7 +69,9 @@ We have a delete button inside the JSX code. To make it do something, we use a p
 
 What you can also see is that I'm using browserify and `require()` to include the Rating.jsx component. as a variable called `Rating`. As soon as you have a component available in a variable, you can use it directly in your template, for example:
 
+```html
 <Rating data={this.props.data} />
+```
 
 What happens on that line is that we create an instance of the Rating.jsx component and pass it the current data.
 
@@ -69,12 +79,13 @@ What happens on that line is that we create an instance of the Rating.jsx compon
 
 If you understand what we just did, then the next component will be peanuts. This component actually has an entire array of songs inside `this.props.data` and uses the `map()` function to convert it to a list of Song components, like this:
 
+```javascript
 (function(React, module, undefined) {
   var Song = require('./Song.jsx');
   
   module.exports = React.createClass({
     render: function() {
-      var stars = \[\];
+      var stars = [];
       return (
         <table className="table table-striped table-condensed">
           <thead>
@@ -92,6 +103,7 @@ If you understand what we just did, then the next component will be peanuts. Thi
     }
   });
 }(React, module));
+```
 
 Quite simple, don't you think? All we do is create a Song component for each song and add some extra markup to it (table heading).
 
@@ -105,6 +117,7 @@ Like I said in the previous tutorial, we defined a root component called **App.j
 
 Well, displaying the Songs and SongForm component isn't that hard, the SongAlert component on the other hand has to be displayed conditionally, but with JSX it's quite easy as well, you just write a simple if-structure and that's it:
 
+```javascript
 (function(React, module, undefined) {
   var Songs = require('./Songs.jsx'),
       SongForm = require('./SongForm.jsx'),
@@ -130,6 +143,7 @@ Well, displaying the Songs and SongForm component isn't that hard, the SongAlert
     }
   });
 }(React, module));
+```
 
 So, as you can see, we're importing all the components we need into the variables `Songs`, `SongForm` and `SongAlert`. The alert only has to be showed in case if there are no songs, so all we have to do is write a simple if, using `!this.props.songs || this.props.songs.length === 0` as expression to validate if the songs array is empty or not. If it's empty, we fill up the variable called `alert`, which we later use in our template as `{alert}`.
 
@@ -137,6 +151,7 @@ So, as you can see, we're importing all the components we need into the variable
 
 I was first thinking if it was worth creating a component for it, but I decided to do it after all... because I like components! However, this one is simple enough to leave it like that without any other explanation:
 
+```javascript
 (function(React, module, undefined) {
   module.exports = React.createClass({
     render: function() {
@@ -148,6 +163,7 @@ I was first thinking if it was worth creating a component for it, but I decided 
     }
   });
 }(React, module));
+```
 
 ### Adding new songs with the SongForm
 
@@ -155,6 +171,7 @@ Before we start with the rating, we're going to make it possible to add new song
 
 Because this component is quite large, I'm going to split it in smaller chunks. Let's start with something that's familiar by now, the `render()` function:
 
+```javascript
 render: function() {
   var disabled = this.isDisabled();
   return (
@@ -177,6 +194,7 @@ render: function() {
     </form>
   );
 },
+```
 
 What we notice here is that we will add the new song the moment the form is submitted by using `onSubmit={this.addSong}`. This will call a function called `addSong` in our component which we will define later on.
 
@@ -186,36 +204,43 @@ Then finally we have the submit button itself, note that we're disabling the for
 
 The next function I'm going to talk about is the `getInitialState()` function. With this function we can set up our initial state, in this case it will be an object containing properties for both the artist and the title:
 
+```javascript
 getInitialState: function() {
   return {
     artist: "",
     title: ""
   };
 }
+```
 
 Now, when the artist or title field changes, we have to update the state, which we will do by using the functions `handleNewArtist()` and `handleNewTitle()`:
 
+```javascript
 handleNewArtist: function(event) {
-  this.setState(\_.extend(this.state, {
+  this.setState(_.extend(this.state, {
     artist: event.target.value
   }));
 },
 handleNewTitle: function(event) {
-  this.setState(\_.extend(this.state, {
+  this.setState(_.extend(this.state, {
     title: event.target.value
   }));
 },
+```
 
 We're using Lo-Dash here to extend the state (`this.state`) with either the new artist or title. Then we use `this.setState()` to update the state of the component, which will trigger the rendering of the component.
 
 The next function we need is the `isDisabled()` function to determine whether or not the artist/title field are blank. This is quite easy now that we know how to use the state of a component:
 
+```javascript
 isDisabled:  function() {
-  return \_.isBlank(this.state.artist) || \_.isBlank(this.state.title);
+  return _.isBlank(this.state.artist) || _.isBlank(this.state.title);
 },
+```
 
 Then the last function is the function to add new songs:
 
+```javascript
 addSong: function(event) {
   var song = new Song(this.state);
   song.save();
@@ -224,24 +249,26 @@ addSong: function(event) {
   event.preventDefault();
   event.stopPropagation();
 },
+```
 
 What happens here is that we create a new Song model (which I will explain later). After creating the new song, we can reset the form, which we do by resetting the state of the component back to its initial state. Don't forget to stop the event after adding a new song, or it might refresh the page.
 
 All together the SongForm component will look like this:
 
-(function(React, \_) {
+```javascript
+(function(React, _) {
   var Song = require('../models/SongModel.js');
   module.exports = React.createClass({
     isDisabled:  function() {
-      return \_.isBlank(this.state.artist) || \_.isBlank(this.state.title);
+      return _.isBlank(this.state.artist) || _.isBlank(this.state.title);
     },
     handleNewArtist: function() {
-      this.setState(\_.extend(this.state, {
+      this.setState(_.extend(this.state, {
         artist: event.target.value
       }));
     },
     handleNewTitle: function(event) {
-      this.setState(\_.extend(this.state, {
+      this.setState(_.extend(this.state, {
         title: event.target.value
       }));
     },
@@ -282,13 +309,14 @@ All together the SongForm component will look like this:
       };
     }
   });
-}(React, \_));
+}(React, _));
+```
 
 ### Let's rate the songs
 
 The rating component will contain two parts, the **Rating** component/container which will contain the stars and "manages" the score, and then we will have the **RatingStar** component which will simply show a star with the properties passed by the Rating component, and will propagate the hovering over a star. This propagation is necessary, so that if we hover over the third star, the first two get highlighted as well.
 
-[![rating-hover](images/rating-hover.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/rating-hover.png)
+![rating-hover](images/rating-hover.png)
 
 So, back to the Rating component. The Rating component is a bit complex as well, so let's split this one into chunks as well. However, in stead of starting with the `render()` function, let's talk about the `getInitialState()` function.
 
@@ -300,6 +328,7 @@ When we think about the rating component, we will notice that we need three thin
 
 So, our state will represent an object with properties for these three things:
 
+```javascript
 getInitialState: function() {
   return {
     song: this.props.data,
@@ -307,28 +336,32 @@ getInitialState: function() {
     hoverIndex: -1
   };
 },
+```
 
 The song is simple, it's being propagated from the Song component to the rating. If you want to know why we initialize the `hoverIndex` on -1, well, that's because there will be no star with an index that is equal or lower to -1, because we start with 0.
 
 The next functions we're going to define are the `hoverStar()` and `leaveStar()` functions. When a star is hovered, we want to update the `hoverIndex` property of our state, so we're going to make our RatingStar component propagate this information back to the Rating component in this two functions:
 
+```javascript
 hoverStar: function(index) {
-  this.setState(\_.extend(this.state, {
+  this.setState(_.extend(this.state, {
     hoverIndex: index
   }));
 },
 leaveStar: function() {
-  this.setState(\_.extend(this.state, {
+  this.setState(_.extend(this.state, {
     hoverIndex: -1
   }));
 },
+```
 
 Similar to how we updated the state of the SongForm component, we're using this as well.
 
 Then finally, we have the `render()` function:
 
+```javascript
 render: function() {
-  var stars = \[\];
+  var stars = [];
   for (var idx = 1; idx <= this.state.max; idx++) {
     var fill = idx <= this.props.data.score;
     var hover = idx <= this.state.hoverIndex;
@@ -340,6 +373,7 @@ render: function() {
     </div>
   );
 }
+```
 
 First we will fill an array of RatingStar comonents into `stars`. To do so, we will have to loop from 1 to the maximum score defined in our state. Then for each star we will define if it's filled (check if the score of the song is higher than the current index or if the star is highlighted, by checking if the `hoverIndex` is higher than the current index.
 
@@ -349,6 +383,7 @@ After filling the `stars` array we can simply use `{stars}` to display the entir
 
 Everything together we get:
 
+```javascript
 (function(React) {
   var RatingStar = require('./RatingStar.jsx');
   module.exports = React.createClass({
@@ -360,17 +395,17 @@ Everything together we get:
       };
     },
     hoverStar: function(index) {
-      this.setState(\_.extend(this.state, {
+      this.setState(_.extend(this.state, {
         hoverIndex: index
       }));
     },
     leaveStar: function() {
-      this.setState(\_.extend(this.state, {
+      this.setState(_.extend(this.state, {
         hoverIndex: -1
       }));
     },
     render: function() {
-      var stars = \[\];
+      var stars = [];
       for (var idx = 1; idx <= this.state.max; idx++) {
         var fill = idx <= this.props.data.score;
         var hover = idx <= this.state.hoverIndex;
@@ -384,6 +419,7 @@ Everything together we get:
     }
   })
 }(React));
+```
 
 ### I'm a star
 
@@ -391,6 +427,7 @@ The last component we have to define is the RatingStar component. Like I said be
 
 So, let's start by showing how the `render()` function looks like:
 
+```javascript
 render: function() {
   var starClasses = this.getClasses().join(' ');
   return (
@@ -399,6 +436,7 @@ render: function() {
     </a>
   );
 }
+```
 
 We have a simple link with in it an icon. For the icon itself I will use the Font Awesome iconset, which makes it possible to show a font-based icon just by providing some classes. The classes are determined within the `this.getClasses()` function which I will show next.
 
@@ -406,8 +444,9 @@ For handling the hover/leave actions on the star I have to use the `onMouseOver`
 
 There are several classes we need. First of all we have to show a star-shaped icon, which can be either empty or filled depending on the `this.props.fill` property. Then we also need to change the color depending on if the icon is hovered or not. The complete function looks like this:
 
+```javascript
 getClasses: function() {
-  var classes = \['fa'\];
+  var classes = ['fa'];
   if (this.props.fill || this.props.hoverFill) {
     classes.push('fa-star');
   } else {
@@ -420,27 +459,33 @@ getClasses: function() {
   }
   return classes;
 },
+```
 
 For the mouse over and mouse leave events we simply need to forward the events to the Rating component, so these functions are quite easy:
 
+```javascript
 hoverStar: function() {
   this.props.hover(this.props.index);
 },
 leaveStar: function() {
   this.props.leave(this.props.index);
 },
+```
 
 Then finally we have the `setStar()` function which will update the model:
 
+```javascript
 setScore: function(event) {
   this.props.data.score = this.props.index;
   this.props.data.save();
      
   event.preventDefault();
 },
+```
 
 Everything together we get:
 
+```javascript
 (function(React) {
   module.exports = React.createClass({
     setScore: function(event) {
@@ -450,7 +495,7 @@ Everything together we get:
       event.preventDefault();
     },
     getClasses: function() {
-      var classes = \['fa'\];
+      var classes = ['fa'];
       if (this.props.fill || this.props.hoverFill) {
         classes.push('fa-star');
       } else {
@@ -479,6 +524,7 @@ Everything together we get:
     }
   });
 }(React));
+```
 
 ### Storing and retrieving the songs, using the HTML5 localStorage API
 
@@ -486,19 +532,21 @@ We now have made all of the components we need, but the application isn't finish
 
 To do so I created a separate service which you can find in **services/LSService.js**. This service is quite simple and it can do only two things... storing and reading:
 
+```javascript
 (function(JSON) {
-  var STORAGE\_ID = "myApp.songs";
+  var STORAGE_ID = "myApp.songs";
   var LSService = function() {
     this.store = function(data) {
-      localStorage.setItem(STORAGE\_ID, JSON.stringify(data));
+      localStorage.setItem(STORAGE_ID, JSON.stringify(data));
     };
     
     this.read = function() {
-      return JSON.parse(localStorage.getItem(STORAGE\_ID) || '\[\]');
+      return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
     };
   };
   module.exports = new LSService();
 }(JSON));
+```
 
 ### The center-part of our application, the model
 
@@ -508,13 +556,16 @@ Like I said in my first tutorial, React.js is a view-oriented language, so model
 
 To start, let's open **models/SongModel.js**. The model will have two parts, first of all it will define a prototype that all our songs have to use. Like we saw in the SongForm component we could use:
 
+```javascript
 var song = new Song(this.state);
 song.save();
+```
 
 Then we will also have some static methods, which we will use for retrieving all the songs (for example with `SongModel.query()`) and we will also implement a basic publish/subscriber pattern so that with each change of the model we could re-render certain parts of the view.
 
 First of all, the easiest part, the prototype:
 
+```javascript
 var SongModel = function(song) {
   this.id = song.id || statics.counter++;
   this.title = song.title || "";
@@ -529,6 +580,7 @@ var SongModel = function(song) {
     statics.save(this);
   };
 };
+```
 
 While constructing a `SongModel` object, you can simply pass an object that has a title, artist, score and id property. If it doesn't have one of these properties, it will set a default parameter which could be an empty string or zero. For the id we will use a special counter that increments with one each time a song is created. The Song model will have two functions, a `delete()` and `save()` function. The implementation itself however is defined within the static part of the model.
 
@@ -536,16 +588,17 @@ While constructing a `SongModel` object, you can simply pass an object that has 
 
 The static part of the model is a bit more complex, but looks like this:
 
+```javascript
 var statics = {
-  subscribers: \[\],
+  subscribers: [],
   counter: data && data.length > 0 ? data.slice(-1).pop().id + 1 : 1,
   query: function() {
-    return \_.map(data, function(song) {
+    return _.map(data, function(song) {
       return new SongModel(song);
     });
   },
   publish: function(data) {
-    \_.each(this.subscribers, function(callback) {
+    _.each(this.subscribers, function(callback) {
       callback(data);
     });
     LSService.store(data);
@@ -554,23 +607,24 @@ var statics = {
     this.subscribers.push(callback);
   },
   delete: function(mySong) {
-    data = \_.filter(data, function(song) {
+    data = _.filter(data, function(song) {
       return song.id !== mySong.id;
     });
     this.publish(data);
   },
   save: function(mySong) {
-    var song = \_.find(data, function(song) {
+    var song = _.find(data, function(song) {
       return song.id === mySong.id;
     });
     if (song !== undefined) {
-      \_.extend(song, mySong);
+      _.extend(song, mySong);
     } else {
       data.push(mySong);
     }
     this.publish(data);
   }
 };
+```
 
 First of all let's talk about the `delete()` function, since it's probably the easiest of all. When deleting a song model, we've seen that it calls the static `delete()` method. This function will in turn filter the current list of songs so only the songs remain that don't have the same ID as the current song. The result is that the current song is being removed from that list.
 
@@ -590,14 +644,18 @@ React.js does not automatically update its rendering when the data changes (unle
 
 On the other hand, we have to publish the data once it changes. We've already made it possible that each time a song gets updated/deleted, it calls the `publish()` function. So all we have to do now, is to loop through the list of subscribers and execute them:
 
-\_.each(this.subscribers, function(callback) {
+```javascript
+_.each(this.subscribers, function(callback) {
   callback(data);
 });
+```
 
 So now we made both the static and the prototype part of the model, how do we combine these? Quite simple, we use Lo-Dash for it to extend the prototype with our static methods:
 
-\_.extend(SongModel, statics);
+```javascript
+_.extend(SongModel, statics);
 module.exports = SongModel;
+```
 
 ### Storing and reading the data
 
@@ -605,25 +663,28 @@ Our model is almost finished now, except the part that it doesn't use the LSServ
 
 If you look at the rest of the code inside the model, you will see that we use the array `data` to add the songs to and stuff. But how do we initialize this array? Quite simple, we use the LSService here as well:
 
+```javascript
 var LSService = require('../services/LSService.js'),
 data = LSService.read();
+```
 
 The entire SongModel will eventually look like this:
 
-(function(\_) {
+```javascript
+(function(_) {
   var LSService = require('../services/LSService.js'),
       data = LSService.read();
   
   var statics = {
-    subscribers: \[\],
+    subscribers: [],
     counter: data && data.length > 0 ? data.slice(-1).pop().id + 1 : 1,
     query: function() {
-      return \_.map(data, function(song) {
+      return _.map(data, function(song) {
         return new SongModel(song);
       });
     },
     publish: function(data) {
-      \_.each(this.subscribers, function(callback) {
+      _.each(this.subscribers, function(callback) {
         callback(data);
       });
       LSService.store(data);
@@ -632,17 +693,17 @@ The entire SongModel will eventually look like this:
       this.subscribers.push(callback);
     },
     delete: function(mySong) {
-      data = \_.filter(data, function(song) {
+      data = _.filter(data, function(song) {
         return song.id !== mySong.id;
       });
       this.publish(data);
     },
     save: function(mySong) {
-      var song = \_.find(data, function(song) {
+      var song = _.find(data, function(song) {
         return song.id === mySong.id;
       });
       if (song !== undefined) {
-        \_.extend(song, mySong);
+        _.extend(song, mySong);
       } else {
         data.push(mySong);
       }
@@ -665,9 +726,10 @@ The entire SongModel will eventually look like this:
     };
   };
   
-  \_.extend(SongModel, statics);
+  _.extend(SongModel, statics);
   module.exports = SongModel;
-}(\_));
+}(_));
+```
 
 ### Starting up the application
 
@@ -675,18 +737,20 @@ Almost there! We defined all components and made it possible to work with our so
 
 Implementation of this JavaScript file is quite easy though, since we already did all of the hard work:
 
-(function(React, \_) {
+```javascript
+(function(React, _) {
   var App = require('./components/App.jsx'),
       Song = require('./models/SongModel.js');
   
-  \_.mixin(\_.string.exports());
+  _.mixin(_.string.exports());
   
   var render = function() {
     React.render(React.createElement(App, { songs: Song.query() }), document.body);
   };
   render();
   Song.subscribe(render);
-}(React, \_));
+}(React, _));
+```
 
 What happens here is that we first add the Underscore.string capabilities to Lo-Dash by using `_.mixin()`. Then we use define a `render()` function which will render the App component with the songs from the SongModel (`Song.query()`). As you can see we're not using JSX here. We're using `React.createElement()` with just a reference to the component.
 
@@ -696,29 +760,32 @@ As the second parameter we provide the properties and in the third parameter we 
 
 Our application behavior is ready, we only have to foresee the **index.html** markup:
 
+```html
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
     <title>Rate the song</title>
-    <link rel="stylesheet" href="bower\_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bower\_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="dist/style.css" />
   </head>
 
   <body>
 
-    <script type="text/javascript" src="bower\_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bower\_components/lodash/dist/lodash.min.js"></script>
-    <script type="text/javascript" src="bower\_components/underscore.string/dist/underscore.string.min.js"></script>
-    <script type="text/javascript" src="bower\_components/react/react.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="bower_components/underscore.string/dist/underscore.string.min.js"></script>
+    <script type="text/javascript" src="bower_components/react/react.js"></script>
     <script type="text/javascript" src="dist/app.js"></script>
   </body>
 </html>
+```
 
 As you can see this is quite simple, because most of the application resides in our components. The CSS code is also quite simple, we used Less in this case and split it up into two files. In **general.less** we will add a simple mixin:
 
+```less
 @orange: #F4914E;
 @dark-grey: #3C3C3C;
 
@@ -727,9 +794,11 @@ As you can see this is quite simple, because most of the application resides in 
     color: @color; 
   }
 }
+```
 
 Then in **style.less** you will find our actual stylesheet:
 
+```less
 @import 'general.less';
 
 .rating {
@@ -744,8 +813,9 @@ Then in **style.less** you will find our actual stylesheet:
     text-decoration: none;
   }
 }
+```
 
-I'm not going into detail in the Less code here. However, I made [an entire tutorial about defining this Less stylesheet](http://wordpress.g00glen00b.be/less-grunt/) (I used Grunt there, but that doesn't really matter). Make sure to check it out if you're interested in this kind of stuff.
+I'm not going into detail in the Less code here. However, I made [an entire tutorial about defining this Less stylesheet](/less-grunt/) (I used Grunt there, but that doesn't really matter). Make sure to check it out if you're interested in this kind of stuff.
 
 ### Demo
 
@@ -755,27 +825,27 @@ gulp serve
 
 It should open a new tab in your favourite browser with the application.
 
-[![song-alert](images/song-alert-300x130.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/song-alert.png)
+![song-alert](images/song-alert.png)
 
 As you can see, it shows the **SongAlert **component because the list of songs is empty. Also, the "Add" button is disabled since there is no artist or title yet. However, if we start entering an artist and a title, you will see that the Add button becomes enabled.
 
-[![songform-enabled](images/songform-enabled-300x115.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/songform-enabled.png)
+![songform-enabled](images/songform-enabled.png)
 
 As soon as we press the **Add** button, the form is cleared again (because we restored the initial state) and the song is added to our list. You will also see that the SongAlert component is no longer visible.
 
-[![song-added](images/song-added-300x113.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/song-added.png)
+![song-added](images/song-added.png)
 
 Also, try reloading the browser window, the songs are still displayed, because they were stored in the HTML5 localStorage. With Google Chrome you can see this in the **DevTools** (press F12). In here you can see a JSON serialized version of your songs.
 
-[![chrome-devtools](images/chrome-devtools-300x101.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/chrome-devtools.png)
+![chrome-devtools](images/chrome-devtools.png)
 
 So, let's rate a song! As soon as we hover over it, you will see that the stars turn orange (thanks to our custom Less stylesheet):
 
-[![star-hover](images/star-hover-300x108.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/star-hover.png)
+![star-hover](images/star-hover.png)
 
 After clicking it and leaving the stars, you will see that there are certain stars filled now:
 
-[![score-updated](images/score-updated-300x116.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/11/score-updated.png)
+![score-updated](images/score-updated.png)
 
 We can also delete the song by pressing the delete/trashcan button. You will see that the application is back in its original state and the SongAlert is visible again.
 

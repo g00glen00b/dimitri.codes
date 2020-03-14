@@ -2,9 +2,11 @@
 title: "How to drink gulp.js"
 date: "2014-10-25"
 coverImage: "gulp-logo.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "Gulp", "JavaScript", "Web"]
 ---
 
-A while back I wrote an article about how to use [Grunt to build your application](http://wordpress.g00glen00b.be/angular-grunt/ "Making your AngularJS application grunt"). However, recently there's a new player on the market called [Gulp](http://gulpjs.com). I'm not going to compare the two and tell you which one is better, but I'm going to use the same application and try to achieve the same thing using Gulp. Before we start with that, let me explain what Grunt and Gulp can do. Both these tools allow you through configuration/APIs to execute certain steps to convert your source code into code that can be deployed. Some common use cases are:
+A while back I wrote an article about how to use [Grunt to build your application](/angular-grunt/ "Making your AngularJS application grunt"). However, recently there's a new player on the market called [Gulp](http://gulpjs.com). I'm not going to compare the two and tell you which one is better, but I'm going to use the same application and try to achieve the same thing using Gulp. Before we start with that, let me explain what Grunt and Gulp can do. Both these tools allow you through configuration/APIs to execute certain steps to convert your source code into code that can be deployed. Some common use cases are:
 
 - Less/Sass compiling
 - Coffeescript/Typescript compiling
@@ -24,7 +26,7 @@ In this article I will be using the code from my previous AngularJS application,
 
 You don't need this project if you don't like it. You can use any project you like with a similar scructure:
 
-[![project-structure](images/project-structure-78x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/project-structure.png)
+![project-structure](images/project-structure.png)
 
 ### Loading some modules
 
@@ -51,6 +53,7 @@ So, there are several modules I'm going to use in my Gulp configuration, but are
 
 In the end, my package.json looked like this:
 
+```json
 {
   "name": "angular-song-rate-gulp",
   "version": "0.0.1",
@@ -74,6 +77,7 @@ In the end, my package.json looked like this:
     "karma-ng-html2js-preprocessor": "~0.1.0"
   }
 }
+```
 
 ### Preparing your Gulp configuration file
 
@@ -81,6 +85,7 @@ When you installed all Node.js modules, you can start configuring your project w
 
 First of all, we're going to include all the Node.js packages we need, by writing:
 
+```javascript
 var gulp = require('gulp'),
     del = require('del'),
     run = require('gulp-run'),
@@ -98,21 +103,26 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     pkg = require('./package.json'),
     reload = browserSync.reload;
+```
 
 Then we can start writing our tasks down, for example:
 
+```javascript
 gulp.task('serve', function() {
  // Task contents
 });
+```
 
 If you need to write multiple tasks, you can chain them like this:
 
+```javascript
 gulp.task('serve', function() {
 
 })
 .task('serve:minified', function() {
 
 });
+```
 
 So let's create some tasks!
 
@@ -120,22 +130,27 @@ So let's create some tasks!
 
 To reload the Bower managed dependencies, you usually enter the `bower install` command. To automate this we can be using the gulp-run plugin:
 
+```javascript
 gulp.task('bower', function() {
   run('bower install').exec();
 })
+```
 
 ### Cleaning the dist/ folder
 
 We have some other small tasks as well, for example clearing the dist folder:
 
+```javascript
 .task('clean', function(cb) {
-  del(\['dist/\*\*'\], cb);
+  del(['dist/**'], cb);
 })
+```
 
 ### Running a webserver
 
 Running a webserver to view our application can be done using the browser-sync module:
 
+```javascript
 .task('server', function() {
   browserSync({
     server: {
@@ -143,6 +158,7 @@ Running a webserver to view our application can be done using the browser-sync m
     }
   });
 })
+```
 
 ### Let's start piping by compiling our Less resources
 
@@ -158,19 +174,21 @@ With Gulp on the other hand, you will be using streams, so you can in fact run s
 
 For compiling our Less resources we will have two tasks, one that minifies and one that doesn't (for development):
 
+```javascript
 .task('less', function() {
-  return gulp.src('assets/less/\*.less')
+  return gulp.src('assets/less/*.less')
   .pipe(less())
   .pipe(concat('style.css'))
   .pipe(gulp.dest('dist'));
 })
 .task('less:min', function() {
-  return gulp.src('assets/less/\*.less')
+  return gulp.src('assets/less/*.less')
   .pipe(less())
   .pipe(concat('style.css'))
   .pipe(cssmin())
   .pipe(gulp.dest('dist'));
 })
+```
 
 As you can see here, we run the `less()`, the `concat()` and the `cssmin()` tasks before we actually say that it should be written into the dist folder.
 
@@ -180,11 +198,13 @@ To do this, we pipe the sources into these several tasks and at the end we use `
 
 The pipes return in almost all tasks. For JSHint validation we will be using:
 
+```javascript
 .task('lint', function() {
-  return gulp.src('./app/\*.js')
+  return gulp.src('./app/*.js')
   .pipe(jshint())
   .pipe(jshint.reporter('default'));
 })
+```
 
 ### Running our unit tests with Karma
 
@@ -192,17 +212,19 @@ The Karma module already allows us to run the Karma runner without having to ins
 
 You can simply run the following tasks to start the Karma runner:
 
+```javascript
 .task('karma', function(done) {
   karma.start({
-    configFile: \_\_dirname + '/config/karma.conf.js',
+    configFile: __dirname + '/config/karma.conf.js',
     singleRun: true
   }, done);
 })
 .task('karma:watch', function(done) {
   karma.start({
-    configFile: \_\_dirname + '/config/karma.conf.js'
+    configFile: __dirname + '/config/karma.conf.js'
   }, done);
 })
+```
 
 We have two seperate tasks again here as well. The Karma runner allows us to continuously test our code for test driven development by watching several files. However, for running our code we only need to run our tests once, so we have two tasks.
 
@@ -210,21 +232,23 @@ We have two seperate tasks again here as well. The Karma runner allows us to con
 
 The most complex task will be the JavaScript compilation task. Similar to the Less compilation tasks, we will have two tasks here as well:
 
+```javascript
 .task('js', function() {
-  return gulp.src(\['app/\*.js', 'app/templates/\*.html'\])
-  .pipe(gulpif(/\\.html$/, htmlmin({ collapseWhitespace: true })))
-  .pipe(gulpif(/\\.html$/, ngTemplates()))
+  return gulp.src(['app/*.js', 'app/templates/*.html'])
+  .pipe(gulpif(/\.html$/, htmlmin({ collapseWhitespace: true })))
+  .pipe(gulpif(/\.html$/, ngTemplates()))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('dist'));
 })
 .task('js:min', function() {
-  return gulp.src(\['app/\*.js', 'app/templates/\*.html'\])
-  .pipe(gulpif(/\\.html$/, htmlmin({ collapseWhitespace: true })))
-  .pipe(gulpif(/\\.html$/, ngTemplates()))
+  return gulp.src(['app/*.js', 'app/templates/*.html'])
+  .pipe(gulpif(/\.html$/, htmlmin({ collapseWhitespace: true })))
+  .pipe(gulpif(/\.html$/, ngTemplates()))
   .pipe(uglify({ mangle: false }))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('dist'));
 })
+```
 
 What happens here is not that hard to understand though. First of all we will load both the JavaScript source code as the AngularJS HTML templates as our sources (`gulp.src`).
 
@@ -234,9 +258,11 @@ To execute certain tasks only in several cases, we can use the `gulpif()` plugin
 
 After everything is compiled into JavaScript files, we can use the `uglify()` task to minify our JavaScript code. Be aware that if you use the Angular depdendency injection without strings, for example:
 
+```javascript
 angular.module("myApp.controllers").controller("MyCtrl", function($scope, MyService) {
   // Your code ...
 });
+```
 
 You will have to disable the `mangle` option. This option will rename all variables to one letter variables, which will confuse the AngularJS dependency injection.
 
@@ -246,13 +272,15 @@ After minifying we can concatenate all files using `concat()` and then we can wr
 
 We now made all kind of useful tasks, but you don't want to run these all manually (it's possible though). You can define tasks that depend on other tasks. To do that, we provide a special second parameter with an array of the tasks we would like to run, for example:
 
-.task('serve', \['bower', 'clean', 'lint', 'karma', 'less', 'js', 'server'\], function() {
-  return gulp.watch(\[
-    '\*.js', 'app/\*.js', '\*.html', 'assets/\*\*/\*.less'
-  \], \[
+```javascript
+.task('serve', ['bower', 'clean', 'lint', 'karma', 'less', 'js', 'server'], function() {
+  return gulp.watch([
+    '*.js', 'app/*.js', '*.html', 'assets/**/*.less'
+  ], [
    'lint', 'karma', 'less', 'js', browserSync.reload
-  \]);
+  ]);
 })
+```
 
 So, the serve task will run the bower, clean, lint, karma, less, js and server tasks first.
 
@@ -264,25 +292,29 @@ It will also have to reload the browser, to do that we can use the `browserSync.
 
 Another task we will define is the serve:minified tasks which will do exactly the same as our previous task, but it will serve minified versions of our source code:
 
-.task('serve:minified', \['bower', 'clean', 'lint', 'karma', 'less:min', 'js:min', 'server'\], function() {
-  return gulp.watch(\[
-    '\*.js', 'app/\*.js', '\*.html', 'assets/\*\*/\*.less'
-  \], \[
+```javascript
+.task('serve:minified', ['bower', 'clean', 'lint', 'karma', 'less:min', 'js:min', 'server'], function() {
+  return gulp.watch([
+    '*.js', 'app/*.js', '*.html', 'assets/**/*.less'
+  ], [
    'lint', 'karma', 'less:min', 'js:min', browserSync.reload
-  \]);
+  ]);
 })
+```
 
 ### What about test driven development (TDD)?
 
 When you're using test driven development, it's more important to see if the tests run, than looking at the application each time you change your code. In this case we will have to validate our code again and run the Karma unit tests:
 
-.task('tdd', \['bower', 'lint'\], function() {
-  return gulp.watch(\[
-    '\*.js', 'app/\*.js', '\*.html', 'assets/\*\*/\*.less'
-  \], \[
+```javascript
+.task('tdd', ['bower', 'lint'], function() {
+  return gulp.watch([
+    '*.js', 'app/*.js', '*.html', 'assets/**/*.less'
+  ], [
     'lint', 'karma'
-  \]);
+  ]);
 })
+```
 
 ### Creating an archive
 
@@ -290,11 +322,13 @@ Almost there, the last task I would like to add is a task that creates a ZIP arc
 
 After loading all these tasks, we have to use the `zip()` task:
 
-.task('package', \['bower', 'clean', 'lint', 'karma', 'less:min', 'js:min'\], function() {
-  return gulp.src(\['index.html', 'dist/\*\*', 'libs/\*\*'\], { base: './' })
+```javascript
+.task('package', ['bower', 'clean', 'lint', 'karma', 'less:min', 'js:min'], function() {
+  return gulp.src(['index.html', 'dist/**', 'libs/**'], { base: './' })
   .pipe(zip(pkg.name + '-' + pkg.version + '.zip'))
   .pipe(gulp.dest('dist'));
 })
+```
 
 First of all we load our sources. Important to see here is the second argument, in which we pass `{ base: './' }`. If we leave this away, all sources are passed without referencing the folder they're in.
 
@@ -310,23 +344,23 @@ gulp serve
 
 This will compile all our resources and should pop up a browser window afterwards. If you change something in your code, the browser window should automatically refresh.
 
-[![gulp-serve](images/gulp-serve-300x215.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/gulp-serve.png)
+![gulp-serve](images/gulp-serve.png)
 
 The `gulp serve:minified` should do something quite similar, except that it will run the less:min and js:min tasks.
 
-[![gulp-serve-min](images/gulp-serve-min-300x215.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/gulp-serve-min.png)
+![gulp-serve-min](images/gulp-serve-min.png)
 
 Then we have the `gulp tdd` task, that will run each unit test again as soon as the code changes. For example, when we changed something so that the code would fail, we could see the errors. When we fixed the code again, all tests ran successfully again.
 
-[![gulp-tdd](images/gulp-tdd-198x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/gulp-tdd.png)
+![gulp-tdd](images/gulp-tdd.png)
 
 Then finally we have the `gulp package` task, which can be used to create a ZIP archive.
 
-[![gulp-package](images/gulp-package-300x215.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/gulp-package.png)
+![gulp-package](images/gulp-package.png)
 
 When the task is completed, you will be able to find a .ZIP file inside the dist/ folder containing your application sources.
 
-[![package](images/package-283x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/10/package.png)
+![package](images/package.png)
 
 #### Achievement: Made your AngularJS application run even smoother with Gulp
 

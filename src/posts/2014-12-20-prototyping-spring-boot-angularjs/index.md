@@ -1,9 +1,11 @@
 ---
 title: "Rapid prototyping with Spring Boot and AngularJS"
 date: "2014-12-20"
+categories: ["Java", "Tutorials"]
+tags: ["AngularJS", "Spring", "Spring boot", "Web"]
 ---
 
-Recently I wrote an article about writing modern webapps with [Spring Data REST and AngularJS](http://wordpress.g00glen00b.be/spring-data-angular/ "Building modern webapps using Spring Data REST and AngularJS"). It's not that hard to write, but it can be done even easier with Spring Boot as pointed out in the comments by [Greg Turnquist](http://wordpress.g00glen00b.be/spring-data-angular/#comment-1727795242). I already planned on trying out Spring Boot after some [amazing articles](http://www.drissamri.be/blog/rest/building-your-own-linkshortener-api/) about Spring Boot by my colleague, [Driss](https://twitter.com/drams88). So now it's time to write an article about using Spring Boot myself.
+Recently I wrote an article about writing modern webapps with [Spring Data REST and AngularJS](/spring-data-angular/ "Building modern webapps using Spring Data REST and AngularJS"). It's not that hard to write, but it can be done even easier with Spring Boot. I already planned on trying out Spring Boot after some [amazing articles](http://www.drissamri.be/blog/rest/building-your-own-linkshortener-api/) about Spring Boot by my colleague, [Driss](https://twitter.com/drams88). So now it's time to write an article about using Spring Boot myself.
 
 In this tutorial I'm going to show you how you can write a good looking, responsive full CRUD application in less than 150 lines of code (100 lines of Java code and 50 lines of JavaScript), all thanks to a great Java framework ([Spring](http://spring.io/)) and a great JavaScript framework ([AngularJS](https://angularjs.org/)).
 
@@ -15,6 +17,7 @@ For example, if you add HSQLDB to your classpath and add a single property, it w
 
 So, all we need to do is to declare some dependencies. In this case I want to create a web application using [Spring Data](http://projects.spring.io/spring-data/) JPA and an in memory HSQLDB, so I have to add the following dependencies:
 
+```xml
 <dependency>
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-web</artifactId>
@@ -28,26 +31,31 @@ So, all we need to do is to declare some dependencies. In this case I want to cr
   <artifactId>hsqldb</artifactId>
   <scope>runtime</scope>
 </dependency>
+```
 
 And now we only have to tell Maven that this application should be using Spring Boot, and to do that we define spring boot as the parent POM, by writing:
 
+```xml
 <parent>
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-parent</artifactId>
   <version>1.2.0.RELEASE</version>
 </parent>
+```
 
 Now we have to write a single class to bootstrap our Spring boot application, the main class. Spring Boot allows you to run your application using an embedded webcontainer like Tomcat, so that makes it even easier for running the application itself.
 
 The main class should look like this:
 
+```java
 @SpringBootApplication
 public class Application {
 
-  public static void main(String\[\] args) {
+  public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
 }
+```
 
 And yes, that should do the trick. You now have a completely configured web application with Spring data JPA, Web MVC and an in memory HSQLDB. No more hassle with defining `AppConfig`, `WebAppIntializer`, defining entity managers, ... .
 
@@ -61,13 +69,16 @@ To configure Bower, you simply have to add two files in the root folder of your 
 
 The contents of the .bowerrc file are the following:
 
+```json
 {
-  "directory": "src/main/resources/static/bower\_components",
+  "directory": "src/main/resources/static/bower_components",
   "json": "bower.json"
 }
+```
 
 Then finally we have to add the **bower.json** configuration:
 
+```json
 {
   "name": "ng-spring-boot",
   "dependencies": {
@@ -76,25 +87,31 @@ Then finally we have to add the **bower.json** configuration:
     "bootstrap-css-only": "~3.2.0"
   }
 }
+```
 
 I will only need three frameworks. AngularJS for creating the application itself, Angular resource for handling my REST resource and finally I will be using [Twitter Bootstrap](http://getbootstrap.com/) for easily writing the user interface without having to spend a lot of time writing CSS, which is ideal for setting up prototypes or proof of concepts.
 
 Running Bower requires you to install it though the Node.js package manager:
 
+```
 npm install -g bower
+```
 
 And then you will be able to install your dependencies by entering the following command:
 
+```
 bower install
+```
 
 When it's finished loading, you should see a new folder called bower\_components in your resources, containing the libraries we need.
 
-[![project-structure](images/project-structure-243x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/project-structure.png)
+![project-structure](images/project-structure.png)
 
 ### Working with Spring Data JPA
 
 In my previous tutorial I used Spring Data REST. While Spring Data REST allows you to create RESTful webservices quite easily, it makes it a bit harder to retrieve the contents using AngularJS because it uses HATEOAS. In this example I will be using Spring Data JPA together with a REST controller. But before we start writing repositories or controllers, we have to create our entity:
 
+```java
 @Entity
 public class Item {
   @Id
@@ -129,25 +146,31 @@ public class Item {
     this.description = description;
   }
 }
+```
 
 Quite a simple class, and the funniest thing is that we now already wrote 50% of the Java code you will be writing this tutorial. Even better, the `Item` class is probably the largest class we will be using.
 
 Creating the JPA repository is quite easy with Spring Data. You write an empty interface that extends from `JpaRepository` and you're done:
 
+```java
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 }
+```
 
 You can create extra methods, but the `JpaRepository` already allows you to do most basic operations like creating, updating, deleting and retrieving items.
 
 Now, to finish the data-part of our application we have to add a file called **application.properties** inside the **src/main/resources** folder and we have to add a single property to tell Spring to create a scheme on starting the application:
 
+```
 spring.jpa.hibernate.ddl-auto=create-drop
+```
 
 ### Providing the data using @RestController
 
 The last class we have to write is the controller for providing the data by using REST. The implementation is quite easy though, because we can simply use the `ItemRepository` to retrieve all data:
 
+```java
 @RestController
 @RequestMapping("/items")
 public class ItemController {
@@ -176,6 +199,7 @@ public class ItemController {
     repo.delete(id);
   }
 }
+```
 
 And yes, we now made a full working REST service and by running the application you will be able to create, delete, update and retrieve our items.
 
@@ -183,26 +207,30 @@ And yes, we now made a full working REST service and by running the application 
 
 If you run your application now (by running `Application` as a Java application), and you open up a REST client, you can try out the REST service already. If you're not using an IDE, you can build with Maven using:
 
+```
 mvn clean package
+```
 
 And then run it by using:
 
+```
 cd target/
 java -jar ng-spring-boot-1.0.0.jar
+```
 
-[![spring-boot-run](images/spring-boot-run-300x119.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/spring-boot-run.png)
+![spring-boot-run](images/spring-boot-run.png)
 
 By sending a GET request to [http://localhost:8080/items](http://localhost:8080/items), you will see an empty array, which makes sense because we didn't add an item yet.
 
-[![first-get](images/first-get-300x81.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/first-get.png)
+![first-get](images/first-get.png)
 
 Now, to add an item, you will have to set the method to POST and pass a JSON body like in the image below.
 
-[![post-item](images/post-item-300x137.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/post-item.png)
+![post-item](images/post-item.png)
 
 If you execute the same GET request now as before, you should see that the list is no longer empty now.
 
-[![get-with-item](images/get-with-item-300x106.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/get-with-item.png)
+![get-with-item](images/get-with-item.png)
 
 In the next part we're going to create a small web application using these REST services.
 
@@ -210,10 +238,11 @@ In the next part we're going to create a small web application using these REST 
 
 We're not going to write the most complex application with an extremely flashy user interface, but the application will still look fine enough (to me at least). The HTML will use some AngularJS directives, which I will talk about next. The full HTML has to be placed inside the **src/main/resources/static** folder as the **index.html** file:
 
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./bower\_components/bootstrap-css-only/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
   </head>
   <body ng-app="myApp">
     <div class="container" ng-controller="AppController">
@@ -248,14 +277,15 @@ We're not going to write the most complex application with an extremely flashy u
         </div>
       </form>
     </div>
-    <script type="text/javascript" src="./bower\_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="./bower\_components/angular-resource/angular-resource.min.js"></script>
-    <script type="text/javascript" src="./bower\_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="./bower_components/lodash/dist/lodash.min.js"></script>
     <script type="text/javascript" src="./app/app.js"></script>
     <script type="text/javascript" src="./app/controllers.js"></script>
     <script type="text/javascript" src="./app/services.js"></script>
   </body>
 </html>
+```
 
 Let's start from the top and see what's going on here. First of all we have the `<head>` element, in which we're loading the CSS files we need (Bootstrap). Then, on our `<body>` tag you can find a special attribute called `ng-app`. By using this attribute you're telling AngularJS that it should be bootstrapped. We can pass it a name so we can tell which application (in this case `"myApp"`) should be bootstrapped.
 
@@ -273,11 +303,13 @@ To simply show your model in your view, you can use these handlebars placeholder
 
 Just like Spring Boot we have to create a small application file. In this case, we will be using **src/main/resources/static/app/app.js**. But just like Spring Boot, configuring the application is rather easy:
 
+```javascript
 (function(angular) {
-  angular.module("myApp.controllers", \[\]);
-  angular.module("myApp.services", \[\]);
-  angular.module("myApp", \["ngResource", "myApp.controllers", "myApp.services"\]);
+  angular.module("myApp.controllers", []);
+  angular.module("myApp.services", []);
+  angular.module("myApp", ["ngResource", "myApp.controllers", "myApp.services"]);
 }(angular));
+```
 
 What we're doing here is that we're defining three modules here, the controllers, the services and the application module. Remind that the name of the application module should be the same as the name used inside the `ng-app` attribute (`"myApp"`).
 
@@ -287,6 +319,7 @@ Between the square brackets we can define any dependencies we need. For the appl
 
 Yeah, we defined our modules now, but having empty modules makes no sense. So, let's start by adding a factory to the services module. To define this factory, I'm going to create a file called **services.js**, located in the same directory as **app.js**:
 
+```javascript
 (function(angular) {
   var ItemFactory = function($resource) {
     return $resource('/items/:id', {
@@ -301,9 +334,10 @@ Yeah, we defined our modules now, but having empty modules makes no sense. So, l
     });
   };
   
-  ItemFactory.$inject = \['$resource'\];
+  ItemFactory.$inject = ['$resource'];
   angular.module("myApp.services").factory("Item", ItemFactory);
 }(angular));
+```
 
 By using the `$resource` service, it will automatically make it possible to retrieve and add new items. If you need additional actions (like we did for `update` and `remove`) you can simply add those.
 
@@ -313,10 +347,11 @@ The last part of the application is the controller itself. If you look back at t
 
 The implementation of this controller isn't too hard:
 
+```javascript
 (function(angular) {
   var AppController = function($scope, Item) {
     Item.query(function(response) {
-      $scope.items = response ? response : \[\];
+      $scope.items = response ? response : [];
     });
     
     $scope.addItem = function(description) {
@@ -340,9 +375,10 @@ The implementation of this controller isn't too hard:
     };
   };
   
-  AppController.$inject = \['$scope', 'Item'\];
+  AppController.$inject = ['$scope', 'Item'];
   angular.module("myApp.controllers").controller("AppController", AppController);
 }(angular));
+```
 
 You can find the functions `addItem()`, `updateItem()` and `deleteItem()` here, which are just using the resource factory we made earlier. Also, if you look at the `addItem()` function you see that at the end of that function we set the content of `$scope.newItem` to an empty string. Thanks to the two-way binding of AngularJS which I explained earlier, this will automatically wipe the value from the textbox as well.
 
@@ -352,19 +388,19 @@ By finishing our controller we completed the entire application. If you look at 
 
 If you run the application now, and go to [http://localhost:8080](http://localhost:8080), you should see your application now. If you're running the application from the previous time when we checked the REST service, then you should be able to see the item we added before:
 
-[![checklist-first-run](images/checklist-first-run-300x117.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/checklist-first-run.png)
+![checklist-first-run](images/checklist-first-run.png)
 
 Checking and unchecking the item will result in a PUT request on the REST service, meaning that the item should be updated.
 
-[![checklist-update](images/checklist-update-300x171.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/checklist-update.png)
+![checklist-update](images/checklist-update.png)
 
 You can also add new items. This will execute the same POST request we used earlier in this tutorial.
 
-[![checklist-add](images/checklist-add-300x106.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/checklist-add.png)
+![checklist-add](images/checklist-add.png)
 
 And finally, after removing the item, a DELETE request will be sent to our REST service.
 
-[![delete-item](images/delete-item-300x175.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/12/delete-item.png)
+![delete-item](images/delete-item.png)
 
 #### Achievement: Rapid prototyping with Spring Boot and AngularJS
 

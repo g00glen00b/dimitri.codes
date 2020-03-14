@@ -2,6 +2,8 @@
 title: "Making your AngularJS application grunt"
 date: "2014-06-22"
 coverImage: "grunt-logo.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "Grunt", "JavaScript", "Karma", "Testing"]
 ---
 
 A while back I wrote a small application to show you the main components of AngularJS, demonstrating controllers, services, filters and (custom) directives. In this tutorial I'm going to modify that application a bit and integrate GruntJS into it. For those who are wondering what Grunt is, well, it's the task runner written in JavaScript, for JavaScript. What you can do with it? Run any task you want (as long as you find a plugin for it). Some example tasks you could run using Grunt are:
@@ -24,8 +26,9 @@ So, let's start!
 
 ### Project setup
 
-In [my previous tutorial](http://wordpress.g00glen00b.be/jasminify-angular-app/ "Jasminify your Angular app") I wrote several tests which we're going to run through Grunt by using Karma. So, let's start by getting a copy from [that project](https://github.com/song-rate-mvc/angular-song-rate/tree/0.0.2) first. Now, most of these application lifecycle tools like Grunt and Karma come through the Node.js package manager, so in case you didn't have it installed yet... start by installing [Node.js](http://nodejs.org). Now we can start by creating our Node.js package descriptor, called **package.json**. This descriptor will tell the Node.js package manager which dependencies we have, in this example we will use it to load Grunt, several Grunt task plugins and of course also KarmaJS (and plugins):
+In [my previous tutorial](/jasminify-angular-app/ "Jasminify your Angular app") I wrote several tests which we're going to run through Grunt by using Karma. So, let's start by getting a copy from [that project](https://github.com/song-rate-mvc/angular-song-rate/tree/0.0.2) first. Now, most of these application lifecycle tools like Grunt and Karma come through the Node.js package manager, so in case you didn't have it installed yet... start by installing [Node.js](http://nodejs.org). Now we can start by creating our Node.js package descriptor, called **package.json**. This descriptor will tell the Node.js package manager which dependencies we have, in this example we will use it to load Grunt, several Grunt task plugins and of course also KarmaJS (and plugins):
 
+```json
 {
   "name": "angular-song-rate",
   "version": "0.0.3",
@@ -48,13 +51,16 @@ In [my previous tutorial](http://wordpress.g00glen00b.be/jasminify-angular-app/ 
     "karma-ng-html2js-preprocessor": "~0.1.0"
   }
 }
+```
 
 As you can see these are quite a lot of plugins we need, so let me explain what each package will be used for in this example:
 
 - The **Grunt** package contains all logic necessary to run tasks in your project
 - Normally, the **grunt-cli** should be installed globally, so you don't really need it here, but it can't harm either. To install it globally you use the command:
-    
-    npm install -g grunt-cli
+
+```    
+npm install -g grunt-cli
+```
     
 - The **grunt-html2js** plugin will be used to convert our AngularJS templates (like `app/templates/rating.html`) to JavaScript files, requiring no asynchronous lookups for retrieving the templates
 - To minify our files we can use the **grunt-contrib-uglify** plugin
@@ -80,6 +86,7 @@ Quite a long list, but that should be everything we need. Also make sure you hav
 
 So, let's start configuring Grunt for our project by creating a file called **Gruntfile.js**. This file will contain the configuration of Grunt for our project, and is a typical Node.js JavaScript file, for example we start of by writing:
 
+```javascript
 module.exports = function(grunt) {
   
   grunt.initConfig({
@@ -90,9 +97,11 @@ module.exports = function(grunt) {
 
   // Loading of tasks and registering tasks will be written here
 };
+```
 
 This is the typical structure of any Grunt configuration file, where the configuration of the tasks happens inside the `grunt.initConfig()` command. But before we start by configuring tasks, we have to import all Grunt task packages, for example:
 
+```javascript
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-connect');
@@ -103,11 +112,13 @@ grunt.loadNpmTasks('grunt-html2js');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-bower-task');
 grunt.loadNpmTasks('grunt-karma');
+```
 
 #### Bower
 
 To load the Bower dependencies when building, I'm going to use the following configuration:
 
+```javascript
 bower: {
   install: {
     options: {
@@ -118,6 +129,7 @@ bower: {
     }
   }
 }
+```
 
 Quite simple, we just clean the directory first and then install all dependencies.
 
@@ -125,14 +137,17 @@ Quite simple, we just clean the directory first and then install all dependencie
 
 Even easier to configure is the JSHint task, just tell which files should be verified for code quality and you're done:
 
+```javascript
 jshint: {
-  all: \[ 'Gruntfile.js', 'app/\*.js', 'app/\*\*/\*.js' \]
+  all: [ 'Gruntfile.js', 'app/*.js', 'app/**/*.js' ]
 }
+```
 
 #### Karma
 
 After validating our code quality, it's time to run our unit tests. KarmaJS works with a seperate configuration file, so the Bower task configuration is quite easy:
 
+```javascript
 karma: {
   options: {
     configFile: 'config/karma.conf.js'
@@ -146,6 +161,7 @@ karma: {
     autoWatch: true
   }
 }
+```
 
 We have two tasks configured here, the first being **karma:unit** and the second **karma:continuous**. The first one will run each test once and will then stop, while the last one will continuously test our JavaScript file when a file change is detected.
 
@@ -153,12 +169,14 @@ We have two tasks configured here, the first being **karma:unit** and the secon
 
 After verifying our code, it's time to build the release version of our JavaScript code, starting of by compiling the AngularjS template:
 
+```javascript
 html2js: {
   dist: {
-    src: \[ 'app/templates/\*.html' \],
+    src: [ 'app/templates/*.html' ],
     dest: 'tmp/templates.js'
   }
 }
+```
 
 Similar to most plugins we're just telling what the source is and where it should put it's output, in this case in the **tmp/** folder. Because we're no longer going to use that file once it's concatenated.
 
@@ -166,15 +184,17 @@ Similar to most plugins we're just telling what the source is and where it shoul
 
 Almost there... to concatenate our JavaScript files to one file, we're going to use the following configuration:
 
+```javascript
 concat: {
   options: {
     separator: ';'
   },
   dist: {
-    src: \[ 'app/\*.js', 'tmp/\*.js' \],
+    src: [ 'app/*.js', 'tmp/*.js' ],
     dest: 'dist/app.js'
   }
 }
+```
 
 Very similar to what we've done already in the previous plugin, we just defined a list of sources, and the output file.
 
@@ -182,46 +202,56 @@ Very similar to what we've done already in the previous plugin, we just defined 
 
 For production releases, you also want the JavaScript file to be minified, which means that all unnecessary stuff like whitespace, comments, ... are removed until only a small file remains:
 
+```javascript
 uglify: {
   dist: {
     files: {
-      'dist/app.js': \[ 'dist/app.js' \]
+      'dist/app.js': [ 'dist/app.js' ]
     },
     options: {
       mangle: false
     }
   }
 }
+```
 
 As you can see I'm simply overwriting the concatenated file, I have one reason for this approach (compared to writing your minified file to app.min.js) and that's because in this case we can skip minifying for development, the referenced file (dist/app.js) stays the same, so no other changes have to occur.
 
-One thingto know is that, when using AngularJS you have to disable the `mangle` option. If you don't do that, your application will probably not work, the reason why is because it will try to adjust variable names like this:
+One thing to know is that, when using AngularJS you have to disable the `mangle` option. If you don't do that, your application will probably not work, the reason why is because it will try to adjust variable names like this:
 
+```javascript
 var sum = function(myParam, myOtherParam) {
   return myParam + myOtherParam;
 };
 sum(2, 3);
+```
 
 Which would become something like:
 
+```javascript
 var a = function(b, c) {
   return b + c;
 };
 a(2, 3);
+```
 
 Obviously, nothing is wrong here, as both examples will run fine. However, if you use AngularJS dependency injection like:
 
+```javascript
 angular.module("myApp.controllers").controller("songCtrl", function($scope, songService) {
   // Your code
 });
+```
 
 AngularJS will fail to inject its dependencies, because things like `$scope` and `songService` will be converted to a and b. The error you will get is that AngularJS will not be able to find `aProvider` because there's no module to inject which is being called "a".
 
 To solve that you can either disable the mangle option, or you could use the named dependency injection like this:
 
-angular.module("myApp.controllers").controller("songCtrl", \[ '$scope', 'songService', function($scope, songService) {
+```javascript
+angular.module("myApp.controllers").controller("songCtrl", [ '$scope', 'songService', function($scope, songService) {
   // Your code
-}\]);
+}]);
+```
 
 I didn't test it, but in this case it will use the String names to determine what to inject. The names of the variables in the function itself can be named anything you like, so this will probably work fine.
 
@@ -229,32 +259,36 @@ I didn't test it, but in this case it will use the String names to determine wha
 
 The tmp directory, used by the AngularJS compiled templates, is no longer necessary, as we already used that file while concatenating. This means we can clean the tmp directory now by using:
 
+```javascript
 clean: {
   temp: {
-    src: \[ 'tmp' \]
+    src: [ 'tmp' ]
   }
 }
+```
 
 #### Watch and execute
 
 While developing it's not really interesting that the developer should have to execute these Grunt tasks each time when he changed something. To increase productivity, you can automatically run these tasks when a file changes by using something like:
 
+```javascript
 watch: {
   dev: {
-    files: \[ 'Gruntfile.js', 'app/\*.js', '\*.html' \],
-    tasks: \[ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp' \],
+    files: [ 'Gruntfile.js', 'app/*.js', '*.html' ],
+    tasks: [ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp' ],
     options: {
       atBegin: true
     }
   },
   min: {
-    files: \[ 'Gruntfile.js', 'app/\*.js', '\*.html' \],
-    tasks: \[ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist' \],
+    files: [ 'Gruntfile.js', 'app/*.js', '*.html' ],
+    tasks: [ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist' ],
     options: {
       atBegin: true
     }
   }
 }
+```
 
 We defined two tasks here, named **watch:dev** and **watch:min**. Like I explained earlier, minification should be optional. Minification removes all whitespace including enters, which means that while debugging or while getting errors in your console, it's easier to know on which line you're debugging, if everything is minified, there's only one big line of JavaScript code, making it impossible to do that.
 
@@ -266,6 +300,7 @@ The watch task only executed when a file change is detected, if you also want to
 
 To run a webserver that can be used for development, we use the following task:
 
+```javascript
 connect: {
   server: {
     options: {
@@ -274,31 +309,34 @@ connect: {
     }
   }
 }
+```
 
 #### Zipping your application
 
 The final task I'm going to configure is used to compress all files necessary to a single archive (ZIP file), which we can do by using:
 
+```javascript
 compress: {
   dist: {
     options: {
       archive: 'dist/<%= pkg.name %>-<%= pkg.version %>.zip'
     },
-    files: \[{
-      src: \[ 'index.html' \],
+    files: [{
+      src: [ 'index.html' ],
       dest: '/'
     }, {
-      src: \[ 'dist/\*\*' \],
+      src: [ 'dist/**' ],
       dest: 'dist/'
     }, {
-      src: \[ 'assets/\*\*' \],
+      src: [ 'assets/**' ],
       dest: 'assets/'
     }, {
-      src: \[ 'libs/\*\*' \],
+      src: [ 'libs/**' ],
       dest: 'libs/'
-    }\]
+    }]
   }
 }
+```
 
 So here we list down all files and directories we need to bundle. Also notice the use of placeholders like `<%= pkg.name %>` and `<%= pkg.version %>`. These are being replaced by the `pkg.name` and `pkg.version` property in our configuration and if you remember our initial code, the pkg property uses `grunt.file.readJSON('package.json')`, which means we're retrieving the name and version property from that file.
 
@@ -313,15 +351,18 @@ So, that's all tasks we have to configure, but it would be really crazy if you h
 
 Defining these workflows is quite simple, just write the following code at the bottom of your file:
 
-grunt.registerTask('dev', \[ 'bower', 'connect:server', 'watch:dev' \]);
-grunt.registerTask('test', \[ 'bower', 'jshint', 'karma:continuous' \]);
-grunt.registerTask('minified', \[ 'bower', 'connect:server', 'watch:min' \]);
-grunt.registerTask('package', \[ 'bower', 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'uglify:dist',
-  'clean:temp', 'compress:dist' \]);
+```javascript
+grunt.registerTask('dev', [ 'bower', 'connect:server', 'watch:dev' ]);
+grunt.registerTask('test', [ 'bower', 'jshint', 'karma:continuous' ]);
+grunt.registerTask('minified', [ 'bower', 'connect:server', 'watch:min' ]);
+grunt.registerTask('package', [ 'bower', 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'uglify:dist',
+  'clean:temp', 'compress:dist' ]);
+```
 
 This is everything you should do in this file, everything together it should look like:
 
-/\*jslint node: true \*/
+```javascript
+/*jslint node: true */
 "use strict";
 
 module.exports = function(grunt) {
@@ -343,7 +384,7 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'dist/app.js': \[ 'dist/app.js' \]
+          'dist/app.js': [ 'dist/app.js' ]
         },
         options: {
           mangle: false
@@ -353,14 +394,14 @@ module.exports = function(grunt) {
     
     html2js: {
       dist: {
-        src: \[ 'app/templates/\*.html' \],
+        src: [ 'app/templates/*.html' ],
         dest: 'tmp/templates.js'
       }
     },
     
     clean: {
       temp: {
-        src: \[ 'tmp' \]
+        src: [ 'tmp' ]
       }
     },
     
@@ -369,13 +410,13 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: \[ 'app/\*.js', 'tmp/\*.js' \],
+        src: [ 'app/*.js', 'tmp/*.js' ],
         dest: 'dist/app.js'
       }
     },
     
     jshint: {
-      all: \[ 'Gruntfile.js', 'app/\*.js', 'app/\*\*/\*.js' \]
+      all: [ 'Gruntfile.js', 'app/*.js', 'app/**/*.js' ]
     },
     
     connect: {
@@ -389,15 +430,15 @@ module.exports = function(grunt) {
     
     watch: {
       dev: {
-        files: \[ 'Gruntfile.js', 'app/\*.js', '\*.html' \],
-        tasks: \[ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp' \],
+        files: [ 'Gruntfile.js', 'app/*.js', '*.html' ],
+        tasks: [ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp' ],
         options: {
           atBegin: true
         }
       },
       min: {
-        files: \[ 'Gruntfile.js', 'app/\*.js', '\*.html' \],
-        tasks: \[ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist' \],
+        files: [ 'Gruntfile.js', 'app/*.js', '*.html' ],
+        tasks: [ 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist' ],
         options: {
           atBegin: true
         }
@@ -409,19 +450,19 @@ module.exports = function(grunt) {
         options: {
           archive: 'dist/<%= pkg.name %>-<%= pkg.version %>.zip'
         },
-        files: \[{
-          src: \[ 'index.html' \],
+        files: [{
+          src: [ 'index.html' ],
           dest: '/'
         }, {
-          src: \[ 'dist/\*\*' \],
+          src: [ 'dist/**' ],
           dest: 'dist/'
         }, {
-          src: \[ 'assets/\*\*' \],
+          src: [ 'assets/**' ],
           dest: 'assets/'
         }, {
-          src: \[ 'libs/\*\*' \],
+          src: [ 'libs/**' ],
           dest: 'libs/'
-        }\]
+        }]
       }
     },
     
@@ -451,12 +492,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-karma');
   
-  grunt.registerTask('dev', \[ 'bower', 'connect:server', 'watch:dev' \]);
-  grunt.registerTask('test', \[ 'bower', 'jshint', 'karma:continuous' \]);
-  grunt.registerTask('minified', \[ 'bower', 'connect:server', 'watch:min' \]);
-  grunt.registerTask('package', \[ 'bower', 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'uglify:dist',
-    'clean:temp', 'compress:dist' \]);
+  grunt.registerTask('dev', [ 'bower', 'connect:server', 'watch:dev' ]);
+  grunt.registerTask('test', [ 'bower', 'jshint', 'karma:continuous' ]);
+  grunt.registerTask('minified', [ 'bower', 'connect:server', 'watch:min' ]);
+  grunt.registerTask('package', [ 'bower', 'jshint', 'karma:unit', 'html2js:dist', 'concat:dist', 'uglify:dist',
+    'clean:temp', 'compress:dist' ]);
 };
+```
 
 ### Karma configuration
 
@@ -464,35 +506,37 @@ Before testing it out, we have to configure Karma as well. If you look at the ka
 
 The content of that file is quite simple, it contains the configuration of the testing framework, the location of our sources, test files and libraries we need and some extra stuff:
 
+```javascript
 module.exports = function(config) {
   config.set({
     basePath: '../',
-    frameworks: \[ 'jasmine' \],
-    files: \[
+    frameworks: [ 'jasmine' ],
+    files: [
       'libs/jquery/dist/jquery.js',
       'libs/angular/angular.js',
       'libs/angular-mocks/angular-mocks.js',
       'libs/lodash/dist/lodash.js',
       'libs/underscore.string/lib/underscore.string.js',
-      'app/\*\*/\*.js',
-      'tests/\*\*/\*.js',
-      'app/templates/\*.html'
-    \],
+      'app/**/*.js',
+      'tests/**/*.js',
+      'app/templates/*.html'
+    ],
     preprocessors: {
-      'app/templates/\*.html': 'ng-html2js'
+      'app/templates/*.html': 'ng-html2js'
     },
-    reporters: \[ 'progress' \],
+    reporters: [ 'progress' ],
     colors: true,
     autoWatch: false,
-    browsers: \[ 'PhantomJS' \],
+    browsers: [ 'PhantomJS' ],
     singleRun: true,
-    plugins: \[
+    plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'
-    \]
+    ]
   });
 };
+```
 
 What you can see here is that we defined "Jasmine" as our testing framework, followed by all sources we need (including test files and libraries). Then we also tell Karma that we need to preprocess our template file to become a compiled JavaScript template. For reporting we're going to use the "progress" reporter, which will simple show how many tests are failed. There are other reporters as well, like a JUnit XML format reporter, a "dots" reporter (which returns a green dot for each succesful test and a red cross for each failed test), ... .
 
@@ -502,69 +546,83 @@ We also say that we want to use PhantomJS as the browser to use for testing and 
 
 We now configured the entire build process, however, we made some changes to the JavaScript location, because we want to use the dist/app.js file when we load our application. So, let's open **index.html** and look at the bottom of the file where you can find this:
 
+```html
 <script type="text/javascript" src="app/app.js"></script>
 <script type="text/javascript" src="app/controllers.js"></script>
 <script type="text/javascript" src="app/services.js"></script>
 <script type="text/javascript" src="app/filters.js"></script>
 <script type="text/javascript" src="app/directives.js"></script>
+```
 
 And replace it by:
 
+```html
 <script type="text/javascript" src="dist/app.js"></script>
+```
 
 ### Testing it out
 
 So now our configuration is complete, let's test it out! Open a command prompt or terminal and set your project as current working directory. Then make sure all packages are installed by using:
 
+```
 npm install
+```
 
 Now you can start by executing Grunt, for example:
 
+```
 grunt dev
+```
 
 If you did everything well, you should see that the Bower task is executed, followed by the connect:server and watch:dev task which will in turn execute the jshint:all, karma:unit, html2js:dist, concat:dist and clean:temp task.
 
-[![grunt-dev](images/grunt-dev-1024x594.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-dev.png)
+![grunt-dev](images/grunt-dev.png)
 
 Now you should be able to go to [http://localhost:8080](http://localhost:8080) where you can see the application. If you make a small change to a file, you will see that the tasks defined in the watch:dev task are being executed again. In my case I adjusted the title of the **index.html** page a bit. Notice that the tasks are automatically being executed as well:
 
-[![grunt-dev-watch](images/grunt-dev-watch-1024x594.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-dev-watch.png)
+![grunt-dev-watch](images/grunt-dev-watch.png)
 
 If you take a look at the application and refresh, your changes should be applied, for example:
 
-[![grunt-dev-changes](images/grunt-dev-changes-1024x259.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-dev-changes.png)
+![grunt-dev-changes](images/grunt-dev-changes.png)
 
 You can do the same thing by using:
 
+```
 grunt minified
+```
 
 The main difference is that it will now use the minified version of your JavaScript code:
 
-[![grunt-min](images/grunt-min.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-min.png)
+![grunt-min](images/grunt-min.png)
 
 So let's test our unit tests as well by using:
 
+```
 grunt test
+```
 
-[![grunt-test](images/grunt-test-1024x594.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-test.png)
+![grunt-test](images/grunt-test.png)
 
 You will see that it executes all tests properly and no failures are found. For testing purposes I edited **ratingDirectiveSpec.js** a bit and made a false statement. Because the karma:continuous task is executed, it will detect changes in my JavaScript file and automatically rerun my tests:
 
-[![grunt-test-fail](images/grunt-test-fail-1024x594.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-test-fail.png)
+![grunt-test-fail](images/grunt-test-fail.png)
 
 You can see that the tests are failing now, even by looking at the amount of red in the console. You can also open the link which you can see in your command prompt, in my case being [http://localhost:9876](http://localhost:9876/). If you do that, the tests will now get executed in both PhantomJS and your webbrowser.
 
-[![grunt-test-chrome](images/grunt-test-chrome-1024x62.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-test-chrome.png)
+![grunt-test-chrome](images/grunt-test-chrome.png)
 
 However, this is way slower. As you can see in my screenshot it's still executing my tests and it's only at test 6 of 23.
 
 The last task to test is the package task:
 
+```
 grunt package
+```
 
 Which will produce a ZIP file containing all your files inside the dist/ folder.
 
-[![grunt-package](images/grunt-package-1024x594.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/06/grunt-package.png)
+![grunt-package](images/grunt-package.png)
 
 _Note: The command I used lists the contents of the archive file, but excluding all files in the libs folder._
 
