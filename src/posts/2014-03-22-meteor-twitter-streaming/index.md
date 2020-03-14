@@ -1,6 +1,8 @@
 ---
 title: "Meteor Twitter streaming"
 date: "2014-03-22"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]
 ---
 
 **Be aware**, this article was written for Meteor 0.7. Recently Meteor released their 0.9 version, and things doesn't seem to work as expected anymore. I will try to look at this as soon as possible, but be patient.
@@ -47,15 +49,17 @@ The client code is the most complex one (containing views, controllers and Handl
 - **client/app/views**: This folder contains all views. In Meteor you talk about Handlebars templates when you talk about views.
 - **client/assets**: This folder contains all our automatically loaded assets (like stylesheets). In this case I also made a folder called **css** inside of it.
 
-[![project-structure](images/project-structure.png)](http://wordpress.g00glen00b.be/meteor-twitter-streaming/project-structure-15/)
+![project-structure](images/project-structure.png)
 
 So, make sure you have the same structure as in the screenshot above. Prepare by already creating the necessary files as well. For the **public** folder you need to download [Semantic UI](http://semantic-ui.com) and copy the **fonts** and **images** folder inside it. There is currently a bug in the Semantic UI smart package that doesn't allow it to find its resources (fonts/images). When deploying them seperately in the **public** folder the issue is resolved.
 
 We also need to include the Twitter Node.js module that I already told you about, to do that, we're going to need a file called **packages.json** and add the dependencies you need, for example:
 
+```json
 {
     "twitter": "0.2.9"
 }
+```
 
 **Heads up!** The file `packages.json` should NOT be confused with `package.json` that you use with Node.js and npm. They have the same purpose (allowing you to load Node.js packages), however, their structure is entirely different!
 
@@ -72,29 +76,33 @@ The consumer key and secret are application dependant, while the access token ke
 
 So now we put these inside our **twitter.json** configuration file, together with the hashtag we're going to look for (in this case #JavaScript).
 
+```json
 {
     "consumer": {
         "key": "xxxxxxxxxxxxxxxxxxx",
         "secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     },
-    "access\_token": {
+    "access_token": {
         "key": "xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     },
     "hashtag": "#javascript"
 }
+```
 
 So now we can finally start developing our application. The first step (**server.js**) is that we're going to initialize the Twitter streaming module:
 
+```javascript
 var Twitter = Meteor.require("twitter");
 var TweetStream = new Meteor.Stream('tweets');
 var conf = JSON.parse(Assets.getText('twitter.json'));
 var twit = new Twitter({
-    consumer\_key: conf.consumer.key,
-    consumer\_secret: conf.consumer.secret,
-    access\_token\_key: conf.access\_token.key,
-    access\_token\_secret: conf.access\_token.secret
+    consumer_key: conf.consumer.key,
+    consumer_secret: conf.consumer.secret,
+    access_token_key: conf.access_token.key,
+    access_token_secret: conf.access_token.secret
 });
+```
 
 So what happens here is that we first include the Twitter Node.js module (`Twitter`). We then initialize the stream we're going to use to stream our data to the client (`TweetStream`). We're also going to read the configuration file we created just now and parse the JSON contents (`conf`) and finally we're going to initialize the Twitter client by providing it the keys we configured earlier (`twit`).
 
@@ -102,6 +110,7 @@ The most important things to know here are that you can include Node.js modules 
 
 So the next step is to initialize the Twitter stream and when we retrieve new tweets from the stream, we use our own Meteor stream to stream that data to the client. The code for this is easy as well:
 
+```javascript
 twit.stream('statuses/filter', {
     'track': conf.hashtag
 }, function(stream) {
@@ -109,6 +118,7 @@ twit.stream('statuses/filter', {
         TweetStream.emit('tweet', data);
     });
 });
+```
 
 So as you can see we first set up the stream by usng `twit.stream()`. We then read the data from the stream (`stream.on()`) and send it to our Meteor stream (`TweetStream.emit()`).
 
@@ -116,6 +126,7 @@ So as you can see we first set up the stream by usng `twit.stream()`. We then re
 
 Before we're actually going to write templates and JavaScript code for our templates, I'm going to set up the client. First I'm going to write a small stylesheet (**style.css**). Semantic UI does not provide styling for links, so I'm going to write that myself:
 
+```css
 a {
     color: #009FDA;
     text-decoration: none;
@@ -123,9 +134,11 @@ a {
 a:hover {
     color: #00BAFF;
 }
+```
 
 Then the next thing I'm going to do is write my main application HTML code (**index.html**). This is going to pretty easy, because the only thing I'm going to do is load my tweets template/view:
 
+```html
 <head>
   <title>Tweets for #JavaScript</title>
 </head>
@@ -133,6 +146,7 @@ Then the next thing I'm going to do is write my main application HTML code (**in
 <body>
   {{> tweets}}
 </body>
+```
 
 As you can see this file is pretty empty. Meteor automatically loads all files you need. So if you put extra JavaScript code, stylesheets or HTML files inside your **client** folder, then they're automatically picked up and added to your application. No more `<script>` tag hell for us!
 
@@ -142,55 +156,63 @@ As you can see this file is pretty empty. Meteor automatically loads all files y
 
 The first helper (**helpers.js**) that I'm going to write will format the timestamp of the tweet, I'm going to use the HH:mm:ss format here:
 
+```javascript
 Handlebars.registerHelper('moments', function(date) {
     return moment(date).format('HH:mm:ss');
 });
+```
 
 As you can see it's quite easy. I use the **moment.js** module to format a specific date and return the desired output.
 
 A more comple helper is the helper to format the tweet text. As you may know from the Twitter API, the text that is returned does not provide links (like mentions, hashtags or URLs). So in this case I'm going to do that myself by using the following helper:
 
+```javascript
 Handlebars.registerHelper('linkify', function(tweet) {
     var out = tweet.text;
-    out = out.replace(/\[A-Za-z\]+:\\/\\/\[A-Za-z0-9-\_\]+\\.\[A-Za-z0-9-\_:%&~\\?\\/.=\]+/g, function(url) {
+    out = out.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
         var tweetText = url;
         if (tweet.entities.urls !== undefined && tweet.entities.urls.length > 0) {
-            var myUrl = \_.find(tweet.entities.urls, function(urlObj) {
+            var myUrl = _.find(tweet.entities.urls, function(urlObj) {
                 return urlObj.url === url;
             });
             if (myUrl !== undefined && myUrl !== null) {
-                tweetText = myUrl.display\_url;
+                tweetText = myUrl.display_url;
             }
         }
         return tweetText.link(url);
     });
-    out = out.replace(/\[#\]+\[A-Za-z0-9-\_\]+/g, function(hash) {
+    out = out.replace(/[#]+[A-Za-z0-9-_]+/g, function(hash) {
         txt = hash.replace("#", "");
         return hash.link("http://twitter.com/search/%23" + txt);
     });
-    out = out.replace(/\[@\]+\[A-Za-z0-9-\_\]+/g, function(u) {
+    out = out.replace(/[@]+[A-Za-z0-9-_]+/g, function(u) {
         var username = u.replace("@","")
         return u.link("http://twitter.com/" + username);
     });
     return out;
 });
+```
 
 This is probably the most complex helper I've ever written, but don't worry, it's also the hardest piece of code in this entire tutorial. What I'm going here is actually three things. First I'm going to use a regular expression to find all URLs inside the tweet. Then I'm going to convert those to links and eventually also look inside the **entities** of the tweet object to get the original URL.
 
 If you're familiar with Twitter, then you know that each URL you add, is being converted to a shortlink using the `t.co` shortener. However, this is not being displayed in your tweets and in stead of that the original URL is displayed. To do this kind of stuff, we need to check if the URL we're currently parsing has a match inside of the entities object. We can do that by using [underscore.js](http://underscorejs.org):
 
-var myUrl = \_.find(tweet.entities.urls, function(urlObj) {
+```javascript
+var myUrl = _.find(tweet.entities.urls, function(urlObj) {
     return urlObj.url === url;
 });
 if (myUrl !== undefined && myUrl !== null) {
-    tweetText = myUrl.display\_url;
+    tweetText = myUrl.display_url;
 }
+```
 
 With `_.find()` I can find the entity that matches the current URL. If it exists, then I'm going to use that URL to put it inside `tweetText` which is going to be used as the visible text of the link.
 
 The "linkify" part for mentions and hashtags is a bit easier. First I'm going to look for all hashtags by using a regular expression (`/[#]+[A-Za-z0-9-_]+/g`) and then I'm going to replace each hashtag by a link:
 
+```javascript
 hash.link("http://twitter.com/search/%23" + txt);
+```
 
 ### Model, View, Controller
 
@@ -202,6 +224,7 @@ The `null` means that it's not going to be persisted to the MongoDB database. So
 
 The next part is the view (**tweets.html**), it looks quite spectacular, but it's really not that hard:
 
+```html
 <template name="tweets">
     <div class="ui piled feed segment">
         <h2 class="ui header">
@@ -211,33 +234,33 @@ The next part is the view (**tweets.html**), it looks quite spectacular, but it'
         {{#each tweets}}
             <div class="event">
                 <div class="label">
-                    {{#if retweeted\_status}}
+                    {{#if retweeted_status}}
                         <i class="circular retweet icon"></i>
                     {{else}}
-                        <a href="http://twitter.com/{{user.screen\_name}}" title="{{user.name}}">
-                            <img src="{{user.profile\_image\_url}}">
+                        <a href="http://twitter.com/{{user.screen_name}}" title="{{user.name}}">
+                            <img src="{{user.profile_image_url}}">
                         </a>
                     {{/if}}
                 </div>
                 <div class="content">
-                    <div class="date">{{moments created\_at}}</div>
+                    <div class="date">{{moments created_at}}</div>
                     <div class="summary">
-                        {{#if retweeted\_status}}
-                            <a href="http://twitter.com/{{user.screen\_name}}">{{user.name}}</a> retweeted
+                        {{#if retweeted_status}}
+                            <a href="http://twitter.com/{{user.screen_name}}">{{user.name}}</a> retweeted
                         {{else}}
                             {{{linkify this}}}
                         {{/if}}
                     </div>
-                    {{#if retweeted\_status}}
+                    {{#if retweeted_status}}
                         <div class="extra text">
-                            {{{linkify retweeted\_status}}}
+                            {{{linkify retweeted_status}}}
                         </div>
                     {{else}}
                         {{#if entities.media}}
                             <div class="extra images">
                                 {{#each entities.media}}
                                     {{#if isPhoto}}
-                                        <a href="{{expanded\_url}}"><img src="{{media\_url}}" /></a>
+                                        <a href="{{expanded_url}}"><img src="{{media_url}}" /></a>
                                     {{/if}}
                                 {{/each}}
                             </div>
@@ -248,9 +271,11 @@ The next part is the view (**tweets.html**), it looks quite spectacular, but it'
         {{/each}}
     </div>
 </template>
+```
 
 So what happens here is that I'm going to write a template first, for example:
 
+```html
 <template name="tweets">
     <div class="ui piled feed segment">
         <h2 class="ui header">
@@ -259,9 +284,11 @@ So what happens here is that I'm going to write a template first, for example:
         </h2>
     </div>
 </template>
+```
 
 Then I'm going to loop through each tweet in the Tweet collection:
 
+```html
 {{#each tweets}}
     <div class="event">
         <div class="label">
@@ -272,83 +299,98 @@ Then I'm going to loop through each tweet in the Tweet collection:
         </div>
     </div>
 {{/each}}
+```
 
 The next part is the image. For each tweet I'm going to show the profile image. However, if it's a retweet, then I'm going to show you the retweet symbol in stead, for example:
 
+```html
 <div class="label">
-    {{#if retweeted\_status}}
+    {{#if retweeted_status}}
         <i class="circular retweet icon"></i>
     {{else}}
-        <a href="http://twitter.com/{{user.screen\_name}}" title="{{user.name}}">
-            <img src="{{user.profile\_image\_url}}">
+        <a href="http://twitter.com/{{user.screen_name}}" title="{{user.name}}">
+            <img src="{{user.profile_image_url}}">
         </a>
     {{/if}}
 </div>
+```
 
 So as you can see we wrote a simple if/else structure based upon the `retweeted_status` field. If this field is defined, then it means it's a retweet.
 
 The next part is the tweet itself. In this part I'm going to show you the magic of Handlebars helpers:
 
-<div class="date">{{moments created\_at}}</div>
+```html
+<div class="date">{{moments created_at}}</div>
 <div class="summary">
-    {{#if retweeted\_status}}
-        <a href="http://twitter.com/{{user.screen\_name}}">{{user.name}}</a> retweeted
+    {{#if retweeted_status}}
+        <a href="http://twitter.com/{{user.screen_name}}">{{user.name}}</a> retweeted
     {{else}}
         {{{linkify this}}}
     {{/if}}
 </div>
+```
 
 The first thing I'm going to do is format my date using the **moments** helper which I wrote earlier. Then I'm going to show the tweet contents (using the **linkify** helper) unless it's a retweet. If it's a retweet then I'm going to show you who retweeted.
 
 Obviously, when we have a retweet we also want to show you the retweeted contents. We can do that by using the `retweeted_status` field and use the **linkify** helper to format it.
 
-{{#if retweeted\_status}}
+```html
+{{#if retweeted_status}}
     <div class="extra text">
-        {{{linkify retweeted\_status}}}
+        {{{linkify retweeted_status}}}
     </div>
 {{else}}
 
 {{/if}}
+```
 
 Finally I also want to show you the images that are inside the tweet if there is any. The `entities` object of a tweet allows us to retrieve various meta information about the tweet like the URLs, mentions, hashtags and also the media that's used inside the tweet. In this case I'm going to loop through the media and if it's a photo I'm going to show it to the user:
 
+```html
 {#if entities.media}}
     <div class="extra images">
         {{#each entities.media}}
             {{#if isPhoto}}
-                <a href="{{expanded\_url}}"><img src="{{media\_url}}" /></a>
+                <a href="{{expanded_url}}"><img src="{{media_url}}" /></a>
             {{/if}}
         {{/each}}
     </div>
 {{/if}}
+```
 
 And with this piece we actually wrote the entire view, now it's time for the controller (**app/controllers/tweets.js**. The controller is quite easy. The first thing it does is listen to the Meteor stream and add each tweet to a local collection (model):
 
+```javascript
 TweetStream = new Meteor.Stream('tweets');
 
 TweetStream.on('tweet', function(tweet) {
-    tweet.created\_at = moment(tweet.created\_at).toDate();
+    tweet.created_at = moment(tweet.created_at).toDate();
     console.log(tweet);
     Tweets.insert(tweet);
 });
+```
 
 As you can see I'm also converting the `created_at` field to a date. This makes it much easier to sort. In our template we are using the `{{#each tweets}}` to loop through all tweets. Obviously we first have to specify what's inside `tweets` by using the following code:
 
+```javascript
 Template.tweets.tweets = function() {
     return Tweets.find({}, {
         sort: {
-            'created\_at': -1
+            'created_at': -1
         }
     });
 };
+```
 
 What this does is that it uses the `Tweets` collection and sorts all entries/tweets based upon the creation date. The code `Template.tweets.tweets` means that we're filling a property called `tweets` (2) inside the `tweets` template (1).
 
 Another thing we did in our template is checking if the media is a photo by using `{{#if isPhoto}}`. We have to write that piece of code as well:
 
+```javascript
 Template.tweets.isPhoto = function() {
     return this.type === "photo";
 };
+```
 
 Automatically the current media is sent with it, because we're using it inside a `{{#each}}` loop. So the only thing we have to check is if the `type` field equals to **photo**.
 
@@ -358,7 +400,7 @@ So now we made an awesome application in just **50 lines** of HTML code and **70
 
 If you open your browser now and go to [http://localhost:3000](http://localhost:3000) you will see our application in its full glory.
 
-[![outcome](images/outcome-1024x455.png)](http://wordpress.g00glen00b.be/meteor-twitter-streaming/outcome/)
+![outcome](images/outcome.png)
 
 You can also find the demo online on [meteor.com](http://mrt-twttr-stream.meteor.com/). Deployment to a subdomain of meteor.com is free and can be really great to collaborate and test how cool Meteor actually is.
 
