@@ -1,9 +1,11 @@
 ---
 title: "Working with the MEAN stack: Application setup"
 date: "2014-05-17"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "Express", "JavaScript", "MongoDB", "Node.js"]
 ---
 
-In an earlier article/tutorial series I told you how you could create your own application using AngularJS and the HTML Local storage to persist the data. If you missed it, be sure to check it out [here](http://wordpress.g00glen00b.be/introduction-angularjs/ "Introduction to AngularJS"). The local storage is great but what if we want to persist the data somewhere inside a database and share that information across all clients?
+In an earlier article/tutorial series I told you how you could create your own application using AngularJS and the HTML Local storage to persist the data. If you missed it, be sure to check it out [here](/introduction-angularjs/ "Introduction to AngularJS"). The local storage is great but what if we want to persist the data somewhere inside a database and share that information across all clients?
 
 In this tutorial I will convert the app I wrote using AngularJS to make it use the MEAN stack. Don't worry, there's nothing mean about the MEAN stack. The MEAN stack is a pure JavaScript stack containing:
 
@@ -18,19 +20,27 @@ Before starting with the application, you obviously need to install the MEAN sta
 
 Verify that the installation was successful by using the command:
 
+```
 node --version
+```
 
 or:
 
+```
 nodejs --version
+```
 
 And to check if npm was installed, use:
 
+```
 npm --version
+```
 
 The second step is to install MongoDB, which you can download from [mongodb.org](http://mongodb.org). To check if the installation was successful, use:
 
+```
 mongod --version
+```
 
 ### Setting up our application
 
@@ -42,6 +52,7 @@ The first step is that we're going to setup our application. Start a new project
 
 We're also going to add some files. First of all we're going to create our Node.js application by creating a file called **app.js**. Node.js also comes with a packaage manager called **NPM**. To load our dependencies, we will have to define a file called **package.json**, which will define our application and the dependencies we have. In our app the file will contain:
 
+```json
 {
   "name": "mean-song-rate",
   "version": "0.0.1",
@@ -50,30 +61,32 @@ We're also going to add some files. First of all we're going to create our Node.
     "express": "~3.3.4"
   }
 }
+```
 
 I already explained what we're going to do with Express. **Mongoose** on the other hand is a Node.js framework used to communicate with MongoDB. It provides a sweet API where you use models to add/update/retrieve and read your data.
 
-[![project-setup](images/project-setup.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/05/project-setup.png)
-
- 
+![project-setup](images/project-setup.png)
 
 #### Client
 
-For the client-side part of our application, I'm going to start of where we left in my previous tutorial. I'm not going into detail about AngularJS controllers, services or directives in this tutorial. If you're interested in that, I suggest reading my introduction [tutorial series](http://wordpress.g00glen00b.be/introduction-angularjs/ "Introduction to AngularJS") to AngularJS.
+For the client-side part of our application, I'm going to start of where we left in my previous tutorial. I'm not going into detail about AngularJS controllers, services or directives in this tutorial. If you're interested in that, I suggest reading my introduction [tutorial series](/introduction-angularjs/ "Introduction to AngularJS") to AngularJS.
 
 What we do need is the code of the application, which you can find on [Github](https://github.com/song-rate-mvc/angular-song-rate) ([master.zip](https://github.com/song-rate-mvc/angular-song-rate/archive/master.zip)). Put all the code in the client folder, except **bower.json** and **.bowerrc** which you can put in the root folder.
 
 Now open up **.bowerrc** and change the `directory` to:
 
+```json
 {
   "directory": "client/libs",
   "json": "bower.json"
 }
+```
 
 This is obviously necessary because we moved our Bower configuration one level up (to the parent folder).
 
 Now open **bower.json** and add the dependency **angular-resource**, for example:
 
+```json
 {
   "name": "mean-song-rate",
   "version": "0.0.1",
@@ -86,12 +99,13 @@ Now open **bower.json** and add the dependency **angular-resource**, for examp
     "font-awesome": "4.0.3"
   }
 }
+```
 
 Angular-resource is a part of the AngularJS framework and provides an easy way to integrate with your RESTful webservices.
 
 Also note that I changed the name in the bower configuration.
 
-[![project-setup-client](images/project-setup-client.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/05/project-setup-client.png)
+![project-setup-client](images/project-setup-client.png)
 
 #### Configuration
 
@@ -102,7 +116,7 @@ The next part is the configuration. Open the **config** folder and add the foll
 - **express.js**: This file will contain the configuration used for Express.js like on which port it has to un, which context will be used to serve our client application and which context will be used to provide our RESTful webservices.
 - **routes.js**: Finally we will also use the routing pattern to setup which URL is bound to which logic in our controller.
 
-[![project-setup-config](images/project-setup-config-190x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/05/project-setup-config.png)
+![project-setup-config](images/project-setup-config.png)
 
 #### Server
 
@@ -110,7 +124,7 @@ The serverside logic will not be too complicated. We're going to add two folders
 
 In the controllers folder we will add our RESTful webservice controller, called **rest.js**. In the models folder we will add our model, a file called **Song.js**.
 
-[![project-setup-server](images/project-setup-server-165x300.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2014/05/project-setup-server.png)
+![project-setup-server](images/project-setup-server.png)
 
 ### Writing your Node.js app
 
@@ -118,7 +132,8 @@ Now all files are ready, so let's start by writing our application. I'm going to
 
 Let's open up **config.js** and add the following code:
 
-var env = process.env.NODE\_ENV || 'development';
+```javascript
+var env = process.env.NODE_ENV || 'development';
 
 var config = {
   port: 3000,
@@ -127,12 +142,15 @@ var config = {
 };
 
 module.exports = config;
+```
 
 On the first line we're retrieving a system variable called `NODE_ENV`. This is not really important in our app, but if you want to deploy this on a cloud environment like IBM BlueMix or if you want to host this on multiple environments, you might be interested in this. For every environment you choose another value for `NODE_ENV`, which will allow you to use something like:
 
+```javascript
 if (env === "production") {
   config.db = 'mongodb://my.production.server/songs';
 }
+```
 
 So, on the next lines we can see our configuration which contains:
 
@@ -144,6 +162,7 @@ And finally we make sure that this module returns `config`, so when another modu
 
 The next configuration file is **db.js**. Similar to config.js we will configure Mongoose and return the configuration by using `module.exports`, for example:
 
+```javascript
 var mongoose = require('mongoose');
 
 module.exports = function(config) {
@@ -154,11 +173,13 @@ module.exports = function(config) {
     throw new Error('Unable to connect to database at ' + config.db);
   });
 };
+```
 
 So, here we're using the configuration object we made in our previous module and use it to connect to MongoDB using Mongoose. The configuration itself is passed as an argument to this module, I will show you how that works later.
 
 Then the next configuration file is **express.js**, similar to db.js it will configure our application based upon the configuration from config.js.
 
+```javascript
 var express = require('express');
 
 module.exports = function(app, config) {
@@ -170,9 +191,10 @@ module.exports = function(app, config) {
     app.use(express.methodOverride());
     
     app.use('/api', app.router);
-    app.use('/', express.static(\_\_dirname + "/../client"));
+    app.use('/', express.static(__dirname + "/../client"));
   });
 };
+```
 
 So, what happens here is that this module accepts two parameters, `app` which is an application object initialized by Express and second we have `config` which is our configuration object which we're going to need to know the port we're going to run on.
 
@@ -186,6 +208,7 @@ Then finally we configure our app to use `/api` to serve our RESTful webservice 
 
 The last configuration file is **routes.js** and this is probably the easiest one. In this configuration file we will define which REST endpoint is mapped to which method in our controller.
 
+```javascript
 var rest = require('../server/controllers/rest');
 
 module.exports = function(app){
@@ -205,6 +228,7 @@ module.exports = function(app){
   // Delete song route
   app.del('/songs/:id', rest.remove);
 };
+```
 
 As you can see here, we're using several endpoints here:
 
@@ -222,8 +246,10 @@ Before actually writing our application we have to write the "glue" that keeps a
 
 So, first of all we're going to import all modules that we need by using the `require()` function:
 
+```javascript
 var express = require('express'), mongoose = require('mongoose'), fs = require('fs'), http = require('http'),
-    config = require('./config/config'), root = \_\_dirname, app = express(), server = null;
+    config = require('./config/config'), root = __dirname, app = express(), server = null;
+```
 
 Most of these modules are known by now. Only `fs` and `http` are new modules. These are standard modules of Node.js, so that's why you won't find them in package.json. The names of the modules already explain what they do:
 
@@ -232,33 +258,41 @@ Most of these modules are known by now. Only `fs` and `http` are new modules. Th
 
 Then the next step is that we're going to configure Mongoose by using db.js:
 
+```javascript
 require('./config/db')(config);
+```
 
 As you can see here, we're importing the module and immediately after it we're executing the function and providing the `config` argument.
 
 The next part is a bit more complex. To dynamically load all our models, we're going to list all files in the models directory and add all modules that are inside that folder. We can do that by writing:
 
-var modelsPath = \_\_dirname + '/server/models';
+```javascript
+var modelsPath = __dirname + '/server/models';
 fs.readdirSync(modelsPath).forEach(function (file) {
   if (file.indexOf('.js') >= 0) {
     require(modelsPath + '/' + file);
   }
 });
+```
 
 Now we only have the express and route configuration file left, which we're going to load by writing:
 
+```javascript
 require('./config/express')(app, config);
 require('./config/routes')(app);
+```
 
 And finally we need to start the webserver itself, which we will do by adding:
 
+```javascript
 var server = http.createServer(app);
 server.listen(config.port, config.host);
 console.log('App started on port ' + config.port);
+```
 
 This is everything we have to do to make our application work. In the next part I'm going to explain how we're going to create the MVC application using Express and how we're going to tweak the AngularJS application to make it work with our new RESTful webservice.
 
 ### Working with the MEAN stack
 
-1. [Node.js application setup](http://wordpress.g00glen00b.be/mean-application-setup/)
-2. [MVC using Express and AngularJS](http://wordpress.g00glen00b.be/mean-mvc/)
+1. [Node.js application setup](/mean-application-setup/)
+2. [MVC using Express and AngularJS](/mean-mvc/)

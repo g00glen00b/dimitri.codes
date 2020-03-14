@@ -1,6 +1,8 @@
 ---
 title: "Working with the MEAN stack"
-date: "2014-05-17"
+date: "2014-05-19"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "Express", "JavaScript", "MongoDB", "Node.js"]
 ---
 
 JavaScript is more important than ever. In today's applications, JavaScript is used to create certain effect, make websites more interactive and improve the user experience. But you can achieve much more using JavaScript. There are MVC frameworks like AngularJS that help you structure the entire front-end part of your application and even more. With the introduction of Node.js you can also write your entire back-end using only one language; JavaScript. The MEAN stack is a good example of what you can do with JavaScript, solely JavaScript. The MEAN stack consists out of four elements:
@@ -18,13 +20,13 @@ If you, as developer are interested in writing an app using the MEAN stack, be s
 
 This tutorial series is a continuation of the introduction to AngularJS series, which consists out of three tutorials:
 
-1. [Writing your first controller](http://wordpress.g00glen00b.be/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller")
-2. [Filters and factories](http://wordpress.g00glen00b.be/introduction-angularjs-filter-factory)
-3. [A rating directive](http://wordpress.g00glen00b.be/introduction-angularjs-directives)
+1. [Writing your first controller](/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller")
+2. [Filters and factories](/introduction-angularjs-filter-factory)
+3. [A rating directive](/introduction-angularjs-directives)
 
 ### Working with the MEAN stack
 
 If you read those or if you're already familiar with the main concepts of AngularJS, you can start by converting that AngularJS app and write a RESTful webservice using Node.js:
 
-1. [Node.js application setup](http://wordpress.g00glen00b.be/mean-application-setup/)
-2. [MVC using Express and AngularJS](http://wordpress.g00glen00b.be/mean-mvc/)
+1. [Node.js application setup](/mean-application-setup/)
+2. [MVC using Express and AngularJS](/mean-mvc/)
