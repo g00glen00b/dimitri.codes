@@ -1,6 +1,8 @@
 ---
 title: "Introduction to AngularJS"
-date: "2014-04-04"
+date: "2014-04-05"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "Javascript"]
 ---
 
 Are you new to AngularJS? Good! Just because you're reading this means you're willing to jump onto the JavaScript train towards the future of web development. Over the past years, HTML5, CSS3 and JavaScript became a valuable alternative to desktop applications. This entire new trend also caused an entire wave of new JavaScript ideas, libraries and frameworks that are making JavaScript what it is today. JavaScript is not only hip and trendy, it's becoming mature as well.
@@ -11,10 +13,10 @@ The application I'm going to build in this tutorial series will contain a contro
 
 The code for the application is also available on [Github](https://github.com/song-rate-mvc/angular-song-rate/tree/0.0.2), together with the [full demo](http://song-rate-mvc.github.io/angular-song-rate).
 
-[![app-final](images/app-final.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-final/)
+![app-final](images/app-final.png)
 
 ### Introduction to AngularJS series
 
-1. [Writing your first controller](http://wordpress.g00glen00b.be/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller")
-2. [Filters and factories](http://wordpress.g00glen00b.be/introduction-angularjs-filter-factory)
-3. [A rating directive](http://wordpress.g00glen00b.be/introduction-angularjs-directives)
+1. [Writing your first controller](/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller")
+2. [Filters and factories](/introduction-angularjs-filter-factory)
+3. [A rating directive](/introduction-angularjs-directives)

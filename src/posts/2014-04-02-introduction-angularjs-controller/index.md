@@ -1,11 +1,13 @@
 ---
 title: "An introduction to AngularJS: Writing your first controller"
 date: "2014-04-02"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AngularJS", "Javascript"]
 ---
 
 In this introduction tutorial series to [AngularJS](http://angularjs.org) I'm going to build a small webapp introducing several aspects of AngularJS like controllers, filters, services and directives. I'm going to explain all of that by creating an artist/song-rating app, which (in the end) will look like:
 
-[![app-final](images/app-final.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-final/)
+![app-final](images/app-final.png)
 
 Awesome, don't you think?
 
@@ -31,6 +33,7 @@ The **libs** folder will contain our libraries, in this tutorial I'm going to u
 
 If you want to use [Bower](http://bower.io) to load these dependencies, you can do that as well, the configuration I used is:
 
+```json
 {
   "name": "angular-song-rate",
   "version": "0.0.1",
@@ -42,22 +45,26 @@ If you want to use [Bower](http://bower.io) to load these dependencies, you can 
     "font-awesome": "4.0.3"
   }
 }
+```
 
 If you're using Bower, make sure you change the destination directory to **libs**. You can do that by creating a file called **.bowerrc** with the following contents:
 
+```json
 {
   "directory": "libs",
   "json": "bower.json"
 }
+```
 
 Last but not least is the **assets** folder which, in my case, contains a folder called **css** with a file **style.css**. The entire project structure would become something like:
 
-[![project-structure](images/project-structure.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/project-structure-16/)
+![project-structure](images/project-structure.png)
 
 ### Index HTML page
 
 Let's start with developing our application. The first thing we're going to do is set up our **index.html** page and include all scripts/stylesheets:
 
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -82,11 +89,13 @@ Let's start with developing our application. The first thing we're going to do i
     <script type="text/javascript" src="app/directives.js"></script>
   </body>
 </html>
+```
 
 We're adding the stylesheets ([Twitter Bootstrap](http://getbootstrap.com), [Font awesome](http://fontawesome.io) and our own) and the scripts (AngularJS, [Lo-Dash](http://lodash.com), [Underscore.string](http://epeli.github.io/underscore.string/) and our own scripts). One special thing I'm already doing here is adding the `ng-app` attribute to the `<body>` tag. This means we're bootstrapping AngularJS to this page and "Angularify" it.
 
 The next step is to write a controller, so inside our `<body>` tag we write the following:
 
+```html
 <div ng-controller="songCtrl" class="container">
   <div class="page-header">
     <h1>Rate the song <small>Like them all!</small></h1>
@@ -94,9 +103,11 @@ The next step is to write a controller, so inside our `<body>` tag we write the 
 
   <!-- Write code here -->
 </div>
+```
 
 Notice the `ng-controller` attribute. This means that everything inside the `<div>` is now managed by the controller called **songCtrl**. The final step is that I'm going to show a list of songs, in this first stage it's going to be a simple table containing the artist and the song, for example:
 
+```html
 <table class="table table-striped table-condensed">
   <thead>
     <tr>
@@ -114,6 +125,7 @@ Notice the `ng-controller` attribute. This means that everything inside the `<di
     </tr>
   </tbody>
 </table>
+```
 
 This is a simple table styled with Twitter bootstrap. The only difference is that in this case we want to show a row **dynamically** based upon the songs that are listed. We can create such a dynamic structure by using the `ng-repeat` attribute. In this case the attribute is saying "for each song in the songs array do ...". The songs-array is something we will define later on in our controller. Now, for each song I want to show the artist and the title. To do that, we add a **placeholder** which will be replaced for each song. The placeholders in this example are `{{song.artist}}` and `{{song.title}}`.
 
@@ -121,25 +133,32 @@ This is a simple table styled with Twitter bootstrap. The only difference is tha
 
 So right now we wrote our first view in AngularJS. Of course, there's some JavaScript we need to write as well to make this app work. Before we actually start writing a controller, we first have to open up **app.js** and add the following code to it:
 
-angular.module("myApp", \[
+```javascript
+angular.module("myApp", [
   'myApp.controllers'
-\]);
+]);
+```
 
 This makes sure that for the app called **myApp** (remember from the `ng-app` attribute), we're depending on the "package" called `myApp.controllers`. So now we can go and edit **controllers.js**. Just like in app.js we also have to define something first, in this case the package **myApp.controllers** which we can do by writing:
 
-angular.module("myApp.controllers", \[\])
+```javascript
+angular.module("myApp.controllers", [])
+```
 
 To add a controller to this package, we write the following:
 
-angular.module("myApp.controllers", \[\]).controller("songCtrl", function($scope) {
+```javascript
+angular.module("myApp.controllers", []).controller("songCtrl", function($scope) {
   // Write your code here
 });
+```
 
 So in this case we're adding a controller called **songCtrl** (remember from the `ng-controller` attribute). We also get a parameter called `$scope`. This parameter is actually representing the controller object. Right now it's kind of empty, so let's start by adding functionality to it.
 
 If you remember well, we used the `ng-repeat` attribute to make a list of all songs. Now it's time to define those songs, you can do that by adding the following code:
 
-$scope.songs = \[{
+```javascript
+$scope.songs = [{
   artist: "Nightwish",
   title: "Ghost Loves Score"
 }, {
@@ -148,16 +167,18 @@ $scope.songs = \[{
 }, {
   artist: "Within Temptation",
   title: "Ice Queen"
-}\];
+}];
+```
 
 Right now we have a perfect example of a simple view + controller, so it's time to test everything out! Open up your app and you should be able to see something like the following screenshot.
 
-[![app-1](images/app-1.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-1/)
+![app-1](images/app-1.png)
 
 ### Changing the model
 
 Woohoo! It works like magic. However, I don't think you came all this way just to make a small app that does nothing. Well, now it's time for enhancing the app a bit. First, let's start off by adding a form just below the table to add new songs:
 
+```html
 <form role="form" ng-submit="addSong(newSong.artist, newSong.title)">
   <div class="row">
     <div class="col-sm-5">
@@ -175,6 +196,7 @@ Woohoo! It works like magic. However, I don't think you came all this way just t
     </div>
   </div>
 </form>
+```
 
 This is just some plain HTML with a few Bootstrap classnames to style everything. What we're interested in is the AngularJS stuff. The first thing you may notice is the `ng-submit` attribute onto the form. If you're familiar with JavaScript, you probably know what `onsubmit` does. If you don't, well, it's an event that is executed when the form is submitted. In this case, it will call a function called `addSong()` with parameters `newSong.artist` and `newSong.title`.
 
@@ -182,11 +204,14 @@ If you want to know where they come from, you should look a bit further to the `
 
 We didn't do that yet, so let's edit our controller once more and add the `newSong` object:
 
+```javascript
 $scope.newSong = { };
+```
 
 We also have to write the function `addSong()` to do something when the form is submitted. In this case it will just add a new object to the `songs` array and AngularJS will do the rest.
 
-$scope.addSong = function(/\*\* String \*/ artist, /\*\* String \*/ title) {
+```javascript
+$scope.addSong = function(/** String */ artist, /** String */ title) {
   $scope.songs.push({
     artist: artist,
     title: title
@@ -194,55 +219,66 @@ $scope.addSong = function(/\*\* String \*/ artist, /\*\* String \*/ title) {
   $scope.newSong.title = "";
   $scope.newSong.artist = "";
 };
+```
 
 So, what I'm doing here is that I'm adding a new song to the array and then I reset the title and artist properties. If you scroll a bit higher, you will notice that I told you that the form fields are **bound** to the properties. This means that if I type a letter into the textbox, the property in our controller is **automatically** (or better said: magically) updated with the value from our textbox. However, the opposite is also true. If we change the property in our controller, then the textbox is also being updated **automagically**. This magic thing has a cool name and it's being called **two way data binding**, where the "two way" means that the form can update the property and vice versa. This is where the real power behind AngularJS lies. It totally decouples your HTML from your controller, which improves your code design and makes it way easier to test later on.
 
 So now it's time to test our app again! If we open our app we can see our form and we can now add new songs to the list.
 
-[![app-2](images/app-2.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-2/)
+![app-2](images/app-2.png)
 
 ### Hiding and disabling
 
 So right now we made our app a little bit better and made it more dynamic. This means it's time remove the static data from the `$scope.songs` array and just leave an empty array behind:
 
-$scope.songs = \[ \];
+```javascript
+$scope.songs = [ ];
+```
 
 However, this makes our initial screen look so empty and unattractive:
 
-[![app-3](images/app-3.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-3/)
+![app-3](images/app-3.png)
 
 So let's make our app even better and show a small message if there are no songs yet in the songs array. With AngularJS this is quite easy, just open your **index.html** and add the following piece of HTML just above the table:
 
+```html
 <div class="alert alert-info" ng-if="!songs.length">
   <strong>First!</strong> You're the first one using this app. Make sure to add some songs to the list!
 </div>
+```
 
 This will show you a simple message, and thanks to the `ng-if` attribute, it is only being displayed if the songs array is empty.
 
-[![app-4](images/app-4.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-4/)
+![app-4](images/app-4.png)
 
 So right now we're seeing the message, but the moment we add a song to the array, the message is gone.
 
 Another thing I'm not happy about is that we can just leave the form empty and add a new song which means an empty row is being added. I only want the user to be able to submit the form **only** if he entered a value in both the artist and song field. This is quite easy as well, just add the `ng-disabled` attribute to the submit button of the form like this:
 
+```html
 <button type="submit" class="btn btn-default form-control"
   ng-disabled="isEmpty(newSong.title) || isEmpty(newSong.artist)">Add</button>
+```
 
 This means that we're going to disable the form when the artist or title property is empty. The only thing we have to do now is to define the `isEmpty()` function by adding it to our controller:
 
-$scope.isEmpty = function(/\*\* String \*/ str) {
-  return \_.isBlank(str);
+```javascript
+$scope.isEmpty = function(/** String */ str) {
+  return _.isBlank(str);
 };
+```
 
 We're using a combination of **Lo-Dash** and **Underscore.string** to validate if the given string is empty or not. The only thing we didn't do yet is to integrate Underscore.string with Lo-Dash. Open up your **app.js** and add the following line to the bottom of the script:
 
-\_.mixin(\_.string.exports());
+```javascript
+_.mixin(_.string.exports());
+```
 
 This has nothing to do with AngularJS, so I'm not going to explain this into detail, but what happens here is that we extend Lo-Dash (by using the `mixin()`) function with the functionality of underscore.string (`_.string.exports()`).
 
 So if we test our app again, we will notice that by default the submit button is disabled, making it impossible to submit the form. However, when we enter a value in both the artist and song field, the button is no longer disabled.
 
-[![app-5](images/app-5.png)](http://wordpress.g00glen00b.be/introduction-angularjs-controller/app-5/)
+![app-5](images/app-5.png)
 
 With the disable-functionality finished, I'm going to end this tutorial. We now made a small application using AngularJS. The most important things to remember are:
 
@@ -253,6 +289,6 @@ In the next tutorial of this series I'm going to extend the controller a bit, wr
 
 ### The story continues...
 
-1. [Writing your first controller](http://wordpress.g00glen00b.be/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller")
-2. [Filters and factories](http://wordpress.g00glen00b.be/introduction-angularjs-filter-factory)
-3. [A rating directive](http://wordpress.g00glen00b.be/introduction-angularjs-directives)
+1. [Writing your first controller](/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller")
+2. [Filters and factories](/introduction-angularjs-filter-factory)
+3. [A rating directive](/introduction-angularjs-directives)

@@ -2,7 +2,7 @@
 title: "Meteor Twitter streaming"
 date: "2014-03-22"
 categories: ["JavaScript", "Tutorials"]
-tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]
+tags: ["JavaScript", "Meteor.js", "Twitter"]
 ---
 
 **Be aware**, this article was written for Meteor 0.7. Recently Meteor released their 0.9 version, and things doesn't seem to work as expected anymore. I will try to look at this as soon as possible, but be patient.
