@@ -2,9 +2,11 @@
 title: "Testing your Node.js application with tape"
 date: "2018-11-20"
 coverImage: "nodejs-logo.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Node.js", "Sinon.js", "tape", "Testing"]
 ---
 
-[Last time](https://wordpress.g00glen00b.be/nodejs-ava/), I tested a simple Node.js application I wrote with [AVA](https://github.com/avajs/ava). While my initial experience with AVA was great, it's probably still worth it to compare it with other testing frameworks. Another testing framework I seem to hear a lot about is [tape](https://github.com/substack/tape). One of the main advantages of tape is that it produces its output according to **TAP** or the [Test Anything Protocol](https://testanything.org/). Let's see how we can write our tests!
+[Last time](/nodejs-ava/), I tested a simple Node.js application I wrote with [AVA](https://github.com/avajs/ava). While my initial experience with AVA was great, it's probably still worth it to compare it with other testing frameworks. Another testing framework I seem to hear a lot about is [tape](https://github.com/substack/tape). One of the main advantages of tape is that it produces its output according to **TAP** or the [Test Anything Protocol](https://testanything.org/). Let's see how we can write our tests!
 
 ### Setting up
 
@@ -38,7 +40,7 @@ Compared to AVA, which allows us to use Babel out-of-the-box, this is a bit less
 
 Just like last time, I'm going to start testing by writing tests for the helpers I wrote. One of the helpers returns an alternative value if the operation that it executed fails. The code I wrote looks like this:
 
-```
+```javascript
 const returnOnError = (operation, alternative) => {
   try {
     return operation();
@@ -53,7 +55,7 @@ To properly test this, I need to write two tests:
 1. A test to see if the result of the operation is used.
 2. Another test to see if the alternative is used when the operation failed.
 
-```
+```javascript
 import test from 'tape';
 import {returnOnError} from '../../src/helpers';
 
@@ -76,7 +78,7 @@ Unlike many testing frameworks, tape does not require an additional setup if you
 
 In this tutorial, I'll use tape in stead of blue-tape, and manually call the `t.end()` function as within my other tests. Let's demonstrate that by writing tests for my next helper. My promisify helper converts a Mongoose query to a promise, as you can see in the code below:
 
-```
+```javascript
 const promisify = query => new Promise((resolve, reject) => {
   query.exec((err, data) => {
     if (err) reject(err);
@@ -98,7 +100,7 @@ npm install --save-dev sinon
 
 Now we can stub that `exec()` function properly within our tests:
 
-```
+```javascript
 test('resolves promise if a result is returned', t => {
   const exec = sinon.stub();
   promisify({exec}).then(result => {
@@ -128,7 +130,7 @@ This means that, if we import a dependency in our test, we can stub some functio
 
 For example, let's say we want to write a unit test for the `author` resolver of `Post`:
 
-```
+```javascript
 const resolvers = {
   author: post => promisify(User.findById(post.authorId))
 };
@@ -136,7 +138,7 @@ const resolvers = {
 
 This code depends on the `User` model, and calls the `findById()` function. So, if we import the `User` model in our test, and stub the `findById` function, we can write clean tests:
 
-```
+```javascript
 test('author resolver fetches the user', t => {
   const exec = sinon.stub();
   const user = {id: 1, name: 'Foo'};
@@ -160,7 +162,7 @@ To test it out, you can call the npm script:
 npm test
 ```
 
-[![tape + faucet report](images/Screenshot-2018-07-25-11.23.21.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/Screenshot-2018-07-25-11.23.21.png)
+![tape + faucet report](images/Screenshot-2018-07-25-11.23.21.png)
 
 Additionally, if we want to see a coverage report, we can install tools like [**nyc**](https://github.com/istanbuljs/nyc):
 
@@ -174,7 +176,7 @@ And then we can run it like this:
 npx nyc npm test
 ```
 
-[![Istanbul.js nyc coverage report](images/Screenshot-2018-07-23-15.48.46.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/Screenshot-2018-07-23-15.48.46.png)
+![Istanbul.js nyc coverage report](images/Screenshot-2018-07-23-15.48.46.png)
 
 ### Summarized
 

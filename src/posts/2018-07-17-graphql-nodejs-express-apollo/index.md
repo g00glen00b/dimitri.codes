@@ -1,11 +1,13 @@
 ---
 title: "Writing a GraphQL API with Node.js, Express and Apollo"
 date: "2018-07-17"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Apollo", "Express", "GraphQL", "Node.js"]
 ---
 
-A while back, I wrote [a tutorial](https://wordpress.g00glen00b.be/graphql-spring-boot/) about creating a GraphQL API using Java, followed by a web application using Angular and Apollo. Back then, I also mentioned that Apollo has a server-side part as well, which allows you to create GraphQL API's on Node.js. And today, we're going to explore that option!
+A while back, I wrote [a tutorial](/graphql-spring-boot/) about creating a GraphQL API using Java, followed by a web application using Angular and Apollo. Back then, I also mentioned that Apollo has a server-side part as well, which allows you to create GraphQL API's on Node.js. And today, we're going to explore that option!
 
-[![GraphQL + Node.js + Apollo](images/nodejs-apollo-graphql.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/05/nodejs-apollo-graphql.png)
+![GraphQL + Node.js + Apollo](images/nodejs-apollo-graphql.png)
 
 ### Setting up a Node.js project
 
@@ -34,8 +36,7 @@ This script will watch the source directory, and run Babel + Node.js to run our 
 1. A `/graphql` endpoint which will be the entrypoint for our GraphQL API
 2. A `/graphiql` endpoiont which contains a visual GraphQL tester to test out the API
 
-```
-
+```javascript
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -47,7 +48,6 @@ mongoose.connect('mongodb://localhost:27017/local');
 app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
 app.use('/graphiql', graphiqlExpress({endpointURL:'/graphql'}));
 app.listen(3000, () => console.log('Application started on port 3000'));
-
 ```
 
 As you can see, we're using the the Apollo library to bootstrap both endpoints. The `graphqlExpress` endpoint does require a `schema` property though, which we'll create in a moment.
@@ -56,7 +56,7 @@ As you can see, we're using the the Apollo library to bootstrap both endpoints. 
 
 Now that the application is set up, it's time to create the GraphQL schema itself. To do this, we need to create a file called **schema/index.js** and define our type definitions. In my case, I want to create some kind of Q&A platform where people can ask questions, and other people can answer them. In order to do this, I created the following schema:
 
-```
+```javascript
 const typeDefs = `
   type Query {
     questions(query: Pagination!): [Question]
@@ -133,7 +133,7 @@ const typeDefs = `
 
 Visually, it means that my model looks like this:
 
-[![Model schema of my GraphQL types](images/graphql-schema.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/04/graphql-schema.png)
+![Model schema of my GraphQL types](images/graphql-schema.png)
 
 Each question contains one or multiple posts. Each answer and question becomes a post, containing information about the author, the votes it had and the content itself. To group these posts per questions, there is also a question model, which contains both the `firstPost` property, which is a link to the actual question post, and a list of zero or many answer posts.
 
@@ -143,7 +143,7 @@ Mongoose, a popular Node.js library for MongoDB, requires a schema to work again
 
 This is an example of how I'll define the Mongoose models:
 
-```
+```javascript
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -159,8 +159,7 @@ export default mongoose.model('Question', questionSchema);
 
 Rather than using a single document, I defined multiple documents, and linked those using the IDs as you can see here. The same applies to the other schemas as well:
 
-```
-
+```javascript
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -177,10 +176,9 @@ const postSchema = new Schema({
 }, {collection:'Post'});
 
 export default mongoose.model('Post', postSchema);
-
 ```
 
-```
+```javascript
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -201,7 +199,7 @@ Our root queries (which can be found within the `Query` type) and our mutations 
 
 Since these resolvers tend to grow, I'm going to define them in separate files, for example, for the query resolver, this will look like this:
 
-```
+```javascript
 import Question from '../models/Question';
 import User from '../models/User';
 import {promisify} from '../helpers';
@@ -220,7 +218,7 @@ These resolvers match the properties of the `Query` type. The arguments (for exa
 
 Since these results will come in asynchronously, we need to use promises so that Apollo can handle those. By default, Mongoose doesn't work with promises, so I defined a custom helper called `promisify` to convert the query to a promise:
 
-```
+```javascript
 const promisify = query => new Promise((resolve, reject) => {
   query.exec((err, data) => {
     if (err) reject(err);
@@ -237,13 +235,13 @@ This function will call the `exec()` function for the given query, and if it ret
 
 The final step is to register the resolvers for each type. Since I defined these in separate JavaScript files, I'll have to import them into the **schema/index.js** file and use them properly:
 
-```
+```javascript
 const resolvers = {Query, Mutation, Question, Post, User, Vote};
 ```
 
 If you name the imports similar to the type definitions (eg. the query resolver becomes `Query`, ...), you can use the enhanced object literals and just list the resolvers that way. Now that we have the `typeDefs` and `resolvers`, we can export the schema:
 
-```
+```javascript
 export default makeExecutableSchema({typeDefs, resolvers});
 ```
 
@@ -259,8 +257,7 @@ So, just like before, we'll create a separate resolver file for mutations, and m
 
 To handle these three steps, I defined three separate functions:
 
-```
-
+```javascript
 const createQuestion = (id, title, firstPostId) => new Promise((resolve, reject) => {
   Question.create({title, firstPostId, _id: id}, (err, result) => {
     if (err) reject(err);
@@ -281,12 +278,11 @@ const appendPostToUser = (authorId, postId) => new Promise((resolve, reject) => 
     else resolve(result);
   });
 });
-
 ```
 
 Now that we have these, we can start to define our resolver:
 
-```
+```javascript
 const resolvers = {
   createQuestion: (_, args) => {
     const questionId = mongoose.Types.ObjectId();
@@ -308,11 +304,11 @@ What happens here is that we pre-generate the object IDs for both the question a
 
 To test it out, you can run the application using the script that was provided earlier, and then we can go to [http://localhost:3000/graphiql](http://localhost:3000/graphiql). As explained before, this opens the tester for your GraphQL API, and provides useful information such as auto-completion of both type definitions and input variables.
 
-[![Example of GraphiQL](images/Screenshot-2018-02-03-17.19.42.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/02/Screenshot-2018-02-03-17.19.42.png)
+![Example of GraphiQL](images/Screenshot-2018-02-03-17.19.42.png)
 
 Now that we have our tester, we can try to obtain a list of all questions containing just their title and their vote count. The GraphQL query I'll be using is:
 
-```
+```javascript
 query QuestionPage($query: Pagination!) {
   questions(query: $query) {
     _id
@@ -332,11 +328,11 @@ To provide the pagination input, we define a `$query` variable of the `Paginatio
 
 This means we'll also have to provide the query variables, which can be done at the bottom of the GraphiQL tester:
 
-[![GraphiQL autosuggestion of query variables](images/Screenshot-2018-05-01-22.11.44.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/05/Screenshot-2018-05-01-22.11.44.png)
+![GraphiQL autosuggestion of query variables](images/Screenshot-2018-05-01-22.11.44.png)
 
 In my case I'll be using the following query variables:
 
-```
+```json
 {"query": {"offset": 0, "limit": 10}}
 ```
 
@@ -346,7 +342,7 @@ At this moment, the results will be empty, but we can create a new question thro
 
 Similar to a query, we can test mutations. Before we can create questions, we'll have to create a user first though. This can be done by using the following query:
 
-```
+```graphql
 mutation CreateUser($input: UserInput!) {
   createUser(input: $input) {
     _id
@@ -371,7 +367,7 @@ While GraphQL is great, it certainly isn't the silver bullet for all occasions. 
 
 Another issue is **recursion**. Let's say you have an application that allows nested comments. If you would define a GraphQL query for this, you can't recurse all the way through these comments, because you have to explicitly define which fields to obtain. For example:
 
-```
+```graphql
 query Post {
   comments {
     id

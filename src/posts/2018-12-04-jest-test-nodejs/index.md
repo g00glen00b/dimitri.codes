@@ -2,9 +2,11 @@
 title: "Using Jest to test your Node.js application"
 date: "2018-12-04"
 coverImage: "jest.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Babel", "Jest", "Node.js", "Testing"]
 ---
 
-After checking out [AVA](https://wordpress.g00glen00b.be/nodejs-ava/) and [tape](https://wordpress.g00glen00b.be/testing-nodejs-tape/), it's time to check out [Jest](https://jestjs.io/). Jest is a testing framework developed by Facebook, and is often used to test React applications. However, it isn't limited to just React, so let's explore the features it has by testing a small Node.js application!
+After checking out [AVA](/nodejs-ava/) and [tape](/testing-nodejs-tape/), it's time to check out [Jest](https://jestjs.io/). Jest is a testing framework developed by Facebook, and is often used to test React applications. However, it isn't limited to just React, so let's explore the features it has by testing a small Node.js application!
 
 ### Snapshot testing
 
@@ -22,7 +24,7 @@ The reason why we have to install **babel-core** as well is due to the move of B
 
 After installing these dependencies, we have to make a slight modification toe the configuration of Jest. By default, it will load tests matching a certain pattern. However, I'll be using a different pattern, so that's why I added the following to my **package.json** file:
 
-```
+```json
 {
   "name": "graphql-qa-clone-api",
   "version": "1.0.0",
@@ -47,7 +49,7 @@ Since all other configuration resides within package.json, we don't need to prov
 
 One of the smallest parts of our application is a helper that returns a default value when an error occurs. To do that, I wrote the following code:
 
-```
+```javascript
 const returnOnError = (operation, alternative) => {
   try {
     return operation();
@@ -59,7 +61,7 @@ const returnOnError = (operation, alternative) => {
 
 So, to be able to test this, I'll need two tests. One test to verify that we're using the return value, and another one to verify that we're using the alternative value.
 
-```
+```javascript
 test('returns the result if no error was thrown', () => {
   expect(returnOnError(() => 'foo', 'bar')).toEqual('foo');
 });
@@ -75,7 +77,7 @@ As you can see, both tests are quite small. The expect API looks very similar to
 
 Another helper I wrote is to convert a Mongoose result to a promise. A Mongoose result has an `exec()` function that requires a callback. So, I wrote the following code to either resolve or reject a promise:
 
-```
+```javascript
 const promisify = query => new Promise((resolve, reject) => {
   query.exec((err, data) => {
     if (err) reject(err);
@@ -86,7 +88,7 @@ const promisify = query => new Promise((resolve, reject) => {
 
 Now, just like before, we need two tests; one to test the resolved value and another one to test the rejected value. One issue is that we need to create a dummy Mongoose result to make this work. Luckily for us, Jest comes with a mocking/stubbing framework as part of its core.
 
-```
+```javascript
 test('resolves promise if a result is returned', () => {
   const exec = jest.fn(cb => cb(null, 'foo'));
   return expect(promisify({exec})).resolves.toEqual('foo');
@@ -106,7 +108,7 @@ We can mock the `exec()` function using `jest.fn()`. Immediately, we can add som
 
 The application I wrote is a small GraphQL API that contains a few resolvers to resolve certain properties. One of these resolvers will retrieve the user object for a specific vote object using its `userId` property:
 
-```
+```javascript
 const resolvers = {
   author: vote => promisify(User.findById(vote.userId))
 };
@@ -116,7 +118,7 @@ export default resolvers;
 
 To be able to test this, I'll have to somehow mock the `findById()` function of the `User` module. Additionally, I want to write two expectations, to verify both the result and if the correct argument is passed to the mock. This is the test I eventually came up with:
 
-```
+```javascript
 test('author resolver returns the author by its identifier', () => {
   const author = {_id: 'id-123'};
   const exec = jest.fn(cb => cb(null, author));
@@ -136,7 +138,7 @@ Additionally, you can see that the expect API has a matcher called `toHaveBeenLa
 
 Sometimes, you only want to check that certain parts of the actual value match the expected value. In those cases, you could use `**expect.objectContaining()**`:
 
-```
+```javascript
 test('posts resolver returns a list of all user posts', () => {
   const handler = {};
   const postIds = ['id-123', 'id-234'];
@@ -161,7 +163,7 @@ Another thing that could be useful is `**expect.anything()**`. As we've seen bef
 
 For example:
 
-```
+```javascript
 test('createAnswer creates a new model', () => {
   const answer = {_id: 'id-123'};
   const input = {content: 'Content', authorId: 'id-234', questionId: 'id-345'};
@@ -203,7 +205,7 @@ Additionally, if you want to run jest directly without having to install it glob
 npx jest
 ```
 
-[![Jest CLI output](images/workspaces-jest.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/workspaces-jest.png)
+![Jest CLI output](images/workspaces-jest.png)
 
 Additionally, Jest comes with support for Istanbul.js out of the box, so we can get a coverage report as well when we pass the `--coverage` flag:
 
@@ -211,7 +213,7 @@ Additionally, Jest comes with support for Istanbul.js out of the box, so we can 
 npx jest --coverage
 ```
 
-[![Jest coverage report](images/Screenshot-2018-07-27-13.40.42.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/Screenshot-2018-07-27-13.40.42.png)
+![Jest coverage report](images/Screenshot-2018-07-27-13.40.42.png)
 
 ### Summarizing
 

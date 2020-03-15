@@ -2,11 +2,13 @@
 title: "Getting started with Vue and AT UI"
 date: "2018-08-14"
 coverImage: "vue-logo.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["JavaScript", "NPM", "vue"]
 ---
 
 [Vue.js](https://vuejs.org/) gained quite some popularity over the past few years. As a JavaScript framework, it positions itself next to React, Angular and a few other libraries to provide a component-based application structure. In this example, I'll create a Q&A application... with Vue!
 
-[![Vue + AT UI](images/vue-at-ui-e1525425198368.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/05/vue-at-ui-e1525425198368.png)
+![Vue + AT UI](images/vue-at-ui-e1525425198368.png)
 
 ### What is Vue
 
@@ -38,7 +40,7 @@ npm install -s at-ui at-ui-style
 
 The next step is to load the components by importing it and using `Vue.use()`. This can be done by pasting the following code in **src/main.js**:
 
-```
+```javascript
 import AtUI from 'at-ui';
 import 'at-ui-style';
 
@@ -49,7 +51,7 @@ Make sure to do this before bootstrapping your Vue application.
 
 To see if it worked, you can add a simple button to `App.vue`:
 
-```
+```html
 <template>
   <div id="app">
     <div class="container">
@@ -69,7 +71,7 @@ npm run serve
 
 In this tutorial, we're going to set up a few components so we can use them in the future. First of all, let's create a header for our application. I'm going to call this component **src/components/core/SiteHeader.vue**:
 
-```
+```html
 <template>
   <at-menu mode="horizontal" active-name="questions">
     <at-menu-item name="questions"><i class="icon icon-home"></i> Questions</at-menu-item>
@@ -96,13 +98,13 @@ In this case, I'm going to keep the component quite simple, routing will be for 
 
 Now that we have our site header component, it's time to include it within the `App` component. The first step to do this is to import the component:
 
-```
+```javascript
 import SiteHeader from '@/components/core/SiteHeader';
 ```
 
 The next thing is to register it within the `App` component itself, to do this you have to use the `components` section:
 
-```
+```javascript
 export default {
   components: {SiteHeader}
 }
@@ -110,7 +112,7 @@ export default {
 
 Now that we did this, we can add the header into the template by using the `<SiteHeader>` tag:
 
-```
+```html
 <template>
   <div id="app">
     <div class="container">
@@ -125,7 +127,7 @@ Now that we did this, we can add the header into the template by using the `<Sit
 
 I also added a bit CSS to the app component to add some spacing:
 
-```
+```css
 .inner-container {
   padding: 1em 0;
 }
@@ -144,7 +146,7 @@ This component will mostly contain references to other components and propagate 
 
 After that, we can create some dummy data by using the `data` section:
 
-```
+```javascript
 import QuestionList from './QuestionList';
   
 export default {
@@ -179,7 +181,7 @@ This data will eventually come from the GraphQL API I wrote before. But for now,
 
 Now, we just created a `QuestionList` component, but our data is within the `QuestionsPage` component... so how do we pass it? To pass properties, you can use the `props` section, and define each property and configure the type and tell if its required or not:
 
-```
+```javascript
 export default {
   props: { 
     questions: {
@@ -192,7 +194,7 @@ export default {
 
 The next step is to loop over the questions and to show the details of it. To do this, I'm going to create a new component called **src/components/questions/QuestionListItem.vue**. This component will also require a property, but in this case it will be a single question:
 
-```
+```javascript
 export default {
   props: {
     question: {
@@ -205,7 +207,7 @@ export default {
 
 Within the `QuestionsPage` component, we can now pass the questions by using the following template:
 
-```
+```html
 <template>
   <QuestionList :questions="questions"></QuestionList>
 </template>
@@ -227,7 +229,7 @@ npm install --save moment
 
 After that, I can import it and use it:
 
-```
+```javascript
 import moment from 'moment';
 
 export default {
@@ -247,7 +249,7 @@ export default {
 
 Now that we have our question and the `isNew` property, we can write our template:
 
-```
+```html
 <template>
   <div class="card-wrapper">
     <at-card>
@@ -269,7 +271,7 @@ Now that we have our question and the `isNew` property, we can write our templat
 
 Back in our `QuestionList` component, we still have to use `QuestionListItem` somehow. To do this, we can use the `v-for` directive to create a `QuestionListItem` component for each question in the array:
 
-```
+```html
 <template>
   <div>
     <QuestionListItem :question="question" v-for="question in questions" :key="question._id"></QuestionListItem>
@@ -283,6 +285,6 @@ What happens here is that with the `v-for` directive, the component is repeated 
 
 If we add the `QuestionsPage` component to the `App` component properly like we did before, you should be able to see the result. The application should look like this:
 
-[![Screenshot of the Vue application](images/workspaces-vue-app.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/05/workspaces-vue-app.png)
+![Screenshot of the Vue application](images/workspaces-vue-app.png)
 
 Depending on the `createdAt` date, you'll see a "New question" tag next to the question or not. The code can, as usual be found on [GitHub](https://github.com/g00glen00b/apollo-express-vue-example).

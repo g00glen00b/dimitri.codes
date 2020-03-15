@@ -1,6 +1,8 @@
 ---
 title: "Writing your own Spring boot starter"
 date: "2018-02-27"
+categories: ["Java", "Tutorials"]
+tags: ["Spring boot"]
 ---
 
 If you worked with Spring boot before, you know it, there are various starters out there. These starters automatically configure all kind of things so that you no longer have to. This allows you to get started more quickly, and not to be bothered about configuration that is usually a copy-paste from something else. The nice thing is that you're not limited to the Spring boot starters that are already out there, since you can write your own starters as well.
@@ -9,6 +11,7 @@ If you worked with Spring boot before, you know it, there are various starters o
 
 Rather than using the Spring Initializr here, I'm going to create a simple Java/Maven project. Then the first thing we do is to add the **spring-boot-dependencies** to our dependency management:
 
+```xml
 <dependencyManagement>
     <dependencies>
         <dependency>
@@ -20,11 +23,13 @@ Rather than using the Spring Initializr here, I'm going to create a simple Java/
         </dependency>
     </dependencies>
 </dependencyManagement>
+```
 
 This allows us to use any Spring dependency we'd like, without having to import a whole starter/BOM and without having to provide the version numbers by ourselves.
 
 The next step is to add the following two dependencies:
 
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-autoconfigure</artifactId>
@@ -34,15 +39,17 @@ The next step is to add the following two dependencies:
     <artifactId>spring-boot-configuration-processor</artifactId>
     <optional>true</optional>
 </dependency>
+```
 
 The first dependency allows us to use the proper annotations to create our own (conditional) configuration classes, while the second dependency allows us to generate proper metadata for our configuration properties, so IDEs can pick those up in their intellisense.
 
-In this tutorial, I'm going to write a starter to provide the Prometheus endpoint for monitoring that I [talked about before](https://wordpress.g00glen00b.be/monitoring-spring-prometheus-grafana/). To do that, I'm also going to add the **simpleclient\_spring\_boot**, **simpleclient\_hotspot**, **simpleclient\_servlet**, **javax.servlet-api** and **commons-lang3** dependencies.
+In this tutorial, I'm going to write a starter to provide the Prometheus endpoint for monitoring that I [talked about before](/monitoring-spring-prometheus-grafana/). To do that, I'm also going to add the **simpleclient\_spring\_boot**, **simpleclient\_hotspot**, **simpleclient\_servlet**, **javax.servlet-api** and **commons-lang3** dependencies.
 
 ### Configuration properties
 
 When you think of the essential parts of Spring boot, you probably think about the appliction properties. When you write your own Spring boot starter, you probably want to make it configurable as well. To do this, you can create your own class, and annotate it with `@ConfigurationProperties`. In my case, I want to be able to configure my monitoring library like this:
 
+```yaml
 monitoring:
   path: /prometheus
   interval: 10000
@@ -59,9 +66,11 @@ monitoring:
     - name: metrics
       method: GET
       matcher: /metrics
+```
 
 So, the classes I created were:
 
+```java
 @ConfigurationProperties("monitoring")
 public class MonitoringProperties {
     private String path = "/prometheus";
@@ -70,9 +79,11 @@ public class MonitoringProperties {
 
     // Getters + Setters ...
 }
+```
 
 And also:
 
+```java
 public class MonitoringPathMatcher {
     private static final AntPathMatcher MATCHER = new AntPathMatcher();
     private String name;
@@ -85,6 +96,7 @@ public class MonitoringPathMatcher {
         return getMethod().matches(request.getMethod()) && MATCHER.match(getMatcher(), request.getServletPath());
     }
 }
+```
 
 The `@ConfigurationProperties` indicates that this POJO will be used for all configuration properties prefixed with monitoring. The property names on the other hand should have the same name as in the POJO. So in this case, `monitoring.path` would match the `path` property in the `MonitoringProperties` class.
 
@@ -92,40 +104,48 @@ If you use camelcase in your property names, you can either use `monitoring.came
 
 To improve the usability of your library, you could add comments to the properties of your configuration properties, for example:
 
-/\*\*
- \* Path of the Prometheus metrics endpoint
- \*/
+```java
+/**
+ * Path of the Prometheus metrics endpoint
+ */
 private String path = "/prometheus";
+```
 
 If you used the **spring-boot-configuration-processor** dependency, it will use these comments as metadata. When you do this, IDE's may pick them up and show them to the developer. This is what it looks like with IntelliJ:
 
-[![IntelliJ configuration properties intellisense](images/Screenshot-2018-01-14-17.19.37.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/01/Screenshot-2018-01-14-17.19.37.png)
+![IntelliJ configuration properties intellisense](images/Screenshot-2018-01-14-17.19.37.png)
 
 ### Creating your own autoconfiguration
 
 The next step is to create your own autoconfiguration class. To do this, you start by creating a simple class and annotating it with the `@Configuration` annotation, like this:
 
+```java
 @Configuration
 public class MonitorAutoConfiguration {
     // ...
 }
+```
 
 After that, you have to enable your configuration properties you created earlier, by adding the `@EnableConfigurationProperties` annotation. For example:
 
+```java
 @Configuration
 @EnableConfigurationProperties(MonitoringProperties.class)
 public class MonitorAutoConfiguration {
     // ...
 }
+```
 
 Now you can also customise when you want Spring to invoke your autoconfiguration. In our case, since we're a monitoring library, we want to invoke it after the metric repository autoconfiguration of the Spring boot actuator has been loaded. To do this, we can use the `@AutoConfigureAfter` annotation:
 
+```java
 @Configuration
 @EnableConfigurationProperties(MonitoringProperties.class)
 @AutoConfigureAfter(MetricRepositoryAutoConfiguration.class)
 public class MonitorAutoConfiguration {
     // ...
 }
+```
 
 ### Conditionals
 
@@ -133,6 +153,7 @@ Now, some Spring boot starters are only invoked when certain dependencies or oth
 
 In our case, we want to be sure that both the `GaugeService` and the `CounterService` classes are on the classpath. We can do this, by adding the `@ConditionalOnClass` annotation. Additionally, we only want to invoke our autoconfiguration if the project is a web application. If the project is not a web application, we can't do anything with the Prometheus endpoint, so we can't monitor it either with our library. To do this, you can use the `@ConditionalOnWebApplication` annotation:
 
+```java
 @Configuration
 @AutoConfigureAfter(MetricRepositoryAutoConfiguration.class)
 @ConditionalOnWebApplication
@@ -141,11 +162,13 @@ In our case, we want to be sure that both the `GaugeService` and the `CounterSer
 public class MonitorAutoConfiguration {
     // ...
 }
+```
 
 The nice thing about the `@ConditionalOnClass` annotation is that you can provide the classes as strings, so you don't have to add those classes to your classpath somehow.
 
 Now that you've properly annotated your configuration class, you can start adding beans to it that you need for your autoconfiguration to work. In my case, I need a filter that monitors certain paths, and I have to set up the Prometheus client configuration to automatically generate the `/prometheus` endpoint. So this is how I implemented my autoconfiguration:
 
+```java
 @Bean
 public SpringBootMetricsCollector springBootMetricsCollector(Collection<PublicMetrics> publicMetrics) {
     SpringBootMetricsCollector springBootMetricsCollector = new SpringBootMetricsCollector(publicMetrics);
@@ -163,6 +186,7 @@ public ServletRegistrationBean servletRegistrationBean(MonitoringProperties prop
 public MonitoringFilter filter(CounterService counterService, GaugeService gaugeService, MonitoringProperties monitoringProperties) {
     return new MonitoringFilter(counterService, gaugeService, monitoringProperties);
 }
+```
 
 You can see here that we used the `MonitoringProperties` in the filter we created, and also in the `ServletRegistrationBean` to create the `/prometheus` endpoint.
 
@@ -170,7 +194,9 @@ You can see here that we used the `MonitoringProperties` in the filter we create
 
 Before including your Spring boot starter in your other projects, you have to do one more thing. To make the application pick up our Spring boot starter, we have to create a special property file called **spring.factories**. This file should be placed within the **src/main/resources/META-INF** folder and should contain the `org.springframework.boot.autoconfigure.EnableAutoConfiguration` property, for example:
 
+```
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=be.g00glen00b.monitor.MonitorAutoConfiguration
+```
 
 This property should contain the fully qualified name of the autoconfiguration class, in our case this was `be.g00glen00b.monitor.MonitorAutoConfiguration`.
 

@@ -2,6 +2,8 @@
 title: "Validating the input of your REST API with Spring"
 date: "2018-06-08"
 coverImage: "spring-logo.png"
+categories: ["Java", "Tutorials"]
+tags: ["Spring", "Spring boot", "Validators"]
 ---
 
 When handling input of a user, validation is a common task. In fact, it's so common, that there's even a specification for it called [JSR 303 bean validation](http://beanvalidation.org/1.0/) and [JSR-380](http://beanvalidation.org/2.0/) which contains version 2 of the same specification. With Spring, we can utilize this specification to the fullest extent, and make validation an easier task.
@@ -14,7 +16,7 @@ To set up a Spring project with bean validation, you don't really need anything 
 
 After that, you can start adding validation annotations to your model. I'll personally use the following model:
 
-```
+```java
 @Entity
 @Data
 @NoArgsConstructor
@@ -46,7 +48,7 @@ public class UserInput {
 
 I'm also going to write a simple REST API to create new posts:
 
-```
+```java
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
@@ -73,7 +75,7 @@ Hey, that rhymes, so it must be good, right? Anyways, even though our API works 
 
 First of all, both `firstName`, `lastName`, `dateOfBirth` and `siblings` should be required to fill in. Only the `middleName` can be left empty. To do this, we can use the `@NotNull` annotation:
 
-```
+```java
 @NotNull
 private String lastName;
 @NotNull
@@ -86,7 +88,7 @@ private Integer siblings;
 
 Additionally to that, I want to limit the `lastName`, `middleName` and `firstName` fields to a certain amount of characters, because I limited them in my database to 60 characters. We can do that using the `@Size` annotation, which allows you to pass both a `min` and `max` property:
 
-```
+```java
 @NotNull
 @Size(min = 1, max = 60)
 private String lastName;
@@ -99,7 +101,7 @@ private String firstName;
 
 By adding the `min` property, we can also prevent people from passing empty strings as their last- or first name. The next step is that we also want to prevent people from adding a negative amount of siblings. For these types of checks we can use the `@Min` annotation:
 
-```
+```java
 @NotNull
 @Min(0)
 private Integer siblings;
@@ -107,7 +109,7 @@ private Integer siblings;
 
 However, if you're using the bean validation 2.0 API, you can make that even more readable by using the `@PositiveOrZero` annotation:
 
-```
+```java
 @NotNull
 @PositiveOrZero
 private Integer siblings;
@@ -115,7 +117,7 @@ private Integer siblings;
 
 Finally, we also want to make sure that the given date of birth lies in the past, not in the future. Since the 2.0 bean validation API, we have access to the `@Past` annotation which can be used in combination with the Java 8 time API like this:
 
-```
+```java
 @NotNull
 @Past
 private LocalDate dateOfBirth;
@@ -125,7 +127,7 @@ private LocalDate dateOfBirth;
 
 Right now, these validations don't really do anything. If you would run the application, it would result in the same output as before. To solve this, we need to add the `@Valid` annotation to the parameters we'd like to be validated. In my case, that would be the request body itself:
 
-```
+```java
 @PostMapping
 @Transactional
 public User save(@RequestBody @Valid UserInput user) {
@@ -141,7 +143,7 @@ public User save(@RequestBody @Valid UserInput user) {
 
 If you run the application now, you'll see that you can no longer add invalid objects. For example, let's say that I forgot to pass my first name, then I'll get the following response:
 
-```
+```json
 {
   "timestamp": "2018-06-07T13:40:58.353+0000",
   "status": 400,
@@ -184,7 +186,7 @@ So, as you can see, we get a (very) detailed error message describing that the f
 
 As you can see in the `defaultMessage` property, the error message is "must not be null". If you want to change this, you can add a `message` property to the specific annotation, for example:
 
-```
+```java
 @NotNull(message = "First name is a required field")
 @Size(min = 1, max = 60, message = "First name cannot be longer than 60 characters")
 private String firstName;
@@ -203,7 +205,7 @@ user.firstName.size=First name cannot be longer than 60 characters
 
 The next step is to change the `message` property of each annotation like this:
 
-```
+```java
 @NotNull(message = "{user.firstName.notNull}")
 @Size(min = 1, max = 60, message = "{user.firstName.size}")
 private String firstName;
@@ -211,7 +213,7 @@ private String firstName;
 
 And finally, we have to register our own `LocalValidatorFactoryBean` that is linked to the `MessageSource`. This new bean has to be placed in any configuration file, or in your main class. If you would forget to do this, you'll see that the message is simply `{user.firstName.notNull}`, which isn't exactly what we want.
 
-```
+```java
 @Bean
 public LocalValidatorFactoryBean validator(MessageSource messageSource) {
     LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
@@ -234,7 +236,7 @@ Now we only have the "60" in one place, great!
 
 While there are many built-in validations already, sometimes, there isn't an annotation that's doing exactly what you want. But no worries, what isn't there can be made! For example, let's say that our users have to be at least 18 years old (no, it's not what you're thinking), so let's create our own, `@Adult` annotation:
 
-```
+```java
 @Documented
 @Retention(RUNTIME)
 @Target({FIELD, ANNOTATION_TYPE, PARAMETER})
@@ -248,7 +250,7 @@ public @interface Adult {
 
 Now, to make this annotation work, we also have to write our business logic in a class called `AdultValidator`, which we pass to the `@Constraint` annotation as you can see above.
 
-```
+```java
 @Component
 public class AdultValidator implements ConstraintValidator<Adult, LocalDate> {
     private static final int ADULT_AGE = 18;
@@ -268,7 +270,7 @@ Also, if you want to pass parameters from your annotation to the validator (like
 
 Now we can just add the annotation to our `dateOfBirth` field and we're done!
 
-```
+```java
 @NotNull
 @Past
 @Adult
@@ -281,7 +283,7 @@ Additionally to what we've seen, you can also put constraints on class level, ju
 
 One thing that might bother you is how bulky the error message is. If you prefer to have only the error message and nothing else, you can write your own exception handler:
 
-```
+```java
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 @ExceptionHandler(MethodArgumentNotValidException.class)
 public List<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -294,6 +296,6 @@ public List<String> handleValidationExceptions(MethodArgumentNotValidException e
 
 Writing an exception handler can be done by creating a new method within the controller using the `@ExceptionHandler` annotation. If you want to apply this logic to all controllers, you should create a new class annotated with the `@ControllerAdvice`. Other than that, the code is pretty self-explanatory, from the binding result we retrieve a list of all errors, which we'll use the Java 8 stream API with to obtain the error messages, and to return a new list.
 
-![Screenshot of Postman](images/Screenshot-2018-06-08-15.26.12-1024x576.png)
+![Screenshot of Postman](images/Screenshot-2018-06-08-15.26.12.png)
 
 With this, we've seen pretty much everything there is to tell about validating beans with Spring and the bean validation API. As usual, the complete code example can be found on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-validation).

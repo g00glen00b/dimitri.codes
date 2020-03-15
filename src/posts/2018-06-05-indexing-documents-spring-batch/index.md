@@ -2,11 +2,13 @@
 title: "Indexing documents with Spring batch"
 date: "2018-06-05"
 coverImage: "spring-batch-1.png"
+categories: ["Java", "Tutorials"]
+tags: ["Solr", "Spring batcch", "Springn boot"]
 ---
 
 Batch processing of information is a common thing to do when developing applications. Spring has its own framework to handle batch processing, called [Spring batch](https://projects.spring.io/spring-batch/). In this tutorial, I'll use Spring batch to index markdown documents on my local disk onto Solr to make them easier to search for.
 
-[![Spring batch + Apache Solr](images/spring-batch-solr-1024x342.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/spring-batch-solr.png)
+![Spring batch + Apache Solr](images/spring-batch-solr.png)
 
 ### Getting started
 
@@ -17,7 +19,7 @@ To create a Spring boot project with Spring batch, I'm going to use [Spring Init
 - **Solr**: To index documents into Solr, we're going to use the Springs wrapper for SolrJ, which is a client library to use with Solr.
 - **Lombok**: Lombok is a library that generates getters, setters, constructors and various other things for me. I'll use it to simplify the code in this tutorial.
 
-[![Dependencies for a Spring batch application](images/workspaces-2.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/workspaces-2.png)
+![Dependencies for a Spring batch application](images/workspaces-2.png)
 
 ### Batch appliczation structure
 
@@ -30,21 +32,19 @@ Spring batch contains a few key elements, such as:
 - **Writers**: The writer is the final part within a step, and can be used to write data back to a CSV, a database, ... .
 - **Tasklets**: Sometimes, a step doesn't require a reader, processor and writer but only a tasklet. For example, when indexing data in Solr, you can use a separate step with tasklet to optimize at the end of the batch process.
 
-[![Detailed overview of a reader, processor and writer within a step and batch job.](images/spring-batch.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/spring-batch.png)
+![Detailed overview of a reader, processor and writer within a step and batch job.](images/spring-batch.png)
 
 ### Custom configuration
 
 But before we start configuring jobs, steps, and so on, let's start by defining the configuration properties of our application. [Last time](https://wordpress.g00glen00b.be/solr-tika-docker/), I set up Solr with Tika by providing a separate `/update/extract` endpoint. In this tutorial, I'll be using that endpoint, so I'll provide it as a configuration property. Other than that, I'm also going to define the location of my Markdown files to be indexed:
 
-```
-
+```java
 @ConfigurationProperties(prefix = "reader")
 @Data
 public class MarkdownReaderConfigurationProperties {
     private String pathPattern;
     private String extractPath;
 }
-
 ```
 
 In this case, `pathPattern` will contain the pattern the markdown files have to match in order to be picked up by the batch process. For example `reader.path-pattern=/users/g00glen00b/documents/**/*.md` will allow me to scan the files in a specific folder.
@@ -58,8 +58,7 @@ Now that we have our configuration properties, we can start configuring the batc
 
 The batch configuration for these steps looks like this:
 
-```
-
+```java
 @Configuration
 @EnableBatchProcessing
 @EnableConfigurationProperties(MarkdownReaderConfigurationProperties.class)
@@ -93,22 +92,19 @@ public class MarkdownSolrBatchConfig {
     }
 
 }
-
 ```
 
 What's important to notice here is the `@EnableBatchProcessing` annotation used to enable Spring batch. This is necessary to have references to the `JobBuilderFactory`, the `StepBuilderFactory`, ... . I also enabled the configuration property by adding the `@EnableConfigurationProperties` annotation.
 
 Within the `indexingStep` you can see that the reader/processor/writer API requires you to provide a generic with the in- and output types. In this case I'm using `Resource` as the input type, and `HtmlRendering`, a custom class, as the output type.
 
-```
-
+```java
 @AllArgsConstructor
 @Data
 public class HtmlRendering {
     private Resource resource;
     private String html;
 }
-
 ```
 
 This class will contain a refernece back to the original `Resource` and to the rendered HTML.
@@ -119,8 +115,7 @@ Spring batch has several built-in readers. Readers to read lines from a single f
 
 First of all, I created my own implementation of `MultiResourceItemReader`:
 
-```
-
+```java
 @Component
 @AllArgsConstructor
 public class MarkdownFileReader extends MultiResourceItemReader<Resource> {
@@ -134,15 +129,13 @@ public class MarkdownFileReader extends MultiResourceItemReader<Resource> {
         setDelegate(new ResourcePassthroughReader());
     }
 }
-
 ```
 
 This class will use the pattern that I defined before. This reader doesn't work on its own though, and requires a delegate item reader. This can be used to read lines from multiple CSV files for example. With a custom reader, you can also use it to pass files as a while rather than reading each line separate.
 
 To do this, I defined the following delegate reader:
 
-```
-
+```java
 public class ResourcePassthroughReader implements ResourceAwareItemReaderItemStream<Resource> {
     private Resource resource;
     private boolean read = false;
@@ -176,7 +169,6 @@ public class ResourcePassthroughReader implements ResourceAwareItemReaderItemStr
     public void close() throws ItemStreamException {
     }
 }
-
 ```
 
 What's important here is that the `MultiResourceItemReader` will keep reading from the delegate reader until it returns `null`. That's why I'm storing a separate boolean field called `read` to know if I already returned a result, and if so, return `null` to prevent infinite loops.
@@ -189,20 +181,17 @@ Solr and Tika support many formats, but as far as I know, they don't support mar
 
 To be able to parse Markdown to HTML, I'm using the [commonmark-java library](https://github.com/atlassian/commonmark-java) from Atlassian:
 
-```
-
+```xml
 <dependency>
     <groupId>com.atlassian.commonmark</groupId>
     <artifactId>commonmark</artifactId>
     <version>0.11.0</version>
 </dependency>
-
 ```
 
 The implementation of the processor isn't that difficult, and will use the commonmark API:
 
-```
-
+```java
 @Component
 public class MarkdownFileHtmlProcessor implements ItemProcessor<Resource, HtmlRendering> {
     private Parser parser;
@@ -222,7 +211,6 @@ public class MarkdownFileHtmlProcessor implements ItemProcessor<Resource, HtmlRe
         }
     }
 }
-
 ```
 
 By passing the `Resource` to the processor, we can use the `getInputStream()` method to create a reader. By using Java 8's [try-with-resources](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html), it will also automatically close after reading, so we don't have to handle that.
@@ -231,8 +219,7 @@ By passing the `Resource` to the processor, we can use the `getInputStream()` me
 
 The Solr writer is a bit more complex, and will use a `ContentStreamUpdateRequest` to upload a contentstream from a string using the `SolrClient`:
 
-```
-
+```java
 @Component
 @AllArgsConstructor
 public class SolrHtmlWriter implements ItemWriter<HtmlRendering> {
@@ -267,8 +254,6 @@ public class SolrHtmlWriter implements ItemWriter<HtmlRendering> {
         }
     }
 }
-
-
 ```
 
 By creating a `StringStream`, we can pass the HTML generated by commonmark to Solr. But since we're not sending a complete file, we also have to pass the mediatype and the charset of the content. For HTML, you can use the `text/html;charset=UTF-8` content type to handle that.
@@ -281,8 +266,7 @@ If you index documents, you should otpimize the Solr index afterwards to increas
 
 A proper way to do this is by creating a new step and adding a tasklet to it:
 
-```
-
+```java
 @Component
 @AllArgsConstructor
 public class SolrOptimizeTasklet implements Tasklet {
@@ -294,7 +278,6 @@ public class SolrOptimizeTasklet implements Tasklet {
         return RepeatStatus.FINISHED;
     }
 }
-
 ```
 
 ### Testing it out
@@ -303,6 +286,6 @@ Now that we have our batch process completely defined, you can try it out by run
 
 After everything has been indexed, you can check the [Solr dashboard](http://localhost:8983/solr/#/) and write a simple query to verify that the documents have been stored.
 
-[![Solr query showing documents](images/workspaces-solr-query-1024x302.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/workspaces-solr-query.png)
+![Solr query showing documents](images/workspaces-solr-query.png)
 
 As you can see, the markdown files on my disk have been indexed, and can now be searched on Solr, all thanks to Spring batch. If you're interested in the code, you can find it on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-solr-batch).

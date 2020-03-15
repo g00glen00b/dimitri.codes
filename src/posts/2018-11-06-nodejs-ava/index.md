@@ -2,11 +2,13 @@
 title: "Testing your Node.js application with AVA"
 date: "2018-11-06"
 coverImage: "ava.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["AVA", "Babel", "Node.js", "Sinon.js"]
 ---
 
-[A while ago](https://wordpress.g00glen00b.be/graphql-nodejs-express-apollo/), I wrote a simple GraphQL API using Node.js, Express.js, Apollo and Mongoose. While the API probably works, we didn't really invest any time to write some unit tests for it. That's going to change now. There are many testing frameworks and test runners out there, but in this tutorial I'll be checking out the [AVA test runner](https://github.com/avajs/ava).
+[A while ago](/graphql-nodejs-express-apollo/), I wrote a simple GraphQL API using Node.js, Express.js, Apollo and Mongoose. While the API probably works, we didn't really invest any time to write some unit tests for it. That's going to change now. There are many testing frameworks and test runners out there, but in this tutorial I'll be checking out the [AVA test runner](https://github.com/avajs/ava).
 
-[![AVA + Sinon.js](images/ava-sinonjs.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/ava-sinonjs.png)
+![AVA + Sinon.js](images/ava-sinonjs.png)
 
 ### Migrating to Babel 7
 
@@ -24,7 +26,7 @@ npm install --save-dev @babel/core @babel/node @babel/preset-env @babel/preset-s
 
 The final step is to update our **.babelrc** file to include the scoped package presets:
 
-```
+```json
 {
   "presets": ["@babel/env", "@babel/stage-2"],
   "plugins": []
@@ -51,7 +53,7 @@ The last step is to configure AVA and to add it as an npm script. Since I'll be 
 
 Additionally to that, I also had to configure the babel register to make our tests work properly. Last but not least, I configured the `npm test` script to use `ava --verbose`:
 
-```
+```json
 {
   "name": "graphql-qa-clone-api",
   "version": "1.0.0",
@@ -75,7 +77,7 @@ Additionally to that, I also had to configure the babel register to make our tes
 
 The first thing I'm going to test is my `returnOnError` helper, which would return a default value if any error is thrown within the logic. The implementation of this helper looks like this:
 
-```
+```javascript
 const returnOnError = (operation, alternative) => {
   try {
     return operation();
@@ -90,7 +92,7 @@ To test this, I'm going to write two tests:
 1. One that tests if the result of the operation is used when executed successfully.
 2. Another one to test if the alternative is returned when an error occurs.
 
-```
+```javascript
 import {test} from 'ava';
 import {returnOnError} from '../../src/helpers';
 
@@ -109,7 +111,7 @@ As you can see, this looks pretty clean. In both cases we defined a function usi
 
 The next piece of code I'm going to test is the promisify helper I wrote to convert a Mongoose query result to a promise. The implementation of this method looks like this:
 
-```
+```javascript
 const promisify = query => new Promise((resolve, reject) => {
   query.exec((err, data) => {
     if (err) reject(err);
@@ -129,7 +131,7 @@ In this case, I'm also going to write two tests:
 1. One that tests if the promise is being resolved when the query returns a result.
 2. Another one that tests if the promise is being rejected if we get an error.
 
-```
+```javascript
 import {promisify} from '../../src/helpers';
 import {test} from 'ava';
 import * as sinon from 'sinon';
@@ -167,7 +169,7 @@ While our previously tested code was well isolated, you don't always have that o
 
 For example, let's say I want to write a unit test for the `author` resolver of `Post`. The implementation looks like this:
 
-```
+```javascript
 const resolvers = {
   author: post => promisify(User.findById(post.authorId))
 };
@@ -177,7 +179,7 @@ export default resolvers;
 
 This code relies on the `User` model, which we imported within our resolver, so what now? Let's write a test:
 
-```
+```javascript
 test('author resolver fetches the user', t => {
   const exec = sinon.stub();
   const user = {id: 1, name: 'Foo'};
@@ -196,13 +198,13 @@ Just like before, we can write our assertions within the promise handler, given 
 
 Additionally to what we've tested now, we could also write an assertion to make sure that the code passes the ID of the author to the `User.findById()` function by doing this:
 
-```
+```javascript
 t.is(UserModel.findById.lastCall.args[0], 1);
 ```
 
 You have to be really careful though when you write tests with stubs like this. AVA's biggest advantage, but also a big pitfall is that it runs tests in parallel. This means that if you have multiple tests that stub `UserModel.findById`, it could be that another test overrode the stub. So, to improve the last test, we should assign the stub to a local variable as well:
 
-```
+```javascript
 test('author resolver fetches the user', t => {
   const exec = sinon.stub();
   const user = {id: 1, name: 'Foo'};
@@ -232,7 +234,7 @@ npx ava --verbose
 
 After that, you'll see the results being displayed:
 
-[![AVA output](images/Screenshot-2018-07-23-15.22.28.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/Screenshot-2018-07-23-15.22.28.png)
+![AVA output](images/Screenshot-2018-07-23-15.22.28.png)
 
 If you don't use the `--verbose` flag, you'll see the output appear on a single line.
 
@@ -250,7 +252,7 @@ npx nyc npm test
 
 This will result in a table summary containing your coverage statistics, for example:
 
-[![Istanbul.js nyc coverage report](images/Screenshot-2018-07-23-15.48.46.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/Screenshot-2018-07-23-15.48.46.png)
+![Istanbul.js nyc coverage report](images/Screenshot-2018-07-23-15.48.46.png)
 
 ### Summarized
 

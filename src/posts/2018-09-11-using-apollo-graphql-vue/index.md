@@ -1,11 +1,13 @@
 ---
 title: "Using Apollo GraphQL with Vue"
 date: "2018-09-11"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Apollo", "GraphQL", "JavaScipt", "Vue"]
 ---
 
-[Last time](https://wordpress.g00glen00b.be/getting-started-vue-at-ui/), I wrote a simple Vue application using dummy data in our components. Today, we're going to link it to the [Apollo GraphQL](https://www.apollographql.com/) API that I wrote earlier. As said before, Apollo has both a server-component that can integrate with Express, but also a client component that can integrate with Angular, React but also with Vue.
+[Last time](/getting-started-vue-at-ui/), I wrote a simple Vue application using dummy data in our components. Today, we're going to link it to the [Apollo GraphQL](https://www.apollographql.com/) API that I wrote earlier. As said before, Apollo has both a server-component that can integrate with Express, but also a client component that can integrate with Angular, React but also with Vue.
 
-[![Vue.js + Apollo + GraphQL](images/vue-apollo-graphql.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/05/vue-apollo-graphql.png)
+![Vue.js + Apollo + GraphQL](images/vue-apollo-graphql.png)
 
 ### Adding Apollo to our project
 
@@ -13,12 +15,11 @@ To add Apollo, you can either use the Apollo plugin for Vue CLI (if you're using
 
 ```
 npm install --save vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag
-
 ```
 
 After that, you can create a **src/apollo/index.js** file and add the following content:
 
-```
+```javascript
 import {HttpLink} from 'apollo-link-http';
 import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
@@ -42,7 +43,7 @@ export default apolloClient;
 
 This will export a "standard" Apollo client over HTTP, which we can now import in the **main.js** file so that we can use it throughout the application. To do this, you need to create a new provider:
 
-```
+```javascript
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 });
@@ -50,14 +51,14 @@ const apolloProvider = new VueApollo({
 
 To be able to do this, I also had to import both the `apolloClient` from the **src/apollo/index.js** location and `VueApollo`:
 
-```
+```javascript
 import VueApollo from 'vue-apollo';
 import apolloClient from './apollo';
 ```
 
 And finally, you also have to add your provider to your `Vue` instance:
 
-```
+```javascript
 new Vue({
   render: h => h(App),
   router,
@@ -71,7 +72,7 @@ Now that we've setup our project, you can start writing queries. The first thing
 
 To do this, I'm going to create a separate file called **src/questions/queries.js** which will contain all the GraphQL queries related to questions. In this file, I'm going to start by exporting an `AllQuestions` query:
 
-```
+```javascript
 import gql from 'graphql-tag';
 
 export const AllQuestions = gql`
@@ -91,7 +92,7 @@ export const AllQuestions = gql`
 
 The `gql` template literal tag library will parse the query for us, so that it can be used within our components. Before we actually start to use our query we need to remove the dummy data, and just replace it by an empty array:
 
-```
+```javascript
 data () {
   return {
     questions: []
@@ -101,7 +102,7 @@ data () {
 
 After that, we can add the query to our component:
 
-```
+```javascript
 import QuestionList from './QuestionList';
 import {AllQuestions} from './queries';
 
@@ -128,7 +129,7 @@ The way Apollo works is that we define the proper type properties (in this case 
 
 As you can see in the example above, we've hardcoded the `variables` section, but in most cases you probably want to customize this. To do this, let's create two new properties in our component called `offset` and `questionCount`:
 
-```
+```javascript
 data () {
   return {
     offset: 0,
@@ -140,7 +141,7 @@ data () {
 
 The `questionCount` property will be provided by our backend, and will contain the amount of questions there are, so we can use some kind of pagination component. That means we need to add a new property to the `apollo` section:
 
-```
+```javascript
 export default {
   apollo: {
     questions: {
@@ -164,7 +165,7 @@ As you can see, we're re-using the `AllQuestions` query for this new property. A
 
 The next step is to add a pagination component to the `QuestionsPage` component template:
 
-```
+```html
 <at-pagination :total="questionCount" show-total v-on:page-change="updateOffset"></at-pagination>
 ```
 
@@ -172,7 +173,7 @@ In this case, I'm using the pagination component from AT UI, which requires us t
 
 Since we're using an offset (offset N elements) rather than a page number, I'll have to convert it within the `updateOffset` method:
 
-```
+```javascript
 methods: {
   updateOffset (pageNumber) {
     this.offset = (pageNumber - 1) * 10;
@@ -182,7 +183,7 @@ methods: {
 
 One thing you'll notice is that Apollo uses its own cache when fetching the same page. If you don't want to do this, you can change your `ApolloClient` in **src/apollo/index.js**:
 
-```
+```javascript
 const apolloClient = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
@@ -198,7 +199,7 @@ const apolloClient = new ApolloClient({
 
 Being able to retrieve a list of questions using GraphQL is nice, but it would also be great if I could create new questions as well. To do this, I wrote a new component and created a `saveQuestion()` method that will do the actual saving:
 
-```
+```javascript
 export default {
   components: {QuestionEditor},
   data () {
@@ -214,7 +215,7 @@ export default {
 
 Writing mutations with Vue and Apollo is a bit different compared to querying. One similarity though is that we need to define our query first, for example:
 
-```
+```javascript
 export const CreateQuestion = gql`
   mutation CreateQuestion($input: QuestionInput!) {
     createQuestion(input: $input) {
@@ -227,7 +228,7 @@ export const CreateQuestion = gql`
 
 After that, we can use the query by using `this.$apollo` in our component, for example:
 
-```
+```javascript
 saveQuestion (question) {
   const input = {...question};
   input.authorId = '5aeb5bd99be6ec471bcdff2f'; // Dummy author ID

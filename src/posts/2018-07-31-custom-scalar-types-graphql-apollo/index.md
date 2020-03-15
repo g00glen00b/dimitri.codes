@@ -1,6 +1,8 @@
 ---
 title: "Using custom scalar types with GraphQL and Apollo"
 date: "2018-07-31"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Apollo", "Express", "GraphQL"]
 ---
 
 Last time, we created a GraphQL API with Node.js, Express, Mongoose and Apollo. However, one of the fields we tried to use was the `createdAt` date. Since GraphQL doesn't come with a date-based scalar type, we used a simple `String`. However, the result of that is that it calls the [`Date.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toString) function which returns a string in the following format: `Thu Jan 01 1970 01:00:00 GMT+0100 (CET)`. In this tutorial, I'll replace it with an ISO timestamp.
@@ -9,13 +11,13 @@ Last time, we created a GraphQL API with Node.js, Express, Mongoose and Apollo. 
 
 The first thing you have to do, is to adjust the schema to introduce the new scalar. This means that you need to define the scalar itself:
 
-```
+```graphql
 scalar ISODate
 ```
 
 Next to that, we also have to change the type of `createdAt` from `String` to `ISODate`:
 
-```
+```graphql
 type Post {
   _id: ID!
   content: String
@@ -38,7 +40,7 @@ The next thing to do is to write the scalar itself. Basically, a scalar is a spe
 
 Before writing the scalar type itself, I'm going to introduce a new helper:
 
-```
+```javascript
 const returnOnError = (operation, alternative) => {
   try {
     return operation();
@@ -50,7 +52,7 @@ const returnOnError = (operation, alternative) => {
 
 After that, you can use the helper to write the custom scalar:
 
-```
+```javascript
 import {Kind} from 'graphql/language';
 import {GraphQLScalarType} from 'graphql';
 import {returnOnError} from '../helpers';
@@ -80,7 +82,7 @@ By using the `GraphQLScalarType` you can define your own scalars, using the func
 
 The final step to make your custom scalar work is to include it as a resolver. I defined my resolvers in **src/schema/index.js**, so I'll change my code to do the following:
 
-```
+```javascript
 import ISODate from '../scalars/ISODate';
 
 const resolvers = {Query, Mutation, Question, Post, User, Vote, ISODate};
@@ -89,7 +91,7 @@ export default makeExecutableSchema({typeDefs, resolvers});
 
 If you run the application now, and make a query to get a posts creation date, you'll see that it's now formatted as an ISO string:
 
-```
+```graphql
 query AllQuestions($query: Pagination!) {
   questionCount
   questions(query: $query) {
@@ -104,6 +106,6 @@ query AllQuestions($query: Pagination!) {
 }
 ```
 
-[![GraphiQL example of scalar type converting date to an ISO timestamp](images/Screenshot-2018-05-13-21.04.14.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/05/Screenshot-2018-05-13-21.04.14.png)
+![GraphiQL example of scalar type converting date to an ISO timestamp](images/Screenshot-2018-05-13-21.04.14.png)
 
 If you're interested in the full code, you can find it on [GitHub](https://github.com/g00glen00b/apollo-express-vue-example).

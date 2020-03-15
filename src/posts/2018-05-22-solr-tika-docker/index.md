@@ -1,17 +1,19 @@
 ---
 title: "Setting up Apache Solr with Tika using Docker"
 date: "2018-05-22"
+categories: ["Java", "Tutorials"]
+tags: ["Docker", "Solr", "Tika"]
 ---
 
 When indexing documents, [Apache Solr](http://lucene.apache.org/solr/) is a possible solution. Combined with [Apache Tika](http://tika.apache.org/), you can also use Solr to index various types of documents, such as PDFs, Word documents, HTML files, ... . In this tutorial, I'll be setting up Solr with Tika using [Docker compose](https://docs.docker.com/compose/).
 
-[![Docker + Solr](images/docker-solr.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/docker-solr.png)
+![Docker + Solr](images/docker-solr.png)
 
 ### Project structure
 
 In my case, I want to run Solr inside a Docker container next to my Java application. That means I will have the following project structure:
 
-[![Project structure of a Solr Docker project](images/workspaces.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/workspaces.png)
+![Project structure of a Solr Docker project](images/workspaces.png)
 
 In this case, **src/** is the code of my Java application, while the **solr/** folder will be used for binding certain folders in my Docker container.
 
@@ -30,8 +32,7 @@ Additionally to these libraries, you may need other libraries as well, depending
 
 To include these libraries, you can either download them manually and place them in **solr/libs** or you can use Maven to download them if you use the [**maven-dependency-plugin**](https://maven.apache.org/plugins/maven-dependency-plugin/):
 
-```
-
+```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-dependency-plugin</artifactId>
@@ -96,7 +97,6 @@ To include these libraries, you can either download them manually and place them
         </execution>
     </executions>
 </plugin>
-
 ```
 
 ### Configuring your Solr core
@@ -105,8 +105,7 @@ By default, Solr within Docker will load cores automatically if placed within th
 
 So, within my project, I created a folder called **solr/core/conf** and added the **solrconfig.xml** file:
 
-```
-
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
     <luceneMatchVersion>6.0.0</luceneMatchVersion>
@@ -146,7 +145,6 @@ So, within my project, I created a folder called **solr/core/conf** and added th
         </lst>
     </initParams>
 </config>
-
 ```
 
 What's important to notice here is that I'll be including libraries from the `../../solr-cell/` folder. This will be another bind mount within the Docker container, referencing the **solr/libs** folder that I defined earlier. Another thing to notice is the request handler for `/update/extract`. This is the Solr cell request handler that can be used to index PDF files, Word documents, ... .
@@ -159,8 +157,7 @@ When using Solr cell, you can pretty much chose the fields you want by yourself.
 
 This file has to be configured within the same folder as before, meaning that you should put it within the \*\*\*\*solr/core/conf\*\* folder.
 
-```
-
+```xml
 <?xml version="1.0" ?>
 <schema name="markdown" version="1.1">
     <types>
@@ -195,17 +192,14 @@ This file has to be configured within the same folder as before, meaning that yo
 
     <uniqueKey>file.id</uniqueKey>
 </schema>
-
 ```
 
 What's important to notice here is that I'm using the `StopFilterFactory` and the `SynonymFilterFactory`, which means you need to define a `stopwords.txt` and `synonyms.txt` file. For example, you can use the [CoreNLP stopwords.txt file](https://github.com/stanfordnlp/CoreNLP/blob/master/data/edu/stanford/nlp/patterns/surface/stopwords.txt). An example of the `synonyms.txt` syntax can be found within the [Solr GitHub project itself](https://github.com/apache/lucene-solr/blob/master/solr/server/solr/configsets/sample_techproducts_configs/conf/synonyms.txt). These files have to be stored within the **solr/core** folder.
 
 Additionally, if you want to properly debug what's happening, you may want to change the `indexed` and `stored` attributes of the `ignored_` field to `true`. This gives you a better overview of what happened behind the screens and what parsers were used:
 
-```
-
+```xml
 <dynamicField name="ignored_*" type="text_general" indexed="true" stored="true"/>
-
 ```
 
 If you're using older versions of Solr, you may want to replace the `solr.LongPointField` and `solr.DatePointField` fields by `solr.TrieLongField` and `solr.TrieDateField` respectively.
@@ -219,8 +213,7 @@ Configuring Docker compose happens through the configuration of a YAML file call
 
 My Docker compose configuration looks like this:
 
-```
-
+```yaml
 version: '3.1'
 
 services:
@@ -231,25 +224,22 @@ services:
     volumes:
       - ./solr/core/:/opt/solr/server/solr/markdown/
       - ./solr/libs/:/opt/solr/server/solr-cell/
-
 ```
 
 ### Running the project
 
 To run the project, you can use the `docker-compose up` command. After a while, Solr should have been started. You can now take a look at the Solr dashboard at [http://localhost:8983/solr](http://localhost:8983/solr/) which should have loaded your core:
 
-[![Example of a Solr dashboard](images/workspaces-1.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/03/workspaces-1.png)
+![Example of a Solr dashboard](images/workspaces-1.png)
 
 ### Configuring Tika
 
 If, for some reason you want to configure Tika using the [XML configuration format](https://tika.apache.org/1.17/configuring.html#Using_a_Tika_Configuration_XML_file), you can do this by adding a file called **tika-config.xml** to the **solr/core/conf** folder (next to `solrconfig.xml` and `schema.xml`). To load this configuration, you have to define another `<initParams>` element within `solrconfig.xml`:
 
-```
-
+```xml
 <initParams path="/update/extract">
     <str name="tika.config">tika-config.xml</str>
 </initParams>
-
 ```
 
 This will properly load the Tika configuration file when Solr starts. For more configuration properties you can take a look at [this Solr guide](https://lucene.apache.org/solr/guide/6_6/uploading-data-with-solr-cell-using-apache-tika.html#UploadingDatawithSolrCellusingApacheTika-ConfiguringtheSolrExtractingRequestHandler).

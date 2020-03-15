@@ -2,6 +2,8 @@
 title: "Generating documentation for your REST API with Spring REST Docs"
 date: "2018-10-09"
 coverImage: "asciidoctor.png"
+categories: ["Java", "Tutorials"]
+tags: ["AsciiDoc", "Integration testing", "Java", "Spring boot"]
 ---
 
 [Last time](https://wordpress.g00glen00b.be/generating-static-documentation-swagger/), we automatically generated documentation for our REST APIs written with Spring using Swagger annotations, Springfox and AsciiDoc. This allowed us to list all possible operations, models and so on. Additionally to such documentation, it could be interesting to have some examples as well. With Spring REST Docs we can automatically generate these examples by writing some integration tests. Let's find out how!
@@ -12,7 +14,7 @@ Before we can actually generate our documentation, we need a working REST API. S
 
 After opening the project in our favourite IDE, we can start writing our models. Just like last time, my API will be about creating and retrieving users.
 
-```
+```java
 @Entity
 @Data
 @NoArgsConstructor
@@ -29,7 +31,7 @@ public class User {
 }
 ```
 
-```
+```java
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,7 +53,7 @@ public class UserInput {
 }
 ```
 
-```
+```java
 @Data
 @AllArgsConstructor
 public class ApiError {
@@ -64,7 +66,7 @@ public class ApiError {
 }
 ```
 
-```
+```java
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {
         super(message);
@@ -74,14 +76,14 @@ public class UserNotFoundException extends RuntimeException {
 
 Now that we have these, we can create our repository to access the database:
 
-```
+```java
 public interface UserRepository extends JpaRepository<User, Long> {
 }
 ```
 
 And also our controller:
 
-```
+```java
 @Validated
 @RestController
 @RequestMapping("/api/user")
@@ -162,7 +164,7 @@ On these calls there are also certain validations. For example, the `findAll()` 
 
 Writing integration tests with Spring and Mock MVC isn't difficult, but before we can do that, we need to set up our test using some annotations:
 
-```
+```java
 @RunWith(SpringRunner.class)
 @WebMvcTest
 @AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
@@ -188,7 +190,7 @@ Within the test we also autowired `MockMvc` so that we can use it within our tes
 
 Now that we have our test class set up, we can write some integration tests. First, let's get started with the **GET /api/user** operation:
 
-```
+```java
 @Test
 public void findAllShouldReturnListOfUsers() throws Exception {
     when(repository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Lists.newArrayList(
@@ -224,7 +226,7 @@ Additionally to that, there will also be a header (`X-Users-Total`), so we can w
 
 Documenting an integration test isn't difficult. Just after our test, we can use the `andDo()` method to add the documentation handler, for example:
 
-```
+```java
 @Test
 public void findAllShouldReturnListOfUsers() throws Exception {
     when(repository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Lists.newArrayList(
@@ -262,7 +264,7 @@ After that, you should be able to find your generated documentation within the *
 
 While Spring REST Docs will now generate some snippets for us, we can also provide additional metadata so that our snippets become even more useful. For example:
 
-```
+```java
 @Test
 public void findAllShouldReturnListOfUsers() throws Exception {
     when(repository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Lists.newArrayList(
@@ -310,7 +312,7 @@ Spring REST Docs generates several little snippets that you can use. The advanta
 
 Now, the first step to combine these snippets is to create our "main documentation page". To do this, I'm going to create a file called **src/main/asciidoc/index.html**:
 
-```
+```asciidoc
 :sectnums:
 :sectnumlevels: 5
 :toc: left
@@ -328,7 +330,7 @@ Since I'm going to end up with a lot of snippets to include, I decided to write 
 
 So, my **find-all/index.adoc** looks like this:
 
-```
+```asciidoc
 [[users_find_all]]
 === Find all users
 
@@ -345,7 +347,7 @@ In here, I'm including all different scenarios. So far, we've only written an in
 
 My **find-all/success.adoc** file looks like this:
 
-```
+```asciidoc
 [[users_find_all_success]]
 ==== Successful call
 When making a successfull call to this API endpoint, the following request parameters and body can be expected.
@@ -380,7 +382,7 @@ include::{snippets}/find-all-should-return-list-of-users/curl-request.adoc[]
 
 While the AsciiDoc format is already supported on many platforms, including IntelliJ, Visual Studio Code, GitHub, ..., it doesn't hurt to generate an HTML file from our documentation. To be able to do this, I'm going to use the **asciidoctor-maven-plugin** with the following configuration:
 
-```
+```xml
 <plugin>
     <groupId>org.asciidoctor</groupId>
     <artifactId>asciidoctor-maven-plugin</artifactId>
@@ -417,7 +419,7 @@ Basically, I configured the source directory, the name of the main document, the
 
 Now, if we run `mvn package`, we'll see that there is a folder being generated with the name **snippets** and **documentation** within **target/generated-sources**. The HTML file can now be opened in any browser to be able to see the result.
 
-[![Screenshot of the generated HTML](images/Screenshot-2018-06-29-20.29.10.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/Screenshot-2018-06-29-20.29.10.png)
+![Screenshot of the generated HTML](images/Screenshot-2018-06-29-20.29.10.png)
 
 ### Using custom snippet templates
 
@@ -425,7 +427,7 @@ As you've seen now, we can indicate whether or not a field is optional by using 
 
 For example:
 
-```
+```asciidoc
 |===
 |Parameter|Optional|Description
 
@@ -440,13 +442,13 @@ For example:
 
 If we build the application again, and we take a look at the generated HTML, you'll see that the request parameters now contain an additional column mentioning if the field is optional or not.
 
-[![Screenshot of the generated HTML with the additional column](images/Screenshot-2018-06-29-20.30.55.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/Screenshot-2018-06-29-20.30.55.png)
+![Screenshot of the generated HTML with the additional column](images/Screenshot-2018-06-29-20.30.55.png)
 
 ### Adding constraints
 
 Another feature which we didn't use yet is the possibility to add your constraints. If you're using bean validation like I did on the `UserInput` class, you can add these to your documentation as well.
 
-```
+```java
 @Test
 public void saveShouldReturnUser() throws Exception {
     ConstraintDescriptions constraintDescriptions = new ConstraintDescriptions(UserInput.class);
@@ -496,7 +498,7 @@ By using the `ConstraintDescriptions` class combined with setting an attribute (
 
 However, to be able to see the constraint descriptions, we need a custom template here as well. So let's create a templated called **request-fields.snippet** within the same folder as before, and add a column for the constraints (and perhaps one for the optional fields as well):
 
-```
+```asciidoc
 |===
 |Path|Type|Optional|Description|Constraints
 
@@ -513,7 +515,7 @@ However, to be able to see the constraint descriptions, we need a custom templat
 
 Now you can include the generated snippets in your documentation as well, and the result will be similar to the one in the screenshot below.
 
-[![Screenshot of the constraints visualized with Spring REST Docs](images/workspaces-constraints-rest-docs2.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/07/workspaces-constraints-rest-docs2.png)
+![Screenshot of the constraints visualized with Spring REST Docs](images/workspaces-constraints-rest-docs2.png)
 
 Be aware though, automatically adding constraint information is only supported for validation on properties within a bean. As far as I'm aware, this doesn't include direct constraints on request parameters like for the `@Positive` annotation on the `page` and `size` parameters within the `findAll()` method.
 

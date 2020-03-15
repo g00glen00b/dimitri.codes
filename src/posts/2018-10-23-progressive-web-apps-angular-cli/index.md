@@ -1,6 +1,8 @@
 ---
 title: "Progressive Web Apps with Angular CLI"
 date: "2018-10-23"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Angular", "Angular CLI", "PWA"]
 ---
 
 One of the buzzwords of Google nowadays is Progressive Web Apps or shortly PWA's. In this tutorial we'll learn what progressive webapps exactly are. Additionally we'll see how we can use them and how we can integrate it with Angular and Angular CLI.
@@ -59,7 +61,7 @@ The **manifest.json** describes your application, such as:
 
 This is an example **src/manifest.json** (removed some of the icons for readability in this example):
 
-```
+```json
 {
   "name": "Task manager",
   "short_name": "Task manager",
@@ -83,24 +85,24 @@ In my case, the colors are based upon the [color system of Material design](http
 
 Additionally to setting the theme color within the manifest, it's also a good idea to change the `<meta />` tag generated within **index.html**:
 
-```
+```html
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#64B5F6">
 ```
 
 If you change this theme color, and you run the application on a mobile device, you'll see that the color of the address bar changes to the specific theme color.
 
-[![Theme color applied on mobile](images/Screenshot_20180923-133833-e1538214550146-1024x395.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/09/Screenshot_20180923-133833-e1538214550146.png)
+![Theme color applied on mobile](images/Screenshot_20180923-133833-e1538214550146.png)
 
 Additionally, if you add the application to the home screen manually, you'll see that it shows the name of the application and the icon that are provided in the manifest. In Chrome you can do this by opening the menu and selecting **Add to Home screen**.
 
-[![Adding to homescreen confirmation](images/Screenshot_20180923-134907-e1538214517221-1024x502.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/09/Screenshot_20180923-134907-e1538214517221.png)
+![Adding to homescreen confirmation](images/Screenshot_20180923-134907-e1538214517221.png)
 
 ### Service worker
 
 One of the key-features of progressive webapps is the use of service workers. Service workers are basic JavaScript files that run in the background. One of their uses is to make your application available offline. However, to do that, the script should load all necessary scripts for you. Luckily, with Angular CLI, you can automate the process. This means that when you build the application in production mode, a service worker is generated. You can see this at work within the **app.module.ts** module:
 
-```
+```typescript
 @NgModule({
   declarations: [
     AppComponent
@@ -122,7 +124,7 @@ As the creation of the service worker script happens entirely automatically, the
 
 Additionally, you can use it to cache network requests as well by using the **dataGroups** property. For example:
 
-```
+```json
 {
   "index": "/index.html",
   "assetGroups": [...],
@@ -149,7 +151,7 @@ While working with the [local storage](https://developer.mozilla.org/en-US/docs/
 
 Anyhow, to work with local storage in Angular, I prefer writing a service wrapper that uses a `BehaviorSubject` to contain the tasks. This allows me to properly use RxJS. An example:
 
-```
+```typescript
 @Injectable({
   providedIn: 'root'
 })
@@ -202,7 +204,7 @@ To make your application re-engageable, we can use two browser APIs, the push AP
 
 The other available API is the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API). This API allows you to send notifications, but only while the application is running. To use this API within Angular, we can use the following code:
 
-```
+```typescript
 notify(tasks: Task[]) {
   Notification.requestPermission(perm => {
     if (perm === 'granted') {
@@ -218,7 +220,7 @@ notify(tasks: Task[]) {
 
 If you invoke this code, you'll see a proper notification pop up on your device:
 
-[![Notification center containing our own notification](images/Screenshot_20181006-195725-e1538848766639-1024x527.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/10/Screenshot_20181006-195725-e1538848766639.png)
+![Notification center containing our own notification](images/Screenshot_20181006-195725-e1538848766639.png)
 
 ### Running without JavaScript
 
@@ -228,7 +230,7 @@ To solve that issue, you should add a proper message so your users are informed 
 
 By default, Angular CLI generates a `<noscript>` element within **src/index.html**, which can be customised as well. For example:
 
-[![noscript element in action](images/Screenshot-2018-10-06-19.56.08.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/10/Screenshot-2018-10-06-19.56.08.png)
+![noscript element in action](images/Screenshot-2018-10-06-19.56.08.png)
 
 ### Loading screen
 
@@ -236,8 +238,8 @@ Initially when starting up your application, a splash screen will be shown, base
 
 This allows you to create loading screens like this:
 
-[![](images/Screenshot-2018-10-06-20.08.23.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/10/Screenshot-2018-10-06-20.08.23.png)
+![Loading screen](images/Screenshot-2018-10-06-20.08.23.png)
 
 Tobias Ahlin has [a neat collection of CSS-based spinners](http://tobiasahlin.com/spinkit/) you can use. Be sure to check them out.
 
-With that, it's time to conclude this tutorial. Next time, we'll explore how we can use a proper backend, and how we can use the push API to send notifications even when the application isn't running. As usual, the code can be found on [GitHub](https://github.com/g00glen00b/angular-cli-pwa). The example itself is also running at [https://pwa.wordpress.g00glen00b.be](https://pwa.wordpress.g00glen00b.be).
+With that, it's time to conclude this tutorial. Next time, we'll explore how we can use a proper backend, and how we can use the push API to send notifications even when the application isn't running. As usual, the code can be found on [GitHub](https://github.com/g00glen00b/angular-cli-pwa). 

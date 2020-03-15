@@ -2,21 +2,23 @@
 title: "Generating documentation for your REST API with Spring and Swagger"
 date: "2018-09-25"
 coverImage: "open-api.png"
+categories: ["Java", "Tutorials"]
+tags: ["AsciiDoc"," Maven", "Spring boot", "Swagger"]
 ---
 
-[A while ago](https://wordpress.g00glen00b.be/documenting-rest-api-swagger-springfox/), I used Springfox to include Swagger into our Spring projects. This allows us to use the Swagger UI tester to obtain some live documentation and testing for our REST APIs. However, sometimes you also want to have a static version of the documentation available, so that it can be printed, read without having your application running, ... . In this tutorial we'll see how we can do this.
+[A while ago](/documenting-rest-api-swagger-springfox/), I used Springfox to include Swagger into our Spring projects. This allows us to use the Swagger UI tester to obtain some live documentation and testing for our REST APIs. However, sometimes you also want to have a static version of the documentation available, so that it can be printed, read without having your application running, ... . In this tutorial we'll see how we can do this.
 
-[![Spring boot + Open API + AsciiDoctor](images/spring-boot-open-api-asciidoctor.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/spring-boot-open-api-asciidoctor.png)
+![Spring boot + Open API + AsciiDoctor](images/spring-boot-open-api-asciidoctor.png)
 
 ### Creating a REST API
 
-Before we can actually start documenting our REST API... we need a REST API. For this project, I'll use the same API as [my tutorial about validating your REST API with bean validation](https://wordpress.g00glen00b.be/validating-the-input-of-your-rest-api-with-spring/). In order to create such a project, I'll add **Lombok**, **JPA**, **Web** and **HSQLDB** as my dependencies:
+Before we can actually start documenting our REST API... we need a REST API. For this project, I'll use the same API as [my tutorial about validating your REST API with bean validation](/validating-the-input-of-your-rest-api-with-spring/). In order to create such a project, I'll add **Lombok**, **JPA**, **Web** and **HSQLDB** as my dependencies:
 
-[![Spring Initializr with HSQLDB, JPA, Lombok and Web](images/Screenshot-2018-06-22-08.48.41.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/Screenshot-2018-06-22-08.48.41.png)
+![Spring Initializr with HSQLDB, JPA, Lombok and Web](images/Screenshot-2018-06-22-08.48.41.png)
 
 With our project set up, we can create a few model classes representing the API we want to define. In my case, I'm going to write a user API that will allow me to create and find users. That's why I created the following classes:
 
-```
+```java
 @Entity
 @Data
 @NoArgsConstructor
@@ -33,7 +35,7 @@ public class User {
 }
 ```
 
-```
+```java
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,7 +57,7 @@ public class UserInput {
 }
 ```
 
-```
+```java
 @Data
 @AllArgsConstructor
 public class ApiError {
@@ -70,14 +72,14 @@ public class ApiError {
 
 Since `User` is an entity, I also defined a repostiory using Spring Data JPA:
 
-```
+```java
 public interface UserRepository extends JpaRepository<User, Long> {
 }
 ```
 
 And to actually serve some REST APIs, I defined a controller:
 
-```
+```java
 @Validated
 @RestController
 @RequestMapping("/api/user")
@@ -137,7 +139,7 @@ public class UserController {
 
 Well, we have our REST API now, but no documentation... yet. The first step to be able to do this is to add a few dependencies:
 
-```
+```xml
 <dependency>
     <groupId>io.springfox</groupId>
     <artifactId>springfox-swagger-ui</artifactId>
@@ -152,7 +154,7 @@ Well, we have our REST API now, but no documentation... yet. The first step to b
 
 Springfox is a library that works on top of Swagger/OpenAPI to use our Spring controllers to generate API documentation. After adding these dependencies, we can enable Springfox by adding the `@EnableSwagger2` annotation and some additional configuration:
 
-```
+```java
 @Bean
 public Docket docket(ApiInfo apiInfo) {
     return new Docket(DocumentationType.SWAGGER_2)
@@ -183,11 +185,11 @@ public UiConfiguration uiConfiguration() {
 
 Now that we have all of this, it's time to test it out by running the application and visiting [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). Normally, you should be able to see your API here now:
 
-[![Screenshot of our API within Swagger UI](images/Screenshot-2018-06-22-17.35.19.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/Screenshot-2018-06-22-17.35.19.png)
+![Screenshot of our API within Swagger UI](images/Screenshot-2018-06-22-17.35.19.png)
 
 The only issue is that our API documentation isn't describing our API properly yet. Luckily, there's nothing we can't fix, so let's add some annotations to our controller to describe the API, for example:
 
-```
+```java
 @GetMapping
 @Validated
 @ApiResponses(value = {
@@ -213,7 +215,7 @@ By using annotations like `@ApiParam`, `@ApiResponses` and so on, we can provide
 
 If we run the application now, we can see those descriptions in action:
 
-[![More descriptive screenshot of Swagger UI](images/workspaces_descriptive-swagger-screenshot.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/workspaces_descriptive-swagger-screenshot.png)
+![More descriptive screenshot of Swagger UI](images/workspaces_descriptive-swagger-screenshot.png)
 
 ### Obtaining the API specification
 
@@ -225,7 +227,7 @@ However, the first issue is; how do we get this Swagger specification? If you ru
 
 Now, to obtain this specification locally, we'll have to use a small work-around. By writing an integration test that runs the Spring boot application, we can download the JSON file, which can then be used in other Maven plugins for further processing:
 
-```
+```java
 @WebMvcTest
 @Import(ApiConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -255,7 +257,7 @@ So, what happened here is that I wrote a test using the `@WebMvcTest` annotation
 
 With `MockMvc`, we can call the `/v2/api-docs` path to obtain the specification. Afterwards, we can use [Apache Commons IO](https://commons.apache.org/proper/commons-io/) to save the content within `target/generated-sources/swagger.json`. In order to do this, we need an additional dependency:
 
-```
+```xml
 <dependency>
     <groupId>commons-io</groupId>
     <artifactId>commons-io</artifactId>
@@ -267,7 +269,7 @@ With `MockMvc`, we can call the `/v2/api-docs` path to obtain the specification.
 
 The next step is to generate the documentation itself based on the specification. This can be done by the Maven plugin I mentioned earlier. To be able to do this we need to configure it and decide whether we want to generate Markdown or AsciiDoc. In this example I'll be using AsciiDoc since it allows you to write more advanced documentation:
 
-```
+```xml
 <plugin>
     <groupId>io.github.swagger2markup</groupId>
     <artifactId>swagger2markup-maven-plugin</artifactId>
@@ -296,7 +298,7 @@ Be aware, this will generate three AsciiDoc files called **overview.adoc**, **pa
 
 This plugin will require some dependencies that aren't available in Maven central as far as I know. So you may want to add the following plugin repositories to your **pom.xml**:
 
-```
+```xml
 <pluginRepositories>
     <pluginRepository>
         <id>jcenter-snapshots</id>
@@ -318,7 +320,7 @@ This plugin will require some dependencies that aren't available in Maven centra
 
 If your goal is to generate HTML files, you have to add an additional step to render the AsciiDoc into HTML. But before we can generate a HTML file, we probably need to merge the generated documentation files into one **index.adoc** file:
 
-```
+```asciidoc
 include::{generated}/overview.adoc[]
 include::{generated}/paths.adoc[]
 include::{generated}/definitions.adoc[]
@@ -326,7 +328,7 @@ include::{generated}/definitions.adoc[]
 
 I've stored this file within the **src/main/asciidoc** folder, where you can put all your manually written documentation. After that, we can use the **asciidoctor-maven-plugin** to generate the HTML files:
 
-```
+```xml
 <plugin>
     <groupId>org.asciidoctor</groupId>
     <artifactId>asciidoctor-maven-plugin</artifactId>
@@ -368,6 +370,6 @@ In this plugin, we're telling to process the AsciiDoc files as HTML, that it sho
 
 If you're running the Maven using the `mvn clean package` command, you'll be able to find your generated documentation within the **target/generated-sources/swagger-html** directory. You can now deploy this documentation somewhere, or share it, ... . If you prefer PDF, you can use the asciidoc Maven plugin to generate PDFs as well in stead of HTML.
 
-[![Example of the generated documentation](images/workspaces-asciidoc-html-swagger.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/06/workspaces-asciidoc-html-swagger.png)
+![Example of the generated documentation](images/workspaces-asciidoc-html-swagger.png)
 
 In another project of mine, I used this approach combined with Travis CI to deploy the documentation to the **gh-pages** branch, which you can view on [GitHub](https://aquafinnv.github.io/biodiversity-api/). As usual, the code used in this example can be found on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-swagger-static-docs) as well.
