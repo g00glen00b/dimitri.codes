@@ -2,9 +2,11 @@
 title: "Using the Netflix stack with Spring boot: Eureka"
 date: "2016-10-11"
 coverImage: "netflix-oss-logo.png"
+categories: ["Java", "Tutorials]
+tags: ["Eureka", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
 ---
 
-A while back I wrote [a simple REST service](http://wordpress.g00glen00b.be/producing-rest-apis-with-spring/) with [Spring boot](http://projects.spring.io/spring-boot/). While this is quite common, we're also seeing the word "microservice" [pop up more often](https://www.google.com/trends/explore?q=microservice) as well. But what is a microservice and what does [Netflix](https://www.netflix.com) has to do with it and more specifically, what is [Eureka](https://github.com/Netflix/eureka)? Well, in this article I will show you how you can use Eureka with Spring boot and how it relates to microservices.
+A while back I wrote [a simple REST service](/producing-rest-apis-with-spring/) with [Spring boot](http://projects.spring.io/spring-boot/). While this is quite common, we're also seeing the word "microservice" [pop up more often](https://www.google.com/trends/explore?q=microservice) as well. But what is a microservice and what does [Netflix](https://www.netflix.com) has to do with it and more specifically, what is [Eureka](https://github.com/Netflix/eureka)? Well, in this article I will show you how you can use Eureka with Spring boot and how it relates to microservices.
 
 ### What is SOA?
 
@@ -44,31 +46,36 @@ Now, most of the questions we introduced at the start of this article are solved
 
 Now that we know what Eureka is, it's time to combine the powers of Spring and Netflix!
 
-[![netfix-spring-boot](images/netfix-spring-boot-768x217.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/netfix-spring-boot.png)
+![netfix-spring-boot](images/netfix-spring-boot.png)
 
 Let's open the [Spring Initializr](http://start.spring.io/) and create a project with the **Eureka Server** dependency and import it in your IDE.
 
-[![Screenshot 2016-08-13 15.12.56](images/Screenshot-2016-08-13-15.12.56-768x329.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/Screenshot-2016-08-13-15.12.56.png)
+![Screenshot 2016-08-13 15.12.56](images/Screenshot-2016-08-13-15.12.56.png)
 
 Open the main class and add the `@EnableEurekaServer` annotation to it, like this:
 
+```java
 @SpringBootApplication
 @EnableEurekaServer
 public class SpringBootEurekaRegistryApplication {
 
 }
+```
 
 After that, open the **application.properties** or **application.yml** file and add the following properties:
 
-\# application.properties
+```
+# application.properties
 server.port=8761
 
 eureka.instance.hostname=localhost
 eureka.client.registerWithEureka=false
 eureka.client.fetchRegistry=false
 eureka.server.enableSelfPreservation=false
+```
 
-\# application.yml
+```yaml
+# application.yml
 server:
   port: 8761
 
@@ -80,10 +87,11 @@ eureka:
     fetch-registry: false
   server:
     enable-self-preservation: false
+```
 
 Now, if we run this application now and go to [http://localhost:8761](http://localhost:8761), you'll see there's something there already.
 
-[![Screenshot 2016-08-13 15.26.49](images/Screenshot-2016-08-13-15.26.49-768x357.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/Screenshot-2016-08-13-15.26.49.png)
+![Screenshot 2016-08-13 15.26.49](images/Screenshot-2016-08-13-15.26.49.png)
 
 Well, that is our service registry dashboard, up & running, without much trouble.
 
@@ -91,7 +99,7 @@ Well, that is our service registry dashboard, up & running, without much trouble
 
 Now, a service registry without a service is obviously not really useful at all. So, let's create another project with the [Spring Initializr](http://start.spring.io/), but this time add the dependencies **Web**, **Eureka Discovery**, **JPA**, **MySQL** and **Actuator**. Did I already tell you how much I like the Spring Initializr? It feels like I'm shopping in a developer world "Let's have this, and that, and that as well..".
 
-[![Screenshot 2016-08-13 15.46.57](images/Screenshot-2016-08-13-15.46.57-768x410.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/Screenshot-2016-08-13-15.46.57.png)
+![Screenshot 2016-08-13 15.46.57](images/Screenshot-2016-08-13-15.46.57.png)
 
 Now, import this project in your IDE as well, and let's get started!
 
@@ -101,6 +109,7 @@ I'm going to rush this part a bit since I already explained most of this in my p
 
 First, let's create an entity called `Task`:
 
+```java
 @Entity
 public class Task {
     @Id
@@ -142,16 +151,20 @@ public class Task {
         this.completed = completed;
     }
 }
+```
 
 And create a repository as well with Spring Data JPA:
 
+```java
 public interface TaskRepository extends JpaRepository<Task, Long> {
 }
+```
 
 ### Creating a service
 
 Now that we have our data model and repository, it's time to create our DTO:
 
+```java
 public class TaskDTO {
     private Long id;
     private String task;
@@ -188,11 +201,13 @@ public class TaskDTO {
         this.completed = completed;
     }
 }
+```
 
 If you wonder why I didn't provide a setter for my ID in both my entity and my DTO, well that's because you should never be able to edit the ID, so a setter is not necessary. The only time you might want to provide an ID is during the creation of the object, so that's why I only allow to provide an ID with a constructor and nowhere else.
 
 Now, the next part is the service itself, which will use the repository, and map all the entities to their DTO:
 
+```java
 @Service
 public class TaskServiceImpl {
     @Autowired
@@ -204,11 +219,13 @@ public class TaskServiceImpl {
             .collect(Collectors.toList());
     }
 }
+```
 
 ### Writing the REST controller
 
 Now, for the last part of our REST service, we'll have to create a REST controller that uses the service:
 
+```java
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -220,70 +237,84 @@ public class TaskController {
         return service.findAll();
     }
 }
+```
 
 ### Connecting to the database
 
 Now, before our service is ready, we have to connect to our database. Open **application.properties** (or **application.yml**) and add the properties to connect to your database. I have a local MySQL running, so I'm going to enter these details:
 
-\# application.properties
+```
+# application.properties
 spring.datasource.url=jdbc:mysql://localhost:3306/demo?useSSL=false
 spring.datasource.username=dbuser
 spring.datasource.password=dbp4ss
 spring.datasource.platform=mysql
+```
 
-\# application.yml
+```yaml
+# application.yml
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/demo?useSSL=false
     username: dbuser
     password: dbp4ss
     platform: mysql
+```
 
 Since I'm not going to create endpoints for creating/updating/deleting tasks, I'll insert some mock data and I'll also create the schema using Spring boot.
 
 First of all create a file called **schema.sql** in the **src/main/resources** folder:
 
+```sql
 CREATE TABLE IF NOT EXISTS task (
-  id INT(11) NOT NULL AUTO\_INCREMENT,
+  id INT(11) NOT NULL AUTO_INCREMENT,
   task VARCHAR(32) NOT NULL,
   completed bit(1),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+```
 
 Now create a file called **data.sql** in the same folder:
 
+```sql
 DELETE FROM task;
 INSERT INTO task (task, completed) VALUES
   ('My first task', true),
   ('My second task', false);
+```
 
 Now that we have that, it's time to run our application. If you go to [http://localhost:8080/api/tasks](http://localhost:8080/api/tasks), you'll see that your REST API is working fine.
 
-[![Screenshot 2016-08-13 16.05.58](images/Screenshot-2016-08-13-16.05.58-768x448.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/Screenshot-2016-08-13-16.05.58.png)
+![Screenshot 2016-08-13 16.05.58](images/Screenshot-2016-08-13-16.05.58.png)
 
 ### Registering your service with Eureka
 
 Now that we have a working REST service, it's time to register the service with Eureka. First of all, open the main class and add the `@EnableEurekaClient` annotation:
 
+```java
 @SpringBootApplication
 @EnableEurekaClient
 public class SpringBootEurekaServiceApplication {
 
-    public static void main(String\[\] args) {
+    public static void main(String[] args) {
         SpringApplication.run(SpringBootEurekaServiceApplication.class, args);
     }
 }
+```
 
 if we have that annotation, add the following properties to **application.properties** (or **application.yml**):
 
-\# application.properties
+```
+# application.properties
 spring.application.name=task-service
 eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
 eureka.client.healthcheck.enabled=true
 eureka.instance.statusPageUrlPath=/info
 eureka.instance.healthCheckUrlPath=/health
+```
 
-\# application.yml
+```yaml
+# application.yml
 spring:
   application:
     name: task-service
@@ -296,18 +327,19 @@ eureka:
   instance:
     status-page-url-path: /info
     health-check-url-path: /health
+```
 
 As you can see, we gave the application a name (task-service) and provided details to the Eureka service registry, and also the info and health path, allowing Eureka to correctly remove the service instance when it's down. To make this work, you need the **spring-boot-starter-actuator** dependency like we used.
 
 Now, if you run the application again and go back to the Eureka dashboard ([http://localhost:8761/](http://localhost:8761/)), you'll see that our new REST service is now registered:
 
-[![Screenshot 2016-08-13 16.19.05](images/Screenshot-2016-08-13-16.19.05-768x381.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/Screenshot-2016-08-13-16.19.05.png)
+![Screenshot 2016-08-13 16.19.05](images/Screenshot-2016-08-13-16.19.05.png)
 
 Now, if we stop the service, you'll see that the task service is unregistered, so any client using Eureka will not use a service that is no longer existing.
 
 If you run the application twice, but using a different port you'll see that Eureka registers both instances.
 
-[![Screenshot 2016-08-13 16.21.35](images/Screenshot-2016-08-13-16.21.35-768x91.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/08/Screenshot-2016-08-13-16.21.35.png)
+![Screenshot 2016-08-13 16.21.35](images/Screenshot-2016-08-13-16.21.35.png)
 
 This is already quite nice, since we now have a single dashboard showing what microservices there are and where they are running. You can also provide additional metadata with your application, which can be useful if you're using Swagger for example and you want to add the location to the Swagger tester to the metadata of your microservice.
 

@@ -1,6 +1,8 @@
 ---
 title: "Showing a loader with Angular 2"
 date: "2016-12-08"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Angular", "Angular CLI"]
 ---
 
 We've already done quite a lot to get a working pokédex with [Angular 2](https://angular.io/). However, there are still two things that bother me:
@@ -13,7 +15,9 @@ We've already done quite a lot to get a working pokédex with [Angular 2](https:
 To solve the first problem, I'm going to use Materialize's [circular preloader](http://materializecss.com/preloader.html) and use it within our overview and detail components.  
 Since components should be small in scope, I don't think it would be a good idea to add this to an already existing component. So that's why I'm going to generate a new component with Angular CLI like this:
 
+```
 ng g component shared/loader
+```
 
 This will generate four files. For this tutorial I'm not going to use either the test file (`*.spec.ts`), nor the CSS file.
 
@@ -21,17 +25,21 @@ This will generate four files. For this tutorial I'm not going to use either the
 
 To start, I'm going to copy paste the code from the Materialize page and tweak it a bit:
 
+```html
 <div class="preloader-wrapper big active">
   <div class="spinner-layer spinner-red-only">
     <div class="circle-clipper left">
       <div class="circle"></div>
-    </div><div class="gap-patch">
-    <div class="circle"></div>
-  </div><div class="circle-clipper right">
-    <div class="circle"></div>
-  </div>
+    </div>
+    <div class="gap-patch">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
   </div>
 </div>
+```
 
 This is basically the markup you need if you want to use the prelaoder of Materialize, nothing special here.
 
@@ -39,13 +47,17 @@ This is basically the markup you need if you want to use the prelaoder of Materi
 
 Our component should only show the loader if there is some process going on. To indicate this, I'm going to add an input property to our component called `loading`:
 
+```typescript
 @Input() loading: boolean = false;
+```
 
 The next step is to use this property in our template:
 
-<div class="preloader-wrapper big active" \*ngIf="loading">
+```html
+<div class="preloader-wrapper big active" *ngIf="loading">
   <!-- ... -->
 </div>
+```
 
 ### Using the component on our overview
 
@@ -53,60 +65,72 @@ Almost there! Our loader component is basically finished, so it's time to use it
 
 To do that, I'm going to open **app/pokemon-list/pokemon-list.component.html** and add the component to our template:
 
+```html
 <div class="center">
-  <app-loader \[loading\]="loading"></app-loader>
+  <app-loader [loading]="loading"></app-loader>
 </div>
+```
 
 Now we have to define `loading` in our component (**app/pokemon-list/pokemon-list.component.ts**):
 
+```typescript
 loading: boolean = false;
+```
 
 And finally, I'm going to change the `findAll()` function a bit, so that the `loading` property is set to `true` when the function is called, and back to `false` when a value is received from the observable.
 
+```typescript
 findAll(offset: number, limit: number) {
-  this.pokemons = \[\];
+  this.pokemons = [];
   this.loading = true;
-  this.\_service.findAll(offset, limit).subscribe(result => {
+  this._service.findAll(offset, limit).subscribe(result => {
     this.pokemons = result.pokemons;
     this.count = result.count;
     this.loading = false;
   }, () => this.loading = false);
 }
+```
 
 We have to remember that we have to set `loading` to `false` both when the request was successful and when the request failed. To do this, I added a new function as the error callback (`() => this.loading = false`).
 
 If we take a look at the application now, we can see that our loader is there already, great!
 
-[![preloader](images/preloader-300x55.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/12/preloader.png)
+![preloader](images/preloader.png)
 
 ### Implementing the loader on our detail page
 
 Similar to the overview, I also implemented the `loading` property and used it like this:
 
+```typescript
 ngOnInit() {
-  let observable = this.\_route.params
-    .map(params => params\['id'\])
-    .flatMap(id => this.\_service.findOne(id))
+  let observable = this._route.params
+    .map(params => params['id'])
+    .flatMap(id => this._service.findOne(id))
     .share();
   this.loading = true;
   observable.subscribe(pokemon => {
     this.pokemon = pokemon;
     this.loading = false;
   }, () => this.loading = false);
-  observable.subscribe(pokemon => this.\_titleService.setTitle(\`#${pokemon.baseInfo.id} - ${pokemon.baseInfo.name}\`));
+  observable.subscribe(pokemon => this._titleService.setTitle(`#${pokemon.baseInfo.id} - ${pokemon.baseInfo.name}`));
 }
+```
 
 To our template I added the same markup:
 
+```html
 <div class="center">
-  <app-loader \[loading\]="loading"></app-loader>
+  <app-loader [loading]="loading"></app-loader>
 </div>
+```
 
 However, I also wrapped the already exisitng markup into a new `<div>` element with the following `*ngIf`:
 
-<div \*ngIf="!loading">
+```html
+<div *ngIf="!loading">
   <!-- ... -->
 </div>
+```
 
 This allows me to hide all the components containing the Pokémon's info if the data is not yet retrieved. This looks way cleaner now.
 
@@ -116,6 +140,7 @@ The next problem I want to solve is the "Loading..." message, because we can act
 
 To do that, let's open **index.html**. Normally, this page should contain our root component being `<app-root>`. Inside, you can see that it contains the "Loading..." text. But basically, you can put anything inside. I'm going to choose some markup:
 
+```html
 <app-root>
   <div class="pokeball">
     <div class="upper">
@@ -127,9 +152,11 @@ To do that, let's open **index.html**. Normally, this page should contain our ro
     </div>
   </div>
 </app-root>
+```
 
 After that, I'm also going to add some CSS to **styles.css**:
 
+```css
 .pokeball {
   width: 150px;
   height: 150px;
@@ -182,12 +209,11 @@ After that, I'm also going to add some CSS to **styles.css**:
     transform: rotate(360deg);
   }
 }
+```
 
 This markup + CSS will allow me to show a rotating pokéball when the application is still loading. If you wonder where this all comes from and how it all relates, well, then I encourage you to look at my [Codepen](https://codepen.io/g00glen00b/pen/pNdvwN) which contains the uncompile Sass code (SCSS).
 
-If you look at your application, you should be able to see it into its full glory right now. Normally, you should see something like this:
-
-<iframe height="265" style="width: 100%;" scrolling="no" title="Rotating pokeball" src="//codepen.io/g00glen00b/embed/pNdvwN/?height=265&amp;theme-id=0&amp;default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">See the Pen <a href='https://codepen.io/g00glen00b/pen/pNdvwN/'>Rotating pokeball</a> by Dimitri (<a href='https://codepen.io/g00glen00b'>@g00glen00b</a>) on <a href='https://codepen.io'>CodePen</a>. </iframe>
+If you look at your application, you should be able to see it into its full glory right now. 
 
 If that's the case, then well done, you made your application a lot more responsive towards the enduser. This is also the conclusion of my (initial) series of Angular 2 articles. If you want to check out the full result, feel free to check the [Github pages](https://g00glen00b.github.io/ng2-pokedex/) branch of the project on Github.
 

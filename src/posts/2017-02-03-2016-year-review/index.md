@@ -1,35 +1,19 @@
 ---
 title: "2016: Year in review"
 date: "2017-02-03"
+categories: ["General"]
 ---
 
-A bit later than usual, but here it is! The year in review of [wordpress.g00glen00b.be](http://wordpress.g00glen00b.be)! (Yes, that's the site you're visiting right now) During this time of the year (though we're a bit too late), people all around the world gather and review last year. We, we jump onto that bandwagon and do the same thing!
+A bit later than usual, but here it is! The year in review of [dimitr.im](https://dimitr.im)! (Yes, that's the site you're visiting right now) During this time of the year (though we're a bit too late), people all around the world gather and review last year. We, we jump onto that bandwagon and do the same thing!
 
 ### Visitors
 
 While last year we gained a lot visitors, this time we didn't get a huge increase in traffic, but we were able to maintain our record and the amount of visitors slightly increased.
 
-2014
-
-2015
-
-2016
-
-Visitors
-
-63.000
-
-247.000
-
-280.000
-
-Page views
-
-102.000
-
-361.000
-
-365.000
+|            | 2014    | 2015    | 2016    |
+| ---------- | ------- | ------- | ------- |
+| Visitors   | 63.000  | 247.000 | 280.000 |
+| Page views | 102.000 | 361.000 | 365.000 |
 
 So, I guess we can safely say that we're reaching an equilibrium here.
 
@@ -37,51 +21,13 @@ So, I guess we can safely say that we're reaching an equilibrium here.
 
 If we look at the webbrowsers our users are using, we can see that the war of the webbrowsers isn't much of a war anymore. With **78%**, Google Chrome is an obvious winner.
 
-2014
-
-2015
-
-2016
-
-Google Chrome
-
-71%
-
-74,5%
-
-78%
-
-Mozilla Firefox
-
-19%
-
-16,5%
-
-14%
-
-Safari
-
-5,5%
-
-5%
-
-5%
-
-Internet Explorer
-
-2,5%
-
-2%
-
-2%
-
-Opera
-
-0,8%
-
-0,7%
-
-0,8%
+|                   | 2014 | 2015  | 2016 |
+| ----------------- | ---- | ----- | ---- |
+| Google Chrome     | 71%  | 74,5% | 78%  |
+| Mozilla Firefox   | 19%  | 16,5% | 14%  |
+| Safari            | 5,5% | 5%    | 5%   |
+| Internet Explorer | 2,5% | 2%    |  2%  |
+| Opera             | 0,8% | 0,7%  | 0,8% |
 
 Most browsers appear to have their browser usage on a declining rate. However we see that Internet Explorer users are slowly migrating to Edge, (which is #6 in the rankings). However, even if we include both IE and Edge together, they're still having a (slightly) declining rate.
 
@@ -110,7 +56,7 @@ Even if Microsoft is not scoring as high on the mobile devices or the webbrowser
 
 If we take a look at what we published last year, I think I can be very proud. With 23 tutorials last year, we did slightly better than last year. As promised in last years review, we rewrote several old Spring-related tutorials and updated them to Spring boot. Next to Spring boot-related tutorials we also introduced some new tutorials about Angular (2).
 
-From our articles released in 2016, [Using Docker containers for your Spring boot applications](https://wordpress.g00glen00b.be/docker-spring-boot/) was the most visited one.
+From our articles released in 2016, [Using Docker containers for your Spring boot applications](/docker-spring-boot/) was the most visited one.
 
 ### Looking ahead
 
@@ -137,6 +83,6 @@ We also want to explore progressive webapps, Aurelia and Vue.
 
 The website itself didn't chang much last year, the top navigation changed a bit after we learned that not many people clicked those other links anyways. We also introduced a new logo last year, which I'll probably keep using this year as well:
 
-[![](images/logo-1-300x101.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/09/logo-1.png)
+![New logo](images/logo-1.png)
 
 Since the start of **2017** we also introduced **HTTPS** using [Let's Encrypt](https://letsencrypt.org/). The reason for this is that the web is making the move to HTTPS, with search engines making websites over HTTPS score higher and browsers marking nonHTTPS websites as unsafe, it's time to make the switch as well. That's about it for now!

@@ -1,6 +1,8 @@
 ---
 title: "Handling forms with Spring Web and JSR-303"
 date: "2016-04-13"
+categories: ["Java", "Tutorials"]
+tags: ["Spring", "Spring boot", "Web", "form"]
 ---
 
 Up until now I've written several tutorials already about creating some readonly Spring boot application, but what's cool about that? Eventually you'll have to add/update some data in your application. In this example I'll show you how you can do that with Spring Web and JSR-303 bean validations.
@@ -9,7 +11,7 @@ Up until now I've written several tutorials already about creating some readonly
 
 As I've told a few times already. The greatest place to start any Spring project is [start.spring.io](http://start.spring.io/). In this case I'm going to create a project with four dependencies: Web, HSQLDB, JPA and Thymeleaf.
 
-[![spring-initializr](images/spring-initializr-1-768x331.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/spring-initializr-1.png) _The screenshot above is missing the **HSQLDB** dependency_
+![spring-initializr](images/spring-initializr-1.png)
 
 After creating, downloading, extracting and importing the project in your IDE, you're ready to start writing some code!
 
@@ -19,6 +21,7 @@ In this case I'm going to create a simple CRUD application and it seems that 99%
 
 First of all we need an entity:
 
+```java
 @Entity
 @Table(name = "task")
 public class Task {
@@ -49,15 +52,18 @@ public class Task {
         this.completed = completed;
     }
 }
+```
 
 We have three properties here, an auto-generated ID, the task description and a boolean indicating if the task is completed or not.
 
 So, let's create our table schema now:
 
+```sql
 CREATE TABLE task (
   id          INTEGER IDENTITY PRIMARY KEY,
   description VARCHAR(64) NOT NULL,
   completed   BIT NOT NULL);
+```
 
 If you save this file as **schema.sql** in **src/main/resources**, it gets automatically executed when you launch the application, convenient, isn't it?
 
@@ -65,28 +71,35 @@ You could also create the schema by creating one using Hibernate, but in any rea
 
 Anyhow, if you create a schema this way, you'll have to disable Spring's default behaviour, which is generating a schema based on your entities if you're using HSQLDB. So, open **application.yml** (or **application.properties**) and add the following:
 
+```yaml
 spring:
   jpa:
     hibernate:
       ddl-auto: none
+```
 
 Now all we need is some test-data:
 
+```sql
 INSERT INTO task (description, completed) VALUES
   ('Setting up our application', 1),
   ('Handling our form', 0);
+```
 
 Similarly to our schema, if you save this file as **data.sql** inside the **src/main/resources** folder, it will automatically executed when you start your application.
 
 The last step is to create a repository to handle our data. Create an interface called `TaskRepository` and make it extend from `JpaRepository`:
 
+```java
 public interface TaskRepository extends JpaRepository<Task , Long> {
 }
+```
 
 ### Creating a service
 
 Writing a service isn't really that difficult either:
 
+```java
 @Service
 public class TaskServiceImpl {
     @Autowired
@@ -127,6 +140,7 @@ public class TaskServiceImpl {
         }
     }
 }
+```
 
 The `findAll()` method is quite simple, this method simply uses the repository. In real cases there might also happen some mapping here to make sure you don't expose your entities to the outer world.
 
@@ -134,8 +148,10 @@ The `create()` method creates a new `Task` and saves it using the repository's `
 
 The same happens for the `update()` method. I'm retrieving the entity using the `findOne()` method and then I'm copying the properties over, one by one. When I can't find an entity with the given ID I'm throwing an exception called `TaskNotFoundException`:
 
+```java
 public class TaskNotFoundException extends RuntimeException {
 }
+```
 
 This allows you to show proper error messages in case someone tries to update a non-existing entity, though that should not happen if using the application.
 
@@ -145,6 +161,7 @@ Finally, the `delete()` method also uses the same `findOne()` method to delete t
 
 The first step in the application is to show the tasks themself. To do that, create a controller called `TaskController` and make it extend from `WebMvcConfigurerAdapter` like this:
 
+```java
 @Controller
 @RequestMapping("/")
 public class TaskController extends WebMvcConfigurerAdapter {
@@ -157,9 +174,11 @@ public class TaskController extends WebMvcConfigurerAdapter {
         return "tasks";
     }
 }
+```
 
 This uses the service to add the tasks to the model. Then create an HTML file called **tasks.html** inside the **src/main/resources/templates** folder.
 
+```html
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -184,24 +203,28 @@ This uses the service to add the tasks to the model. Then create an HTML file ca
   </div>
 </body>
 </html>
+```
 
 If you run the application now, you'll see that the dummy tasks we created are already visible.
 
-[![tasks-overview](images/tasks-overview.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/tasks-overview.png)
+![tasks-overview](images/tasks-overview.png)
 
 ### Adding new tasks
 
 The next thing we'll do is adding new tasks. To do that, first you have to provide a separate model in the `findAll()` method in the controller:
 
+```java
 @RequestMapping(method = RequestMethod.GET)
 public String findAll(Model model) {
     model.addAttribute("tasks", service.findAll());
     model.addAttribute("newTask", new Task());
     return "tasks";
 }
+```
 
 I also added some validations to the `Task` entity by adding some annotations to the properties:
 
+```java
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id")
@@ -212,11 +235,13 @@ private Long id;
 private String description;
 @Column(name = "completed")
 private boolean completed;
+```
 
 The annotations you're seeing here are the JSR-303 annotations I was speaking of. They allow you to validate the properties on your objects. In this case we added both the `@NotNull` and `@Size` annotations.
 
 And finally, we also have to add a method to the controller to save the new task by calling the service:
 
+```java
 @RequestMapping(method = RequestMethod.POST)
 public String post(@Valid @ModelAttribute("newTask") Task task, BindingResult bindingResult, Model model) {
     if (bindingResult.hasErrors()) {
@@ -228,6 +253,7 @@ public String post(@Valid @ModelAttribute("newTask") Task task, BindingResult bi
         return "redirect:/";
     }
 }
+```
 
 With the `@Valid` annotation you tell Spring that you want to validate the DTO with these annotations, while the `@ModelAttribute` annotation is used to bind the values from the form (which we'll edit after this) back to the model. The name (`"newTask"`) fits the name of the model which we added to the `findAll()` method on the controller.
 
@@ -235,17 +261,19 @@ The `BindingResult` on the other hands contains more info about the result, like
 
 So now we only have to add the form on which we will bind the model to. To do that, open **tasks.html** again and add the following below the `<hr />` tag:
 
+```html
 <form method="post" th:action="@{/}" th:object="${newTask}">
   <div class="row">
     <div class="nine columns">
-      <input type="text" placeholder="Description of the task" class="u-full-width" th:field="\*{description}" />
-      <span th:if="${#fields.hasErrors('description')}" th:errors="\*{description}">Description errors</span>
+      <input type="text" placeholder="Description of the task" class="u-full-width" th:field="*{description}" />
+      <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description errors</span>
     </div>
     <div class="three columns">
       <button type="submit" class="button-primary u-full-width">Add</button>
     </div>
   </div>
 </form>
+```
 
 Important here to see are the Thymeleaf attributes starting with the `th:` like `th:action`, `th:object`, `th:field` and `th:if`. Some of them are quite obvious, like `th:action`, which is just a wrapper for the `action` attribue, telling which location to use to submit the form.
 
@@ -257,24 +285,26 @@ Obviously, in proper web applications you would also validate the form on the cl
 
 So, let's test it out now by running the application. If you open the application, you'll see that the form is now appended correctly. After entering and submitting a value, you'll see that it properly gets appended to the list, which indicates that the application is behaving correctly, at least when following the "happy path".
 
-[![before-add-task](images/before-add-task.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/before-add-task.png)
+![before-add-task](images/before-add-task.png)
 
-[![after-add-task](images/after-add-task.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/after-add-task.png)
+![after-add-task](images/after-add-task.png)
 
 Now, when we don't enter a value and press the button, you'll see that a message is displayed below the input field, right where we added the `th:errors` attribute.
 
-[![add-task-error](images/add-task-error.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/add-task-error.png)
+![add-task-error](images/add-task-error.png)
 
 ### Updating the tasks
 
 The next thing we're going to do is to update the tasks, when we check them so we can complete them. Sadly, while this is all quite obvious with JavaScript frameworks like AngularJS, Ember.js, ..., we're going a bit out of the boundaries of what Spring/Thymeleaf does (at least about the model binding part), so the best way to do this is by creating your own form and using hidden fields for the ID.
 
+```html
 <form th:method="put" th:action="@{/}">
   <input type="hidden" name="id" th:value="${task.id}" />
   <input type="hidden" name="description" th:value="${task.description}" />
   <input type="checkbox" name="completed" th:checked="${task.completed}" onchange="form.submit()" />
   <span th:text="${task.description}"></span>
 </form>
+```
 
 Another form here, with the `th:action` attribute we've already seen. The `th:method` on the other hand is quite new, but this is very similar to the normal `method` attribute, with the exception that it also allows put/delete by proxying them through a POST call. The reason for this is that most browsers do not allow this.
 
@@ -282,17 +312,19 @@ Within the form we have the id/description and completed attributes, where two o
 
 The last part we have to do to make the update work is to add a method to the controller:
 
+```java
 @RequestMapping(method = RequestMethod.PUT)
 public String update(@RequestParam Long id, Task task) {
     service.update(id, task);
     return "redirect:/";
 }
+```
 
 While there is less "magic" involved here, compared to adding items, Spring does allow some neat things, for example, in stead of binding each property individually (the description and the completed), you can simply add a `Task` parameter to your method and Spring will fill the properties for you, allowing us to just send it to the service and redirect it back to the `findAll()` method.
 
 If you reload the application and check the checkbox next to one of the tasks, you'll see that the page gets reloaded, this means the form successfully got submitted and the task was updating. To guarantee that it works you can simply refresh the page, and you'll see that the checkbox is still checked (or unchecked if you unchecked one of the tasks), meaning that your change successfully got persisted.
 
-[![update-task](images/update-task.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/update-task.png)
+![update-task](images/update-task.png)
 
 ### Deleting a task
 
@@ -300,22 +332,26 @@ The final part of this application is deleting the tasks. While this no longer h
 
 To do that we do something similar to the update part, by adding another form with the ID as a hidden field on the form, wrapping it around the delete button:
 
+```html
 <form th:method="delete" th:action="@{/}">
   <input type="hidden" name="id" th:value="${task.id}" />
   <button class="button u-full-width" type="submit">Delete</button>
 </form>
+```
 
 Compared to the update form there's nothing new here, and the method we have to add to the controller is similar as well:
 
+```java
 @RequestMapping(method = RequestMethod.DELETE)
 public String delete(@RequestParam Long id) {
     service.delete(id);
     return "redirect:/";
 }
+```
 
 So, if we test it out, you'll see that the page reloads as well and the item should properly be deleted.
 
-[![delete-task](images/delete-task.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2012/08/delete-task.png)
+![delete-task](images/delete-task.png)
 
 ### Conclusion
 

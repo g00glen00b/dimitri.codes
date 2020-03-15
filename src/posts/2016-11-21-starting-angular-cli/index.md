@@ -2,6 +2,8 @@
 title: "Getting started with Angular 2 using Angular CLI"
 date: "2016-11-21"
 coverImage: "angular.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Angular", "Angular CLI", "Materialize", "NPM", "PokeAPI", "Yarn"]
 ---
 
 [Angular 2](https://angular.io/) has been released for a few weeks/months now, so it's time to explore what has been changed (spoiler alert: a lot) and how you can get started with Angular 2. During this series I will build a small Pokédex, building on the [pokéapi](https://pokeapi.co/).
@@ -26,15 +28,21 @@ You don't have to do that all on your own though. Angular 2 comes with their own
 
 So, let's get started by installing Angular CLI, all you need is [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) (which will be installed if you install Node.js). Just open your terminal and enter:
 
+```
 npm install -g angular-cli
+```
 
 Or for the [cool kids](https://github.com/yarnpkg/yarn) in town:
 
+```
 yarn global add angular-cli
+```
 
 After a while it should be installed completely, and you can test it out by using:
 
+```
 ng --help
+```
 
 Normally this should give you a bunch of information.
 
@@ -42,29 +50,39 @@ Normally this should give you a bunch of information.
 
 So, go to your workspace using your terminal and enter the following command:
 
+```
 ng new ng2-pokedex
+```
 
 With this command we create a new project called **ng2-pokedex**. After this is complete, we can open our project in our favourite IDE or text editor. In my case that will be [IntelliJ](https://www.jetbrains.com/idea/), but feel free to anything you like. [Visual Studio Code](https://code.visualstudio.com/) appears to be popular choice to write TypeScript code.
 
-[![ng-new](images/ng-new.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/11/ng-new.png)
+![ng-new](images/ng-new.png)
 
 ### Running the Angular 2 application
 
 To run the application you use the following command:
 
+```
 ng serve
+```
 
 This command is also added to the scripts of your package.json, so you can also run it like this:
 
+```
 npm start
+```
 
 The hipster kids using Yarn on UNIX will have to wait though, until [a fix](https://github.com/yarnpkg/yarn/pull/809) is implemented in 0.15.2. Otherwise they could use:
 
+```
 yarn start
+```
 
 By default, this will start the application on port 4200, so if you visit [http://localhost:4200/](http://localhost:4200/), you should get a cool message that the app works. If you don't like this port, you can always configure it by providing the `--port` parameter:
 
+```
 ng serve --port 8080
+```
 
 ### What's under the hood?
 
@@ -72,7 +90,9 @@ Before continuing, it's probably worth checking out what it actually does. If yo
 
 I already explained that, in order to make the TypeScript work, it has to transpile it back to JavaScript. To do that, it uses the [TypeScript compiler](https://www.typescriptlang.org/). However, TypeScript allows you to write imports like this:
 
+```
 import { Component } from '@angular/core';
+```
 
 To handle these cases, the TypeScript compiler uses a module loader such as [RequireJS](http://requirejs.org/), [Browserify](http://browserify.org/), [System.js](https://github.com/systemjs/systemjs), [Webpack](https://webpack.github.io/), ... . In the early days, Angular CLI used System.js, so you might encounter a few articles mentioning this, however, recently they switched to Webpack.
 
@@ -103,19 +123,25 @@ The other folder is the **e2e** folder. This folder contains our end to end test
 
 To create our project, I'm going to add two more dependencies, [Lodash](https://lodash.com/) and [Materialize](http://materializecss.com). However, to use Lodash we also need to install the typings for it, like I explained earlier. So to install these, use:
 
+```
 npm install --save lodash materialize-css @typings/lodash
+```
 
 Or when you're using Yarn:
 
+```
 yarn add lodash materialize-css @types/lodash
+```
 
 If you're wondering why I'm not using Angular Material, well, that's because there are still some issues with the grid, which I'll be using during these tutorials.
 
 We can also add the Materialize CSS already to our application by opening **styles.css** and adding:
 
+```
 @import '~materialize-css/dist/css/materialize.min.css';
+```
 
-That's it for now, in the [next article](http://wordpress.g00glen00b.be/services-angular-rxjs/) I'll be creating a service using RxJS.
+That's it for now, in the [next article](/services-angular-rxjs/) I'll be creating a service using RxJS.
 
 #### Achievement: Ready to start with Angular 2
 
