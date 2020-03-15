@@ -2,6 +2,8 @@
 title: "Getting started with Spring boot 2.0"
 date: "2017-11-28"
 coverImage: "logo-reactor.png"
+categories: ["Java", "Tutorials"]
+tags: ["Java", "Reactive programming", "Spring", "Spring boot"]
 ---
 
 A few weeks back, I went to [Devoxx](https://blog.optis.be/spring-devoxx-7c0fa8a9dc9f), an annual Java conference located in Belgium. One of the few hypes there was [Spring framework 5](https://spring.io/blog/2017/09/28/spring-framework-5-0-goes-ga) and the upcoming release of [Spring boot 2.0](https://spring.io/blog/2017/05/16/spring-boot-2-0-0-m1-available-now). With this tutorial I'll show you how you can get started Spring boot 2.0.
@@ -14,15 +16,17 @@ Just like last year, Josh Long's second favourite place on the internet is still
 - **Reactive MongoDB**: According to Josh Long, it's the best way to lose your data in a reactive way, but this is one of the few options if you want to utilize reactive programming at the persistence layer (the alternatives being Cassandra and Redis)
 - **Lombok**: You don't need this, but this allows you to get more done with less boilerplate code (think about constructors, getters, setters, ...).
 
-[![](images/Screenshot-2017-11-25-21.02.12.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2017/11/Screenshot-2017-11-25-21.02.12.png)
+![Spring initializr](images/Screenshot-2017-11-25-21.02.12.png)
 
 In this article, I'll be writing a web crawler (because why not?), so I'll also manually add the [**JSoup** library](https://jsoup.org/) afterwards to be able to parse webpages:
 
+```xml
 <dependency>
     <groupId>org.jsoup</groupId>
     <artifactId>jsoup</artifactId>
     <version>1.11.1</version>
 </dependency>
+```
 
 ### What is reactive programming?
 
@@ -38,7 +42,7 @@ There are various reactive programming libraries, such as [Vert.X](http://vertx.
 - **Subscriber**: A subscriber can subscribe to a `Publisher`, which allows it to receive the data.
 - **Operator**: If you could only publish/subscribe, the world would be quite boring. Additionally to that, you can also apply operators to a publisher, such as `map()`, `filter()`, ... . Most of these should be familiar if you're into functional programming.
 
-[![](images/pubsub.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2017/11/pubsub.png)
+![Overview of the reactive concepts](images/pubsub.png)
 
 #### What is the difference between Java 8 streams and publishers/subscribers
 
@@ -50,17 +54,22 @@ Since Spring Data Kay, we're now able to create reactive repositories by extenin
 
 Except from the different interface, creating repositories is still the same:
 
+```java
 public interface WebpageRepository extends ReactiveCrudRepository<Webpage, String> WebpageRepositoryCustom {
 }
+```
 
 You can also still use custom implementations by using the `ReactiveMongoTemplate`. First you have to create an additional interface defining those custom methods:
 
+```java
 public interface WebpageRepositoryCustom {
     Flux<Webpage> findAllByContentLikeOrTitleLike(String search); // Custom
 }
+```
 
 After that you can create an implementation and autowire `ReactiveMongoTemplate`:
 
+```java
 @AllArgsConstructor
 public class WebpageRepositoryImpl implements WebpageRepositoryCustom {
     private ReactiveMongoTemplate mongoTemplate;
@@ -71,11 +80,14 @@ public class WebpageRepositoryImpl implements WebpageRepositoryCustom {
         return mongoTemplate.find(query, Webpage.class);
     }
 }
+```
 
 Alternatively you can use the `@Query` annotation:
 
-@Query("{ '$or': \[{ 'content': {'$regex': ?0 } }, { 'title': { '$regex': ?0 } }\] }")
+```java
+@Query("{ '$or': [{ 'content': {'$regex': ?0 } }, { 'title': { '$regex': ?0 } }] }")
 Flux<Webpage> findAllByContentLikeOrTitleLike(String search);
+```
 
 ### Router functions
 
@@ -83,24 +95,28 @@ The nice thing about Spring 5 is that, even though the reactive architecture cha
 
 For example, if we want to define some routes to retrieve the `Webpage` objects returned from our custom repository implementation, we could write:
 
+```java
 @Component
 @AllArgsConstructor
 public class WebpageHandler {
-    private static final String SEARCH\_ATTRIBUTE = "search";
+    private static final String SEARCH_ATTRIBUTE = "search";
     private WebpageRepository repository;
 
     public Mono<ServerResponse> findAll(ServerRequest request) {
-        String parameter = request.queryParam(SEARCH\_ATTRIBUTE).orElse(".\*");
+        String parameter = request.queryParam(SEARCH_ATTRIBUTE).orElse(".*");
         return ServerResponse.ok().body(repository.findAllByContentLikeOrTitleLike(parameter), Webpage.class);
     }
 }
+```
 
 After that we can create a `RouterFunction` bean:
 
+```java
 @Bean
 public RouterFunction<?> routes(WebpageHandler handler) {
-    return route(GET("/api/webpage").and(accept(MediaType.APPLICATION\_JSON)), handler::findAll);
+    return route(GET("/api/webpage").and(accept(MediaType.APPLICATION_JSON)), handler::findAll);
 }
+```
 
 And there you go, that's how you can define your new API endpoints with Spring 5's router functions.
 
@@ -110,19 +126,22 @@ Obviously it doesn't stop here, your entire codebase could benefit from working 
 
 Basically, the web crawler will start by retrieving the content of an initial webpage (the seed), it will store the content, and then it will crawl again, using the hyperlinks on the page.
 
-[![](images/crawler.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2017/11/crawler.png)
+![Architecture schema](images/crawler.png)
 
 You may realize that this is likely going to end up to be an infinite loop, considering that webpages are often links to several other webpages, which in turn are also linked... . That's why we also need to limit it somehow by providing a maximum depth and also keeping track of the depth when we crawl. To keep track of the depth I'll be using a class called `CrawlerCommand`:
 
+```java
 @AllArgsConstructor
 @Data
 public class CrawlerCommand {
     private String seed;
     private int depth;
 }
+```
 
 Now, let's start with the begin, when we crawl, we want to retrieve the document using JSoup. As far as I know, JSoup does not support any form of reactive results, so we'll just wrap it ourselves:
 
+```java
 private Mono<Document> getDocument(String seed) {
     try {
         return Mono.just(Jsoup.connect(seed).validateTLSCertificates(false).get());
@@ -130,11 +149,13 @@ private Mono<Document> getDocument(String seed) {
         return Mono.empty();
     }
 }
+```
 
 We will only have one document (or none, if the request fails), so we'll use a `Mono` here.
 
 The next step is that we're going to get a `CrawlerCommand` input, crawl the webpage using the method above, and then retrieve the hyperlinks on the page, the title, and the content of the webpage. To "store" that information, I'm going to create a separate class:
 
+```java
 @Data
 @AllArgsConstructor
 public class CrawlerResult {
@@ -144,9 +165,11 @@ public class CrawlerResult {
     private List<String> hyperlinks;
     private int depth;
 }
+```
 
 Now we can write the following methods:
 
+```java
 private Mono<CrawlerResult> getResult(CrawlerCommand command) {
     return Mono.just(command)
         .map(CrawlerCommand::getSeed)
@@ -160,6 +183,7 @@ private Mono<CrawlerResult> getCrawlerResult(Document document, int depth) {
         .collectList()
         .map(hyperlinks -> new CrawlerResult(document.location(), document.title(), document.text(), hyperlinks, depth));
 }
+```
 
 First we start off with the URL (in `CrawlerCommand`), we retrieve the URL, then we have to map it to the document, but since this is a `Mono`, we'll use the `flatMap` operator so that we just get a `Mono<Document>`, rather than a `Mono<Mono<Document>>`. Finally, we can use the `flatMap()` operator again to get a `CrawlerResult` object.
 
@@ -167,10 +191,12 @@ This object will use the `Document` to retrieve the information we need (aka the
 
 Now we can start writing the actual `crawl()` function:
 
+```java
 public Flux<CrawlerResult> crawl(Flux<CrawlerCommand> commands, int maxDepth) {
     return commands
         .filter(command -> command.getDepth() < = maxDepth)
         .flatMap(this::getResult);
+```
 
 When we start, we only have a single seed, and thus a single `CrawlerCommand`, but as soon as we start to use the hyperlinks from that page, we'll end up with multiple `CrawlerCommand` objects, so that's why we'll use a `Flux` rather than a `Mono`.
 
@@ -180,6 +206,7 @@ Other than that, we use a `filter()` operator here to filter out the commands as
 
 The problem right now is that we have the result of the initial seed, but we aren't doing any recursion right now to get to the results of the linked pages. To implement that, I'm going to add the following methods:
 
+```java
 public Flux<CrawlerResult> crawl(CrawlerResult result, int maxDepth) {
     return Mono.just(result).mergeWith(crawl(getNextCommands(result), maxDepth));
 }
@@ -187,6 +214,7 @@ public Flux<CrawlerResult> crawl(CrawlerResult result, int maxDepth) {
 private Flux<CrawlerCommand> getNextCommands(CrawlerResult result) {
     return Flux.fromIterable(result.getHyperlinks()).map(link -> new CrawlerCommand(link, result.getDepth() + 1));
 }
+```
 
 What happens here is that we create a new `Flux` containing the original result, combined with the results from the linked pages. This is done by using the `mergeWith()` operator. Additionally to that, we have to convert the hyperlinks to new `CrawlerCommand` objects, which is what happens in the `getNextCommands` by using the `Flux.fromIterable()`.
 
@@ -194,6 +222,7 @@ What happens here is that we create a new `Flux` containing the original result,
 
 The last step is to schedule the crawling job by calling the `crawl()` function with the seed URL and the maximum depth. To do this, I'm going to define a configuration object:
 
+```java
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -202,17 +231,21 @@ public class CrawlerOptions {
     private int depth;
     private int scheduleDelayMillis;
 }
+```
 
 Then I'm going to create a bean using `@ConfigurationProperties`:
 
+```java
 @Bean
 @ConfigurationProperties(prefix = "crawler")
 public CrawlerOptions crawlerOptions() {
     return new CrawlerOptions();
 }
+```
 
 And the final step is to autowire this in our crawler, in addition to the repository we made earlier on and to use it in a method annotated with `@Scheduled`:
 
+```java
 @Scheduled(fixedDelayString = "${crawler.schedule-delay-millis}", initialDelay = 0)
 public void crawl() {
     repository.saveAll(crawl(Flux.just(new CrawlerCommand(crawlerOptions.getSeed(), 1)), crawlerOptions.getDepth())
@@ -220,34 +253,37 @@ public void crawl() {
         .distinct(Webpage::getUrl))
         .subscribe(webpage -> logger.info("Webpage stored {} ({})", webpage.getTitle(), webpage.getUrl()));
 }
+```
 
 Using the `repository.saveAll()` function we can save the results we retrieved. It may look as if we're saving all of these together in one call, but be aware that this doesn't happen since the code is working reactively. This means that as soon as a new webpage is retrieved, it is being saved, it doesn't wait until all other webpages are also retrieved.
 
 Finally, we subscribe to the `repository.saveAll()` function, because reactive code will only work as soon as a subscriber is registered. With that, our flow is complete and we can start to run our application. But first, here's an overview of the flow:
 
-[![](images/Untitled-Diagram.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2017/11/Untitled-Diagram.png)
+![Complete schema](images/Untitled-Diagram.png)
 
 ### Running the application
 
 If we run the application now, we can start to see it shine:
 
-\[      Thread-10\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Configuration as a microservice - g00glen00b (https://wordpress.g00glen00b.be/configuration-as-a-microservice/)
-\[      Thread-11\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Using the Netflix stack with Spring boot: Hystrix - g00glen00b (https://wordpress.g00glen00b.be/spring-boot-netflix-hystrix/)
-\[      Thread-12\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Showing a loader with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/angular-2-loader/)
-\[      Thread-13\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Animating with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/animating-angular-2/)
-\[      Thread-14\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Implementing your own pipes with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/implementing-pipes-angular-2/)
-\[       Thread-9\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Changing your page title when a route changes with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/page-title-route-change-angular-2/)
-\[       Thread-7\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Using routing with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/routing-angular-2/)
-\[       Thread-8\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Creating a pagination component with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/pagination-component-angular-2/)
-\[       Thread-6\] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Writing your first component with Angular 2 - g00glen00b (https://wordpress.g00glen00b.be/component-angular-2/)
+```
+[      Thread-10] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Configuration as a microservice - g00glen00b (https://dimitr.im/configuration-as-a-microservice/)
+[      Thread-11] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Using the Netflix stack with Spring boot: Hystrix - g00glen00b (https://dimitr.im/spring-boot-netflix-hystrix/)
+[      Thread-12] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Showing a loader with Angular 2 - g00glen00b (https://dimitr.im/angular-2-loader/)
+[      Thread-13] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Animating with Angular 2 - g00glen00b (https://dimitr.im/animating-angular-2/)
+[      Thread-14] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Implementing your own pipes with Angular 2 - g00glen00b (https://dimitr.im/implementing-pipes-angular-2/)
+[       Thread-9] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Changing your page title when a route changes with Angular 2 - g00glen00b (https://dimitr.im/page-title-route-change-angular-2/)
+[       Thread-7] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Using routing with Angular 2 - g00glen00b (https://dimitr.im/routing-angular-2/)
+[       Thread-8] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Creating a pagination component with Angular 2 - g00glen00b (https://dimitr.im/pagination-component-angular-2/)
+[       Thread-6] b.g.c.webcrawlerapi.crawler.Crawler      : Webpage stored Writing your first component with Angular 2 - g00glen00b (https://dimitr.im/component-angular-2/)
+```
 
 From the logs, you can see that every step is running in its own thread. If you look at the threads in a tool like JVisualVM, you can see that every tasks runs on a thread and is only running for a while until it is parked again. This means that we aren't waiting for a proper response, we're just parking the thread and picking it up once we have the result.
 
-[![](images/Screenshot-2017-11-27-11.17.21.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2017/11/Screenshot-2017-11-27-11.17.21.png)
+![Thread diagram](images/Screenshot-2017-11-27-11.17.21.png)
 
 If we make a call to the endpoint we defined, for example: [http://localhost:8080/api/webpage?search=angular](http://localhost:8080/api/webpage?search=angular), we can see that we have a working application:
 
-[![](images/Screenshot-2017-11-27-11.43.48.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2017/11/Screenshot-2017-11-27-11.43.48.png)
+![JSON response](images/Screenshot-2017-11-27-11.43.48.png)
 
 And there you have it, a reactive application with Spring boot 2.0!
 

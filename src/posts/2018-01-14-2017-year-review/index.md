@@ -1,6 +1,7 @@
 ---
 title: "2017: Year in review"
 date: "2018-01-14"
+categories: ["General"]
 ---
 
 While 2017 was mostly an inactive year for me, that doesn't mean that we didn't have any visitors! So let's review what happened last year.
@@ -9,105 +10,23 @@ While 2017 was mostly an inactive year for me, that doesn't mean that we didn't 
 
 The amount of visitors is similar to last year. While we gained a bit more visitors, we got less pageviews overall, but that makes sense, since we didn't really write new articles, and thus didn't really get much traffic through social networks either:
 
-2014
-
-2015
-
-2016
-
-2017
-
-Visitors
-
-63.000
-
-247.000
-
-280.000
-
-288.000
-
-Page views
-
-102.000
-
-361.000
-
-365.000
-
-344.000
+|            | 2014    | 2015    | 2016    | 2017    |
+| ---------- | ------- | ------- | ------- | ------- |
+| Visitors   | 63.000  | 247.000 | 280.000 | 288.000 |
+| Page views | 102.000 | 361.000 | 365.000 | 344.000 |
 
 ### War of the browsers
 
 Just like last year, the war of the browsers isn't a war anymore. Google Chrome rose another 4%, and now **82%** of the visitors use Chrome:
 
-2014
-
-2015
-
-2016
-
-2017
-
-Google Chrome
-
-71%
-
-74,5%
-
-78%
-
-82%
-
-Mozilla Firefox
-
-19%
-
-16,5%
-
-14%
-
-11%
-
-Safari
-
-5,5%
-
-5%
-
-5%
-
-4%
-
-Internet Explorer
-
-2,5%
-
-2%
-
-1,8%
-
-1,4%
-
-Opera
-
-0,8%
-
-0,7%
-
-0,8%
-
-0,6%
-
-Edge
-
-\-
-
-0,1%
-
-0,4%
-
-0,5%
+|                   | 2014 | 2015  | 2016 | 2017 |
+| ----------------- | ---- | ----- | ---- | ---- |
+| Google Chrome     | 71%  | 74,5% | 78%  | 82%  |
+| Mozilla Firefox   | 19%  | 16,5% | 14%  | 11%  |
+| Safari            | 5,5% | 5%    | 5%   | 4%   |
+| Internet Explorer | 2,5% | 2%    | 1,8% | 1,4% |
+| Opera             | 0,8% | 0,7%  | 0,8% | 0,6% |
+| Edge              | \-   | 0,1%  | 0,4% | 0,5% |
 
 The only other browser in the top 6 browsers that's not declining is Edge, which makes sense, since it should eventually replace Internet Explorer.
 
