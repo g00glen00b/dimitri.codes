@@ -2,7 +2,7 @@
 title: "An introduction to AngularJS: Filters and factories"
 date: "2014-04-03"
 categories: ["JavaScript", "Tutorials"]
-tags: ["AngularJS", "Javascript"]
+tags: ["AngularJS", "JavaScript"]
 ---
 
 In this second part of the tutorials series about introducing AngularJS I'm going to talk about filters and factories. In the [first part](http://wordpress.g00glen00b.be/introduction-angularjs-controller/ "An introduction to AngularJS: Writing your first controller") we made our first AngularJS application and wrote a small controller. What we learned in that tutorial is that AngularJS biggest trump is that it has **two way data binding**, which means that the data is bound in two ways:

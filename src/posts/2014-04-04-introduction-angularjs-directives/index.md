@@ -2,7 +2,7 @@
 title: "Introduction to AngularJS: A rating directive"
 date: "2014-04-04"
 categories: ["JavaScript", "Tutorials"]
-tags: ["AngularJS", "Javascript"]
+tags: ["AngularJS", "JavaScript"]
 ---
 
 In this final part of the introduction to AngularJS series I'm going to write a directive. When you start writing apps using AngularJS, you will eventually have to re-use certain UI components over and over again. The best way to componentize these small pieces of user interface + behavior, we use directives. Directives are very important in AngularJS, when you want to use the JavaScript components from Twitter Bootstrap, you will have to create your own directives, or use libraries that are already doing this, like for example [Angular UI](http://angular-ui.github.io/).

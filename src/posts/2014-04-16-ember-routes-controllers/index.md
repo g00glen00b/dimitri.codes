@@ -3,7 +3,7 @@ title: "Ember.js in action: Routes and controllers"
 date: "2014-04-16"
 coverImage: "ember-logo.png"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Ember.js", "Javascript", "Web"]
+tags: ["Ember.js", "JavaScript", "Web"]
 ---
 
 In my previous tutorial I explained how to create a simple song rating app using AngularJS and storing the data in the HTML5 LocalStorage. Today I'm going to do the same thing, but this time I will be using Ember.js. The setup is quite easy, I'm going to write an app that allows you to add songs, rate them and delete them.

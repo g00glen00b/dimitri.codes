@@ -19,6 +19,8 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-robots-txt": "^1.5.0",
     "gatsby-plugin-sharp": "^2.2.9",
+    "gatsby-remark-images": "^3.1.49",
+    "gatsby-remark-prismjs": "^3.3.35",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-wordpress": "^3.1.57",
     "gatsby-transformer-remark": "^2.6.58",

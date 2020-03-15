@@ -14,14 +14,14 @@ const Page = ({data: {wordpressPage}}) => {
   );
 };
 
-export const query = graphql`
-  query ($id: String!) {
-    wordpressPage(id: {eq: $id}) {
-      title
-      content
-      slug
-    }
-  }
-`;
+// export const query = graphql`
+//   query ($id: String!) {
+//     wordpressPage(id: {eq: $id}) {
+//       title
+//       content
+//       slug
+//     }
+//   }
+// `;
 
 export default Page;

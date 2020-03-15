@@ -2,7 +2,7 @@
 title: "Handling forms with Spring Web and JSR-303"
 date: "2016-04-13"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "Web", "form"]
+tags: ["Spring", "Spring boot", "Web", "Forms"]
 ---
 
 Up until now I've written several tutorials already about creating some readonly Spring boot application, but what's cool about that? Eventually you'll have to add/update some data in your application. In this example I'll show you how you can do that with Spring Web and JSR-303 bean validations.

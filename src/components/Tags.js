@@ -1,15 +1,14 @@
 import React from 'react';
 import {Link} from 'gatsby';
 import './Tags.css';
+import {kebabCase} from '../helpers/contentHelpers';
 
-export const Tags = ({tags, base = `/tag`}) => (
+export const Tags = ({tags}) => (
   <ul className="tags">
-    {tags != null && tags.map(({id, name, slug, count}) => (
-      <li key={id}>
-        <Link to={`${base}/${slug}`}>
+    {tags != null && tags.map(name => (
+      <li key={name}>
+        <Link to={`/tag/${kebabCase(name)}`}>
           {name}
-          {` `}
-          {count && <strong>{count}</strong>}
         </Link>
       </li>
     ))}

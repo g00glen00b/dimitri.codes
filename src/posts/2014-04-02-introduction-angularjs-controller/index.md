@@ -2,7 +2,7 @@
 title: "An introduction to AngularJS: Writing your first controller"
 date: "2014-04-02"
 categories: ["JavaScript", "Tutorials"]
-tags: ["AngularJS", "Javascript"]
+tags: ["AngularJS", "JavaScript"]
 ---
 
 In this introduction tutorial series to [AngularJS](http://angularjs.org) I'm going to build a small webapp introducing several aspects of AngularJS like controllers, filters, services and directives. I'm going to explain all of that by creating an artist/song-rating app, which (in the end) will look like:

@@ -6,31 +6,24 @@ import {PostExcerpt} from '../components/PostExcerpt';
 import {ElevatorPitch} from '../components/ElevatorPitch';
 import {ReadMoreBox} from '../components/ReadMoreBox';
 
-const allWordpressPostQuery = graphql`
+const allPostsQuery = graphql`
   query {
-    allWordpressPost(sort: {fields: [date], order:DESC}, limit: 5) {
+    allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, limit: 10) {
       edges {
         node {
-          id
-          categories {
-            id
-            name
-            slug
-          }
-          daysAgo: date(difference: "days")
-          title
-          excerpt
-          slug
-          tags {
-            id
-            slug
-            name
+          excerpt(format: PLAIN)
+          frontmatter {
+            categories
+            tags
+            title
+            daysAgo: date(difference: "days")
           }
           fields {
-            readingTime {
-              text
-            }
+            slug
           }
+          id
+          fileAbsolutePath
+          timeToRead
         }
       }
     }
@@ -38,23 +31,23 @@ const allWordpressPostQuery = graphql`
 `;
 
 const IndexPage = () => {
-  const {allWordpressPost} = useStaticQuery(allWordpressPostQuery);
+  const {allMarkdownRemark} = useStaticQuery(allPostsQuery);
 
   return (
     <Layout>
       <SEO title="Home"/>
       <ElevatorPitch/>
       <h1>Latest posts</h1>
-      {allWordpressPost.edges.map(({node}) => (
+      {allMarkdownRemark.edges.map(({node}) => (
         <PostExcerpt
           key={node.id}
-          categories={node.categories}
+          categories={node.frontmatter.categories}
           excerpt={node.excerpt}
-          isNew={node.daysAgo < 20}
-          readingTime={node.fields.readingTime}
-          slug={node.slug}
-          tags={node.tags}
-          title={node.title}/>
+          isNew={node.frontmatter.daysAgo < 20}
+          readingTime={node.timeToRead}
+          slug={node.fields.slug}
+          tags={node.frontmatter.tags}
+          title={node.frontmatter.title}/>
       ))}
       <ReadMoreBox/>
     </Layout>

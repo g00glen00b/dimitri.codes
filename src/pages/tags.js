@@ -3,25 +3,21 @@ import {graphql, useStaticQuery} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {ElevatorPitch} from '../components/ElevatorPitch';
-import {Tags} from '../components/Tags';
+import {GroupCounts} from '../components/GroupCounts';
 
-const allWordpressTagQuery = graphql`
+const allTagsQuery = graphql`
   query {
-    allWordpressTag(filter: {count: {gt: 0}}) {
-      edges {
-        node {
-          id
-          count
-          slug
-          name
-        }
+    allMarkdownRemark {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
       }
     }
   }
 `;
 
 const IndexPage = () => {
-  const {allWordpressTag} = useStaticQuery(allWordpressTagQuery);
+  const {allMarkdownRemark} = useStaticQuery(allTagsQuery);
 
   return (
     <Layout>
@@ -30,7 +26,9 @@ const IndexPage = () => {
       <h1 className="page__title">
         Pick a tag
       </h1>
-      <Tags tags={allWordpressTag.edges.map(({node}) => node)}/>
+      <GroupCounts
+        base="/tag"
+        groups={allMarkdownRemark.group}/>
     </Layout>
   );
 };

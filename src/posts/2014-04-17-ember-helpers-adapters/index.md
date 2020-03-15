@@ -2,7 +2,7 @@
 title: "Ember.js in action: Helpers and adapters"
 date: "2014-04-17"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Ember.js", "Javascript", "Web"]
+tags: ["Ember.js", "JavaScript", "Web"]
 ---
 
 In the previous tutorial I talked about setting up a simple application using Ember.js. We wrote a simple app containing a route, a controller and a store (using Ember-data). In this tutorial we will go further using stores by adding an adapter to the store and removing elements from our store as well. Another feature I'm going to talk about is defining your own Handlebars helpers.

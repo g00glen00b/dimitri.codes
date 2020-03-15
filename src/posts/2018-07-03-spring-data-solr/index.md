@@ -2,7 +2,7 @@
 title: "Working with Spring Data Solr repositories"
 date: "2018-07-03"
 categories: ["Java", "Tutorials"]
-tags: ["Solr", "Sprinng boot", "Spring data"]
+tags: ["Solr", "Spring boot", "Spring Data"]
 ---
 
 Spring Data is the go-to framework when trying to get access to a database within a Spring application. Next to relational databases it also provides support for a wide variety of noSQL databases, including document-based databases like Apache Solr. In this tutorial I'll explore the various possibilities of using Spring Data Solr.

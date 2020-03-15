@@ -2,7 +2,7 @@
 title: "Adding reading time with Gatsby"
 date: "2019-11-12"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Gatsby", "GraphQL", "React]
+tags: ["Gatsby", "GraphQL", "React"]
 ---
 
 In [my latest tutorials](/tag/gatsby), I've explored how to create a blog with Gatsby using WordPress as a headless CMS. In this tutorial, I'll explain how you can implement a "reading time" feature with Gatsby.

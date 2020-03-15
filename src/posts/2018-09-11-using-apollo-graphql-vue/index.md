@@ -2,7 +2,7 @@
 title: "Using Apollo GraphQL with Vue"
 date: "2018-09-11"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Apollo", "GraphQL", "JavaScipt", "Vue"]
+tags: ["Apollo", "GraphQL", "JavaScript", "Vue"]
 ---
 
 [Last time](/getting-started-vue-at-ui/), I wrote a simple Vue application using dummy data in our components. Today, we're going to link it to the [Apollo GraphQL](https://www.apollographql.com/) API that I wrote earlier. As said before, Apollo has both a server-component that can integrate with Express, but also a client component that can integrate with Angular, React but also with Vue.

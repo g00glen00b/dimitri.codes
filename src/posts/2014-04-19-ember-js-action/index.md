@@ -2,7 +2,7 @@
 title: "Ember.js in action"
 date: "2014-04-19"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Ember.js", "Javascript", "Web"]
+tags: ["Ember.js", "JavaScript", "Web"]
 ---
 
 If you're a developer for the past five years you may have noticed an explosion in the JavaScript world. Suddenly frameworks, concepts, standards and building tools are popping everywhere. The browser is becoming a valuable alternative to desktop applications and if you didn't already hop on to the JavaScript train towards the future, then it's time to do so!

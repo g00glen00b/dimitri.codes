@@ -2,7 +2,7 @@
 title: "Documenting your REST API with Swagger and Springfox"
 date: "2016-09-20"
 coverImage: "swagger-logo.png"
-categories: ["Java", "Tutorials]
+categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Swagger"]
 ---
 

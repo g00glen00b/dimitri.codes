@@ -3,7 +3,7 @@ title: "Getting started with Vue and AT UI"
 date: "2018-08-14"
 coverImage: "vue-logo.png"
 categories: ["JavaScript", "Tutorials"]
-tags: ["JavaScript", "NPM", "vue"]
+tags: ["JavaScript", "NPM", "Vue"]
 ---
 
 [Vue.js](https://vuejs.org/) gained quite some popularity over the past few years. As a JavaScript framework, it positions itself next to React, Angular and a few other libraries to provide a component-based application structure. In this example, I'll create a Q&A application... with Vue!

@@ -2,7 +2,7 @@
 title: "Reactive relational databases with R2DBC and Spring"
 date: "2019-06-25"
 categories: ["Java", "Tutorials"]
-tags: ["PostgreSQL", "Project Reactor", "R2DBc", "Reactive programming", "Spring boot", "Spring WebFlux"]
+tags: ["PostgreSQL", "Project Reactor", "R2DBC", "Reactive programming", "Spring boot", "Spring WebFlux"]
 ---
 
 In the past, we've covered how to use [reactive programming with Project Reactor and Spring](https://blog.optis.be/reactive-programming-with-spring-boot-2-7a11b953c8a). Around that time, I mentioned that the support for databases was limited due to the amount of blocking JDBC drivers.

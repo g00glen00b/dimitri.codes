@@ -3,7 +3,7 @@ title: "Indexing documents with Spring batch"
 date: "2018-06-05"
 coverImage: "spring-batch-1.png"
 categories: ["Java", "Tutorials"]
-tags: ["Solr", "Spring batcch", "Springn boot"]
+tags: ["Solr", "Spring batch", "Spring boot"]
 ---
 
 Batch processing of information is a common thing to do when developing applications. Spring has its own framework to handle batch processing, called [Spring batch](https://projects.spring.io/spring-batch/). In this tutorial, I'll use Spring batch to index markdown documents on my local disk onto Solr to make them easier to search for.

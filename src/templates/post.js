@@ -1,7 +1,6 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import {SEO} from '../components/Seo';
-import {DangerousContent} from '../components/DangerousContent';
 import {Layout} from '../components/Layout';
 import {PostFooter} from '../components/PostFooter';
 import {Tags} from '../components/Tags';
@@ -24,48 +23,48 @@ const Post = ({data: {wordpressPost, site}}) => (
       {wordpressPost.date}, {wordpressPost.fields.readingTime.text}
     </p>
     <Tags tags={wordpressPost.tags}/>
-    <DangerousContent content={wordpressPost.content}/>
+    <div dangerouslySetInnerHTML={{__html: wordpressPost.content}}/>
     <PostFooter url={`${site.siteMetadata.siteUrl}/${wordpressPost.slug}`}/>
     <ElevatorPitch/>
   </Layout>
 );
-
-export const query = graphql`
-  query ($id: String!) {
-    site {
-      siteMetadata {
-        siteUrl
-      }
-    }
-    
-    wordpressPost(id: {eq: $id}) {
-      date(formatString: "MMMM Do, YYYY")
-      iso: date
-      modified
-      title
-      content
-      simpleExcerpt
-      slug
-      featured_media {
-        localFile {
-          publicURL
-        }
-      }
-      categories {
-        name
-      }
-      tags {
-        id
-        slug
-        name
-      }
-      fields {
-        readingTime {
-          text
-        }
-      }
-    }
-  }
-`;
+//
+// export const query = graphql`
+//   query ($id: String!) {
+//     site {
+//       siteMetadata {
+//         siteUrl
+//       }
+//     }
+//
+//     wordpressPost(id: {eq: $id}) {
+//       date(formatString: "MMMM Do, YYYY")
+//       iso: date
+//       modified
+//       title
+//       content
+//       simpleExcerpt
+//       slug
+//       featured_media {
+//         localFile {
+//           publicURL
+//         }
+//       }
+//       categories {
+//         name
+//       }
+//       tags {
+//         id
+//         slug
+//         name
+//       }
+//       fields {
+//         readingTime {
+//           text
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default Post;

@@ -29,35 +29,35 @@ const Posts = ({data: {allWordpressPost}, pageContext}) => (
   </Layout>
 );
 
-export const query = graphql`
-  query($skip: Int!, $limit: Int!, $id: String!) {    
-    allWordpressPost(sort: {fields: [date], order:DESC}, limit: $limit, skip: $skip, filter: {categories: {elemMatch: {id: {eq: $id}}}}) {
-      edges {
-        node {
-          id
-          categories {
-            id
-            name
-            slug
-          }
-          daysAgo: date(difference: "days")
-          title
-          excerpt
-          slug
-          tags {
-            id
-            slug
-            name
-          }
-          fields {
-            readingTime {
-              text
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   query($skip: Int!, $limit: Int!, $id: String!) {
+//     allWordpressPost(sort: {fields: [date], order:DESC}, limit: $limit, skip: $skip, filter: {categories: {elemMatch: {id: {eq: $id}}}}) {
+//       edges {
+//         node {
+//           id
+//           categories {
+//             id
+//             name
+//             slug
+//           }
+//           daysAgo: date(difference: "days")
+//           title
+//           excerpt
+//           slug
+//           tags {
+//             id
+//             slug
+//             name
+//           }
+//           fields {
+//             readingTime {
+//               text
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default Posts;

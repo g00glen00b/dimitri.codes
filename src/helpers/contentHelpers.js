@@ -2,6 +2,9 @@ const possibleImageTags = ['p', 'img'];
 const imageBlock = 'wp-block-image';
 const codeClasses = ['wp-block-code', 'prettyprint', 'linenums', 'inline:true', 'decode:1', 'pre-scrollable', 'lang:default'];
 
+export function kebabCase(name) {
+  return name.replace(/\s+/g, '-').toLowerCase();
+}
 
 export function isImage(node) {
   const {name: nodeName, attribs: {class: nodeClass = ''} = {}} = node;

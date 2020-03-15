@@ -3,26 +3,21 @@ import {graphql, useStaticQuery} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {ElevatorPitch} from '../components/ElevatorPitch';
-import {Tags} from '../components/Tags';
+import {GroupCounts} from '../components/GroupCounts';
 
-const allWordpressCategoryQuery = graphql`
+const allCategoriesQuery = graphql`
   query {
-    allWordpressCategory(filter: {count: {gt: 0}}) {
-      edges {
-        node {
-          id
-          count
-          slug
-          name
-        }
+    allMarkdownRemark {
+      group(field: frontmatter___categories) {
+        fieldValue
+        totalCount
       }
     }
   }
 `;
 
 const IndexPage = () => {
-  const {allWordpressCategory} = useStaticQuery(allWordpressCategoryQuery);
-
+  const {allMarkdownRemark} = useStaticQuery(allCategoriesQuery);
   return (
     <Layout>
       <SEO title="Categories"/>
@@ -30,9 +25,9 @@ const IndexPage = () => {
       <h1 className="page__title">
         Pick a category
       </h1>
-      <Tags
+      <GroupCounts
         base="/category"
-        tags={allWordpressCategory.edges.map(({node}) => node)}/>
+        groups={allMarkdownRemark.group}/>
     </Layout>
   );
 };

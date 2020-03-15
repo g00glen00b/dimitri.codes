@@ -2,7 +2,7 @@
 title: "Get more with Less using Grunt"
 date: "2014-06-22"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Grunt", "JavaScript", "LESS]
+tags: ["Grunt", "JavaScript", "LESS"]
 ---
 
 In [my previous tutorial](/angular-grunt/ "Making your AngularJS application grunt") I explained how you could use Grunt to create a nice and easy build environment. We did stuff like checking our code quality using JSHint, concatenated and minified files, ran our unit tests, ... Most of these changes didn't require any change to our code (except the location of our freshly built JavaScript file). In this example I'm going to use the same app and rewrite the CSS code made in the first part of the tutorial to use Less. But first of all, what is Less? LESS is a CSS pre-processor, similar to what CoffeeScript is to JavaScript (in case you're familiar with CoffeeScript). It goes further where CSS stops and adds features like mixins, variables, functions, hierarchical structures and much, much more. So basically... Less is MORE!

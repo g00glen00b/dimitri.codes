@@ -2,7 +2,7 @@
 title: "Containerizing your static web project"
 date: "2019-03-19"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Docker", "nginx", "NPM", "Webb"]
+tags: ["Docker", "nginx", "NPM", "Web"]
 ---
 
 [Last time](/web-project-webpack-babel/), we've seen how we can set up a simple web project using Babel and Webpack. More precisely, we've seen how we can both run and build the application.  

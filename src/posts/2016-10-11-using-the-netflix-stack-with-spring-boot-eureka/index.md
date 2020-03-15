@@ -2,7 +2,7 @@
 title: "Using the Netflix stack with Spring boot: Eureka"
 date: "2016-10-11"
 coverImage: "netflix-oss-logo.png"
-categories: ["Java", "Tutorials]
+categories: ["Java", "Tutorials"]
 tags: ["Eureka", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
 ---
 

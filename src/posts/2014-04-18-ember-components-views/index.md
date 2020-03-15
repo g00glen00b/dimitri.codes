@@ -2,7 +2,7 @@
 title: "Ember.js in action: Components and views"
 date: "2014-04-18"
 categories: ["JavaScript", "Tutorials"]
-tags: ["Ember.js", "Javascript", "Web"]
+tags: ["Ember.js", "JavaScript", "Web"]
 ---
 
 In our last two tutorials we made a simple song list app where you could add/delete songs from a list. To make the app really good we're going to add a rating component to the app, allowing us to rate the songs and eventually sort them based on their rating. So let's start!
