@@ -1,6 +1,8 @@
 ---
 title: "Difference between Mono and Flux"
 date: "2019-10-01"
+categories: ["Java", "Tutorials"]
+tags: ["Java", "Project Reactor", "Reactive programming"]
 ---
 
 If you're using Project Reactor, or any of the frameworks that use it, such as Spring WebFlux, or a reactive Spring Data library, you probably encountered the terms **Mono** and **Flux**. In this (small) tutorial I'll explore the differences between them.
@@ -33,7 +35,7 @@ The first type of publisher is a `Mono`. The `Mono` API allows you to emit only 
 
 For example, let's say we have the following code:
 
-```
+```java
 public Person findCurrentUser() {
     if (isAuthenticated()) return new Person("Jane", "Doe");
     else return null;
@@ -42,7 +44,7 @@ public Person findCurrentUser() {
 
 In Java 8, we could rewrite this as:
 
-```
+```java
 public Optional<Person> findCurrentUser() {
     if (isAuthenticated()) return Optional.of(new Person("Jane", "Doe"));
     else return Optional.empty();
@@ -51,7 +53,7 @@ public Optional<Person> findCurrentUser() {
 
 If we're using reactive streams on the other hand, we would use the following code:
 
-```
+```java
 public Mono<Person> findCurrentUser() {
     if (isAuthenticated()) return Mono.just(new Person("Jane", "Doe"));
     else return Mono.empty();
@@ -64,7 +66,7 @@ While the `Mono` is used for handling zero or one result, the `Flux` is used to 
 
 For example, if we have the following code:
 
-```
+```java
 public List<Person> findAll() {
     return Arrays.asList(
         new Person("Jane", "Doe"),
@@ -75,7 +77,7 @@ public List<Person> findAll() {
 
 In Java 8, we could rewrite this by using streams:
 
-```
+```java
 public Stream<Person> findAll() {
     return Stream.of(
         new Person("Jane", "Doe"),
@@ -86,7 +88,7 @@ public Stream<Person> findAll() {
 
 And with reactive streams, we can rewrite this as:
 
-```
+```java
 public Flux<Person> findAll() {
     return Flux.just(
         new Person("Jane", "Doe"),
@@ -101,7 +103,7 @@ As you probably can tell, the concepts of reactive streams overlap with the conc
 
 Let's assume the following code, what will be printed on the console:
 
-```
+```java
 Flux
     .just(1, 2, 3, 4)
     .reduce(Integer::sum)
@@ -118,7 +120,7 @@ I've mentioned before that publishers are asynchronous in nature, but are they a
 
 For example, let's assume the following code:
 
-```
+```java
 AtomicInteger sum = new AtomicInteger(0);
 Flux
     .just(1, 2, 3, 4)
@@ -133,7 +135,7 @@ The answer to that question is that it will print 10 onto the console, because `
 
 Now, what would be the result in the following example?
 
-```
+```java
 AtomicInteger sum = new AtomicInteger(0);
 Flux
     .just(1, 2, 3, 4)
@@ -147,7 +149,7 @@ The answer in this case would be **0**, because using `subscribeOn()` will execu
 
 So, depending on the nature of the reactive stream, it will be either synchronous or asynchronous. Code like I just wrote is a **bad practice** when you work with reactive streams. The proper solution would have been:
 
-```
+```java
 Flux
     .just(1, 2, 3, 4)
     .reduce(Integer::sum)
@@ -160,7 +162,7 @@ With Project Reactor, there are already a lot of built-in publishers. However, i
 
 For example, let's say we want to use the [Twitter4J library](http://twitter4j.org) with reactive streams, in that case, we could write:
 
-```
+```java
 return Flux.create(sink -> {
     TwitterStream twitterStream = new TwitterStreamFactory(configuration).getInstance();
     twitterStream.onStatus(sink::next);
@@ -177,7 +179,7 @@ If you worked with a reactive library like RxJS, you're probably familiar with t
 
 By default, streams in project reactor are **cold**. We can demonstrate that using the following code:
 
-```
+```java
 Flux<Integer> numbers = Flux
     .just(1, 2, 3, 4)
     .log();
@@ -193,7 +195,7 @@ In this example, the numbers 1 to 4 are emitted twice, once for the first subscr
 
 However, in some cases, like executing a HTTP request, you don't want to start from the source again, and you want to turn your cold stream into a hot one. Within Project Reactor, we can do that by **sharing**:
 
-```
+```java
 Flux<Integer> numbers = Flux
     .just(1, 2, 3, 4)
     .log()

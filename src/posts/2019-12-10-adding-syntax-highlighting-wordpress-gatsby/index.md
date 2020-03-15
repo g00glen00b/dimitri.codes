@@ -1,6 +1,8 @@
 ---
 title: "Adding syntax highlighting with WordPress and Gatsby"
 date: "2019-12-10"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "React"]
 ---
 
 If you're looking for syntax highlighting with Gatsby, chances are you've encountered an example using Prism.js. Sadly, the plugins that are available to do syntax highlighting, only work for Markdown, and not for WordPress.
@@ -27,7 +29,7 @@ To use the syntax highlighter, I'll create a `<PostCode/>` component. This compo
 
 Additionally, we can use it to import the syntax highlighting theme:
 
-```
+```jsx
 import React from 'react';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {ghcolors} from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -43,7 +45,7 @@ export const PostCode = ({language, children}) => (
 
 In this component, I'm using [Prism.js](https://prismjs.com/), since Prism appears to support more languages than highlight.js. If you're interested in using [highlight.js](https://highlightjs.org/) instead, you can use the following component:
 
-```
+```jsx
 import React from 'react';
 import {SyntaxHighlighter} from 'react-syntax-highlighter';
 import {github} from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -63,25 +65,25 @@ The nice part is that it works very similar. The only differences are that we pi
 
 The next step we have to make is to replace all `<pre/>` elements within the content with the new `<PostCode/>` component. Originally, we used the following code to inject the content into our Gatsby page template:
 
-```
+```jsx
 <div dangerouslySetInnerHtml={{__html: content}}/>
 ```
 
 To use react-html-parser, we can replace it with:
 
-```
+```jsx
 <div>{parse(content, {replace: replaceCode})}</div>
 ```
 
 However, to make this work, you have to add the following imports:
 
-```
+```javascript
 import parse, {domToReact} from 'html-react-parser';
 ```
 
 The final step is to define the `replaceCode()` function. Within this function, we'll return the `<PostCode/>` component if the name of the node matches `<pre/>`:
 
-```
+```javascript
 const replaceCode = node => {
   if (node.name === 'pre') {
     return node.children.length > 0 && <PostCode language={getLanguage(node)}>{domToReact(getCode(node))}</PostCode>;
@@ -93,7 +95,7 @@ To pass the language, I have to retrieve it from the original markup somehow. On
 
 That means that we can obtain the language from the attributes:
 
-```
+```javascript
 const getLanguage = node => {
   if (node.attribs.class != null) {
     return node.attribs.class;
@@ -106,7 +108,7 @@ If you used hightlight.js with the `lang:` prefix, this is where you would filte
 
 Additionally, we have to retrieve the actual code from the markup as well. On my blog, I wrapped all code within a `<code/>` element as well. That means we have to unwrap the code before we send it to the `<PostCode/>` component:
 
-```
+```javascript
 const getCode = node => {
   if (node.children.length > 0 && node.children[0].name === 'code') {
     return node.children[0].children;

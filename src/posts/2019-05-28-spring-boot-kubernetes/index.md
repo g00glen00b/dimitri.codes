@@ -1,9 +1,11 @@
 ---
 title: "Running your Spring boot application on Kubernetes"
 date: "2019-05-28"
+categories: ["Java", "Tutorials"]
+tags: ["Docker", "Kubernetes", "Minikube", "Spring", "Spring boot"]
 ---
 
-A few weeks ago, I've covered how you can properly [create Docker images for your Spring boot application](https://wordpress.g00glen00b.be/docker-spring-boot/). Last time, we've also seen how to [set up Kubernetes locally with Minikube](https://wordpress.g00glen00b.be/setting-up-minikube-istio-macos). Now, it's time to combine the two, and deploy a Spring boot application on Kubernetes.
+A few weeks ago, I've covered how you can properly [create Docker images for your Spring boot application](/docker-spring-boot/). Last time, we've also seen how to [set up Kubernetes locally with Minikube](/setting-up-minikube-istio-macos). Now, it's time to combine the two, and deploy a Spring boot application on Kubernetes.
 
 ### Creating a deployment
 
@@ -11,7 +13,7 @@ A few weeks ago, I've covered how you can properly [create Docker images for you
 
 The first step, when trying to deploy an application with Kubernetes is to describe the [deployment/pods](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) itself within a YAML file. To do this, I'm going to use the following YAML configuration:
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -58,7 +60,7 @@ Please note, you have to add the `-n` flag, otherwise a newline will be appended
 
 Now you can add the following configuration to your YAML file:
 
-```
+```yaml
 ---
 apiVersion: v1
 kind: Secret
@@ -76,7 +78,7 @@ Obviously, if you want to expose your database somehow, you probably don't want 
 
 Once you've setup your secret, you can use it within environment variables by using the `secretKeyRef` property, for example:
 
-```
+```yaml
 name: movie-quote-service-deployment
 image: g00glen00b/movie-quote-service:0.0.1
 # ports: ...
@@ -101,7 +103,7 @@ As you can see, we're configuring both `SPRING_DATASOURCE_USERNAME` and `SPRING_
 
 If you want to [limit the resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container) that are available to your container, you can use the `resources` property within your YAML configuration file for your container, for example:
 
-```
+```yaml
 name: movie-quote-service-deployment
 image: g00glen00b/movie-quote-service:0.0.1
 # env: ...
@@ -130,7 +132,7 @@ With Spring boot, we could use any endpoint for the liveness probe. If the appli
 
 To configure this, we can use the following configuration:
 
-```
+```yaml
 name: movie-quote-service-deployment
 image: g00glen00b/movie-quote-service:0.0.1
 ports:
@@ -156,7 +158,7 @@ Make sure that the initial delay covers the startup time of your application. If
 
 The readiness probe on the other hand, can rely on third party services to determine its outcome. If the database is unavailable, you don't want requests to end up to this pod. So, in this case, we can use the **/actuator/health** endpoint:
 
-```
+```yaml
 name: movie-quote-service-deployment
 image: g00glen00b/movie-quote-service:0.0.1
 ports:
@@ -183,7 +185,7 @@ The NodePort service requires two ports to be configured. First, you have to con
 
 NodePort services can only be exposed to ports within the 30000-32767 range:
 
-```
+```yaml
 ---
 apiVersion: v1
 kind: Service

@@ -1,6 +1,8 @@
 ---
 title: "Writing your own Gatsby plugin"
 date: "2020-01-14"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Babel", "Gatsby", "Jest", "NPM", "React"]
 ---
 
 So far, I've [written several tutorials](https://wordpress.g00glen00b.be/tag/gatsby/) about using Gatsby. What they have in common, is that they all depend on certain Gatsby plugins. In this tutorial, I'll explore the options you have when creating your own Gatsby plugin.
@@ -41,7 +43,7 @@ Be aware that you have to install this dependency using `--save` instead of `--s
 
 To make Babel work, you have to configure which plugins and presets you want to use, and which platform you're targeting. To do this, I'll create a new file called **.babelrc**:
 
-```
+```json
 {
   "presets": [
     [
@@ -63,7 +65,7 @@ To make Babel work, you have to configure which plugins and presets you want to 
 
 Additionally, I want to add two npm scripts to transpile my source code. One to actually build it, and another one to build as soon as I change something within my code. To do this, I'll add the following to my **package.json**:
 
-```
+```json
 "scripts": {
   "build": "babel src --out-dir ./ --source-maps",
   "watch": "babel src --out-dir ./ --source-maps --watch"
@@ -72,7 +74,7 @@ Additionally, I want to add two npm scripts to transpile my source code. One to 
 
 I also defined **Gatsby** as a peer dependency. This means that the plugin itself doesn't depend on Gatsby, but that it's meant to be used with Gatsby. To add peer dependencies, I added the following to my **package.json**:
 
-```
+```json
 "peerDependencies": {
   "gatsby": ">2.0.0"
 }
@@ -88,7 +90,7 @@ npm install --save-dev babel-eslint eslint eslint-plugin-babel
 
 ESLint can be configured as well, to allow certain features. In this case, I want to use the recommended code style with ES6 and JSX. To do that, I have to create a **.eslintrc** file with the following contents:
 
-```
+```json
 {
   "root": true,
   "extends": ["eslint:recommended"],
@@ -110,7 +112,7 @@ ESLint can be configured as well, to allow certain features. In this case, I wan
 
 To check the code style, I added another npm script to my **package.json**:
 
-```
+```json
 "scripts": {
   "lint": "eslint --ext js ./ --cache"
 }
@@ -128,7 +130,7 @@ npm install --save-dev prettier
 
 Just like Babel and ESLint, this requires some configuration to set up the code formatting for your project. This configuration can be placed within **.prettierrc**:
 
-```
+```json
 {
   "semi": true,
   "singleQuote": true,
@@ -141,7 +143,7 @@ Just like Babel and ESLint, this requires some configuration to set up the code 
 
 I also added an npm script to **package.json** to format code:
 
-```
+```json
 "scripts": {
   "format": "prettier --write 'src/*.js'"
 }
@@ -157,7 +159,7 @@ npm install --save-dev jest
 
 Jest uses global variables (like `test`, `jest`, `describe`, ...). To make sure that ESLint doesn't complain about these, I added a specific ESLint configuration file for my tests within **test/.eslintrc**:
 
-```
+```json
 {
   "env": {
     "jest": true
@@ -167,7 +169,7 @@ Jest uses global variables (like `test`, `jest`, `describe`, ...). To make sure 
 
 I also added another npm script to run my tests:
 
-```
+```json
 "scripts": {
   "test": "jest --color"
 }
@@ -177,7 +179,7 @@ Jest also allows you to configure certain features. In this case, I wanted to co
 
 To do this, I added the following to my **package.json**:
 
-```
+```json
 "jest": {
   "collectCoverage": true
 }
@@ -203,7 +205,7 @@ Within the Node API, I need the `[onCreateNode](https://www.gatsbyjs.org/docs/no
 
 The code I wrote is the following:
 
-```
+```javascript
 import readingTime from 'reading-time';
 
 export function onCreateNode({node, actions}) {
@@ -228,7 +230,7 @@ Now that we've implemented our plugin, we can write some tests. To do this, I cr
 
 To set up some tests, I'm going to mock the `reading-time` library using `jest.doMock()`:
 
-```
+```javascript
 jest.doMock('reading-time', () => content => ({
   text: '5 min read',
   content: content
@@ -241,7 +243,7 @@ The next step is to actually import the `onCreateNode()` function. It's necessar
 
 We can import the `onCreateNode()` function like this:
 
-```
+```javascript
 const {onCreateNode} = require('../src/gatsby-node');
 ```
 
@@ -252,7 +254,7 @@ Now we're ready to write some tests. While the plugin is quite simple, we can wr
 
 To make the first test work, I'll use `jest.fn()` to create a dummy `createNodeField()` action:
 
-```
+```javascript
 test('adds readingTime field for nodes with content', () => {
   const node = {content: 'foo'};
   const createNodeField = jest.fn();
@@ -266,7 +268,7 @@ test('adds readingTime field for nodes with content', () => {
 
 Now we can use `createNodeField.mock.calls` to verify what was sent to it:
 
-```
+```javascript
 expect(createNodeField.mock.calls.length).toBe(1);
 expect(createNodeField.mock.calls[0][0].node).toBe(node);
 expect(createNodeField.mock.calls[0][0].name).toBe('readingTime');
@@ -276,7 +278,7 @@ expect(createNodeField.mock.calls[0][0].value.content).toBe('foo');
 
 The second test will look very similar, except that we now have to make sure that `createNodeField()` wasn't called:
 
-```
+```javascript
 test('does not add readingTime field if there is no content', () => {
   const node = {};
   const createNodeField = jest.fn();
@@ -339,7 +341,7 @@ npm publish
 
 If you want to make sure it appears on the Gatsby website as well, you have to include the keywords "gatsby" and "gatsby-plugin" within your **package.json**.
 
-```
+```json
 "keywords": [
   "gatsby",
   "gatsby-plugin"

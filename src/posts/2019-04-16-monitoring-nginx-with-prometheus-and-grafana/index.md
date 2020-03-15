@@ -1,17 +1,19 @@
 ---
 title: "Monitoring nginx with Prometheus and Grafana"
 date: "2019-04-16"
+categories: ["Tutorials"]
+tags: ["Docker", "Grafana", "Monitoring", "nginx", "Prometheus"]
 ---
 
-A while ago, I wrote [a tutorial about deploying your static web project on nginx using Docker](https://wordpress.g00glen00b.be/containerizing-your-static-web-project/). Today, we'll go a bit further, and see how we can monitor what's happening on [nginx](https://www.nginx.com/), by using [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).
+A while ago, I wrote [a tutorial about deploying your static web project on nginx using Docker](/containerizing-your-static-web-project/). Today, we'll go a bit further, and see how we can monitor what's happening on [nginx](https://www.nginx.com/), by using [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).
 
-![](images/nginx-prometheus-grafana.png)
+![nginx + Prometheus + Grafana](images/nginx-prometheus-grafana.png)
 
 ### Enabling the status endpoint
 
 nginx itself already comes with a status endpoint on its own, which can be enabled using the [ngx\_http\_stub\_status\_module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html). To do this, we have to open our **nginx.conf** and add a separate location:
 
-```
+```nginx
 http {
     index   index.html;
     server {
@@ -55,7 +57,7 @@ Another important note is that if you don't configure the amount of retries, thi
 
 The next step to get this running is to configure Prometheus properly by adding a target to `prometheus.yml`. For example:
 
-```
+```yaml
 scrape_configs:
   - job_name: 'movie-quote-consumer'
     scrape_interval: 1m
@@ -68,7 +70,7 @@ In this example, I'm running the Prometheus exporter as a container within the s
 
 Once your containers are running, you should be able to see whether or not Prometheus is configured properly by visiting the **/targets** endpoint. This should show the status **UP** next to the **movie-quote-consumer** job.
 
-![](images/movie-quote-consumer-prometheus.png)
+![Prometheus jobs](images/movie-quote-consumer-prometheus.png)
 
 ### Configuring Grafana
 
@@ -82,6 +84,6 @@ delta(nginx_http_requests_total{job="movie-quote-consumer"}[2m])
 
 This will result in a graph like this:
 
-![](images/grafana-nginx-requests.png)
+![Grafana chart](images/grafana-nginx-requests.png)
 
 And there you have it, a nice dashboard for nginx. The great thing about this is that if you have **nginx plus**, the configuration barely changes. You only have to enable the Prometheus exporter to collect metrics for nginx plus by using the `-nginx.plus` flag. After that, you should be able to use the new metrics within Grafana.

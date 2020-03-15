@@ -1,9 +1,11 @@
 ---
 title: "Adding reading time with Gatsby"
 date: "2019-11-12"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "React]
 ---
 
-In [my latest tutorials](https://wordpress.g00glen00b.be/tag/gatsby), I've explored how to create a blog with Gatsby using WordPress as a headless CMS. In this tutorial, I'll explain how you can implement a "reading time" feature with Gatsby.
+In [my latest tutorials](/tag/gatsby), I've explored how to create a blog with Gatsby using WordPress as a headless CMS. In this tutorial, I'll explain how you can implement a "reading time" feature with Gatsby.
 
 ![Gatsby + WordPress](images/gatsby-wordpress.png)
 
@@ -17,7 +19,7 @@ npm install gatsby-transformer-remark gatsby-remark-reading-time --save
 
 Once installed, you can add `gatsby-remark-reading-time` as a plugin for `gatsby-transformer-remark`:
 
-```
+```javascript
 {
   resolve: `gatsby-transformer-remark`,
   options: {
@@ -30,7 +32,7 @@ Once installed, you can add `gatsby-remark-reading-time` as a plugin for `gatsby
 
 By adding this plugin, the `readingTime` property will be available to use within the GraphQL API. For example:
 
-```
+```graphql
 {
   allMarkdownRemark {
     edges {
@@ -66,7 +68,7 @@ We have two separate methods of integrating this library into our Gatsby data. F
 
 After configuring the Gatsby WordPress plugin, you can add a `normalizer` to transform the entities. For example:
 
-```
+```javascript
 {
   resolve: `gatsby-source-wordpress`,
   options: {
@@ -80,7 +82,7 @@ The `normalizer` parameter expects a function that returns the normalized entiti
 
 All we have to do is map each entity by using a function, such as `entityWithReadingTime`:
 
-```
+```javascript
 const readingTime = require('reading-time');
 
 const entityWithReadingTime = ({content, ...rest}) => ({
@@ -94,7 +96,7 @@ This function will transform every entity that has a `content` to also include a
 
 If we run the application now, we can use the following GraphQL query to retrieve the reading time information for every post:
 
-```
+```graphql
 {
   allWordpressPost {
     edges {
@@ -122,7 +124,7 @@ Another possibility, if you don't like the `normalizer` option, is by using the 
 
 To do this, we can add the following code to **gatsby-node.js**:
 
-```
+```javascript
 const readingTime = require('reading-time');
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -141,7 +143,7 @@ Like the other Gatsby Node APIs, we get an `actions` object containing operation
 
 One difference with the previous method is that we now have to retrieve the `readingTime` property from `fields` in GraphQL:
 
-```
+```graphql
 {
   allWordpressPost {
     edges {
@@ -173,7 +175,7 @@ npm install gatsby-source-wordpress gatsby-wordpress-reading-time --save
 
 After that, you can enable it by adding it as a plugin for `gatsby-source-wordpress`:
 
-```
+```javascript
 module.exports = {
   plugins: [
     {

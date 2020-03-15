@@ -1,6 +1,8 @@
 ---
 title: "Reactive relational databases with R2DBC and Spring"
 date: "2019-06-25"
+categories: ["Java", "Tutorials"]
+tags: ["PostgreSQL", "Project Reactor", "R2DBc", "Reactive programming", "Spring boot", "Spring WebFlux"]
 ---
 
 In the past, we've covered how to use [reactive programming with Project Reactor and Spring](https://blog.optis.be/reactive-programming-with-spring-boot-2-7a11b953c8a). Around that time, I mentioned that the support for databases was limited due to the amount of blocking JDBC drivers.
@@ -15,13 +17,13 @@ I'm also going to use Lombok in this example, but that's completely optional.
 
 Before you create your project, make sure that you're using **Spring boot 2.2.x** or higher. The Spring Data project for R2DBC relies on **Spring framework 5.2.x**, which is available within Spring boot 2.2.x and higher.
 
-![Spring Initializr setup for R2DBC](images/Screenshot-2019-06-14-09.12.24-1024x551.png)
+![Spring Initializr setup for R2DBC](images/Screenshot-2019-06-14-09.12.24.png)
 
 Now, after generating the project, we do have to add a few dependencies on our own.
 
 First of all, since these are experimental features, we have to make sure that we included the Spring milestone repository:
 
-```
+```xml
 <repositories>
     <repository>
         <id>spring-milestone</id>
@@ -32,7 +34,7 @@ First of all, since these are experimental features, we have to make sure that w
 
 Additionally, if you don't want any version conflict between the dependencies that are necessary to work with R2DBC, I suggest using their BOM (Bill of Materials):
 
-```
+```xml
 <dependencyManagement>
 	<dependencies>
 		<dependency>
@@ -48,7 +50,7 @@ Additionally, if you don't want any version conflict between the dependencies th
 
 The next step is to add the **Spring boot starter** for Spring Data R2DBC:
 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot.experimental</groupId>
     <artifactId>spring-boot-starter-data-r2dbc</artifactId>
@@ -59,7 +61,7 @@ Now that we have a starter, it's time to choose a proper **R2DBC driver**, just 
 
 In this example, I'll use PostgreSQL:
 
-```
+```xml
 <dependency>
     <groupId>io.r2dbc</groupId>
     <artifactId>r2dbc-postgresql</artifactId>
@@ -71,7 +73,7 @@ In this example, I'll use PostgreSQL:
 
 Now that we've set up our project, we can create our entity class. Be aware that even though we can connect to relational databases reactively, there's no such thing as JPA for R2DBC, which means that you can't use features like `@OneToMany` and such within your entities:
 
-```
+```java
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -87,7 +89,7 @@ As you can see, I wrote a very simple `Person` class with a unique identifier an
 
 Now that you have your entity, you can create a proper Spring Data repository like this:
 
-```
+```java
 public interface PersonRepository extends ReactiveCrudRepository<Person, Long> {
 }
 ```
@@ -108,7 +110,7 @@ spring.r2dbc.password=dbpass
 
 One thing you can do, even without the repositories, is to use the `DatabaseClient` directly. For example, if we want to set up our schema, we could create a `schema.sql` file like this:
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS person (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR(100),
@@ -118,7 +120,7 @@ CREATE TABLE IF NOT EXISTS person (
 
 After that, you can create a method that returns a `Mono<String>` to read the `schema.sql` file:
 
-```
+```java
 private Mono<String> getSchema() throws URISyntaxException {
     Path path = Paths.get(ClassLoader.getSystemResource("schema.sql").toURI());
     return Flux
@@ -131,7 +133,7 @@ This method uses the same approach as mentioned by [Simon Baslé](https://simonb
 
 After that, we can create an `ApplicationRunner` to execute our script:
 
-```
+```java
 @Bean
 public ApplicationRunner seeder(DatabaseClient client) {
     return args -> getSchema()
@@ -142,7 +144,7 @@ public ApplicationRunner seeder(DatabaseClient client) {
 
 In this example, `executeSql()` uses the `DatabaseClient` API to execute the SQL string. You don't have to use a separate method, but I prefer having a method name that describes what I'm going to do:
 
-```
+```java
 private Mono<Integer> executeSql(DatabaseClient client, String sql) {
     return client.execute(sql).fetch().rowsUpdated();
 }
@@ -152,7 +154,7 @@ private Mono<Integer> executeSql(DatabaseClient client, String sql) {
 
 Using your repository is identical to what we've done before with reactive repositories, we can use them either within a controller or a WebFlux route. For example:
 
-```
+```java
 @RestController
 @RequestMapping("/api/person")
 @RequiredArgsConstructor

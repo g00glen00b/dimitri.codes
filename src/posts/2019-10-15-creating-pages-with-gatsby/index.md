@@ -1,9 +1,11 @@
 ---
 title: "Creating pages with Gatsby"
 date: "2019-10-15"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "React"]
 ---
 
-In [my latest tutorial](https://wordpress.g00glen00b.be/using-gatsby-with-wordpress-as-a-headless-cms/), I've explored the possibilities with Gatsby and WordPress. While we built a proper index-page, our WordPress-powered Gatsby blog is far from done.
+In [my latest tutorial](/using-gatsby-with-wordpress-as-a-headless-cms/), I've explored the possibilities with Gatsby and WordPress. While we built a proper index-page, our WordPress-powered Gatsby blog is far from done.
 
 In this tutorial, I'll pick up where we left off and start with creating detail-pages.
 
@@ -17,7 +19,7 @@ This function passes two arguments, a `graphql` parameter to execute GraphQL que
 
 Since we need both these parameters, we can initialize our code like this:
 
-```
+```javascript
 exports.createPages = ({graphql, actions}) => {
   const {createPage} = actions;
 };
@@ -25,7 +27,7 @@ exports.createPages = ({graphql, actions}) => {
 
 The next step is to find out which query we want to execute. In this case, I want to create a detail-page for every blog post, so I need to use a query like last time, to fetch `allWordpressPost`. This time, I won't have to add a limit though:
 
-```
+```javascript
 const allPostsQuery = `{
   allWordpressPost {
     edges {
@@ -47,7 +49,7 @@ I also don't need all the details of a post, only:
 
 Now that we have our query, we can execute it using the `graphql` parameter. When executing, this returns a promise, which we have to return within the `createPages` hook:
 
-```
+```javascript
 exports.createPages = ({graphql, actions}) => {
   const {createPage} = actions;
   return graphql(allPostsQuery).then(({errors, data}) => {
@@ -58,7 +60,7 @@ exports.createPages = ({graphql, actions}) => {
 
 Using the data, we can call the `createPage` function for every post like this:
 
-```
+```javascript
 return data.allWordpressPost.edges.map(({node}) => createPage({
   path: node.slug,
   component: path.resolve('./src/templates/post.js'),
@@ -74,7 +76,7 @@ As you can see, the `createPage` function requires a parameter containing three 
 
 The component should contain an absolute path to the component that we want to use. To do this, we use `path.resolve()` which we can only use if we properly import it:
 
-```
+```javascript
 const path = require('path');
 ```
 
@@ -84,7 +86,7 @@ While we've set up Gatsby to create new pages for every WordPress post, we're no
 
 For the structure of this component, we can look at **src/pages/index.js** and copy the same structure over:
 
-```
+```jsx
 const PostPage = () => (
   <Layout>
     <SEO title="Home"/>
@@ -98,7 +100,7 @@ Now, like before, we have to execute a GraphQL query to retrieve the data. Howev
 
 An alternative method to execute a GraphQL query is to export it:
 
-```
+```javascript
 export const query = graphql`
   query ($id: String!) {
     wordpressPost(id: {eq: $id}) {
@@ -118,7 +120,7 @@ The nice part about Gatsby is that it automatically recognizes that your GraphQL
 
 Additionally, we can retrieve the data in our component like this:
 
-```
+```jsx
 const Post = ({data}) => {
   return (
     <Layout>

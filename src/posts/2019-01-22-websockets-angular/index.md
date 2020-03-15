@@ -1,9 +1,11 @@
 ---
 title: "Using WebSockets with Angular"
 date: "2019-01-22"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Angular", "RxJS", "WebSockets"]
 ---
 
-In [my previous tutorial](https://wordpress.g00glen00b.be/websockets-spring-boot/), I've set up a Spring boot application that allows WebSocket communication rather than serving a traditional REST API. Today, we're going to find out how to communicate to that backend using Angular.
+In [my previous tutorial](/websockets-spring-boot/), I've set up a Spring boot application that allows WebSocket communication rather than serving a traditional REST API. Today, we're going to find out how to communicate to that backend using Angular.
 
 ### Getting started
 
@@ -32,7 +34,7 @@ npm install --save @types/stompjs @types/sockjs-client
 
 To connect to our API through both SockJS and STOMP.js isn't actually all that difficult, all we need is the following code:
 
-```
+```typescript
 const conn = over(new SockJS('http://localhost:8080/live'));
 conn.connect({}, () => {
   // We are connected
@@ -41,8 +43,7 @@ conn.connect({}, () => {
 
 Additionally to this code, we have to make sure that we import both the `SockJS` prototype from the SockJS library, and the `over()` function from the Stomp.js client:
 
-```
-
+```typescript
 import { over } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 
@@ -50,7 +51,7 @@ import * as SockJS from 'sockjs-client';
 
 However, we want to write proper service wrappers, and use observables for our communication. When we create our own observables, we have two choices. Either we go with **cold observables** or we go for **hot observables**. The difference can be best demonstrated using an example. If we would use cold observables, our code would look like this:
 
-```
+```typescript
 return new Observable<Client>(observer => {
   const conn = over(new SockJS('http://localhost:8080/live'));
   conn.connect({}, () => {
@@ -64,7 +65,7 @@ This means that the connection logic would happen on subscribing and unsubscribi
 
 In order to solve this, we can "share" the same connection by using hot observables. To do that, we have to move the connection logic out of the observable itself, for example:
 
-```
+```typescript
 const conn = over(new SockJS('http://localhost:8080/live'));
 return new Observable(observer => observer.next(conn));
 ```
@@ -80,7 +81,7 @@ Let's find out!
 
 The first one is a bit difficult, because the `connect()` callback only fires once, even if multiple callbacks are added before the WebSocket connection is made. To solve this problem, we can use a [`BehaviorSubject`](http://reactivex.io/rxjs/manual/overview.html#behaviorsubject). A **BehaviorSubject** represents a value over time, in this case I would use it to represent the WebSocket connection state. This state could be either "attempting to connect" or "connected". So, let's make an enumeration to represent this state:
 
-```
+```typescript
 export enum SocketClientState {
   ATTEMPTING, CONNECTED
 }
@@ -96,7 +97,7 @@ ng g service socketClient
 
 After that, I added the following code:
 
-```
+```typescript
 @Injectable({
   providedIn: 'root'
 })
@@ -128,7 +129,7 @@ I then created a new function, that will return the client itself if the state i
 
 The URL to connect to is stored within the environment properties, which can be found in **environment.ts**. I changed it to look like this:
 
-```
+```typescript
 export const environment = {
   production: false,
   api: 'http://localhost:8080/live'
@@ -139,7 +140,7 @@ export const environment = {
 
 That does bring us to the next point though, when do we disconnect? Well, basically, I want to keep the connection open the entire time. Only when the application is being closed, the client can be disconnected. Since the service is provided in the root module, we can easily disconnect by making the service implement the `OnDestroy` lifecycle hook:
 
-```
+```typescript
 // ...
 export class SocketClientService implements OnDestroy {
   // ...
@@ -156,7 +157,7 @@ The `first()` operator is used to clean up the observable as well. The reason wh
 
 The next part of this service is to retrieve messages. Messages can be retrieved using the following code:
 
-```
+```typescript
 const conn = over(new SockJS('http://localhost:8080/live'));
 conn.connect({}, () => {
   conn.subscribe('/topic/posts/get', message => {
@@ -168,7 +169,7 @@ conn.connect({}, () => {
 
 Now, once again, since we're working with observables, we need to tweak it a bit. In this case, we can use cold observables, so that when you unsubscribe from the observable, you simply unsubscribe from the topic as well:
 
-```
+```typescript
 onMessage(topic: string): Observable<any> {
   return this.connect().pipe(first(), switchMap(client => {
     return new Observable<any>(observer => {
@@ -185,7 +186,7 @@ By using the `switchMap()` operator, we can switch from the original observable 
 
 To do that, I basically created two handler functions:
 
-```
+```typescript
 static jsonHandler(message: Message): any {
   return JSON.parse(message.body);
 }
@@ -197,7 +198,7 @@ static textHandler(message: Message): string {
 
 And then I added a parameter to the `onMessage()` function that defaults to the `jsonHandler`:
 
-```
+```typescript
 onMessage(topic: string, handler = SocketClientService.jsonHandler): Observable<any> {
   return this.connect().pipe(first(), switchMap(client => {
     return new Observable<any>(observer => {
@@ -212,7 +213,7 @@ onMessage(topic: string, handler = SocketClientService.jsonHandler): Observable<
 
 And finally, I added an additional method called `onPlainMessage`:
 
-```
+```typescript
 onPlainMessage(topic: string): Observable<string> {
   return this.onMessage(topic, SocketClientService.textHandler);
 }
@@ -222,7 +223,7 @@ onPlainMessage(topic: string): Observable<string> {
 
 Sending messages can be done using the `client.send()` function. So, let's write a wrapper using observables as well:
 
-```
+```typescript
 send(topic: string, payload: any): void {
   this.connect()
     .pipe(first())
@@ -236,7 +237,7 @@ Once again I'm using the `first()` function to immediately complete/clean up the
 
 As you may have noticed in my last tutorial, I'm going to write a simplified Reddit-clone. My first job is to fetch a list of all posts, so let's create a service called `PostService` and use the service we just wrote:
 
-```
+```typescript
 @Injectable({
   providedIn: 'root'
 })
@@ -262,7 +263,7 @@ If you didn't follow the Spring tutorial, I basically wrote the code so that as 
 
 The next step is to create a component called `PostListingPageComponent` that will call this service for us:
 
-```
+```typescript
 @Component({
   selector: 'app-post-listing-page',
   templateUrl: './post-listing-page.component.html'
@@ -287,13 +288,13 @@ export class PostListingPageComponent implements OnInit {
 
 That's all you really need to make this work. All that's left is to properly render them within the template, and to apply some routing and CSS. The result could eventually look like the one in the screenshot below.
 
-[![Screenshot of the post list component](images/Screenshot-2018-08-26-10.42.52.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/08/Screenshot-2018-08-26-10.42.52.png)
+![Screenshot of the post list component](images/Screenshot-2018-08-26-10.42.52.png)
 
 ### Creating new posts
 
 The next part to test out is sending messages through WebSockets. We already prepared the `SocketClientService` to do that, so all we have to do is to actually use it. So let's get started by adding a new function to the `PostService`:
 
-```
+```typescript
 save(post: PostInput) {
   return this.socketClient.send('/topic/posts/create', post);
 }
@@ -303,7 +304,7 @@ This will send a message of type `PostInput` to the socket service after which t
 
 To test this out, I'm going to create a new page component called the `CreatePostPageComponent`:
 
-```
+```typescript
 @Component({
   selector: 'app-create-post-page',
   templateUrl: './create-post-page.component.html'
@@ -324,7 +325,7 @@ We're providing a dummy `PostInput` object, and we have a function that will cal
 
 The next component I'm going to create is a component called `PostFormComponent`. This will allow me to re-use the same form for creating and editing posts:
 
-```
+```typescript
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html'
@@ -354,7 +355,7 @@ export class PostFormComponent implements OnChanges {
 }
 ```
 
-```
+```html
 <div class="inner-container">
   <article>
     <form [formGroup]="form" (submit)="onSubmit()">
@@ -372,14 +373,14 @@ export class PostFormComponent implements OnChanges {
 
 Within this component we're using reactive forms to provide some validations, and when we save the post, we call the `onPost` even emitter, which we'll now bind to the `createPost()` function within the `CreatePostPageComponent` template:
 
-```
+```html
 <h1>Create a new post</h1>
 <app-post-form [post]="newPost" (onPost)="createPost($event)"></app-post-form>
 ```
 
 After this, we can now successfully create new posts using WebSockets.
 
-[![Screenshot of the new post page](images/Screenshot-2018-08-26-10.53.07.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/08/Screenshot-2018-08-26-10.53.07.png)
+![Screenshot of the new post page](images/Screenshot-2018-08-26-10.53.07.png)
 
 ### Unlocking the full power of WebSockets
 
@@ -387,7 +388,7 @@ What's great about WebSockets though is that the server can let us know when som
 
 First of all, we need to create a new method within `PostService`:
 
-```
+```typescript
 onPost(): Observable {
   return this.socketClient.onMessage('/topic/posts/created').pipe(map(post => PostService.getPostListing(post)));
 }
@@ -397,7 +398,7 @@ Just like before, we're using the `map()` function to properly convert the date 
 
 However, back to the `PostListComponent`, we can subscribe to those changes within the `ngOnInit()` lifecycle hook:
 
-```
+```typescript
 ngOnInit(): void {
   this.service
     .findAll()
@@ -422,13 +423,13 @@ But that's basically it, if you create a new post now, and you open the post ove
 
 Now, one issue we have right now is that if we switch pages, our subscriptions aren't released and we're basically having a memory leak. To solve that, we can unsubscribe. To make this happen, you can either store the subscriptions as fields, or you can create a separate subject within the `PostListingPageComponent`, for example:
 
-```
+```typescript
 private unsubscribeSubject: Subject = new Subject();
 ```
 
 After that, you can modify the `ngOnInit()` method to use the `takeUntil()` operator:
 
-```
+```typescript
 ngOnInit(): void {
   this.service
     .findAll()
@@ -446,7 +447,7 @@ ngOnInit(): void {
 
 And now we can implement the `OnDestroy` interface like this:
 
-```
+```typescript
 ngOnDestroy(): void {
   this.unsubscribeSubject.next();
   this.unsubscribeSubject.complete();
@@ -463,7 +464,7 @@ Handling errors is just the same thing over again. Within the backend, we wrote 
 
 So basically, all we have to do is the same thing we have already done. First let's create a new service:
 
-```
+```typescript
 @Injectable({
   providedIn: 'root'
 })
@@ -479,7 +480,7 @@ export class ErrorService {
 
 And then let's create a component that will listen to these messages:
 
-```
+```typescript
 @Component({
   selector: 'app-error-handler',
   templateUrl: './error-handler.component.html'
@@ -508,7 +509,7 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
 
 And the template:
 
-```
+```html
 <p *ngIf="message != null" class="error">
   {{message}}
   <a class="close" href="" (click)="clear($event)">&times;</a>
@@ -518,6 +519,6 @@ And the template:
 
 Now, that's all you need. To test it out, you could change the author ID within the `CreatePostPageComponent` to a value that doesn't exist (anything except 1 or 2). If you add the component to your application, and apply some CSS, it could look like this when you're trying to add a new post:
 
-[![Screenshot of the error message](images/Screenshot-2018-08-26-11.47.54.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/08/Screenshot-2018-08-26-11.47.54.png)
+![Screenshot of the error message](images/Screenshot-2018-08-26-11.47.54.png)
 
 And with this, I'm going to wrap up this tutorial. As usual, the full code can be found on [GitHub](https://github.com/g00glen00b/spring-boot-angular-websockets/tree/master/angular-websockets-client).

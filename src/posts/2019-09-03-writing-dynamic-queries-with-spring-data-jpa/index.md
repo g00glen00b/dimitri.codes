@@ -1,9 +1,11 @@
 ---
 title: "Writing dynamic queries with Spring Data JPA"
 date: "2019-09-03"
+categories: ["Java", "Tutorials"]
+tags: ["Hibernate", "JPA", "Spring", "Spring Data"]
 ---
 
-In one of my earlier tutorials, I've explored the [basics about Spring Data JPA](https://wordpress.g00glen00b.be/spring-data-jpa/). While that tutorial shows what you have to do in most situations, in some cases you want to have more control over your queries rather than having a fairly static one.
+In one of my earlier tutorials, I've explored the [basics about Spring Data JPA](/spring-data-jpa/). While that tutorial shows what you have to do in most situations, in some cases you want to have more control over your queries rather than having a fairly static one.
 
 ### Using examples
 
@@ -11,7 +13,7 @@ One of the possibilities to have more dynamic control over your queries, is by u
 
 For example, let's say we have the following entity:
 
-```
+```java
 @Data
 @Builder
 @NoArgsConstructor
@@ -31,7 +33,7 @@ public class MarvelCharacter {
 
 Additionally, we defined a service to optionally send a first- and a last name. When these parameters are `null`, we shouldn't filter on those fields. For example:
 
-```
+```java
 public List<MarvelCharacter> findByName(String firstName, String lastName) {
     // TODO: Implement
 }
@@ -47,7 +49,7 @@ Obviously, this doesn't scale well, as for each new parameter, the amount of que
 
 For example:
 
-```
+```java
 MarvelCharacter example = MarvelCharacter
     .builder()
     .firstName(firstName) // firstName from parameter
@@ -62,7 +64,7 @@ Additionally, you can change the way the examples are being matched, by providin
 
 In that case, we could write a matcher like this:
 
-```
+```java
 ExampleMatcher matcher = ExampleMatcher
     .matchingAll()
     .withMatcher("firstName", contains().ignoreCase());
@@ -84,7 +86,7 @@ The specification API is an abstraction on top of the JPA Criteria API, which me
 
 If we take the example we used previously, and convert it into specifications, we can write the following specifications:
 
-```
+```java
 public static Specification<MarvelCharacter> firstNameContains(String expression) {
     return (root, query, builder) -> builder.like(root.get("firstName"), contains(expression));
 }
@@ -108,7 +110,7 @@ This interface method passes three arguments which you can use:
 
 Usually, I put these specifications within a new class, for example `MarvelCharacterSpecifications`. Since this class will only contain static methods that return a `Specification`, we can mark this class as `final`. For example:
 
-```
+```java
 public final class MarvelCharacterSpecifications {
     // ...
 }
@@ -116,14 +118,14 @@ public final class MarvelCharacterSpecifications {
 
 Additionally, we have to change our repository, so that it extends from `JpaSpecificationExecutor`. For example:
 
-```
+```java
 public interface MarvelCharacterRepository extends JpaRepository<MarvelCharacter, String>, JpaSpecificationExecutor<MarvelCharacter> {
 }
 ```
 
 Once that's done, we'll implement our service method:
 
-```
+```java
 Specification<MarvelCharacter> specification = Specification
     // firstName from parameter
     .where(firstName == null ? null : firstNameContains(firstName))
@@ -135,7 +137,7 @@ The nice thing with the Specification API is that we can properly chain these sp
 
 This approach allows you to write more complex specifications as well, for example:
 
-```
+```java
 public static Specification<MarvelCharacter> lastNameIn(String... values) {
     return (root, query, builder) -> builder.or(Arrays
         .stream(values)
@@ -152,7 +154,7 @@ Now, so far we've seen what we could do with specifications, and more precisely 
 
 For example, if you've used custom queries with Spring Data JPA before, you probably know that [you can't use join fetching when you're using a count query](https://stackoverflow.com/questions/21549480/spring-data-fetch-join-with-paging-is-not-working). In those cases, you usually have to provide a separate `countQuery` that doesn't do the fetching, for example:
 
-```
+```java
 @Query(
     value = "select mc from MarvelCharacter mc left join fetch mc.team where mc.firstName like ?1",
     countQuery = "select count(mc) from MarvelCharacter where mc.firstName like ?1")
@@ -163,7 +165,7 @@ Since Spring Data uses a count query to determine how many total elements there 
 
 Within your specifications, you can also use join fetching, which allows you to dynamically fetch fields as well. For example, you could write a specification like this:
 
-```
+```java
 public static Specification<MarvelCharacter> fetchTeam() {
     return (root, query, builder) -> {
         root.fetch("team");
@@ -176,7 +178,7 @@ However, just like before, if you would use this specification within a count qu
 
 To solve this, we can use the `query` argument to detect if we're executing a count query or not:
 
-```
+```java
 public static Specification<MarvelCharacter> fetchTeam() {
     return (root, query, builder) -> {
         if (MarvelCharacter.class.equals(query.getResultType())) {
@@ -193,7 +195,7 @@ In this case, we're using `query.getResultType()` to see if we're actually fetch
 
 Another purpose of the `query` parameter is to create subqueries. For example:
 
-```
+```java
 return (root, query, builder) -> {
     SubQuery<MarvelCharacter> subquery = query.subquery(MarvelCharacter.class);
     Root<MarvelCharacter> = subquery.from(MarvelCharacter.class);
@@ -205,7 +207,7 @@ return (root, query, builder) -> {
 
 The JPQL variant of this query would become:
 
-```
+```sql
 select mc from MarvelCharacter mc where not(exists(select mc2 from MarvelCharacter mc2 where mc2.firstName = 'Tony' and mc2.id = mc.id));
 ```
 

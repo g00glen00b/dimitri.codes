@@ -1,9 +1,11 @@
 ---
 title: "Loading initial data with Spring"
 date: "2019-08-20"
+categories: ["Java", "Tutorials"]
+tags: ["Java", "JPA", "Spring", "Spring boot", "Spring Data"]
 ---
 
-I've been answering Spring related questions on Stack Overflow for the past three years now, and one of my most popular answers is about [how to load initial data](https://stackoverflow.com/a/38047021/1915448). While my solution over there works really fine, there are multiple solutions to this problem, and in this tutorial I'll demonstrate which ones you have. This also allows me to fulfil my promise I made in [my earlier tutorial about Spring Data JPA](https://wordpress.g00glen00b.be/spring-data-jpa/), where I said I would create a tutorial like this one.
+I've been answering Spring related questions on Stack Overflow for the past three years now, and one of my most popular answers is about [how to load initial data](https://stackoverflow.com/a/38047021/1915448). While my solution over there works really fine, there are multiple solutions to this problem, and in this tutorial I'll demonstrate which ones you have. This also allows me to fulfil my promise I made in [my earlier tutorial about Spring Data JPA](/spring-data-jpa/), where I said I would create a tutorial like this one.
 
 ### Using Spring's JDBC initializer
 
@@ -11,7 +13,7 @@ One of the nice features of Spring boot is that it will automatically pick up an
 
 For example, let's say we have the following entity:
 
-```
+```java
 @Data
 @Builder
 @NoArgConstructor
@@ -31,7 +33,7 @@ public class MarvelCharacter {
 
 In this case, we can set up our schema by creating a **schema.sql** file like this:
 
-```
+```sql
 create table marvel_character (
     name        varchar(100)    not null,
     first_name  varchar(100)    not null,
@@ -42,7 +44,7 @@ create table marvel_character (
 
 Additionally, we can create a **data.sql** file like this:
 
-```
+```sql
 insert into marvel_character (hero_name, first_name, last_name) values ('Iron man', 'Tony', 'Stark');
 insert into marvel_character (hero_name, first_name, last_name) values ('Thor', 'Thor', 'Odinson');
 insert into marvel_character (hero_name, first_name, last_name) values ('Black widow', 'Natasha', 'Romanova');
@@ -91,7 +93,7 @@ spring.jpa.hibernate.ddl-auto=create-drop
 
 Additionally, when you do this, Hibernate will pick up a file called **import.sql** on the classpath, in which you can add your insert-statements, like we did before:
 
-```
+```sql
 insert into marvel_character (hero_name, first_name, last_name) values ('Iron man', 'Tony', 'Stark');
 insert into marvel_character (hero_name, first_name, last_name) values ('Thor', 'Thor', 'Odinson');
 insert into marvel_character (hero_name, first_name, last_name) values ('Black widow', 'Natasha', 'Romanova');
@@ -115,7 +117,7 @@ While the previous solutions used SQL statements to insert data into the databas
 
 To be able to insert data into the database when the application is started, all you have to do is create a bean of type `ApplicationRunner` or `CommandLineRunner`, for example:
 
-```
+```java
 @Bean
 public ApplicationRunner initializer(MarvelCharacterRepository repository) {
     return args -> repository.saveAll(Arrays.asList(
@@ -137,7 +139,7 @@ The benefit of this approach is that you can do this programmatically. The downs
 
 Rather than relying on the `DataSource` that's being provided by the Spring boot's autoconfiguration, you can also create your own `DataSource`. Using the `EmbeddedDataSourceBuilder`, you can easily add scripts you want to execute, for example:
 
-```
+```java
 @Bean
 public DataSource dataSource() {
     return new EmbeddedDatabaseBuilder()
@@ -158,7 +160,7 @@ When you're handling more complex DDLs, or you need more versioned control over 
 
 The nice part is that both integrate nicely with Spring boot. For example, to use Flyway, all you have to do is to add the following dependency:
 
-```
+```xml
 <dependency>
     <groupId>org.flywaydb</groupId>
     <artifactId>flyway-core</artifactId>
@@ -171,7 +173,7 @@ Now you can create a folder called **db/migrations** in your **src/main/resource
 
 For example, we can create a **V1\_\_create\_table\_marvel\_hero.sql**, containing the `CREATE TABLE` statement like before:
 
-```
+```sql
 create table marvel_character (
     hero_name   varchar(100)    not null,
     first_name  varchar(100)    not null,
@@ -182,7 +184,7 @@ create table marvel_character (
 
 Additionally, you can create a **V1.1\_\_insert\_marvel\_hero.sql** file, for example:
 
-```
+```sql
 insert into marvel_character (hero_name, first_name, last_name) values ('Iron man', 'Tony', 'Stark');
 insert into marvel_character (hero_name, first_name, last_name) values ('Thor', 'Thor', 'Odinson');
 insert into marvel_character (hero_name, first_name, last_name) values ('Black widow', 'Natasha', 'Romanova');
@@ -191,7 +193,7 @@ insert into marvel_character (hero_name, first_name, last_name) values ('Hawkeye
 
 Did you forget a column, or did you forget to add some records? No worries, crate a **V1.2\_\_insert\_more\_marvel\_hero.sql** file, and add the records you need:
 
-```
+```sql
 insert into marvel_character (hero_name, first_name, last_name) values ('Spider-man', 'Peter', 'Parker');
 insert into marvel_character (hero_name, first_name, last_name) values ('Captain America', 'Steve', 'Rogers');
 insert into marvel_character (hero_name, first_name, last_name) values ('Hulk', 'Bruce', 'Banner');

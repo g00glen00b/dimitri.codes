@@ -2,6 +2,8 @@
 title: "Reactive streams over the network with RSocket"
 date: "2019-07-09"
 coverImage: "rsocket-logo.png"
+categories: ["Java", "Tutorials"]
+tags: ["Project Reactor", "Reactive programming", "RSocket", "Spring boot"]
 ---
 
 [RSocket](http://rsocket.io/) is a protocol that allows you to reactively stream data over the network. One of the benefits of RSocket is that the header of the frame itself is being sent in binary. This reduces the overal network payload and decreases network latency.
@@ -18,7 +20,7 @@ The first step to set up our project is to head over to Spring Initializr and se
 
 If you prefer to set up your project manually, you can do so by adding the following dependency:
 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-rsocket</artifactId>
@@ -37,7 +39,7 @@ In this example, I'll run the application on port 8000.
 
 Working with RSocket is similar to working with other messaging protocols, first you have to create a class representing the data you want to transfer (eg. a DTO). For example:
 
-```
+```java
 @Getter
 @ToString
 @RequiredArgsConstructor
@@ -50,7 +52,7 @@ public class PersonMessage {
 
 After that, we can create a controller and define the endpoints we want to provide by using the `@MessageMapping` annotation:
 
-```
+```java
 @Controller
 public class PersonController {
     @MessageMapping("findPeople")
@@ -71,7 +73,7 @@ Setting up the consumer happens in a similar way. For the consumer you also need
 
 The next step is to set up our `RSocket` client, for example:
 
-```
+```java
 @Bean
 public Mono<RSocket> rSocket() {
     return RSocketFactory
@@ -91,7 +93,7 @@ Additionally, we're using the `cache()` operator so that the cold observable tur
 
 After that, we should wrap the `RSocket` instance within Spring's `RSocketRequester`, which provides a more fluent API for requesting data from RSocket. To do that, I'm going to create the following method:
 
-```
+```java
 @Bean
 public Mono<RSocketRequester> rSocketRequester(Mono<RSocket> rSocket, RSocketStrategies strategies) {
     return rSocket
@@ -106,7 +108,7 @@ The reason we're wrapping `RSocket` is because RSocket does support reactive str
 
 With the wrapper on the other hand, we could write our code like this:
 
-```
+```java
 private Flux<PersonMessage> findPeople(RSocketRequester requester) {
     return requester
         .route("findPeople")
@@ -119,7 +121,7 @@ private Flux<PersonMessage> findPeople(RSocketRequester requester) {
 
 Now that we've defined all the building blocks to connect to our RSocket server, we could write an `ApplicationRunner` that fetches the data. For example:
 
-```
+```java
 @Bean
 public ApplicationRunner consumer(Mono<RSocketRequester> requester) {
     return args -> requester
@@ -135,7 +137,7 @@ To solve this issue, we can use a `CountDownLatch`, set it to 1 entry, and to co
 
 For example:
 
-```
+```java
 @Bean
 public ApplicationRunner consumer(Mono<RSocketRequester> requester) {
     return args -> {
@@ -161,7 +163,7 @@ Another choice for encoding and decoding objects is the use of **CBOR** or the [
 
 To make this work on the consumer-end, we have to change the mediatypes to `application/cbor`. For example:
 
-```
+```java
 @Bean
 public Mono<RSocket> rSocket() {
     return RSocketFactory
@@ -177,7 +179,7 @@ public Mono<RSocket> rSocket() {
 
 Additionally, we should change the mimetype in the wrapper as well:
 
-```
+```java
 @Bean
 public Mono<RSocketRequester> rSocketRequester(Mono<RSocket> rSocket, RSocketStrategies strategies) {
     return rSocket

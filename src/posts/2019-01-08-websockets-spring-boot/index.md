@@ -1,9 +1,11 @@
 ---
 title: "Using WebSockets with Spring boot"
 date: "2019-01-08"
+categories: ["Java", "Tutorials"]
+tags: ["Java", "Spring", "Spring boot", "WebSockets"]
 ---
 
-A few years ago, I wrote [an article about using WebSockets with Spring and AngularJS](https://wordpress.g00glen00b.be/spring-websockets/). However, the technologies have evolved over the years. That's why I decided to write some up-to-date follow-up articles using the latest version of Spring boot and the latest version of the Angular framework. In this first follow-up article, I'm going to focus on the backend implementation.
+A few years ago, I wrote [an article about using WebSockets with Spring and AngularJS](/spring-websockets/). However, the technologies have evolved over the years. That's why I decided to write some up-to-date follow-up articles using the latest version of Spring boot and the latest version of the Angular framework. In this first follow-up article, I'm going to focus on the backend implementation.
 
 ### Why WebSockets
 
@@ -20,7 +22,7 @@ In this tutorial, I'll create a simplified Reddit clone application, where peopl
 - **Configuration processor** as I'll be using some configuration properties and I like the additional intellisense offered by it.
 - **Lombok** because I'm even too lazy to generate getters and setters.
 
-[![Screenshot of Spring Initializr setup](images/Screenshot-2018-08-24-19.52.36.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/08/Screenshot-2018-08-24-19.52.36.png)
+![Screenshot of Spring Initializr setup](images/Screenshot-2018-08-24-19.52.36.png)
 
 Once the project is downloaded and opened in your favourite IDE? we can start coding!
 
@@ -28,7 +30,7 @@ Once the project is downloaded and opened in your favourite IDE? we can start co
 
 Before you can get a WebSocket project started, you need to add an additional configuration class. Within this configuration class we need to provide the WebSocket endpoint and a few prefixes. I prefer putting these endpoints and prefixes in a separate configuration properties class. That's why I wrote something like this:
 
-```
+```java
 @Data
 @ConfigurationProperties("app.websocket")
 public class WebSocketProperties {
@@ -59,7 +61,7 @@ app.websocket.allowed-origins[0]=*
 
 Now, for the actual configuration I'm going to create a new class called `WebSocketConfiguration` and make it implement the `WebSocketMessageBrokerConfigurer` interface:
 
-```
+```java
 @Configuration
 @ConfigurationProperties
 @EnableWebSocketMessageBroker
@@ -93,7 +95,7 @@ When you use the `@SubscribeMapping` annotation, and a user subscribes to the gi
 
 To do this with Spring, we need to define a new controller using the `@Controller` annotation, for example:
 
-```
+```java
 @Controller
 @AllArgsConstructor
 public class PostController {
@@ -113,7 +115,7 @@ Now, when a user connects to `ws://localhost:8080/live` and subscribes to `/topi
 
 Next to retrieving a list of all posts, I also want to be able to obtain the details about a single post. For example, by subscribing to `/topic/posts/1/get` a user should get all details about a post with ID 1. Within Spring MVC we can already do this in several ways, either by using path variables, request parameters, headers, ... . With WebSockets on the other hand, we use the `@DestinationVariable` annotation:
 
-```
+```java
 @SubscribeMapping("/posts/{id}/get")
 public PostInfoDTO findOne(@DestinationVariable Long id) {
     return service.findOne(id);
@@ -124,7 +126,7 @@ public PostInfoDTO findOne(@DestinationVariable Long id) {
 
 Sometimes, you don't want to react to people subscribing to a topic, but to people sending messages to certain topics. In that case, you no longer want to use `@SubscribeMapping`, but use `@MessageMapping` in stead. This could be useful when we're trying to create a new post, or a new comment:
 
-```
+```java
 @MessageMapping("/posts/create")
 public void save(PostInputDTO post) {
     service.save(post);
@@ -137,7 +139,7 @@ In this case, when a user sends a message to the `/topic/posts/create` topic, th
 
 If you want to send back a message as well, you can use the `@SendTo` annotation, for example:
 
-```
+```java
 @MessageMapping("/posts/create")
 @SendTo("/topic/posts/created")
 public PostListingDTO save(PostInputDTO post) {
@@ -153,7 +155,7 @@ For example, if you would use `@SendToUser("/topic/foo")`, a user would have to 
 
 Just like regular Spring MVC, we can handle exceptions as well. However, rather than using the `@ExceptionHandler` annotation, we now have to use the `@MessageExceptionHandler` annotation. For example:
 
-```
+```java
 @MessageExceptionHandler
 @SendToUser("/topic/error")
 public String handleException(PostNotFoundException ex) {

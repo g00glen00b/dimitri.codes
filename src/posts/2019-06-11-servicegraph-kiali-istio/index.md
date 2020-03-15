@@ -2,9 +2,11 @@
 title: "Creating a servicegraph with Kiali and Istio"
 date: "2019-06-11"
 coverImage: "kiali-logo.png"
+categories: ["Tutorials"]
+tags: ["Envoy", "Grafana", "Istio", "Kiali", "Kubernetes", "Prometheus"]
 ---
 
-Last time, we've set up [Minikube with Istio](https://wordpress.g00glen00b.be/setting-up-minikube-istio-macos/), and we've [deployed our application using Kubernetes](https://wordpress.g00glen00b.be/spring-boot-kubernetes/). Today, we'll see how we can use [Kiali](https://www.kiali.io/) with Istio to visualise our service dependencies.
+Last time, we've set up [Minikube with Istio](/setting-up-minikube-istio-macos/), and we've [deployed our application using Kubernetes](/spring-boot-kubernetes/). Today, we'll see how we can use [Kiali](https://www.kiali.io/) with Istio to visualise our service dependencies.
 
 ![Kubernetes + Istio + Kiali](images/kubernetes-istio-kiali-1024x279.png)
 
@@ -36,7 +38,7 @@ echo -n "password" | base64
 
 When that's complete, you can create a new secret with the name **kiali** like this:
 
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -48,8 +50,6 @@ type: Opaque
 data:
   username: YWRtaW4=
   passphrase: cGFzc3dvcmQ=
-
-
 ```
 
 After that's complete, you can run the following **kubectl** commands to apply them:
@@ -106,6 +106,6 @@ On the right side of the graph, you can also view some other interesting informa
 
 Additionally to this overview of your service mesh, you can also get some detailed graphs for each pod. For example, if you go to **workloads**, select an existing workload and go to inbound or outbound metrics, you can see some detailed graphs:
 
-![Detailed graphs](images/kiali-detailed-graph-1024x695.png)
+![Detailed graphs](images/kiali-detailed-graph.png)
 
 And there you have it, a proper visualisation for your service mesh with Kubernetes, Istio and Kiali.

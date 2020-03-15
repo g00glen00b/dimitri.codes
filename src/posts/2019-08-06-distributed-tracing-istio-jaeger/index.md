@@ -2,13 +2,15 @@
 title: "Distributed tracing with Istio and Jaeger"
 date: "2019-08-06"
 coverImage: "jaeger-logo.png"
+categories: ["Tutorials"]
+tags: ["Istio", "Jaeger", "Kubernetes"]
 ---
 
-So far, we've already explored some of the elements Istio provides, such as [visualizing our service mesh with Kiali](https://wordpress.g00glen00b.be/servicegraph-kiali-istio), and monitoring our [application metrics with Prometheus and Grafana](https://wordpress.g00glen00b.be/collecting-application-metrics-with-istio/). In this tutorial, we'll see how we can use Jaeger with Istio.
+So far, we've already explored some of the elements Istio provides, such as [visualizing our service mesh with Kiali](/servicegraph-kiali-istio), and monitoring our [application metrics with Prometheus and Grafana](/collecting-application-metrics-with-istio/). In this tutorial, we'll see how we can use Jaeger with Istio.
 
 [Jaeger](https://www.jaegertracing.io/) is a distributed tracing platform. The two keywords are "distributed" and "tracing". If you work with a **distributed system**, such as a microservices architecture, you may find out that it's a pain in the ass to know where an error comes from, certainly if microservices call each other and errors are being propagated. In this case, platforms like Jaeger help, as they provide **tracing** for those distributed systems.
 
-![Kubernetes + Istio + Jaeger](images/kubernetes-istio-jaeger-1024x298.png)
+![Kubernetes + Istio + Jaeger](images/kubernetes-istio-jaeger.png)
 
 ### Enabling tracing
 
@@ -62,7 +64,7 @@ In my case, I have an application where the frontend is hosted on nginx, while t
 
 The solution to that is by enabling `proxy_pass_request_headers`, for example:
 
-```
+```nginx
 location /movie-quote-service {
     proxy_pass http://movie-quote-service:8080;
     proxy_http_version 1.1;
@@ -81,10 +83,10 @@ So open the Jaeger dashboard again, and now you should be able to see two servic
 
 When you select your application and click the **Find traces** button, you should be able to see the sampled requests. Once you click on one of these, you can see how it correlates to other requests being made. For example:
 
-![Jaeger trace timeline](images/jaeger-trace-timeline-1024x248.png)
+![Jaeger trace timeline](images/jaeger-trace-timeline.png)
 
 Additionally, if you click the **Trace Timeline** dropdown at the top right, and click the **Trace Graph** option, you can see a graph to how your services are connected.
 
-![Jaeger Trace Graph](images/jaeger-trace-graph-1024x80.png)
+![Jaeger Trace Graph](images/jaeger-trace-graph.png)
 
 In my case, you can see that the movie-quote-consumer calls the movie-quote-service. But there you have it, you're now able to see which calls are being made under the hood, and how long each call takes. This allows you to detect failures or performance issues.

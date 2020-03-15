@@ -1,9 +1,11 @@
 ---
 title: "Working with Gatsby and pagination"
 date: "2019-10-29"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "React"]
 ---
 
-A while back, I decided to use Gatsby for my WordPress blog, and continue with WordPress as a headless CMS. So far, I've also written two tutorials about [setting up Gatsby with WordPress](https://wordpress.g00glen00b.be/using-gatsby-with-wordpress-as-a-headless-cms/), and [how to create detail pages for your content](https://wordpress.g00glen00b.be/creating-pages-with-gatsby/). In this tutorial, we'll explore how we can use pagination with Gatsby.
+A while back, I decided to use Gatsby for my WordPress blog, and continue with WordPress as a headless CMS. So far, I've also written two tutorials about [setting up Gatsby with WordPress](/using-gatsby-with-wordpress-as-a-headless-cms/), and [how to create detail pages for your content](/creating-pages-with-gatsby/). In this tutorial, we'll explore how we can use pagination with Gatsby.
 
 ![Gatsby + WordPress](images/gatsby-wordpress.png)
 
@@ -15,7 +17,7 @@ For example, let's say we have 183 blog posts, and we want 10 blogposts per page
 
 The nice part is that we already wrote a query to retrieve all blog posts before. If you don't remember, this is what we ended up with:
 
-```
+```javascript
 const allPostsQuery = `{
   allWordpressPost {
     edges {
@@ -42,7 +44,7 @@ exports.createPages = ({graphql, actions}) => {
 
 To expand this, I'm going to put the original code in a separate function, like this:
 
-```
+```javascript
 const createDetailPages = ({allWordpressPost}, createPage) => {
   return allWordpressPost.edges.map(({node}) => createPage({
     path: node.slug,
@@ -66,7 +68,7 @@ exports.createPages = ({graphql, actions}) => {
 
 Now that we can plug in more functions to create pages, it's time to do so. As I've said before, the only thing we need to know is the total amount of published blog posts. We can retrieve this with `allWordpressPost.edges.length`, so let's get started:
 
-```
+```javascript
 const pageSize = 10;
 const createPaginationPages = ({allWordpressPost}, createPage) => {
   const pageCount = Math.ceil(allWordpressPost.edges.length / pageSize);
@@ -85,7 +87,7 @@ const createPaginationPages = ({allWordpressPost}, createPage) => {
 
 Now we can use the `createPages` API to call our function:
 
-```
+```javascript
 exports.createPages = ({graphql, actions}) => {
   const {createPage} = actions;
   return graphql(allPostsQuery).then(({errors, data}) => {
@@ -104,7 +106,7 @@ And there you have it, you're now ready to create a proper component to render t
 
 Before creating the page template component, I'm going to create a simple pagination component. This component will allow users to navigate to the previous and next page.
 
-```
+```jsx
 export const Pagination = ({currentPage, pageCount, base}) => (
   <nav className="pagination">
     {currentPage > 1 ? (
@@ -130,7 +132,7 @@ In this component, we're showing a link to the previous page if our `currentPage
 
 If either of these links isn't visible, we're showing an empty `<span/>` tag. This allows us to use flexbox with `justify-content` being `space-between` for alignment:
 
-```
+```css
 nav.pagination {
   display: flex;
   justify-content: space-between;
@@ -141,7 +143,7 @@ nav.pagination {
 
 Now that we have a proper pagination component, we can create a file called **src/templates/posts.js** and add the initial structure:
 
-```
+```jsx
 const Posts = () => (
   <Layout>
     <SEO title="Posts"/>
@@ -155,7 +157,7 @@ The next step is to write the query we need. If we open `http://localhost:8080/_
 
 If we need to retrieve the blogposts for page 3, we can use a skip of 20 if our page size is 10. For example:
 
-```
+```graphql
 {
   allWordpressPost(skip: 20, limit: 10, sort: {fields: date, order: DESC}) {
     edges {
@@ -175,7 +177,7 @@ If we need to retrieve the blogposts for page 3, we can use a skip of 20 if our 
 
 We can include this query in our component by exporting it and adding variables called `$skip` and `$limit`:
 
-```
+```javascript
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
     allWordpressPost(sort: {fields: [date], order:DESC}, limit: $limit, skip: $skip) {
@@ -200,7 +202,7 @@ Gatsby will inject all page context parameters into the query, so we don't have 
 
 Now that we have a query, we can inject `data` into our component and use it. For example:
 
-```
+```jsx
 const Posts = ({data}) => (
   <Layout>
     <SEO title="Posts"/>
@@ -225,7 +227,7 @@ The final step is to add the `<Pagination/>` component to our template. To be ab
 
 With Gatsby, we can inject these into our component as well:
 
-```
+```jsx
 const Posts = ({data, pageContext}) => (
   <Layout>
     <SEO title="Posts"/>
@@ -253,7 +255,7 @@ With that, we've implemented pagination with Gatsby.
 
 We can also do the same thing for our categories and tags. First of all, we need to extend the query we used in **gatsby-node.js** to also include a list of all categories and tags. We can do this by using `allWordpressCategory` and `allWordpressTag`:
 
-```
+```javascript
 const allPostsQuery = `{
   allWordpressPost {
     edges {
@@ -288,7 +290,7 @@ const allPostsQuery = `{
 
 Using the `count` of both, we know how many pages we have to generate. Like before, we'll implement this by creating a few new functions:
 
-```
+```javascript
 const createCategoryPages = ({allWordpressCategory}, createPage) => {
   return allWorpressCategory.edges.map(({node}) => {
     const pageCount = Math.ceil(node.count / pageSize);
@@ -326,7 +328,7 @@ const createTagPages = ({allWordpressTag}, createPage) => {
 
 To call these functions, we add them to the `createPages` function:
 
-```
+```javascript
 exports.createPages = ({graphql, actions}) => {
   const {createPage} = actions;
   return graphql(allPostsQuery).then(({errors, data}) => {
@@ -343,7 +345,7 @@ exports.createPages = ({graphql, actions}) => {
 
 The implementation of the templates is similar to what we've done before, since `allWordpressPost` contains a `filter` parameter. This allows us to filter posts by category (or by tag), as you can see in the query below:
 
-```
+```javascript
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $categoryId: String!) {    
     allWordpressPost(sort: {fields: [date], order:DESC}, limit: $limit, skip: $skip, filter: {categories: {elemMatch: {id: {eq: $categoryId}}}}) {
@@ -366,7 +368,7 @@ export const query = graphql`
 
 Other than that, the template looks exactly the same. I only extended the `<Pagination/>` component by including a `base` parameter:
 
-```
+```jsx
 export const Pagination = ({currentPage, pageCount, base}) => (
   <nav className="pagination">
     {currentPage > 1 ? (
@@ -390,7 +392,7 @@ export const Pagination = ({currentPage, pageCount, base}) => (
 
 This allows me to use the pagination component for the category posts like this:
 
-```
+```jsx
 <Pagination
   pageCount={pageContext.pageCount}
   currentPage={pageContext.currentPage}

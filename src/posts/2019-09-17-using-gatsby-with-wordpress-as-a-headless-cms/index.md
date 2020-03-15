@@ -2,6 +2,8 @@
 title: "Using Gatsby with WordPress as a headless CMS"
 date: "2019-09-17"
 coverImage: "gatsby-logo.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "JavaScript", "React"]
 ---
 
 Recently, I've moved over my blog to Gatsby, with Wordpress as a headless CMS. In this tutorial, I'll show how you can set up Gatsby in such way.
@@ -46,7 +48,7 @@ Last but not least, there is the **src/templates** folder. You can use this fold
 
 If we check the **src/pages/index.js** page, we see that it contains some dummy content:
 
-```
+```jsx
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
@@ -63,7 +65,7 @@ const IndexPage = () => (
 
 Since we don't need this dummy content, we can remove most of it, and keep the `Layout` and `SEO` components:
 
-```
+```jsx
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
@@ -79,7 +81,7 @@ As I've mentioned before, Gatsby plugin configuration should be put within the *
 
 Within this file, we need to add a new object to the "plugins" array, like this one:
 
-```
+```javascript
 {
   resolve: `gatsby-source-wordpress`,
   options: {
@@ -114,7 +116,7 @@ If we open the GraphQL endpoint, usually found at http://localhost:8000/\_\_grap
 
 For example, let's say I want to fetch the latest 5 posts, I could execute the following query:
 
-```
+```graphql
 {
   allWordpressPost(limit: 5, sort: {fields: date, order: DESC}) {
     edges {
@@ -139,7 +141,7 @@ The response should be a JSON array containing the excerpt, the date, slug, the 
 
 Now that we know that our WordPress data is imported properly, we can build an index page by using the GraphQL API. To do this, we can use the new **useStaticQuery** react hook provided by Gatsby:
 
-```
+```javascript
 const {allWordpressPost} = useStaticQuery(graphql`
   {
     allWordpressPost(limit: 5, sort: {fields: date, order: DESC}) {
@@ -161,7 +163,7 @@ const {allWordpressPost} = useStaticQuery(graphql`
 
 Now we can use `allWordpressPost` in our React components. For example, I could create a `PostTitle` component:
 
-```
+```jsx
 export const PostTitle = ({title, date, tags, slug}) => (
   <h1 className="post-title">
     <Link to={`/${slug}`}>{title}</Link>
@@ -176,7 +178,7 @@ export const PostTitle = ({title, date, tags, slug}) => (
 
 Additionally, I can create a `PostItem` component:
 
-```
+```jsx
 export const PostItem = ({node}) => (
   <article>
     <PostTitle
@@ -191,7 +193,7 @@ export const PostItem = ({node}) => (
 
 And finally, we can iterate over the `allwordpressPost.edges` within the index page to use the `PostItem` component:
 
-```
+```jsx
 return (
   <Layout>
     <SEO title="Home" />

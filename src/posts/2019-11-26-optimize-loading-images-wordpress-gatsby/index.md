@@ -1,9 +1,11 @@
 ---
 title: "Optimize loading images with WordPress and Gatsby"
 date: "2019-11-26"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "React"]
 ---
 
-In [my previous tutorials](https://wordpress.g00glen00b.be/tag/gatsby), we've explored how to use WordPress with Gatsby. One issue we haven't covered yet is to lazy-load embedded images within our WordPress posts. This isn't easily done with `gatsby-source-wordpress` or other plugins.
+In [my previous tutorials](/tag/gatsby), we've explored how to use WordPress with Gatsby. One issue we haven't covered yet is to lazy-load embedded images within our WordPress posts. This isn't easily done with `gatsby-source-wordpress` or other plugins.
 
 In this tutorial, I'll hack my way around it to show lazy images with Gatsby.
 
@@ -27,7 +29,7 @@ npm install html-react-parser --save
 
 To use the Gatsby image component, we’ll create a wrapper component. This component will accept the `src`, `alt` and `width` parameters. These parameters are usually present on any image embedded with WordPress:
 
-```
+```javascript
 export const PostImage = ({src, alt, width}) => {
 
 };
@@ -35,7 +37,7 @@ export const PostImage = ({src, alt, width}) => {
 
 The next step is to map each `src` to a local image served with Gatsby. To do this, I wrote a static query to load all image references:
 
-```
+```javascript
 const allMedia = graphql`
   query {
     allWordpressWpMedia {
@@ -71,7 +73,7 @@ https://example.org/wp-content/my-image.png
 
 Using regular expressions we can map those URLs to the correct Gatsby image:
 
-```
+```javascript
 export const PostImage = ({src, alt, width}) => {
   const {allWordpressWpMedia} = useStaticQuery(allMedia);
   const originalSource = src.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$3');
@@ -81,7 +83,7 @@ export const PostImage = ({src, alt, width}) => {
 
 In this example, `image` may contain a reference to a local image. If we found a local image, we can use Gatsby's `<Img/>` component to show it. If we didn't find a local image, we can use a fallback to a normal `<img/>` using the original source.
 
-```
+```javascript
 export const PostImage = ({src, alt, width}) => {
   const {allWordpressWpMedia} = useStaticQuery(allMedia);
   const originalSource = src.replace(/^(http?s:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g, '$1.$3');
@@ -109,25 +111,25 @@ Now that we have our `<PostImage/>` component, we can use **html-react-parser** 
 
 Originally, we used the following code to visualize the post content:
 
-```
+```jsx
 <div dangerouslySetInnerHtml={{__html: content}}/>
 ```
 
 Now we're going to replace that by using the `parse()` function from `html-react-parser`:
 
-```
+```jsx
 <div>{parse(content, {replace: replaceMedia})}</div>
 ```
 
 We can import the `parse()` function like this:
 
-```
+```javascript
 import parse from 'html-react-parser';
 ```
 
 The last step is to implement the `replaceMedia()` function. This function will return the `<PostImage/>` component if we encounter a normal `<img/>`. However, since Gatsby images aren't intended to be used within paragraphs and such, we'll look for any paragraph that contains an image:
 
-```
+```javascript
 const getImage = node => {
   if (node.name === 'img') {
     return node;

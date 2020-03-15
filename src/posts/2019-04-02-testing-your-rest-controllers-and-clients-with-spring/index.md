@@ -1,6 +1,8 @@
 ---
 title: "Testing your REST controllers and clients with Spring"
 date: "2019-04-02"
+categories: ["Java", "Tutorials"]
+tags: ["MockMVC", "REST", "Spring", "Spring boot", "Testing"]
 ---
 
 That Spring allows you to easily develop REST APIs, is probably something we all know by now. With MockMvc and MockRestServiceServer, the same can be said to testing those REST APIs and clients. If you didn't know this, then you're at the right place to learn about it, as we'll explore those options today!
@@ -11,7 +13,7 @@ When testing controllers, you can write some unit tests that verify if a specifi
 
 Let's say we have a controller that allows us to get some famous movie quotes, which has a `findAll()` operation like this:
 
-```
+```java
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/movie-quote")
@@ -29,7 +31,7 @@ public class MovieQuoteController {
 
 Now, to set up MockMvc, we need to annotate our tests with both `@RunWith(SpringRunner.class)` and the `@WebMvcTest` annotation. For example:
 
-```
+```java
 @WebMvcTest
 @RunWith(SpringRunner.class)
 public class MovieQuoteControllerTest {
@@ -39,7 +41,7 @@ public class MovieQuoteControllerTest {
 
 By doing this, Spring will set up MockMvc for us, and we can autowire it properly:
 
-```
+```java
 @Autowired
 private MockMvc mockMvc;
 @MockBean
@@ -52,7 +54,7 @@ As you can see, we're also using the `@MockBean` annotation so that we can provi
 
 Now, to start a test, we have to create a new method using the `@Test` annotation, for example:
 
-```
+```java
 @Test
 public void getMovieQuotes_shouldUseFindAll() throws Exception {
     // TODO: Implement test
@@ -66,7 +68,7 @@ Within the method body, we usually do two things:
 
 When we want to write a test for our previously defined controller method, we'll have to mock the `service.findAll()` method:
 
-```
+```java
 Movie movie = Movie.builder().id(1L).name("Terminator").build();
 when(service.findAll(0, 10)).thenReturn(Lists.newArrayList(
     MovieQuote.builder().id(1L).movie(movie).quote("Hasta la vista, baby").build(),
@@ -78,7 +80,7 @@ Note, I'm aware that both quotes were first seen in a different movie within the
 
 The next step is to use MockMvc to make our API call and write our expectations:
 
-```
+```java
 this.mockMvc
     .perform(get("/api/movie-quote"))
     .andExpect(status().isOk())
@@ -99,7 +101,7 @@ As you can see, MockMvc uses a **fluent API**, where we can add multiple expecta
 
 With the test we've just seen, we're able to write most tests. One exception is when we have a request body, which we often use to create or update some data. For example:
 
-```
+```java
 @PostMapping
 public MovieQuote create(@RequestBody MovieQuoteInput input) {
     return service.create(input);
@@ -110,7 +112,7 @@ Now, if we want to write a test for this, we have to be able to send the request
 
 In this case, we'll use the `ArgumentMatchers.any()` matcher of Mockito to be able to return a result from our service:
 
-```
+```java
 Movie movie = Movie.builder().id(1L).name("Terminator").build();
 MovieQuote quote = MovieQuote.builder().id(1L).movie(movie).quote("Hasta la vista, baby").build();
 when(service.create(any())).thenReturn(quote);
@@ -118,7 +120,7 @@ when(service.create(any())).thenReturn(quote);
 
 After that, we can perform our POST, and pass some content with MockMvc:
 
-```
+```java
 this.mockMvc
     .perform(post("/api/movie-quote")
         .contentType(MediaType.APPLICATION_JSON)
@@ -132,7 +134,7 @@ this.mockMvc
 
 The final step is to capture the arguments passed to the `service.create(..)` method by using Mockito's `ArgumentCaptor` API:
 
-```
+```java
 ArgumentCaptor<MovieQuoteInput> anyQuote = forClass(MovieQuoteInput.class);
 verify(service).create(anyQuote.capture());
 assertThat(anyQuote.getValue().getMovie()).isEqualTo("Terminator");
@@ -145,7 +147,7 @@ Using the `ArgumentCaptor` we can verify if the JSON request matches the `MovieQ
 
 A nice feature with Spring Web is the possibility to define exception handlers easily by using the `@ExceptionHandler`annotation:
 
-```
+```java
 @ExceptionHandler(MovieQuoteNotFoundException.class, MovieNotFoundException.class)
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public String notFound(MovieQuoteNotFoundException ex) {
@@ -155,7 +157,7 @@ public String notFound(MovieQuoteNotFoundException ex) {
 
 In this case, our code will return a 404 when a `MovieQuoteNotFoundException` is thrown anywhere within our code. We'll simply return the message of the exception, which in our case is a message like: "Quote with id '1' was not found", for example:
 
-```
+```java
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieQuoteNotFoundException extends RuntimeException {
@@ -170,13 +172,13 @@ public class MovieQuoteNotFoundException extends RuntimeException {
 
 Now, to write a test for this, we'll use Mockito to throw the specific exception when certain service is invoked:
 
-```
+```java
 when(service.findById(1L)).thenThrow(new MovieQuoteNotFoundException(1L));
 ```
 
 After that, we can write our expectations with MockMVC, just like before:
 
-```
+```java
 this.mockMvc
     .perform(get("/api/movie-quote/1"))
     .andExpect(status().isNotFound())
@@ -191,7 +193,7 @@ Another nice feature of Spring is the `RestTemplate`, which allows us to easily 
 
 Now, let's say we have a client that calls our `GET /api/movie-quote` operation, which we defined earlier. To do that, we would write something like this:
 
-```
+```java
 @Component
 @AllArgsConstructor
 public class MovieQuoteClient {
@@ -213,7 +215,7 @@ Now, when writing tests for this, you can simply use Mockito to verify that the 
 
 Just like before, we have to add specific annotations to our test to make this happen. In this case, we have to use both `@RunWith(SpringRunner.class)` and the `@RestClientTest` annotation:
 
-```
+```java
 @RunWith(SpringRunner.class)
 @RestClientTest({MovieQuoteClient.class, MovieQuoteClientConfiguration.class})
 public class MovieQuoteClientTest {
@@ -223,7 +225,7 @@ public class MovieQuoteClientTest {
 
 As you can see, we're adding both the `MovieQuoteClient.class` as a class called `MovieQuoteClientConfiguration.class` to the `@RestClientTest`. This allows Spring to setup the client, and the `RestTemplate` bean, which I've setup within `MovieQuoteClientConfiguration`:
 
-```
+```java
 @Bean
 public RestTemplate restTemplate(RestTemplateBuilder builder) {
     return builder
@@ -234,7 +236,7 @@ public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
 After that, we can autowire the necessary parts in our test:
 
-```
+```java
 @Autowired
 private MovieQuoteClient client;
 @Autowired
@@ -250,7 +252,7 @@ Now, testing your `RestTemplate`is similar to testing with MockMvc, as it will a
 
 For the `findAll()` method, we could write our expectations like this:
 
-```
+```java
 server
     .expect(once(), requestTo(startsWith("/movie-quote")))
     .andExpect(method(HttpMethod.GET))
@@ -263,7 +265,7 @@ In this case, I've stored the "dummy response" within a JSON file called **src/t
 
 The next step is to write our assertions. Since our result will be a list of `MovieQuote` objects, I first wrote a simple class with the methods that could be exctracted within the test:
 
-```
+```java
 public final class MovieQuoteExtractors {
     public static Function<MovieQuote, Object> quote() {
         return MovieQuote::getQuote;
@@ -285,7 +287,7 @@ public final class MovieQuoteExtractors {
 
 This allows us to write assertions like this, and re-use these in other tests:
 
-```
+```java
 assertThat(client.findAll(0, 10))
     .extracting(id(), movieId(), movieName(), quote())
     .containsOnlyOnce(
@@ -297,7 +299,7 @@ assertThat(client.findAll(0, 10))
 
 If we want to write a client for our `POST /api/movie-quote` operation, we'll write code like this:
 
-```
+```java
 public MovieQuote create(MovieQuoteInput input) {
     return restTemplate.postForObject("/movie-quote", input, MovieQuote.class);
 }
@@ -305,7 +307,7 @@ public MovieQuote create(MovieQuoteInput input) {
 
 To test something like this, we have to make sure that the JSON request body matches our expectations, and just like before, we can use JSONPath to do so:
 
-```
+```java
 @Test
 public void create_callsPostMovieQuotes() {
     server

@@ -1,9 +1,11 @@
 ---
 title: "Containerizing your static web project"
 date: "2019-03-19"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Docker", "nginx", "NPM", "Webb"]
 ---
 
-[Last time](https://wordpress.g00glen00b.be/web-project-webpack-babel/), we've seen how we can set up a simple web project using Babel and Webpack. More precisely, we've seen how we can both run and build the application.  
+[Last time](/web-project-webpack-babel/), we've seen how we can set up a simple web project using Babel and Webpack. More precisely, we've seen how we can both run and build the application.  
 In this article, we'll see how we can containerize such a project using [Docker](https://www.docker.com/docker-community).
 
 ### Setting up a Dockerfile
@@ -12,13 +14,13 @@ The first step is to create a **Dockerfile** containing the steps necessary to r
 
 So, if we create a Dockerfile, it will likely start like this:
 
-```
+```dockerfile
 FROM nginx:1.15.8-alpine
 ```
 
 The next step is to properly copy our bundle to the right location so nginx will properly serve it. For nginx that location is **/etc/nginx/html**, so we'll use the `COPY` command like this:
 
-```
+```dockerfile
 FROM nginx:1.15.8-alpine
 COPY dist/ /etc/nginx/html
 ```
@@ -35,7 +37,7 @@ However, a more interesting approach is to integrate this within npm. The reason
 
 To do this, we can add a script like this:
 
-```
+```json
 {
   "name": "movie-quote-consumer",
   "version": "0.0.1",
@@ -67,7 +69,7 @@ This will run a Docker container and expose port 80 to the host machine as port 
 
 Another nice feature of Docker is Docker Compose. With Docker Compose, we can define our configuration to run the Docker container as a YAML file. For example, since we exposed port 80 before, we could write a simple **docker-compose.yml** file like this in stead:
 
-```
+```yaml
 version: '3.7'
 
 services:
@@ -89,7 +91,7 @@ However, since we'll make these API calls within our JavaScript code, running wi
 
 First of all, let's add a dependency within the **docker-compose.yml** file:
 
-```
+```yaml
 version: '3.7'
 
 services:
@@ -105,7 +107,7 @@ In this example, we're adding a dependency from this container to another contai
 
 The next step is to create an **nginx.conf** file that does the proxying, for example:
 
-```
+```nginx
 events {
     worker_connections  1024;
 }
@@ -126,7 +128,7 @@ This configuration will proxy all calls going to `/movie-quote-service/...` by r
 
 The final step is to add a volume for this configuration file so that we can make sure that it's in the right spot when we run our container:
 
-```
+```yaml
 version: '3.7'
 
 services:

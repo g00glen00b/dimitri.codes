@@ -2,6 +2,8 @@
 title: "Containerizing your Spring boot application with Docker"
 date: "2019-02-05"
 coverImage: "docker-logo.png"
+categories: ["Java", "Tutorials"]
+tags: ["Docker", "Maven", "Spring", "Spring boot", "Web"]
 ---
 
 About two years ago, I wrote a blogpost about containerizing your Spring boot application with Docker. However, some things have changed, and within this tutorial I'll give you a more up-to-date take to containerizing your Spring boot applications.
@@ -17,9 +19,7 @@ Thanks to Docker, problems like "it works on my machine" can belong to the past,
 You might wonder, how all of this is any different to using virtual machines. Well, one difference is that Docker containers do not run on a separate operating system. In stead, they use the Docker engine to talk to the host operating system.  
 This is more convenient in terms of resources, as it does not require additional resources to set up an entire guest operating system.
 
-![](images/docker-engine.png)
-
-Comparison of traditional VMs vs. the Docker Engine
+![Docker engine architecture](images/docker-engine.png)
 
 ### The Dockerfile
 
@@ -33,8 +33,6 @@ Using the `docker history` command, you can find out which layers a Docker image
 
 ![Docker history command output](images/docker-history.png)
 
-Example output of the Docker history command
-
 ### Unpack your JAR
 
 Since each layer will be processed individually, it would be more interesting if you would separate your JAR into multiple layers, one for your classes, and another one for your dependencies.
@@ -43,7 +41,7 @@ If you take a look at the screenshot above, the layer that contains your classes
 
 To be able to write a Dockerfile that utilizes these separate layers, we first have to unpack the generated JAR file. For this purpose, we'll be using the **maven-dependency-plugin** to do this.
 
-```
+```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-dependency-plugin</artifactId>
@@ -91,7 +89,7 @@ If you're running this within a Docker container, you'll see that the max heap s
 
 Now that we have unpacked our JAR and are aware of how to properly limit the JVM, we can create our own Dockerfile:
 
-```
+```dockerfile
 FROM openjdk:8-jre-alpine
 VOLUME /tmp
 ARG DEPENDENCY=target/dependency
@@ -112,7 +110,7 @@ A plugin that can help you with this is the **dockerfile-maven-plugin**. This wi
 
 For example, if you want to build an image and use the artifact ID as the name and tag it with the version within your **pom.xml** file, you can use something like this:
 
-```
+```xml
 <plugin>
     <groupId>com.spotify</groupId>
     <artifactId>dockerfile-maven-plugin</artifactId>
@@ -137,7 +135,7 @@ This will, while packaging the application, generate a Docker image for your pro
 
 If you would make a change to your classes now, and rebuild the project using Maven, you can see that it only changed that specific layer within the Docker history:
 
-![](images/Screenshot-2019-02-06-09.46.02.png)
+![Docker history](images/Screenshot-2019-02-06-09.46.02.png)
 
 In this screenshot, you can see that I've build the application twice. First I did an initial build, **3 minutes ago** and all layers had to be built.
 
@@ -148,7 +146,7 @@ Additionally, it triggered a rebuild on all depending layers, which are the laye
 
 An additional interesting feature of the Docker ecosystem is [Docker Compose](https://docs.docker.com/compose/). Docker Compose allows a user to run certain containers, simply by providing a YAML configuration file called `docker-compose.yml`. For example, to run an application, you could use:
 
-```
+```yaml
 version: '3.7'
 services:
   movie-quote-service:
@@ -161,7 +159,7 @@ Using this simple setup, you can run a specific container, and expose a specific
 
 It also allows you to easily link containers together, for example:
 
-```
+```yaml
 version: '3.7'
 services:
   movie-quote-service:
@@ -199,7 +197,7 @@ DATABASE_NAME=quotes
 
 After that, you can replace these values within your `docker-compose.yml` by `${DATABASE_USER}`, ... .
 
-```
+```yaml
 version: '3.7'
 services:
   movie-quote-service:
@@ -226,7 +224,7 @@ services:
 
 One issue with the current setup is that once you destroy your database container and recreate it, all data will be lost. A solution to this problem is to map a specific volume within your `docker-compose.yml` file, for example:
 
-```
+```yaml
 version: '3.7'
 services:
   movie-quote-database:
@@ -249,7 +247,7 @@ So far, we've already seen how your application container can talk to your datab
 
 Since, circular dependencies are not allowed, we have to come up with a different solution., and that solution is adding your own network. For example:
 
-```
+```yaml
 version: '3.7'
 services:
   movie-quote-service:

@@ -2,6 +2,8 @@
 title: "Starting a web project with Webpack and Babel"
 date: "2019-03-05"
 coverImage: "webpack.png"
+categories: ["JavaScript", "Tutorials"]
+tags: ["NPM"]
 ---
 
 When starting a new web project, you often use some libraries. Nowadays, these libraries usually come with tools to scaffold your project. However, in certain cases you don't want to rely on these libraries. For that reason, we'll demonstrate how you can set up your own project with [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/).
@@ -12,7 +14,7 @@ When starting a new web project, you often use some libraries. Nowadays, these l
 
 Before starting, you have to install a recent version of [Node.js and npm](https://nodejs.org/en/). Once that's done, you can initialize your project using the **npm init** command. This command will help you setting up a **package.json**, which could look like this:
 
-```
+```json
 {
   "name": "movie-quote-consumer",
   "version": "0.0.1",
@@ -44,7 +46,7 @@ npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/register
 
 After installing these dependencies, the next step is to configure Babel to use the **@babel/preset-env** preset. To do so, we create a file called **.babelrc**:
 
-```
+```json
 {
   "presets": [
     ["@babel/preset-env", {
@@ -61,7 +63,7 @@ This configuration makes sure that the transpiled code works on all browsers tha
 
 You can also target specific browsers, such as:
 
-```
+```json
 {
   "presets": [
     ["@babel/preset-env", {
@@ -102,7 +104,7 @@ The next step is to configure how Webpack should use these loaders and plugins. 
 
 First of all, I had to tell Webpack which my entry points are, and where the bundle should be located. These entry points are basically a list of your main files that import all the other ones.
 
-```
+```javascript
 const path = require('path');
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -125,7 +127,7 @@ In this case, both **src/index.js** and **src/style.css** are my entrypoints. Th
 
 The next step is to tell Webpack which loaders to use to bundle your source code. As mentioned earlier, I will be using the **babel-loader**, **css-loader** and **style-loader**:
 
-```
+```javascript
 const path = require('path');
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -152,7 +154,7 @@ module.exports = env => {
 
 Additionally, I also want to add my **src/index.html** page to the destination, and add a `<script>` tag to it containing the **bundle.js**, and a hash that will make sure browsers are not using an old cached version:
 
-```
+```javascript
 const path = require('path');
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -174,7 +176,7 @@ module.exports = env => {
 
 Finally, I also want to define an environment variable called `API_URL` that will contain a reference to my backend, so that I can customise this when building for a different environment:
 
-```
+```javascript
 const path = require('path');
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -208,7 +210,7 @@ To make our lifes easier, we can use **npm scripts** to actually do this for us
 
 To add a script, you can open the **package.json** file and add something like this:
 
-```
+```json
 {
   "name": "movie-quote-consumer",
   "version": "0.0.1",

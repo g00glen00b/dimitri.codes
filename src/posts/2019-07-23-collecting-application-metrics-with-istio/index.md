@@ -2,13 +2,15 @@
 title: "Collecting application metrics with Istio"
 date: "2019-07-23"
 coverImage: "istio-logo.png"
+categories: ["Tutorials"]
+tags: ["Grafana", "Istio", "Kubernetes", "Prometheus"]
 ---
 
-In my earlier tutorials, I've explained how you can set up your own [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) containers with Docker, and how you can [configure them for Spring boot](https://wordpress.g00glen00b.be/monitoring-spring-prometheus-grafana/) and [nginx](https://wordpress.g00glen00b.be/monitoring-nginx-with-prometheus-and-grafana/). A nice feature of [Istio](https://istio.io/), is that it comes with Prometheus and Grafana out of the box. Additionally, they're already set up to collect certain metrics.
+In my earlier tutorials, I've explained how you can set up your own [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) containers with Docker, and how you can [configure them for Spring boot](/monitoring-spring-prometheus-grafana/) and [nginx](/monitoring-nginx-with-prometheus-and-grafana/). A nice feature of [Istio](https://istio.io/), is that it comes with Prometheus and Grafana out of the box. Additionally, they're already set up to collect certain metrics.
 
 In this tutorial, we'll integrate our own application metrics with the existing services that are available with Istio.
 
-![Kubernetes + Istio + Prometheus](images/kubernetes-istio-prometheus-1024x279.png)
+![Kubernetes + Istio + Prometheus](images/kubernetes-istio-prometheus.png)
 
 ### Enabling Grafana
 
@@ -49,7 +51,7 @@ While Grafana already contains some interesting metrics about Istio itself, it w
 
 All you have to do to make this work is to add the following annotations to your deployment:
 
-```
+```yaml
 prometheus.io/scrape: "true"
 prometheus.io/path: "/actuator/prometheus"
 prometheus.io/port: "8080"
