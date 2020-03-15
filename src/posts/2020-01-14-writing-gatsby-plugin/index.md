@@ -5,7 +5,7 @@ categories: ["JavaScript", "Tutorials"]
 tags: ["Babel", "Gatsby", "Jest", "NPM", "React"]
 ---
 
-So far, I've [written several tutorials](https://wordpress.g00glen00b.be/tag/gatsby/) about using Gatsby. What they have in common, is that they all depend on certain Gatsby plugins. In this tutorial, I'll explore the options you have when creating your own Gatsby plugin.
+So far, I've [written several tutorials](/tag/gatsby/) about using Gatsby. What they have in common, is that they all depend on certain Gatsby plugins. In this tutorial, I'll explore the options you have when creating your own Gatsby plugin.
 
 ![Example of a Gatsby plugin](images/Screenshot-2019-09-08-11.36.36.png)
 

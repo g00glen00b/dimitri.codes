@@ -1,9 +1,11 @@
 ---
 title: "Working with Gatsby and Craft CMS"
 date: "2020-03-10"
+categories: ["JavaScript", "Tutorials"]
+tags: ["CraftCMS", "Gatsby", "GraphQL", "React"]
 ---
 
-The last few weeks, I've covered how to [use Gatsby with WordPress](https://wordpress.g00glen00b.be/using-gatsby-with-wordpress-as-a-headless-cms/), and with [JSON files](https://wordpress.g00glen00b.be/using-json-with-gatsby/). Today, I'm going to show you how you can use Gatsby with [Craft CMS](https://craftcms.com/).
+The last few weeks, I've covered how to [use Gatsby with WordPress](/using-gatsby-with-wordpress-as-a-headless-cms/), and with [JSON files](/using-json-with-gatsby/). Today, I'm going to show you how you can use Gatsby with [Craft CMS](https://craftcms.com/).
 
 Craft CMS is a flexible, feature-rich content management system. One of the major differences between WordPress and Craft CMS is that the latter relies on matrix fields in stead of a regular WYSIWYG editor. This allows you to add multiple types of content to a single post.  
 In addition, it doesn't rely on certain templates like WordPress does, and thus, gives designers and developers more of a clean slate when it comes to customization.  
@@ -23,7 +25,7 @@ Once changed, you can try writing a query by going to **GraphQL** and then selec
 
 The queries you can execute, depend mostly on what you enabled, and what type of entities you use on Craft CMS. In my case, I can fetch all blogposts with their featured image by using the following query:
 
-```
+```graphql
 query {
   entries(typeId: 8) {
     ... on blog_blog_Entry {
@@ -67,7 +69,7 @@ After that, you're ready to start developing.
 The first step when setting up Gatsby, is to configure the plugins you're using. Since we just installed the `gatsby-source-graphql` plugin, we'll have to configure it first.  
 To do this, open **gatsby-config.js**. In here, add a new entry to the **plugins** section. For example:
 
-```
+```javascript
 {
   resolve: `gatsby-source-graphql`,
   options: {
@@ -80,7 +82,7 @@ To do this, open **gatsby-config.js**. In here, add a new entry to the **plugins
 
 In case you're using a private schema, you'll have to copy over the access token, and use it like this:
 
-```
+```javascript
 {
   resolve: `gatsby-source-graphql`,
   options: {
@@ -108,7 +110,7 @@ We don't really need the "page-2.js" file, so let's look at the "index.js" page 
 
 To do this, we can write a query like this:
 
-```
+```javascript
 const allEntriesQuery = graphql`
   {
     craftApi {
@@ -136,13 +138,13 @@ To actually use the query within the index page, we can use the `useStaticQuery(
 
 In my case, I'm interested in looping over all `entries`, and thus I wrote the following within the `IndexPage` component:
 
-```
+```javascript
 const {craftApi: {entries}} = useStaticQuery(allEntriesQuery);
 ```
 
 Once done, you can use the entries in a normal React component. For example, I defined a `<Post/>` component, and called it like this:
 
-```
+```javascript
 {entries.map(({id, title, uri, postDate, fieldMedia: [{url: mediaUrl} = {}] = []}) => <Post
   key={id}
   title={title}
@@ -156,7 +158,7 @@ Sadly, directives from the original schema aren't stitched together with the sch
 
 In my case, I ended up using `Intl.DateTimeFormat()` to format the given date. Libraries like [Moment.js](https://momentjs.com/) could also solve this problem for you, but are a bit more heavy-weight.
 
-```
+```jsx
 const dateFormat = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
@@ -184,11 +186,11 @@ If you're experiencing any diffulties when fetching the `fieldMedia` field, make
 
 While the index page works fine now, clicking any article results in a 404 page. This happens because Gatsby isn't aware yet about the pages we want to declare.
 
-To do this, we can use the `createPages` API within the **gatsby-node.js** file. I've explained this more in detail in [my tutorial about dynamically creating new pages](https://wordpress.g00glen00b.be/creating-pages-with-gatsby/).
+To do this, we can use the `createPages` API within the **gatsby-node.js** file. I've explained this more in detail in [my tutorial about dynamically creating new pages](/creating-pages-with-gatsby/).
 
 In my case, I want to create a page for every blogpost, so I'll be using a similar query as I wrote before:
 
-```
+```javascript
 const allEntriesQuery = `
   {
     craftApiApi {
@@ -224,7 +226,7 @@ Now, the next step is to fetch the data. Within the index page, we used the `use
 
 In this example, we'll have to fetch the entry with a given ID. With Gatsby, we can do that by exporting a field called `query`:
 
-```
+```javascript
 export const query = graphql`
   query ($id: [Int]) {
     craftApi {
@@ -247,7 +249,7 @@ As I've mentioned at the beginning of this article, the way entries are created 
 
 To be able to create a complete remake of a detail page within Gatsby, we'll have to fetch all these blocks. We can do this by querying the `fieldContent` field within each entry. For example:
 
-```
+```javascript
 export const query = graphql`
   query ($id: [Int]) {
     craftApi {
@@ -291,7 +293,7 @@ In this example, I'm using five different content block types, being titles, tex
 
 To properly render all these different blocks, I created a new component called `<PostContent/>`, which will do the heavy lifting:
 
-```
+```jsx
 export const PostContent = ({fieldContent}) => (
   <>
     {fieldContent.map(({id, itemTitle, itemText, code, itemLink, title, itemMedia}) => {
@@ -316,7 +318,7 @@ Earlier on, we exported a query within the post.js template. The data that is be
 
 This allows you to utilize the `<PostContent/>` component I wrote earlier on:
 
-```
+```jsx
 const PostPage = ({data: {craftApi: {entries: [{title, postDate, fieldContent}]}}}) => {
   return (
     <Layout>

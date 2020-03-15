@@ -2,6 +2,8 @@
 title: "Using EhCache 3 with Spring boot"
 date: "2020-02-25"
 coverImage: "ehcache-icon.png"
+categories: ["Java", "Tutorials"]
+tags: ["EHCache", "Spring", "Spring boot"]
 ---
 
 Caching is a common operation when developing appllications. Spring provides [an abstraction on top of all different caching libraries](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache) to make this even easier.
@@ -22,7 +24,7 @@ In this example, I will create a simple REST API. So let's start by opening [Spr
 
 To be able to set up caching, we need some data to cache first. In this example, I'll create a task API using the following DTO:
 
-```
+```java
 @Getter
 @RequiredArgsConstructor
 public class TaskDTO {
@@ -34,7 +36,7 @@ public class TaskDTO {
 
 In addition, I created the following facade:
 
-```
+```java
 @Slf4j
 @Service
 public class TaskFacade {
@@ -50,7 +52,7 @@ public class TaskFacade {
 
 And finally, I've set up the following controller to retrieve these "dummy" tasks:
 
-```
+```java
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -73,7 +75,7 @@ However, we aren't caching yet. If we refresh the page a few times, you'll see t
 
 To enable the cache, we first have to add Ehcache 3 as a dependency:
 
-```
+```xml
 <dependency>
     <groupId>org.ehcache</groupId>
     <artifactId>ehcache</artifactId>
@@ -90,7 +92,7 @@ Be aware, make sure that you're using `org.ehcache` as the group ID for the `ehc
 
 The next step is to create a configuration file called `ehcache.xml` within `src/main/resources`:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns='http://www.ehcache.org/v3'>
     <cache alias="tasks">
@@ -117,7 +119,7 @@ spring.cache.jcache.config=classpath:ehcache.xml
 
 Since caching is optional, you'll also have to explicitly enable caching by using the `@EnableCaching` annotation. We can put this annotation on top of our main class:
 
-```
+```java
 @EnableCaching // Add this
 @SpringBootApplication
 public class SpringBootEhcacheApplication {
@@ -134,7 +136,7 @@ Now that we've set up caching, we can start using it within our code. First of a
 
 To do this, we can use the `@Cacheable` annotation:
 
-```
+```java
 @Cacheable("tasks") // Add this
 public List<TaskDTO> findAll() {
     log.info("Retrieving tasks");
@@ -150,7 +152,7 @@ If you restart the application now, and you execute `http://localhost:8080/api/t
 
 While this works great, sometimes, you still want to bypass the cache, and fetch the actual real-time value. In that case, you could use the `condition` argument of `@Cacheable`.
 
-```
+```java
 @Cacheable(value = "tasks", condition = "!#noCache")
 public List<TaskDTO> findAll(boolean noCache) {
     log.info("Retrieving tasks");
@@ -172,7 +174,7 @@ In the second example, we added a `noCache` parameter, and thus, the results are
 
 In this case, it's pretty useless to use the `noCache` parameter as the key value. So, in stead of that, we could hardcode the key to a constant string:
 
-```
+```java
 @Cacheable(value = "tasks", condition = "!#noCache", key = "'ALL'")
 public List<TaskDTO> findAll(boolean noCache) {
     log.info("Retrieving tasks");
@@ -197,7 +199,7 @@ Usually, that's all you need. However, in our example, it means that if we set `
 
 If we still want to add the result to the cache, even when `noCache` is `true`, then we could use the `@CachePut` annotation:
 
-```
+```java
 @Cacheable(value = "tasks", condition = "!#noCache", key = "'ALL'")
 @CachePut(value = "tasks", condition = "#noCache", key = "'ALL'")
 public List<TaskDTO> findAll(boolean noCache) {
@@ -210,7 +212,7 @@ public List<TaskDTO> findAll(boolean noCache) {
 
 When you're using multiple caching annotations, or you're trying to use the same caching annotation twice, you could also replace it with the `@Caching` annotation:
 
-```
+```java
 @Caching(
     cacheable = @Cacheable(value = "tasks", condition = "!#noCache", key = "'ALL'"),
     put = @CachePut(value = "tasks", condition = "#noCache", key = "'ALL'"))
@@ -230,7 +232,7 @@ This annotation can be used to either delete a single cached value, or delete al
 
 For example:
 
-```
+```java
 @CacheEvict(value = "tasks", allEntries = true)
 public void clearCache() {
     log.info("Cleared task cache");
@@ -239,7 +241,7 @@ public void clearCache() {
 
 In addition to this method, I'm also going to create a REST endpoint within `TaskController` to call this method:
 
-```
+```java
 @DeleteMapping("/cache")
 public void clearCache() {
     taskFacade.clearCache();
@@ -254,7 +256,7 @@ So far, we've been using custom logging to verify that the cache was behaving co
 
 For example, let's create a class called `TaskCacheListener`:
 
-```
+```java
 @Slf4j
 public class TaskCacheListener implements CacheEventListener<String, List<TaskDTO>> {
     @Override
@@ -266,7 +268,7 @@ public class TaskCacheListener implements CacheEventListener<String, List<TaskDT
 
 To register this event listener, we have to add the `<listeners>` section to `ehcache.xml` as well:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns='http://www.ehcache.org/v3'>
     <cache alias="tasks">
@@ -311,7 +313,7 @@ This could happen because the maximum object graph size by default is 1000. If t
 
 To fix this issue, you have to configure the maximum object graph size. This can be done by using the `<heap-store-setting>`:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns='http://www.ehcache.org/v3'>
     <cache alias="tasks">

@@ -1,11 +1,11 @@
 ---
 title: "Securing your GraphQL API with Spring Security"
 date: "2020-03-24"
-categories: ["JavaScript", "Tutorials"]
-tags: ["Dojo", "JavaScript"]
+categories: ["Java", "Tutorials"]
+tags: ["Spring", "Spring boot", "GraphQL", "Spring security"]
 ---
 
-[A while ago](https://wordpress.g00glen00b.be/graphql-spring-boot/), I wrote a tutorial about developing a GraphQL API with Spring boot. In this tutorial, I'll show you how you can add security to your API.
+[A while ago](/graphql-spring-boot/), I wrote a tutorial about developing a GraphQL API with Spring boot. In this tutorial, I'll show you how you can add security to your API.
 
 ![GraphQL + Spring boot](images/graphql-spring-boot.png)
 
@@ -13,7 +13,7 @@ tags: ["Dojo", "JavaScript"]
 
 To get started, we need both the **Web** and **Security** starters within our project:
 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-security</artifactId>
@@ -26,7 +26,7 @@ To get started, we need both the **Web** and **Security** starters within our pr
 
 In addition, I'll also be using the **GraphQL Spring boot starter** to create a GraphQL API with Spring boot:
 
-```
+```xml
 <dependency>
     <groupId>com.graphql-java-kickstart</groupId>
     <artifactId>graphql-spring-boot-starter</artifactId>
@@ -36,7 +36,7 @@ In addition, I'll also be using the **GraphQL Spring boot starter** to create a 
 
 To authenticate within our API, I'll use **JSON Web Tokens** (JWT), so I also added a JWT library:
 
-```
+```xml
 <dependency>
     <groupId>com.auth0</groupId>
     <artifactId>java-jwt</artifactId>
@@ -50,7 +50,7 @@ Once that's done, we're ready to go!
 
 The first step, is to create some beans that we'll use within our security configuration. Since I'll be using JWT, I also have to specify which algorithm I want to use to secure my tokens. In this example, I'll use **HMAC256**, so I defined the following bean:
 
-```
+```java
 @Bean
 public Algorithm jwtAlgorithm() {
     return Algorithm.HMAC256("my-JWT-secret");
@@ -61,7 +61,7 @@ As you can see, we also have to specify a secret key, which in my case will be `
 
 The next step is to set up a `JWTVerifier`. This class can be used to verify if a token is signed with the right algorithm and secret, and if the payload matches your expectations (eg. is the expiry date and the issuer correct, ...). In my case, I'll use the algorithm I just defined, and verify that the issuer is my own API:
 
-```
+```java
 @Bean
 public JWTVerifier verifier(Algorithm algorithm) {
     return JWT
@@ -73,7 +73,7 @@ public JWTVerifier verifier(Algorithm algorithm) {
 
 The final bean I'll create is an `AuthenticationProvider`. The way this is defined depends on where you store your user credentials (LDAP, database, in memory, ...). In my case, I'll use a database to store my credentials:
 
-```
+```java
 @Bean
 public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder(10);
@@ -98,7 +98,7 @@ This token will then be passed as a header, such as `Authorization: Bearer <the 
 
 To verify that the token is valid, I'll use a custom filter:
 
-```
+```java
 @Component
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
@@ -132,7 +132,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
 This filter will parse the token from the headers, and set up a proper authentication by using `[WebAuthenticationDetailsSource](https://docs.spring.io/spring-security/site/docs/4.2.13.RELEASE/apidocs/org/springframework/security/web/authentication/WebAuthenticationDetailsSource.html)`. The way `userService.loadByToken()` works is by verifying the token using the `JWTVerifier` we defined earlier:
 
-```
+```java
 private Optional<DecodedJWT> getDecodedToken(String token) {
     try {
         return Optional.of(verifier.verify(token));
@@ -144,7 +144,7 @@ private Optional<DecodedJWT> getDecodedToken(String token) {
 
 We can then fetch our user information and set up a `[UserDetails](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html)` object:
 
-```
+```java
 @Transactional
 public JWTUserDetails loadUserByToken(String token) {
     return getDecodedToken(token)
@@ -159,7 +159,7 @@ But as I mentioned before, this largely depends on where your users are stored. 
 
 Once we've set up the filter, we can set up Spring Security to add the filter to the chain:
 
-```
+```java
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -192,7 +192,7 @@ In addition to adding the filter, we also pass the `AuthenticationProvider` bean
 
 To allow people to log in using their username and password, I defined a custom mutation:
 
-```
+```graphql
 type Mutation {
     login(email: String!, password: String!): User
 }
@@ -205,7 +205,7 @@ type User {
 
 This also means we have to define a custom `MutationResolver` to handle the login:
 
-```
+```java
 @Component
 @RequiredArgsConstructor
 public class MutationResolver implements GraphQLMutationResolver {
@@ -231,7 +231,7 @@ In addition to setting up the Spring Security part, I'm also returning a custom 
 
 We will add a custom resolver which will return the token for the user though:
 
-```
+```java
 @Component
 @RequiredArgsConstructor
 public class UserResolver implements GraphQLResolver<User> {
@@ -246,7 +246,7 @@ public class UserResolver implements GraphQLResolver<User> {
 
 Now we can generate our token, such as:
 
-```
+```java
 @Transactional
 public String getToken(User user) {
     Instant now = Instant.now();
@@ -269,7 +269,7 @@ As we've seen before, we configured Spring Security to permit everyone to call t
 
 For example, let's say we have an `updatePassword` operation. This operation should only be allowed for people who are authenticated, and thus we could annotate our mutation resolver like this:
 
-```
+```java
 @PreAuthorize("isAuthenticated()")
 public User updatePassword(UpdatePasswordInput input) {
     return userService.updatePassword(userService.getCurrentUser().getPersonId(), input);
@@ -278,7 +278,7 @@ public User updatePassword(UpdatePasswordInput input) {
 
 In addition, if an operation requires certain role, we could do something like this:
 
-```
+```java
 @PreAuthorize("hasAuthority('ADMIN')")
 public StudyMaterial approveStudyMaterial(long studyMaterialId) {
     return studyMaterialService.approve(studyMaterialId, true);

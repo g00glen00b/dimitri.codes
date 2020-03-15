@@ -1,9 +1,11 @@
 ---
 title: "Using JSON with Gatsby"
 date: "2020-01-28"
+categories: ["JavaScript", "Tutorials"]
+tags: ["Gatsby", "GraphQL", "React"]
 ---
 
-[Earlier, we've seen](https://wordpress.g00glen00b.be/using-gatsby-with-wordpress-as-a-headless-cms/) how we can use the **gatsby-source-wordpress** plugin to retrieve blog posts using the WordPress API. In this tutorial, we'll explore another possible source of information that [Gatsby](https://www.gatsbyjs.org/) can use, such as JSON.
+[Earlier, we've seen](/using-gatsby-with-wordpress-as-a-headless-cms/) how we can use the **gatsby-source-wordpress** plugin to retrieve blog posts using the WordPress API. In this tutorial, we'll explore another possible source of information that [Gatsby](https://www.gatsbyjs.org/) can use, such as JSON.
 
 ### Setting up a project
 
@@ -26,7 +28,7 @@ When we installed all plugins, it's time to open **gatsby-config.js** to configu
 
 Within this configuration file, we see that the gatsby-source-filesystem plugin is already configured to serve images from `${__dirname}/src/images`. We can leave this as-is, and add a new "gatsby-source-filesystem" plugin to our configuration:
 
-```
+```javascript
 {
   resolve: `gatsby-source-filesystem`,
   options: {
@@ -47,7 +49,7 @@ Like the other plugin, we can provide a name and a path. In my example, I'll use
 
 If we would run the application like this, nothing will happen. That's because Gatsby doesn't know what to do with this JSON file. To solve that, we can add gatsby-transformer-json to the graveyard configuration:
 
-```
+```javascript
 {
   resolve: `gatsby-source-filesystem`,
   options: {
@@ -97,7 +99,7 @@ Gatsby also recognized that `dateClose` contained a date, and allows us to forma
 
 For example, using the following query we can find all entries within our JSON, sorted by the date they were closed:
 
-```
+```graphql
 query {
   allGraveyardJson(sort: {fields: dateClose, order: DESC}) {
     edges {
@@ -123,7 +125,7 @@ To do that, let's open **src/pages/index.js** and use the `useStaticQuery()` Rea
 
 With the GraphQL API, we can build a query like this:
 
-```
+```javascript
 const {games} = useStaticQuery(graphql`
     {
       games: allGraveyardJson(sort: {fields: dateClose, order: DESC}) {
@@ -143,7 +145,7 @@ const {games} = useStaticQuery(graphql`
 
 Now, we're able to create a new `Game` component to visualize the games. I'll use [React icons](https://react-icons.netlify.com/#/) to add an icon for each entry:
 
-```
+```jsx
 export const Game = ({opened, closed, closedAgo, name, description}) => (
   <div className="game">
     <div className="grave">
@@ -160,7 +162,7 @@ export const Game = ({opened, closed, closedAgo, name, description}) => (
 
 Additionally, I'm going to create a `GameGrid` component to loop over all games and show the `Game` component:
 
-```
+```jsx
 export const GameGrid = ({games, sort}) => (
   <div className="games">
     {games
@@ -179,7 +181,7 @@ export const GameGrid = ({games, sort}) => (
 
 Finally, we can use the `GameGrid` component within the `IndexPage` component:
 
-```
+```jsx
 <Layout>
   <GameGrid games={games.edges}/>
 </Layout>

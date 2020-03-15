@@ -1,6 +1,8 @@
 ---
 title: "Updating your Gatsby site when WordPress posts are published"
 date: "2020-02-11"
+categories: ["Other", "Tutorials"]
+tags: ["CI", "Gatsby", "Netlify", "WordPress"]
 ---
 
 During the last few weeks, I've covered most steps I took when moving from WordPress to a headless WordPress setup with Gatsby. One of the questions I often see is, "how do I update my Gatsby site when a post is published or updated?". In this tutorial, I'll cover what you need to know.
@@ -13,9 +15,7 @@ For a headless CMS on the other hand, it's a bit more difficult. For example, le
 
 The first thing we have to do is to make sure we can call our CI server from outside. For Netlify, this can be done by going to the **Settings** of your project, and selecting **Build & deploy**. In here, you can find a section called **Build hooks** that allows you to create a new webhook.
 
-![](images/Screenshot-2020-01-21-11.40.26.png)
-
-Screenshot of the Netlify settings
+![Netlify build hooks](images/Screenshot-2020-01-21-11.40.26.png)
 
 If you're using **AWS CodePipeline**, you can refer to [the documentation about creating a webhook](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html). As authentication, I would suggest to either use an unauthenticated setup, or an IP, and by whitelisting the IP of the server where WordPress is hosted on.
 
@@ -33,7 +33,7 @@ You can also use the `publish_{custom type}` hook if you're using custom WordPre
 
 The arguments that are passed to the hook are the post ID, and the actual post itself. To register a hook, you could write the following code:
 
-```
+```php
 <?php
 add_action('publish_post', 'nb_webhook_post', 10, 2);
 add_action('publish_page', 'nb_webhook_post', 10, 2);
@@ -51,7 +51,7 @@ While the previously used hooks work perfectly for when a post is published, it'
 
 The arguments passed to this hook are the post ID, the updated post, and the original post. Important to know is that this hook is fired when a post is updated, regardless of whether it was published or not. This means you have to filter out updates for posts that haven't been published yet:
 
-```
+```php
 <?php
 add_action('publish_post', 'nb_webhook_post', 10, 2);
 add_action('publish_page', 'nb_webhook_post', 10, 2);
@@ -77,7 +77,7 @@ As I've mentioned before, the previously used hooks aren't fired when a post is 
 
 This hook only passes the post ID, so if we're interested in retrieving the post itself, we can use the `get_post()` function:
 
-```
+```php
 <?php
 add_action('publish_future_post', 'nb_webhook_future_post', 10);
 add_action('publish_post', 'nb_webhook_post', 10, 2);
@@ -106,7 +106,7 @@ When using this code, the `nb_webhook_post()` method will be called if a post is
 
 The final step within the WordPress plugin is to call the webhook or the API to trigger a new build. If you're using Netlify or an unauthenticated AWS CodePipeline webhook, you can use the [PHP cURL library](https://www.php.net/manual/en/book.curl.php):
 
-```
+```php
 function nb_webhook_post($post_id, $post) {
   if ($post->post_status === 'publish') {
     $url = curl_init('https://api.netlify.com/build_hooks/id-of-my-webhook');
@@ -123,7 +123,7 @@ To be able to use your WordPress plugin, you have to create a new folder in **wp
 
 Additionally, you have to add some metadata to the top of your PHP code so that WordPress can pick it up. To do this, you have to add the following comment:
 
-```
+```php
 <?php
 /**
  * Plugin Name: Netlify build hook
@@ -140,14 +140,10 @@ Additionally, you have to add some metadata to the top of your PHP code so that 
 
 Finally, you have to call the PHP file the same as your plugin folder name, such as **wp-content/plugins/netlify-build-hook/netlify-build-hook.php**. After that, you have to activate the plugin in WordPress itself by logging in and going to the **Plugins** section.
 
-![](images/Screenshot-2020-01-21-12.29.14.png)
-
-Screenshot of the WordPress plugins section
+![WordPress plugins](images/Screenshot-2020-01-21-12.29.14.png)
 
 If you're using Netlify, and you published a post, you should see the builds appear with the name you used for the webhook:
 
-![](images/Screenshot-2020-01-21-12.30.47.png)
-
-Netlify production deploys
+![Netlify producction deploys](images/Screenshot-2020-01-21-12.30.47.png)
 
 And there you have it, you're now able to automatically update your Gatsby site when you change your content on WordPress. If you're interested in the full plugin code, you can check out [this gist](https://gist.github.com/g00glen00b/94423e94d115e2b797c1343375bc01a4).
