@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../images/logo.svg';
+import Logo from '../../content/images/logo.svg';
 import {graphql, Link, useStaticQuery} from 'gatsby';
 import './Header.css';
 import {ThemeSwitch} from './ThemeSwitch';

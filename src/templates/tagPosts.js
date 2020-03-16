@@ -5,22 +5,22 @@ import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
 import {Pagination} from '../components/Pagination';
 
-const Posts = ({data: {allWordpressPost}, pageContext}) => (
+const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
-    <SEO title={`${pageContext.name} posts`}/>
+    <SEO title={`${pageContext.fieldValue} posts`}/>
     <h1 className="page__title">
-      Posts tagged with <strong>{pageContext.name}</strong>
+      Posts tagged with <strong>{pageContext.fieldValue}</strong>
     </h1>
-    {allWordpressPost.edges.map(({node}) => (
+    {allMarkdownRemark.edges.map(({node}) => (
       <PostExcerpt
         key={node.id}
-        categories={node.categories}
+        categories={node.frontmatter.categories}
         excerpt={node.excerpt}
-        isNew={node.daysAgo < 20}
-        readingTime={node.fields.readingTime}
-        slug={node.slug}
-        tags={node.tags}
-        title={node.title}/>
+        isNew={node.frontmatter.daysAgo < 20}
+        readingTime={node.timeToRead}
+        slug={node.fields.slug}
+        tags={node.frontmatter.tags}
+        title={node.frontmatter.title}/>
     ))}
     <Pagination
       base={pageContext.base}
@@ -29,35 +29,28 @@ const Posts = ({data: {allWordpressPost}, pageContext}) => (
   </Layout>
 );
 
-// export const query = graphql`
-//   query($skip: Int!, $limit: Int!, $id: String!) {
-//     allWordpressPost(sort: {fields: [date], order:DESC}, limit: $limit, skip: $skip, filter: {tags: {elemMatch: {id: {eq: $id}}}}) {
-//       edges {
-//         node {
-//           id
-//           categories {
-//             id
-//             name
-//             slug
-//           }
-//           daysAgo: date(difference: "days")
-//           title
-//           excerpt
-//           slug
-//           tags {
-//             id
-//             slug
-//             name
-//           }
-//           fields {
-//             readingTime {
-//               text
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+export const query = graphql`
+  query($skip: Int!, $limit: Int!, $fieldValue: String!) {
+    allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit, filter: {frontmatter: {tags: {eq: $fieldValue}}}) {
+      edges {
+        node {
+          excerpt(format: PLAIN)
+          frontmatter {
+            categories
+            tags
+            title
+            daysAgo: date(difference: "days")
+          }
+          fields {
+            slug
+          }
+          id
+          fileAbsolutePath
+          timeToRead
+        }
+      }
+    }
+  }
+`;
 
 export default Posts;

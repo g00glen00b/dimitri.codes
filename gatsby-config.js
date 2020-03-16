@@ -1,4 +1,3 @@
-const {normalize} = require('./src/helpers/node/wordpressNormalizerHelpers');
 const {feedItemQuery, getFeedItem, siteMetadataQuery} = require('./src/helpers/node/feedHelpers');
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
@@ -12,7 +11,7 @@ module.exports = {
     siteUrl: process.env.SITE_URL,
     headerLinks: [
       {name: 'Home', to:'/'},
-      {name: 'Tutorials', to: '/category/t'},
+      {name: 'Tutorials', to: '/category/tutorials'},
       {name: 'Speaking', to: '/speaking'},
       {name: 'About me', to: '/about-me'}
     ],
@@ -31,20 +30,8 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `posts`,
-        path: `${__dirname}/src/posts`,
-      },
-    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -55,14 +42,37 @@ module.exports = {
               maxWidth: 1024
             }
           },
-          `gatsby-remark-prismjs`
-          // TODO gatsby-remark-external-links
-          // TODO gatsby-remark-smartypants
+          {
+            resolve: `gatsby-remark-external-links`,
+            options: {
+              target: '_blank',
+              rel: 'noopener noreferrer'
+            }
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              noInlineHighlight: true
+            }
+          },
+          `gatsby-remark-smartypants`
         ]
       }
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/content/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/content/posts`,
+      },
+    },
     {
       resolve: `gatsby-plugin-react-svg`,
       options: {
@@ -105,7 +115,7 @@ module.exports = {
         background_color: `#FFFFFF`,
         theme_color: `#3E84CB`,
         display: `standalone`,
-        icon: `src/images/logo-square.svg`,
+        icon: `content/images/logo-square.svg`,
         include_favicon: false
       }
     },

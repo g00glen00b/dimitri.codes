@@ -36,7 +36,7 @@ export const ElevatorPitch = () => {
         {` `}
         new and interesting frameworks and
         {` `}
-        <Link to="/category/t">blogging</Link>
+        <Link to="/category/tutorials">blogging</Link>
         {` `}
         about them.
         I prefer working with <strong>Java</strong> and <strong>JavaScript</strong>.

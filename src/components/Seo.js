@@ -23,7 +23,7 @@ const siteMetadataQuery = graphql`
 export const SEO = ({description, lang = 'en', meta = [], title, image}) => {
   const {site, file} = useStaticQuery(siteMetadataQuery);
   const metaDescription = description || site.siteMetadata.description;
-  const metaImage = image || file.publicURL;
+  const metaImage = image != null ? image.childImageSharp.fluid.src : file.publicURL;
 
   return (
     <Location>

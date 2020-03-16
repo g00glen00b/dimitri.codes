@@ -1,3 +1,4 @@
+const {kebabCase} = require('../contentHelpers');
 const path = require('path');
 
 function createPaginationPages(component, totalItems, base, context, createPage) {
@@ -30,9 +31,9 @@ function createPaginationPages(component, totalItems, base, context, createPage)
   return [...pages, firstPage];
 }
 
-function createPostPages({allWordpressPost}, createPage) {
-  return allWordpressPost.edges.map(({node}) => createPage({
-    path: node.slug,
+function createPostPages({allPosts}, createPage) {
+  return allPosts.edges.map(({node}) => createPage({
+    path: node.fields.slug,
     component: path.resolve('./src/templates/post.js'),
     context: {id: node.id}
   }));
@@ -46,40 +47,54 @@ function createPagePages({allWordpressPage}, createPage) {
   }));
 }
 
-function createPostsPages({allWordpressPost}, createPage) {
+function createPostsPages({allPosts}, createPage) {
   return createPaginationPages(
     path.resolve('./src/templates/posts.js'),
-    allWordpressPost.edges.length,
+    allPosts.edges.length,
     '/posts',
     {},
     createPage
   );
 }
 
-function createCategoryPostsPages({allWordpressCategory}, createPage) {
-  return allWordpressCategory.edges.map(({node}) => createPaginationPages(
+function createCategoryPostsPages({allCategories}, createPage) {
+  return allCategories.group.map(group => createPaginationPages(
     path.resolve('./src/templates/categoryPosts.js'),
-    node.count,
-    `/category/${node.slug}`,
-    node,
+    group.totalCount,
+    `/category/${kebabCase(group.fieldValue)}`,
+    group,
     createPage
   ));
 }
 
-function createTagPostsPages({allWordpressTag}, createPage) {
-  return allWordpressTag.edges.map(({node}) => createPaginationPages(
+function createTagPostsPages({allTags}, createPage) {
+  return allTags.group.map(group => createPaginationPages(
     path.resolve('./src/templates/tagPosts.js'),
-    node.count,
-    `/tag/${node.slug}`,
-    node,
+    group.totalCount,
+    `/tag/${kebabCase(group.fieldValue)}`,
+    group,
     createPage
   ));
+}
+
+function createLegacyCategoryTutorialsPage({allCategories}, createPage) {
+  return allCategories.group
+    .filter(({fieldValue}) => fieldValue === 'Tutorials')
+    .map(group => createPaginationPages(
+      path.resolve('./src/templates/categoryPosts.js'),
+      group.totalCount,
+      `/category/t`,
+      group,
+      createPage
+    ));
 }
 
 module.exports = {
+  createPaginationPages,
   createTagPostsPages,
   createPostsPages,
   createPagePages,
   createCategoryPostsPages,
-  createPostPages
+  createPostPages,
+  createLegacyCategoryTutorialsPage
 };
