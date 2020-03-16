@@ -4,6 +4,7 @@ import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
 import {Pagination} from '../components/Pagination';
+import PropTypes from 'prop-types';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
@@ -28,6 +29,35 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
       pageCount={pageContext.pageCount}/>
   </Layout>
 );
+
+Posts.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          excerpt: PropTypes.string,
+          timeToRead: PropTypes.number,
+          frontmatter: PropTypes.shape({
+            categories: PropTypes.arrayOf(PropTypes.string),
+            tags: PropTypes.arrayOf(PropTypes.string),
+            daysAgo: PropTypes.number,
+            title: PropTypes.string
+          }),
+          fields: PropTypes.shape({
+            slug: PropTypes.string
+          })
+        })
+      }))
+    })
+  }),
+  pageContext: PropTypes.shape({
+    fieldValue: PropTypes.string.isRequired,
+    base: PropTypes.string.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    pageCount: PropTypes.number.isRequired
+  })
+};
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $fieldValue: String!) {

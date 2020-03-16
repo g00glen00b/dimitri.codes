@@ -2,6 +2,7 @@ import {OutboundLink} from 'gatsby-plugin-google-analytics';
 import {Link} from 'gatsby';
 import React from 'react';
 import './PostFooter.css';
+import PropTypes from 'prop-types';
 
 export const PostFooter = ({url}) => (
   <p className="post-footer">
@@ -29,3 +30,7 @@ export const PostFooter = ({url}) => (
     </OutboundLink>
   </p>
 );
+
+PostFooter.propTypes = {
+  url: PropTypes.string
+};

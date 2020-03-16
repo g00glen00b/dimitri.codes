@@ -22,10 +22,10 @@ export const ElevatorPitch = () => {
     <div className="elevator-pitch">
       <Img className="elevator-pitch__image" fixed={profileImage}/>
       <h1 className="elevator-pitch__title">
-        <span role="img" aria-label="Waving emoji">👋</span> Hey there, I'm Dimitri
+        <span role="img" aria-label="Waving emoji">👋</span> Hey there, I&apos;m Dimitri
       </h1>
       <p className="elevator-pitch__bio">
-        I'm a full-stack developer who likes
+        I&apos;m a full-stack developer who likes
         {` `}
         <OutboundLink
           href="https://github.com/g00glen00b"

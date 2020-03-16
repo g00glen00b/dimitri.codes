@@ -3,6 +3,7 @@ import './Layout.css';
 import {Header} from './Header';
 import {Footer} from './Footer';
 import {UpdateBar} from './UpdateBar';
+import PropTypes from 'prop-types';
 
 export const Layout = ({children, simple}) => (
   <div className="container">
@@ -14,3 +15,8 @@ export const Layout = ({children, simple}) => (
     <UpdateBar/>
   </div>
 );
+
+Layout.propTypes = {
+  simple: PropTypes.bool,
+  children: PropTypes.object
+};

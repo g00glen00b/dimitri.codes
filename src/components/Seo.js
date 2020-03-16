@@ -3,6 +3,7 @@ import Helmet from "react-helmet"
 import {graphql, useStaticQuery} from "gatsby"
 import {Location} from '@reach/router';
 import {getOpenGraphMetadata, getTwitterMetadata} from '../helpers/metadataHelpers';
+import PropTypes from 'prop-types';
 
 const siteMetadataQuery = graphql`
   query {
@@ -45,4 +46,18 @@ export const SEO = ({description, lang = 'en', meta = [], title, image}) => {
       )}
     </Location>
   )
+};
+
+SEO.propTypes = {
+  description: PropTypes.string,
+  lang: PropTypes.string,
+  title: PropTypes.string,
+  image: PropTypes.shape({
+    childImageSharp: PropTypes.shape({
+      fluid: PropTypes.shape({
+        src: PropTypes.string.isRequired
+      })
+    })
+  }),
+  meta: PropTypes.array
 };

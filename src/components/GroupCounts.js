@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'gatsby';
 import './Tags.css';
 import {kebabCase} from '../helpers/contentHelpers';
+import PropTypes from 'prop-types';
 
 export const GroupCounts = ({groups, base = `/tag`}) => (
   <ul className="tags">
@@ -18,3 +19,11 @@ export const GroupCounts = ({groups, base = `/tag`}) => (
     ))}
   </ul>
 );
+
+GroupCounts.propTypes = {
+  base: PropTypes.string,
+  groups: PropTypes.arrayOf(PropTypes.shape({
+    fieldValue: PropTypes.string.isRequired,
+    totalCount: PropTypes.number.isRequired
+  }))
+};

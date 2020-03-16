@@ -2,6 +2,7 @@ import React from 'react';
 import './PostExcerpt.css';
 import {Tags} from './Tags';
 import {Link} from 'gatsby';
+import PropTypes from 'prop-types';
 
 export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, readingTime, slug, tags = [], title}) => {
   const tagless = tags == null || tags.length === 0;
@@ -34,4 +35,14 @@ export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, r
       </div>
     </article>
   );
-}
+};
+
+PostExcerpt.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.string),
+  isNew: PropTypes.bool,
+  readingTime: PropTypes.number,
+  slug: PropTypes.string,
+  title: PropTypes.string,
+  excerpt: PropTypes.string
+};

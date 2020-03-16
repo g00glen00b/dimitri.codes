@@ -151,6 +151,7 @@ module.exports = {
       }
     },
     `gatsby-plugin-robots-txt`,
-    `gatsby-plugin-netlify`
+    `gatsby-plugin-netlify`,
+    `gatsby-plugin-eslint`
   ],
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'gatsby';
 import './Pagination.css';
+import PropTypes from 'prop-types';
 
 export const Pagination = ({currentPage, pageCount, base}) => (
   <nav className="pagination">
@@ -21,3 +22,9 @@ export const Pagination = ({currentPage, pageCount, base}) => (
       <span />}
   </nav>
 );
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  base: PropTypes.string
+};

@@ -2,6 +2,7 @@ import React from 'react';
 import './Button.css';
 import {Link} from 'gatsby';
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
+import PropTypes from 'prop-types';
 
 export const Button = ({isLink, isOutbound, isSimple, children, className, ...props}) => (
   <>
@@ -26,3 +27,11 @@ export const Button = ({isLink, isOutbound, isSimple, children, className, ...pr
       </button>}
   </>
 );
+
+Button.propTypes = {
+  isLink: PropTypes.bool,
+  isOutbound: PropTypes.bool,
+  isSimple: PropTypes.bool,
+  children: PropTypes.object,
+  className: PropTypes.string
+};

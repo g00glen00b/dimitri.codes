@@ -11,7 +11,7 @@ export const UpdateBar = () => {
   return (
     <>
       {isUpdate && <div className="update-bar">
-        There is an update available.
+        This website has been updated since the last time you visited.
         <button
           className="update-bar__action"
           onClick={reload}>

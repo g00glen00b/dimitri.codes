@@ -10,7 +10,7 @@ export const NotFoundBox = () => (
     </h1>
     <h2
       className="not-found__subtitle">
-      The page you're looking for doesn't exist
+      The page you&apos;re looking for doesn&apos;t exist
     </h2>
     <Link
       to="/"

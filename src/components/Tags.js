@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'gatsby';
 import './Tags.css';
 import {kebabCase} from '../helpers/contentHelpers';
+import PropTypes from 'prop-types';
 
 export const Tags = ({tags}) => (
   <ul className="tags">
@@ -14,3 +15,7 @@ export const Tags = ({tags}) => (
     ))}
   </ul>
 );
+
+Tags.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.string)
+};

@@ -4,6 +4,7 @@ import {SEO} from '../components/Seo';
 import {Pagination} from '../components/Pagination';
 import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
+import PropTypes from 'prop-types';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
@@ -54,3 +55,31 @@ export const query = graphql`
 `;
 
 export default Posts;
+
+Posts.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          excerpt: PropTypes.string,
+          timeToRead: PropTypes.number,
+          frontmatter: PropTypes.shape({
+            categories: PropTypes.arrayOf(PropTypes.string),
+            tags: PropTypes.arrayOf(PropTypes.string),
+            daysAgo: PropTypes.number,
+            title: PropTypes.string
+          }),
+          fields: PropTypes.shape({
+            slug: PropTypes.string
+          })
+        })
+      }))
+    })
+  }),
+  pageContext: PropTypes.shape({
+    base: PropTypes.string.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    pageCount: PropTypes.number.isRequired
+  })
+};
