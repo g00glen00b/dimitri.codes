@@ -52,7 +52,7 @@ export const query = graphql`
             }
           }
           iso: date
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMMM Do, YYYY")
         }
         html
         id
