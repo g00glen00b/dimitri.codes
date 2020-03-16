@@ -99,7 +99,7 @@ module.exports = {
       options: {
         query: siteMetadataQuery,
         feeds: [{
-          serialize: ({query: {site, allWordpressPost}}) => allWordpressPost.edges.map(({node}) => getFeedItem(site, node)),
+          serialize: ({query: {site, allMarkdownRemark}}) => allMarkdownRemark.edges.map(({node}) => getFeedItem(site, node)),
           query: feedItemQuery,
           output: `/rss.xml`,
           title: `Dimitri's tutorial RSS feed`
