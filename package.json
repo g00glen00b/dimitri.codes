@@ -50,10 +50,10 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "GATSBY_CONCURRENT_DOWNLOAD=50 gatsby build",
-    "develop": "GATSBY_CONCURRENT_DOWNLOAD=50 gatsby develop",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "GATSBY_CONCURRENT_DOWNLOAD=50 npm run develop",
+    "start": "npm run develop",
     "serve": "gatsby serve",
     "develop-any": "GATSBY_CONCURRENT_DOWNLOAD=50 gatsby develop -H 0.0.0.0"
   },
