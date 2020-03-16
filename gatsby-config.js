@@ -128,7 +128,7 @@ module.exports = {
             urlPattern: /(\.js$|\.css$|static\/)/,
             handler: `CacheFirst`
           }, {
-            urlPattern: /^https?:.*\page-data\/.*\/page-data\.json/,
+            urlPattern: /^https?:.*\/page-data\/.*\/(page-data|app-data)\.json$/,
             // Default is `StaleWhileRevalidate`, which causes stale data to appear
             // The reason this is applied is to increase performance.
             // To still allow immediate live data, without losing much performance, we're using `NetworkFirst` with a timeout of 1 second.

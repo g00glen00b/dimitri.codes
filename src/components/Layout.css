@@ -12,18 +12,22 @@
     --background-color: #FFFFFF;
     --background-color-dark-1: #EFF1F1;
     --background-color-dark-2: #DBE2E5;
+    --background-color-inverted: #242931;
     --text-color: #181C22;
     --text-color-light-1: #3C4044;
     --text-color-light-2: #6D6F77;
+    --text-color-inverted: #E5E5E5;
 }
 
 :root[data-theme=dark] {
     --background-color: #242931;
     --background-color-dark-1: #383b43;
     --background-color-dark-2: #636977;
+    --background-color-inverted: #EFF1F1;
     --text-color: #E5E5E5;
     --text-color-light-1: #8B9099;
-    --text-color-light-2: #9eaaaf;
+    --text-color-light-2: #9EAAAF;
+    --text-color-inverted: #181C22;
 }
 
 html, body {
@@ -54,9 +58,8 @@ main {
     transition: background-color .3s, color .3s, border-bottom-color .3s;
 }
 
-:root[data-theme=dark] .container__content pre {
-    border: solid 0.1rem var(--text-color);
-    border-radius: 0.2rem;
+.container__content pre {
+    border-radius: .5rem;
 }
 
 .container__content a:hover {

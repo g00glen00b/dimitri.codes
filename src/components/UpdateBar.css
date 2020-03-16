@@ -1,0 +1,27 @@
+.update-bar {
+  background-color: var(--background-color-inverted);
+  color: var(--text-color-inverted);
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  padding: 1em;
+  border-radius: 0.3em;
+  box-shadow: 0 0.2em 0.8em 0 rgba(0, 0, 0, 0.3);
+}
+
+.update-bar__action {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  padding: 0;
+  margin-left: 4em;
+  font-size: 1em;
+  font-weight: 500;
+  transition: color .3s;
+}
+
+.update-bar__action:hover {
+  color: var(--secondary-color-dark-1);
+}

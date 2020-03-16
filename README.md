@@ -1,5 +1,9 @@
 # dimitr.im [![Netlify Status](https://api.netlify.com/api/v1/badges/7d74b2f7-8c18-46cc-8d56-477fc30997fd/deploy-status)](https://app.netlify.com/sites/dimitrim/deploys)
-This is the source code of my personal blog at [https://dimit.im](https://dimitr.im). This project uses [Gatsby](https://www.gatsbyjs.org/), seeding Markdown posts from **content/posts**.
+
+This is the source code of my personal blog at [https://dimit.im](https://dimitr.im).
+This project uses [Gatsby](https://www.gatsbyjs.org/), using [`gatsby-transformer-remark`](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/) to source Markdown blogposts.
+
+The syntax highlighting theme is based on the [One Dark UI theme for Atom](https://atom.io/themes/one-dark-ui), which has been [ported to Prism.js](https://github.com/AGMStudio/prism-theme-one-dark). 
 
 ## Set up
 To get started with this project, you have to configure an `.env.development` file containing the following environment variables:
