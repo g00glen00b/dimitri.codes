@@ -93,7 +93,6 @@ module.exports = {
   createPaginationPages,
   createTagPostsPages,
   createPostsPages,
-  createPagePages,
   createCategoryPostsPages,
   createPostPages,
   createLegacyCategoryTutorialsPage

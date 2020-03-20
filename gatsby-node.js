@@ -29,13 +29,10 @@ const allPostsQuery = `
   }
 `;
 
-
-
 exports.createPages = async ({graphql, actions: {createPage}}) => {
   const {data, errors} = await graphql(allPostsQuery);
   if (errors) throw errors;
   return [
-    // createPagePages(data, createPage),
     createPostPages(data, createPage),
     createPostsPages(data, createPage),
     createCategoryPostsPages(data, createPage),

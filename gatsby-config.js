@@ -60,6 +60,12 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-source-license`,
+      options: {
+        depth: 2
+      }
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
