@@ -5,7 +5,7 @@ on:
       - opened
       - edited
   schedule:
-    - cron: 0 16 * * *
+    - cron: 0 15 * * *
 
 jobs:
   merge_schedule:
