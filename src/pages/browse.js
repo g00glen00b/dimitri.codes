@@ -2,13 +2,18 @@ import React from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
-import {ElevatorPitch} from '../components/ElevatorPitch';
 import {GroupCounts} from '../components/GroupCounts';
 
-const allCategoriesQuery = graphql`
+const allCategoriesAndTagsQuery = graphql`
   query {
-    allMarkdownRemark {
+    allCategories: allMarkdownRemark {
       group(field: frontmatter___categories) {
+        fieldValue
+        totalCount
+      }
+    }
+    allTags: allMarkdownRemark {
+      group(field: frontmatter___tags) {
         fieldValue
         totalCount
       }
@@ -17,17 +22,23 @@ const allCategoriesQuery = graphql`
 `;
 
 const IndexPage = () => {
-  const {allMarkdownRemark} = useStaticQuery(allCategoriesQuery);
+  const {allCategories, allTags} = useStaticQuery(allCategoriesAndTagsQuery);
   return (
     <Layout>
-      <SEO title="Categories"/>
-      <ElevatorPitch/>
+      <SEO title="Browse"/>
       <h1 className="page__title">
         Pick a category
       </h1>
       <GroupCounts
         base="/category"
-        groups={allMarkdownRemark.group}/>
+        groups={allCategories.group}/>
+
+      <h1 className="page__title">
+        Pick a tag
+      </h1>
+      <GroupCounts
+        base="/tag"
+        groups={allTags.group}/>
     </Layout>
   );
 };

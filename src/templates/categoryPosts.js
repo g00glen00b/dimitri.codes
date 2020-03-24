@@ -5,6 +5,7 @@ import {Layout} from '../components/Layout';
 import {PostExcerpt} from '../components/PostExcerpt';
 import {Pagination} from '../components/Pagination';
 import PropTypes from 'prop-types';
+import {BrowsePitch} from '../components/BrowsePitch';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
@@ -27,6 +28,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
       pageCount={pageContext.pageCount}
       currentPage={pageContext.currentPage}
       base={pageContext.base}/>
+    <BrowsePitch/>
   </Layout>
 );
 
