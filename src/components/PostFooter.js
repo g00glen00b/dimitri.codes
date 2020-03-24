@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export const PostFooter = ({url}) => (
   <p className="post-footer">
-    <Link to="/category/t">Back to tutorials</Link>
+    <Link to="/category/tutorials">Back to tutorials</Link>
     <span className="post-footer__divider">&bull;</span>
     <OutboundLink
       href="https://github.com/g00glen00b/gatsby-blog"
