@@ -22,12 +22,6 @@ export const PostFooter = ({url}) => (
         Discuss on Twitter
     </OutboundLink>
     <span className="post-footer__divider">&bull;</span>
-    <OutboundLink
-      href="https://ko-fi.com/dimitrim"
-      target="_blank"
-      rel="noopener noreferrer">
-      Buy me a coffee
-    </OutboundLink>
   </p>
 );
 
