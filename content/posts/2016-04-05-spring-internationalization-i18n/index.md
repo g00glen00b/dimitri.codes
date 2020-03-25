@@ -4,6 +4,7 @@ date: "2016-04-05"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["i18n", "Spring", "Spring boot", "Web"]
+excerpt: "In this article I will explain how you can use internationalization (i18n) to your Spring boot applications using properties and programmatical approaches."
 ---
 
 When developing applications, it can be interesting to put labels in a separate properties file, so that they can be re-used. For example, we often noticed that within our applications there were slight variations on specific words, which broke consistency. The easiest way to solve that is to centralize these labels. Another benefit you get by having these labels centralized is that it makes translating easier. Just switch the properties file and you can have your application translated in no time. If you're working with the Spring framework already, this is very easy to do, and is part of Spring MVC (internationalization or i18n).

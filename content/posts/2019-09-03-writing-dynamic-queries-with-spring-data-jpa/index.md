@@ -4,6 +4,7 @@ date: "2019-09-03"
 featuredImage: "../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["Hibernate", "JPA", "Spring", "Spring Data"]
+excerpt: "With Spring Data, we can easily write queries usinng @Query. For more dynamic queries, we can use the Example and Specification API, which we'll explore here."
 ---
 
 In one of my earlier tutorials, I've explored the [basics about Spring Data JPA](/spring-data-jpa/). While that tutorial shows what you have to do in most situations, in some cases you want to have more control over your queries rather than having a fairly static one.

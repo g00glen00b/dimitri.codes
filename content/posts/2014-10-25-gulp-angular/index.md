@@ -4,6 +4,7 @@ date: "2014-10-25"
 featuredImage: "../../images/logos/gulp.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Gulp", "JavaScript", "Web"]
+excerpt: "Gulp is the new build system for your webapps. It's powered by streams which makes it fast. In this article I will use it to build my Angular app."
 ---
 
 A while back I wrote an article about how to use [Grunt to build your application](/angular-grunt/ "Making your AngularJS application grunt"). However, recently there's a new player on the market called [Gulp](http://gulpjs.com). I'm not going to compare the two and tell you which one is better, but I'm going to use the same application and try to achieve the same thing using Gulp. Before we start with that, let me explain what Grunt and Gulp can do. Both these tools allow you through configuration/APIs to execute certain steps to convert your source code into code that can be deployed. Some common use cases are:

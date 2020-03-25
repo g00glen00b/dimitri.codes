@@ -4,6 +4,7 @@ date: "2013-07-12"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]
+excerpt: "In this tutorial I'll show how you can use the observer/observable or pub/sub pattern to separate widgets from their behaviour."
 ---
 
 As a third tutorial about Dojo this month I'm going to talk about a very common design pattern called the observer/observable pattern or also known as the publisher/subscriber pattern. JavaScript is a primary event driven language, the problem that occurs often is that one event might trigger multiple actions. When you have to deal with such code in JavaScript, you can write some spaghetti-code and write callbacks in callbacks in ..., yeah... you get the point, it becomes really messy.

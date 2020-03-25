@@ -4,6 +4,7 @@ date: "2016-11-21"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Materialize", "NPM", "PokeAPI", "Yarn"]
+excerpt: "Angular 2 is out for a while now, so it's time to explorer what has changed (spoiler alert: a lot) and how we can set up a project with Angular CLI."
 ---
 
 [Angular 2](https://angular.io/) has been released for a few weeks/months now, so it's time to explore what has been changed (spoiler alert: a lot) and how you can get started with Angular 2. During this series I will build a small Pokédex, building on the [pokéapi](https://pokeapi.co/).

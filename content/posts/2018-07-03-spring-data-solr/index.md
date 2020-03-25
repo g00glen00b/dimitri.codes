@@ -4,6 +4,7 @@ date: "2018-07-03"
 featuredImage: "../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["Solr", "Spring boot", "Spring Data"]
+excerpt: "Spring Data is the go-to framework when using datasources with Spring, regardless of whether they're relational or non-relational databases. With Spring Data Solr, we can also consume documents from Apache Solr, a document based database."
 ---
 
 Spring Data is the go-to framework when trying to get access to a database within a Spring application. Next to relational databases it also provides support for a wide variety of noSQL databases, including document-based databases like Apache Solr. In this tutorial I'll explore the various possibilities of using Spring Data Solr.

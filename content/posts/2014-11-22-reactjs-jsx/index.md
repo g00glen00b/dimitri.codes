@@ -4,6 +4,7 @@ date: "2014-11-22"
 featuredImage: "../../images/logos/react.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gulp", "JavaScript", "React", "Web"]
+excerpt: "React.js is all about components. In this tutorial I will create an application using React.js to create several JSX components."
 ---
 
 In my [previous tutorial](/reactjs-gulp-browserify/ "Writing apps with React.js: Build using gulp.js and Browserify"), I've set up gulp.js to build my React.js application, now it's time to write that application. Like I said before, the app I'm going to build in this tutorial, is an application where you can add/remove songs and rate those. We have several components to implement, so let's start.

@@ -4,6 +4,7 @@ date: "2016-02-16"
 featuredImage: "../../images/logos/docker.png"
 categories: ["Cloud", "Tutorials"]
 tags: ["IBM Cloud", "Docker", "Spring boot"]
+excerpt: "The Bluemix PaaS allows you to take your own Docker containers to the cloud. In this example I will be deploying some containers to Bluemix."
 ---
 
 A few weeks ago I wrote [an article](http://wordpress.g00glen00b.be/docker-spring-boot/) about creating [Docker](http://docker.io/) images containing a [Spring boot](http://projects.spring.io/spring-boot/) application, introducing both Docker, Docker Machine and Docker Compose. Today I'm going to take those images (both the application image and the [MySQL](https://www.mysql.com/) image) to the cloud, using [Bluemix](http://bluemix.net/). [![bluemix-docker](images/bluemix-docker.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/02/bluemix-docker.png)

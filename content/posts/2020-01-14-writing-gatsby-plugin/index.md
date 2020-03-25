@@ -4,6 +4,7 @@ date: "2020-01-14"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Babel", "Gatsby", "Jest", "NPM", "React"]
+excerpt: "So far, I've written several tutorials about using Gatsby.  What they have in common, is that they all depend on certain Gatsby plugins. In this tutorial, I'll explore the options you have when creating your own Gatsby plugin."
 ---
 
 So far, I've [written several tutorials](/tag/gatsby/) about using Gatsby. What they have in common, is that they all depend on certain Gatsby plugins. In this tutorial, I'll explore the options you have when creating your own Gatsby plugin.

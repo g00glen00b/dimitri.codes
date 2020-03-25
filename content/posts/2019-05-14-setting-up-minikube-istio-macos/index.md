@@ -4,6 +4,7 @@ date: "2019-05-14"
 featuredImage: "../../images/logos/kubernetes.png"
 categories: ["Tutorials"]
 tags: ["Docker", "Homebrew", "Istio", "kubernetes", "macOS", "Minikube"]
+excerpt: "When developing cloud-native applications, using tools like Kubernetes and Istio are a must. In this tutorial we'll use Minikube to install these locally."
 ---
 
 Recently, I've been writing some tutorials about creating cloud native applications with Spring boot. So far, we've already covered how to create a Docker image of your Spring boot application. In the next tutorial, we'll also see how we can run our application on Kubernetes. However, before we can do this, we have to set up our local Kubernetes cluster first. Luckily, Kubernetes makes this easy for us by providing Minikube.

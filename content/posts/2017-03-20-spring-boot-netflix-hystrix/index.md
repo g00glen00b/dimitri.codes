@@ -4,6 +4,7 @@ date: "2017-03-20"
 featuredImage: "../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["EhCache", "Hystrix", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
+excerpt: "What happens when something fails in an application and it keeps failing? In this article I'll show you how you can have more control using Hystrix."
 ---
 
 Recently [I wrote](/using-netflix-stack-spring-boot-ribbon/) [some articles](/using-the-netflix-stack-with-spring-boot-eureka/) about the various Netflix components and how they fit into a microservice architecture. In this article I will talk about the next component that is usable with Spring boot and that's Hystrix.

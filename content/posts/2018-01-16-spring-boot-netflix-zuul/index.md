@@ -4,6 +4,7 @@ date: "2018-01-16"
 featuredImage: "../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["Eureka", "Gateway", "Netflix", "Spring boot", "Spring cloud", "Zuul"]
+excerpt: "Spring boot has several integrations available for Netflix components such as Zuul. In this tutorial I'll demonstrate how Zuul can be used to handle several cross-cutting concerns on a network-based level, such as CORS headers and handling multipart requests."
 ---
 
 You might have heard of the term [cross-cutting concerns](https://stackoverflow.com/questions/23700540/cross-cutting-concern-example) in the past. If not, cross-cutting concerns are concerns that apply to all layers of the application. Examples of these concerns are logging, monitoring, security, ... .

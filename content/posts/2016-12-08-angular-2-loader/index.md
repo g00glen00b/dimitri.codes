@@ -4,6 +4,7 @@ date: "2016-12-08"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI"]
+excerpt: "With Angular 2, we can change the default Loading... message to something else. In this article I will show you how to change it into a wonderful pokéball."
 ---
 
 We've already done quite a lot to get a working pokédex with [Angular 2](https://angular.io/). However, there are still two things that bother me:

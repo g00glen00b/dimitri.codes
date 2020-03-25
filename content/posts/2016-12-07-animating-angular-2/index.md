@@ -4,6 +4,7 @@ date: "2016-12-07"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Components", "PokeAPI"]
+excerpt: "Just like AngularJS, Angular 2 has a mechanism for applying animations to your application. During this article we'll look into the animation API."
 ---
 
 We're getting pretty far already with our Pokédex. We've already [implemented a service](/services-angular-rxjs/) with the [Pokéapi](https://pokeapi.co/), [an overview](/component-angular-2/) and a part of the detail page. The next thing I'm going to look at is how to animate stuff with [Angular 2](https://angular.io/). If you're just like me and enjoyed the good ol' days with AngularJS 1.x, you probably already know that AngularJS had support for it (eg. leave/enter). In Angular 2 there is also [support for animations](https://angular.io/docs/ts/latest/guide/animations.html), and in this article we'll find out how.

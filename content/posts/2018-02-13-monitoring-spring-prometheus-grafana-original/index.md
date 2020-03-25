@@ -4,6 +4,7 @@ date: "2018-02-13"
 featuredImage: "../../images/logos/grafana.png"
 categories: ["Java", "Tutorials"]
 tags: ["Grafana", "Monitoring", "Prometheus", "Spring boot"]
+excerpt: "While monitoring is essential, there are various tools on the market to do this. In this tutorial I'll be using Prometheus and Grafana to monitor an existing Spring boot application."
 ---
 
 > This article is **outdated** since the release of **Spring boot 2.0**. If you're interested in a more up-to-date setup, make sure to read [my new tutorial about monitoring Spring boot applications with Micrometer, Prometheus and Grafana](https://wordpress.g00glen00b.be/monitoring-spring-prometheus-grafana/).

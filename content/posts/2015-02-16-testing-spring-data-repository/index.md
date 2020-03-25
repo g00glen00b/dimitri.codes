@@ -4,6 +4,7 @@ date: "2015-02-16"
 featuredImage: "../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["JPA", "Spring", "Testing"]
+excerpt: "Spring Data allows you to create repositories by writing a simple interface. In this article I'll write some integration tests for a repository using DBUnit"
 ---
 
 With [Spring Data](http://projects.spring.io/spring-data/) JPA, persisting data is quite easy. You no longer need to write complex DAO's or repositories, no, all you need is an interface. If you look at my Spring Boot tutorial, you will see that by writing a few lines of code for creating our interface, we're able to read, update, delete and create new records in our database. This is quite interesting, but Spring Data also allows you to write custom queries, but the question is, how do you test these custom queries? You no logner have to write code, so there's no unit to test.

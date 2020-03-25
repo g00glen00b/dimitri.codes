@@ -4,6 +4,7 @@ date: "2018-11-20"
 featuredImage: "../../images/logos/nodejs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Node.js", "Sinon.js", "tape", "Testing"]
+excerpt: "In this tutorial I'll discover the features of tape combined with Sinon.js while writing unit tests for a simple Node.js application."
 ---
 
 [Last time](/nodejs-ava/), I tested a simple Node.js application I wrote with [AVA](https://github.com/avajs/ava). While my initial experience with AVA was great, it's probably still worth it to compare it with other testing frameworks. Another testing framework I seem to hear a lot about is [tape](https://github.com/substack/tape). One of the main advantages of tape is that it produces its output according to **TAP** or the [Test Anything Protocol](https://testanything.org/). Let's see how we can write our tests!

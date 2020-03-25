@@ -4,6 +4,7 @@ date: "2019-10-29"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]
+excerpt: "Gatsby is an awesome static site generator, and in this tutorial I'll look at how to implement pagination using Gatsby."
 ---
 
 A while back, I decided to use Gatsby for my WordPress blog, and continue with WordPress as a headless CMS. So far, I've also written two tutorials about [setting up Gatsby with WordPress](/using-gatsby-with-wordpress-as-a-headless-cms/), and [how to create detail pages for your content](/creating-pages-with-gatsby/). In this tutorial, we'll explore how we can use pagination with Gatsby.

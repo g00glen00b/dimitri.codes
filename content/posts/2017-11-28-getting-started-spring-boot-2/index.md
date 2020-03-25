@@ -4,6 +4,7 @@ date: "2017-11-28"
 featuredImage: "../../images/logos/reactor.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Reactive programming", "Spring", "Spring boot"]
+excerpt: "Explore the new reactive features of Spring boot 2.0 and Spring 5 with me by writing a web crawler using Webflux and reactive MongoDB."
 ---
 
 A few weeks back, I went to [Devoxx](https://blog.optis.be/spring-devoxx-7c0fa8a9dc9f), an annual Java conference located in Belgium. One of the few hypes there was [Spring framework 5](https://spring.io/blog/2017/09/28/spring-framework-5-0-goes-ga) and the upcoming release of [Spring boot 2.0](https://spring.io/blog/2017/05/16/spring-boot-2-0-0-m1-available-now). With this tutorial I'll show you how you can get started Spring boot 2.0.

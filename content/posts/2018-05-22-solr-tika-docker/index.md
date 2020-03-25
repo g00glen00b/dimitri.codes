@@ -4,6 +4,7 @@ date: "2018-05-22"
 featuredImage: "../../images/logos/docker.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Solr", "Tika"]
+excerpt: "Indexing documents is quite easy with Apache Solr and Tika. In this tutorial, I'll demonstrate how to configure both and to run them within a Docker container."
 ---
 
 When indexing documents, [Apache Solr](http://lucene.apache.org/solr/) is a possible solution. Combined with [Apache Tika](http://tika.apache.org/), you can also use Solr to index various types of documents, such as PDFs, Word documents, HTML files, ... . In this tutorial, I'll be setting up Solr with Tika using [Docker compose](https://docs.docker.com/compose/).

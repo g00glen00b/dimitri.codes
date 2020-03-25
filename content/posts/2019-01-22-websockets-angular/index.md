@@ -4,6 +4,7 @@ date: "2019-01-22"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "RxJS", "WebSockets"]
+excerpt: "In this tutorial we'll explore how we can use WebSockets with Angular and how to properly create RxJS observables from them."
 ---
 
 In [my previous tutorial](/websockets-spring-boot/), I've set up a Spring boot application that allows WebSocket communication rather than serving a traditional REST API. Today, we're going to find out how to communicate to that backend using Angular.

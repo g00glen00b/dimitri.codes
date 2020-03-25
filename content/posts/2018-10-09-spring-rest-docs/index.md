@@ -4,6 +4,7 @@ date: "2018-10-09"
 featuredImage: "../../images/logos/asciidoctor.png"
 categories: ["Java", "Tutorials"]
 tags: ["AsciiDoc", "Integration testing", "Java", "Spring boot"]
+excerpt: "When writing integration tests for your Spring application, Spring REST Docs might be useful to automatically generate examples for your documentation."
 ---
 
 [Last time](https://wordpress.g00glen00b.be/generating-static-documentation-swagger/), we automatically generated documentation for our REST APIs written with Spring using Swagger annotations, Springfox and AsciiDoc. This allowed us to list all possible operations, models and so on. Additionally to such documentation, it could be interesting to have some examples as well. With Spring REST Docs we can automatically generate these examples by writing some integration tests. Let's find out how!

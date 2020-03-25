@@ -4,6 +4,7 @@ date: "2018-07-17"
 featuredImage: "../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Apollo", "Express", "GraphQL", "Node.js"]
+excerpt: "GraphQL nowadays is often seen as an alternative to REST, each with its own benefits. With Apollo, we can consume GraphQL APIs, but additionally to that, we can create GraphQL API's as well by using Node.js and Express. In this tutorial I'll explore the possibilities."
 ---
 
 A while back, I wrote [a tutorial](/graphql-spring-boot/) about creating a GraphQL API using Java, followed by a web application using Angular and Apollo. Back then, I also mentioned that Apollo has a server-side part as well, which allows you to create GraphQL API's on Node.js. And today, we're going to explore that option!

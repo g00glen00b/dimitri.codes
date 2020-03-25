@@ -4,6 +4,7 @@ date: "2013-12-22"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
+excerpt: "Today the world is more mobile than ever, and the web is following this trend. In this tutorial I will create a mobile app using the Dojo Mobile."
 ---
 
 In the third part of this series I will tell you how to create controllers and views and how to re-use certain parts of your view (like the header) in all your views.

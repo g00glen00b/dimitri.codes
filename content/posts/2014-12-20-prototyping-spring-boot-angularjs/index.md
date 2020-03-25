@@ -4,6 +4,7 @@ date: "2014-12-20"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Spring", "Spring boot", "Web"]
+excerpt: "When people say \"Java\" they usually think \"slow\". However, with Spring Boot and AngularJS you can create prototypes really fast."
 ---
 
 Recently I wrote an article about writing modern webapps with [Spring Data REST and AngularJS](/spring-data-angular/ "Building modern webapps using Spring Data REST and AngularJS"). It's not that hard to write, but it can be done even easier with Spring Boot. I already planned on trying out Spring Boot after some [amazing articles](http://www.drissamri.be/blog/rest/building-your-own-linkshortener-api/) about Spring Boot by my colleague, [Driss](https://twitter.com/drams88). So now it's time to write an article about using Spring Boot myself.

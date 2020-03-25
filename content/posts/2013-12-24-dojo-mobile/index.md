@@ -4,6 +4,7 @@ date: "2013-12-24"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
+excerpt: "Today the world is more mobile than ever, and the web is following this trend. In this tutorial I will create a mobile app using the Dojo Mobile."
 ---
 
 The entire web (and even the entire world) is changing. Today the world is more mobile than ever, and the web is following this trend. If you would compare the world 10 years ago to the world now, you will notice that a lot changed in the world of the devices. Desktop computers are making room for tablets and smartphones but also phablets and smartwatches are entering the mobile market.

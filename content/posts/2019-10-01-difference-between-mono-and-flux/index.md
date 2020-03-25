@@ -4,6 +4,7 @@ date: "2019-10-01"
 featuredImage: "../../images/logos/reactor.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Project Reactor", "Reactive programming"]
+excerpt: "Project Reactor introduced us two specific types of publishers, being Mono and Flux. In this tutorial we'll see what they mean and what we can use them for."
 ---
 
 If you're using Project Reactor, or any of the frameworks that use it, such as Spring WebFlux, or a reactive Spring Data library, you probably encountered the terms **Mono** and **Flux**. In this (small) tutorial I'll explore the differences between them.

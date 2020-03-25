@@ -4,6 +4,7 @@ date: "2015-01-24"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST-Assured", "Spring", "Spring boot", "Testing"]
+excerpt: "Spring boot allows you to easily write an application, but it also provides the tools to run the application for using in integration tests."
 ---
 
 In my [previous article](/prototyping-spring-boot-angularjs/ "Rapid prototyping with Spring Boot and AngularJS") I explained how you could rapidly create a completely working, responsive CRUD application with about 150 lines of code. That's obviously nice, but [Spring Boot](http://projects.spring.io/spring-boot/) also makes it easy to write integration tests for your application, because it's easy to setup a running test application with a few annotations, so then you can use your favourite testing framework (for example [REST-assured](https://code.google.com/p/rest-assured/)) to test your REST API.

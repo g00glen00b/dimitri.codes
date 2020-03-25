@@ -4,6 +4,7 @@ date: "2016-02-23"
 featuredImage: "../../images/logos/mapstruct.png"
 categories: ["Java", "Tutorials"]
 tags: ["MapStruct", "Maven", "Spring"]
+excerpt: "Object mapping is a common practice in developing apps when you need to get across the different tiers. MapStruct is a framework for mapping objects."
 ---
 
 Recently, I wrote several tutorials about [Spring boot](http://projects.spring.io/spring-boot/) and [Spring Data](http://projects.spring.io/spring-data/) JPA. A common issue that appears when writing large applications is that you don't want to use your entities on your front-end. The reason behind this is that your entity usually resembles how your database and your tables look like, while your model or your DTO could be entirely different.

@@ -4,6 +4,7 @@ date: "2020-02-25"
 featuredImage: "../../images/logos/ehcache.png"
 categories: ["Java", "Tutorials"]
 tags: ["EHCache", "Spring", "Spring boot"]
+excerpt: "Caching is a common operation when developing appllications. Spring provides an abstraction on top of all different caching libraries to make this even easier."
 ---
 
 Caching is a common operation when developing appllications. Spring provides [an abstraction on top of all different caching libraries](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache) to make this even easier.

@@ -4,6 +4,7 @@ date: "2018-09-11"
 featuredImage: "../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Apollo", "GraphQL", "JavaScript", "Vue"]
+excerpt: "GraphQL is a new way to write your APIs, and with Apollo you can easily integrate it within your Vue.js applications. In this tutorial I'll show you how you can make queries and mutations within your Vue components."
 ---
 
 [Last time](/getting-started-vue-at-ui/), I wrote a simple Vue application using dummy data in our components. Today, we're going to link it to the [Apollo GraphQL](https://www.apollographql.com/) API that I wrote earlier. As said before, Apollo has both a server-component that can integrate with Express, but also a client component that can integrate with Angular, React but also with Vue.

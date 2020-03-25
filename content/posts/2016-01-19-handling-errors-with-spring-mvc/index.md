@@ -4,6 +4,7 @@ date: "2016-01-19"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring MVC", "Web"]
+excerpt: "When developing applications, error handling is a common job. With Spring MVC you can easily handle exceptions using a few annotations."
 ---
 
 In [my previous tutorial](/spring-data-jpa/) I wrote a small Spring boot application that retrieved data from a database and showed it on a webpage. However, we only handled the happy path, usually stuff may go wrong when retrieving data or doing certain operations.

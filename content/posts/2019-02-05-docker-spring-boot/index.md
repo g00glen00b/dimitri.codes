@@ -4,6 +4,7 @@ date: "2019-02-05"
 featuredImage: "../../images/logos/docker.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Maven", "Spring", "Spring boot", "Web"]
+excerpt: "The world of DevOps is here. In this tutorial I'll be writing a Spring application and wrap it inside Docker containers."
 ---
 
 About two years ago, I wrote a blogpost about containerizing your Spring boot application with Docker. However, some things have changed, and within this tutorial I'll give you a more up-to-date take to containerizing your Spring boot applications.

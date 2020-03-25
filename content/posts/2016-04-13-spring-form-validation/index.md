@@ -4,6 +4,7 @@ date: "2016-04-13"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Web", "Forms"]
+excerpt: "Handling forms is a common task in web development. In this article I'll demonstrate how to use Spring and JSR-303 bean validation to create proper forms."
 ---
 
 Up until now I've written several tutorials already about creating some readonly Spring boot application, but what's cool about that? Eventually you'll have to add/update some data in your application. In this example I'll show you how you can do that with Spring Web and JSR-303 bean validations.

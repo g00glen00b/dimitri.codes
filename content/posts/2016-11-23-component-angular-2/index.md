@@ -4,6 +4,7 @@ date: "2016-11-23"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Components", "Materialize", "PokeAPI"]
+excerpt: "A lot has changed with Angular 2, and the driving force behind it changed from controllers to components. During this tutorial we will write a component."
 ---
 
 In my [last tutorial](/services-angular-rxjs/), we finished creating [a service](https://github.com/g00glen00b/ng2-pokedex/blob/master/src/app/shared/services/pokemon.service.ts) that has two functions for finding pokémons. First of all we have the `findAll()` function to return multiple pokémons (only basic info though) and secondly, we have the `findOne()` function which will return more detailed information about a single pokémon. Both of these are using the [pokéapi](https://pokeapi.co/) as their backend. In this article we will be using the `findAll()` API to create a pokédex.

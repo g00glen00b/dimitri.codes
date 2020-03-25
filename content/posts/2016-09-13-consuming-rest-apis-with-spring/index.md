@@ -4,6 +4,7 @@ date: "2016-09-13"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Web"]
+excerpt: "Spring boot became quite popular as a framework for microservices. In this tutorial I will show you how to produce and consume REST API's with Spring boot."
 ---
 
 In the [last tutorial](/producing-rest-apis-with-spring/) we created [a small REST API](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-rest/spring-boot-rest-impl). So now that the "producing REST API" step is completed, it's time to start consuming it in another Spring boot project. Last time we've already set up a module for this project, called **spring-boot-rest-client**.

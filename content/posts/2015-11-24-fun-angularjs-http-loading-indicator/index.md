@@ -4,6 +4,7 @@ date: "2015-11-24"
 featuredImage: "../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS"]
+excerpt: "Ever wanted to create a \"Loading, please wait...\" indicator when your data is loading over your REST service? With $http you can easily set something up like this, without having to create a lot of overhead in your controllers."
 ---
 
 In [my previous tutorial](/angularjs-http-and-dates/) we used `$http` to create a utility that automatically converts all ISO 8601 date strings to proper JavaScript dates. `$http` allows us to do a lot of things. Ever wanted to create a "Loading, please wait..." indicator when your data is loading over your REST service?

@@ -4,6 +4,7 @@ date: "2018-05-08"
 featuredImage: "../../images/logos/graphql.png"
 categories: ["Java", "Tutorials"]
 tags: ["GraphQL", "Java", "Spring boot"]
+excerpt: "Forget REST, get started with GraphQL! In this tutorial I'll be using GrapQL mutations with Spring boot to create a next level API."
 ---
 
 [A few weeks ago](/graphql-spring-boot/), we created a beautiful API using GraphQL. We only had one problem... the application was completely read-only and no updates were allowed. This time, we're about to change this, and implement our own mutations with GraphQL.

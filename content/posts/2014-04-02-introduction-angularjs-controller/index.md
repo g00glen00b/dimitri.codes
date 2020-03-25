@@ -4,6 +4,7 @@ date: "2014-04-02"
 featuredImage: "../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]
+excerpt: "In this introduction tutorial series to AngularJS I'm going to build an app introducing several aspects like controllers, filters, services and directives."
 ---
 
 In this introduction tutorial series to [AngularJS](http://angularjs.org) I'm going to build a small webapp introducing several aspects of AngularJS like controllers, filters, services and directives. I'm going to explain all of that by creating an artist/song-rating app, which (in the end) will look like:

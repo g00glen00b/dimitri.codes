@@ -4,6 +4,7 @@ date: "2018-01-30"
 featuredImage: "../../images/logos/clarity.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Clarity"]
+excerpt: "Project Clarity is a neat UI library with a component-set that can be used with Angular. In this tutorial, I'll set up Project Clarity with Angular CLI."
 ---
 
 When working at an Angular project, there are many choices for a UI kit. You have [Angular Material](https://material.angular.io/), [ng-bootstrap](https://ng-bootstrap.github.io/#/home) and a few more. My favourite UI kit is probably [Project Clarity](http://clarity.design), open sourced by VMWare.

@@ -4,6 +4,7 @@ date: "2014-03-09"
 featuredImage: "../../images/logos/spring.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]
+excerpt: "HTML5 made browsers a powerful tool alternative to applications. With HTML5 WebSockets you can also send messages over the network in both ways unlike AJAX."
 ---
 
 HTML5 made browsers a powerful alternative to desktop applications. However, network traffic (when using AJAX or by simply loading pages) is always in one direction. The client requests a page from the server, which in turn responds with the proper content. With HTML5 WebSockets that's a different story, websockets allow you to setup a full duplex channel between server and client, making it possible to send messages in both ways.

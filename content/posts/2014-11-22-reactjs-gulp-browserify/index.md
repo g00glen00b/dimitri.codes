@@ -4,6 +4,7 @@ date: "2014-11-22"
 featuredImage: "../../images/logos/react.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gulp", "JavaScript", "React", "Web"]
+excerpt: "In this article I will prepare my environment to create apps using React.js. First of all we're going to use gulp and Browserify to build our app."
 ---
 
 Previous week I went to [Devoxx](http://devoxx.be) and [Pratik Patel](https://twitter.com/prpatel) gave a great talk about [React.js](http://facebook.github.io/react/). This was enough for me to start playing with the library. React.js is a JavaScript library for building user interfaces by writing components. It's a view-oriented library which allows you to write isomorphic components which can be used both in the back-end (to prerender the markup) and in the front-end (to make the user interface adapt to new changes). Since it's a view-oriented library, it can be used within other libraries/frameworks, for example AngularJS.

@@ -4,6 +4,7 @@ date: "2018-06-19"
 featuredImage: "../../images/logos/spring-batch.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring batch", Spring boot"]
+excerpt: "Writing a RESTful webservice with Spring is easy, even easier with Spring Boot. But did you also know that validation is quite easy as well with Spring?"
 ---
 
 [Last time](/indexing-documents-spring-batch/), I wrote a Spring batch application to index local markdown files into Apache Solr. While the default configuration of Spring batch is great, I don't want to re-run the application to re-index all documents. In this tutorial I'll show you how you can run a batch job at a certain schedule.

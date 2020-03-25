@@ -4,6 +4,7 @@ date: "2015-03-07"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["E2E", "Java", "Selenium", "Spring", "Spring boot", "Testing"]
+excerpt: "Functional testing never has been easier with Spring Boot and FluentLenium, a wrapper framework for Selenium, using a fluent API."
 ---
 
 The past couple of weeks I wrote several kind of tests for [my Spring Boot application](/prototyping-spring-boot-angularjs/ "Rapid prototyping with Spring Boot and AngularJS"), we started of with some [integration tests for our REST service](/spring-boot-rest-assured/ "Easy integration testing with Spring Boot and REST-Assured"), and today I'm writing the last part of the series with some functional/integration tests for the application using Selenium.

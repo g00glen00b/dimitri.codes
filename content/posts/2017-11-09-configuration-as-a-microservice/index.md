@@ -4,6 +4,7 @@ date: "2017-11-09"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Git", "Microservices", "Spring boot", "Spring cloud", "Web"]
+excerpt: "Decentralized configuration on the filesystem has its flawed. But what if you could provide configuration as a microservice with Git?"
 ---
 
 In my last few tutorials, I've covered some aspects that are really important with microservice, such as [a discovery service like Eureka](/using-the-netflix-stack-with-spring-boot-eureka/) and [a circuit breaker like Hystrix](/spring-boot-netflix-hystrix/). Another thing that might be useful when working with microservices is to provide your application configuration as a microservice as well.

@@ -4,6 +4,7 @@ date: "2015-08-10"
 featuredImage: "../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Chai", "Chimp.js", "Cucumber", "E2E", "Meteor.js", "Testing", "Velocity", "WebdriverIO"]
+excerpt: "E2E testing your Meteor app is quite easy with Velocity. In this article I will be using WebdriverIO, Cucumber.js and Chai to completely test my app."
 ---
 
 In [my previous tutorial](/unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/) I mentioned how to write unit tests for Meteor using Jasmine and Sinon.js on the Velocity platform.

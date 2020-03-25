@@ -4,6 +4,7 @@ date: "2016-09-27"
 featuredImage: "../../images/logos/swagger.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Swagger"]
+excerpt: "In the great world of SOA we know something like \"contract first development\", in which we initially describe the web service (using WSDL) and later on implement the service based on that definition. In this article I will explore the options we have with Swagger and Springfox."
 ---
 
 In [my latest tutorial](/documenting-rest-api-swagger-springfox/) I documented a simple REST API with [Swagger](http://swagger.io/) and [Springfox](https://springfox.github.io/springfox/). While this approach certainly showed how valuable documenting your REST API can be, we aren't really "done" yet. In the great world of SOA we know something like "contract first development", in which we initially describe the web service (using WSDL) and later on implement the service based on that definition. In this article I will explore the options we have with Swagger.

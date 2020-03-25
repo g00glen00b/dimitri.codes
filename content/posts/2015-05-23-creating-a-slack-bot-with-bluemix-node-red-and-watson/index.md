@@ -4,6 +4,7 @@ date: "2015-05-23"
 featuredImage: "../../images/logos/bluemix.png"
 categories: ["Other", "Tutorials"]
 tags: ["Bluemix", "Node-RED", "Slack", "Watson"]
+excerpt: "Bluemix, IBM's cloud platform brings the awesome stuff like Watson really close to you. Combine it with Node-RED and Slack and you can create a cool bot."
 ---
 
 If you're just like me and you're over 20 years, you might have spent several years on IRC and you probably interacted with hundreds of bots over the years. You may have written your own bot, just like I did. Well, with todays frameworks, API's and tools it's a lot easier to write such a bot... in the cloud.

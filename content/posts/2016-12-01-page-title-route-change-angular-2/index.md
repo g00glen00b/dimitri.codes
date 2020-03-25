@@ -4,6 +4,7 @@ date: "2016-12-01"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Routing"]
+excerpt: "Routing is an important concept with modern webapps. In this article I will show you how to dynamically change your title based on a route with Angular 2."
 ---
 
 [Last time](/routing-angular-2/), we implemented our pokémon detail view by using routing to switch between the overview and the detail. However, currently we still have the same title across our entire application. Usually when you have an application with multiple pages, you want to change the page title depending on the page the user visits.

@@ -4,6 +4,7 @@ date: "2014-08-27"
 featuredImage: "../../images/logos/d3.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "D3", "JavaScript"]
+excerpt: "D3 is a framework about visualizing data. In this tutorial I will show you how to integrate it with AngularJS by using it inside a directive."
 ---
 
 In my previous tutorials I covered the basics of creating a basic AngularJS application containing services, controllers, filters and directives. It explained most of the basic parts, but in a real application you usually combine many frameworks together to form a solid webapplication. In this tutorial I'm going to show you how you could combine AngularJS and the D3 framework.

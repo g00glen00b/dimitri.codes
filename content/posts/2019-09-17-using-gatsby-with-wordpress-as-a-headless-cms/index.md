@@ -4,6 +4,7 @@ date: "2019-09-17"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "JavaScript", "React"]
+excerpt: "If you want to use WordPress as a headless CMS with Gatsby, I'll demonstrate how you can achieve this in this tutorial."
 ---
 
 Recently, I've moved over my blog to Gatsby, with Wordpress as a headless CMS. In this tutorial, I'll show how you can set up Gatsby in such way.

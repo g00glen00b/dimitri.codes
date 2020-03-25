@@ -4,6 +4,7 @@ date: "2014-09-01"
 featuredImage: "../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Forms"]
+excerpt: "Demonstration of how to use AngularJS form validation and how to write your own directives for custom form validation."
 ---
 
 In the previous tutorials about AngularJS I already used some forms, but I never went into detail about them or about form validation. In this tutorial that will probably change, as I will explain you how you could use AngularJS validation and write your own custom validators.

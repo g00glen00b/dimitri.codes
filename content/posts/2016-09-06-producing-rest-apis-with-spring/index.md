@@ -4,6 +4,7 @@ date: "2016-09-06"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Spring MVC", "Web", "Web services"]
+excerpt: "Spring boot became quite popular as a framework for microservices. In this tutorial I will show you how to produce and consume REST API's with Spring boot."
 ---
 
 In the past couple of weeks I've written [a few simple applications using Spring boot](/tag/spring-boot/). With Spring MVC it's also quite easy to serve REST API's. In this article I'll show you how to create such a REST API and how to consume one using `RestTemplate`.

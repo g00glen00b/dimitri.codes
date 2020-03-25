@@ -4,6 +4,7 @@ date: "2019-08-06"
 featuredImage: "../../images/logos/jaeger.png"
 categories: ["Tutorials"]
 tags: ["Istio", "Jaeger", "Kubernetes"]
+excerpt: "So far, we've already explored some of the elements Istio provides, such as visualizing our service mesh with Kiali, and monitoring our application metrics with Prometheus and Grafana. In this tutorial, we'll see how we can use Jaeger with Istio."
 ---
 
 So far, we've already explored some of the elements Istio provides, such as [visualizing our service mesh with Kiali](/servicegraph-kiali-istio), and monitoring our [application metrics with Prometheus and Grafana](/collecting-application-metrics-with-istio/). In this tutorial, we'll see how we can use Jaeger with Istio.

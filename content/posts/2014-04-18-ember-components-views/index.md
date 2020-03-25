@@ -4,6 +4,7 @@ date: "2014-04-18"
 featuredImage: "../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "JavaScript", "Web"]
+excerpt: "In this small tutorial series I will create a small application using Ember.js from scratch. Many aspects will be handled, easy for starters."
 ---
 
 In our last two tutorials we made a simple song list app where you could add/delete songs from a list. To make the app really good we're going to add a rating component to the app, allowing us to rate the songs and eventually sort them based on their rating. So let's start!

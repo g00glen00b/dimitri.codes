@@ -4,6 +4,7 @@ date: "2016-11-29"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Components", "RxJS"]
+excerpt: "In this article we'll go more in depth on components with Angular 2, such as property and event binding. We'll do this by creating a pagination component."
 ---
 
 [Last time](/component-angular-2/), we made a simple pokédex overview, but we're missing something on our overview... . Right now, we're seeing only the first 20 pokémons, and we have no way to view any other pokémon. So let's change that!

@@ -4,6 +4,7 @@ date: "2018-04-24"
 featuredImage: "../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Apollo", "GraphQL"]
+excerpt: "Forget REST and learn GraphQL! In this tutorial I'll be using Apollo as my GraphQL client library together with Angular to create even more powerful applications."
 ---
 
 [Last time](https://wordpress.g00glen00b.be/graphql-spring-boot/), we wrote a GraphQL API using Spring boot and the graphql-java library. Today, we'll write a simple frontend application using [Angular](https://angular.io/). As mentioned in my previous article, there are few JavaScript libraries out there that we can use. Facebook, which is also behind the idea of [GraphQL](http://graphql.org/), wrote a library called [Relay](https://facebook.github.io/relay/). Additionally, the [group behind Meteor](https://www.meteor.io/) wrote their own library called [Apollo](https://www.apollographql.com/). In this example I'll be using Apollo as the GraphQL library.

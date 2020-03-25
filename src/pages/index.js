@@ -17,6 +17,7 @@ const allPostsQuery = graphql`
             tags
             title
             daysAgo: date(difference: "days")
+            excerpt
           }
           fields {
             slug
@@ -43,6 +44,7 @@ const IndexPage = () => {
           key={node.id}
           categories={node.frontmatter.categories}
           excerpt={node.excerpt}
+          manualExcerpt={node.frontmatter.excerpt}
           isNew={node.frontmatter.daysAgo < 20}
           readingTime={node.timeToRead}
           slug={node.fields.slug}

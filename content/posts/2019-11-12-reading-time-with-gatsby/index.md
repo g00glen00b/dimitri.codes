@@ -4,6 +4,7 @@ date: "2019-11-12"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]
+excerpt: "Popular online blogging platforms like Medium add an estimated reading time to each post. In this tutorial we'll achieve the same thing by using Gatsby."
 ---
 
 In [my latest tutorials](/tag/gatsby), I've explored how to create a blog with Gatsby using WordPress as a headless CMS. In this tutorial, I'll explain how you can implement a "reading time" feature with Gatsby.

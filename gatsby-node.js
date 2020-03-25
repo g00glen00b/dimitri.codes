@@ -1,3 +1,4 @@
+const {createSlug} = require('./src/helpers/node/slugHelpers');
 const {createLegacyCategoryTutorialsPage, createPostPages, createCategoryPostsPages, createPostsPages, createTagPostsPages} = require('./src/helpers/node/createPageHelpers');
 
 const allPostsQuery = `
@@ -43,16 +44,6 @@ exports.createPages = async ({graphql, actions: {createPage}}) => {
   ];
 };
 
-exports.onCreateNode = ({node, actions: {createNodeField}}) => {
-  if (node.frontmatter != null) {
-    const matcher = /posts\/\d{4}-\d{2}-\d{2}-(.+?)\/index.md$/;
-    const [, slug] = node.fileAbsolutePath.match(matcher) || [];
-    if (slug) {
-      createNodeField({
-        node,
-        name: 'slug',
-        value: slug
-      });
-    }
-  }
+exports.onCreateNode = ({node, actions}) => {
+  createSlug(node, actions);
 };

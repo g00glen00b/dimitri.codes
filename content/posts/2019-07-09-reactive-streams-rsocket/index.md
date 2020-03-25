@@ -4,6 +4,7 @@ date: "2019-07-09"
 featuredImage: "../../images/logos/rsocket.png"
 categories: ["Java", "Tutorials"]
 tags: ["Project Reactor", "Reactive programming", "RSocket", "Spring boot"]
+excerpt: "With RSocket, we can reactively stream our data over the network. In this example I'll demonstrate how RSocket can be used with Spring boot."
 ---
 
 [RSocket](http://rsocket.io/) is a protocol that allows you to reactively stream data over the network. One of the benefits of RSocket is that the header of the frame itself is being sent in binary. This reduces the overal network payload and decreases network latency.

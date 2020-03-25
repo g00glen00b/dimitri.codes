@@ -4,6 +4,7 @@ date: "2018-09-25"
 featuredImage: "../../images/logos/open-api.png"
 categories: ["Java", "Tutorials"]
 tags: ["AsciiDoc", "Maven", "Spring boot", "Swagger"]
+excerpt: "With Springfox, we can generate documentation for REST APIs written in Spring. In this article, I'll use some Maven plugins to make this offline available."
 ---
 
 [A while ago](/documenting-rest-api-swagger-springfox/), I used Springfox to include Swagger into our Spring projects. This allows us to use the Swagger UI tester to obtain some live documentation and testing for our REST APIs. However, sometimes you also want to have a static version of the documentation available, so that it can be printed, read without having your application running, ... . In this tutorial we'll see how we can do this.

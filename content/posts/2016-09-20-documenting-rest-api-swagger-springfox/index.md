@@ -4,6 +4,7 @@ date: "2016-09-20"
 featuredImage: "../../images/logos/swagger.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Swagger"]
+excerpt: "REST services are pretty great to allow reuse of your operations, however, to become reusable, you'll have to properly document the available endpoints in your REST API. A popular standard, that is used for this, is Swagger."
 ---
 
 In my last tutorial I built [a REST service](/producing-rest-apis-with-spring/) together with [a REST client](/consuming-rest-apis-with-spring/). Like I said before, REST services are pretty great to allow reuse of your operations, however, to become reusable, you'll have to properly document the available endpoints in your REST API, which endpoints there are, what they can do, what they need as input parameters and what they will provide as output. A popular standard, that is used for this, is [Swagger](http://swagger.io/).

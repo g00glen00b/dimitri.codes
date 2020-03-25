@@ -4,6 +4,7 @@ date: "2014-03-07"
 featuredImage: "../../images/logos/spring.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]
+excerpt: "HTML5 made browsers a powerful tool alternative to applications. With HTML5 WebSockets you can also send messages over the network in both ways unlike AJAX."
 ---
 
 In the previous tutorial I already configured the entire web application, so that part is already behind us. In this tutorial I will add the code necessary to make the data access + websockets + RESTful webservice work. I'm going to work my way from the bottom up to the top, so the first step is the data access layer.

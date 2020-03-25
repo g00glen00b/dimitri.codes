@@ -4,11 +4,12 @@ date: "2019-06-11"
 featuredImage: "../../images/logos/kiali.png"
 categories: ["Tutorials"]
 tags: ["Envoy", "Grafana", "Istio", "Kiali", "Kubernetes", "Prometheus"]
+excerpt: "In this tutorial, we'll use Kiali to visualise our Istio service mesh on Kubernetes. With Kiali, we can view a servicegraph, and several other graphs."
 ---
 
 Last time, we've set up [Minikube with Istio](/setting-up-minikube-istio-macos/), and we've [deployed our application using Kubernetes](/spring-boot-kubernetes/). Today, we'll see how we can use [Kiali](https://www.kiali.io/) with Istio to visualise our service dependencies.
 
-![Kubernetes + Istio + Kiali](images/kubernetes-istio-kiali-1024x279.png)
+![Kubernetes + Istio + Kiali](images/kubernetes-istio-kiali.png)
 
 ### Enabling Grafana and Kiali
 

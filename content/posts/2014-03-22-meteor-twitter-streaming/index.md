@@ -4,6 +4,7 @@ date: "2014-03-22"
 featuredImage: "../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "Meteor.js", "Twitter"]
+excerpt: "With Meteor you can write really cool apps in a few minutes. In this example I'm going to give you a live Twitter feed using the streaming API."
 ---
 
 **Be aware**, this article was written for Meteor 0.7. Recently Meteor released their 0.9 version, and things doesn't seem to work as expected anymore. I will try to look at this as soon as possible, but be patient.

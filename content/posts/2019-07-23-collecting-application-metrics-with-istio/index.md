@@ -4,6 +4,7 @@ date: "2019-07-23"
 featuredImage: "../../images/logos/istio.png"
 categories: ["Tutorials"]
 tags: ["Grafana", "Istio", "Kubernetes", "Prometheus"]
+excerpt: "Istio comes with Prometheus and Grafana out of the box. In this tutorial we'll demonstrate how you can set up your pods to be scraped by Istio's monitoring."
 ---
 
 In my earlier tutorials, I've explained how you can set up your own [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) containers with Docker, and how you can [configure them for Spring boot](/monitoring-spring-prometheus-grafana/) and [nginx](/monitoring-nginx-with-prometheus-and-grafana/). A nice feature of [Istio](https://istio.io/), is that it comes with Prometheus and Grafana out of the box. Additionally, they're already set up to collect certain metrics.

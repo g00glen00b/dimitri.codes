@@ -18,6 +18,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
         key={node.id}
         categories={node.frontmatter.categories}
         excerpt={node.excerpt}
+        manualExcerpt={node.frontmatter.excerpt}
         isNew={node.frontmatter.daysAgo < 20}
         readingTime={node.timeToRead}
         slug={node.fields.slug}
@@ -44,7 +45,8 @@ Posts.propTypes = {
             categories: PropTypes.arrayOf(PropTypes.string),
             tags: PropTypes.arrayOf(PropTypes.string),
             daysAgo: PropTypes.number,
-            title: PropTypes.string
+            title: PropTypes.string,
+            excerpt: PropTypes.string
           }),
           fields: PropTypes.shape({
             slug: PropTypes.string
@@ -72,6 +74,7 @@ export const query = graphql`
             tags
             title
             daysAgo: date(difference: "days")
+            excerpt
           }
           fields {
             slug

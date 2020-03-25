@@ -4,6 +4,7 @@ date: "2020-03-24"
 featuredImage: "../../images/logos/graphql.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "GraphQL", "Spring security"]
+excerpt: "In this tutorial, I'll show how you can use Spring Security with Spring boot and GraphQL."
 ---
 
 [A while ago](/graphql-spring-boot/), I wrote a tutorial about developing a GraphQL API with Spring boot. In this tutorial, I'll show you how you can add security to your API.

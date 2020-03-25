@@ -4,6 +4,7 @@ date: "2014-01-11"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript", "Web"]
+excerpt: "In this series I will explain many basic Dojo features by writing a widget from scratch. Topics handled are internationalization, inheritance, AMD and more."
 ---
 
 A decade ago, the web was just a place full of websites and information. Today, the web has evolved into something bigger. Next to websites, you also have web applications or rich internet applications (RIA). With the new technologies like HTML5, CSS3 and JavaScript, the web became a good alternative to many desktop applications. One of these frameworks that is directed to the web application market is Dojo. Dojo is one of the few JavaScript frameworks that allows you to do anything you need using JavaScript. From basic DOM manipulation to widgets, a mobile aspect, MVC applications, ... .

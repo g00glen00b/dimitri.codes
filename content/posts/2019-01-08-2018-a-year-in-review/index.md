@@ -2,6 +2,7 @@
 title: "2018: A year in review"
 date: "2019-01-08"
 categories: ["General"]
+excerpt: "As usual, the beginning of a new year is a good time to reflect on the previous year. For me, that meant the return of writing more blogposts, so I'm quite satisfied. Anyhow, let's recap some important  analytics!"
 ---
 
 As usual, the beginning of a new year is a good time to reflect on the previous year. For me, that meant the return of writing more blogposts, so I'm quite satisfied. Anyhow, let's recap some important analytics!

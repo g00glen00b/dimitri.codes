@@ -4,6 +4,7 @@ date: "2014-06-21"
 featuredImage: "../../images/logos/jasmine.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Jasmine", "JavaScript", "Testing"]
+excerpt: "Wrote an app using AngularJS? Great! Now it's time to use the angular-mock framework and Jasmine to test your controllers, services, filters and directives."
 ---
 
 Two months ago I wrote a small [tutorial series](/introduction-angularjs/ "Introduction to AngularJS") about writing a small application using AngularJS. In that series I talked about the most common parts of AngularJS like controllers, services, filters and directives. However, AngularJS is more than just that, AngularJS also comes with an entire mocking framework, which makes the life of the unit tester a lot easier. In this tutorial I will demonstrate you the power of this mocking framework, by writing several Jasmine unit tests to test the behaviour of the application we wrote.

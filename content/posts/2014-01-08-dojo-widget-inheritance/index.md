@@ -4,6 +4,7 @@ date: "2014-01-08"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript", "Web"]
+excerpt: "In this series I will explain many basic Dojo features by writing a widget from scratch. Topics handled are internationalization, inheritance, AMD and more."
 ---
 
 In the previous tutorial we did everything we needed to set up our widget like providing our template and the localized messages. In this tutorial I will start writing our widget module by explaining the module system and inheritance.

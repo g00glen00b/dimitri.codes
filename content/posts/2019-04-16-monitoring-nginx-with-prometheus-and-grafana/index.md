@@ -4,6 +4,7 @@ date: "2019-04-16"
 featuredImage: "../../images/logos/grafana.png"
 categories: ["Tutorials"]
 tags: ["Docker", "Grafana", "Monitoring", "nginx", "Prometheus"]
+excerpt: "In this tutorial, you'll find out how we can use the Prometheus exporter for nginx, to start monitoring, and to create NASA-level dashboards with Grafana."
 ---
 
 A while ago, I wrote [a tutorial about deploying your static web project on nginx using Docker](/containerizing-your-static-web-project/). Today, we'll go a bit further, and see how we can monitor what's happening on [nginx](https://www.nginx.com/), by using [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).

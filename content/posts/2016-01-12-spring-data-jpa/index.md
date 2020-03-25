@@ -4,6 +4,7 @@ date: "2016-01-12"
 featuredImage: "../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["JPA", "Spring", "Spring boot", "Spring Data", "Web"]
+excerpt: "With Spring Data it's very easy to create a simple CRUD application without the hassle of creating your own DAO's. Spring Boot makes it even easier for you."
 ---
 
 In [my previous tutorial](/spring-webapp/) I made a simple application to show some superheroes and supervillains. While the application did what it should do it was pretty statically because I used some mock data.

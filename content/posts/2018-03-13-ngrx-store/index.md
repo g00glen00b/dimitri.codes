@@ -4,6 +4,7 @@ date: "2018-03-13"
 featuredImage: "../../images/logos/ngrx.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "ngrx", "RxJS"]
+excerpt: "A component-based architecture brings it own challenges, such as state management. In this tutorial I'll demonstrate how the ngrx library can solve this problem by defining actions and reducers."
 ---
 
 One of the major differences between AngularJS 1.x and Angular 2 and beyond is the shift to components. Even though components were introduced in AngularJS 1.5, controllers are still often used. Embracing components provides many advantages, such as proper loosely coupled components, re-usability and so on. One drawback to the component-based approach is state management and how to handle it. Luckily, people solved that problem already, and that's where things like ngrx pop up.

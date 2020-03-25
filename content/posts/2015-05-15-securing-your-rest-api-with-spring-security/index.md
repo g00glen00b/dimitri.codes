@@ -4,6 +4,7 @@ date: "2015-05-15"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring security"]
+excerpt: "In this tutorial I'm going to write a small REST API with Spring Boot and Spring Web MVC. Securing the application will be done with Spring Security."
 ---
 
 In the next couple of weeks I'm going to develop a small idea sharing/voting application, using several common concepts in web development. First of all, I'm going to write and secure a REST API with Spring Security.

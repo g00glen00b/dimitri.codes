@@ -4,6 +4,7 @@ date: "2016-12-06"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "pipe", "PokeAPI"]
+excerpt: "Pipes are one of the key features of Angular 2 and they are the successor to AngularJS' filters. In this article I'll write my own pipes with Angular 2."
 ---
 
 Now that we've [set up a project](/starting-angular-cli/) with [Angular 2](https://angular.io/), with [a service to fetch data](/services-angular-rxjs/) from our REST API and [some components](/component-angular-2/) and [routing](/routing-angular-2/) to show an overview of pokémons, it's time to show some more detailed data. The component I'm going to be working on will be using the `PokemonAbilityInfo` object, which contains the weight, height, abilities and category of the pokémon.

@@ -4,6 +4,7 @@ date: "2019-10-15"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]
+excerpt: "Gatsby has a large set of APIs, and one of them is to programmatically create new pages. In this tutorial we'll use this API to create detail pages for each blogpost."
 ---
 
 In [my latest tutorial](/using-gatsby-with-wordpress-as-a-headless-cms/), I've explored the possibilities with Gatsby and WordPress. While we built a proper index-page, our WordPress-powered Gatsby blog is far from done.

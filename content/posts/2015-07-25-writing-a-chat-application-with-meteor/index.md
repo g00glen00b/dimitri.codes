@@ -4,6 +4,7 @@ date: "2015-07-25"
 featuredImage: "../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "Meteor.js"]
+excerpt: "In this example I'll show you how easily you can create applications using Meteor by demonstrating how to write a chat application in less than 100 lines."
 ---
 
 A few days ago I gave an introduction to Meteor for students of [UCLL](http://www.ucll.be/) starting of with an empty project and building a complete chat application in the process. The application we're going to build will look like this:

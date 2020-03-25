@@ -4,6 +4,7 @@ date: "2018-08-28"
 featuredImage: "../../images/logos/vue.png"
 categories: ["Java", "Tutorials"]
 tags: ["JavaScript", "Vue"]
+excerpt: "An advantage of Vue is that many additional modules are officially developed, such as state management with vuex and routing with the vue-router. In this tutorial I'll take a look at the Vue router."
 ---
 
 In the [previous tutorial](/getting-started-vue-and-ui/), I made a very [simple Vue application](https://github.com/g00glen00b/apollo-express-vue-example). However, the goal of the Q&A application that I'm trying to write is to have multiple pages within our application. To be able to get multiple pages to work client-side (Single-Page Applications), I need a router. The nice thing about Vue is that many of these modules, such as routing, are officially released, so you don't need any third-party library. In our case, we can use [vue-router](https://github.com/vuejs/vue-router) to make this work.

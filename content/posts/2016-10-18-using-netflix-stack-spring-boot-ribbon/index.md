@@ -4,6 +4,7 @@ date: "2016-10-18"
 featuredImage: "../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["Eureka", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
+excerpt: "Last time, I gave a basic introduction into the concepts of microservices. In this tutorial we'll explore how Netflix helps us with calling microservices using Ribbon."
 ---
 
 In [my last article](/using-the-netflix-stack-with-spring-boot-eureka/) I gave a basic introduction into the concepts of a service oriented architecture (SOA) and microservices. I also made a small example about a service registry and how [Netflix](https://github.com/netflix) is involved into microservices with tools like [Eureka](https://github.com/Netflix/eureka). However, the story was quite unfinished, since we only made it possible for microservices to register themselves on the registry, but the ones consuming the microservices have nothing to do with the service registry... yet.

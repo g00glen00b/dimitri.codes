@@ -4,6 +4,7 @@ date: "2015-11-16"
 featuredImage: "../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]
+excerpt: "while Date objects are a part of the standard JavaScript specs, it's not a part of the JSON spec. In this tutorial we'll explain how to properly consume dates from your REST API with AngularJS."
 ---
 
 When you're writing AngularJS applications, chances are that you're going to have to consume a REST API. If you're as lucky as me you'll encounter a situation where you'll have to read dates. However, while `Date` objects are a part of the standard [JavaScript specs](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date), it's not a part of the [JSON spec](http://www.json.org/). So... how do we handle dates?

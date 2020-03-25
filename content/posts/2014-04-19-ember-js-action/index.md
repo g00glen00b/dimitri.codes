@@ -4,6 +4,7 @@ date: "2014-04-19"
 featuredImage: "../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "JavaScript", "Web"]
+excerpt: "In this small tutorial series I will create a small application using Ember.js from scratch. Many aspects will be handled, easy for starters."
 ---
 
 If you're a developer for the past five years you may have noticed an explosion in the JavaScript world. Suddenly frameworks, concepts, standards and building tools are popping everywhere. The browser is becoming a valuable alternative to desktop applications and if you didn't already hop on to the JavaScript train towards the future, then it's time to do so!

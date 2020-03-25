@@ -4,6 +4,7 @@ date: "2018-01-03"
 featuredImage: "../../images/logos/spring-security.png"
 categories: ["Java", "Tutorials"]
 tags: ["JWT", "Microservices", "Spring", "Spring boot", "Spring security"]
+excerpt: "JWT is a popular type of token. In this tutorial I'll show you how to integrate a JWT authentication mechanism with Spring, and within a microservice oriented architecture."
 ---
 
 As soon as you write your first web application with Spring, you probably want to secure it. Spring has a project called [Spring Security](https://projects.spring.io/spring-security/) that does most of the generic stuff for you. Just plug in a service that provides the user details (from a database, LDAP, ...) and configure the endpoints and you're ready to go.

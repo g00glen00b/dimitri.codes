@@ -4,6 +4,7 @@ date: "2013-07-09"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]
+excerpt: "In this tutorial I'll explain what the differences are between loading dependencies through require and define."
 ---
 
 I didn't exactly plan on writing this, but after a question from an intern, I thought it might be interesting to exaplain the difference between `require()` and `define()`. Every developer who has used Dojo or even another JavaScript framework/platform like Node.js and RequireJS, knows that one time or another, you need to load your modules. In Dojo they chose to use an asynchronous module loader or the AMD loader.

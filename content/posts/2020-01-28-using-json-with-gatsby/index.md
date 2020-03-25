@@ -4,6 +4,7 @@ date: "2020-01-28"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]
+excerpt: "Earlier, we've seen how we can use the gatsby-source-wordpress plugin to retrieve blog posts using the WordPress API. In this tutorial, we'll explore another possible source of information that Gatsby can use, such as JSON."
 ---
 
 [Earlier, we've seen](/using-gatsby-with-wordpress-as-a-headless-cms/) how we can use the **gatsby-source-wordpress** plugin to retrieve blog posts using the WordPress API. In this tutorial, we'll explore another possible source of information that [Gatsby](https://www.gatsbyjs.org/) can use, such as JSON.

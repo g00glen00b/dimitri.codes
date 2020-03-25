@@ -4,6 +4,7 @@ date: "2014-04-17"
 featuredImage: "../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "JavaScript", "Web"]
+excerpt: "In this small tutorial series I will create a small application using Ember.js from scratch. Many aspects will be handled, easy for starters."
 ---
 
 In the previous tutorial I talked about setting up a simple application using Ember.js. We wrote a simple app containing a route, a controller and a store (using Ember-data). In this tutorial we will go further using stores by adding an adapter to the store and removing elements from our store as well. Another feature I'm going to talk about is defining your own Handlebars helpers.

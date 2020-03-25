@@ -4,6 +4,7 @@ date: "2014-11-07"
 featuredImage: "../../images/logos/jenkins.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Code quality", "JavaScript", "Jenkins", "SonarQube"]
+excerpt: "Continuous integration of JavaScript apps requires some setup. A possible setup is the use of Jenkins, SonarQube and Bower for continuous integration."
 ---
 
 For the past half year I've written several articles about JavaScript frameworks and developing pure JavaScript web applications. In this article I will demonstrate how you could use Jenkins, SonarQube and Bower for continuous integration of your JavaScript applications.

@@ -4,6 +4,7 @@ date: "2015-01-31"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["AssertJ", "JUnit", "Mockito", "Testing"]
+excerpt: "Unit testing is a very important part in development. In this example I show you how easy it is, using Mockito and AssertJ."
 ---
 
 A few weeks ago I wrote [my very first Spring Boot application](/prototyping-spring-boot-angularjs/ "Rapid prototyping with Spring Boot and AngularJS") and I was quite astonished about the result. Now, I did want to complete the application by writing some tests and so I did. In my [previous tutorial](/spring-boot-rest-assured/ "Easy integration testing with Spring Boot and REST-Assured") I wrote several integration tests, and now it's time to write some unit tests as well.

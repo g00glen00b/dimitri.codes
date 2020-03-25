@@ -4,6 +4,7 @@ date: "2015-09-28"
 featuredImage: "../../images/logos/yeoman.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "mashape", "Yeoman"]
+excerpt: "In this article I will write a small AngularJS application and use Yeoman to set it all up."
 ---
 
 Where are the good ol' days when everyone used 1 JavaScript library at most (usually jQuery). With modern applications you need a modern approach, setting up such a project can be hard sometimes, but why re-invent the wheel if there are probably thousands of people who need the same thing? [Yeoman](http://yeoman.io/) helps you to setup your project by providing configuration and a project skeleton, usually based on best practices.

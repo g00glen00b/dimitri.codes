@@ -4,6 +4,7 @@ date: "2013-12-20"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
+excerpt: "In this tutorial I'll show you how to create an application using Dojo with Dojo mobile."
 ---
 
 After a lot of tutorials and guides written in Dutch, I thought it was the time to write some English tutorials as well. In this tutorial I'll show you how to create an application using Dojo with [Dojo mobile](http://dojotoolkit.org/documentation/#mobile "Dojo Mobile"). I will not talk about frameworks like [dojox/app](http://dojotoolkit.org/reference-guide/1.9/dojox/app.html)\* or [dojox/mvc](http://dojotoolkit.org/reference-guide/1.9/dojox/mvc.html)\*, but I will tend to create an application with reusable code as much as possible.

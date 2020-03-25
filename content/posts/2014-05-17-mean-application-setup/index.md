@@ -4,6 +4,7 @@ date: "2014-05-17"
 featuredImage: "../../images/logos/nodejs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Express", "JavaScript", "MongoDB", "Node.js"]
+excerpt: "The MEAN stack is a pure JavaScript stack containing MongoDB, Express, AngularJS and Node.js. In this tutorial I'm going to use these to build our own app."
 ---
 
 In an earlier article/tutorial series I told you how you could create your own application using AngularJS and the HTML Local storage to persist the data. If you missed it, be sure to check it out [here](/introduction-angularjs/ "Introduction to AngularJS"). The local storage is great but what if we want to persist the data somewhere inside a database and share that information across all clients?

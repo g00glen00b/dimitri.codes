@@ -4,6 +4,7 @@ date: "2013-09-29"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AJAX", "Dojo", "JavaScript"]
+excerpt: "In this tutorial I'll show how you can use deferreds, more commonly known as promises to create asynchronous communication."
 ---
 
 It's already a while ago I wrote my last tutorial, so it's time for the next one now. In this tutorial I'm going to talk about the Dojo Deferred module, in the JavaScript world also known as promises. As you probably know by now is that JavaScript is a language that makes it easy to work asynchronously and to use callbacks. In theory this all works fine, but if you make an asynchronous call and you would like to do something with the response elsewhere, then it becomes a bit trickier in JavaScript. In the Dojo toolkit you can find a module that may help you, called the **dojo/Deferred** module. In this tutorial I'm going to explain you what you could do with it and how it works.

@@ -4,6 +4,7 @@ date: "2015-09-29"
 featuredImage: "../../images/logos/jasmine.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Jasmine", "JavaScript", "Sinon.js", "Testing"]
+excerpt: "With Sinon.js you can easily set up stubs and spies. This can be a real benefit when testing AngularJS apps because of all the different components."
 ---
 
 I've already done quite some tutorials about testing JavaScript applications, recently about [testing a Meteor application with Jasmine and Sinon.js](/unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/). Sinon.js is not only useful to Meteor applications though, and in this article I'll show you how helpful it can be while testing AngularJS applications. [![grunt-jasmine-sinon](images/grunt-jasmine-sinon.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2015/09/grunt-jasmine-sinon.png)

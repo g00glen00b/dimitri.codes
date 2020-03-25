@@ -4,6 +4,7 @@ date: "2019-12-10"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]
+excerpt: "For Markdown, there are plugins to add syntax highlighting to your Gatsbby website. In this tutorial we'll explore the alternatives for adding syntax highlighting through WordPress."
 ---
 
 If you're looking for syntax highlighting with Gatsby, chances are you've encountered an example using Prism.js. Sadly, the plugins that are available to do syntax highlighting, only work for Markdown, and not for WordPress.

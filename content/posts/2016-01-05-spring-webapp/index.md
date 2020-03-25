@@ -4,6 +4,7 @@ date: "2016-01-05"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring MVC", "Thymeleaf", "Web"]
+excerpt: "Spring boot changed the Java and Spring landscape. In this tutorial I'll write a small Spring webapp in about 70 lines of Java code."
 ---
 
 Three years ago I wrote this tutorial. Things have changed in the Java and Spring landscape, so let's see how much easier it is now to write a simple Spring webapplication.

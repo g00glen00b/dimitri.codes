@@ -4,6 +4,7 @@ date: "2016-10-11"
 featuredImage: "../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["Eureka", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
+excerpt: "When you talk about Java and microservices, chances are that you'll stumble upon the Netflix stack. In this example I'll use Spring boot with Eureka."
 ---
 
 A while back I wrote [a simple REST service](/producing-rest-apis-with-spring/) with [Spring boot](http://projects.spring.io/spring-boot/). While this is quite common, we're also seeing the word "microservice" [pop up more often](https://www.google.com/trends/explore?q=microservice) as well. But what is a microservice and what does [Netflix](https://www.netflix.com) has to do with it and more specifically, what is [Eureka](https://github.com/Netflix/eureka)? Well, in this article I will show you how you can use Eureka with Spring boot and how it relates to microservices.

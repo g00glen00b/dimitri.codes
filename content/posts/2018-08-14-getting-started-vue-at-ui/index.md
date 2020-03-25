@@ -4,6 +4,7 @@ date: "2018-08-14"
 featuredImage: "../../images/logos/vue.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "NPM", "Vue"]
+excerpt: "Vue is a progressive web framework, similar to Angular, React and others. In this tutorial I'll set up a simple Vue.js application using Vue CLI and AT UI. I'll also explore some basic concepts suchs as properties, certain directives, computed properties and so on."
 ---
 
 [Vue.js](https://vuejs.org/) gained quite some popularity over the past few years. As a JavaScript framework, it positions itself next to React, Angular and a few other libraries to provide a component-based application structure. In this example, I'll create a Q&A application... with Vue!

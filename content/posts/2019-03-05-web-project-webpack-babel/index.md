@@ -4,6 +4,7 @@ date: "2019-03-05"
 featuredImage: "../../images/logos/webpack.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["NPM"]
+excerpt: "Building JavaScript applications has evolved over time, and in this tutorial we'll explore how Babel and Webpack can be used to make your life easier."
 ---
 
 When starting a new web project, you often use some libraries. Nowadays, these libraries usually come with tools to scaffold your project. However, in certain cases you don't want to rely on these libraries. For that reason, we'll demonstrate how you can set up your own project with [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/).

@@ -4,6 +4,7 @@ date: "2013-07-08"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]
+excerpt: "In this tutorial I'll explain the difference between the dojo domReady and ready modules."
 ---
 
 One of the biggest misconceptions in Dojo is what module to choose to create a document-on-load event handler. In Dojo there are two modules that are commonly used, called **dojo/ready** and **dojo/domReady**. In this small tutorial I will explain you what the differences are and in what situation you should use them.

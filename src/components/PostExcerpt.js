@@ -4,7 +4,7 @@ import {Tags} from './Tags';
 import {Link} from 'gatsby';
 import PropTypes from 'prop-types';
 
-export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, readingTime, slug, tags = [], title}) => {
+export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, manualExcerpt, isNew, readingTime, slug, tags = [], title}) => {
   const tagless = tags == null || tags.length === 0;
   return (
     <article className={`excerpt ${tagless ? 'excerpt--tagless' : ''}`}>
@@ -27,7 +27,7 @@ export const PostExcerpt = ({categories: [firstCategory] = [], excerpt, isNew, r
       </div>}
       <div className="excerpt__content">
         <p>
-          {excerpt}
+          {manualExcerpt != null ? manualExcerpt : excerpt}
         </p>
       </div>
       <div className="excerpt__more">
@@ -44,5 +44,6 @@ PostExcerpt.propTypes = {
   readingTime: PropTypes.number,
   slug: PropTypes.string,
   title: PropTypes.string,
-  excerpt: PropTypes.string
+  excerpt: PropTypes.string,
+  manualExcerpt: PropTypes.string
 };

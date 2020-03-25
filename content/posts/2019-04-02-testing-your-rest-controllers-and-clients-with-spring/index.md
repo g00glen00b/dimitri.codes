@@ -4,6 +4,7 @@ date: "2019-04-02"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["MockMVC", "REST", "Spring", "Spring boot", "Testing"]
+excerpt: "Spring allows you to easily develop REST API's and clients. With MockMvc and MockRestServiceServer, the same easiness can be applied to your tests as well."
 ---
 
 That Spring allows you to easily develop REST APIs, is probably something we all know by now. With MockMvc and MockRestServiceServer, the same can be said to testing those REST APIs and clients. If you didn't know this, then you're at the right place to learn about it, as we'll explore those options today!

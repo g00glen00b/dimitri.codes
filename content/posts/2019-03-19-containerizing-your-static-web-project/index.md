@@ -4,6 +4,7 @@ date: "2019-03-19"
 featuredImage: "../../images/logos/docker.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Docker", "nginx", "NPM", "Web"]
+excerpt: "WIth Docker and nginx, we can easily containerize our static web project. In this tutorial, you'll find out how you can do that."
 ---
 
 [Last time](/web-project-webpack-babel/), we've seen how we can set up a simple web project using Babel and Webpack. More precisely, we've seen how we can both run and build the application.  

@@ -4,6 +4,7 @@ date: "2016-03-30"
 featuredImage: "../../images/logos/dozer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Dozer", "Java", "Spring"]
+excerpt: "Dozer is a simple bean mapping framework, which allows you to convert an object of a specific type, to an object of another type."
 ---
 
 Recently I wrote a tutorial about [mapping with MapStruct](/mapstruct/). Testing it out for the first time, I noticed several differences between MapStruct and the mapping framework that I have the most experience in, called [Dozer](http://dozer.sourceforge.net/). That's why I'm going to make a similar tutorial to my previous one, utilizing the Dozer framework this time, allowing you to properly make your own conclusion about which mapping framework you'll choose.

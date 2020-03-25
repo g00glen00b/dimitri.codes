@@ -4,6 +4,7 @@ date: "2015-10-19"
 featuredImage: "../../images/logos/protractor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "E2E", "Jasmine", "JavaScript", "Protractor", "Testing"]
+excerpt: "In this tutorial we'll go into detail about end to end testing (E2E) with AngularJS and Protractor"
 ---
 
 A few weeks ago I wrote a [simple AngularJS application](/angularjs-applications-yeoman/) and [some tests using Jasmine + Sinon.js](/sinonjs-testing-angularjs-applications/). Today we will go into detail about another aspect of testing AngularJS applications, namely end to end testing (E2E).

@@ -4,6 +4,7 @@ date: "2018-02-27"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring boot"]
+excerpt: "Spring boot comes with many starters that do most of the work for you. The nice thing is that you can also write your own Spring boot starters as well, and in this tutorial, we'll figure out what we need to do to make our own Spring boot starter."
 ---
 
 If you worked with Spring boot before, you know it, there are various starters out there. These starters automatically configure all kind of things so that you no longer have to. This allows you to get started more quickly, and not to be bothered about configuration that is usually a copy-paste from something else. The nice thing is that you're not limited to the Spring boot starters that are already out there, since you can write your own starters as well.

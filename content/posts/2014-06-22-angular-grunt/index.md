@@ -4,6 +4,7 @@ date: "2014-06-22"
 featuredImage: "../../images/logos/grunt.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Grunt", "JavaScript", "Karma", "Testing"]
+excerpt: "Running tests, minifying files, ... these are two of the many tasks you canfigure by using the Grunt task runner for your JavaScript application."
 ---
 
 A while back I wrote a small application to show you the main components of AngularJS, demonstrating controllers, services, filters and (custom) directives. In this tutorial I'm going to modify that application a bit and integrate GruntJS into it. For those who are wondering what Grunt is, well, it's the task runner written in JavaScript, for JavaScript. What you can do with it? Run any task you want (as long as you find a plugin for it). Some example tasks you could run using Grunt are:

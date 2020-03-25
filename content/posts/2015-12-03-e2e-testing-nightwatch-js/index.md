@@ -4,6 +4,7 @@ date: "2015-12-03"
 featuredImage: "../../images/logos/nightwatch.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["E2E", "JavaScript", "Nightwatch.js", "Testing"]
+excerpt: "Today I'm also going to test an AngularJS application, but this time I will be using Nightwatch.js. While Nightwatch.js is not made specifically for AngularJS applications, you can use this framework as well."
 ---
 
 A while back I wrote some tutorials about [E2E testing with FluentLenium](/spring-boot-selenium/) (Java), [E2E testing for Meteor using Velocity](/e2e-testing-your-meteor-app-with-cucumber-webdriverio-and-chai/) and recently [E2E testing AngularJS applications using Protractor](/e2e-testing-angularjs-applications-with-protractor/). Today I'm also going to test an AngularJS application, but this time I will be using [Nightwatch.js](http://nightwatchjs.org/). While Nightwatch.js is not made specifically for AngularJS applications, you can use this framework as well.

@@ -4,6 +4,7 @@ date: "2014-05-19"
 featuredImage: "../../images/logos/nodejs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Express", "JavaScript", "MongoDB", "Node.js"]
+excerpt: "With the introduction of Node.js you can write entire applications using only one language; JavaScript. A good example of this is the MEAN stack."
 ---
 
 JavaScript is more important than ever. In today's applications, JavaScript is used to create certain effect, make websites more interactive and improve the user experience. But you can achieve much more using JavaScript. There are MVC frameworks like AngularJS that help you structure the entire front-end part of your application and even more. With the introduction of Node.js you can also write your entire back-end using only one language; JavaScript. The MEAN stack is a good example of what you can do with JavaScript, solely JavaScript. The MEAN stack consists out of four elements:

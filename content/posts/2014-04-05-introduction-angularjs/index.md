@@ -4,6 +4,7 @@ date: "2014-04-05"
 featuredImage: "../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]
+excerpt: "AngularJS is a framework by Google that allows you to write your code according to the Model, View, Controller pattern."
 ---
 
 Are you new to AngularJS? Good! Just because you're reading this means you're willing to jump onto the JavaScript train towards the future of web development. Over the past years, HTML5, CSS3 and JavaScript became a valuable alternative to desktop applications. This entire new trend also caused an entire wave of new JavaScript ideas, libraries and frameworks that are making JavaScript what it is today. JavaScript is not only hip and trendy, it's becoming mature as well.

@@ -4,6 +4,7 @@ date: "2019-05-28"
 featuredImage: "../../images/logos/kubernetes.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Kubernetes", "Minikube", "Spring", "Spring boot"]
+excerpt: "Kubernetes has been the way to go to orchestrate containerized applications. In this tutorial, we'll see how we can use Kubernetes with Spring boot."
 ---
 
 A few weeks ago, I've covered how you can properly [create Docker images for your Spring boot application](/docker-spring-boot/). Last time, we've also seen how to [set up Kubernetes locally with Minikube](/setting-up-minikube-istio-macos). Now, it's time to combine the two, and deploy a Spring boot application on Kubernetes.

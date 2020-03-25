@@ -4,6 +4,7 @@ date: "2020-02-11"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["Other", "Tutorials"]
 tags: ["CI", "Gatsby", "Netlify", "WordPress"]
+excerpt: "During the last few weeks, I've covered most steps I took when moving from WordPress to a headless WordPress setup with Gatsby. One of the questions I often see is, \"how do I update my Gatsby site when a post is published or updated?\". In this tutorial, I'll cover what you need to know."
 ---
 
 During the last few weeks, I've covered most steps I took when moving from WordPress to a headless WordPress setup with Gatsby. One of the questions I often see is, "how do I update my Gatsby site when a post is published or updated?". In this tutorial, I'll cover what you need to know.

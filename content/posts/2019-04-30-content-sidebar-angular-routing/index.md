@@ -4,6 +4,7 @@ date: "2019-04-30"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Material", "Routing"]
+excerpt: "In this tutorial, we'll use the powers of Angular Material and routing combined to load our route content within a sidebar or sidenav component."
 ---
 
 A few years ago, I explored the capabilities of the router framework within [Angular](https://angular.io/). One of the aspects I didn't cover are named router outlets. These outlets are very interesting when it comes to working with master-detail user interfaces. Within this tutorial I'll show you how you can use them to either activate or deactivate a sidebar component within [Angular Material](https://material.angular.io/).

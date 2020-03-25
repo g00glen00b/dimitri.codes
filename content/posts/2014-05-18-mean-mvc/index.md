@@ -4,6 +4,7 @@ date: "2014-05-18"
 featuredImage: "../../images/logos/nodejs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Express", "JavaScript", "MongoDB", "Node.js"]
+excerpt: "In this tutorial I will write both the front-end AngularJS MVC code and the back-end MVC code using Express to complete our app using the MEAN stack."
 ---
 
 In the previous tutorial I finished the configuration of the application so that in this tutorial we can concentrate ourself on the Model-View-Controller part of the application. The application consists of two parts, the server- and the client-side part of the application. Both of them use the Model-View-Controller pattern though. First of all, let's start by developing the server-side part of our application.

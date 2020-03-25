@@ -4,6 +4,7 @@ date: "2019-08-20"
 featuredImage: "../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "JPA", "Spring", "Spring boot", "Spring Data"]
+excerpt: "With Spring, you can set up your initial data in different ways. In this tutorial we'll discover database migration tools, and other options."
 ---
 
 I've been answering Spring related questions on Stack Overflow for the past three years now, and one of my most popular answers is about [how to load initial data](https://stackoverflow.com/a/38047021/1915448). While my solution over there works really fine, there are multiple solutions to this problem, and in this tutorial I'll demonstrate which ones you have. This also allows me to fulfil my promise I made in [my earlier tutorial about Spring Data JPA](/spring-data-jpa/), where I said I would create a tutorial like this one.

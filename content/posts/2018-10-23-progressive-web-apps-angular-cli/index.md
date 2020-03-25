@@ -4,6 +4,7 @@ date: "2018-10-23"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "PWA"]
+excerpt: "One of the buzzwords of Google nowadays is Progressive Web Apps or shortly PWA's. In this tutorial we'll learn what progressive webapps exactly are. Additionally we'll see how we can use them and how we can integrate it with Angular and Angular CLI."
 ---
 
 One of the buzzwords of Google nowadays is Progressive Web Apps or shortly PWA's. In this tutorial we'll learn what progressive webapps exactly are. Additionally we'll see how we can use them and how we can integrate it with Angular and Angular CLI.

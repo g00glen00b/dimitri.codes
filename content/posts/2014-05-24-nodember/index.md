@@ -4,6 +4,7 @@ date: "2014-05-24"
 featuredImage: "../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "Express", "JavaScript", "MongoDB", "Node.js"]
+excerpt: "In this tutorial I will be talking about the Node.js + Ember.js + Express + MongoDB stack, more commonly known as the Nodember stack."
 ---
 
 A while back I wrote a tutorial about writing a small app using Ember.js by storing its data inside the HTML5 LocalStorage. In this tutorial I will be using Node.js REST webservice and store the data into a MongoDB database. By writing both front-end and back-end in JavaScript, I'm able to write an entire application using JavaScript. The data will be stored inside MongoDB, which makes it easy as well, because that data is being stored by using a JSON structure.

@@ -4,6 +4,7 @@ date: "2018-06-08"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Validators"]
+excerpt: "Writing a RESTful webservice with Spring is easy, even easier with Spring Boot. But did you also know that validation is quite easy as well with Spring?"
 ---
 
 When handling input of a user, validation is a common task. In fact, it's so common, that there's even a specification for it called [JSR 303 bean validation](http://beanvalidation.org/1.0/) and [JSR-380](http://beanvalidation.org/2.0/) which contains version 2 of the same specification. With Spring, we can utilize this specification to the fullest extent, and make validation an easier task.

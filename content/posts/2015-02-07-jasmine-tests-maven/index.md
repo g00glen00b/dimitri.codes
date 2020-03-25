@@ -4,6 +4,7 @@ date: "2015-02-07"
 featuredImage: "../../images/logos/jasmine.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Jasmine", "JavaScript", "Maven", "Testing"]
+excerpt: "In modern webapps, you will be using more than just Java. You will write JavaScript code too. With Maven + Jasmine you can test your JavaScript code."
 ---
 
 A while ago I wrote my very first Spring Boot application and I showed you how fast it could be using Spring Boot and AngularJS. I also thought about testing all sides of the application, so I started with writing some integration tests for my REST API, then I wrote some unit tests using Mockito and JUnit, and now it's time to write some unit tests for my JavaScript code.

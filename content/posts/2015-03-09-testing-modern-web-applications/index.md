@@ -4,6 +4,7 @@ date: "2015-03-09"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Testing", "Web"]
+excerpt: "There are a lot of aspects that have to be covered while testing modern web applications. In this tutorial series I would like to talk about these aspects."
 ---
 
 If you're a web developer like me, then you probably know that writing tests for an application means that you have to test various parts of the application. Modern web architectures usually contain the necessary front-end logic, a REST back-end and some data persistence. Having to test your application means that you want to cover most of these, if not all. So, a while back I wrote [a Spring Boot application](/prototyping-spring-boot-angularjs/ "Rapid prototyping with Spring Boot and AngularJS"), quite a simple one though, but it perfectly shows you how this modern web architecture works. The last couple of weeks I spent some time trying to test each aspect of the application and I wrote some articles about each and every aspect. If you're interested in how to test your application, then here's a small overview:

@@ -4,6 +4,7 @@ date: "2019-11-26"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]
+excerpt: "Displaying embedded images within WordPress posts using Gatsby is officially unsupported, but in this tutorial we'll explore alternatives."
 ---
 
 In [my previous tutorials](/tag/gatsby), we've explored how to use WordPress with Gatsby. One issue we haven't covered yet is to lazy-load embedded images within our WordPress posts. This isn't easily done with `gatsby-source-wordpress` or other plugins.

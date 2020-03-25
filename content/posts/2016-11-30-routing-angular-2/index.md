@@ -4,6 +4,7 @@ date: "2016-11-30"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Routing"]
+excerpt: "Single page webapps are the future, and to achieve that, routing is a commonly used pattern. In this article I will show how to use routing with Angular."
 ---
 
 [Last time](/pagination-component-angular-2/), we pretty much finished our pokédex overview by implementing some pagination. Now that the pagination is behind us, we can focus on creating a more detailed view for our pokémons. If you remember [when we wrote a service](/services-angular-rxjs/), we actually provided two functions, a `findAll()` and `findOne()` function. However, we didn't use the `findOne()` function until now, so let's create a page to show more information for our pokémon!

@@ -4,6 +4,7 @@ date: "2013-07-20"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]
+excerpt: "In this tutorial I'll show how you can extend existing widgets and how you can create new ones by inheriting from other widgets using Dojo."
 ---
 
 Dojo is a decent JavaScript framework offering a lot of functionality. One of its biggest trumphs is the possibility to extend modules in an easy way through mixin inheritance. In this tutorial I'm going to show you how you can extend a widget with extra functionality.

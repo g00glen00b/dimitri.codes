@@ -4,6 +4,7 @@ date: "2013-12-23"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
+excerpt: "Today the world is more mobile than ever, and the web is following this trend. In this tutorial I will create a mobile app using the Dojo Mobile."
 ---
 
 After all these tutorials it's finally time to write our controllers and with it, also our views. There are two controllers in this example, the first one (`MoviesController`) will give us a list of all movies, while the second one (`MovieController`) will give us a detailed view of one movie. Since all routing, storing and template inheritance work is completed, this will be quite easy.

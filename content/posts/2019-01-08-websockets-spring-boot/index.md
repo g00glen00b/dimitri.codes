@@ -4,6 +4,7 @@ date: "2019-01-08"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Spring", "Spring boot", "WebSockets"]
+excerpt: "With WebSockets we can have a two-way server-client communication. Today we'll explore how you can benefit from WebSockets in a CRUD application."
 ---
 
 A few years ago, I wrote [an article about using WebSockets with Spring and AngularJS](/spring-websockets/). However, the technologies have evolved over the years. That's why I decided to write some up-to-date follow-up articles using the latest version of Spring boot and the latest version of the Angular framework. In this first follow-up article, I'm going to focus on the backend implementation.

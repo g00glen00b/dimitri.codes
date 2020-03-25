@@ -4,6 +4,7 @@ date: "2018-11-06"
 featuredImage: "../../images/logos/ava.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AVA", "Babel", "Node.js", "Sinon.js"]
+excerpt: "In this tutorial I'll use AVA together with Sinon.js to test my Node.js application and summarize the good and the bad parts that come with it."
 ---
 
 [A while ago](/graphql-nodejs-express-apollo/), I wrote a simple GraphQL API using Node.js, Express.js, Apollo and Mongoose. While the API probably works, we didn't really invest any time to write some unit tests for it. That's going to change now. There are many testing frameworks and test runners out there, but in this tutorial I'll be checking out the [AVA test runner](https://github.com/avajs/ava).

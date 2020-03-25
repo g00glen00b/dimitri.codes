@@ -4,6 +4,7 @@ date: "2018-07-31"
 featuredImage: "../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Apollo", "Express", "GraphQL"]
+excerpt: "GraphQL comes with several types out-of-the-box, but in many cases you probably want to extend those with your own scalar types. In this tutorial we'll create our own ISO timestamp based scalar type with Node.js, GraphQL and Apollo."
 ---
 
 Last time, we created a GraphQL API with Node.js, Express, Mongoose and Apollo. However, one of the fields we tried to use was the `createdAt` date. Since GraphQL doesn't come with a date-based scalar type, we used a simple `String`. However, the result of that is that it calls the [`Date.prototype.toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toString) function which returns a string in the following format: `Thu Jan 01 1970 01:00:00 GMT+0100 (CET)`. In this tutorial, I'll replace it with an ISO timestamp.

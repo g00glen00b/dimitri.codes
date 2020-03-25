@@ -4,6 +4,7 @@ date: "2014-11-30"
 featuredImage: "../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Spring", "Spring Data"]
+excerpt: "In this example I will setup a web project using Spring Data REST. The client-side of the application will be written using AngularJS."
 ---
 
 Recently I wrote several "exotic" applications using WebSockets. If you're not into WebSockets, but you're interested in using Spring and AngularJS, this article may suite you. In this example I will setup a web project using the Spring framework and an in memory embedded HSQL database. The client-side of the application will be written using AngularJS. Let's start!

@@ -3,6 +3,7 @@ title: "You have to love JavaScript's type coercion"
 date: "2014-06-28"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "coercion"]
+excerpt: "JavaScript type coercion is the magic when a variable is casted to another type to execute. It can be a real pain if you don't know what's happening."
 ---
 
 JavaScript... some people love it, other people hate it. One of the many good/bad discussions in JavaScript are about its weak and dynamic typing. Because of that, type coercion exists. Type coercion you ask? Well, type coercion is a feature in JavaScript that automatically "casts" one of the operands to another type, for example:

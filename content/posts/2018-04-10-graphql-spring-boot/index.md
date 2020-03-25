@@ -4,6 +4,7 @@ date: "2018-04-10"
 featuredImage: "../../images/logos/graphql.png"
 categories: ["Java", "Tutorials"]
 tags: ["GraphQL", "Spring boot"]
+excerpt: "Forget REST, start with GraphQL! In this tutorial I'll show you what the benefits are of GraphQL and how you can use GraphQL with Spring boot to create even better APIs."
 ---
 
 When creating applications, REST is an often used technology to transfer data through APIs. While REST is commonly adopted, there are some issues with it. In this tutorial, I'll show you how [GraphQL](http://graphql.org/) compares to REST and how to use GraphQL with [Spring boot](https://projects.spring.io/spring-boot/).

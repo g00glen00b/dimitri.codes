@@ -4,6 +4,7 @@ date: "2014-03-08"
 featuredImage: "../../images/logos/angularjs.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]
+excerpt: "HTML5 made browsers a powerful tool alternative to applications. With HTML5 WebSockets you can also send messages over the network in both ways unlike AJAX."
 ---
 
 In the previous two tutorials I made the entire back-end for the real time application. You probably have noticed that the configuration part actually took longer than actually writing the application itself, this is because there's a lot of magic behind the screens (think about the data access layer we didn't have to write). This tutorial will actually handle the entire HTML + JavaScript part. The last few years JavaScript was really growing into a more mature environment. We now have frameworks like **AngularJS**, **Ember.js** and many more that allow us to provide an abstraction layer for our DOM so we really don't need to interact with it anymore. In this tutorial I will be using [AngularJS](http://angularjs.org).

@@ -4,6 +4,7 @@ date: "2016-11-22"
 featuredImage: "../../images/logos/angular.png"
 categories: ["Java", "Tutorials"]
 tags: ["Angular", "Angular CLI", "PokeAPI", "RxJS"]
+excerpt: "Angular comes with RxJS, which allows you to write services in a reactive way. During this tutorial we'll explore what exactly this means."
 ---
 
 In our [last article](/starting-angular-cli/), we've set up a project with [Angular 2](https://angular.io/) using [Angular CLI](https://cli.angular.io/). Now that we have a project and we understand it, it's time to start writing some code. In this series I will be creating a small Pokédex using the [Pokéapi](https://pokeapi.co/). The application will have two pages, a list of all Pokémons, and a detail page. The first thing we'll do is creating a service that uses the Pokéapi and which will have two functions:

@@ -4,6 +4,7 @@ date: "2018-12-04"
 featuredImage: "../../images/logos/jest.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Babel", "Jest", "Node.js", "Testing"]
+excerpt: "Jest is a testing framework developed by Facebook. In this tutorial I'll demonstrate the features of Jest while testing a small Node.js application."
 ---
 
 After checking out [AVA](/nodejs-ava/) and [tape](/testing-nodejs-tape/), it's time to check out [Jest](https://jestjs.io/). Jest is a testing framework developed by Facebook, and is often used to test React applications. However, it isn't limited to just React, so let's explore the features it has by testing a small Node.js application!

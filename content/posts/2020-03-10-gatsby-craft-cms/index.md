@@ -4,6 +4,7 @@ date: "2020-03-10"
 featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["CraftCMS", "Gatsby", "GraphQL", "React"]
+excerpt: "In this tutorial I'll build a blazing-fast static website with Gatsby on top of a Craft CMS blog."
 ---
 
 The last few weeks, I've covered how to [use Gatsby with WordPress](/using-gatsby-with-wordpress-as-a-headless-cms/), and with [JSON files](/using-json-with-gatsby/). Today, I'm going to show you how you can use Gatsby with [Craft CMS](https://craftcms.com/).

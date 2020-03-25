@@ -4,6 +4,7 @@ date: "2013-12-21"
 featuredImage: "../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]
+excerpt: "Today the world is more mobile than ever, and the web is following this trend. In this tutorial I will create a mobile app using the Dojo Mobile."
 ---
 
 In the previous tutorial in this series I told you how to set up your project and we already provided our app with some data. Before we actually start writing the application and its behavior, I'm going to write the "glue" between the controllers, the router. Dojo mobile already has a way to transition between views by using the `performTransition` function on a `dojox/mobile/View`. However, this has a few drawbacks:

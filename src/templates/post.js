@@ -14,7 +14,7 @@ const Post = ({data: {markdownRemark, site}}) => {
       <Layout>
           <SEO
             title={markdownRemark.frontmatter.title}
-            description={markdownRemark.excerpt}
+            description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
             image={markdownRemark.frontmatter.featuredImage}
             meta={[
                 ...getTimeMetadata(markdownRemark.frontmatter.iso, markdownRemark.frontmatter.iso),
@@ -54,6 +54,7 @@ export const query = graphql`
           }
           iso: date
           date(formatString: "MMMM Do, YYYY")
+          excerpt
         }
         html
         id
@@ -82,7 +83,8 @@ Post.propTypes = {
         iso: PropTypes.string,
         date: PropTypes.string,
         title: PropTypes.string,
-        featuredImage: PropTypes.object
+        featuredImage: PropTypes.object,
+        excerpt: PropTypes.string
       }),
       fields: PropTypes.shape({
         slug: PropTypes.string

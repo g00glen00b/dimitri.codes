@@ -4,6 +4,7 @@ date: "2018-03-27"
 featuredImage: "../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "ngrx"]
+excerpt: "In this tutorial I'll use route guards, Http interceptors and directives to improve handling authentication and authorization in an Angular application using ngrx."
 ---
 
 When writing an application, eventually you may have to secure it. In this article I'll go over the various things you can do with [Angular](https://angular.io/) to handle the authentication of your application.

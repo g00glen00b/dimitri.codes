@@ -4,6 +4,7 @@ date: "2019-02-19"
 featuredImage: "../../images/logos/micrometer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Grafana", "Micrometer", "Prometheus", "Spring boot"]
+excerpt: "With Spring boot 2.0, the support for Micrometer made monitoring a lot easier. In this tutorial we'll see how we can use it with Grafana and Prometheus."
 ---
 
 Monitoring is an essential aspect to the maintainability of applications, it’s no surprise that there are many platforms out there that allow you to properly monitor your applications. Usually, monitoring platforms work by using a time series database, which is a database optimised for time-based information, such as application metrics. Then on the other hand you have a visualization part, which allows you to show time-based charts to visualize the data.

@@ -4,6 +4,7 @@ date: "2015-08-07"
 featuredImage: "../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Jasmine", "JavaScript", "Meteor.js", "Sinon.js", "Testing", "Velocity"]
+excerpt: "In this article I will demonstrate how to unit test the client part of Meteor applications with Velocity, Jasmine and Sinon.js."
 ---
 
 In my [previous tutorial](/writing-a-chat-application-with-meteor/) I explained some of the basic features of Meteor, a full stack JavaScript platform. In this tutorial I will go more in depth about testing a Meteor application, by testing the chat application we wrote in the previous tutorial. In this first part I'll show you how to unit test your Meteor application using the [Velocity platform](https://velocity.readme.io/docs).
