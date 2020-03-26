@@ -58,6 +58,11 @@ main {
     transition: background-color .3s, color .3s, border-bottom-color .3s;
 }
 
+.container__content a.gatsby-resp-image-link {
+    color: transparent;
+    border: none;
+}
+
 .container__content pre {
     border-radius: .5rem;
 }
