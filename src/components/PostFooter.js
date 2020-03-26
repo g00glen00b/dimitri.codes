@@ -9,10 +9,10 @@ export const PostFooter = ({url}) => (
     <Link to="/category/tutorials">Back to tutorials</Link>
     <span className="post-footer__divider">&bull;</span>
     <OutboundLink
-      href="https://github.com/g00glen00b/gatsby-blog"
+      href="https://github.com/g00glen00b/gatsby-blog/issues"
       target="_blank"
       rel="noopener noreferrer">
-        Contact me on GitHub
+        Report an issue on GitHub
     </OutboundLink>
     <span className="post-footer__divider">&bull;</span>
     <OutboundLink
