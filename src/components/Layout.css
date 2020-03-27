@@ -136,7 +136,8 @@ main {
 
 .container__content p > code,
 .container__content li > code,
-.container__content a > code {
+.container__content a > code,
+.container__content td > code {
     background-color: var(--background-color-dark-1);
     padding: 2px 5px;
     font-family: 'Roboto Mono', monospace;
@@ -148,13 +149,25 @@ main {
     font-weight: 500;
 }
 
-.container__content figure.wp-caption {
-    /* Ugly fix to override WordPress setting inline styles */
-    width: auto !important;
-    margin-bottom: 2rem;
+.container__content table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-.container__content figure.wp-caption > figcaption {
-    color: var(--text-color-light-2);
-    text-align: center;
+.container__content table > thead > tr > th {
+    font-weight: 500;
+    border-bottom-width: 2px;
+}
+
+.container__content table > tbody > tr > td,
+.container__content table > thead > tr > th {
+    text-align: left;
+    border-bottom: solid 1px var(--text-color-light-2);
+    padding: .8rem;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+}
+
+.container__content table > tbody > tr:nth-child(even) {
+    background-color: var(--background-color-dark-1);
 }
