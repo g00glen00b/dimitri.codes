@@ -89,6 +89,14 @@ main {
     font-size: 1.1rem;
 }
 
+.container__content p {
+    margin: 1rem 0;
+}
+
+.container__content li > p {
+    margin: 0;
+}
+
 .page__title {
     font-size: 2rem;
     font-weight: 400;
@@ -182,4 +190,11 @@ main {
 :root[data-theme=dark] .container__content a.anchor.before,
 :root[data-theme=dark] .container__content a.anchor.before:hover {
     fill: var(--primary-color-light-1);
+}
+
+.container__content blockquote {
+    border-left: solid 0.3rem var(--background-color-dark-2);
+    padding-left: 2rem;
+    font-style: italic;
+    margin: 0;
 }
