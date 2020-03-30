@@ -171,3 +171,15 @@ main {
 .container__content table > tbody > tr:nth-child(even) {
     background-color: var(--background-color-dark-1);
 }
+
+.container__content a.anchor.before,
+.container__content a.anchor.before:hover {
+    border: none;
+    background: transparent;
+    fill: var(--primary-color);
+}
+
+:root[data-theme=dark] .container__content a.anchor.before,
+:root[data-theme=dark] .container__content a.anchor.before:hover {
+    fill: var(--primary-color-light-1);
+}
