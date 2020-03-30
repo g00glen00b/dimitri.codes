@@ -7,13 +7,13 @@ tags: ["Grafana", "Monitoring", "Prometheus", "Spring boot"]
 excerpt: "While monitoring is essential, there are various tools on the market to do this. In this tutorial I'll be using Prometheus and Grafana to monitor an existing Spring boot application."
 ---
 
-> This article is **outdated** since the release of **Spring boot 2.0**. If you're interested in a more up-to-date setup, make sure to read [my new tutorial about monitoring Spring boot applications with Micrometer, Prometheus and Grafana](https://wordpress.g00glen00b.be/monitoring-spring-prometheus-grafana/).
+> This article is **outdated** since the release of **Spring boot 2.0**. If you're interested in a more up-to-date setup, make sure to read [my new tutorial about monitoring Spring boot applications with Micrometer, Prometheus and Grafana](/monitoring-spring-prometheus-grafana/).
 
 Monitoring is an essential aspect to the maintainability of applications, it's no surprise that there are many platforms out there that allow you to properly monitor your applications. Usually, monitoring platforms work by using a time series database, which is a database optimised for time-based information, such as application metrics. Then on the other hand you have a visualization part, which allows you to show time-based charts to visualize the data.
 
 Some products offer both combined (eg. Graphite, [Prometheus](https://prometheus.io/)), while other platforms either manage the database part (InfluxDB) and other platforms manage the visualization ([Grafana](https://grafana.com/)). In this example I'll be combining Prometheus and Grafana and use them to monitor an existing Spring boot application.
 
-[![Spring boot + Prometheus + Grafana](images/spring-boot-prometheus-grafana-1024x279.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/01/spring-boot-prometheus-grafana.png)
+![Spring boot + Prometheus + Grafana](images/spring-boot-prometheus-grafana.png)
 
 ### Setting up Prometheus and Grafana
 

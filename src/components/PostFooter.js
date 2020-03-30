@@ -21,7 +21,6 @@ export const PostFooter = ({url}) => (
       rel="noopener noreferrer">
         Discuss on Twitter
     </OutboundLink>
-    <span className="post-footer__divider">&bull;</span>
   </p>
 );
 
