@@ -3,7 +3,7 @@ name: Design idea
 about: Is accessibility, web design or anything else related to the UI up for improvement?
   Share it!
 title: ''
-labels: Design
+labels: ''
 assignees: ''
 
 ---

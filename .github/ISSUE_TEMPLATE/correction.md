@@ -2,7 +2,7 @@
 name: Correction
 about: Anything not correct, did I make a typo? Mention it here.
 title: ''
-labels: Correction
+labels: ''
 assignees: ''
 
 ---

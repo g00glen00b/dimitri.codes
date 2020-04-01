@@ -2,7 +2,7 @@
 name: Blog idea
 about: Do you have an interesting idea for a new blogpost? Share it here.
 title: ''
-labels: Blogpost
+labels: ''
 assignees: ''
 
 ---
