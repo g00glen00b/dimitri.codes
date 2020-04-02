@@ -55,7 +55,7 @@ By default, secrets have to be base64 encoded first. So, let's generate those ba
 ```
 echo -n "dbuser" | base64
 echo -n "dbpass" | base64
-echo -n "P@\$\$w0rd" | base64
+echo -n "P@$$w0rd" | base64
 ```
 
 Please note, you have to add the `-n` flag, otherwise a newline will be appended to the end, and that will be encoded as well.
