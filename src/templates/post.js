@@ -3,32 +3,35 @@ import {graphql} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {PostFooter} from '../components/PostFooter';
-import {Tags} from '../components/Tags';
 import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
 import {ElevatorPitch} from '../components/ElevatorPitch';
 import PropTypes from 'prop-types';
+import {PageTitle} from '../components/PageTitle';
 
 const Post = ({data: {markdownRemark, site}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
     return (
       <Layout>
-          <SEO
-            title={markdownRemark.frontmatter.title}
-            description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
-            image={markdownRemark.frontmatter.featuredImage}
-            meta={[
-                ...getTimeMetadata(markdownRemark.frontmatter.iso, markdownRemark.frontmatter.iso),
-                ...getTagMetadata(markdownRemark.frontmatter.tags),
-                ...getSectionMetadata(markdownRemark.frontmatter.categories)
-            ]}/>
-          <h1 className="page__title">{markdownRemark.frontmatter.title}</h1>
-          {!isPage && <p className="page__metadata">
-              {markdownRemark.frontmatter.date}, {markdownRemark.timeToRead} min read
-          </p>}
-          <Tags tags={markdownRemark.frontmatter.tags}/>
-          <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
-          <PostFooter url={`${site.siteMetadata.siteUrl}/${markdownRemark.fields.slug}`}/>
-          <ElevatorPitch/>
+        <SEO
+          title={markdownRemark.frontmatter.title}
+          description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
+          image={markdownRemark.frontmatter.featuredImage}
+          meta={[
+              ...getTimeMetadata(markdownRemark.frontmatter.iso, markdownRemark.frontmatter.iso),
+              ...getTagMetadata(markdownRemark.frontmatter.tags),
+              ...getSectionMetadata(markdownRemark.frontmatter.categories)
+          ]}/>
+        {!isPage && <PageTitle
+          title={markdownRemark.frontmatter.title}
+          timeToRead={!isPage && markdownRemark.timeToRead}
+          date={markdownRemark.frontmatter.date}
+          featuredImage={markdownRemark.frontmatter.featuredImage}
+          tags={markdownRemark.frontmatter.tags}/>
+        }
+        {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
+        <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
+        <PostFooter url={`${site.siteMetadata.siteUrl}/${markdownRemark.fields.slug}`}/>
+        <ElevatorPitch/>
       </Layout>
     );
 }
@@ -49,6 +52,7 @@ export const query = graphql`
             childImageSharp {
               fluid(maxWidth: 512) {
                 src
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -83,7 +87,11 @@ Post.propTypes = {
         iso: PropTypes.string,
         date: PropTypes.string,
         title: PropTypes.string,
-        featuredImage: PropTypes.object,
+        featuredImage: PropTypes.shape({
+          childImageSharp: PropTypes.shape({
+            fluid: PropTypes.object
+          })
+        }),
         excerpt: PropTypes.string
       }),
       fields: PropTypes.shape({
@@ -95,11 +103,5 @@ Post.propTypes = {
         siteUrl: PropTypes.string.isRequired
       })
     })
-  }),
-  pageContext: PropTypes.shape({
-    fieldValue: PropTypes.string.isRequired,
-    base: PropTypes.string.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired
   })
 };
