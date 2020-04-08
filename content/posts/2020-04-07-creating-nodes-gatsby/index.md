@@ -12,7 +12,7 @@ In this tutorial, I'll show you how you can create your own Gatsby nodes.
 
 ### Using the Node API
 
-To be able to create new nodes, we have to use the [Node APIs](https://www.gatsbyjs.org/docs/node-apis/), and mre precisely, the [`sourceNodes` API](https://www.gatsbyjs.org/docs/node-apis/#sourceNodes). This API, allows us to create new nodes on the fly.
+To be able to create new nodes, we have to use the [Node APIs](https://www.gatsbyjs.org/docs/node-apis/), and more precisely, the [`sourceNodes` API](https://www.gatsbyjs.org/docs/node-apis/#sourceNodes). This API, allows us to create new nodes on the fly.
 
 So, let's open **gatsby-node.js** and add the `sourceNodes` function:
 
