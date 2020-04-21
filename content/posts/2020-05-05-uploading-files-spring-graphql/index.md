@@ -1,6 +1,6 @@
 ---
 title: "Uploading files with Spring and GraphQL"
-date: "2020-04-21"
+date: "2020-05-05"
 featuredImage: "../../images/logos/graphql.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "GraphQL"]
