@@ -132,7 +132,26 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 ```
 
-This filter will parse the token from the headers, and set up a proper authentication by using [`WebAuthenticationDetailsSource`](https://docs.spring.io/spring-security/site/docs/4.2.13.RELEASE/apidocs/org/springframework/security/web/authentication/WebAuthenticationDetailsSource.html). The way `userService.loadByToken()` works is by verifying the token using the `JWTVerifier` we defined earlier:
+This filter will parse the token from the headers, and set up a proper authentication by using [`WebAuthenticationDetailsSource`](https://docs.spring.io/spring-security/site/docs/4.2.13.RELEASE/apidocs/org/springframework/security/web/authentication/WebAuthenticationDetailsSource.html). This object is then wrapped within a `PreAuthenticatedAuthenticationToken` class, which is stored within the `SecurityContext`. To do this, I created a custom implementation of `PreAuthenticatedAuthenticationToken`:
+
+```java
+@Getter
+public class JWTPreAuthenticationToken extends PreAuthenticatedAuthenticationToken {
+
+    @Builder
+    public JWTPreAuthenticationToken(JWTUserDetails principal, WebAuthenticationDetails details) {
+        super(principal, null, principal.getAuthorities());
+        super.setDetails(details);
+    }
+
+    @Override
+    public Object getCredentials() {
+        return null;
+    }
+}
+```
+
+The way `userService.loadByToken()` works is by verifying the token using the `JWTVerifier` we defined earlier:
 
 ```java
 private Optional<DecodedJWT> getDecodedToken(String token) {
