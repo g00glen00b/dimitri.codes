@@ -136,7 +136,7 @@ This configuration will scrape all **/prometheus** endpoints every minute, and a
 
 If you have the Docker containers running, you should now be able to visit [http://localhost:9090/targets](http://localhost:9090/targets) to see if it's successfully scraping the Prometheus endpoints of your application. For example:
 
-![Prometheus targets](images/Screenshot-2019-02-10-22.10.38-1024x247.png)
+![Prometheus targets](images/Screenshot-2019-02-10-22.10.38.png)
 
 ### Setting up Grafana
 
@@ -164,6 +164,6 @@ If you save the graph and the dashboard, you can now see your beautiful graphs a
 
 Additionally to graphs, you can also configure single stats, which can be interesting for metrics like the uptime of your application:
 
-![Single stat on Grafana](images/Screenshot-2019-02-10-22.25.37-1024x209.png)
+![Single stat on Grafana](images/Screenshot-2019-02-10-22.25.37.png)
 
 And there you have it, the start of your own dashboard to monitor your own Spring boot applications.
