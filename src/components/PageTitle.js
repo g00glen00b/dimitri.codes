@@ -1,8 +1,10 @@
 import React from 'react';
 import Img from 'gatsby-image';
-import {Tags} from './Tags';
 import PropTypes from 'prop-types';
+import {TiCalendarOutline, TiStopwatch, TiTag} from 'react-icons/ti';
+import {Link} from 'gatsby';
 import './PageTitle.css';
+import {kebabCase} from '../helpers/contentHelpers';
 
 export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
   <div className={`page-title ${featuredImage != null ? `page-title--with-image` : `page-title--without-image`}`}>
@@ -10,10 +12,38 @@ export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
       <Img fluid={featuredImage.childImageSharp.fluid}/>
     </div>}
     <h1 className="page-title__title">{title}</h1>
-    <p className="page-title__metadata">
-      {date}, {timeToRead} min read
-    </p>
-    <Tags tags={tags}/>
+    <dl className="page-title__info">
+      <dt>
+        <TiCalendarOutline
+          size={24}
+          aria-label="Calendar icon"
+          title="Posted at"/>
+      </dt>
+      <dd>{date}</dd>
+
+      <dt>
+        <TiStopwatch
+          size={24}
+          aria-label="Stopwatch icon"
+          title="Time to read"/>
+      </dt>
+      <dd>{timeToRead} minute read</dd>
+
+      {tags != null && <dt>
+        <TiTag
+          size={24}
+          aria-label="Tag icon"
+          title="Tags"/>
+      </dt>}
+      {tags != null && <dd>
+        {tags.map(tag => <Link
+          to={`/tag/${kebabCase(tag)}`}
+          title={`View all posts tagged with ${tag}`}
+          key={tag}>
+          {tag}
+        </Link>)}
+        </dd>}
+    </dl>
   </div>
 );
 
