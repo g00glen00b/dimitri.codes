@@ -1,6 +1,6 @@
 .update-bar {
-  background-color: var(--background-color-inverted);
-  color: var(--text-color-inverted);
+  background-color: var(--background-color);
+  color: var(--text-color);
   position: fixed;
   bottom: 1em;
   left: 1em;
@@ -9,7 +9,7 @@
   box-shadow: 0 0.2em 0.8em 0 rgba(0, 0, 0, 0.3);
 }
 
-.update-bar__action {
+.update-bar-action {
   background: transparent;
   outline: none;
   border: none;
@@ -20,8 +20,9 @@
   font-size: 1em;
   font-weight: 500;
   transition: color .3s;
+  cursor: pointer;
 }
 
-.update-bar__action:hover {
-  color: var(--secondary-color-dark-1);
+.update-bar-action:hover {
+  color: var(--text-color);
 }

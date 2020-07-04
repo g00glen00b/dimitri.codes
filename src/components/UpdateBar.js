@@ -1,6 +1,6 @@
-import {useEventTriggered} from '../helpers/hooks/serviceWorkerHooks';
 import './UpdateBar.css';
 import React from 'react';
+import {useEventTriggered} from '../helpers/hooks/serviceWorkerHooks';
 
 function reload() {
   window.location.reload();
@@ -13,7 +13,7 @@ export const UpdateBar = () => {
       {isUpdate && <div className="update-bar">
         This website has been updated since the last time you visited.
         <button
-          className="update-bar__action"
+          className="update-bar-action"
           onClick={reload}>
           Update
         </button>
