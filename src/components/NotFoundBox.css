@@ -10,13 +10,10 @@
   font-size: 7rem;
   line-height: 6rem;
   margin-bottom: 0;
+  color: var(--text-color-lightest);
 }
 
 .not-found > .not-found__subtitle {
   font-size: 1rem;
   font-weight: 400;
-}
-
-.not-found > .not-found__link {
-
 }
