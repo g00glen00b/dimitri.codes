@@ -12,7 +12,11 @@ The talk will be given for the [WordCamp Antwerp conference](https://2020.antwer
 
 **Tech talk about Micronaut**, An introduction to Micronaut, what it does and why it exists in the vast Java ecosystem.
 Talk will be given during an Optis team meeting for colleagues.<br />
-(May 29th, 2020)
+(July 31th, 2020)
+
+**Better monitoring with Spring boot Actuator**, An overview of what's possible with Spring boot Actuator and Micrometer.
+Taalk will be given to employees of Aquafin.<br />
+(August 4th, 2020)
 
 
 ### Past 
