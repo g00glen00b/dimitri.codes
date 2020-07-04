@@ -1,0 +1,121 @@
+.container__content pre {
+  border-radius: .5rem;
+  font-size: 1.3rem;
+}
+
+
+.container__content table *,
+.container__content p,
+.container__content li,
+.container__content .alert,
+.container__content blockquote {
+  line-height: 2.3rem;
+  font-size: 1.3rem;
+}
+
+.container__content p {
+  margin: 1.5rem 0;
+}
+
+.container__content li > p {
+  margin: 0;
+}
+
+.container__content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.container__content h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -0.025rem;
+}
+
+.container__content h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.025rem;
+  margin: 3rem 0 1rem;
+}
+
+.container__content h4 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: -0.025rem;
+}
+
+.container__content p > code,
+.container__content li > code,
+.container__content a > code,
+.container__content td > code,
+.container__content blockquote > code {
+  background-color: var(--background-color-darkest);
+  padding: 2px 5px;
+  font-family: 'Roboto Mono', monospace;
+  border-radius: 0.1rem;
+}
+
+.container__content p > strong,
+.container__content li > strong {
+  font-weight: 500;
+}
+
+.container__content a.gatsby-resp-image-link {
+  color: transparent;
+  border: none;
+}
+
+.container__content table {
+  border-spacing: 0 0.5rem;
+}
+
+.container__content table > thead > tr > th {
+  font-weight: 500;
+  color: var(--text-color-lighter);
+}
+
+.container__content table > tbody > tr {
+  background-color: var(--background-color);
+}
+
+.container__content table > tbody > tr > td:first-child {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.container__content table > tbody > tr > td:last-child {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.container__content table > tbody > tr > td {
+  padding: .8rem;
+}
+
+.container__content table > thead > tr > th {
+  padding: .8rem .8rem 0;
+}
+
+.container__content table > tbody > tr > td,
+.container__content table > thead > tr > th {
+  text-align: left;
+  border: none;
+}
+
+.container__content a.anchor {
+  border: none;
+  background: transparent;
+  margin-left: 0.5rem;
+  fill: var(--secondary-color);
+}
+
+.container__content a.anchor svg {
+  visibility: visible;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.container__content blockquote {
+  border-left: solid 0.5rem var(--secondary-color-lighter);
+  padding: 0.5rem 0 0.5rem 2rem;
+  margin: 0;
+}
