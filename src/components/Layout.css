@@ -40,7 +40,7 @@ h1 strong {
     font-weight: 600;
 }
 
-.button__primary {
+.button-primary {
     padding: 1rem;
     border: solid 0.1rem var(--primary-color);
     color: var(--primary-color);
@@ -57,12 +57,17 @@ h1 strong {
     font-weight: 500;
 }
 
-.button__primary:hover,
-.button__primary:active {
+.button-primary:hover,
+.button-primary:active {
     color: inherit;
     box-shadow: none;
     margin: 8px -8px -8px 8px;
     background-color: var(--primary-color-lightest);
+}
+
+.button-secondary {
+    border: solid 0.1rem var(--primary-color);
+    padding: 0.2rem;
 }
 
 * {
@@ -84,5 +89,3 @@ a {
 a:hover, a:active {
     color: var(--tertiary-color-darker);
 }
-
-

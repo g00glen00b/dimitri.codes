@@ -17,5 +17,5 @@ export const Layout = ({children, simple}) => (
 
 Layout.propTypes = {
   simple: PropTypes.bool,
-  children: PropTypes.object
+  children: PropTypes.node
 };

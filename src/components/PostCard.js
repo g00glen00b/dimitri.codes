@@ -9,7 +9,7 @@ export const PostCard = ({featuredImage, categories: [firstCategory] = [], excer
   return (
     <Link
       className="excerpt"
-      to={slug}
+      to={`/${slug}`}
       title="View post">
       <div className="excerpt--header">
         {featuredImage && <div className="excerpt--header__image">

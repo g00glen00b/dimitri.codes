@@ -17,23 +17,25 @@ export const PostCardContainer = ({posts}) => (
 );
 
 PostCardContainer.propTypes = {
-  posts: PropTypes.arrayOf({
-    id: PropTypes.string.isRequired,
-    frontmatter: PropTypes.objectOf({
-      categories: PropTypes.arrayOf(PropTypes.string),
-      title: PropTypes.string,
-      manualExcerpt: PropTypes.string,
-      date: PropTypes.string,
-      excerpt: PropTypes.string,
-      featuredImage: PropTypes.shape({
-        childImageSharp: PropTypes.shape({
-          fluid: PropTypes.object
+  posts: PropTypes.arrayOf(PropTypes.shape({
+    node: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      frontmatter: PropTypes.shape({
+        categories: PropTypes.arrayOf(PropTypes.string),
+        title: PropTypes.string,
+        manualExcerpt: PropTypes.string,
+        date: PropTypes.string,
+        excerpt: PropTypes.string,
+        featuredImage: PropTypes.shape({
+          childImageSharp: PropTypes.shape({
+            fluid: PropTypes.object
+          })
         })
-      })
-    }),
-    fields: PropTypes.objectOf({
-      slug: PropTypes.string
-    }),
-    excerpt: PropTypes.string
-  })
+      }),
+      fields: PropTypes.shape({
+        slug: PropTypes.string
+      }),
+      excerpt: PropTypes.string
+    })
+  }))
 };

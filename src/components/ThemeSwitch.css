@@ -1,7 +1,3 @@
-.theme-switch__button > svg {
-  fill: yellow;
-}
-
-.theme-switch__button {
+.theme-switch {
   margin-left: 1rem;
 }

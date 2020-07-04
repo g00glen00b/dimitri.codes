@@ -26,9 +26,9 @@ export const ContentLinks = ({links}) => (
 );
 
 ContentLinks.propTypes = {
-  links: PropTypes.arrayOf({
+  links: PropTypes.arrayOf(PropTypes.shape({
     outbound: PropTypes.bool,
     to: PropTypes.string,
     name: PropTypes.string
-  })
+  }))
 };

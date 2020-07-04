@@ -9,5 +9,5 @@ export const ContainerContent = ({children}) => (
 );
 
 ContainerContent.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.node
 };
