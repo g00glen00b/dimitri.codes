@@ -7,17 +7,19 @@ export const Pagination = ({currentPage, pageCount, base}) => (
   <nav className="pagination">
     {currentPage > 1 ? (
         <Link
+          className="button__primary"
           title="Go to previous page"
           to={`${base}/page/${currentPage - 1}`}>
-          ← Newer posts
+          ← newer posts
         </Link>) :
       <span />}
-    Page {currentPage} of {pageCount}
+    page {currentPage} of {pageCount}
     {currentPage < pageCount ? (
         <Link
+          className="button__primary"
           title="Go to next page"
           to={`${base}/page/${currentPage + 1}`}>
-          Older posts →
+          older posts →
         </Link>) :
       <span />}
   </nav>
