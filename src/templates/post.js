@@ -2,13 +2,11 @@ import React from 'react';
 import {graphql} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
-import {PostFooter} from '../components/PostFooter';
 import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
-import {ElevatorPitch} from '../components/ElevatorPitch';
 import PropTypes from 'prop-types';
 import {PageTitle} from '../components/PageTitle';
 
-const Post = ({data: {markdownRemark, site}}) => {
+const Post = ({data: {markdownRemark}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
     return (
       <Layout>
@@ -30,19 +28,12 @@ const Post = ({data: {markdownRemark, site}}) => {
         }
         {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
         <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
-        <PostFooter url={`${site.siteMetadata.siteUrl}/${markdownRemark.fields.slug}`}/>
-        <ElevatorPitch/>
       </Layout>
     );
 }
 
 export const query = graphql`
   query ($id: String!) {
-      site {
-        siteMetadata {
-          siteUrl
-        }
-      }
       markdownRemark(id: {eq: $id}) {
         frontmatter {
           title

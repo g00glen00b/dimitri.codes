@@ -3,7 +3,7 @@ import {graphql} from "gatsby"
 import {SEO} from '../components/Seo';
 import {Pagination} from '../components/Pagination';
 import {Layout} from '../components/Layout';
-import {PostExcerpt} from '../components/PostExcerpt';
+import {PostCard} from '../components/PostCard';
 import PropTypes from 'prop-types';
 import {BrowsePitch} from '../components/BrowsePitch';
 
@@ -14,7 +14,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
     </h1>
     <SEO title="Posts"/>
     {allMarkdownRemark.edges.map(({node}) => (
-      <PostExcerpt
+      <PostCard
         key={node.id}
         categories={node.frontmatter.categories}
         excerpt={node.excerpt}

@@ -2,10 +2,10 @@ import React from "react"
 import {graphql} from "gatsby"
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
-import {PostExcerpt} from '../components/PostExcerpt';
 import {Pagination} from '../components/Pagination';
 import PropTypes from 'prop-types';
 import {BrowsePitch} from '../components/BrowsePitch';
+import {PostCardContainer} from '../components/PostCardContainer';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
@@ -13,18 +13,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
     <h1 className="page__title">
       Posts tagged with <strong>{pageContext.fieldValue}</strong>
     </h1>
-    {allMarkdownRemark.edges.map(({node}) => (
-      <PostExcerpt
-        key={node.id}
-        categories={node.frontmatter.categories}
-        excerpt={node.excerpt}
-        manualExcerpt={node.frontmatter.excerpt}
-        isNew={node.frontmatter.daysAgo < 20}
-        readingTime={node.timeToRead}
-        slug={node.fields.slug}
-        tags={node.frontmatter.tags}
-        title={node.frontmatter.title}/>
-    ))}
+    <PostCardContainer posts={allMarkdownRemark.edges}/>
     <Pagination
       base={pageContext.base}
       currentPage={pageContext.currentPage}
@@ -40,7 +29,6 @@ Posts.propTypes = {
         node: PropTypes.shape({
           id: PropTypes.string.isRequired,
           excerpt: PropTypes.string,
-          timeToRead: PropTypes.number,
           frontmatter: PropTypes.shape({
             categories: PropTypes.arrayOf(PropTypes.string),
             tags: PropTypes.arrayOf(PropTypes.string),
@@ -71,10 +59,17 @@ export const query = graphql`
           excerpt(format: PLAIN)
           frontmatter {
             categories
-            tags
             title
-            daysAgo: date(difference: "days")
+            date(formatString: "MMMM Do, YYYY")
             excerpt
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 128) {
+                  src
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           fields {
             slug

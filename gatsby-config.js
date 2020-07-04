@@ -7,6 +7,7 @@ module.exports = {
   siteMetadata: {
     title: `Dimitri's tutorials`,
     description: `Dimitri's tutorials about software development with Java and JavaScript`,
+    authorName: 'Dimitri Mestdagh',
     author: `@g00glen00b`,
     siteUrl: process.env.SITE_URL,
     headerLinks: [
@@ -52,7 +53,12 @@ module.exports = {
             }
           },
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              isIconAfterHeader: true
+            }
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -90,10 +96,13 @@ module.exports = {
       options: {
         fonts: [{
           family: `Roboto`,
-          variants: [`300`, `400`, `500`]
+          variants: [`400`, `500`]
         }, {
           family: `Roboto Mono`,
           variants: [`400`, `700`]
+        }, {
+          family: `Montserrat`,
+          variants: [`600`, `700`]
         }]
       }
     },

@@ -2,9 +2,9 @@ import React from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
-import {PostExcerpt} from '../components/PostExcerpt';
-import {ElevatorPitch} from '../components/ElevatorPitch';
-import {ReadMoreBox} from '../components/ReadMoreBox';
+import {AboutHeadline} from '../components/AboutHeadline';
+import {PostCardContainer} from '../components/PostCardContainer';
+import {VisitBlogBanner} from '../components/VisitBlogBanner';
 
 const allPostsQuery = graphql`
   query {
@@ -14,10 +14,17 @@ const allPostsQuery = graphql`
           excerpt(format: PLAIN)
           frontmatter {
             categories
-            tags
             title
-            daysAgo: date(difference: "days")
+            date(formatString: "MMMM Do, YYYY")
             excerpt
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 128) {
+                  src
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           fields {
             slug
@@ -37,21 +44,10 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home"/>
-      <ElevatorPitch/>
+      <AboutHeadline/>
       <h1>Latest posts</h1>
-      {allMarkdownRemark.edges.map(({node}) => (
-        <PostExcerpt
-          key={node.id}
-          categories={node.frontmatter.categories}
-          excerpt={node.excerpt}
-          manualExcerpt={node.frontmatter.excerpt}
-          isNew={node.frontmatter.daysAgo < 20}
-          readingTime={node.timeToRead}
-          slug={node.fields.slug}
-          tags={node.frontmatter.tags}
-          title={node.frontmatter.title}/>
-      ))}
-      <ReadMoreBox/>
+      <PostCardContainer posts={allMarkdownRemark.edges}/>
+      <VisitBlogBanner/>
     </Layout>
   );
 };
