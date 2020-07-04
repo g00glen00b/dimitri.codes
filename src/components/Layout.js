@@ -4,13 +4,12 @@ import {Header} from './Header';
 import {Footer} from './Footer';
 import {UpdateBar} from './UpdateBar';
 import PropTypes from 'prop-types';
+import {ContainerContent} from './ContainerContent';
 
 export const Layout = ({children, simple}) => (
   <div className="container">
     {!simple && <Header/>}
-    <main className="container__content">
-      {children}
-    </main>
+    <ContainerContent>{children}</ContainerContent>
     {!simple && <Footer/>}
     <UpdateBar/>
   </div>
