@@ -1,0 +1,19 @@
+.content-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-links > a {
+  text-decoration: none;
+  color: var(--text-color-lighter);
+  margin-left: 1rem;
+  transition: color .3s;
+}
+
+.content-links > a:first-child {
+  margin-left: 0;
+}
+
+.content-links > a:hover {
+  color: var(--text-color);
+}
