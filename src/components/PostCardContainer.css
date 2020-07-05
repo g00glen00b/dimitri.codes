@@ -3,3 +3,10 @@
   flex-flow: row wrap;
   margin: -1rem;
 }
+
+@media (max-width: 640px) {
+  .posts {
+    display: flex;
+    flex-direction: column;
+  }
+}
