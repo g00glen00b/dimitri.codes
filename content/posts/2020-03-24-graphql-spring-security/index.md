@@ -312,4 +312,4 @@ The major downside to this approach is that our schema is still public and I hav
 
 In addition, it doesn't seem that GraphiQL doesn't support setting HTTP headers. That means that if you want to test out the API, you'll have to rely on other GraphQL clients such as [GraphQL Playground](https://github.com/prisma-labs/graphql-playground) or [Postman](https://www.postman.com/).
 
-Knowing that, we're now fully able to add security to the GraphQL APIs we create with Spring.
+Knowing that, we're now fully able to add security to the GraphQL APIs we create with Spring. A complete code example can be found on [GitHub](https://github.com/g00glen00b/whoiswho-graphql).

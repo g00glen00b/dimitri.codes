@@ -226,13 +226,27 @@ public class PersonAvatarConfig implements WebMvcConfigurer {
 }
 ```
 
-### Testing it out
+### Using it with Apollo and React
 
 Testing this out will be a bit more difficult.
 As mentioned before, file uploads are not a part of the GraphQL specification, and thus, can't be easily configured within GraphiQL.
 Currently, I've only been able to properly test this through [Postman](https://www.postman.com/).
 
-However, since the way the files are uploaded is compatible with Apollo, you could write a React component like this:
+If you plan on using it with React, you can do this by using the [`apollo-upload-client`](https://github.com/jaydenseric/apollo-upload-client) library:
+
+```
+npm install apollo-upload-client
+```
+
+Now you can replace your existing Apollo HTTP link by using:
+
+```js
+import {createUploadLink} from 'apollo-upload-client';
+
+const httpLink = createUploadLink({uri: `http://localhost:8080/graphql`});
+```
+
+After that, you could write a React component like this to test it out:
 
 ```jsx
 const updateAvatarMutation = gql`
@@ -250,5 +264,7 @@ return <input
 ```
 
 This code would show a simple file input type, and call the `updateAvatar` mutation as soon as a file is chosen.
+
+A full code example can be found on [GitHub](https://github.com/g00glen00b/whoiswho-graphql).
 
 
