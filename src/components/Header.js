@@ -19,11 +19,13 @@ const headerLinksQuery = graphql`
 export const Header = () => {
   const {site: {siteMetadata: {headerLinks = []} = {}} = {}} = useStaticQuery(headerLinksQuery);
   return (
-    <header className="header">
-      <Link to="/" className="header__logo" title="Home">
-        <Logo/>
+    <header
+      className="header"
+      aria-label="Primary navigation">
+      <Link to="/" className="header-logo" title="Home">
+        <Logo aria-label="Website logo"/>
       </Link>
-      <nav className="header__navigation">
+      <nav className="header-navigation">
         {headerLinks.map(({name, to}) => (
           <Link key={name} to={to}>{name}</Link>
         ))}

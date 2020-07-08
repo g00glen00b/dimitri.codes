@@ -16,24 +16,26 @@ export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
       <dt>
         <TiCalendarOutline
           size={24}
-          aria-label="Calendar icon"
-          title="Posted at"/>
+          aria-label="Calendar icon"/>
       </dt>
-      <dd>{date}</dd>
+      <dd
+        aria-label={`Posted at ${date}`}>
+        {date}
+      </dd>
 
       <dt>
         <TiStopwatch
           size={24}
-          aria-label="Stopwatch icon"
-          title="Time to read"/>
+          aria-label="Stopwatch icon"/>
       </dt>
-      <dd>{timeToRead} minute read</dd>
+      <dd>
+        {timeToRead} minute read
+      </dd>
 
       {tags != null && <dt>
         <TiTag
           size={24}
-          aria-label="Tag icon"
-          title="Tags"/>
+          aria-label="Tag icon"/>
       </dt>}
       {tags != null && <dd>
         {tags.map(tag => <Link

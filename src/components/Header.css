@@ -7,18 +7,18 @@
   padding: 0 1rem;
 }
 
-.header__logo > svg {
+.header-logo > svg {
   width: 100px;
   height: auto;
   fill: var(--text-color);
 }
 
-.header__navigation {
+.header-navigation {
   display: flex;
   align-items: center;
 }
 
-.header__navigation > a {
+.header-navigation > a {
   margin-left: 2rem;
   text-transform: lowercase;
   font-weight: 500;
@@ -27,7 +27,7 @@
   transition: color .3s;
 }
 
-.header__navigation > a:hover {
+.header-navigation > a:hover {
   color: var(--secondary-color);
 }
 
@@ -37,7 +37,7 @@
     position: relative;
   }
 
-  .header__navigation {
+  .header-navigation {
     margin-top: 1.5rem;
   }
 

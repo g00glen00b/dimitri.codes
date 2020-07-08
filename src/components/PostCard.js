@@ -11,26 +11,31 @@ export const PostCard = ({featuredImage, categories: [firstCategory] = [], excer
       className="excerpt"
       to={`/${slug}`}
       title="View post">
-      <div className="excerpt--header">
-        {featuredImage && <div className="excerpt--header__image">
+      <div className="excerpt-header">
+        {featuredImage && <div className="excerpt-header-image">
           <Img fluid={featuredImage.childImageSharp.fluid}/>
         </div>}
-        <span className="excerpt--header__category">
+        <span
+          aria-label={`Category ${firstCategory}`}
+          className="excerpt-header-category">
           {firstCategory}
         </span>
         <h2>
           {title}
         </h2>
-        <time className="excerpt--header__date">
+        <time
+          aria-label={`Posted at ${date}`}
+          className="excerpt-header-date">
           {date}
         </time>
       </div>
-      <div className="excerpt--body">
+      <div className="excerpt-body">
         <p>
           {excerpt}
         </p>
         <span
-          className="excerpt--read-more">
+          aria-hidden
+          className="excerpt-read-more">
           Read more <IoIosArrowRoundForward/>
         </span>
       </div>

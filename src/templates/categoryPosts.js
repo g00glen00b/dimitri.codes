@@ -4,7 +4,6 @@ import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {Pagination} from '../components/Pagination';
 import PropTypes from 'prop-types';
-import {BrowsePitch} from '../components/BrowsePitch';
 import {PostCardContainer} from '../components/PostCardContainer';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
@@ -18,7 +17,6 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
       pageCount={pageContext.pageCount}
       currentPage={pageContext.currentPage}
       base={pageContext.base}/>
-    <BrowsePitch/>
   </Layout>
 );
 
