@@ -15,5 +15,5 @@
 }
 
 .content-links > a:hover {
-  color: var(--text-color);
+  color: var(--secondary-color);
 }

@@ -19,6 +19,14 @@
   box-shadow: 0 0.3rem 0.8rem 0 #00000020;
 }
 
+:root[data-theme=dark] .excerpt {
+  box-shadow: 0 0.3rem 0.3rem 0 #00000080;
+}
+
+:root[data-theme=dark] .excerpt:hover {
+  box-shadow: 0 0.3rem 0.8rem 0 #00000080;
+}
+
 .excerpt-header {
   background-color: var(--primary-color);
   color: var(--text-color-inverse);

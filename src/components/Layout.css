@@ -1,12 +1,11 @@
 :root {
-    --primary-color: #2d3142;
-    --primary-color-lighter: #626482;
+    --primary-color: #2d3452;
     --primary-color-lightest: #9c9fbd;
 
     --secondary-color: #f0803c;
-    --secondary-color-lighter: #FACDB3;
+    --secondary-color-lighter: #facdb3;
 
-    --tertiary-color: #5296A5;
+    --tertiary-color: #5296a5;
     --tertiary-color-darker: #2d6874;
 
     --background-color: #FFFFFF;
@@ -16,10 +15,20 @@
     --text-color: #051923;
     --text-color-lighter: #404c5a;
     --text-color-lightest: #5b6976;
-    --text-color-inverse: #FFFFFF;
-    --text-color-inverse-darker: #B4B4C7;
+    --text-color-inverse: #ffffff;
+    --text-color-inverse-darker: #b4b4c7;
 
     --container-width: 950px;
+}
+
+:root[data-theme=dark] {
+    --text-color: #d4d4d1;
+    --text-color-lighter: #b3b3b3;
+    --text-color-lightest: #a1a1a1;
+
+    --background-color: #2b2b2b;
+    --background-color-darker: #212121;
+    --background-color-darkest: #171717;
 }
 
 html, body {
@@ -40,6 +49,11 @@ h1 strong {
     font-weight: 600;
 }
 
+:root[data-theme=dark] h1 strong {
+    color: var(--secondary-color);
+    background-color: transparent;
+}
+
 .button-primary {
     padding: 1rem;
     border: solid 0.1rem var(--primary-color);
@@ -57,6 +71,19 @@ h1 strong {
     font-weight: 500;
 }
 
+:root[data-theme=dark] .button-primary {
+    border-color: var(--primary-color-lightest);
+    color: var(--primary-color-lightest);
+    box-shadow: var(--primary-color-lightest) 1px 1px 0,
+    var(--primary-color-lightest) 2px 2px 0,
+    var(--primary-color-lightest) 3px 3px 0,
+    var(--primary-color-lightest) 4px 4px 0,
+    var(--primary-color-lightest) 5px 5px 0,
+    var(--primary-color-lightest) 6px 6px 0,
+    var(--primary-color-lightest) 7px 7px 0,
+    var(--primary-color-lightest) 8px 8px 0;
+}
+
 .button-primary:hover,
 .button-primary:active {
     color: inherit;
@@ -65,9 +92,10 @@ h1 strong {
     background-color: var(--primary-color-lightest);
 }
 
-.button-secondary {
-    border: solid 0.1rem var(--primary-color);
-    padding: 0.2rem;
+:root[data-theme=dark] .button-primary:hover,
+:root[data-theme=dark] .button-primary:active {
+    box-shadow: none;
+    background-color: var(--primary-color);
 }
 
 * {
