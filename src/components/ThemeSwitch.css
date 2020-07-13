@@ -1,7 +1,7 @@
 #theme-switch {
   height: 0;
   width: 0;
-  visibility: hidden;
+  opacity: 0;
   margin-left: 1rem;
 }
 
@@ -27,13 +27,19 @@
   width: 1.3rem;
   height: 1.3rem;
   background: #fff;
+  box-sizing: border-box;
   border-radius: 0.65rem;
+  border: solid 0.1rem white;
   transition: left .3s;
   z-index: 9;
 }
 
 #theme-switch:checked + label:before {
   left: calc(100% - 1.4rem);
+}
+
+#theme-switch:focus + label:before {
+  border-color: var(--primary-color);
 }
 
 #theme-switch + label > svg {
