@@ -1,4 +1,4 @@
-.excerpt {
+a.excerpt {
   overflow: hidden;
   max-width: 100%;
   display: flex;
@@ -8,23 +8,25 @@
   box-shadow: 0 0.3rem 0.3rem 0 #00000020;
   flex-direction: column;
   background-color: var(--background-color);
-  color: inherit;
+  color: var(--text-color);
   transition: transform .3s, box-shadow .3s;
   border: solid 2px var(--primary-color);
 }
 
-.excerpt:hover {
+a.excerpt:hover {
   color: inherit;
   transform: scale(1.05);
   box-shadow: 0 0.3rem 0.8rem 0 #00000020;
 }
 
-:root[data-theme=dark] .excerpt {
+:root[data-theme=dark] a.excerpt {
   box-shadow: 0 0.3rem 0.3rem 0 #00000080;
+  color: var(--text-color);
 }
 
-:root[data-theme=dark] .excerpt:hover {
+:root[data-theme=dark] a.excerpt:hover {
   box-shadow: 0 0.3rem 0.8rem 0 #00000080;
+  color: var(--text-color);
 }
 
 .excerpt-header {
@@ -69,7 +71,11 @@
 }
 
 .excerpt-read-more {
-  color: var(--tertiary-color);
+  color: var(--tertiary-color-darker);
   display: flex;
   align-items: center;
+}
+
+:root[data-theme=dark] .excerpt-read-more {
+  color: var(--tertiary-color-lighter);
 }

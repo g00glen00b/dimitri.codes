@@ -5,8 +5,10 @@
     --secondary-color: #f0803c;
     --secondary-color-lighter: #facdb3;
 
-    --tertiary-color: #5296a5;
-    --tertiary-color-darker: #2d6874;
+    --tertiary-color-lighter: #80bfcd;
+    --tertiary-color: #60a5b4;
+    --tertiary-color-darker: #356771;
+    --tertiary-color-darkest: #215058;
 
     --background-color: #FFFFFF;
     --background-color-darker: #f3f3f9;
@@ -54,50 +56,6 @@ h1 strong {
     background-color: transparent;
 }
 
-.button-primary {
-    padding: 1rem;
-    border: solid 0.1rem var(--primary-color);
-    color: var(--primary-color);
-    box-shadow: var(--primary-color) 1px 1px 0,
-    var(--primary-color) 2px 2px 0,
-    var(--primary-color) 3px 3px 0,
-    var(--primary-color) 4px 4px 0,
-    var(--primary-color) 5px 5px 0,
-    var(--primary-color) 6px 6px 0,
-    var(--primary-color) 7px 7px 0,
-    var(--primary-color) 8px 8px 0;
-    transition: box-shadow .3s, margin .3s, background .3s;
-    transition-timing-function: ease-in-out;
-    font-weight: 500;
-}
-
-:root[data-theme=dark] .button-primary {
-    border-color: var(--primary-color-lightest);
-    color: var(--primary-color-lightest);
-    box-shadow: var(--primary-color-lightest) 1px 1px 0,
-    var(--primary-color-lightest) 2px 2px 0,
-    var(--primary-color-lightest) 3px 3px 0,
-    var(--primary-color-lightest) 4px 4px 0,
-    var(--primary-color-lightest) 5px 5px 0,
-    var(--primary-color-lightest) 6px 6px 0,
-    var(--primary-color-lightest) 7px 7px 0,
-    var(--primary-color-lightest) 8px 8px 0;
-}
-
-.button-primary:hover,
-.button-primary:active {
-    color: inherit;
-    box-shadow: none;
-    margin: 8px -8px -8px 8px;
-    background-color: var(--primary-color-lightest);
-}
-
-:root[data-theme=dark] .button-primary:hover,
-:root[data-theme=dark] .button-primary:active {
-    box-shadow: none;
-    background-color: var(--primary-color);
-}
-
 * {
     box-sizing: border-box;
 }
@@ -106,14 +64,4 @@ main {
     max-width: var(--container-width);
     padding: 0 1rem;
     margin: 0 auto;
-}
-
-a {
-    color: var(--tertiary-color);
-    text-decoration: none;
-    transition: color .1s;
-}
-
-a:hover, a:active {
-    color: var(--tertiary-color-darker);
 }
