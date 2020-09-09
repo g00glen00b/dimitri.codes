@@ -452,8 +452,8 @@ One problem is that it isn't aware that Micronaut translates the page, size and 
         description = "The field by which can be sorted"),
     })
 })
-public Page<Employee> findAll(Pageable pageable) {
-    return repository.findAll(pageable);
+public EmployeePage findAll(Pageable pageable) {
+    return new EmployeePage(repository.findAll(pageable));
 }
 ```
 
