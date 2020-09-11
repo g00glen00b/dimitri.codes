@@ -310,6 +310,14 @@ In this case, only admins are allowed to approve certain things, and thus, we're
 
 The major downside to this approach is that our schema is still public and I haven't found a way to filter the schema itself. This means that people checking out the schema will know that there are certain operations, even if they can't access them.
 
-In addition, it doesn't seem that GraphiQL doesn't support setting HTTP headers. That means that if you want to test out the API, you'll have to rely on other GraphQL clients such as [GraphQL Playground](https://github.com/prisma-labs/graphql-playground) or [Postman](https://www.postman.com/).
+In addition, GraphiQL doesn't allow you to set HTTP headers within the interfacce itself. It does allow you to configure a header within the application properties like this:
+
+```yaml
+graphiql:
+  headers:
+    Authorization: Bearer my-generated-token
+```
+
+If you want to set headers from within the interface, you'll have to rely on other GraphQL clients such as [GraphQL Playground](https://github.com/prisma-labs/graphql-playground) or [Postman](https://www.postman.com/).
 
 Knowing that, we're now fully able to add security to the GraphQL APIs we create with Spring. A complete code example can be found on [GitHub](https://github.com/g00glen00b/whoiswho-graphql).
