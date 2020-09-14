@@ -1,6 +1,6 @@
 ---
 title: "Building microservices with Micronaut and GraalVM"
-date: "2020-05-05"
+date: "2020-09-15"
 featuredImage: "../../images/logos/micronaut.png"
 categories: ["Java", "Tutorials"]
 tags: ["Micronaut", "Flyway", "OpenAPI", "Swagger", "GraalVM", "Docker"]
