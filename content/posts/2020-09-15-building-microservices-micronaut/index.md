@@ -7,7 +7,7 @@ tags: ["Micronaut", "Flyway", "OpenAPI", "Swagger", "GraalVM", "Docker"]
 excerpt: "In this tutorial, I'll build a microservice from scratch with Micronaut."
 ---
 
-Micronaut is a relatively new open source Java framework. It differentiates from other frameworks by reducing the amount of reflection it uses. This has several benefits, such as a lower memory footprint, lower startup times and a better integration with ahead of time compilers like [GraalVM](https://www.graalvm.org/).
+Micronaut is a new open source Java framework. It differentiates from other frameworks by reducing the amount of reflection it uses. This has several benefits, such as a lower memory footprint, and a lower startup time. Additionally, it allows for a better integration with ahead of time compilers like [GraalVM](https://www.graalvm.org/).
 
 While these advantages are not always important, there are a few use cases where they become very relevant, such as microservices and serverless functions. No worries though if you're developing a different type of application, [Micronaut](https://micronaut.io/) has you covered as well!
 
@@ -30,7 +30,7 @@ Since this will be a very lengthy tutorial, here are some links to navigate:
 
 ### Getting started
 
-The easiest way to create a Micronaut project, is through the Micronaut CLI. There are several ways you can install the Micronaut CLI, so I suggest you take a look at the [installation guide](https://micronaut-projects.github.io/micronaut-starter/latest/guide/#installation) and come back once you're set.
+The easiest way to create a Micronaut project, is through the Micronaut CLI. There are several ways you can install the Micronaut CLI, so take a look at the [installation guide](https://micronaut-projects.github.io/micronaut-starter/latest/guide/#installation) and come back once you're set.
 
 To see what's possible with the Micronaut CLI, you can use the following command:
 
@@ -52,8 +52,8 @@ For this example, I'll use the following features:
 
 - **flyway**: This allows us to use database migrations to set up the database.
 - **mariadb**: Since we'll be using a database, I'm going to select MariaDB, which is a fork of MySQL.
-- **data-jdbc**: With the Micronaut data JDBC project, we have a lightweight ORM framework at our disposal. Allowing us to easily map SQL records to Java objects, and perform CRUD operations.
-- **graalvm**: As mentioned before, GraalVM is a Ahead of Time compiler, and compiles our Java application into a native image, which allows us to start our application even faster than before.
+- **data-jdbc**: With the Micronaut data JDBC project, we have a lightweight ORM framework at our disposal. Allowing us to map SQL records to Java objects, and perform CRUD operations.
+- **graalvm**: As mentioned before, GraalVM is an Ahead of Time compiler, and compiles our Java application into a native image, which allows us to start our application even faster than before.
 - **openapi**: As we'll be exposing an API within our microservice, some documentation would be great. With the OpenAPI specification, we can do that.
 
 ![Micronaut + OpenAPI + GraalVM](images/micronaut-openapi-graalvm.png)
@@ -101,7 +101,7 @@ When we want to use a Docker container, we have to tell which image we want to u
 
 In addition, we have to configure a few environment variables to configure the user and the name of the database.
 
-Another important thing is that we'll create a nework with the name "employee-network" and add our database container to it with the alias "database". For now, this isn't really important, but if we want to run our microservice as a Docker container as well, these networks allow us to communicate between containers.
+Another important thing is that we'll create a network with the name "employee-network" and add our database container to it with the alias "database". For now, this isn't really important, but if we want to run our microservice as a Docker container as well, these networks allow us to communicate between containers.
 
 The final bit of configuration is the volume. Each time we recreate the container, all our data would be lost. To prevent this from happening, we can map specific folders within the Docker container to a folder on our host machine. Since MariaDB stores every important data within **/var/lib/mysql**, we'll map that folder to a relative folder called **./data/**.
 
@@ -113,7 +113,7 @@ docker-compose up
 
 ### Dependency management
 
-By default, Micronaut uses Gradle to manage its dependencies. To see exactly which dependencies are being used, we can check the **build.gradle** file. What's important to remember from this is that Micronaut relies heavily on annotation processors. These annotation processors generate code or metadata about the annotations that are being used at build time. This is different from other libraries, which often use reflection to look up information about these annotations at runtime. The downside of that is that reflection takes time, and to optimize this, many libraries use caches, which means that it also costs extra memory.
+By default, Micronaut uses Gradle to manage its dependencies. To see exactly which dependencies we use, we can check the **build.gradle** file. What's important to remember from this is that Micronaut relies heavily on annotation processors. These annotation processors generate code or metadata about the annotations that are being used at build time. This is different from other libraries, which often use reflection to look up information about these annotations at runtime. The downside of that is that reflection takes time, and to optimize this, many libraries use caches, which means that it also costs extra memory.
 
 One library I want to add to this file is [Lombok](https://projectlombok.org/). Lombok generates code for us, such as getters, setters and so on. Like Micronaut, it uses an annotation processor to do this. Since Micronaut should be aware of it, it's important to add the Lombok annotation processor **before** the Micronaut annotation processors.
 
@@ -126,7 +126,7 @@ annotationProcessor('org.projectlombok:lombok:1.18.12')
 
 ### Setting up test data
 
-The first thing I want to do is to set up the database with some tables and testdata. As mentioned earlier, I'll use Flyway to do that. Flyway works by executing versioned SQL files from certain location. First of all, we'll have to configure how to connect to the database. To do this, we open the **application.yml** file within **src/main/resources**, and change the existing datasource configuration to this:
+The first thing I want to do is to set up the database with some tables and test data. As mentioned earlier, I'll use Flyway to do that. Flyway works by executing versioned SQL files from certain location. First, we'll have to configure how to connect to the database. To do this, we open the **application.yml** file within **src/main/resources**, and change the existing datasource configuration to this:
 
 ```yaml
 datasources:
@@ -150,7 +150,7 @@ flyway:
         - classpath:db/migration
 ```
 
-By doing this, we tell Flyway to use the defaault datasource, and to read SQL files from the **db/migration** classpath folder. Now, since **src/main/resources** is a classpath folder, we can create this folder here, and then create a file called **V1__create_employees_table.sql**. Be aware, Flyway relies on a specific naming convention, where you start with the version, and then a description. Flyway will then properly execute these SQL files in the right order.
+By doing this, we tell Flyway to use the default datasource, and to read SQL files from the **db/migration** classpath folder. Now, since **src/main/resources** is a classpath folder, we can create this folder here, and then create a file called **V1__create_employees_table.sql**. Be aware, Flyway relies on a specific naming convention, where you start with the version, and then a description. Flyway will then properly execute these SQL files in the right order.
 
 Within this SQL file, we can create our table:
 
@@ -194,7 +194,7 @@ insert into employee (name, startdate, title) values
 
 ### Accessing the database
 
-Now that we have our testdata, it's time to write some code to access the database. First, we have to create a Java class that represents the table we just created. To do this, I created the following class:
+Now that we have our test data, it's time to write some code to access the database. First, we have to create a Java class to represent the table we just created. To do this, I created the following class:
 
 ```java
 @MappedEntity
@@ -228,7 +228,7 @@ public interface EmployeeRepository {
 }
 ```
 
-By annotating this interface with `@JdbcRepository`, Micronaut knows that it should generate code for this interface.  Within this interface, we defined two methods. Since the first method is named `findAll()`, and uses a `Pageable` parameter, Micronaut knows that this method will be used to select all records paginated.
+By annotating this interface with `@JdbcRepository`, Micronaut knows that it should generate code for this interface.  Within this interface, we defined two methods. Since we named the first method `findAll()`, and it uses a `Pageable` parameter, Micronaut knows that this method will be used to select all records paginated.
 
 From the second method, it's clear to Micronaut that it should generate a query that uses a where-clause to select a record by its id field.
 
@@ -269,7 +269,7 @@ By using the `@Get` annotation, we will be able to send a GET request to /api/em
 
 By declaring the `Pageable` object as a parameter, we can use parameters like `sort`, `page` and `size` to retrieve certain employees. For example, let's say that we're building an application that requires us to fetch the first five employees, sorted by their name, then we could call **/api/employee?page=0&size=5&sort=name**.
 
-One thing you'll notice if you run this is that the startdate of an employee is returned as an array of numbers, for example `[2020, 9, 6]`. I prefer using ISO dates (`2020-09-06`), so I usually disable this feature. This can be done by adding the following property to **application.yml**:
+One thing you'll notice if you run this is that the API returns the startdate of an employee as an array of numbers, for example `[2020, 9, 6]`. I prefer using ISO dates (`2020-09-06`), so I usually disable this feature. This can be done by adding the following property to **application.yml**:
 
 ```yaml
 jackson.serialization.writeDatesAsTimestamps: false
@@ -277,7 +277,7 @@ jackson.serialization.writeDatesAsTimestamps: false
 
 ![Screenshot of the API response of the find all operation](images/api-response-findall.png)
 
-Another problem I ran into is that due to the `Page` class implementing the `Iterable` interface, sometimes, the response is returned as an array rather than an object containing content (like the screenshot above). To fix that, we could create a proper DTO ourself:
+Another problem I ran into is that due to the `Page` class implementing the `Iterable` interface, sometimes, the API returns the response as an array rather than an object containing content (like the screenshot above). To fix that, we could create a proper DTO ourselves:
 
 ```java
 @Value
@@ -305,7 +305,7 @@ public class EmployeePage {
 }
 ```
 
-We're using the `@Value` annotation here to create an immutable value object with Lombok, which only provides getters and a required argument constructor. In addition, we use the `@Introspected` annotation to generate bean introspection metadata for Jackson to use. This is necessary if you want to use it later within a native image.
+We're using the `@Value` annotation here to create an immutable value object with Lombok, which only provides getters, and a required argument constructor. In addition, we use the `@Introspected` annotation to generate bean introspection metadata for Jackson to use. This is necessary if you want to use it later within a native image.
 
 Now we can refactor the controller to use `EmployeePage` in stead:
 
@@ -318,11 +318,11 @@ public EmployeePage findAll(Pageable pageable) {
 
 ### Working with exception handlers
 
-Often, when you write business logic, you want to throw some exceptions. The question is, how do we handle these exceptions within our API? The HTTP spec has us covered here, usually, we will return a status within the 200 range, which means that the response is OK.
+Often, when you write business logic, you want to throw some exceptions. The question is, how do we handle these exceptions within our API? The HTTP specification has us covered here. Usually, we will return a status within the 200 range, which means that the response is OK.
 
-If we send a status within the 400 range, it means there is a client error, such as missing input info, ... . And finally, there is also a 500 range, which we use when there is a server error, such as a failure to connect to the database and so on.
+If we send a status within the 400 range, it means there is a client error, such as missing input info, ... . Finally, there is also a 500 range, which we use when there is a server error, such as a failure to connect to the database and so on.
 
-In our case, we have a `findById()` operation that could return an employee by its ID, but if we enter an invalid ID, we should return a 400.
+In our case, we have a `findById()` operation that could return an employee by its ID, but if we enter an invalid ID, we can return a 404 Not found.
 
 To do this, we first create the exception itself:
 
@@ -352,7 +352,7 @@ public Employee findById(@PathVariable long id) {
 The way we can call this API is by using **/api/employee/1234**. Micronaut knows that it has to pass the "1234" value to the `id` parameter because it's annotated with `@PathVariable` and the name matches the `{id}` placeholder.
 Within the method, we use the Java 8 `Optional` API to throw an exception if the result is empty.
 
-Before we create the exception handler, we also want to create a class that will contain the error response. We could return the error as plain text, but sometimes you want to add additional info. So this is why I created the `ErrorMessage` class:
+Before we create the exception handler, we also want to create a class to contain the error response. We could return the error as plain text, but sometimes you want to add additional info. So this is why I created the `ErrorMessage` class:
 
 ```java
 @Value
@@ -379,7 +379,7 @@ public class EmployeeNotFoundExceptionHandler implements ExceptionHandler<Employ
 
 This interface requires us to pass the exception, and the response type as generics. In addition, it defines a single method called `handle`, which will pass the request itself and the exception, and expects an `HttpResponse` in return.
 
-To tell Micronaut to pick up this class, we'll use the `@Singleton` annotation. We can also tell Micronaut that this bean should only picked up if the `EmployeeNotFoundException` is available, but this is not required.
+To tell Micronaut to pick up this class, we'll use the `@Singleton` annotation. We can also tell Micronaut to pick up this bean if  `EmployeeNotFoundException` is available, but this is not required.
 
 As a final step, we can implement the `handle()` method like this:
 
@@ -417,7 +417,7 @@ public class Application {
 }
 ```
 
-If you build your project now (using (`./gradlew build`), the OpenAP YAML specification is generated within the **build/classes/java/main/META-INF/swagger** folder.  Here you'll see that the info we just added, is available as well:
+If you build your project now (using (`./gradlew build`), Gradle generates the OpenAPI YAML specification within the **build/classes/java/main/META-INF/swagger** folder.  Here you'll see that the info we just added, is available as well:
 
 ```yaml
 openapi: 3.0.1
@@ -430,7 +430,7 @@ info:
   version: "1.0"
 ```
 
-One problem is that it isn't aware that Micronaut translates the page, size and sort parameters to a `Pageable`. We can fix that by overriding the parameters by declaring additional annotations to our controllers. For example:
+One problem is that the generation tool isn't aware that Micronaut translates the page, size and sort parameters to a `Pageable`. We can fix that by overriding the parameters by declaring additional annotations to our controllers. For example:
 
 ```java
 @Get
@@ -465,7 +465,7 @@ Within the `findById()` method, we can also use the `@Operation` annotation. Thi
     @ApiResponse(
         responseCode = "200",
         content = @Content(schema = @Schema(implementation = Employee.class)),
-        description = "Succesful request"),
+        description = "Successful request"),
     @ApiResponse(
         responseCode = "404",
         content = @Content(schema = @Schema(implementation = ErrorMessage.class)),
@@ -490,7 +490,7 @@ For example, there is a user interface that we can generate, and that can be use
 swagger-ui.enabled=true
 ```
 
-If you build your project now, you'll see that not only the YAML file is generated, but also a folder called **views/**. By default it will only generate the necessary HTML file. If you want to serve it together with your application, you can use the router configuration of Micronaut.
+If you build your project now, you'll see that Gradle not only generated the YAML file, but also a folder called **views/**. By default, it will only generate the necessary HTML file. If you want to serve it together with your application, you can use the router configuration of Micronaut.
 
 To do this, add the following to **application.yml**:
 
@@ -567,7 +567,7 @@ chmod +x ./wait-for
 
 Docker not only copies over the file, but also copies the metadata. That means that if we make the shellscript executable on our system, it will also be executable within the Docker container.
 
-Before we start building the Docker image, there are a few things to be aware of. First of all, this build process can take a while, on my local system it takes up to 8 minutes to completely build the native image. In addition, it also requires a lot of memory. If you're noticing out of memory errors, open up Docker, and increase the amount of memory.
+Before we start building the Docker image, there are a few things to be aware of. First, this build process can take a while, on my local system it takes up to 8 minutes to completely build the native image. In addition, it also requires a lot of memory. If you're noticing out of memory errors, open up Docker, and increase the amount of memory.
 
 ![Screenshot of Docker settings](./images/docker-settings.png)
 
@@ -608,7 +608,7 @@ networks:
 
 A few things to be aware of here. As I mentioned earlier, we defined the **employee-network** network because we want to be able to talk to our database from within the application container. This allows us to talk to the database by using its alias (employee-db) as the hostname.
 
-That allows us to configure the `DATABASE_HOST` and `DATABASE_PORT` environment variables that we used before. In addition, since our **application.yml** contains a property `datasources.default.url`, we have to override that as well. Luckily, Micronaut allows us to overide application properties by using environment variables with the same name. To do this, use uppercase letters and replace the dots with underscores.
+That allows us to configure the `DATABASE_HOST` and `DATABASE_PORT` environment variables that we used before. In addition, since our **application.yml** contains a property `datasources.default.url`, we have to override that as well. Luckily, Micronaut allows us to override application properties by using environment variables with the same name. To do this, use uppercase letters and replace the dots with underscores.
 
 Once that's done, you can run both images by using the following command. Make sure to stop your locally running application beforehand, so that port 8080 is available.
 
@@ -624,6 +624,6 @@ Once you start the application, you'll see that it starts really fast. According
 
 Summarized, Micronaut is a very interesting framework that uses quite a different approach than others on the market. By doing so, it allows you to write very fast running microservices that require less resources. Be aware though, since these annotation processors run at build time, your builds may take longer.
 
-Personally, I really loved trying out Micronaut. If there's one downside I'd have to mention is that after using Spring through all these years, I started to get used to the quality of the documentation they have. While Micronaut's documentation is also very great, sometimes it took me a while to find certain things in the documentation (but that might be my personal experience).
+Personally, I really loved trying out Micronaut. If there's one downside I'd have to mention is that after using Spring through all these years, I started to get used to the quality of the documentation they have. While Micronauts documentation is also very great, sometimes it took me a while to find certain things in the documentation (but that might be my personal experience).
 
 Thanks for making it to the end of this lengthy tutorial. As usual, you can find the code that I used for this example on [GitHub](https://github.com/g00glen00b/micronaut-examples/tree/master/employee-service-openapi).
