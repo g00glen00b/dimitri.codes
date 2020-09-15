@@ -150,7 +150,7 @@ flyway:
         - classpath:db/migration
 ```
 
-By doing this, we tell Flyway to use the default datasource, and to read SQL files from the **db/migration** classpath folder. Now, since **src/main/resources** is a classpath folder, we can create this folder here, and then create a file called **V1__create_employees_table.sql**. Be aware, Flyway relies on a specific naming convention, where you start with the version, and then a description. Flyway will then properly execute these SQL files in the right order.
+By doing this, we tell Flyway to use the default datasource, and to read SQL files from the **db/migration** classpath folder. Now, since **src/main/resources** is a classpath folder, we can create this folder here, and then create a file called **V1\_\_create\_employees\_table.sql**. Be aware, Flyway relies on a specific naming convention, where you start with the version, and then a description. Flyway will then properly execute these SQL files in the right order.
 
 Within this SQL file, we can create our table:
 
