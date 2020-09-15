@@ -56,7 +56,7 @@ In that case, we could create a mutation like this:
 type Mutation {
   updateAvatar(avatar: Upload!): String
 }
-``` 
+```
 
 This schema means that we'll have an `updateAvatar` operation, that accepts a single parameter called `avatar` and returns the URL of where to access the profile picture.
 
