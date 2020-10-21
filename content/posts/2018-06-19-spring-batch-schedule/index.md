@@ -74,7 +74,7 @@ public void schedule() {
 }
 ```
 
-In this example, the method will run every method since the start of the application. If you don't want to run your job every x milliseconds, but you want to run the method x milliseconds after it has been run, you can use the `fixedDelay` property:
+In this example, the method will run every minute since the start of the application. If you don't want to run your job every x milliseconds, but you want to run the method x milliseconds after it has been run, you can use the `fixedDelay` property:
 
 ```java
 @Scheduled(fixedDelay = 60000)
