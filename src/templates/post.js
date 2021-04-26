@@ -41,10 +41,7 @@ export const query = graphql`
           categories
           featuredImage {
             childImageSharp {
-              fluid(maxWidth: 512) {
-                src
-                ...GatsbyImageSharpFluid
-              }
+              gatsbyImageData(layout: CONSTRAINED, width: 80)
             }
           }
           iso: date
@@ -80,7 +77,7 @@ Post.propTypes = {
         title: PropTypes.string,
         featuredImage: PropTypes.shape({
           childImageSharp: PropTypes.shape({
-            fluid: PropTypes.object
+            gatsbyImageData: PropTypes.object
           })
         }),
         excerpt: PropTypes.string

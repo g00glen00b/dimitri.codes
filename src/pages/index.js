@@ -19,10 +19,7 @@ const allPostsQuery = graphql`
             excerpt
             featuredImage {
               childImageSharp {
-                fluid(maxWidth: 128) {
-                  src
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(layout: CONSTRAINED, width: 80)
               }
             }
           }

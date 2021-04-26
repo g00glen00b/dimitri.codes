@@ -1,9 +1,9 @@
 import React from "react"
 import {graphql} from "gatsby"
 import {SEO} from '../components/Seo';
-import {Pagination} from '../components/Pagination';
 import {Layout} from '../components/Layout';
-import {PostCard} from '../components/PostCard';
+import {Pagination} from '../components/Pagination';
+import {PostCardContainer} from "../components/PostCardContainer";
 import PropTypes from 'prop-types';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
@@ -12,18 +12,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
       Posts
     </h1>
     <SEO title="Posts"/>
-    {allMarkdownRemark.edges.map(({node}) => (
-      <PostCard
-        key={node.id}
-        categories={node.frontmatter.categories}
-        excerpt={node.excerpt}
-        manualExcerpt={node.frontmatter.excerpt}
-        isNew={node.frontmatter.daysAgo < 20}
-        readingTime={node.timeToRead}
-        slug={node.fields.slug}
-        tags={node.frontmatter.tags}
-        title={node.frontmatter.title}/>
-    ))}
+    <PostCardContainer posts={allMarkdownRemark.edges}/>
     <Pagination
       pageCount={pageContext.pageCount}
       currentPage={pageContext.currentPage}
@@ -43,6 +32,11 @@ export const query = graphql`
             title
             daysAgo: date(difference: "days")
             excerpt
+            featuredImage {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED, width: 80)
+              }
+            }
           }
           fields {
             slug
@@ -71,7 +65,12 @@ Posts.propTypes = {
             tags: PropTypes.arrayOf(PropTypes.string),
             daysAgo: PropTypes.number,
             title: PropTypes.string,
-            excerpt: PropTypes.string
+            excerpt: PropTypes.string,
+            featuredImage: PropTypes.shape({
+              childImageSharp: PropTypes.shape({
+                gatsbyImageData: PropTypes.object
+              })
+            })
           }),
           fields: PropTypes.shape({
             slug: PropTypes.string

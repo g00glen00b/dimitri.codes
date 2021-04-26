@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -87,23 +88,18 @@ module.exports = {
       resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {
-          include: /images\/.+?\.svg$/
+          include: /.*\.svg$/
         }
       }
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [{
-          family: `Roboto`,
-          variants: [`400`, `500`]
-        }, {
-          family: `Roboto Mono`,
-          variants: [`400`, `700`]
-        }, {
-          family: `Montserrat`,
-          variants: [`600`, `700`]
-        }]
+        fonts: [
+            `Roboto:400,500`,
+            `Roboto Mono:400,700`,
+            `Montserrat:700`
+        ]
       }
     },
     `gatsby-plugin-advanced-sitemap`,
@@ -123,7 +119,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Dimitri's tutorials`,
-        short_name: `Dimitri\'s tutorials`,
+        short_name: `Dimitri's tutorials`,
         start_url: `/`,
         background_color: `#FFFFFF`,
         theme_color: `#3E84CB`,
