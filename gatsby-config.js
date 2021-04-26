@@ -87,18 +87,23 @@ module.exports = {
       resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {
-          include: /.*\.svg$/
+          include: /images\/.+?\.svg$/
         }
       }
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
-        fonts: [
-            `Roboto:400,500`,
-            `Roboto Mono:400,700`,
-            `Montserrat:600,700`
-        ]
+        fonts: [{
+          family: `Roboto`,
+          variants: [`400`, `500`]
+        }, {
+          family: `Roboto Mono`,
+          variants: [`400`, `700`]
+        }, {
+          family: `Montserrat`,
+          variants: [`600`, `700`]
+        }]
       }
     },
     `gatsby-plugin-advanced-sitemap`,
