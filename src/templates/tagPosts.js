@@ -3,8 +3,8 @@ import {graphql} from "gatsby"
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {Pagination} from '../components/Pagination';
-import PropTypes from 'prop-types';
 import {PostCardContainer} from '../components/PostCardContainer';
+import PropTypes from 'prop-types';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
@@ -20,35 +20,6 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   </Layout>
 );
 
-Posts.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.arrayOf(PropTypes.shape({
-        node: PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          excerpt: PropTypes.string,
-          frontmatter: PropTypes.shape({
-            categories: PropTypes.arrayOf(PropTypes.string),
-            tags: PropTypes.arrayOf(PropTypes.string),
-            daysAgo: PropTypes.number,
-            title: PropTypes.string,
-            excerpt: PropTypes.string
-          }),
-          fields: PropTypes.shape({
-            slug: PropTypes.string
-          })
-        })
-      }))
-    })
-  }),
-  pageContext: PropTypes.shape({
-    fieldValue: PropTypes.string.isRequired,
-    base: PropTypes.string.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired
-  })
-};
-
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $fieldValue: String!) {
     allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit, filter: {frontmatter: {tags: {eq: $fieldValue}}}) {
@@ -62,10 +33,7 @@ export const query = graphql`
             excerpt
             featuredImage {
               childImageSharp {
-                fluid(maxWidth: 128) {
-                  src
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(layout: CONSTRAINED, width: 80)
               }
             }
           }
@@ -82,3 +50,38 @@ export const query = graphql`
 `;
 
 export default Posts;
+
+
+Posts.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          excerpt: PropTypes.string,
+          frontmatter: PropTypes.shape({
+            categories: PropTypes.arrayOf(PropTypes.string),
+            tags: PropTypes.arrayOf(PropTypes.string),
+            daysAgo: PropTypes.number,
+            title: PropTypes.string,
+            excerpt: PropTypes.string,
+            featuredImage: PropTypes.shape({
+              childImageSharp: PropTypes.shape({
+                gatsbyImageData: PropTypes.object
+              })
+            })
+          }),
+          fields: PropTypes.shape({
+            slug: PropTypes.string
+          })
+        })
+      }))
+    })
+  }),
+  pageContext: PropTypes.shape({
+    fieldValue: PropTypes.string.isRequired,
+    base: PropTypes.string.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    pageCount: PropTypes.number.isRequired
+  })
+};

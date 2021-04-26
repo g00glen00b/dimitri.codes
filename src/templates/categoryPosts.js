@@ -3,8 +3,8 @@ import {graphql} from "gatsby"
 import {SEO} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {Pagination} from '../components/Pagination';
-import PropTypes from 'prop-types';
 import {PostCardContainer} from '../components/PostCardContainer';
+import PropTypes from 'prop-types';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
@@ -33,10 +33,7 @@ export const query = graphql`
             excerpt
             featuredImage {
               childImageSharp {
-                fluid(maxWidth: 128) {
-                  src
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(layout: CONSTRAINED, width: 80)
               }
             }
           }
@@ -67,7 +64,7 @@ Posts.propTypes = {
             excerpt: PropTypes.string,
             featuredImage: PropTypes.shape({
               childImageSharp: PropTypes.shape({
-                fluid: PropTypes.object
+                gatsbyImageData: PropTypes.object
               })
             })
           }),

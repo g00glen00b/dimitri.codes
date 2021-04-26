@@ -10,7 +10,6 @@ a.excerpt {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: transform .3s, box-shadow .3s;
-  border: solid 2px var(--primary-color);
 }
 
 a.excerpt:hover {
@@ -68,6 +67,10 @@ a.excerpt:hover {
 
 .excerpt-body {
   padding: 1rem;
+  border-radius: 0 0 0.3rem 0.3rem;
+  border-left: solid 2px var(--primary-color);
+  border-bottom: solid 2px var(--primary-color);
+  border-right: solid 2px var(--primary-color);
 }
 
 .excerpt-read-more {
