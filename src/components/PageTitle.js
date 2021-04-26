@@ -1,5 +1,5 @@
 import React from 'react';
-import Img from 'gatsby-image';
+import {GatsbyImage} from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import {TiCalendarOutline, TiStopwatch, TiTag} from 'react-icons/ti';
 import {Link} from 'gatsby';
@@ -9,7 +9,9 @@ import {kebabCase} from '../helpers/contentHelpers';
 export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
   <div className={`page-title ${featuredImage != null ? `page-title--with-image` : `page-title--without-image`}`}>
     {featuredImage && <div className="page-title__image">
-      <Img fluid={featuredImage.childImageSharp.fluid}/>
+      <GatsbyImage
+        image={featuredImage.childImageSharp.gatsbyImageData}
+        alt={`Featured image for "${title}"`}/>
     </div>}
     <h1 className="page-title__title">{title}</h1>
     <dl className="page-title__info">
@@ -56,7 +58,7 @@ PageTitle.propTypes = {
   title: PropTypes.string,
   featuredImage: PropTypes.shape({
     childImageSharp: PropTypes.shape({
-      fluid: PropTypes.object
+      gatsbyImageData: PropTypes.object
     })
   })
 };

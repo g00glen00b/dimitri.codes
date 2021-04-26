@@ -28,7 +28,7 @@ PostCardContainer.propTypes = {
         excerpt: PropTypes.string,
         featuredImage: PropTypes.shape({
           childImageSharp: PropTypes.shape({
-            fluid: PropTypes.object
+            gatsbyImageData: PropTypes.object
           })
         })
       }),

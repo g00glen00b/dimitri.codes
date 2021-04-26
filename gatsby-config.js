@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -97,7 +98,7 @@ module.exports = {
         fonts: [
             `Roboto:400,500`,
             `Roboto Mono:400,700`,
-            `Montserrat:600,700`
+            `Montserrat:700`
         ]
       }
     },
@@ -118,7 +119,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Dimitri's tutorials`,
-        short_name: `Dimitri\'s tutorials`,
+        short_name: `Dimitri's tutorials`,
         start_url: `/`,
         background_color: `#FFFFFF`,
         theme_color: `#3E84CB`,
