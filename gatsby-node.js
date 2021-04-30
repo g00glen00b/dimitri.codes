@@ -1,3 +1,4 @@
+const {createSocialCard} = require('./src/helpers/node/socialCardHelpers');
 const {createSlug} = require('./src/helpers/node/slugHelpers');
 const {createLegacyCategoryTutorialsPage, createPostPages, createCategoryPostsPages, createPostsPages, createTagPostsPages} = require('./src/helpers/node/createPageHelpers');
 
@@ -44,6 +45,7 @@ exports.createPages = async ({graphql, actions: {createPage}}) => {
   ];
 };
 
-exports.onCreateNode = ({node, actions}) => {
+exports.onCreateNode = async ({node, actions, store, cache, createNodeId}) => {
   createSlug(node, actions);
+  await createSocialCard(node, actions, store, cache, createNodeId);
 };

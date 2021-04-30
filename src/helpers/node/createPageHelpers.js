@@ -39,14 +39,6 @@ function createPostPages({allPosts}, createPage) {
   }));
 }
 
-function createPagePages({allWordpressPage}, createPage) {
-  return allWordpressPage.edges.map(({node}) => createPage({
-    path: node.slug,
-    component: path.resolve('./src/templates/page.js'),
-    context: {id: node.id}
-  }));
-}
-
 function createPostsPages({allPosts}, createPage) {
   return createPaginationPages(
     path.resolve('./src/templates/posts.js'),

@@ -13,7 +13,7 @@ const Post = ({data: {markdownRemark}}) => {
         <SEO
           title={markdownRemark.frontmatter.title}
           description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
-          image={markdownRemark.frontmatter.featuredImage}
+          image={markdownRemark.socialCard}
           meta={[
               ...getTimeMetadata(markdownRemark.frontmatter.iso, markdownRemark.frontmatter.iso),
               ...getTagMetadata(markdownRemark.frontmatter.tags),
@@ -54,6 +54,11 @@ export const query = graphql`
         fields {
           slug
         }
+        socialCard {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
         excerpt(format: PLAIN)
       }
     }
@@ -84,7 +89,12 @@ Post.propTypes = {
       }),
       fields: PropTypes.shape({
         slug: PropTypes.string
-      })
+      }),
+      socialCard: PropTypes.shape({
+        childImageSharp: PropTypes.shape({
+          gatsbyImageData: PropTypes.object
+        })
+      }),
     }),
     site: PropTypes.shape({
       siteMetadata: PropTypes.shape({
