@@ -23,7 +23,7 @@ export function getOpenGraphMetadata(site, title, metaDescription, location, ima
     {property: `og:locale`, content: `en_US`},
     {property: `og:url`, content: `${site.siteMetadata.siteUrl}${location.pathname}`},
     {property: `og:image`, content: `${site.siteMetadata.siteUrl}${image}`},
-    {property: `og:image:secure_url`, content: `${site.siteMetadata.siteUrl}${image}`},
+    {property: `og:image:secure_url`, content: `${site.siteMetadata.siteUrl}${image}`}
   ];
 }
 
@@ -34,6 +34,6 @@ export function getTwitterMetadata(site, title, metaDescription, image) {
     {name: `twitter:title`, content: title},
     {name: `twitter:description`, content: metaDescription},
     {name: `twitter:site`, content: site.siteMetadata.author},
-    {name: `twitter:image`, content: `${site.siteMetadata.siteUrl}${image}`},
+    {name: `twitter:image`, content: `${site.siteMetadata.siteUrl}${image}`}
   ];
 }
