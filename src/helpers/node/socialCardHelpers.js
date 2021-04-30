@@ -9,7 +9,7 @@ async function createSocialCard(node, {createNode}, store, cache, createNodeId) 
     const {minutes: minutesRead} = readingTime(node.rawMarkdownBody);
     const formattedDate = format(new Date(node.frontmatter.date), 'MMMM do, yyyy');
     const buffer = await generateImage(node.fields.slug, node.frontmatter.title, formattedDate, Math.floor(minutesRead), node.frontmatter.tags);
-    let socialCardNode = await createFileNodeFromBuffer({
+    const socialCardNode = await createFileNodeFromBuffer({
       buffer,
       createNodeId,
       createNode,
@@ -23,30 +23,28 @@ async function createSocialCard(node, {createNode}, store, cache, createNodeId) 
 }
 
 async function generateImage(name, title, publishDate, minutesRead, tags) {
-  const width = 1200;
-  const height = 600;
-  const padding = 40;
-  const iconSize = 24;
-  const shadowDistance = 20;
-  const titleLineHeight = 60;
-  const logoWidth = 250;
-  const logoHeight = 125;
   registerFont(join('src', 'social-card', 'Montserrat-Bold.ttf'), {family: 'Montserrat', weight: '700'});
   registerFont(join('src', 'social-card', 'Roboto-Regular.ttf'), {family: 'Roboto', weight: '400'});
-  const canvas = createCanvas(width, height);
+  const canvas = createCanvas(1200, 600);
   const context = canvas.getContext('2d');
-  fillBackground(context, '#f3f3f9', width, height);
-  showBox(context, '#ffffff', '#2d3452', padding, padding, width - 2 * padding, height - 2 * padding, shadowDistance);
-  showText(context, 'bold 40pt Montserrat', '#051923', title, padding * 2, padding * 2 + 50, width - 4 * padding, titleLineHeight);
-  await showImage(context, join('src', 'social-card', 'calendar-outline.png'), padding * 2, padding * 2 + titleLineHeight * 3 + 20, iconSize, iconSize);
-  showText(context, '16pt Roboto', '#051923', publishDate, padding * 2 + iconSize + 20, padding * 2 + titleLineHeight * 3 + 39, width - 4 * padding, 20);
-  await showImage(context, join('src', 'social-card', 'stopwatch.png'), padding * 2, padding * 2 + titleLineHeight * 3 + 70, iconSize, iconSize);
-  showText(context, '16pt Roboto', '#051923', `${minutesRead} minute read`, padding * 2 + iconSize + 20, padding * 2 + titleLineHeight * 3 + 89, width - 4 * padding, 20);
-  await showImage(context, join('src', 'social-card', 'tag.png'), padding * 2, padding * 2 + titleLineHeight * 3 + 120, iconSize, iconSize);
+  fillBackground(context, '#f3f3f9', 1200, 600);
+  showBox(context, '#ffffff', '#2d3452', 40, 40, 1120, 520, 20);
+  context.font = 'bold 40pt Montserrat';
+  context.textAlign = 'left';
+  context.fillStyle = '#051923';
+  showText(context, title, 80, 130, 1040, 60);
+  await showImage(context, join('src', 'social-card', 'calendar-outline.png'), 80, 260, 24, 24);
+  context.font = '16pt Roboto';
+  context.textAlign = 'left';
+  context.fillStyle = '#051923';
+  showText(context, publishDate, 124, 299, 821, 20);
+  await showImage(context, join('src', 'social-card', 'stopwatch.png'), 80, 330, 24, 24);
+  showText(context, `${minutesRead} minute read`, 124, 349, 821, 20);
   if (tags != null && tags.length > 0) {
-    showText(context, '16pt Roboto', '#051923', tags.join(', '), padding * 2 + iconSize + 20, padding * 2 + titleLineHeight * 3 + 139, width - 4 * padding, 20);
-    await showImage(context, join('src', 'social-card', 'logo.png'), width - padding * 2 - shadowDistance - logoWidth, height - padding - shadowDistance - logoHeight, logoWidth, logoHeight);
+    await showImage(context, join('src', 'social-card', 'tag.png'), 80, 380, 24, 24);
+    showText(context, tags.join(', '), 124, 399, 821, 20);
   }
+  await showImage(context, join('src', 'social-card', 'logo.png'), 850, 415, 250, 125);
   return canvas.toBuffer('image/png');
 }
 
@@ -65,24 +63,21 @@ function showBox(context, backgroundColor, borderColor, x, y, width, height, sha
   context.strokeRect(x, y, width - 2 * shadowDistance, height - 2 * shadowDistance);
 }
 
-function showText(context, font, color, text, x, y, width, lineHeight) {
-  context.font = font;
-  context.textAlign = 'left';
-  context.fillStyle = '#051923';
+function showText(context, text, x, y, maxWidth, lineHeight) {
   const words = text.split(' ');
   let currentLine = '';
   let currentY = y;
-  for (let index = 0; index < words.length; index++) {
-    const testLine = currentLine + words[index] + ' ';
+  words.forEach(word => {
+    const testLine = currentLine + word + ' ';
     const {width: testWidth} = context.measureText(testLine);
-    if (testWidth > width) {
+    if (testWidth > maxWidth) {
       context.fillText(currentLine, x, currentY);
       currentY += lineHeight;
-      currentLine = words[index] + ' ';
+      currentLine = word + ' ';
     } else {
       currentLine = testLine;
     }
-  }
+  });
   context.fillText(currentLine, x, currentY);
 }
 
