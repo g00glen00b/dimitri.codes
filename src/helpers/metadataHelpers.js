@@ -29,7 +29,7 @@ export function getOpenGraphMetadata(site, title, metaDescription, location, ima
 
 export function getTwitterMetadata(site, title, metaDescription, image) {
   return [
-    {name: `twitter:card`, content: `summary`},
+    {name: `twitter:card`, content: `summary_large_image`},
     {name: `twitter:creator`, content: site.siteMetadata.author},
     {name: `twitter:title`, content: title},
     {name: `twitter:description`, content: metaDescription},
