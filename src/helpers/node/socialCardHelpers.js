@@ -28,15 +28,15 @@ async function generateImage(name, title, publishDate, minutesRead, tags) {
   const canvas = createCanvas(1200, 600);
   const context = canvas.getContext('2d');
   fillBackground(context, '#f3f3f9', 1200, 600);
-  showBox(context, '#ffffff', '#2d3452', 40, 40, 1120, 520, 20);
+  showBox(context, '#ffffff', '#2d3452', 60, 60, 1080, 480);
   context.font = 'bold 40pt Montserrat';
   context.textAlign = 'left';
   context.fillStyle = '#051923';
   showText(context, title, 80, 130, 1040, 60);
-  await showImage(context, join('src', 'social-card', 'calendar-outline.png'), 80, 260, 24, 24);
   context.font = '16pt Roboto';
   context.textAlign = 'left';
   context.fillStyle = '#051923';
+  await showImage(context, join('src', 'social-card', 'calendar-outline.png'), 80, 280, 24, 24);
   showText(context, publishDate, 124, 299, 821, 20);
   await showImage(context, join('src', 'social-card', 'stopwatch.png'), 80, 330, 24, 24);
   showText(context, `${minutesRead} minute read`, 124, 349, 821, 20);
@@ -53,14 +53,15 @@ function fillBackground(context, color, width, height) {
   context.fillRect(0, 0, width, height);
 }
 
-function showBox(context, backgroundColor, borderColor, x, y, width, height, shadowDistance) {
+function showBox(context, backgroundColor, borderColor, x, y, width, height) {
+  const shadowDistance = 20;
   context.fillStyle = borderColor;
-  context.fillRect(x + shadowDistance, y + shadowDistance, width - 2 * shadowDistance, height - 2 * shadowDistance);
+  context.fillRect(x + shadowDistance, y + shadowDistance, width, height);
   context.fillStyle = backgroundColor;
   context.strokeStyle = borderColor;
-  context.lineWidth = '4pt';
-  context.fillRect(x, y, width - 2 * shadowDistance, height - 2 * shadowDistance);
-  context.strokeRect(x, y, width - 2 * shadowDistance, height - 2 * shadowDistance);
+  context.lineWidth = '16pt';
+  context.fillRect(x, y, width, height);
+  context.strokeRect(x, y, width, height);
 }
 
 function showText(context, text, x, y, maxWidth, lineHeight) {

@@ -23,7 +23,7 @@ export function getOpenGraphMetadata(site, title, metaDescription, location, ima
     {property: `og:locale`, content: `en_US`},
     {property: `og:url`, content: `${site.siteMetadata.siteUrl}${location.pathname}`},
     {property: `og:image`, content: `${site.siteMetadata.siteUrl}${image}`},
-    {property: `og:image:secure_url`, content: `${site.siteMetadata.siteUrl}${image}`},
+    {property: `og:image:secure_url`, content: `${site.siteMetadata.siteUrl}${image}`}
   ];
 }
 
