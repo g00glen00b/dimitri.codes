@@ -4,7 +4,7 @@ date: "2021-04-27"
 featuredImage: "../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot"]
-excerpt: In this blog post, we discover whether we have to use an interface when writing services with Spring boot."
+excerpt: "In this blog post, we discover whether we have to use an interface when writing services with Spring boot."
 ---
 
 # Do I need an interface with Spring boot?
