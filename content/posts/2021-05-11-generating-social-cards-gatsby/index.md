@@ -1,7 +1,7 @@
 ---
 title: "Generating social cards with Gatsby"
 date: "2021-05-11"
-featuredImage: "../../images/logos/spring-boot.png"
+featuredImage: "../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby"]
 excerpt: I always wanted some cool looking social cards, and in this tutorial I'll cover how you can automatically generate them for your posts with Gatsby."
