@@ -57,7 +57,8 @@ If you're using Gatsby, you'll typically manage these with React Helmet. Many st
 
 ### Set up
 I don't want to manually create these social card images. So, in stead of that, I will automate it.
-To do this, I will use the [node-canvas](https://www.npmjs.com/package/canvas) library, which I can install by using:
+To do this, I could use any of the existing plugins. However, they are limited in customization. That's why I decided to write my own.
+A library that can help you with this is the [node-canvas](https://www.npmjs.com/package/canvas) library, which you can install by using:
 
 ```
 npm install --save canvas
@@ -103,7 +104,7 @@ exports.onCreateNode = async ({node}) => {
 This code will generate a canvas of 1200 by 600 pixels, which is ideal for large social cards.
 
 ### Working with rectangles
-Now, if we would save this, we would only get a white 1200x600 image, which isn't what we want.
+Now, if we would save this, we would only get an empty 1200x600 image, which isn't what we want.
 First of all, we can use `fillRect()` to fill the entire space with a different color.
 
 For example:
@@ -249,7 +250,7 @@ exports.onCreateNode = async ({node}) => {
 };
 ```
 
-**Be aware**, registering the font should happen before you create the canvas. That's why I'm putting this as the first line within the `onCreateNode()` function.
+**Be aware**, registering the font should happen before you create the canvas. That's why I'm putting this on one of the first lines within the `onCreateNode()` function.
 
 ### Adding images
 The final part is to add the website logo to the social card. From my experience, this only works with regular image types like png and jpegs.
@@ -411,4 +412,9 @@ This allows me to use the image within the `<Helmet/>` component:
 />
 ```
 
+By doing so, you now have a working social card with automatically generated images! If you want to make sure that it looks fine on social media, you can use the [Twitter Card Validator](https://cards-dev.twitter.com/validator) for Twitter and the [Facebook sharing debugger](https://developers.facebook.com/tools/debug/) for Facebook.
+
+If you're interested in a working example, then look no further, as this blog is using those automatically generated images. The source code can be found on [GitHub](https://github.com/g00glen00b/gatsby-blog/blob/main/src/helpers/node/socialCardHelpers.js).
+
+Let me know if you created some kickass social card images using this approach.
 
