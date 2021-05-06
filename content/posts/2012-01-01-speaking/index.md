@@ -10,16 +10,18 @@ categories: ["Pages"]
 The talk will be given for the [WordCamp Antwerp conference](https://2020.antwerp.wordcamp.org/).<br />
 ~~(March 27th, 2020)~~ (Postphoned due to COVID-19)
 
-**Tech talk about Micronaut**, An introduction to Micronaut, what it does and why it exists in the vast Java ecosystem.
-Talk will be given during an Optis team meeting for colleagues.<br />
-(July 31th, 2020)
-
-**Better monitoring with Spring boot Actuator**, An overview of what's possible with Spring boot Actuator and Micrometer.
-Taalk will be given to employees of Aquafin.<br />
-(August 4th, 2020)
-
 
 ### Past 
+
+**Better monitoring with Spring boot Actuator**, An overview of what's possible with Spring boot Actuator and Micrometer.
+Talk will be given to employees of Aquafin.<br />
+Slides can be found on [Speaker Deck](https://speakerdeck.com/g00glen00b/better-monitoring-with-spring-boot-actuator).<br />
+(August 4th, 2020)
+
+**Tech talk about Micronaut**, An introduction to Micronaut, what it does and why it exists in the vast Java ecosystem.
+Talk will be given during an Optis team meeting for colleagues.<br />
+Slides can be found on [Speaker Deck](https://speakerdeck.com/g00glen00b/tech-talk-micronaut).<br />
+(July 31th, 2020)
 
 **From WordPress to Gatsby**, A talk about Gatsby, and how and why I transitioned from WordPress to Gatsby, given for the [Fronteers meetup](https://www.meetup.com/Fronteers-BE/events/267803949/).
 Slides can be found on [Speaker Deck](https://speakerdeck.com/g00glen00b/from-wordpress-to-gatsby).<br />
