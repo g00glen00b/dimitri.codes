@@ -33,7 +33,7 @@ Other social media use the [Open Graph Protocol](https://ogp.me/). To make those
 - `og:title`: The title of your webpage.
 - `og:description`: The description of your webpage.
 - `og:site_name`: The name of your website.
-- `og:type`: The type of card yu want. I typically use **website** for this.
+- `og:type`: The type of card you want. I typically use **website** for this.
 - `og:locale`: The language or locale of the webbsite. For English you can use **en_US**.
 - `og:url`: The canonical URL of your webpage. Use this if you have multiple URLs pointing to the same resource.
 - `og:image`: The URL of the image you want to show.
@@ -147,6 +147,8 @@ exports.onCreateNode = async ({node}) => {
 This will create a white box on your image with a darkblue border.
 
 ![Current progress of social card](images/social-card-border.png)
+
+*Be aware, the bordered white box is surrounded by a light gray background. It's not visible because it's the same background as my blog.*
 
 ### Showing text
 The next part is to show the title of each blog post. Since we have access to the node, we can obtain the title and show it:
