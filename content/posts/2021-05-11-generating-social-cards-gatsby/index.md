@@ -137,7 +137,6 @@ exports.onCreateNode = async ({node}) => {
     context.fillRect(0, 0, 1200, 600);
     context.fillStyle = '#ffffff';
     context.strokeStyle = '#2d3452';
-    context.lineWidth = '4pt';
     context.fillRect(40, 40, 1120, 520);
     context.strokeRect(40, 40, 1120, 520);
     // TODO: add more

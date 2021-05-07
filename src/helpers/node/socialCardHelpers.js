@@ -59,7 +59,7 @@ function showBox(context, backgroundColor, borderColor, x, y, width, height) {
   context.fillRect(x + shadowDistance, y + shadowDistance, width, height);
   context.fillStyle = backgroundColor;
   context.strokeStyle = borderColor;
-  context.lineWidth = '16pt';
+  context.lineWidth = 4;
   context.fillRect(x, y, width, height);
   context.strokeRect(x, y, width, height);
 }
