@@ -37,12 +37,12 @@ async function generateImage(name, title, publishDate, minutesRead, tags) {
   context.textAlign = 'left';
   context.fillStyle = '#051923';
   await showImage(context, join('src', 'social-card', 'calendar-outline.png'), 80, 280, 48, 48);
-  showText(context, publishDate, 150, 318, 821, 20);
+  showText(context, publishDate, 150, 318, 680, 30);
   await showImage(context, join('src', 'social-card', 'stopwatch.png'), 80, 350, 48, 48);
-  showText(context, `${minutesRead} minute read`, 150, 388, 821, 20);
+  showText(context, `${minutesRead} minute read`, 150, 388, 680, 30);
   if (tags != null && tags.length > 0) {
     await showImage(context, join('src', 'social-card', 'tag.png'), 80, 420, 48, 48);
-    showText(context, tags.join(', '), 150, 458, 821, 20);
+    showText(context, tags.join(', '), 150, 458, 680, 30);
   }
   await showImage(context, join('src', 'social-card', 'logo.png'), 850, 415, 250, 125);
   return canvas.toBuffer('image/png');
