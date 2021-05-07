@@ -39,7 +39,7 @@ Other social media use the [Open Graph Protocol](https://ogp.me/). To make those
 - `og:image`: The URL of the image you want to show.
 - `og:image:secure_url`: The URL of the image you want to show for HTTPS.
 
-Another thing you have to be aware of is that Twitter uses the `property` attribute to define the property name, while Open Graph utilizes the `name` property.
+Another thing you have to be aware of is that Twitter uses the `property` attribute to define the property name, while Open Graph utilizes the `name` attribute.
 For example:
 
 ```html
