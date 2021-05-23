@@ -3,7 +3,7 @@ title: "Deploying your Spring boot application to AWS with Terraform"
 date: "2021-05-25"
 featuredImage: "../../images/logos/terraform.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "AWS", "Terraform"]
+tags: ["Spring", "Spring boot", "AWS", "Elastic Beanstalk", "Terraform"]
 excerpt: "In this tutorial I'll deploy a simple Spring boot application on AWS by using Terraform."
 ---
 
@@ -19,10 +19,11 @@ These cloud providers provide hundreds of services, each dedicated towards a spe
 This means that setting up the infrastructure is a lot more complex than it used to be. Luckily, the tooling evolved a lot as well, and now there are several "infrastructure as code" tools.
 These tools allow you to describe your infrastructure as code. In addition, they will create or destroy the infrastructure that is required.
 
-Terraform is one of these tools. The nice thing is that it comes with a lot of modules that allow you to set up infrastructure on many cloud providers.
+[Terraform](https://www.terraform.io/) is one of these tools. The nice thing is that it comes with a lot of modules that allow you to set up infrastructure on many cloud providers.
 
 In this tutorial, I'll deploy a simple Spring boot application on AWS Elastic Beanstalk with Terraform.
 
+![Terraform + Elastic Beanstalk + Spring boot logos](images/terraform-beanstalk-springboot.png)
 
 ### Terraform providers
  
@@ -32,7 +33,7 @@ Once installed, we can start creating our first Terraform script. So let's start
 Terraform uses a specific configuration language, which is called [HCL](https://www.terraform.io/docs/language/syntax/configuration.html).
 The first step is to configure which provider we want to use. In this example, we'll go for AWS:
 
-```hcl-terraform
+```hcl
 provider "aws" {
   region = "eu-west-1"
   shared_credentials_file = "$HOME/.aws/credentials"
@@ -51,7 +52,7 @@ In addition, we have to tell Terraform how to log in to AWS. One possibility is 
 To be able to deploy our application, we first have to store our JAR file on AWS somewhere. Typically, we use an S3 bucket to do this.
 To configure this, I'm going to create a new Terraform file called **main.tf**:
 
-```hcl-terraform
+```hcl
 resource "aws_s3_bucket" "s3_bucket_myapp" {
   bucket = "myapp-prod"
   acl = "private"
@@ -62,7 +63,7 @@ In this case, we're creating an S3 bucket called "myapp-dev", which will contain
 
 Within that bucket, we can add the JAR file as an object:
 
-```hcl-terraform
+```hcl
 resource "aws_s3_bucket_object" "s3_bucket_object_myapp" {
   bucket = aws_s3_bucket.s3_bucket_myapp.id
   key = "beanstalk/myapp"
@@ -85,7 +86,7 @@ You provide an application, and your cloud provider provides everything else up 
 
 Within the Terraform scripts, we first have to create an application:
 
-```hcl-terraform
+```hcl
 resource "aws_elastic_beanstalk_application" "beanstalk_myapp" {
   name = "myapp"
   description = "The description of my application"
@@ -94,7 +95,7 @@ resource "aws_elastic_beanstalk_application" "beanstalk_myapp" {
 
 After that, we have to create a version, in which we can tell AWS where to find our application:
 
-```hcl-terraform
+```hcl
 resource "aws_elastic_beanstalk_application_version" "beanstalk_myapp_version" {
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
   bucket = aws_s3_bucket.s3_bucket_myapp.id
@@ -112,7 +113,7 @@ In this example, I'll run my application on Java 11, so I decided to use "64bit 
 
 For example:
 
-```hcl-terraform
+```hcl
 resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
   name = "myapp-prod"
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
@@ -128,7 +129,7 @@ That means we have to run our application on that port.
 
 Luckily, with Spring boot we can configure the port by setting the `SERVER_PORT` environment variable:
 
-```hcl-terraform
+```hcl
 resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
   name = "myapp-prod"
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
@@ -152,7 +153,7 @@ In my case, I'm going to run on a fairly small instance type called "t2.micro". 
 
 To configure the instance type, I'll use:
 
-```hcl-terraform
+```hcl
 resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
   name = "myapp-prod"
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
@@ -181,7 +182,7 @@ This does the same thing, but according to [the documentation](https://docs.aws.
 Another setting I had to configure to make it work is to provide an IAM profile. AWS Identity and Access Management or IAM allows you to finetune permissions to access certain resources.
 If you're not interested in configuring these, you can also work with the [default instance profile for Elastic Beanstalk](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-instanceprofile.html), called `aws-elasticbeanstalk-ec2-role`.
 
-```hcl-terraform
+```hcl
 resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
   name = "myapp-prod"
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
@@ -232,7 +233,7 @@ This makes it difficult to work on the project with multiple people. To solve th
 
 To do this, we have to open **provider.tf** again and add a [backend](https://www.terraform.io/docs/language/settings/backends/s3.html):
 
-```hcl-terraform
+```hcl
 terraform {
   backend "s3" {
     bucket = "terraform-state-bucket-eu-west-1"
@@ -250,3 +251,77 @@ Be aware, when running this setup, you have to create the S3 bucket and DynamoDB
 ### Working with variables
 
 As you've seen before, we hardcoded certain things like the version of our application and the name of the environment (myapp-prod).
+To solve that, we can use [variables](https://www.terraform.io/docs/language/values/variables.html). The first step is to define what variables we'll use. To do this, I'll create a **variables.tf** file with the following contents:
+
+```hcl
+variable "myapp_version" {
+  type = "string"
+}
+
+variable "environment_suffix" {
+  type = "string"
+}
+```
+
+The next part is to use the variables where necessary. For example, within the `beanstalk_myapp_env` resource I can change the name to this:
+
+```hcl
+resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
+  name = "myapp-${var.environment_suffix}"
+  // ...
+}
+```
+
+I can do the same thing for the S3 bucket where I store my JAR file. Whether you need this depends on whether you build different JAR files for different environments.
+
+```hcl
+resource "aws_s3_bucket" "s3_bucket_myapp" {
+  bucket = "myapp-${var.environment_suffix}"
+  acl = "private"
+}
+```
+
+In addition, we can use `${var.myapp_version}` for the source of the S3 object.
+
+```hcl
+resource "aws_s3_bucket_object" "s3_bucket_object_myapp" {
+  bucket = aws_s3_bucket.s3_bucket_myapp.id
+  key = "beanstalk/myapp"
+  source = "target/myapp-${var.myapp_version}.jar"
+}
+```
+
+And finally, we can use the same variable for the Elastic Beanstalk version:
+
+```hcl
+resource "aws_elastic_beanstalk_application_version" "beanstalk_myapp_version" {
+  application = aws_elastic_beanstalk_application.beanstalk_myapp.name
+  bucket = aws_s3_bucket.s3_bucket_myapp.id
+  key = aws_s3_bucket_object.s3_bucket_object_myapp.id
+  name = "myapp-${var.myapp_version}"
+}
+```
+
+If you want to work with these variables now, you can use the `-var` parameter:
+
+```
+terraform apply -var="environment_suffix=prod" -var="myapp_version=1.0.0"
+```
+
+Alternatively, you can create a file called **production.tfvars** and add the following contents:
+
+```
+environment_suffix=prod
+myapp_version=1.0.0
+```
+
+Then you can use the file like this:
+
+```
+terraform apply -var-file="production.tfvars"
+```
+
+By doing so, you now deployed your Spring boot application on AWS using Terraform!
+You might think that this is overkill, since you can easily deploy a Spring boot application using the AWS CLI, or other tools.
+The benefit of using Terraform comes when you need to manage additional infrastructure, such as databases, other S3 buckets for your application and so on.
+Since Terraform allows you to refer to other resources, it makes setting up your infrastructure less error-prone.
