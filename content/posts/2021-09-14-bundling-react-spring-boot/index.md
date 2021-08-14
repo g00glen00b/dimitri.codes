@@ -285,3 +285,5 @@ Would I use this approach myself? Yes.
 The reason why is that for the projects I work on, scalability and build times aren't an issue.
 On the other hand, we do win a lot of time by not having to worry about how to build, deploy or maintain two applications, but just one.
 And finally, even if our approach doesn't end up to be the right solution, refactoring it won't be difficult.
+
+If you're interested in a complete example, you can find one on [GitHub](https://github.com/g00glen00b/medication-assistant).
