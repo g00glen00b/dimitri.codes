@@ -10,7 +10,7 @@ excerpt: "When using Springfox with CSRF, some issues may arise. In this tutoria
 ### What is CSRF
 
 If you're developing a REST API with Spring and Spring Security, you probably encountered the [CSRF configuration](https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/csrf.html) section.
-Cross Site Request Forgery or CSRF is a technique where the user is tricked into sending a request to an applicaiton they're logged in to.
+Cross Site Request Forgery or CSRF is a technique where the user is tricked into sending a request to an application they're logged in to.
 
 For example, let's say I'm a customer with bank XYZ and I'm currently logged in to their web application.
 Their web application has a REST API to transfer money to other people:
