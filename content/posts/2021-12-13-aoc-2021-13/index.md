@@ -1,7 +1,7 @@
 ---
 title: "Advent of code 2021 - Day 13"
 date: "2021-12-13"
-featuredImage: "../../images/logos/swagger.png"
+featuredImage: "../../images/logos/java.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java"]
 excerpt: ""
