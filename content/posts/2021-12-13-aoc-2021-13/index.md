@@ -107,7 +107,7 @@ fold along x=5
 
 After that I declared a `TransparentPaper` class. My first attempt was to create a boolean array where each coordinate would either be `true` if it was marked, or `false` if it wasn't.
 But then I decided that this would be a waste of computation power, since we're only interested in which coordinates are marked.
-So in stead of that, I started with a list of mark coordinates:
+So in stead of that, I started with a list of marked coordinates:
 
 ```java
 @Value
@@ -147,13 +147,9 @@ private Optional<Coordinate> calculateCoordinateAfterFold(Coordinate coordinate,
 I made a lot of mistakes in this part. One of the mistakes I made is that I made the assumption that the paper would always be folded in half.
 In the example given during the challenge, this is the case. However, this isn't true for the larger dataset.
 
-So, to translate a coordinate, you have to calculate the distance from the fold axis, and subtract that from the axis itself.
-There are two edge cases though:
+So, to translate the X and Y coordinate, you have to calculate the distance from the fold line, and subtract that from the fold line itself. One edge case is when the distance is zero. That means that the coordinates are on the fold line itself, and should be scrapped.
 
-1. If the distance is zero, the coordinate is on the fold line and should be scrapped.
-2. If the translated coordinate is negative, then the bottom or right half of the fold is larger than the top or left part. While not explicitly named during the challenge, I decided to scrap these coordinates as well.
-
-To solve these edge cases, I decided to return an `Optional` that would be empty if the coordinate could not be translated.
+To solve this, I decided to return an `Optional` that would be empty when the coordinate is on the fold line.
 
 After that, I wrote a `fold()` method that would apply a single fold and return a new `TransparentPaper` instance.
 
