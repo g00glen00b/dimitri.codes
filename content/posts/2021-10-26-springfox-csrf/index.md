@@ -3,7 +3,7 @@ title: "Using CSRF with Springfox"
 date: "2021-10-26"
 featuredImage: "../../images/logos/swagger.png"
 categories: ["Java", "Tutorials"]
-tags: [Spring", "Spring boot", "Swagger", "REST"]
+tags: ["Spring", "Spring boot", "Swagger", "REST"]
 excerpt: "When using Springfox with CSRF, some issues may arise. In this tutorial I'll show you how you can solve these."
 ---
 
