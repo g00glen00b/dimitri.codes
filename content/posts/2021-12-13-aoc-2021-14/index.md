@@ -312,4 +312,4 @@ void partOne_elementCount(String fileLocation, int iterations, int expectedOutpu
 I'm starting to see a pattern here. Challenges with exponentional growth, like today and day 6 often have the same challenge for parts one and two.
 The main difference is that the number of iterations changes drastically, so that you need to come up with a smart solution to avoid running into these exponentional growth issues.
 
-As usual, the full code can be found on [GitHub](https://github.com/g00glen00b/advent-of-code-2021/tree/master/src/test/java/be/g00glen00b/adventofcode/day13).
+As usual, the full code can be found on [GitHub](https://github.com/g00glen00b/advent-of-code-2021/tree/master/src/test/java/be/g00glen00b/adventofcode/day14.
