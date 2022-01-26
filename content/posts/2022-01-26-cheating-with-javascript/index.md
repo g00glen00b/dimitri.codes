@@ -1,5 +1,5 @@
 ---
-title: Cheating at online games with JavaScript"
+title: "Cheating at online games with JavaScript"
 date: "2022-01-26"
 featuredImage: "../../images/logos/javascript.png"
 categories: ["JavaScript", "Tutorials"]
