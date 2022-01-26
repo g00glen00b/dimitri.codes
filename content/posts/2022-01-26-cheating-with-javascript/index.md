@@ -59,6 +59,7 @@ function getCoordinates(cell) {
   const row = parseInt(rowString) - 1;
   const column = parseInt(columnString) - 1;
   return {row, column};
+}
 ```
 
 By using the [array destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) we can easily obtain the second and third element of the splitted string.
@@ -71,7 +72,7 @@ Now, we have to write a for each loop to apply the `getCoordinates()` function f
 The easiest way to do that is by using the [Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax), for example:
 
 ```javascript
-const cells = [...document.querySelectorAll('.puzzlecel');
+const cells = [...document.querySelectorAll('.puzzlecel')];
 ```
 
 Now we can use the [`forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function to create our two-dimensional array:
