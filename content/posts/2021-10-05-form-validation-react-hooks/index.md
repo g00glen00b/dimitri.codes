@@ -508,4 +508,4 @@ This state is updated within an `useEffect()` hook, that calls a REST API and re
 When that promise resolves, we update the state by calling `setEmailUnique()`.
 To prevent this API from being called continuously, we provide an array of parameters that have to change, such as `values.email`.
 
-With that, we've completed our generic `useForm` hook. A full example of this hook can be found [here](https://github.com/g00glen00b/medication-assistant/blob/master/medication-assistant-frontend/src/shared/hooks/useForm.js).
+With that, we've completed our generic `useForm` hook. A full example of this hook can be found [here](https://github.com/g00glen00b/medication-assistant/blob/63da6d5166d95e34c3f18ecaec1af8a552596dde/medication-assistant-frontend/src/shared/hooks/useForm.js).
