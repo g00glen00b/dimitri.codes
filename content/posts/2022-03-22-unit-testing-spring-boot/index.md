@@ -20,7 +20,8 @@ excerpt: "Testing is an important part of development, and in this tutorial I'll
 9. [Advanced answering with mocks](#advanced-answering-with-mocks)
 10. [Assertions for collections](#assertions-for-collections)
 11. [Useful builtin mocks](#useful-builtin-mocks)
-12. [Frequently asked questions](#frequently-asked-questions)
+12. [What should I test](#what-should-i-test)
+13. [Conclusion](#conclusion)
 
 ### What is unit testing
 
@@ -29,9 +30,9 @@ First of all we have to differentiate between manual and automated testing.
 With manual testing, a user goes through certain flows of the application to verify if the most common functionality is working.
 
 However, this doesn't scale, so in addition to manual testing, we usually write automated tests as well.
-With automated tests, we test a certain portion of the application during the build phase, so that it's automatically executed whenever we build and deploy our application.
+With automated tests, we run various tests automatically during the build phase.
 
-One of these automated tests are unit tests. With unit tests, we try to test a specific isolated portion of the code, also called a **unit** or a **component**.
+One of these automated tests are unit tests. With unit tests, we try to test a specific isolated part of the code, also called a **unit**.
 For example, if you have a method for creating a new user in your application, you could write a unit test for the creation/validation process.
 Beware, during these unit tests we **don't** test the integration with other parts of the application, such as other methods, database interactions and so on.
 
@@ -108,9 +109,9 @@ class MedicationAvailabilityEntityTest {
 
 Within IntelliJ, you can generate a test method by using the **Alt** + **Insert** shortcut on Windows or **Command** + **N** on macOS. 
 
-**Be aware**: Between JUnit 4 and JUnit 5, the annotations were changed. 
-Many tutorials still refer to the old annotations.
-To use JUnit 5, make sure that all imports come from **org.junit.jupiter.api**.
+> **Be aware**: Between JUnit 4 and JUnit 5, the annotations were changed. 
+> Many tutorials still refer to the old annotations.
+> To use JUnit 5, make sure that all imports come from **org.junit.jupiter.api**.
 
 
 Now we can initialize an object to use within our test:
@@ -125,7 +126,7 @@ void setQuantity_updatesQuantityIfAtLeastZeroAndLessThanInitialQuantity() {
 ```
 
 As you can see, I created an entity and already configured the initial quantity to be 100.
-This means that if the quantity I set should be zero or more and less than or equal to 100.
+This means that the quantity I set should be between (and including) 0 and 100.
 
 To test this, we set the quantity to a value between those limits (eg. 90) and test whether `getQuantity()` returns 90.
 
@@ -147,15 +148,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 ```
 
 The nice thing about AssertJ is that it comes with an easy comparison check.
-This is important because `BigDecimal`'s equality check does not match if the numbers use a different precision.
+This is important because `BigDecimal`'s `equals()` method only returns `true` if both the value and the precision are exactly the same.
+This means that **100.000** and **100.0** are not considered equal.
 
-For example:
-
-```java
-new BigDecimal("100.00").equals(new BigDecimal("100.0000")); // false
-```
-
-In this test, it doesn't really matter if the internal logic changes the precision, so that's why equality by comparison is good enough for this test.
+In this example, the precision doesn't change, but from an API perspective, it doesn't matter to me either if it did change.
+That's why equality by comparison is good enough for this example. 
 
 To run the test, we can either build our project or run it from our IDE. Within IntelliJ this can be done by clicking the green arrow next to the test method or test class.
 
@@ -430,18 +427,18 @@ On the other hand, if you use the `verify()` call, Mockito will provide a clear 
 
 ![Screenshot of the error message if the arguments do not match](./images/verify-failed.png)
 
-**Be aware**: If you have a method with multiple arguments, either all arguments should be argumentcaptors or concrete arguments.
-The following **will not work**:
-
-```java
-when(repository.findByEmailAndName(any(), "Martine Olamilekan")).thenReturn(Optional.of(entity));
-```
-
-To solve this, you can use `any()` for both parameters or use [`ArgumentMatchers.eq()`](https://javadoc.io/doc/org.mockito/mockito-core/4.4.0/org/mockito/ArgumentMatchers.html#eq-T-):
-
-```java
-when(repository.findByEmailAndName(any(), eq("Martine Olamilekan"))).thenReturn(Optional.of(entity));
-```
+> **Be aware**: If you have a method with multiple arguments, either all arguments should be argumentcaptors or concrete arguments.
+> The following **will not work**:
+> 
+> ```java
+> when(repository.findByEmailAndName(any(), "Martine Olamilekan")).thenReturn(Optional.of(entity));
+> ```
+> 
+> To solve this, you can use `any()` for both parameters or use [`ArgumentMatchers.eq()`](https://javadoc.io/doc/org.mockito/mockito-core/4.4.0/org/mockito/ArgumentMatchers.html#eq-T-):
+>
+> ```java
+> when(repository.findByEmailAndName(any(), eq("Martine Olamilekan"))).thenReturn(Optional.of(entity));
+> ```
 
 ### Capturing arguments
 
@@ -646,34 +643,18 @@ For example, the status of a response can be set in several ways.
 If you use Mockito to test this, you would use `verify()` to check if a specific method was called.
 Rather than focusing on the way we implement this, the goal should be to check whether the status has been set to 401.
 
-### Frequently asked questions
+### What should I test
 
-When talking about unit testing, there are a few questions that usually pop up.
-In this section I'll answer those.
+Before I round up things, I want to cover one topic that is commonly asked. **What should I test**?
+The answer is: **it depends**.
 
-#### Should I write unit tests for my getters and setters?
+Ideally, you should write your tests before you start implementing it.
+This is what we call **Test Driven Development** or **TDD**.
+This means that all business logic should be tested.
+However, in practice we rarely see projects with 100% coverage.
+The best thing to do is to discuss a testing goal with your team.
 
-This depends on whether your getters and setters contain additional logic like the `setQuantity()` method in my earlier examples.
-If they don't contain additional logic, it's better to spend time on writing unit tests for actual business logic.
-
-In addition, you should only generate getters and setters if you use them.
-That means that if you write unit tests for other classes, the getters and setters will be implicitly tested as well.
-
-#### Should I write unit tests for my configuration classes?
-
-No. As I mentioned earlier, your tests should focus on **behaviour** rather than on implementation details.
-Your configuration is nothing more than an implementation detail for a specific goal.
-Your configuration can be tested implicitly by writing integration or end-to-end tests, but not with unit tests.
-
-#### How many unit tests should I write?
-
-Ideally, you should write your tests before you implement your code.
-This means that basically all your code should be tested.
-In practice, you rarely see projects with 100% coverage.
-This is something you should decide with your development team.
-
-If you're using IntelliJ, you can choose to run your tests with coverage.
-This can be done by clicking the green arrow next to your test and choosing the third option.
+If you're using IntelliJ, you can view your testing coverage by clicking the green arrow next to your test and choosing the third option called "**Run ... with Coverage**".
 
 ![Screenshot of the options of running a test within IntelliJ](./images/run-options-intellij.png)
 
@@ -682,13 +663,20 @@ In addition, if you browse your code now, lines that are tested will be marked g
 
 ![Screenshot of code in IntelliJ that is covered 100%](./images/line-coverage-intellij.png)
 
-#### Should I only write unit tests?
+Keep in mind that your tests should **focus on behaviour** and not on implementation details.
+Writing unit tests for configuration classes isn't a good idea. 
+There are other types of testing that are more suitable for this such as **integration tests** and **end to end tests**. 
+Configuration classes will be tested implicitly by these other types of tests.
 
-No. The main advantage of unit tests is that they're fast due to the fact that they're isolated.
-The drawback of this is that this doesn't necessarily mean that it will work when integrated with other parts of your code.
-This means that you should also focus on integration and end to end tests.
-The time spent on each type of tests is something you have to decide with your development team as well.
-Some teams may decide to focus mostly on integration testing and less on unit testing, while other teams may decide it's the other way around.
+How many unit, integration and end to end tests you write also depends on your team.
+Unit tests main advantage is that they're **fast to develop and run**. 
+However, the drawback to their isolated nature is that these tests don't test how these units work together.
+
+
+You also should **focus on testing business logic**. 
+Writing unit tests for your getters and setters is not something you should do unless they contain specific logic such as the `setQuantity()` method I demonstrated earlier.
+Normally these getters and setters will implicitly be tested if you use those getters and setters within your business logic.
+If not, it means you're not using those getters and setters and you should likely remove them.
 
 ### Conclusion
 
