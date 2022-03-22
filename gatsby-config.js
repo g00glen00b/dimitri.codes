@@ -13,7 +13,7 @@ module.exports = {
     utterances: {
       repoUrl: process.env.REPO_URL,
       theme: 'preferred-color-scheme',
-      issueTerm: 'pathname',
+      issueTerm: 'url',
       label: 'type: comments'
     },
     headerLinks: [
