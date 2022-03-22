@@ -10,6 +10,12 @@ module.exports = {
     authorName: 'Dimitri Mestdagh',
     author: `@g00glen00b`,
     siteUrl: process.env.SITE_URL,
+    utterances: {
+      repoUrl: process.env.REPO_URL,
+      theme: 'preferred-color-scheme',
+      issueTerm: 'pathname',
+      label: 'type: comments'
+    },
     headerLinks: [
       {name: 'Home', to:'/'},
       {name: 'Tutorials', to: '/category/tutorials'},

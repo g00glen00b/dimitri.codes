@@ -5,6 +5,7 @@ import {Layout} from '../components/Layout';
 import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
 import PropTypes from 'prop-types';
 import {PageTitle} from '../components/PageTitle';
+import {Comments} from '../components/Comments';
 
 const Post = ({data: {markdownRemark}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
@@ -28,6 +29,7 @@ const Post = ({data: {markdownRemark}}) => {
         }
         {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
         <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
+        <Comments/>
       </Layout>
     );
 }
