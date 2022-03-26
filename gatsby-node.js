@@ -1,6 +1,8 @@
-const {createSocialCard} = require('./src/helpers/node/socialCardHelpers');
 const {createSlug} = require('./src/helpers/node/slugHelpers');
-const {createLegacyCategoryTutorialsPage, createPostPages, createCategoryPostsPages, createPostsPages, createTagPostsPages} = require('./src/helpers/node/createPageHelpers');
+const {createPostPages, createPostsPages, createCategoryPostsPages, createTagPostsPages,
+  createLegacyCategoryTutorialsPage
+} = require('./src/helpers/node/createPageHelpers');
+const {createSocialCard} = require('./src/helpers/node/socialCardHelpers');
 
 const allPostsQuery = `
   query {
@@ -45,7 +47,16 @@ exports.createPages = async ({graphql, actions: {createPage}}) => {
   ];
 };
 
-exports.onCreateNode = async ({node, actions, store, cache, createNodeId}) => {
+exports.onCreateNode = async ({node, actions, store, getCache, createNodeId}) => {
   createSlug(node, actions);
-  await createSocialCard(node, actions, store, cache, createNodeId);
+  await createSocialCard(node, actions, store, getCache, createNodeId);
 };
+
+exports.createResolvers = ({ createResolvers }) => createResolvers({
+  MarkdownRemark: {
+    socialCard: {
+      type: `File`,
+      resolve: (source, args, context) => context.nodeModel.findOne({type: `File`, query: {filter: {id: {eq: source.fields.socialCardId}}}})
+    }
+  }
+});

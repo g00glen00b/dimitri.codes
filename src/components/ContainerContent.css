@@ -1,6 +1,6 @@
 .container-content pre {
   border-radius: .5rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 
@@ -9,8 +9,8 @@
 .container-content li,
 .container-content .alert,
 .container-content blockquote {
-  line-height: 2.3rem;
-  font-size: 1.3rem;
+  line-height: 2.1rem;
+  font-size: 1.1rem;
 }
 
 .container-content p {

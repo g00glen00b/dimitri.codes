@@ -32,7 +32,7 @@ export const Comments = () => {
     container.current.appendChild(script);
 
     return () => container.innerHTML = '';
-  }, []);
+  }, [utterances.issueTerm, utterances.label, utterances.repoUrl, utterances.theme]);
 
   return (
     <div ref={container} />

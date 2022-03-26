@@ -1,6 +1,6 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {SEO} from '../components/Seo';
+import {Seo} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {Pagination} from '../components/Pagination';
 import {PostCardContainer} from "../components/PostCardContainer";
@@ -11,7 +11,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
     <h1 className="page__title">
       Posts
     </h1>
-    <SEO title="Posts"/>
+    <Seo title="Posts"/>
     <PostCardContainer posts={allMarkdownRemark.edges}/>
     <Pagination
       pageCount={pageContext.pageCount}

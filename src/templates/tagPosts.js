@@ -1,6 +1,6 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {SEO} from '../components/Seo';
+import {Seo} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {Pagination} from '../components/Pagination';
 import {PostCardContainer} from '../components/PostCardContainer';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
-    <SEO title={`${pageContext.fieldValue} posts`}/>
+    <Seo title={`${pageContext.fieldValue} posts`}/>
     <h1 className="page__title">
       Posts tagged with <strong>{pageContext.fieldValue}</strong>
     </h1>
