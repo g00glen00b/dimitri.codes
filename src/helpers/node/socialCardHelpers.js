@@ -4,7 +4,7 @@ const readingTime = require('reading-time');
 const format = require('date-fns/format');
 const {createFileNodeFromBuffer} = require("gatsby-source-filesystem");
 
-async function createSocialCard(node, {createNode}, store, cache, createNodeId) {
+async function createSocialCard(node, {createNode, createNodeField, createParentChildLink}, store, getCache, createNodeId) {
   if (node.internal.type === 'MarkdownRemark') {
     const {minutes: minutesRead} = readingTime(node.rawMarkdownBody);
     const formattedDate = format(new Date(node.frontmatter.date), 'MMMM do, yyyy');
@@ -13,12 +13,14 @@ async function createSocialCard(node, {createNode}, store, cache, createNodeId) 
       buffer,
       createNodeId,
       createNode,
-      cache,
-      store
+      getCache,
+      name: 'social-card'
     });
-    if (socialCardNode != null) {
-      node.socialCard___NODE = socialCardNode.id;
-    }
+    createNodeField({
+      node,
+      name: 'socialCardId',
+      value: socialCardNode.id
+    });
   }
 }
 

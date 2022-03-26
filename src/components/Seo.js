@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const siteMetadataQuery = graphql`
   query {
-    file(relativePath: {eq: "logo-square.svg"}) {
+    file(relativePath: {eq: "logo-square.png"}) {
       publicURL
     }
     site {
@@ -21,7 +21,7 @@ const siteMetadataQuery = graphql`
   }
 `;
 
-export const SEO = ({description, lang = 'en', meta = [], title, image}) => {
+export const Seo = ({description, lang = 'en', meta = [], title, image}) => {
   const {site, file} = useStaticQuery(siteMetadataQuery);
   const metaDescription = description || site.siteMetadata.description;
   // const metaImage = image != null ? image.childImageSharp.fluid.src : file.publicURL;
@@ -49,7 +49,7 @@ export const SEO = ({description, lang = 'en', meta = [], title, image}) => {
   )
 };
 
-SEO.propTypes = {
+Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   title: PropTypes.string,

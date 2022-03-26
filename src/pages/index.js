@@ -1,6 +1,6 @@
 import React from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
-import {SEO} from '../components/Seo';
+import {Seo} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {AboutHeadline} from '../components/AboutHeadline';
 import {PostCardContainer} from '../components/PostCardContainer';
@@ -40,7 +40,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home"/>
+      <Seo title="Home"/>
       <AboutHeadline/>
       <h1>Latest posts</h1>
       <PostCardContainer posts={allMarkdownRemark.edges}/>

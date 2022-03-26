@@ -108,7 +108,7 @@ module.exports = {
         ]
       }
     },
-    `gatsby-plugin-advanced-sitemap`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -130,7 +130,7 @@ module.exports = {
         background_color: `#FFFFFF`,
         theme_color: `#3E84CB`,
         display: `standalone`,
-        icon: `content/images/logo-square.svg`,
+        icon: `content/images/logo-square.png`,
         include_favicon: false
       }
     },
@@ -138,7 +138,6 @@ module.exports = {
       resolve: `gatsby-plugin-offline`,
       options: {
         workboxConfig: {
-          offlineGoogleAnalytics: true,
           runtimeCaching: [{
             urlPattern: /(\.js$|\.css$|static\/)/,
             handler: `CacheFirst`
@@ -167,6 +166,5 @@ module.exports = {
     },
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-eslint`
   ],
 };

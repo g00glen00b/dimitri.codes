@@ -1,6 +1,6 @@
 import React from 'react';
 import {graphql} from 'gatsby';
-import {SEO} from '../components/Seo';
+import {Seo} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
 import PropTypes from 'prop-types';
@@ -11,7 +11,7 @@ const Post = ({data: {markdownRemark}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
     return (
       <Layout>
-        <SEO
+        <Seo
           title={markdownRemark.frontmatter.title}
           description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
           image={markdownRemark.socialCard}
@@ -36,34 +36,34 @@ const Post = ({data: {markdownRemark}}) => {
 
 export const query = graphql`
   query ($id: String!) {
-      markdownRemark(id: {eq: $id}) {
-        frontmatter {
-          title
-          tags
-          categories
-          featuredImage {
-            childImageSharp {
-              gatsbyImageData(layout: CONSTRAINED, width: 80)
-            }
-          }
-          iso: date
-          date(formatString: "MMMM Do, YYYY")
-          excerpt
-        }
-        html
-        id
-        timeToRead
-        fields {
-          slug
-        }
-        socialCard {
+    markdownRemark(id: {eq: $id}) {
+      frontmatter {
+        title
+        tags
+        categories
+        featuredImage {
           childImageSharp {
-            gatsbyImageData
+            gatsbyImageData(layout: CONSTRAINED, width: 80)
           }
         }
-        excerpt(format: PLAIN)
+        iso: date
+        date(formatString: "MMMM Do, YYYY")
+        excerpt
       }
+      html
+      id
+      timeToRead
+      fields {
+        slug
+      }
+      socialCard {
+        childImageSharp {
+          gatsbyImageData
+        }
+      }
+      excerpt(format: PLAIN)
     }
+  }
 `;
 
 export default Post;
