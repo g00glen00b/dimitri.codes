@@ -1,4 +1,4 @@
-const {createSlug} = require('./src/helpers/node/slugHelpers');
+const {findSlug} = require('./src/helpers/node/slugHelpers');
 const {createPostPages, createPostsPages, createCategoryPostsPages, createTagPostsPages,
   createLegacyCategoryTutorialsPage
 } = require('./src/helpers/node/createPageHelpers');
@@ -21,13 +21,9 @@ const allPostsQuery = `
       }
     }
     allPosts: allMarkdownRemark {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-        }
+      nodes {
+        id
+        slug
       }
     }
   }
@@ -48,15 +44,21 @@ exports.createPages = async ({graphql, actions: {createPage}}) => {
 };
 
 exports.onCreateNode = async ({node, actions, store, getCache, createNodeId}) => {
-  createSlug(node, actions);
   await createSocialCard(node, actions, store, getCache, createNodeId);
+};
+
+exports.createSchemaCustomization = ({actions}) => {
+  const {createTypes} = actions;
+  createTypes(`type MarkdownRemark implements Node {
+    socialCard: File @link(from: "fields.socialCardId")
+  }`);
 };
 
 exports.createResolvers = ({ createResolvers }) => createResolvers({
   MarkdownRemark: {
-    socialCard: {
-      type: `File`,
-      resolve: (source, args, context) => context.nodeModel.findOne({type: `File`, query: {filter: {id: {eq: source.fields.socialCardId}}}})
+    slug: {
+      type: `String`,
+      resolve: source => findSlug(source)
     }
   }
 });

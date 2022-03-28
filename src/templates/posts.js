@@ -12,7 +12,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
       Posts
     </h1>
     <Seo title="Posts"/>
-    <PostCardContainer posts={allMarkdownRemark.edges}/>
+    <PostCardContainer posts={allMarkdownRemark.nodes}/>
     <Pagination
       pageCount={pageContext.pageCount}
       currentPage={pageContext.currentPage}
@@ -23,28 +23,22 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
     allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit) {
-      edges {
-        node {
-          excerpt(format: PLAIN)
-          frontmatter {
-            categories
-            tags
-            title
-            daysAgo: date(difference: "days")
-            excerpt
-            featuredImage {
-              childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED, width: 80)
-              }
+      nodes {
+        excerpt(format: PLAIN)
+        frontmatter {
+          categories
+          tags
+          title
+          daysAgo: date(difference: "days")
+          excerpt
+          featuredImage {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED, width: 80)
             }
           }
-          fields {
-            slug
-          }
-          id
-          fileAbsolutePath
-          timeToRead
         }
+        slug
+        id
       }
     }
   }
@@ -55,27 +49,23 @@ export default Posts;
 Posts.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.arrayOf(PropTypes.shape({
-        node: PropTypes.shape({
-          id: PropTypes.string.isRequired,
+      nodes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        excerpt: PropTypes.string,
+        timeToRead: PropTypes.number,
+        frontmatter: PropTypes.shape({
+          categories: PropTypes.arrayOf(PropTypes.string),
+          tags: PropTypes.arrayOf(PropTypes.string),
+          daysAgo: PropTypes.number,
+          title: PropTypes.string,
           excerpt: PropTypes.string,
-          timeToRead: PropTypes.number,
-          frontmatter: PropTypes.shape({
-            categories: PropTypes.arrayOf(PropTypes.string),
-            tags: PropTypes.arrayOf(PropTypes.string),
-            daysAgo: PropTypes.number,
-            title: PropTypes.string,
-            excerpt: PropTypes.string,
-            featuredImage: PropTypes.shape({
-              childImageSharp: PropTypes.shape({
-                gatsbyImageData: PropTypes.object
-              })
+          featuredImage: PropTypes.shape({
+            childImageSharp: PropTypes.shape({
+              gatsbyImageData: PropTypes.object
             })
-          }),
-          fields: PropTypes.shape({
-            slug: PropTypes.string
           })
-        })
+        }),
+        slug: PropTypes.string,
       }))
     })
   }),

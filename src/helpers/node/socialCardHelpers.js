@@ -8,7 +8,7 @@ async function createSocialCard(node, {createNode, createNodeField, createParent
   if (node.internal.type === 'MarkdownRemark') {
     const {minutes: minutesRead} = readingTime(node.rawMarkdownBody);
     const formattedDate = format(new Date(node.frontmatter.date), 'MMMM do, yyyy');
-    const buffer = await generateImage(node.fields.slug, node.frontmatter.title, formattedDate, Math.floor(minutesRead), node.frontmatter.tags);
+    const buffer = await generateImage(node.frontmatter.title, formattedDate, Math.floor(minutesRead), node.frontmatter.tags);
     const socialCardNode = await createFileNodeFromBuffer({
       buffer,
       createNodeId,
@@ -24,7 +24,7 @@ async function createSocialCard(node, {createNode, createNodeField, createParent
   }
 }
 
-async function generateImage(name, title, publishDate, minutesRead, tags) {
+async function generateImage(title, publishDate, minutesRead, tags) {
   registerFont(join('src', 'social-card', 'Montserrat-Bold.ttf'), {family: 'Montserrat', weight: '700'});
   registerFont(join('src', 'social-card', 'Roboto-Regular.ttf'), {family: 'Roboto', weight: '400'});
   const canvas = createCanvas(1200, 600);
@@ -41,7 +41,7 @@ async function generateImage(name, title, publishDate, minutesRead, tags) {
   await showImage(context, join('src', 'social-card', 'calendar-outline.png'), 80, 280, 48, 48);
   showText(context, publishDate, 150, 318, 680, 30);
   await showImage(context, join('src', 'social-card', 'stopwatch.png'), 80, 350, 48, 48);
-  showText(context, `${minutesRead} minute read`, 150, 388, 680, 30);
+  showText(context, `${minutesRead} minute(s) read`, 150, 388, 680, 30);
   if (tags != null && tags.length > 0) {
     await showImage(context, join('src', 'social-card', 'tag.png'), 80, 420, 48, 48);
     showText(context, tags.join(', '), 150, 458, 680, 30);

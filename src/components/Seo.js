@@ -24,8 +24,7 @@ const siteMetadataQuery = graphql`
 export const Seo = ({description, lang = 'en', meta = [], title, image}) => {
   const {site, file} = useStaticQuery(siteMetadataQuery);
   const metaDescription = description || site.siteMetadata.description;
-  // const metaImage = image != null ? image.childImageSharp.fluid.src : file.publicURL;
-  const {childImageSharp: {gatsbyImageData: {images: {fallback: {src: metaImage} = {}} = {}} = {}} = {}} = image || {};
+  const imageUrl = image == null ? file.publicURL : image.publicURL;
 
   return (
     <Location>
@@ -36,8 +35,8 @@ export const Seo = ({description, lang = 'en', meta = [], title, image}) => {
           titleTemplate={`%s | ${site.siteMetadata.title}`}
           meta={[
             {name: `description`, content: metaDescription},
-            ...getOpenGraphMetadata(site, title, metaDescription, location, metaImage),
-            ...getTwitterMetadata(site, title, metaDescription, metaImage),
+            ...getOpenGraphMetadata(site, title, metaDescription, location, imageUrl),
+            ...getTwitterMetadata(site, title, metaDescription, imageUrl),
             ...meta,
           ]}
           link={[

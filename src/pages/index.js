@@ -9,27 +9,23 @@ import {VisitBlogBanner} from '../components/VisitBlogBanner';
 const allPostsQuery = graphql`
   query {
     allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, limit: 10) {
-      edges {
-        node {
-          excerpt(format: PLAIN)
-          frontmatter {
-            categories
-            title
-            date(formatString: "MMMM Do, YYYY")
-            excerpt
-            featuredImage {
-              childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED, width: 80)
-              }
+      nodes {
+        excerpt(format: PLAIN)
+        frontmatter {
+          categories
+          title
+          date(formatString: "MMMM Do, YYYY")
+          excerpt
+          featuredImage {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED, width: 80)
             }
           }
-          fields {
-            slug
-          }
-          id
-          fileAbsolutePath
-          timeToRead
         }
+        slug
+        id
+        fileAbsolutePath
+        timeToRead
       }
     }
   }
@@ -43,7 +39,7 @@ const IndexPage = () => {
       <Seo title="Home"/>
       <AboutHeadline/>
       <h1>Latest posts</h1>
-      <PostCardContainer posts={allMarkdownRemark.edges}/>
+      <PostCardContainer posts={allMarkdownRemark.nodes}/>
       <VisitBlogBanner/>
     </Layout>
   );

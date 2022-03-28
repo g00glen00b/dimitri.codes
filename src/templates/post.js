@@ -53,13 +53,9 @@ export const query = graphql`
       html
       id
       timeToRead
-      fields {
-        slug
-      }
+      slug
       socialCard {
-        childImageSharp {
-          gatsbyImageData
-        }
+        publicURL
       }
       excerpt(format: PLAIN)
     }
@@ -89,9 +85,7 @@ Post.propTypes = {
         }),
         excerpt: PropTypes.string
       }),
-      fields: PropTypes.shape({
-        slug: PropTypes.string
-      }),
+      slug: PropTypes.string,
       socialCard: PropTypes.shape({
         childImageSharp: PropTypes.shape({
           gatsbyImageData: PropTypes.object

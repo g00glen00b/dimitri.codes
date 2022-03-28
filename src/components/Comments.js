@@ -31,7 +31,7 @@ export const Comments = () => {
     script.async = true;
     container.current.appendChild(script);
 
-    return () => container.innerHTML = '';
+    return () => container.current.innerHTML = '';
   }, [utterances.issueTerm, utterances.label, utterances.repoUrl, utterances.theme]);
 
   return (
