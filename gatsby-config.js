@@ -24,7 +24,7 @@ module.exports = {
     ],
     footerLinks: [
       {name: 'Privacy policy', to: '/privacy-policy'},
-      {name: 'Post an idea', to: 'https://github.com/g00glen00b/gatsby-blog/issues', outbound: true},
+      {name: 'Post an idea', to: '/post-ideas'},
       {name: 'Contact', to: '/contact'},
       {name: 'RSS', to: 'https://dimitr.im/rss.xml', outbound: true}
     ],
