@@ -2,6 +2,7 @@
 title: "About me"
 date: "2012-01-01"
 categories: ["Pages"]
+disableComments: true
 ---
 
 My name is Dimitri “g00glen00b” Mestdagh. I’m a 32 year old full-stack developer from Antwerp, Belgium.

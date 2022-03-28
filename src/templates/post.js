@@ -9,6 +9,8 @@ import {Comments} from '../components/Comments';
 
 const Post = ({data: {markdownRemark}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
+    const isCommentsDisabled = markdownRemark.frontmatter.disableComments || false;
+    console.log(isCommentsDisabled);
     return (
       <Layout>
         <Seo
@@ -29,7 +31,7 @@ const Post = ({data: {markdownRemark}}) => {
         }
         {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
         <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
-        <Comments/>
+        {isCommentsDisabled || <Comments/>}
       </Layout>
     );
 }
@@ -49,6 +51,7 @@ export const query = graphql`
         iso: date
         date(formatString: "MMMM Do, YYYY")
         excerpt
+        disableComments
       }
       html
       id
@@ -73,6 +76,7 @@ Post.propTypes = {
       timeToRead: PropTypes.number,
       frontmatter: PropTypes.shape({
         categories: PropTypes.arrayOf(PropTypes.string),
+        disableComments: PropTypes.bool,
         tags: PropTypes.arrayOf(PropTypes.string),
         daysAgo: PropTypes.number,
         iso: PropTypes.string,

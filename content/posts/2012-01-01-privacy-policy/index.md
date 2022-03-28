@@ -2,6 +2,7 @@
 title: "Your privacy matters"
 date: "2012-01-01"
 categories: ["Pages"]
+disableComments: true
 ---
 
 You probably are aware that there is a lot of controversy on the world wide web nowadays regarding privacy.

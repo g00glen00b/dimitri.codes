@@ -21,6 +21,7 @@ export const Comments = () => {
   const {site: {siteMetadata: {utterances}}} = useStaticQuery(siteMetadataQuery);
   const container = useRef(null);
   useEffect(() => {
+    const containerElement = container.current;
     const script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
     script.setAttribute('repo', utterances.repoUrl);
@@ -29,9 +30,9 @@ export const Comments = () => {
     script.setAttribute('label', utterances.label)
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
-    container.current.appendChild(script);
+    containerElement.appendChild(script);
 
-    return () => container.current.innerHTML = '';
+    return () => containerElement.innerHTML = '';
   }, [utterances.issueTerm, utterances.label, utterances.repoUrl, utterances.theme]);
 
   return (
