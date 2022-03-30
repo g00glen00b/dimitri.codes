@@ -33,7 +33,7 @@ function createPaginationPages(component, totalItems, base, context, createPage)
 
 function createPostPages({allPosts}, createPage) {
   return allPosts.nodes.map(node => createPage({
-    path: node.slug,
+    path: node.fields.slug,
     component: path.resolve('./src/templates/post.js'),
     context: {id: node.id}
   }));

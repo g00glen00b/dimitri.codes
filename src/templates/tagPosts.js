@@ -36,7 +36,9 @@ export const query = graphql`
             }
           }
         }
-        slug
+        fields {
+          slug
+        }
         id
       }
     }
@@ -64,7 +66,9 @@ Posts.propTypes = {
             })
           })
         }),
-        slug: PropTypes.string,
+        fields: PropTypes.shape({
+          slug: PropTypes.string,
+        }),
       }))
     })
   }),

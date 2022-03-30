@@ -10,7 +10,6 @@ import {Comments} from '../components/Comments';
 const Post = ({data: {markdownRemark}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
     const isCommentsDisabled = markdownRemark.frontmatter.disableComments || false;
-    console.log(isCommentsDisabled);
     return (
       <Layout>
         <Seo
@@ -56,7 +55,6 @@ export const query = graphql`
       html
       id
       timeToRead
-      slug
       socialCard {
         publicURL
       }
@@ -89,7 +87,6 @@ Post.propTypes = {
         }),
         excerpt: PropTypes.string
       }),
-      slug: PropTypes.string,
       socialCard: PropTypes.shape({
         childImageSharp: PropTypes.shape({
           gatsbyImageData: PropTypes.object

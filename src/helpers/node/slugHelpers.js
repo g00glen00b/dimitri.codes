@@ -1,9 +1,17 @@
-function findSlug(node) {
+function createSlug(node, {createNodeField}) {
   if (node.fileAbsolutePath != null) {
-    const matcher = /posts\/\d{4}-\d{2}-\d{2}-(.+?)\/index.md$/;
-    const [, slug] = node.fileAbsolutePath.match(matcher) || [];
-    return slug;
+    const matcher = /(posts|pages)\/(\d{4}\/)?(\d{4}-\d{2}-\d{2}-)?(.+?)\/index\.md$/;
+    const [,,,, slug] = node.fileAbsolutePath.match(matcher) || [];
+    createNodeField({node, name: 'slug', value: slug});
   }
 }
 
-module.exports = {findSlug};
+function createPostDate(node, {createNodeField}) {
+  if (node.fileAbsolutePath != null) {
+    const matcher = /posts\/\d{4}\/(\d{4}-\d{2}-\d{2})-.+?\/index\.md$/;
+    const [, date] = node.fileAbsolutePath.match(matcher) || [];
+    createNodeField({node, name: 'postDate', value: date});
+  }
+}
+
+module.exports = {createSlug, createPostDate};

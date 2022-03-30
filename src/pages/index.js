@@ -22,7 +22,9 @@ const allPostsQuery = graphql`
             }
           }
         }
-        slug
+        fields {
+          slug
+        }
         id
         fileAbsolutePath
         timeToRead

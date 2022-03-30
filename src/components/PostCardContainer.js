@@ -9,7 +9,7 @@ export const PostCardContainer = ({posts}) => (
       key={node.id}
       categories={node.frontmatter.categories}
       excerpt={node.frontmatter.excerpt || node.excerpt}
-      slug={node.slug}
+      slug={node.fields.slug}
       date={node.frontmatter.date}
       featuredImage={node.frontmatter.featuredImage}
       title={node.frontmatter.title}/>)}
@@ -31,7 +31,9 @@ PostCardContainer.propTypes = {
         })
       })
     }),
-    slug: PropTypes.string,
+    fields: PropTypes.shape({
+      slug: PropTypes.string,
+    }),
     excerpt: PropTypes.string
   }))
 };
