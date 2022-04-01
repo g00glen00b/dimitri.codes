@@ -1,6 +1,5 @@
 ---
 title: "Using Jest to test your Node.js application"
-date: "2018-12-04"
 featuredImage: "../../../images/logos/jest.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Babel", "Jest", "Node.js", "Testing"]

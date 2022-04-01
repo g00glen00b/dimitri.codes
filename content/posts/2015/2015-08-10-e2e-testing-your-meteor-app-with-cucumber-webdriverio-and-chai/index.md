@@ -1,6 +1,5 @@
 ---
 title: "E2E testing your Meteor app with Cucumber, WebdriverIO and Chai"
-date: "2015-08-10"
 featuredImage: "../../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Chai", "Chimp.js", "Cucumber", "E2E", "Meteor.js", "Testing", "Velocity", "WebdriverIO"]

@@ -1,6 +1,5 @@
 ---
 title: "2016: Year in review"
-date: "2017-02-03"
 categories: ["General"]
 excerpt: "A bit later than usual, but here it is! The year in review of dimitr.im! (Yes, that's the site you're visiting right now) During this time of the year, people all around the world gather and review last year."
 ---

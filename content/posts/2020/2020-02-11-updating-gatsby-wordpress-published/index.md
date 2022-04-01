@@ -1,6 +1,5 @@
 ---
 title: "Updating your Gatsby site when WordPress posts are published"
-date: "2020-02-11"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["Other", "Tutorials"]
 tags: ["CI", "Gatsby", "Netlify", "WordPress"]

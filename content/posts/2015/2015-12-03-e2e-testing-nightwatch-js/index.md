@@ -1,6 +1,5 @@
 ---
 title: "E2E testing with Nightwatch.js"
-date: "2015-12-03"
 featuredImage: "../../../images/logos/nightwatch.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["E2E", "JavaScript", "Nightwatch.js", "Testing"]

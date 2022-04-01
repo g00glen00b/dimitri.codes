@@ -1,6 +1,5 @@
 ---
 title: "Creating a Slack bot with Bluemix, Node-RED and Watson"
-date: "2015-05-23"
 featuredImage: "../../../images/logos/bluemix.png"
 categories: ["Other", "Tutorials"]
 tags: ["Bluemix", "Node-RED", "Slack", "Watson"]

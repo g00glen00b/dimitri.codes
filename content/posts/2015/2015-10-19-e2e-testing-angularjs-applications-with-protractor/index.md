@@ -1,6 +1,5 @@
 ---
 title: "E2E testing AngularJS applications with Protractor"
-date: "2015-10-19"
 featuredImage: "../../../images/logos/protractor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "E2E", "Jasmine", "JavaScript", "Protractor", "Testing"]

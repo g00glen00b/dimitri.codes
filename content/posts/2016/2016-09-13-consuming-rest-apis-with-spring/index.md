@@ -1,6 +1,5 @@
 ---
 title: "Consuming REST API's with Spring"
-date: "2016-09-13"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Web"]

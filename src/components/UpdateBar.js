@@ -1,6 +1,6 @@
 import './UpdateBar.css';
 import React from 'react';
-import {useEventTriggered} from '../helpers/hooks/serviceWorkerHooks';
+import {useEventTriggered} from '../hooks/serviceWorkerHooks';
 
 function reload() {
   window.location.reload();

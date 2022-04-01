@@ -1,6 +1,5 @@
 ---
 title: "Unit testing with Mockito and AssertJ"
-date: "2015-01-31"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["AssertJ", "JUnit", "Mockito", "Testing"]

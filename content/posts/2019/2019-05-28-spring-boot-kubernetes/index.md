@@ -1,6 +1,5 @@
 ---
 title: "Running your Spring boot application on Kubernetes"
-date: "2019-05-28"
 featuredImage: "../../../images/logos/kubernetes.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Kubernetes", "Minikube", "Spring", "Spring boot"]

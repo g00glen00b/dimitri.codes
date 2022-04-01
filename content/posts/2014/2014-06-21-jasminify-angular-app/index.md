@@ -1,6 +1,5 @@
 ---
 title: "Jasminify your Angular app"
-date: "2014-06-21"
 featuredImage: "../../../images/logos/jasmine.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Jasmine", "JavaScript", "Testing"]

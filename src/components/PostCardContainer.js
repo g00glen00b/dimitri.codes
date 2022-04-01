@@ -10,7 +10,7 @@ export const PostCardContainer = ({posts}) => (
       categories={node.frontmatter.categories}
       excerpt={node.frontmatter.excerpt || node.excerpt}
       slug={node.fields.slug}
-      date={node.frontmatter.date}
+      date={node.fields.postDate}
       featuredImage={node.frontmatter.featuredImage}
       title={node.frontmatter.title}/>)}
   </section>

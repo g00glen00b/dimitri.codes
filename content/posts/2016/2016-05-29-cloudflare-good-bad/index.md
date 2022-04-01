@@ -1,6 +1,5 @@
 ---
 title: "CloudFlare, good or bad?"
-date: "2016-05-29"
 featuredImage: "../../../images/logos/cloudflare.png"
 categories: ["General"]
 ---

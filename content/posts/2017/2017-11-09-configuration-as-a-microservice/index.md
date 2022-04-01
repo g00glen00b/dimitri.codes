@@ -1,6 +1,5 @@
 ---
 title: "Configuration as a microservice"
-date: "2017-11-09"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Git", "Microservices", "Spring boot", "Spring cloud", "Web"]

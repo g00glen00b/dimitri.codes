@@ -1,6 +1,5 @@
 ---
 title: "Using WebSockets with Spring boot"
-date: "2019-01-08"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Spring", "Spring boot", "WebSockets"]

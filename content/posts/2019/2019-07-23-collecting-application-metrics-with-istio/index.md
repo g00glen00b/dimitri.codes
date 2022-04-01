@@ -1,6 +1,5 @@
 ---
 title: "Collecting application metrics with Istio"
-date: "2019-07-23"
 featuredImage: "../../../images/logos/istio.png"
 categories: ["Tutorials"]
 tags: ["Grafana", "Istio", "Kubernetes", "Prometheus"]

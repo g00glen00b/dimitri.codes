@@ -1,6 +1,5 @@
 ---
 title: "Creating your own nodes with Gatsby"
-date: "2020-04-07"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

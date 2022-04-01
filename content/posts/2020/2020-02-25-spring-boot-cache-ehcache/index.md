@@ -1,6 +1,5 @@
 ---
 title: "Using EhCache 3 with Spring boot"
-date: "2020-02-25"
 featuredImage: "../../../images/logos/ehcache.png"
 categories: ["Java", "Tutorials"]
 tags: ["EHCache", "Spring", "Spring boot"]

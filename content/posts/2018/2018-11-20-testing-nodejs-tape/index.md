@@ -1,6 +1,5 @@
 ---
 title: "Testing your Node.js application with tape"
-date: "2018-11-20"
 featuredImage: "../../../images/logos/nodejs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Node.js", "Sinon.js", "tape", "Testing"]

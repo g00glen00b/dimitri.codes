@@ -1,6 +1,5 @@
 ---
 title: "Internationalization (i18n) with Spring"
-date: "2016-04-05"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["i18n", "Spring", "Spring boot", "Web"]

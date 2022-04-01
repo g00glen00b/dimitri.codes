@@ -1,6 +1,5 @@
 ---
 title: "Creating a servicegraph with Kiali and Istio"
-date: "2019-06-11"
 featuredImage: "../../../images/logos/kiali.png"
 categories: ["Tutorials"]
 tags: ["Envoy", "Grafana", "Istio", "Kiali", "Kubernetes", "Prometheus"]

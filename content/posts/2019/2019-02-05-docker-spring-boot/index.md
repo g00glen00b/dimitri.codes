@@ -1,6 +1,5 @@
 ---
 title: "Containerizing your Spring boot application with Docker"
-date: "2019-02-05"
 featuredImage: "../../../images/logos/docker.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Maven", "Spring", "Spring boot", "Web"]

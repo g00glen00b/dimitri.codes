@@ -1,6 +1,5 @@
 ---
 title: "Writing real time applications using Spring, AngularJS and WebSockets"
-date: "2014-03-09"
 featuredImage: "../../../images/logos/spring.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]

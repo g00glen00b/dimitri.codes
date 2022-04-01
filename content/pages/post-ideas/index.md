@@ -1,6 +1,5 @@
 ---
 title: "Post an idea"
-date: "2012-01-01"
 categories: ["Pages"]
 ---
 

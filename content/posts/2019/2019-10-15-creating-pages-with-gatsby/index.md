@@ -1,6 +1,5 @@
 ---
 title: "Creating pages with Gatsby"
-date: "2019-10-15"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

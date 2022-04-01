@@ -1,6 +1,5 @@
 ---
 title: "Working with Gatsby and Craft CMS"
-date: "2020-03-10"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["CraftCMS", "Gatsby", "GraphQL", "React"]

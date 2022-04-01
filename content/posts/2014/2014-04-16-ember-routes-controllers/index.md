@@ -1,6 +1,5 @@
 ---
 title: "Ember.js in action: Routes and controllers"
-date: "2014-04-16"
 featuredImage: "../../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "JavaScript", "Web"]

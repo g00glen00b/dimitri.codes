@@ -1,6 +1,5 @@
 ---
 title: "Angular-powered forms"
-date: "2014-09-01"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Forms"]

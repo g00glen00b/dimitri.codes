@@ -1,6 +1,5 @@
 ---
 title: "Testing your Node.js application with AVA"
-date: "2018-11-06"
 featuredImage: "../../../images/logos/ava.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AVA", "Babel", "Node.js", "Sinon.js"]

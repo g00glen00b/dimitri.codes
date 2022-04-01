@@ -1,6 +1,5 @@
 ---
 title: "Using the Netflix stack with Spring boot: Hystrix"
-date: "2017-03-20"
 featuredImage: "../../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["EhCache", "Hystrix", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]

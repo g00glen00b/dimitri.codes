@@ -1,6 +1,5 @@
 ---
 title: "Deploying your Spring boot application to AWS with Terraform"
-date: "2021-05-25"
 featuredImage: "../../../images/logos/terraform.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "AWS", "Elastic Beanstalk", "Terraform"]

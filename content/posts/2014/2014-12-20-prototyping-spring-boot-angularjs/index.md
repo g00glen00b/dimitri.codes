@@ -1,6 +1,5 @@
 ---
 title: "Rapid prototyping with Spring Boot and AngularJS"
-date: "2014-12-20"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Spring", "Spring boot", "Web"]

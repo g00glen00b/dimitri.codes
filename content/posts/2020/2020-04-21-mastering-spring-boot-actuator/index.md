@@ -1,6 +1,5 @@
 ---
 title: "Mastering Spring boot Actuator"
-date: "2020-04-21"
 featuredImage: "../../../images/logos/micrometer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Micrometer"]

@@ -1,6 +1,5 @@
 ---
 title: "Setting up Minikube and Istio on macOS"
-date: "2019-05-14"
 featuredImage: "../../../images/logos/kubernetes.png"
 categories: ["Tutorials"]
 tags: ["Docker", "Homebrew", "Istio", "kubernetes", "macOS", "Minikube"]

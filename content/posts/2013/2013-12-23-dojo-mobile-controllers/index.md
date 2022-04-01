@@ -1,6 +1,5 @@
 ---
 title: "Building mobile apps with Dojo mobile (controllers)"
-date: "2013-12-23"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]

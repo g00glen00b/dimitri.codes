@@ -1,6 +1,5 @@
 ---
 title: "Monitoring with Micrometer, Prometheus and Grafana"
-date: "2019-02-19"
 featuredImage: "../../../images/logos/micrometer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Grafana", "Micrometer", "Prometheus", "Spring boot"]

@@ -1,32 +1,9 @@
-const {createCanvas, loadImage, registerFont} = require('canvas');
+const {registerFont, createCanvas, loadImage} = require('canvas');
 const {join} = require('path');
-const readingTime = require('reading-time');
-const format = require('date-fns/format');
-const {createFileNodeFromBuffer} = require("gatsby-source-filesystem");
 
-async function createSocialCard(node, {createNode, createNodeField, createParentChildLink}, store, getCache, createNodeId) {
-  if (node.internal.type === 'MarkdownRemark') {
-    const {minutes: minutesRead} = readingTime(node.rawMarkdownBody);
-    const formattedDate = format(new Date(node.frontmatter.date), 'MMMM do, yyyy');
-    const buffer = await generateImage(node.frontmatter.title, formattedDate, Math.floor(minutesRead), node.frontmatter.tags);
-    const socialCardNode = await createFileNodeFromBuffer({
-      buffer,
-      createNodeId,
-      createNode,
-      getCache,
-      name: 'social-card'
-    });
-    createNodeField({
-      node,
-      name: 'socialCardId',
-      value: socialCardNode.id
-    });
-  }
-}
-
-async function generateImage(title, publishDate, minutesRead, tags) {
-  registerFont(join('src', 'social-card', 'Montserrat-Bold.ttf'), {family: 'Montserrat', weight: '700'});
-  registerFont(join('src', 'social-card', 'Roboto-Regular.ttf'), {family: 'Roboto', weight: '400'});
+exports.generateImage = async (title, publishDate, minutesRead, tags) => {
+  registerFont(join('src', 'node', 'social-card', 'assets', 'Montserrat-Bold.ttf'), {family: 'Montserrat', weight: '700'});
+  registerFont(join('src', 'node', 'social-card', 'assets', 'Roboto-Regular.ttf'), {family: 'Roboto', weight: '400'});
   const canvas = createCanvas(1200, 600);
   const context = canvas.getContext('2d');
   fillBackground(context, '#f3f3f9', 1200, 600);
@@ -38,15 +15,17 @@ async function generateImage(title, publishDate, minutesRead, tags) {
   context.font = '25pt Roboto';
   context.textAlign = 'left';
   context.fillStyle = '#051923';
-  await showImage(context, join('src', 'social-card', 'calendar-outline.png'), 80, 280, 48, 48);
-  showText(context, publishDate, 150, 318, 680, 30);
-  await showImage(context, join('src', 'social-card', 'stopwatch.png'), 80, 350, 48, 48);
+  if (publishDate != null) {
+    await showImage(context, join('src', 'node', 'social-card', 'assets', 'calendar-outline.png'), 80, 280, 48, 48);
+    showText(context, publishDate, 150, 318, 680, 30);
+  }
+  await showImage(context, join('src', 'node', 'social-card', 'assets', 'stopwatch.png'), 80, 350, 48, 48);
   showText(context, `${minutesRead} minute(s) read`, 150, 388, 680, 30);
   if (tags != null && tags.length > 0) {
-    await showImage(context, join('src', 'social-card', 'tag.png'), 80, 420, 48, 48);
+    await showImage(context, join('src', 'node', 'social-card', 'assets', 'tag.png'), 80, 420, 48, 48);
     showText(context, tags.join(', '), 150, 458, 680, 30);
   }
-  await showImage(context, join('src', 'social-card', 'logo.png'), 850, 415, 250, 125);
+  await showImage(context, join('src', 'node', 'social-card', 'assets', 'logo.png'), 850, 415, 250, 125);
   return canvas.toBuffer('image/png');
 }
 
@@ -88,5 +67,3 @@ async function showImage(context, path, x, y, width, height) {
   const image = await loadImage(path);
   context.drawImage(image, x, y, width, height);
 }
-
-module.exports = {createSocialCard, generateImage};

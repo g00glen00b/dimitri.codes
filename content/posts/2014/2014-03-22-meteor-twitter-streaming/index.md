@@ -1,6 +1,5 @@
 ---
 title: "Meteor Twitter streaming"
-date: "2014-03-22"
 featuredImage: "../../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "Meteor.js", "Twitter"]

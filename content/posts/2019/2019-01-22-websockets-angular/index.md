@@ -1,6 +1,5 @@
 ---
 title: "Using WebSockets with Angular"
-date: "2019-01-22"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "RxJS", "WebSockets"]

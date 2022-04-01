@@ -1,6 +1,5 @@
 ---
 title: "Adding some D3 magic to AngularJS"
-date: "2014-08-27"
 featuredImage: "../../../images/logos/d3.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "D3", "JavaScript"]

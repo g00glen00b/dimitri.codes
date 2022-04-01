@@ -1,6 +1,5 @@
 ---
 title: "Changing your page title when a route changes with Angular 2"
-date: "2016-12-01"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Routing"]

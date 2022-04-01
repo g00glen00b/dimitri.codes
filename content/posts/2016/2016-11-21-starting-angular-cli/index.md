@@ -1,6 +1,5 @@
 ---
 title: "Getting started with Angular 2 using Angular CLI"
-date: "2016-11-21"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Materialize", "NPM", "PokeAPI", "Yarn"]

@@ -1,6 +1,5 @@
 ---
 title: "Five reasons why blogging made me a better developer"
-date: "2021-08-24"
 categories: ["General"]
 excerpt: "A look back onto how blogging made me a better developer"
 ---

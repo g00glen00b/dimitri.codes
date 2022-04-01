@@ -1,6 +1,5 @@
 ---
 title: "Loading initial data with Spring"
-date: "2019-08-20"
 featuredImage: "../../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "JPA", "Spring", "Spring boot", "Spring Data"]

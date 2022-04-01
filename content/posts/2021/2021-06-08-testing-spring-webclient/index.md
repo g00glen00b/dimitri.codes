@@ -1,6 +1,5 @@
 ---
 title: "Testing code using Spring's WebClient"
-date: "2021-06-08"
 featuredImage: "../../../images/logos/reactor.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Project Reactor", "Reactive programming", "Testing"]

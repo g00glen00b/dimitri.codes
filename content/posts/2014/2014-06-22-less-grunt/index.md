@@ -1,6 +1,5 @@
 ---
 title: "Get more with Less using Grunt"
-date: "2014-06-22"
 featuredImage: "../../../images/logos/grunt.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Grunt", "JavaScript", "LESS"]

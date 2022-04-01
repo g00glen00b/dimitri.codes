@@ -1,7 +1,7 @@
 import React from 'react';
 import {IoIosMoon, IoIosSunny} from 'react-icons/io';
 import './ThemeSwitch.css';
-import {useAttributeTheme, useLocalTheme, usePreferredTheme} from '../helpers/hooks/themeHooks';
+import {useAttributeTheme, useLocalTheme, usePreferredTheme} from '../hooks/themeHooks';
 
 export const ThemeSwitch = () => {
   const [preferredTheme] = usePreferredTheme('light');

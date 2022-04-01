@@ -1,6 +1,5 @@
 ---
 title: "Unit testing your Spring boot applications"
-date: "2022-03-22"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Spring boot", "Testing", "AssertJ", "JUnit", "Mockito"]

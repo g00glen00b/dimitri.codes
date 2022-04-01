@@ -1,0 +1,1 @@
+exports.kebabCase = (name) => name.replace(/\s+/g, '-').toLowerCase();

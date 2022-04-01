@@ -1,6 +1,5 @@
 ---
 title: "Adding syntax highlighting with WordPress and Gatsby"
-date: "2019-12-10"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

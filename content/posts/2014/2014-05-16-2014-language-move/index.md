@@ -1,6 +1,5 @@
 ---
 title: "2014: The language move"
-date: "2014-05-16"
 categories: ["General"]
 ---
 

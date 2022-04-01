@@ -1,6 +1,5 @@
 ---
 title: "Writing your first Spring webapp with Spring Boot"
-date: "2016-01-05"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring MVC", "Thymeleaf", "Web"]

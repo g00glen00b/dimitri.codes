@@ -1,6 +1,5 @@
 ---
 title: "Building mobile apps with Dojo mobile"
-date: "2013-12-24"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "Mobile", "Web"]

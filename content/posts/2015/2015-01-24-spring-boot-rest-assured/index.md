@@ -1,6 +1,5 @@
 ---
 title: "Easy integration testing with Spring Boot and REST-Assured"
-date: "2015-01-24"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST-Assured", "Spring", "Spring boot", "Testing"]

@@ -1,6 +1,5 @@
 ---
 title: "Testing your REST controllers and clients with Spring"
-date: "2019-04-02"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["MockMVC", "REST", "Spring", "Spring boot", "Testing"]

@@ -1,6 +1,5 @@
 ---
 title: "An introduction to AngularJS: Filters and factories"
-date: "2014-04-03"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]

@@ -1,6 +1,5 @@
 ---
 title: "Using JSON with Gatsby"
-date: "2020-01-28"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

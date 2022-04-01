@@ -1,6 +1,5 @@
 ---
 title: "Using the Netflix stack with Spring boot: Zuul"
-date: "2018-01-16"
 featuredImage: "../../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["Eureka", "Gateway", "Netflix", "Spring boot", "Spring cloud", "Zuul"]

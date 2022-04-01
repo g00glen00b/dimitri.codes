@@ -1,6 +1,5 @@
 ---
 title: "Write a widget using Dojo (inheritance)"
-date: "2014-01-08"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript", "Web"]

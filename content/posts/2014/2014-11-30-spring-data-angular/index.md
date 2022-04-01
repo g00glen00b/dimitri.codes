@@ -1,6 +1,5 @@
 ---
 title: "Building modern webapps using Spring Data REST and AngularJS"
-date: "2014-11-30"
 featuredImage: "../../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Spring", "Spring Data"]

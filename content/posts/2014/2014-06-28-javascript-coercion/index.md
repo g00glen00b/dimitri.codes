@@ -1,6 +1,5 @@
 ---
 title: "You have to love JavaScript's type coercion"
-date: "2014-06-28"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "coercion"]
 excerpt: "JavaScript type coercion is the magic when a variable is casted to another type to execute. It can be a real pain if you don't know what's happening."

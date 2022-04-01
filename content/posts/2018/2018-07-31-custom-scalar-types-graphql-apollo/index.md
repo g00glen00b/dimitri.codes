@@ -1,6 +1,5 @@
 ---
 title: "Using custom scalar types with GraphQL and Apollo"
-date: "2018-07-31"
 featuredImage: "../../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Apollo", "Express", "GraphQL"]

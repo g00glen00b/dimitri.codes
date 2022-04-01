@@ -1,6 +1,5 @@
 ---
 title: "Introduction to AngularJS: A rating directive"
-date: "2014-04-04"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]

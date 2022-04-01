@@ -1,6 +1,5 @@
 ---
 title: "Generating documentation for your REST API with Spring and Swagger"
-date: "2018-09-25"
 featuredImage: "../../../images/logos/open-api.png"
 categories: ["Java", "Tutorials"]
 tags: ["AsciiDoc", "Maven", "Spring boot", "Swagger"]

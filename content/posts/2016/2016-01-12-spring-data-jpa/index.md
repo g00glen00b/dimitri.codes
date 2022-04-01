@@ -1,6 +1,5 @@
 ---
 title: "JPA made easy with Spring data's repositories"
-date: "2016-01-12"
 featuredImage: "../../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["JPA", "Spring", "Spring boot", "Spring Data", "Web"]

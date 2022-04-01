@@ -1,6 +1,5 @@
 ---
 title: "Dojo require vs define"
-date: "2013-07-09"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]

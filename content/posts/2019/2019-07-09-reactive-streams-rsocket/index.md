@@ -1,6 +1,5 @@
 ---
 title: "Reactive streams over the network with RSocket"
-date: "2019-07-09"
 featuredImage: "../../../images/logos/rsocket.png"
 categories: ["Java", "Tutorials"]
 tags: ["Project Reactor", "Reactive programming", "RSocket", "Spring boot"]

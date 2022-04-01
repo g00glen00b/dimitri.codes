@@ -1,6 +1,5 @@
 ---
 title: "Using the Netflix stack with Spring boot: Ribbon"
-date: "2016-10-18"
 featuredImage: "../../../images/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
 tags: ["Eureka", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]

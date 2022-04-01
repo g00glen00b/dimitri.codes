@@ -1,6 +1,5 @@
 ---
 title: "Optimize loading images with WordPress and Gatsby"
-date: "2019-11-26"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

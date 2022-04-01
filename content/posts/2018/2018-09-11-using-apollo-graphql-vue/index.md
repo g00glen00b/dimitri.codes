@@ -1,6 +1,5 @@
 ---
 title: "Using Apollo GraphQL with Vue"
-date: "2018-09-11"
 featuredImage: "../../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Apollo", "GraphQL", "JavaScript", "Vue"]

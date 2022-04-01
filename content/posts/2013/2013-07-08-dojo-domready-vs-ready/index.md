@@ -1,6 +1,5 @@
 ---
 title: "Dojo domReady vs ready"
-date: "2013-07-08"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]

@@ -1,6 +1,5 @@
 ---
 title: "Introduction to AngularJS"
-date: "2014-04-05"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]

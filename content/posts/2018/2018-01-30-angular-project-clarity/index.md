@@ -1,6 +1,5 @@
 ---
 title: "Getting started with Angular CLI and Project Clarity"
-date: "2018-01-30"
 featuredImage: "../../../images/logos/clarity.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Clarity"]

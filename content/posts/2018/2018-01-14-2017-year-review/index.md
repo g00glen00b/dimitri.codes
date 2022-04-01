@@ -1,6 +1,5 @@
 ---
 title: "2017: Year in review"
-date: "2018-01-14"
 categories: ["General"]
 excerpt: "While 2017 was mostly an inactive year for me, that doesn't mean that we didn't have any visitors! So let's review what happened last year."
 ---

@@ -1,6 +1,5 @@
 ---
 title: "Writing real time applications using Spring and AngularJS (Part 3: AngularJS)"
-date: "2014-03-08"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "Spring", "Spring MVC", "Web", "WebSockets"]

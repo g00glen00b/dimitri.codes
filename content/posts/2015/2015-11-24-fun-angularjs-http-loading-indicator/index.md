@@ -1,6 +1,5 @@
 ---
 title: "More fun with AngularJS $http: a loading indicator"
-date: "2015-11-24"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS"]

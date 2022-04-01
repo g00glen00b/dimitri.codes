@@ -1,6 +1,5 @@
 ---
 title: "AngularJS $http and dates"
-date: "2015-11-16"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]

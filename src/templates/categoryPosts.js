@@ -22,13 +22,12 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $fieldValue: String!) {
-    allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit, filter: {frontmatter: {categories: {eq: $fieldValue}}}) {
+    allMarkdownRemark(sort: {fields: fields___postDate, order: DESC}, skip: $skip, limit: $limit, filter: {frontmatter: {categories: {eq: $fieldValue}}}) {
       nodes {
         excerpt(format: PLAIN)
         frontmatter {
           categories
           title
-          date(formatString: "MMMM Do, YYYY")
           excerpt
           featuredImage {
             childImageSharp {
@@ -38,6 +37,7 @@ export const query = graphql`
         }
         fields {
           slug
+          postDate(formatString: "MMMM Do, YYYY")
         }
         id
       }
@@ -54,7 +54,6 @@ Posts.propTypes = {
         timeToRead: PropTypes.number,
         frontmatter: PropTypes.shape({
           categories: PropTypes.arrayOf(PropTypes.string),
-          date: PropTypes.string,
           title: PropTypes.string,
           excerpt: PropTypes.string,
           featuredImage: PropTypes.shape({
@@ -65,6 +64,7 @@ Posts.propTypes = {
         }),
         fields: PropTypes.shape({
           slug: PropTypes.string,
+          postDate: PropTypes.string,
         }),
       }))
     })

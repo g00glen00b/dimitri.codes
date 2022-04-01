@@ -1,6 +1,5 @@
 ---
 title: "Advent of code 2021 - Day 14"
-date: "2021-12-14"
 featuredImage: "../../../images/logos/java.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java"]

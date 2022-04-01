@@ -1,6 +1,5 @@
 ---
 title: "Distributed tracing with Istio and Jaeger"
-date: "2019-08-06"
 featuredImage: "../../../images/logos/jaeger.png"
 categories: ["Tutorials"]
 tags: ["Istio", "Jaeger", "Kubernetes"]

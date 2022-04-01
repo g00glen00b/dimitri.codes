@@ -1,6 +1,5 @@
 ---
 title: "Testing your Spring Data JPA repository"
-date: "2015-02-16"
 featuredImage: "../../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["JPA", "Spring", "Testing"]

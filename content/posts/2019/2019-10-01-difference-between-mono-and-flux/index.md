@@ -1,6 +1,5 @@
 ---
 title: "Difference between Mono and Flux"
-date: "2019-10-01"
 featuredImage: "../../../images/logos/reactor.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Project Reactor", "Reactive programming"]

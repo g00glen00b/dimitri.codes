@@ -1,6 +1,5 @@
 ---
 title: "Using routing with Angular 2"
-date: "2016-11-30"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Routing"]

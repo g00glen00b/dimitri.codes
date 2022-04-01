@@ -8,13 +8,12 @@ import {VisitBlogBanner} from '../components/VisitBlogBanner';
 
 const allPostsQuery = graphql`
   query {
-    allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, limit: 10) {
+    allMarkdownRemark(sort: {fields: fields___postDate, order: DESC}, limit: 10) {
       nodes {
         excerpt(format: PLAIN)
         frontmatter {
           categories
           title
-          date(formatString: "MMMM Do, YYYY")
           excerpt
           featuredImage {
             childImageSharp {
@@ -24,6 +23,7 @@ const allPostsQuery = graphql`
         }
         fields {
           slug
+          postDate(formatString: "MMMM Do, YYYY")
         }
         id
         fileAbsolutePath

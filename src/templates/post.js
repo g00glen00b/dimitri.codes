@@ -17,16 +17,16 @@ const Post = ({data: {markdownRemark}}) => {
           description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
           image={markdownRemark.socialCard}
           meta={[
-              ...getTimeMetadata(markdownRemark.frontmatter.iso, markdownRemark.frontmatter.iso),
-              ...getTagMetadata(markdownRemark.frontmatter.tags),
-              ...getSectionMetadata(markdownRemark.frontmatter.categories)
+              ...getTimeMetadata(markdownRemark.fields.iso),
+              ...getTagMetadata(markdownRemark.fields.tags),
+              ...getSectionMetadata(markdownRemark.fields.categories)
           ]}/>
         {!isPage && <PageTitle
           title={markdownRemark.frontmatter.title}
           timeToRead={!isPage && markdownRemark.timeToRead}
-          date={markdownRemark.frontmatter.date}
+          date={markdownRemark.fields.postDate}
           featuredImage={markdownRemark.frontmatter.featuredImage}
-          tags={markdownRemark.frontmatter.tags}/>
+          tags={markdownRemark.fields.tags}/>
         }
         {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
         <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
@@ -47,14 +47,23 @@ export const query = graphql`
             gatsbyImageData(layout: CONSTRAINED, width: 80)
           }
         }
-        iso: date
-        date(formatString: "MMMM Do, YYYY")
         excerpt
         disableComments
       }
       html
       id
       timeToRead
+      fields {
+        iso: postDate
+        postDate(formatString: "MMMM Do, YYYY")
+        tags {
+          path
+          name
+        }
+        categories {
+          name
+        }
+      }
       socialCard {
         publicURL
       }
@@ -73,12 +82,8 @@ Post.propTypes = {
       html: PropTypes.string,
       timeToRead: PropTypes.number,
       frontmatter: PropTypes.shape({
-        categories: PropTypes.arrayOf(PropTypes.string),
         disableComments: PropTypes.bool,
-        tags: PropTypes.arrayOf(PropTypes.string),
         daysAgo: PropTypes.number,
-        iso: PropTypes.string,
-        date: PropTypes.string,
         title: PropTypes.string,
         featuredImage: PropTypes.shape({
           childImageSharp: PropTypes.shape({
@@ -86,6 +91,18 @@ Post.propTypes = {
           })
         }),
         excerpt: PropTypes.string
+      }),
+      fields: PropTypes.shape({
+        iso: PropTypes.string,
+        postDate: PropTypes.string,
+        tags: PropTypes.arrayOf(PropTypes.shape({
+          key: PropTypes.string,
+          name: PropTypes.string
+        })),
+        categories: PropTypes.arrayOf(PropTypes.shape({
+          key: PropTypes.string,
+          name: PropTypes.string
+        }))
       }),
       socialCard: PropTypes.shape({
         childImageSharp: PropTypes.shape({

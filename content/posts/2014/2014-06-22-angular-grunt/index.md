@@ -1,6 +1,5 @@
 ---
 title: "Making your AngularJS application grunt"
-date: "2014-06-22"
 featuredImage: "../../../images/logos/grunt.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Grunt", "JavaScript", "Karma", "Testing"]

@@ -1,6 +1,5 @@
 ---
 title: "Executing Jasmine tests with Maven"
-date: "2015-02-07"
 featuredImage: "../../../images/logos/jasmine.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Jasmine", "JavaScript", "Maven", "Testing"]

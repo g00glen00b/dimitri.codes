@@ -1,6 +1,5 @@
 ---
 title: "Getting started with Vue and AT UI"
-date: "2018-08-14"
 featuredImage: "../../../images/logos/vue.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "NPM", "Vue"]

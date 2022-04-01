@@ -1,6 +1,5 @@
 ---
 title: "Loading content within a sidebar using Angular routing"
-date: "2019-04-30"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Material", "Routing"]

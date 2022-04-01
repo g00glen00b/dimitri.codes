@@ -1,6 +1,5 @@
 ---
 title: "Animating with Angular 2"
-date: "2016-12-07"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "Components", "PokeAPI"]

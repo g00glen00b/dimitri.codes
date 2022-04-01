@@ -1,6 +1,5 @@
 ---
 title: "Working with the MEAN stack: Application setup"
-date: "2014-05-17"
 featuredImage: "../../../images/logos/nodejs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Express", "JavaScript", "MongoDB", "Node.js"]

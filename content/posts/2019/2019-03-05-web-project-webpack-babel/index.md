@@ -1,6 +1,5 @@
 ---
 title: "Starting a web project with Webpack and Babel"
-date: "2019-03-05"
 featuredImage: "../../../images/logos/webpack.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["NPM"]

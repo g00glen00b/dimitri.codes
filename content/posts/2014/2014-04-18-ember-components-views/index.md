@@ -1,6 +1,5 @@
 ---
 title: "Ember.js in action: Components and views"
-date: "2014-04-18"
 featuredImage: "../../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "JavaScript", "Web"]

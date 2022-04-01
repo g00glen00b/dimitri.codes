@@ -1,6 +1,5 @@
 ---
 title: "Containerizing your static web project"
-date: "2019-03-19"
 featuredImage: "../../../images/logos/docker.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Docker", "nginx", "NPM", "Web"]

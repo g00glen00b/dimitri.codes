@@ -1,6 +1,5 @@
 ---
 title: "Write a widget using Dojo (demo)"
-date: "2014-01-10"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript", "Web"]

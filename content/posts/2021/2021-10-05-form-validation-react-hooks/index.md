@@ -1,6 +1,5 @@
 ---
 title: "Form validation using React hooks"
-date: "2021-10-05"
 featuredImage: "../../../images/logos/react.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["React", "React hooks"]

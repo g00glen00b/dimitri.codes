@@ -1,6 +1,5 @@
 ---
 title: "Monitoring Spring boot applications with Prometheus and Grafana"
-date: "2018-02-13"
 featuredImage: "../../../images/logos/grafana.png"
 categories: ["Java", "Tutorials"]
 tags: ["Grafana", "Monitoring", "Prometheus", "Spring boot"]

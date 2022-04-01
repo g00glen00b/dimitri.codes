@@ -1,6 +1,5 @@
 ---
 title: "Using Gatsby with WordPress as a headless CMS"
-date: "2019-09-17"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "JavaScript", "React"]

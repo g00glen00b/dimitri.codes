@@ -1,6 +1,5 @@
 ---
 title: "Writing a chat application with Meteor"
-date: "2015-07-25"
 featuredImage: "../../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["JavaScript", "Meteor.js"]

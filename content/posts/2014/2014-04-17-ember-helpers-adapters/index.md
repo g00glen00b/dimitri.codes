@@ -1,6 +1,5 @@
 ---
 title: "Ember.js in action: Helpers and adapters"
-date: "2014-04-17"
 featuredImage: "../../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "JavaScript", "Web"]

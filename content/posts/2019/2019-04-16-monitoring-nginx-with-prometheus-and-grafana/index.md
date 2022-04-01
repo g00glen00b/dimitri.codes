@@ -1,6 +1,5 @@
 ---
 title: "Monitoring nginx with Prometheus and Grafana"
-date: "2019-04-16"
 featuredImage: "../../../images/logos/grafana.png"
 categories: ["Tutorials"]
 tags: ["Docker", "Grafana", "Monitoring", "nginx", "Prometheus"]

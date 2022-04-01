@@ -1,6 +1,5 @@
 ---
 title: "Unit testing Meteor applications with Velocity, Jasmine and Sinon.js"
-date: "2015-08-07"
 featuredImage: "../../../images/logos/meteor.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Jasmine", "JavaScript", "Meteor.js", "Sinon.js", "Testing", "Velocity"]

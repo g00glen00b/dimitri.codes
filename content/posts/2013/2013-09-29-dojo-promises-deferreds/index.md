@@ -1,6 +1,5 @@
 ---
 title: "Dojo promises & Deferreds"
-date: "2013-09-29"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AJAX", "Dojo", "JavaScript"]

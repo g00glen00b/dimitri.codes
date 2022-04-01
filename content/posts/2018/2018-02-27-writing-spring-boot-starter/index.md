@@ -1,6 +1,5 @@
 ---
 title: "Writing your own Spring boot starter"
-date: "2018-02-27"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring boot"]

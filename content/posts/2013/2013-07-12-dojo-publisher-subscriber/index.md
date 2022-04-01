@@ -1,6 +1,5 @@
 ---
 title: "Dojo publisher & subscriber"
-date: "2013-07-12"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]

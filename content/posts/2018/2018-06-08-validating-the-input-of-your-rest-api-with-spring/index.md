@@ -1,6 +1,5 @@
 ---
 title: "Validating the input of your REST API with Spring"
-date: "2018-06-08"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Validators"]

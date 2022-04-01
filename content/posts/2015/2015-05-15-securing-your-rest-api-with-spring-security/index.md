@@ -1,6 +1,5 @@
 ---
 title: "Securing your REST API with Spring Security"
-date: "2015-05-15"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring security"]

@@ -1,6 +1,5 @@
 ---
 title: "Reactive relational databases with R2DBC and Spring"
-date: "2019-06-25"
 featuredImage: "../../../images/logos/reactor.png"
 categories: ["Java", "Tutorials"]
 tags: ["PostgreSQL", "Project Reactor", "R2DBC", "Reactive programming", "Spring boot", "Spring WebFlux"]

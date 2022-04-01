@@ -1,6 +1,5 @@
 ---
 title: "Writing your own Gatsby plugin"
-date: "2020-01-14"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Babel", "Gatsby", "Jest", "NPM", "React"]

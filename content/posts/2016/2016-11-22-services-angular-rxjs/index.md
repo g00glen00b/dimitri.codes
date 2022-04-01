@@ -1,6 +1,5 @@
 ---
 title: "Writing services with Angular 2 and RxJS"
-date: "2016-11-22"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["Java", "Tutorials"]
 tags: ["Angular", "Angular CLI", "PokeAPI", "RxJS"]

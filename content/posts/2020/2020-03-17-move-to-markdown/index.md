@@ -1,6 +1,5 @@
 ---
 title: "Making the switch to Markdown"
-date: "2020-03-17"
 categories: ["General"]
 excerpt: "Starting today, all new blog posts will be written in Markdown, and will be maintained as part of the repository. In this blog post, I will cover the reasons why I decided to make the switch."
 ---

@@ -1,6 +1,5 @@
 ---
 title: "Writing a GraphQL API with Node.js, Express and Apollo"
-date: "2018-07-17"
 featuredImage: "../../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Apollo", "Express", "GraphQL", "Node.js"]

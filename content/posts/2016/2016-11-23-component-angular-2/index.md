@@ -1,6 +1,5 @@
 ---
 title: "Writing your first component with Angular 2"
-date: "2016-11-23"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Components", "Materialize", "PokeAPI"]

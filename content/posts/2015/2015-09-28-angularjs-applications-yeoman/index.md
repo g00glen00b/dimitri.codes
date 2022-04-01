@@ -1,6 +1,5 @@
 ---
 title: "Setting up AngularJS applications with Yeoman"
-date: "2015-09-28"
 featuredImage: "../../../images/logos/yeoman.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript", "mashape", "Yeoman"]

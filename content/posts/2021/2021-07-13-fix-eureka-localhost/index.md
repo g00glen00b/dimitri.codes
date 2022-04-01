@@ -1,6 +1,5 @@
 ---
 title: "How to fix services registering as localhost on Eureka"
-date: "2021-07-13"
 featuredImage: "../../../images/logos/spring.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring cloud", "Eureka", "Netflix"]

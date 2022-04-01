@@ -1,6 +1,5 @@
 ---
 title: "Using Sinon.js while testing AngularJS applications"
-date: "2015-09-29"
 featuredImage: "../../../images/logos/jasmine.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Jasmine", "JavaScript", "Sinon.js", "Testing"]

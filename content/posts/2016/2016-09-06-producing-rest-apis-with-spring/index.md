@@ -1,6 +1,5 @@
 ---
 title: "Producing REST API's with Spring"
-date: "2016-09-06"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Spring MVC", "Web", "Web services"]

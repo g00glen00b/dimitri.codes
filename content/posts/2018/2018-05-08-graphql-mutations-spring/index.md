@@ -1,6 +1,5 @@
 ---
 title: "Writing GraphQL mutations with Spring boot"
-date: "2018-05-08"
 featuredImage: "../../../images/logos/graphql.png"
 categories: ["Java", "Tutorials"]
 tags: ["GraphQL", "Java", "Spring boot"]

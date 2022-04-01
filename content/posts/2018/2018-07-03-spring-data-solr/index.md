@@ -1,6 +1,5 @@
 ---
 title: "Working with Spring Data Solr repositories"
-date: "2018-07-03"
 featuredImage: "../../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["Solr", "Spring boot", "Spring Data"]

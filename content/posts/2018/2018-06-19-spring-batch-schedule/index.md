@@ -1,6 +1,5 @@
 ---
 title: "Running a Spring batch at a schedule"
-date: "2018-06-19"
 featuredImage: "../../../images/logos/spring-batch.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring batch", "Spring boot"]

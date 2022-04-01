@@ -1,6 +1,5 @@
 ---
 title: "Handling errors with Spring MVC"
-date: "2016-01-19"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring MVC", "Web"]

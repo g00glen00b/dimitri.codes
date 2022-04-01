@@ -1,6 +1,5 @@
 ---
 title: "Mapping beans with MapStruct"
-date: "2016-02-23"
 featuredImage: "../../../images/logos/mapstruct.png"
 categories: ["Java", "Tutorials"]
 tags: ["MapStruct", "Maven", "Spring"]

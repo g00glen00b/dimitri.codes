@@ -1,6 +1,5 @@
 ---
 title: "Exploring contract first options with Swagger"
-date: "2016-09-27"
 featuredImage: "../../../images/logos/swagger.png"
 categories: ["Java", "Tutorials"]
 tags: ["REST", "Spring", "Spring boot", "Swagger"]

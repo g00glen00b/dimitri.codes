@@ -1,6 +1,5 @@
 ---
 title: "Working with @ngrx/store"
-date: "2018-03-13"
 featuredImage: "../../../images/logos/ngrx.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "ngrx", "RxJS"]

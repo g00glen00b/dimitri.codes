@@ -1,6 +1,5 @@
 ---
 title: "Testing your Spring Boot application with Selenium"
-date: "2015-03-07"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["E2E", "Java", "Selenium", "Spring", "Spring boot", "Testing"]

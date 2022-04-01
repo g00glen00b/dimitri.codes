@@ -1,6 +1,5 @@
 ---
 title: "Generating documentation for your REST API with Spring REST Docs"
-date: "2018-10-09"
 featuredImage: "../../../images/logos/asciidoctor.png"
 categories: ["Java", "Tutorials"]
 tags: ["AsciiDoc", "Integration testing", "Java", "Spring boot"]

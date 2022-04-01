@@ -1,6 +1,5 @@
 ---
 title: "Setting up Apache Solr with Tika using Docker"
-date: "2018-05-22"
 featuredImage: "../../../images/logos/docker.png"
 categories: ["Java", "Tutorials"]
 tags: ["Docker", "Solr", "Tika"]

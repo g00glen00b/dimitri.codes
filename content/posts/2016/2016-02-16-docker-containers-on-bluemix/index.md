@@ -1,6 +1,5 @@
 ---
 title: "Take your Spring apps to the cloud with Bluemix and Docker"
-date: "2016-02-16"
 featuredImage: "../../../images/logos/docker.png"
 categories: ["Cloud", "Tutorials"]
 tags: ["IBM Cloud", "Docker", "Spring boot"]

@@ -1,4 +1,4 @@
-const {feedItemQuery, getFeedItem, siteMetadataQuery} = require('./src/helpers/node/feedHelpers');
+const {siteMetadataQuery, feedItemQuery, getFeedItem} = require('./src/node/feed/helpers');
 const environment = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
 require('dotenv').config({path: `.env.${environment}`});

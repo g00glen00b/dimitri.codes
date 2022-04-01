@@ -1,6 +1,5 @@
 ---
 title: "Dojo inheritance, overriding & extending"
-date: "2013-07-20"
 featuredImage: "../../../images/logos/dojo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Dojo", "JavaScript"]

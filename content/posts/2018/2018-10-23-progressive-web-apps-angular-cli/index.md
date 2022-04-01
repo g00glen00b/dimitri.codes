@@ -1,6 +1,5 @@
 ---
 title: "Progressive Web Apps with Angular CLI"
-date: "2018-10-23"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "PWA"]

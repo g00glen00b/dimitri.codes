@@ -1,6 +1,5 @@
 ---
 title: "Securing Spring boot applications with JWT"
-date: "2018-01-03"
 featuredImage: "../../../images/logos/spring-security.png"
 categories: ["Java", "Tutorials"]
 tags: ["JWT", "Microservices", "Spring", "Spring boot", "Spring security"]

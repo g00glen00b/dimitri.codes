@@ -1,6 +1,5 @@
 ---
 title: "Handling forms with Spring Web and JSR-303"
-date: "2016-04-13"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Web", "Forms"]

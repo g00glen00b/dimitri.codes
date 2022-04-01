@@ -1,6 +1,5 @@
 ---
 title: "Bundling your React app with Spring boot"
-date: "2021-09-14"
 featuredImage: "../../../images/logos/react.png"
 categories: ["Java", "Tutorials"]
 tags: ["Maven", "Spring boot", "React"]

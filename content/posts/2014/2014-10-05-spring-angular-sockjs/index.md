@@ -1,6 +1,5 @@
 ---
 title: "Using WebSockets with Spring, AngularJS and SockJS"
-date: "2014-10-05"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["Java", "Tutorials"]
 tags: ["AngularJS", "Spring", "Spring MVC", "WebSockets"]

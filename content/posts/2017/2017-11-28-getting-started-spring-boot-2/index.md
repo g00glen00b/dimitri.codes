@@ -1,6 +1,5 @@
 ---
 title: "Getting started with Spring boot 2.0"
-date: "2017-11-28"
 featuredImage: "../../../images/logos/reactor.png"
 categories: ["Java", "Tutorials"]
 tags: ["Java", "Reactive programming", "Spring", "Spring boot"]

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {TiCalendarOutline, TiStopwatch, TiTag} from 'react-icons/ti';
 import {Link} from 'gatsby';
 import './PageTitle.css';
-import {kebabCase} from '../helpers/contentHelpers';
 
 export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
   <div className={`page-title ${featuredImage != null ? `page-title--with-image` : `page-title--without-image`}`}>
@@ -40,11 +39,11 @@ export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
           aria-label="Tag icon"/>
       </dt>}
       {tags != null && <dd>
-        {tags.map(tag => <Link
-          to={`/tag/${kebabCase(tag)}`}
-          title={`View all posts tagged with ${tag}`}
-          key={tag}>
-          {tag}
+        {tags.map(({name, path}) => <Link
+          to={`/tag/${path}`}
+          title={`View all posts tagged with ${name}`}
+          key={path}>
+          {name}
         </Link>)}
         </dd>}
     </dl>
@@ -53,7 +52,10 @@ export const PageTitle = ({featuredImage, title, date, timeToRead, tags}) => (
 
 PageTitle.propTypes = {
   timeToRead: PropTypes.number,
-  tags: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    path: PropTypes.string,
+    name: PropTypes.string
+  })),
   date: PropTypes.string,
   title: PropTypes.string,
   featuredImage: PropTypes.shape({

@@ -1,6 +1,5 @@
 ---
 title: "Working with Gatsby and pagination"
-date: "2019-10-29"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

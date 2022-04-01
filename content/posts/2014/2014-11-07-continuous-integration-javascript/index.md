@@ -1,6 +1,5 @@
 ---
 title: "Continuous integration of JavaScript apps using Jenkins"
-date: "2014-11-07"
 featuredImage: "../../../images/logos/jenkins.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Code quality", "JavaScript", "Jenkins", "SonarQube"]

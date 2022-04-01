@@ -1,6 +1,5 @@
 ---
 title: "Using Apollo GraphQL with Angular"
-date: "2018-04-24"
 featuredImage: "../../../images/logos/apollo.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Apollo", "GraphQL"]

@@ -1,6 +1,5 @@
 ---
 title: "Working with Spring boot and GraphQL"
-date: "2018-04-10"
 featuredImage: "../../../images/logos/graphql.png"
 categories: ["Java", "Tutorials"]
 tags: ["GraphQL", "Spring boot"]

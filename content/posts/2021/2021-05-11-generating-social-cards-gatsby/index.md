@@ -1,6 +1,5 @@
 ---
 title: "Generating social cards with Gatsby"
-date: "2021-05-11"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby"]

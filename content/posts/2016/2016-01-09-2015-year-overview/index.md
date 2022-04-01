@@ -1,6 +1,5 @@
 ---
 title: "2015: Year overview"
-date: "2016-01-09"
 categories: ["General"]
 ---
 

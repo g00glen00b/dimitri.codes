@@ -1,6 +1,5 @@
 ---
 title: "Handling authentication and authorization with Angular"
-date: "2018-03-27"
 featuredImage: "../../../images/logos/angular.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Angular", "Angular CLI", "ngrx"]

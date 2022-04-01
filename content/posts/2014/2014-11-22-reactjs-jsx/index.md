@@ -1,6 +1,5 @@
 ---
 title: "Writing apps with React.js: Writing components using JSX"
-date: "2014-11-22"
 featuredImage: "../../../images/logos/react.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gulp", "JavaScript", "React", "Web"]

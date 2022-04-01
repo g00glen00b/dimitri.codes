@@ -1,6 +1,5 @@
 ---
 title: "How to drink gulp.js"
-date: "2014-10-25"
 featuredImage: "../../../images/logos/gulp.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "Gulp", "JavaScript", "Web"]

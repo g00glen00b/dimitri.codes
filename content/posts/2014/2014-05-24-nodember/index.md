@@ -1,6 +1,5 @@
 ---
 title: "Working with Nodember"
-date: "2014-05-24"
 featuredImage: "../../../images/logos/ember.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Ember.js", "Express", "JavaScript", "MongoDB", "Node.js"]

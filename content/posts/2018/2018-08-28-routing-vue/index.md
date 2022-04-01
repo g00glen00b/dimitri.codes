@@ -1,6 +1,5 @@
 ---
 title: "Routing with Vue"
-date: "2018-08-28"
 featuredImage: "../../../images/logos/vue.png"
 categories: ["Java", "Tutorials"]
 tags: ["JavaScript", "Vue"]

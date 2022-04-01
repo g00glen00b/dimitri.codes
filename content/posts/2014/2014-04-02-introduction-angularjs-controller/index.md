@@ -1,6 +1,5 @@
 ---
 title: "An introduction to AngularJS: Writing your first controller"
-date: "2014-04-02"
 featuredImage: "../../../images/logos/angularjs.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["AngularJS", "JavaScript"]

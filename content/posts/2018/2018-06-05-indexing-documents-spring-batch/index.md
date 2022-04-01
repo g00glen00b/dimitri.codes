@@ -1,6 +1,5 @@
 ---
 title: "Indexing documents with Spring batch"
-date: "2018-06-05"
 featuredImage: "../../../images/logos/spring-batch.png"
 categories: ["Java", "Tutorials"]
 tags: ["Solr", "Spring batch", "Spring boot"]

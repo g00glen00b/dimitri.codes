@@ -1,6 +1,5 @@
 ---
 title: "Adding reading time with Gatsby"
-date: "2019-11-12"
 featuredImage: "../../../images/logos/gatsby.png"
 categories: ["JavaScript", "Tutorials"]
 tags: ["Gatsby", "GraphQL", "React"]

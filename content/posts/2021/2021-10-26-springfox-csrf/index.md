@@ -1,6 +1,5 @@
 ---
 title: "Using CSRF with Springfox"
-date: "2021-10-26"
 featuredImage: "../../../images/logos/swagger.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Swagger", "REST"]

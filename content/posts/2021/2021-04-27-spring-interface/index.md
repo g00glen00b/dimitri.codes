@@ -1,6 +1,5 @@
 ---
 title: "Do I need an interface with Spring boot?"
-date: "2021-04-27"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot"]

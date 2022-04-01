@@ -1,6 +1,5 @@
 ---
 title: "Setting up Kubernetes with Amazon EKS"
-date: "2021-08-03"
 featuredImage: "../../../images/logos/kubernetes.png"
 categories: ["Tutorials"]
 tags: ["AWS", "Kubernetes"]

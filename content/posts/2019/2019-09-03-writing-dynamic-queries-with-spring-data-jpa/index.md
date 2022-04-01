@@ -1,6 +1,5 @@
 ---
 title: "Writing dynamic queries with Spring Data JPA"
-date: "2019-09-03"
 featuredImage: "../../../images/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
 tags: ["Hibernate", "JPA", "Spring", "Spring Data"]

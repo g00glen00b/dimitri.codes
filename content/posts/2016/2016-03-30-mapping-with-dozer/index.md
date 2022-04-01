@@ -1,6 +1,5 @@
 ---
 title: "Mapping with Dozer"
-date: "2016-03-30"
 featuredImage: "../../../images/logos/dozer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Dozer", "Java", "Spring"]

@@ -1,6 +1,5 @@
 ---
 title: "Testing modern web applications"
-date: "2015-03-09"
 featuredImage: "../../../images/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Testing", "Web"]
