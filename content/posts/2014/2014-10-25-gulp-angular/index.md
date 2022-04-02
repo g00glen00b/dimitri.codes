@@ -26,7 +26,7 @@ In this article I will be using the code from my previous AngularJS application,
 
 You don't need this project if you don't like it. You can use any project you like with a similar scructure:
 
-![project-structure](content/posts/2014/2014-10-25-gulp-angular/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Loading some modules
 
@@ -344,23 +344,23 @@ gulp serve
 
 This will compile all our resources and should pop up a browser window afterwards. If you change something in your code, the browser window should automatically refresh.
 
-![gulp-serve](content/posts/2014/2014-10-25-gulp-angular/images/gulp-serve.png)
+![gulp-serve](./images/gulp-serve.png)
 
 The `gulp serve:minified` should do something quite similar, except that it will run the less:min and js:min tasks.
 
-![gulp-serve-min](content/posts/2014/2014-10-25-gulp-angular/images/gulp-serve-min.png)
+![gulp-serve-min](./images/gulp-serve-min.png)
 
 Then we have the `gulp tdd` task, that will run each unit test again as soon as the code changes. For example, when we changed something so that the code would fail, we could see the errors. When we fixed the code again, all tests ran successfully again.
 
-![gulp-tdd](content/posts/2014/2014-10-25-gulp-angular/images/gulp-tdd.png)
+![gulp-tdd](./images/gulp-tdd.png)
 
 Then finally we have the `gulp package` task, which can be used to create a ZIP archive.
 
-![gulp-package](content/posts/2014/2014-10-25-gulp-angular/images/gulp-package.png)
+![gulp-package](./images/gulp-package.png)
 
 When the task is completed, you will be able to find a .ZIP file inside the dist/ folder containing your application sources.
 
-![package](content/posts/2014/2014-10-25-gulp-angular/images/package.png)
+![package](./images/package.png)
 
 #### Achievement: Made your AngularJS application run even smoother with Gulp
 

@@ -8,7 +8,7 @@ excerpt: "Forget REST, get started with GraphQL! In this tutorial I'll be using 
 
 [A few weeks ago](/graphql-spring-boot/), we created a beautiful API using GraphQL. We only had one problem... the application was completely read-only and no updates were allowed. This time, we're about to change this, and implement our own mutations with GraphQL.
 
-![GraphQL + Spring boot](content/posts/2018/2018-05-08-graphql-mutations-spring/images/graphql-spring-boot.png)
+![GraphQL + Spring boot](./images/graphql-spring-boot.png)
 
 ### Writing your mutation type
 
@@ -272,11 +272,11 @@ When executing this mutation query, you'll see that the output becomes:
 }
 ```
 
-![Screenshot of GraphiQL executing a mutation query](content/posts/2018/2018-05-08-graphql-mutations-spring/images/Screenshot-2018-02-17-15.51.02.png)
+![Screenshot of GraphiQL executing a mutation query](./images/Screenshot-2018-02-17-15.51.02.png)
 
 To verify that this actually worked, we can use the query from last time to retrieve all queries.
 
-![Screenshot of GraphiQL executing a query to retrieve all articles](content/posts/2018/2018-05-08-graphql-mutations-spring/images/Screenshot-2018-02-17-15.52.49.png)
+![Screenshot of GraphiQL executing a query to retrieve all articles](./images/Screenshot-2018-02-17-15.52.49.png)
 
 As you can see in the screenshot above, things are working quite nicely!
 
@@ -296,7 +296,7 @@ Just like before, we have to pass the ID of the article as a query parameter. In
 
 When you execute this, you'll see that you get a "1" as a result, because there was exactly one record deleted:
 
-![Screenshot of GraphiQL executing a delete mutation](content/posts/2018/2018-05-08-graphql-mutations-spring/images/Screenshot-2018-02-17-15.55.51.png)
+![Screenshot of GraphiQL executing a delete mutation](./images/Screenshot-2018-02-17-15.55.51.png)
 
 However, when you execute it again, you'll see that the result changes to zero, because there was no longer any record with ID 3. This indicates that our delete query was properly executed.
 
@@ -304,7 +304,7 @@ However, when you execute it again, you'll see that the result changes to zero, 
 
 As you can see in our code, when we try to update an article or profile that doesn't exist, we throw either an `ArticleNotFoundException` or a `ProfileNotFoundException`. However, if we try this right now, we see we an internal server error:
 
-![Screenshot of server error when updating a non-existing entity within GraphiQL](content/posts/2018/2018-05-08-graphql-mutations-spring/images/Screenshot-2018-02-17-16.04.55.png)
+![Screenshot of server error when updating a non-existing entity within GraphiQL](./images/Screenshot-2018-02-17-16.04.55.png)
 
 This is not really what we want, considering that the exception is really on the users end, and not on the server. First of all, let's alter the `ArticleNotFoundException` to implement the `GraphQLError` interface:
 

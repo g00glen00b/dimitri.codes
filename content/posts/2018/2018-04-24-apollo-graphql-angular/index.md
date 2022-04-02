@@ -8,7 +8,7 @@ excerpt: "Forget REST and learn GraphQL! In this tutorial I'll be using Apollo a
 
 [Last time](https://wordpress.g00glen00b.be/graphql-spring-boot/), we wrote a GraphQL API using Spring boot and the graphql-java library. Today, we'll write a simple frontend application using [Angular](https://angular.io/). As mentioned in my previous article, there are few JavaScript libraries out there that we can use. Facebook, which is also behind the idea of [GraphQL](http://graphql.org/), wrote a library called [Relay](https://facebook.github.io/relay/). Additionally, the [group behind Meteor](https://www.meteor.io/) wrote their own library called [Apollo](https://www.apollographql.com/). In this example I'll be using Apollo as the GraphQL library.
 
-![Angular + Apollo + GraphQL](content/posts/2018/2018-04-24-apollo-graphql-angular/images/angular-apollo-graphql.png)
+![Angular + Apollo + GraphQL](./images/angular-apollo-graphql.png)
 
 ### Getting started
 
@@ -221,7 +221,7 @@ Similar to the article overview component, I wrote an `ArticleDetailComponent` w
 <a class="btn btn-outline" [routerLink]="['/articles']"><clr-icon shape="arrow left"></clr-icon> Go back</a>
 ```
 
-![Screenshot of the article overview component in action](content/posts/2018/2018-04-24-apollo-graphql-angular/images/Screenshot-2018-02-04-16.27.51.png)
+![Screenshot of the article overview component in action](./images/Screenshot-2018-02-04-16.27.51.png)
 
 Like the other component, we can retrieve the article using the service in our `ngOnInit()` function:
 
@@ -237,6 +237,6 @@ ngOnInit() {
 
 In this function I'm using the `ActivatedRoute` to retrieve the route parameters to obtain the ID of the given article. Then I use `switchMap()` to switch it by another observable, in this case the one from our service. Finally, I can subscribe to it to retrieve the result.
 
-![Screenshot of the article detail component in action](content/posts/2018/2018-04-24-apollo-graphql-angular/images/Screenshot-2018-02-04-16.27.59.png)
+![Screenshot of the article detail component in action](./images/Screenshot-2018-02-04-16.27.59.png)
 
 If you're intersted in the full code, you can find it on [GitHub](https://github.com/g00glen00b/blog-apollo-graphql-angular-app).

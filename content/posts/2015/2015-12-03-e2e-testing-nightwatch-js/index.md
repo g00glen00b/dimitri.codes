@@ -32,7 +32,7 @@ webdriver-manager start
 
 This time I'm not going to write/test my own application, but I will be testing the [AngularJS TodoMVC application](http://todomvc.com/examples/angularjs/#/).
 
-![nightwatch-angular](content/posts/2015/2015-12-03-e2e-testing-nightwatch-js/images/nightwatch-angular.png)
+![nightwatch-angular](./images/nightwatch-angular.png)
 
 Create a new project, and inside it create a folder structure **tests/e2e**. Within the tests folder create a file called **nightwatch.json**. This file will be used to configure Nightwatch for running our tests. Now open the configuration file and add the following JSON configuration:
 
@@ -458,7 +458,7 @@ nightwatch --config tests/nightwatch.json --env chrome
 
 This will run all tests, and will open Google Chrome several times (once for each test). Eventually you should see the result:
 
-![nightwatch-run](content/posts/2015/2015-12-03-e2e-testing-nightwatch-js/images/nightwatch-run.png)
+![nightwatch-run](./images/nightwatch-run.png)
 
 If you want to run a test suite, you can use the following command:
 

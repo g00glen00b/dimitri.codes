@@ -16,7 +16,7 @@ For a headless CMS on the other hand, it's a bit more difficult. For example, le
 
 The first thing we have to do is to make sure we can call our CI server from outside. For Netlify, this can be done by going to the **Settings** of your project, and selecting **Build & deploy**. In here, you can find a section called **Build hooks** that allows you to create a new webhook.
 
-![Netlify build hooks](content/posts/2020/2020-02-11-updating-gatsby-wordpress-published/images/Screenshot-2020-01-21-11.40.26.png)
+![Netlify build hooks](./images/Screenshot-2020-01-21-11.40.26.png)
 
 If you're using **AWS CodePipeline**, you can refer to [the documentation about creating a webhook](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html). As authentication, I would suggest to either use an unauthenticated setup, or an IP, and by whitelisting the IP of the server where WordPress is hosted on.
 
@@ -141,10 +141,10 @@ Additionally, you have to add some metadata to the top of your PHP code so that 
 
 Finally, you have to call the PHP file the same as your plugin folder name, such as **wp-content/plugins/netlify-build-hook/netlify-build-hook.php**. After that, you have to activate the plugin in WordPress itself by logging in and going to the **Plugins** section.
 
-![WordPress plugins](content/posts/2020/2020-02-11-updating-gatsby-wordpress-published/images/Screenshot-2020-01-21-12.29.14.png)
+![WordPress plugins](./images/Screenshot-2020-01-21-12.29.14.png)
 
 If you're using Netlify, and you published a post, you should see the builds appear with the name you used for the webhook:
 
-![Netlify producction deploys](content/posts/2020/2020-02-11-updating-gatsby-wordpress-published/images/Screenshot-2020-01-21-12.30.47.png)
+![Netlify producction deploys](./images/Screenshot-2020-01-21-12.30.47.png)
 
 And there you have it, you're now able to automatically update your Gatsby site when you change your content on WordPress. If you're interested in the full plugin code, you can check out [this gist](https://gist.github.com/g00glen00b/94423e94d115e2b797c1343375bc01a4).

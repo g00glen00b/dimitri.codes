@@ -8,7 +8,7 @@ excerpt: "In this tutorial, we'll use the powers of Angular Material and routing
 
 A few years ago, I explored the capabilities of the router framework within [Angular](https://angular.io/). One of the aspects I didn't cover are named router outlets. These outlets are very interesting when it comes to working with master-detail user interfaces. Within this tutorial I'll show you how you can use them to either activate or deactivate a sidebar component within [Angular Material](https://material.angular.io/).
 
-![The result of the sidebar using Angular Material.](content/posts/2019/2019-04-30-content-sidebar-angular-routing/images/angular-material-sidebar.png)
+![The result of the sidebar using Angular Material.](./images/angular-material-sidebar.png)
 
 ### Defining the main route
 
@@ -128,7 +128,7 @@ mat-sidenav {
 
 One issue with this though is that when we open the application on our mobile devices, we'll notice that the sidebar will overlap like 99% of the content we have.
 
-![Animation of the sidebar in action](content/posts/2019/2019-04-30-content-sidebar-angular-routing/images/sidebar-animation.gif)
+![Animation of the sidebar in action](./images/sidebar-animation.gif)
 
 So, for mobile devices I went the extra mile and added some styling that would make sure our sidebar overlaps the entire application:
 

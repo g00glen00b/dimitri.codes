@@ -107,6 +107,6 @@ query AllQuestions($query: Pagination!) {
 }
 ```
 
-![GraphiQL example of scalar type converting date to an ISO timestamp](content/posts/2018/2018-07-31-custom-scalar-types-graphql-apollo/images/Screenshot-2018-05-13-21.04.14.png)
+![GraphiQL example of scalar type converting date to an ISO timestamp](./images/Screenshot-2018-05-13-21.04.14.png)
 
 If you're interested in the full code, you can find it on [GitHub](https://github.com/g00glen00b/apollo-express-vue-example).

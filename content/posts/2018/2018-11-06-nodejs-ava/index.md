@@ -8,7 +8,7 @@ excerpt: "In this tutorial I'll use AVA together with Sinon.js to test my Node.j
 
 [A while ago](/graphql-nodejs-express-apollo/), I wrote a simple GraphQL API using Node.js, Express.js, Apollo and Mongoose. While the API probably works, we didn't really invest any time to write some unit tests for it. That's going to change now. There are many testing frameworks and test runners out there, but in this tutorial I'll be checking out the [AVA test runner](https://github.com/avajs/ava).
 
-![AVA + Sinon.js](content/posts/2018/2018-11-06-nodejs-ava/images/ava-sinonjs.png)
+![AVA + Sinon.js](./images/ava-sinonjs.png)
 
 ### Migrating to Babel 7
 
@@ -234,7 +234,7 @@ npx ava --verbose
 
 After that, you'll see the results being displayed:
 
-![AVA output](content/posts/2018/2018-11-06-nodejs-ava/images/Screenshot-2018-07-23-15.22.28.png)
+![AVA output](./images/Screenshot-2018-07-23-15.22.28.png)
 
 If you don't use the `--verbose` flag, you'll see the output appear on a single line.
 
@@ -252,7 +252,7 @@ npx nyc npm test
 
 This will result in a table summary containing your coverage statistics, for example:
 
-![Istanbul.js nyc coverage report](content/posts/2018/2018-11-06-nodejs-ava/images/Screenshot-2018-07-23-15.48.46.png)
+![Istanbul.js nyc coverage report](./images/Screenshot-2018-07-23-15.48.46.png)
 
 ### Summarized
 

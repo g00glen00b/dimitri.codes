@@ -368,7 +368,7 @@ Well, that was actually all you had to do to write your integration tests, quite
 
 Now, to run your integration tests, you can either choose to run the tests within your IDE (see screenshot below), or you can run Maven.
 
-![ide-integration-test](content/posts/2015/2015-01-24-spring-boot-rest-assured/images/ide-integration-test.png)
+![ide-integration-test](./images/ide-integration-test.png)
 
 And to use Maven, you can simply execute the following command within a terminal:
 
@@ -376,11 +376,11 @@ And to use Maven, you can simply execute the following command within a terminal
 
 By using the **\-P** flag, we can provide the name of the profile we want to use, in this case the integration profile. This makes it easy for integration with CI, because now you can switch integration tests on/off for certain build plans.
 
-![maven-integration-test](content/posts/2015/2015-01-24-spring-boot-rest-assured/images/maven-integration-test.png)
+![maven-integration-test](./images/maven-integration-test.png)
 
 Which should end up with the same result:
 
-![maven-integration-test-result](content/posts/2015/2015-01-24-spring-boot-rest-assured/images/maven-integration-test-result.png)
+![maven-integration-test-result](./images/maven-integration-test-result.png)
 
 This is the end of the first part of the three part series of testing. In the next part I will write some unit tests using Mockito and AssertJ, which we already configured as dependencies in our Maven configuration.
 

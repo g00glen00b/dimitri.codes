@@ -13,7 +13,7 @@ If you don't know what I mean about that, social cards are the things you see wh
 
 For example:
 
-![Example of a social card](content/posts/2021/2021-05-11-generating-social-cards-gatsby/images/preview-social-card.png)
+![Example of a social card](./images/preview-social-card.png)
 
 The way Twitter and other social media generate these cards, is by checking certain meta tags.
 
@@ -145,7 +145,7 @@ exports.onCreateNode = async ({node}) => {
 
 This will create a white box on your image with a darkblue border.
 
-![Current progress of social card](content/posts/2021/2021-05-11-generating-social-cards-gatsby/images/social-card-border.png)
+![Current progress of social card](./images/social-card-border.png)
 
 *Be aware, the bordered white box is surrounded by a light gray background. It's not visible because it's the same background as my blog.*
 
@@ -172,11 +172,11 @@ exports.onCreateNode = async ({node}) => {
 
 This will result in the following card:
 
-![Social card with text](content/posts/2021/2021-05-11-generating-social-cards-gatsby/images/social-card-text.png)
+![Social card with text](./images/social-card-text.png)
 
 This is starting to look great already... until we try a longer title.
 
-![Social card with very long title that goes over the edge](content/posts/2021/2021-05-11-generating-social-cards-gatsby/images/social-card-long-title.png)
+![Social card with very long title that goes over the edge](./images/social-card-long-title.png)
 
 To fix this, we have to wrap the text. Unlike CSS, this isn't an easy task with the Canvas API.
 The way we can implement this is by measuring the length of the text word by word, and creating a new line with text when necessary.
@@ -228,7 +228,7 @@ exports.onCreateNode = async ({node}) => {
 
 This will result in the text being properly wrapped:
 
-![Social card with wrapped text](content/posts/2021/2021-05-11-generating-social-cards-gatsby/images/social-card-text-wrap.png)
+![Social card with wrapped text](./images/social-card-text-wrap.png)
 
 ### Installing fonts
 Up until now, the social card only worked when the font is installed within the operating system.
@@ -275,7 +275,7 @@ exports.onCreateNode = async ({node}) => {
 
 After that, we use the `drawImage()` function to show the image. The result is that we now have our logo on the social card:
 
-![Social card with logo](content/posts/2021/2021-05-11-generating-social-cards-gatsby/images/social-card-logo.png)
+![Social card with logo](./images/social-card-logo.png)
 
 ### Testing it out
 Before we actually hook it to our nodes, we can test it by saving it to a temporary location.

@@ -14,7 +14,7 @@ With unit testing, we try to test/cover small, testable units in our code, like 
 
 With E2E testing on the other hand, we're going to test the entire application and all of its layers at once. In these tests, we're going to test as if we're an end user of your application. You're gonna check what happens when certain elements are clicked, text is entered, ... .
 
-![angular-protractor](content/posts/2015/2015-10-19-e2e-testing-angularjs-applications-with-protractor/images/angular-protractor.png)
+![angular-protractor](./images/angular-protractor.png)
 
 A popular framework to do this for AngularJS applications is [Protractor](http://www.protractortest.org/). Protractor, based upon [Selenium/WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs), will make it very easily to write tests that interact with user interface elements. WebDriverJS already allows us to do that, but Protractor adds some useful features for AngularJS applications, like specifying elements based on the bindings, model, repeater, ... .
 
@@ -120,7 +120,7 @@ If you run this command, you will quickly see a browser window popping up, this 
 
 The result can be seen in the command prompt, normally your test should pass:
 
-![protractor-command](content/posts/2015/2015-10-19-e2e-testing-angularjs-applications-with-protractor/images/protractor-command.png)
+![protractor-command](./images/protractor-command.png)
 
 ### Finishing our test suite
 
@@ -201,7 +201,7 @@ Similar to the previous test we can use the `isDisplayed()` function to verify i
 
 With these 6 tests we tested about everything this small application has to offer. If we run our tests again, they should all run fine.
 
-![protractor-all-tests](content/posts/2015/2015-10-19-e2e-testing-angularjs-applications-with-protractor/images/protractor-all-tests.png)
+![protractor-all-tests](./images/protractor-all-tests.png)
 
 Now you may ask yourself, was this really useful to test all these things? Well, in large projects you often find yourself doing a lot of repeated testing while development to ensure that a feature works as expected.
 

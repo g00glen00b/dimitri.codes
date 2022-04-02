@@ -12,7 +12,7 @@ Recently, someone in my family got me into playing puzzle games like sudoku, bin
 
 A binary puzzle contains a raster, similar to a Sudoku puzzle, where some ones and zeroes have been filled out already. Your goal is to complete the entire raster by following a few rules.
 
-![Layout of a binary puzzle](content/posts/2022/2022-01-26-cheating-with-javascript/images/binary-puzzle-layout.png)
+![Layout of a binary puzzle](./images/binary-puzzle-layout.png)
 
 The rules of a binary puzzle are the following:
 
@@ -28,13 +28,13 @@ First of all, since there can only be two of the same digit adjacent to each oth
 
 For example:
 
-![Binary puzzle with adjacent digits wrapped with the other digit](content/posts/2022/2022-01-26-cheating-with-javascript/images/binary-puzzle-layout2.png)
+![Binary puzzle with adjacent digits wrapped with the other digit](./images/binary-puzzle-layout2.png)
 
 In addition, if there are two of the same digit with a gap of one square between them, then we know it must contain the other digit.
 
 For example:
 
-![Binary puzzle with the other digit between two cells of the same digit](content/posts/2022/2022-01-26-cheating-with-javascript/images/binary-puzzle-layout3.png)
+![Binary puzzle with the other digit between two cells of the same digit](./images/binary-puzzle-layout3.png)
 
 To fill out the missing digits, you try to apply rule 3. Since each row must contain the same amount of zeroes and ones, we know that in this example 4 digits have to be a zero and 4 have to be a one on each row.
 That means that if we have a row with 4 ones and 2 zeroes, we know that the remaining digits should be a zero as well.
@@ -309,7 +309,7 @@ By combining both the rows and columns in a single array using the spread operat
 Now we can paste the code into our browsers console, and run the `solve()` function to run the cheat.
 The funny part is that it immediately shows the "congratulations" message, before even rendering all the values.
 
-![Winner message](content/posts/2022/2022-01-26-cheating-with-javascript/images/winner.png)
+![Winner message](./images/winner.png)
 
 To make it a bit more satisfying to watch, I decided to rewrite the code to stop each iteration after finding a single result.
 The `solveAdjacentValues()` can be rewritten by using the [`array.some()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) operator in stead of the for each:
@@ -379,6 +379,6 @@ function solve() {
 This ensures that one element is changed about every 100 milliseconds.
 If we run the `solve()` function now, we get a cool result.
 
-![Animation of cheats running](content/posts/2022/2022-01-26-cheating-with-javascript/images/animated-cheat.gif)
+![Animation of cheats running](./images/animated-cheat.gif)
 
 The final code can be found on [GitHub](https://gist.github.com/g00glen00b/cdb059d0a5b3046484887fc2c6ba6fd1).

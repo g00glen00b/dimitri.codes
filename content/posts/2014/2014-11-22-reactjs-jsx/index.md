@@ -8,7 +8,7 @@ excerpt: "React.js is all about components. In this tutorial I will create an ap
 
 In my [previous tutorial](/reactjs-gulp-browserify/ "Writing apps with React.js: Build using gulp.js and Browserify"), I've set up gulp.js to build my React.js application, now it's time to write that application. Like I said before, the app I'm going to build in this tutorial, is an application where you can add/remove songs and rate those. We have several components to implement, so let's start.
 
-![application-result](content/posts/2014/2014-11-22-reactjs-jsx/images/application-result.png) 
+![application-result](./images/application-result.png) 
 
 ### JSX
 
@@ -316,7 +316,7 @@ All together the SongForm component will look like this:
 
 The rating component will contain two parts, the **Rating** component/container which will contain the stars and "manages" the score, and then we will have the **RatingStar** component which will simply show a star with the properties passed by the Rating component, and will propagate the hovering over a star. This propagation is necessary, so that if we hover over the third star, the first two get highlighted as well.
 
-![rating-hover](content/posts/2014/2014-11-22-reactjs-jsx/images/rating-hover.png)
+![rating-hover](./images/rating-hover.png)
 
 So, back to the Rating component. The Rating component is a bit complex as well, so let's split this one into chunks as well. However, in stead of starting with the `render()` function, let's talk about the `getInitialState()` function.
 
@@ -825,27 +825,27 @@ gulp serve
 
 It should open a new tab in your favourite browser with the application.
 
-![song-alert](content/posts/2014/2014-11-22-reactjs-jsx/images/song-alert.png)
+![song-alert](./images/song-alert.png)
 
 As you can see, it shows the **SongAlert **component because the list of songs is empty. Also, the "Add" button is disabled since there is no artist or title yet. However, if we start entering an artist and a title, you will see that the Add button becomes enabled.
 
-![songform-enabled](content/posts/2014/2014-11-22-reactjs-jsx/images/songform-enabled.png)
+![songform-enabled](./images/songform-enabled.png)
 
 As soon as we press the **Add** button, the form is cleared again (because we restored the initial state) and the song is added to our list. You will also see that the SongAlert component is no longer visible.
 
-![song-added](content/posts/2014/2014-11-22-reactjs-jsx/images/song-added.png)
+![song-added](./images/song-added.png)
 
 Also, try reloading the browser window, the songs are still displayed, because they were stored in the HTML5 localStorage. With Google Chrome you can see this in the **DevTools** (press F12). In here you can see a JSON serialized version of your songs.
 
-![chrome-devtools](content/posts/2014/2014-11-22-reactjs-jsx/images/chrome-devtools.png)
+![chrome-devtools](./images/chrome-devtools.png)
 
 So, let's rate a song! As soon as we hover over it, you will see that the stars turn orange (thanks to our custom Less stylesheet):
 
-![star-hover](content/posts/2014/2014-11-22-reactjs-jsx/images/star-hover.png)
+![star-hover](./images/star-hover.png)
 
 After clicking it and leaving the stars, you will see that there are certain stars filled now:
 
-![score-updated](content/posts/2014/2014-11-22-reactjs-jsx/images/score-updated.png)
+![score-updated](./images/score-updated.png)
 
 We can also delete the song by pressing the delete/trashcan button. You will see that the application is back in its original state and the SongAlert is visible again.
 

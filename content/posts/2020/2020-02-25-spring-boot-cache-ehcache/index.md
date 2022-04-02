@@ -8,7 +8,7 @@ excerpt: "Caching is a common operation when developing appllications. Spring pr
 
 Caching is a common operation when developing appllications. Spring provides [an abstraction on top of all different caching libraries](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache) to make this even easier.
 
-![Spring boot + EhCache](content/posts/2020/2020-02-25-spring-boot-cache-ehcache/images/spring-boot-ehcache.png)
+![Spring boot + EhCache](./images/spring-boot-ehcache.png)
 
 ### Project setup
 
@@ -18,7 +18,7 @@ In this example, I will create a simple REST API. So let's start by opening [Spr
 - **Spring cache abstraction**: This library contains the cache abstraction we've been talking about before.
 - **Lombok**: This library will make it easier for me to write classes as it will generate getters, setters, constructors and so on for me. This is also an optional dependency.
 
-![Dependencies selected on Spring Initializr](content/posts/2020/2020-02-25-spring-boot-cache-ehcache/images/Screenshot-2020-02-14-11.18.39.png)
+![Dependencies selected on Spring Initializr](./images/Screenshot-2020-02-14-11.18.39.png)
 
 ### A simple REST API
 
@@ -67,7 +67,7 @@ public class TaskController {
 
 If you surf to `http://localhost:8080/api/tasks` now, you'll see that we get a JSON response containing the tasks we defined.
 
-![Screenshot of response with Postman](content/posts/2020/2020-02-25-spring-boot-cache-ehcache/images/Screenshot-2020-02-17-14.52.51.png)
+![Screenshot of response with Postman](./images/Screenshot-2020-02-17-14.52.51.png)
 
 However, we aren't caching yet. If we refresh the page a few times, you'll see that the "Retrieving tasks" message keeps appearing in the logs.
 

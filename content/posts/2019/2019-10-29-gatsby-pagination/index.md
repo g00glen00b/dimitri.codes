@@ -8,7 +8,7 @@ excerpt: "Gatsby is an awesome static site generator, and in this tutorial I'll 
 
 A while back, I decided to use Gatsby for my WordPress blog, and continue with WordPress as a headless CMS. So far, I've also written two tutorials about [setting up Gatsby with WordPress](/using-gatsby-with-wordpress-as-a-headless-cms/), and [how to create detail pages for your content](/creating-pages-with-gatsby/). In this tutorial, we'll explore how we can use pagination with Gatsby.
 
-![Gatsby + WordPress](content/posts/2019/2019-10-29-gatsby-pagination/images/gatsby-wordpress.png)
+![Gatsby + WordPress](./images/gatsby-wordpress.png)
 
 ### Refactoring our original code
 
@@ -250,7 +250,7 @@ const Posts = ({data, pageContext}) => (
 
 With that, we've implemented pagination with Gatsby.
 
-![Pagination component result](content/posts/2019/2019-10-29-gatsby-pagination/images/Screenshot-2019-09-03-15.53.01.png)
+![Pagination component result](./images/Screenshot-2019-09-03-15.53.01.png)
 
 ### Repeating the process for categories and tags
 

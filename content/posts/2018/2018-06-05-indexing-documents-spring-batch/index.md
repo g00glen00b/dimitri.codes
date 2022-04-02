@@ -8,7 +8,7 @@ excerpt: "Batch processing is an often occuring taks when developing application
 
 Batch processing of information is a common thing to do when developing applications. Spring has its own framework to handle batch processing, called [Spring batch](https://projects.spring.io/spring-batch/). In this tutorial, I'll use Spring batch to index markdown documents on my local disk onto Solr to make them easier to search for.
 
-![Spring batch + Apache Solr](content/posts/2018/2018-06-05-indexing-documents-spring-batch/images/spring-batch-solr.png)
+![Spring batch + Apache Solr](./images/spring-batch-solr.png)
 
 ### Getting started
 
@@ -19,7 +19,7 @@ To create a Spring boot project with Spring batch, I'm going to use [Spring Init
 - **Solr**: To index documents into Solr, we're going to use the Springs wrapper for SolrJ, which is a client library to use with Solr.
 - **Lombok**: Lombok is a library that generates getters, setters, constructors and various other things for me. I'll use it to simplify the code in this tutorial.
 
-![Dependencies for a Spring batch application](content/posts/2018/2018-06-05-indexing-documents-spring-batch/images/workspaces-2.png)
+![Dependencies for a Spring batch application](./images/workspaces-2.png)
 
 ### Batch appliczation structure
 
@@ -32,7 +32,7 @@ Spring batch contains a few key elements, such as:
 - **Writers**: The writer is the final part within a step, and can be used to write data back to a CSV, a database, ... .
 - **Tasklets**: Sometimes, a step doesn't require a reader, processor and writer but only a tasklet. For example, when indexing data in Solr, you can use a separate step with tasklet to optimize at the end of the batch process.
 
-![Detailed overview of a reader, processor and writer within a step and batch job.](content/posts/2018/2018-06-05-indexing-documents-spring-batch/images/spring-batch.png)
+![Detailed overview of a reader, processor and writer within a step and batch job.](./images/spring-batch.png)
 
 ### Custom configuration
 
@@ -286,6 +286,6 @@ Now that we have our batch process completely defined, you can try it out by run
 
 After everything has been indexed, you can check the [Solr dashboard](http://localhost:8983/solr/#/) and write a simple query to verify that the documents have been stored.
 
-![Solr query showing documents](content/posts/2018/2018-06-05-indexing-documents-spring-batch/images/workspaces-solr-query.png)
+![Solr query showing documents](./images/workspaces-solr-query.png)
 
 As you can see, the markdown files on my disk have been indexed, and can now be searched on Solr, all thanks to Spring batch. If you're interested in the code, you can find it on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-solr-batch).

@@ -10,7 +10,7 @@ In the next couple of weeks I'm going to develop a small idea sharing/voting app
 
 To start my project I'm going to use [Spring Boot](http://projects.spring.io/spring-boot/) and the [Spring Initializr](http://start.spring.io) online wizard to set up my project. For my project I'm going to use a simple setup using [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) (using an in memory HSQLDB), Spring Web and [Spring Security](http://projects.spring.io/spring-security/).
 
-![initializr](content/posts/2015/2015-05-15-securing-your-rest-api-with-spring-security/images/initializr.png)
+![initializr](./images/initializr.png)
 
 After choosing the proper modules, you can generate the project, which should return an archive with a sample project. Import it in your IDE and we're ready to go.
 
@@ -165,7 +165,7 @@ Yes indeed, you can configure your logging levels from the same file used for co
 
 If you log in properly, and add a new idea by using a **POST** request, you'll see that it works fine.
 
-![post-secured](content/posts/2015/2015-05-15-securing-your-rest-api-with-spring-security/images/post-secured.png)
+![post-secured](./images/post-secured.png)
 
 This looks already pretty nice to me!
 
@@ -211,7 +211,7 @@ What happens here is that we configure all POST/PUT/DELETE requests for everythi
 
 So, now we changed the configuration quite a bit, so it's time to test it out. Run your application and try to send a POST request for creating a new idea:
 
-![post-secured-2](content/posts/2015/2015-05-15-securing-your-rest-api-with-spring-security/images/post-secured-2.png)
+![post-secured-2](./images/post-secured-2.png)
 
 This should give you another prompt, which makes sense because adding is only allowed for authenticated users. So, either enter the prompt or add the following header:
 
@@ -221,7 +221,7 @@ This is the same thing that happens when you enter your credentials, it will add
 
 Now let's try a request that shouldn't be secured, for example getting a list of all ideas. As you can see in the screenshot below, it works as expected. You can send a request without having the Authentication header and it will still return the proper response.
 
-![get-unsecured](content/posts/2015/2015-05-15-securing-your-rest-api-with-spring-security/images/get-unsecured.png)
+![get-unsecured](./images/get-unsecured.png)
 
 #### Achievement: Secured your REST service with Spring Security
 

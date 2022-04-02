@@ -8,7 +8,7 @@ excerpt: "In this example I'll show you how easily you can create applications u
 
 A few days ago I gave an introduction to Meteor for students of [UCLL](http://www.ucll.be/) starting of with an empty project and building a complete chat application in the process. The application we're going to build will look like this:
 
-![demo](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/demo.png)
+![demo](./images/demo.png)
 
 ### Setting up a Meteor project
 
@@ -27,7 +27,7 @@ meteor add mrt:moment
 
 These packages will be used for the styling (Google Open Sans font and SCSS) and the Moment library will be used to format a date to a specific string. Meteor has a lot of packages, which you can browse online using [Atmosphere](https://atmospherejs.com/). We now created our project, so it's time to run it using the `meteor` command.
 
-![install-packages](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/install-packages.png)
+![install-packages](./images/install-packages.png)
 
 ### Meteor project structure
 
@@ -128,7 +128,7 @@ Messages.insert({ message: "Hello everyone", time: new Date() });
 
 We'll see that the application already works quite well. You can also open two windows simultaneous and enter a message in the first window and you'll see that the second window gets updated directly as well. This feature of Meteor, called **live update** is probably the coolest feature of it. If you want to develop something like this using other stacks, it will cost you days, or even weeks if you want to properly secure them with handshakes, with Meteor on the other hand it comes out of the box.
 
-![messages-template](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/messages-template.png)
+![messages-template](./images/messages-template.png)
 
 ### Adding new messages
 
@@ -190,7 +190,7 @@ If we go back to the application now, we'll see that a form field was added to i
 
 So, let's test it out and add a new message by using the form, it should work!
 
-![newmessage-template](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/newmessage-template.png)
+![newmessage-template](./images/newmessage-template.png)
 
 So... we actually have a working chat application now, don't we? It sure looks ugly as hell, but we're going to fix that now!
 
@@ -563,11 +563,11 @@ So, if the input is valid, we show the button and if the input is invalid, we di
 
 That's all we had to do to create some form validation, let's check it out. If we look at the application, we can see that the button has a slightly different color, indicating that the button is disabled.
 
-![input-validation](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/input-validation.png)
+![input-validation](./images/input-validation.png)
 
 As soon as we enter a character in the field, the button will be enabled again:
 
-![input-validation-valid](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/input-validation-valid.png)
+![input-validation-valid](./images/input-validation-valid.png)
 
 So that seems to work fine, also, if we enter a very long message, you'll see that the button becomes disabled again.
 
@@ -608,11 +608,11 @@ This will show the count, and when the message is too long, an additional class 
 
 If we take a look at the application, we'll see that the counter is added properly.
 
-![input-counter](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/input-counter.png)
+![input-counter](./images/input-counter.png)
 
 As soon as we start to type, the counter goes down, eventually going negative, which will cause the color to change:
 
-![input-counter-invalid](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/input-counter-invalid.png)
+![input-counter-invalid](./images/input-counter-invalid.png)
 
 ### Who said that?
 
@@ -641,7 +641,7 @@ Now, star the application again and open **index.html**. The accounts-ui package
 
 If we look at the application now, you'll see that there's a sign in link at the top right corner. However, it requires an e-mail address to sign up, while I would like to enter a username in stead.
 
-![accounts-ui-email](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/accounts-ui-email.png)
+![accounts-ui-email](./images/accounts-ui-email.png)
 
 To configure Accounts UI to use a username in stead of an e-mail address, we add a JavaScript file called **application.config.js** to the **client** folder and add the following code:
 
@@ -690,7 +690,7 @@ If we take a look at the application again, you'll see that it's quite empty, wh
 
 Let's create an account and post a message, and you'll see that everything works well.
 
-![messages-user](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/messages-user.png)
+![messages-user](./images/messages-user.png)
 
 ### Highlighting your own messages
 
@@ -737,7 +737,7 @@ So, what did we do here, we created an `{{#if isOwner this}}` which will be exec
 
 If we look back at the application now, you'll see that your own messages are slightly more visible now:
 
-[![messages-owner](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/messages-owner.png)
+[![messages-owner](./images/messages-owner.png)
 
 ### Sign in with Twitter
 
@@ -781,7 +781,7 @@ function createMessage(evt) {
 
 Now, go over to [apps.twitter.com](https://apps.twitter.com/) and create a new application (or use an existing application). If you have an application prepared on Twitter, you can open your Meteor application, and when you click on the menu to sign in (you have to be logged out), you'll see a button to configure the Twitter login.
 
-![twitter](content/posts/2015/2015-07-25-writing-a-chat-application-with-meteor/images/twitter.png)
+![twitter](./images/twitter.png)
 
 Enter the consumer key and consumer secret (which you can find on Twitter) and you can now log in using Twitter in just a few lines of extra code!
 

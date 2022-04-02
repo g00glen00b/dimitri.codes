@@ -8,7 +8,7 @@ excerpt: "In this small tutorial series I will create a small application using 
 
 In my previous tutorial I explained how to create a simple song rating app using AngularJS and storing the data in the HTML5 LocalStorage. Today I'm going to do the same thing, but this time I will be using Ember.js. The setup is quite easy, I'm going to write an app that allows you to add songs, rate them and delete them.
 
-![app-final](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-final1.png)
+![app-final](./images/app-final1.png)
 
 ### Project setup
 
@@ -22,7 +22,7 @@ So let's start! The first step is setting up our project. In this example I will
 - **routes.js**: When writing single page applications, you still want to provide a way to switch between controllers and their views. A pattern commonly used is the router pattern where you describe the routes and the controller that is attached to that route. In this application we will only have one (main) route, but we do need one (it's not optional like in AngularJS).
 - **views.js**: A view is a small piece of user interface. It's very similar to a component (in fact, a component is an extension to a view) but allows better event handling.
 
-![project-structure](content/posts/2014/2014-04-16-ember-routes-controllers/images/project-structure1.png)
+![project-structure](./images/project-structure1.png)
 
 I'm also going to add several libraries to our application, like:
 
@@ -171,11 +171,11 @@ Nothing special here, we're just loading all the files we need. The next part is
 
 If we open our browser now, we will see that our template is loaded.
 
-![app-first-template](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-first-template.png)
+![app-first-template](./images/app-first-template.png)
 
 If you're using Google Chrome, you can also install the [Ember inspector](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi) plugin. If you install it and open your console, you will be able to see all Ember.js routes, if you hover over one, you can see more information.
 
-![ember-chrome-plugin](content/posts/2014/2014-04-16-ember-routes-controllers/images/ember-chrome-plugin.png)
+![ember-chrome-plugin](./images/ember-chrome-plugin.png)
 
 Our app is still quite boring now, so let's start by showing a list of songs. To do that, we're just going to show a table with a row for each song.
 
@@ -203,7 +203,7 @@ Our app is still quite boring now, so let's start by showing a list of songs. To
 
 As you can see, we start of by defining a normal `<table>`. From the `<tbody>` tag it gets interesting. We want to show a row for each song in the model, so we just use the `{{#each}}` handlebars expression. For each song we're going to show the artist and title field, so we use `{{artist}}` and `{{title}}` respectively. If we open our app again, we can see the result:
 
-![app-each](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-each.png)
+![app-each](./images/app-each.png)
 
 ### Improving the model
 
@@ -226,7 +226,7 @@ model: function() {
 
 If we now open our app again, we will see that all songs disappeared:
 
-![app-model](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-model.png)
+![app-model](./images/app-model.png)
 
 I think this is pretty ugly, such an empty screen, so let's add a message that only pops up if the store is really empty. To do that, open up **index.html** and add the following code just before the `<table>`:
 
@@ -248,7 +248,7 @@ This will return true if the length of the songs collection is zero, `undefined`
 
 If we open the app again, we can now see the message:
 
-![app-if](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-if.png)
+![app-if](./images/app-if.png)
 
 ### Adding a form
 
@@ -296,11 +296,11 @@ So, what we're going here is that we're adding a new record to the store, contai
 
 If we open our newly updated app in our browser, we will notice that a form has been added to the bottom.
 
-![app-form](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-form.png)
+![app-form](./images/app-form.png)
 
 Add the name of an artist/song and submit it and you will notice that it's now added to the list and the values are no longer there inside the form fields.
 
-![app-add-store](content/posts/2014/2014-04-16-ember-routes-controllers/images/app-add-store.png)
+![app-add-store](./images/app-add-store.png)
 
 The message that we implemented earlier is now disappeared, because the collection is no longer empty.
 

@@ -10,13 +10,13 @@ excerpt: "With RSocket, we can reactively stream our data over the network. In t
 
 Not only does RSocket cover the specification of the protocol itself, but it also provides several implementations. Currently, there are implementations for Java, JavaScript, Go, Kotlin and more. In this tutorial I'll demonstrate how to use RSocket with Spring boot.
 
-![Spring boot + Project Reactor + RSocket](content/posts/2019/2019-07-09-reactive-streams-rsocket/images/spring-boot-reactor-rsocket.png)
+![Spring boot + Project Reactor + RSocket](./images/spring-boot-reactor-rsocket.png)
 
 ### Setting up your producer
 
 The first step to set up our project is to head over to Spring Initializr and select the **RSocket** dependency (`spring-boot-starter-rsocket`). Just like with R2DBC, this feature relies on Spring boot **2.2.x**, so make sure to select that as well. Additionally, I'll use Lombok, but you don't need it.
 
-![Spring boot project using RSocket](content/posts/2019/2019-07-09-reactive-streams-rsocket/images/Screenshot-2019-06-19-15.05.40.png)
+![Spring boot project using RSocket](./images/Screenshot-2019-06-19-15.05.40.png)
 
 If you prefer to set up your project manually, you can do so by adding the following dependency:
 

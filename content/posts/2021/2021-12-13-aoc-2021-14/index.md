@@ -304,7 +304,7 @@ void partOne_elementCount(String fileLocation, int iterations, int expectedOutpu
 }
 ```
 
-![Screenshot of my test runner passing all tests](content/posts/2021/2021-12-13-aoc-2021-14/images/test-output.png)
+![Screenshot of my test runner passing all tests](./images/test-output.png)
 
 ### Conclusion
 

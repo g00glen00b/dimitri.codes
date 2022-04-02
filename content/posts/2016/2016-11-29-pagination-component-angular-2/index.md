@@ -220,7 +220,7 @@ As you may realize by now, using `Observable` in Angular is pretty common, so to
 
 If we run the application, we'll see that the pagination is looking pretty great already, though unfinished:
 
-![pagination-initial](content/posts/2016/2016-11-29-pagination-component-angular-2/images/pagination-initial.png)
+![pagination-initial](./images/pagination-initial.png)
 
 ### Using `class` property binding
 
@@ -238,7 +238,7 @@ The next step I'm going to implement is to make sure that the current page looks
 
 If we look at the application now, we can see that we're a step closer:
 
-![pagination-active](content/posts/2016/2016-11-29-pagination-component-angular-2/images/pagination-active.png)
+![pagination-active](./images/pagination-active.png)
 
 ### Using `@Output`
 
@@ -310,7 +310,7 @@ onPageChange() {
 
 If we look at the application now, and we click a page number, you should see the text "changed page" appear in the logs. If you used AngularJS 1.x, you probably notice that this model is pretty clean. We have a flow of property binding in one direction, and a flow of event binding in another direction.
 
-![angular2-control-flow](content/posts/2016/2016-11-29-pagination-component-angular-2/images/angular2-control-flow.png)
+![angular2-control-flow](./images/angular2-control-flow.png)
 
 ### Using `$event`
 
@@ -343,7 +343,7 @@ onPageChange(offset) {
 
 So, if we look at the application now, and click the second page, we can see that it actually works! Both the pokémons and the active page in the pagination component are changed, wonderful!
 
-![pokemon-page-2](content/posts/2016/2016-11-29-pagination-component-angular-2/images/pokemon-page-2.png)
+![pokemon-page-2](./images/pokemon-page-2.png)
 
 Now that we know how that `$event` works, we can actually use it on other places as well. Do you remember the `href` attribtue on the `<a>` element in the pagination? It contained something like `href="javascript:void(0)"`. The reason for this is that we're handling the click event using JavaScript, and the `<a>` element is not really linking to something. So, with this attribute we can tell it to do nothing at all, so the page doesn't change when we click the link.
 
@@ -435,7 +435,7 @@ For the other side we basically repeat the progress, but we **add** the range to
 
 If we take a look at the application now, we can see that it is correctly applying these elements:
 
-![pagination-more-links](content/posts/2016/2016-11-29-pagination-component-angular-2/images/pagination-more-links.png)
+![pagination-more-links](./images/pagination-more-links.png)
 
 ### Implement previous and next page controls
 
@@ -523,7 +523,7 @@ Similar to this, we can also implement first/last page controls if we want to:
 
 Well, with this, we finished our pagination component and we have a working pokédex overview. Great!
 
-![pagination-complete](content/posts/2016/2016-11-29-pagination-component-angular-2/images/pagination-complete.png)
+![pagination-complete](./images/pagination-complete.png)
 
 #### Achievement: Mastered pagination with Angular 2
 

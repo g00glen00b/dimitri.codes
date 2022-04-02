@@ -40,12 +40,12 @@ In my case, I decided to use the [Merge Schedule](https://github.com/marketplace
 Additionally, I had to make sure that the current setup with Gatsby and Netlify works nicely.
 For the past half year I've been running on Gatsby smoothly though, so that's no longer an issue.
 
-![Screenshot of GitHub actions](content/posts/2020/2020-03-17-move-to-markdown/images/github-action.png)
+![Screenshot of GitHub actions](./images/github-action.png)
 
 Another reason why I didn't move over yet is because I still had to move over all existing content.
 Luckily there are tools like [`wordpress-export-to-markdown`](https://github.com/lonekorean/wordpress-export-to-markdown) that helped me, but there were several problems with some of my old blog posts.
 
-![Screenshot of console output](content/posts/2020/2020-03-17-move-to-markdown/images/wordpress-to-markdown.png)
+![Screenshot of console output](./images/wordpress-to-markdown.png)
    
 However, after a few weeks of research, fixing Markdown export issues and changing the GraphQL queries, I can finally say that we're now properly on Gatsby with Markdown! 
 

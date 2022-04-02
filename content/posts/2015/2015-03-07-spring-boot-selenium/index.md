@@ -255,15 +255,15 @@ Then finally we can use the same selector as the one we started with to verify t
 
 The first way to test it out is by running Maven. You can use Maven profiles if you want (like I did), and then run the test. You don't have to install additional software because PhantomJS is loaded through the plugin.
 
-![maven](content/posts/2015/2015-03-07-spring-boot-selenium/images/maven.png)
+![maven](./images/maven.png)
 
 If you want to run them from within your IDE you will have to install [PhantomJS](http://phantomjs.org/) manually. You then have to add an additional VM argument, if you're using Eclipse you can do that by opening the **Run Configurations...** window:
 
-![run-configurations](content/posts/2015/2015-03-07-spring-boot-selenium/images/run-configurations.png)
+![run-configurations](./images/run-configurations.png)
 
 Then you create a new **JUnit** configuration and tell it which project and test class it has to run:
 
-![junit-configuration](content/posts/2015/2015-03-07-spring-boot-selenium/images/junit-configuration.png)
+![junit-configuration](./images/junit-configuration.png)
 
 Additionally you will have to configure a specific VM argument containing the location of your PhantomJS executable, for me it is:
 
@@ -271,11 +271,11 @@ Additionally you will have to configure a specific VM argument containing the lo
 -Dphantomjs.binary.path=/usr/local/phantomjs-1.9.8/bin/phantomjs
 ```
 
-![vm-argument](content/posts/2015/2015-03-07-spring-boot-selenium/images/vm-argument.png)
+![vm-argument](./images/vm-argument.png)
 
 After saving it you can test your configuration out, which should give you the same result:
 
-![junit-test](content/posts/2015/2015-03-07-spring-boot-selenium/images/junit-test.png)
+![junit-test](./images/junit-test.png)
 
 #### Achievement: Master in testing applications
 

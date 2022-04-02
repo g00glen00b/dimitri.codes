@@ -18,7 +18,7 @@ I'm also going to use Lombok in this example, but that's completely optional.
 
 Before you create your project, make sure that you're using **Spring boot 2.2.x** or higher. The Spring Data project for R2DBC relies on **Spring framework 5.2.x**, which is available within Spring boot 2.2.x and higher.
 
-![Spring Initializr setup for R2DBC](content/posts/2019/2019-06-25-reactive-relational-databases-r2dbc-spring/images/Screenshot-2019-06-14-09.12.24.png)
+![Spring Initializr setup for R2DBC](./images/Screenshot-2019-06-14-09.12.24.png)
 
 Now, after generating the project, we do have to add a few dependencies on our own.
 

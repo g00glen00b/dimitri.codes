@@ -143,11 +143,11 @@ If you wonder what the `fa fa-spinner fa-spin fa-4x` classes mean, well, this is
 
 Testing it out might be a bit difficult if you have a fast network connection. However, The Chrome DevTools allow you to throttle network requests, making it easier to test these features.
 
-![chrome-throttle](content/posts/2015/2015-11-24-fun-angularjs-http-loading-indicator/images/chrome-throttle.png)
+![chrome-throttle](./images/chrome-throttle.png)
 
 If you have configured it, reload the page (keep your DevTools open!) and you'll see that everything should load a bit slower. Normally this gives you enough time to properly see the loading icon.
 
-![if-loading-demo](content/posts/2015/2015-11-24-fun-angularjs-http-loading-indicator/images/if-loading-demo.png)
+![if-loading-demo](./images/if-loading-demo.png)
 
 #### Achievement: Master of `$http`
 

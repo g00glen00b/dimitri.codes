@@ -8,7 +8,7 @@ excerpt: "Vue is a progressive web framework, similar to Angular, React and othe
 
 [Vue.js](https://vuejs.org/) gained quite some popularity over the past few years. As a JavaScript framework, it positions itself next to React, Angular and a few other libraries to provide a component-based application structure. In this example, I'll create a Q&A application... with Vue!
 
-![Vue + AT UI](content/posts/2018/2018-08-14-getting-started-vue-at-ui/images/vue-at-ui-e1525425198368.png)
+![Vue + AT UI](./images/vue-at-ui-e1525425198368.png)
 
 ### What is Vue
 
@@ -285,6 +285,6 @@ What happens here is that with the `v-for` directive, the component is repeated 
 
 If we add the `QuestionsPage` component to the `App` component properly like we did before, you should be able to see the result. The application should look like this:
 
-![Screenshot of the Vue application](content/posts/2018/2018-08-14-getting-started-vue-at-ui/images/workspaces-vue-app.png)
+![Screenshot of the Vue application](./images/workspaces-vue-app.png)
 
 Depending on the `createdAt` date, you'll see a "New question" tag next to the question or not. The code can, as usual be found on [GitHub](https://github.com/g00glen00b/apollo-express-vue-example).

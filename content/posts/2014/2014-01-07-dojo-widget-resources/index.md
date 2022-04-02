@@ -30,7 +30,7 @@ The localized folder is a bit different. First you need to create subfolders in 
 
 The last step is to creat our main JavaScript file called `application.js` which should be added to the **app** directory. If you created all these folders and files, your project should look similar to the screenshot below.
 
-![project-structure](content/posts/2014/2014-01-07-dojo-widget-resources/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Template
 

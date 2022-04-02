@@ -12,7 +12,7 @@ In this article I will write a small AngularJS application and use Yeoman to set
 
 To have some more interesting data to display, I'm going to choose one of the thousands of interesting API's at [Mashape](https://market.mashape.com/).
 
-![main](content/posts/2015/2015-09-28-angularjs-applications-yeoman/images/main.png)
+![main](./images/main.png)
 
 ### Let's get started
 
@@ -58,7 +58,7 @@ You'll have to run the `bower install` command to update the dependencies.
 
 Or you can add the CSS file manually, by opening **app/index.html** and to add the Bootstrap CSS to the `<head>` section.
 
-![demo-application](content/posts/2015/2015-09-28-angularjs-applications-yeoman/images/demo-application.png)
+![demo-application](./images/demo-application.png)
 
 ### Signing up for Mashape
 
@@ -239,7 +239,7 @@ grunt serve
 
 And you should see Grunt into action in the terminal, and after a while your favourite web browser should pop up with your application.
 
-![grunt-serve](content/posts/2015/2015-09-28-angularjs-applications-yeoman/images/grunt-serve.png)
+![grunt-serve](./images/grunt-serve.png)
 
 Now you can try it all out, enter a word in the text field and some results should pop up:
 

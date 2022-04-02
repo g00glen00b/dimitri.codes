@@ -10,7 +10,7 @@ In my earlier tutorials, I've explained how you can set up your own [Prometheus]
 
 In this tutorial, we'll integrate our own application metrics with the existing services that are available with Istio.
 
-![Kubernetes + Istio + Prometheus](content/posts/2019/2019-07-23-collecting-application-metrics-with-istio/images/kubernetes-istio-prometheus.png)
+![Kubernetes + Istio + Prometheus](./images/kubernetes-istio-prometheus.png)
 
 ### Enabling Grafana
 
@@ -39,11 +39,11 @@ kubectl port-forward -n istio-system svc/grafana 3000:3000
 
 If you visit the URL mentioned above, you should be able to see the Grafana home. You should notice that it has already been set up to work properly with Prometheus, and that there are also some dashboard already.
 
-![Overview of dashboards of Istio on Grafana](content/posts/2019/2019-07-23-collecting-application-metrics-with-istio/images/grafana-istio-dashboards.png)
+![Overview of dashboards of Istio on Grafana](./images/grafana-istio-dashboards.png)
 
 For example, the **Istio Performance Dashboard** contains some information about your CPU and memory usage.
 
-![istio vCPU performance](content/posts/2019/2019-07-23-collecting-application-metrics-with-istio/images/istio-vcpu-performance.png)
+![istio vCPU performance](./images/istio-vcpu-performance.png)
 
 ### Adding your own metrics
 
@@ -81,6 +81,6 @@ This query will fetch the used heap memory of my application, and now I can prop
 
 Eventually, you can create dashboards like these:
 
-![Grafana dashboard using application metrics](content/posts/2019/2019-07-23-collecting-application-metrics-with-istio/images/grafana-application-metrics.png)
+![Grafana dashboard using application metrics](./images/grafana-application-metrics.png)
 
 And there you have it, your application is now being properly monitored within your service mesh!

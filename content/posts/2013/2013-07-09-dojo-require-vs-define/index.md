@@ -31,7 +31,7 @@ console.log("Second?");
 
 If you execute this code, then there will be a big chance you will see **Second?** first and then **First?**. The reason is that before the `dijit/form/Button` module is loaded, some time has went by already. The second `console.log()` statement however is not being blocked by loading the module, so almost directly you will see **Second?**.
 
-![console-async-amd](content/posts/2013/2013-07-09-dojo-require-vs-define/images/console-async-amd.png)
+![console-async-amd](./images/console-async-amd.png)
 
 But be aware, if you execute the following code:
 
@@ -108,7 +108,7 @@ define([ "dojo/date/locale" ], function(dateLocale) {
 
 As you can see here, I'm using the `define()` function and inside I'm returning an object. If you would import that module now, then the reference you get would be pointing to that object that's being returned here. If you're using the `require()` function to write a module, then no return value is expected and then you would get an error if you would still call that module.
 
-![failure-require](content/posts/2013/2013-07-09-dojo-require-vs-define/images/failure-require.png)
+![failure-require](./images/failure-require.png)
 
 Another difference is that the `define()` function is lazy, while the `require()` function isn't. Modules imported in the `define()` function, will only be imported at the moment they're imported in another  `require()` statement.
 
@@ -141,7 +141,7 @@ require(["my/module"], function(module) {
 
 Then both statements will be printed in the log. So be careful when using the module loader, you can create really weird situations if you're not using them correctly.
 
-![require-vs-define](content/posts/2013/2013-07-09-dojo-require-vs-define/images/require-vs-define.png)
+![require-vs-define](./images/require-vs-define.png)
 
 ### Summarized
 

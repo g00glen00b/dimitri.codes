@@ -10,7 +10,7 @@ Recently, I've been writing some tutorials about creating cloud native applicati
 
 ### Installing Homebrew
 
-![Kubernetes + Istio](content/posts/2019/2019-05-14-setting-up-minikube-istio-macos/images/kubernetes-istio.png)
+![Kubernetes + Istio](./images/kubernetes-istio.png)
 
 The easiest way to install a [Kubernetes](https://kubernetes.io/) cluster locally is by installing [Minikube](https://kubernetes.io/docs/setup/minikube/). To do this, we're going to use [Homebrew](https://brew.sh/), so you might want to install this first, in case you didn't already:
 
@@ -120,7 +120,7 @@ kubectl get service --namespace=istio-system
 
 This command should list some services, including **istio-citadel**, **istio-galley** and so on.
 
-![Output of the Kubernetes command](content/posts/2019/2019-05-14-setting-up-minikube-istio-macos/images/kubectl-istio-system.png)
+![Output of the Kubernetes command](./images/kubectl-istio-system.png)
 
 If you're a GUI-man, you can also run the Minikube dashboard to see the same results. To run the dashboard, you can use the following command:
 

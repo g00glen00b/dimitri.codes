@@ -66,7 +66,7 @@ We're also going to add some files. First of all we're going to create our Node.
 
 I already explained what we're going to do with Express. **Mongoose** on the other hand is a Node.js framework used to communicate with MongoDB. It provides a sweet API where you use models to add/update/retrieve and read your data.
 
-![project-setup](content/posts/2014/2014-05-17-mean-application-setup/images/project-setup.png)
+![project-setup](./images/project-setup.png)
 
 #### Client
 
@@ -106,7 +106,7 @@ Angular-resource is a part of the AngularJS framework and provides an easy way t
 
 Also note that I changed the name in the bower configuration.
 
-![project-setup-client](content/posts/2014/2014-05-17-mean-application-setup/images/project-setup-client.png)
+![project-setup-client](./images/project-setup-client.png)
 
 #### Configuration
 
@@ -117,7 +117,7 @@ The next part is the configuration. Open the **config** folder and add the foll
 - **express.js**: This file will contain the configuration used for Express.js like on which port it has to un, which context will be used to serve our client application and which context will be used to provide our RESTful webservices.
 - **routes.js**: Finally we will also use the routing pattern to setup which URL is bound to which logic in our controller.
 
-![project-setup-config](content/posts/2014/2014-05-17-mean-application-setup/images/project-setup-config.png)
+![project-setup-config](./images/project-setup-config.png)
 
 #### Server
 
@@ -125,7 +125,7 @@ The serverside logic will not be too complicated. We're going to add two folders
 
 In the controllers folder we will add our RESTful webservice controller, called **rest.js**. In the models folder we will add our model, a file called **Song.js**.
 
-![project-setup-server](content/posts/2014/2014-05-17-mean-application-setup/images/project-setup-server.png)
+![project-setup-server](./images/project-setup-server.png)
 
 ### Writing your Node.js app
 

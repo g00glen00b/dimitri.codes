@@ -114,7 +114,7 @@ private String path = "/prometheus";
 
 If you used the **spring-boot-configuration-processor** dependency, it will use these comments as metadata. When you do this, IDE's may pick them up and show them to the developer. This is what it looks like with IntelliJ:
 
-![IntelliJ configuration properties intellisense](content/posts/2018/2018-02-27-writing-spring-boot-starter/images/Screenshot-2018-01-14-17.19.37.png)
+![IntelliJ configuration properties intellisense](./images/Screenshot-2018-01-14-17.19.37.png)
 
 ### Creating your own autoconfiguration
 

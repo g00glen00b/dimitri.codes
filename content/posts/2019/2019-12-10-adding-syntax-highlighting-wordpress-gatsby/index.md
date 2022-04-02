@@ -10,7 +10,7 @@ If you're looking for syntax highlighting with Gatsby, chances are you've encoun
 
 In this tutorial I'll explore the options we have to get syntax highlighting to work with WordPress.
 
-![Gatsby + WordPress](content/posts/2019/2019-12-10-adding-syntax-highlighting-wordpress-gatsby/images/gatsby-wordpress.png)
+![Gatsby + WordPress](./images/gatsby-wordpress.png)
 
 ### Installing dependencies
 
@@ -125,16 +125,16 @@ When writing new blogposts using the Gutenberg editor on WordPress, you can sele
 
 To do this, first add a code block to your post:
 
-![Screenshot of adding a code block to WordPress](content/posts/2019/2019-12-10-adding-syntax-highlighting-wordpress-gatsby/images/Screenshot-2019-09-06-10.10.10.png)
+![Screenshot of adding a code block to WordPress](./images/Screenshot-2019-09-06-10.10.10.png)
 
 After adding the code you want to your blog post, you have to select the code block and open the **Advanced** section at the right-side panel of your blog.
 
 Within this section, you can find the "Additional CSS Class" field, in which you can add the language you prefer. You can find a list of supported languages when using react-syntax-highlighter with Prism.js [here](https://github.com/conorhastings/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD).
 
-![Screenshot of the advanced section within the block pane.](content/posts/2019/2019-12-10-adding-syntax-highlighting-wordpress-gatsby/images/Screenshot-2019-09-06-10.12.52.png)
+![Screenshot of the advanced section within the block pane.](./images/Screenshot-2019-09-06-10.12.52.png)
 
 Now we should be able to run the Gatsby application and look at the syntax highlighted code.
 
-![Screenshot of syntax highlighted code](content/posts/2019/2019-12-10-adding-syntax-highlighting-wordpress-gatsby/images/Screenshot-2019-09-05-14.06.26.png)
+![Screenshot of syntax highlighted code](./images/Screenshot-2019-09-05-14.06.26.png)
 
 With that, we implemented syntax highlighting with WordPress and Gatsby. If you're interested in a full example, you can check out the source code of this blog on [GitHub](https://github.com/g00glen00b/gatsby-blog).

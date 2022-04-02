@@ -23,7 +23,7 @@ In this tutorial, I'll create a simplified Reddit clone application, where peopl
 - **Configuration processor** as I'll be using some configuration properties and I like the additional intellisense offered by it.
 - **Lombok** because I'm even too lazy to generate getters and setters.
 
-![Screenshot of Spring Initializr setup](content/posts/2019/2019-01-08-websockets-spring-boot/images/Screenshot-2018-08-24-19.52.36.png)
+![Screenshot of Spring Initializr setup](./images/Screenshot-2018-08-24-19.52.36.png)
 
 Once the project is downloaded and opened in your favourite IDE? we can start coding!
 

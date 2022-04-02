@@ -56,7 +56,7 @@ ng new ng2-pokedex
 
 With this command we create a new project called **ng2-pokedex**. After this is complete, we can open our project in our favourite IDE or text editor. In my case that will be [IntelliJ](https://www.jetbrains.com/idea/), but feel free to anything you like. [Visual Studio Code](https://code.visualstudio.com/) appears to be popular choice to write TypeScript code.
 
-![ng-new](content/posts/2016/2016-11-21-starting-angular-cli/images/ng-new.png)
+![ng-new](./images/ng-new.png)
 
 ### Running the Angular 2 application
 

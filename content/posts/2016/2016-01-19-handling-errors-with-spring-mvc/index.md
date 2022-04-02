@@ -237,7 +237,7 @@ public class SuperheroesUnavailableException extends RuntimeException {
 
 Now, if we run the application and press refresh a few times (the lucky people might encounter it without refreshing), you'll see a weird page titled **Whitelabel Error Page**.
 
-![whitelabel-error-page](content/posts/2016/2016-01-19-handling-errors-with-spring-mvc/images/whitelabel-error-page.png)
+![whitelabel-error-page](./images/whitelabel-error-page.png)
 
 ### Exception handlers
 
@@ -264,7 +264,7 @@ This will show an error message when the error model is not null. So, 80% of the
 
 To test it out, you'll have to run the application again and refresh several times until you get the error message popping up.
 
-![error-model-and-view](content/posts/2016/2016-01-19-handling-errors-with-spring-mvc/images/error-model-and-view.png)
+![error-model-and-view](./images/error-model-and-view.png)
 
 #### Achievement: Wrote error-prone applications with Spring
 

@@ -342,7 +342,7 @@ http://localhost:8080/ng-spring-data/api/items
 
 In this case **/ng-spring-data** is my content root and I'm running my web container on **http://localhost:8080**.
 
-![rest-response](content/posts/2014/2014-11-30-spring-data-angular/images/rest-response.png)
+![rest-response](./images/rest-response.png)
 
 ### Working at the front-end
 
@@ -691,15 +691,15 @@ That's it for the development of the application. As you can see the amount of J
 
 But let's try out the application. If you deployed it in your web container, you should be able to see the following application in your web browser.
 
-![checklist-no-items](content/posts/2014/2014-11-30-spring-data-angular/images/checklist-no-items.png)
+![checklist-no-items](./images/checklist-no-items.png)
 
 If you add a new item, you will see that two network requests are sent, one for adding the item and another one for retrieving the contents of that item.
 
-![checklist-item-added](content/posts/2014/2014-11-30-spring-data-angular/images/checklist-item-added.png)
+![checklist-item-added](./images/checklist-item-added.png)
 
 Checking or unchecking a task will send a PUT request for updating the item:
 
-![checklist-item-updated](content/posts/2014/2014-11-30-spring-data-angular/images/checklist-item-updated.png)
+![checklist-item-updated](./images/checklist-item-updated.png)
 
 And finally, deleting will send a DELETE request:
 

@@ -49,7 +49,7 @@ To add these features to your Spring boot project, all you have to do is to add 
 
 You can do the same through [Spring Initializr](https://start.spring.io), just make sure to add the **Spring Boot Actuator** dependency.
 
-![Screenshot of adding Actuator on Spring Initializr](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-spring-initializr.png)
+![Screenshot of adding Actuator on Spring Initializr](./images/screenshot-spring-initializr.png)
 
 Once that's done, you're ready to go!
 
@@ -600,7 +600,7 @@ If we want to change the logging level to `WARN`, we can use the following paylo
 }
 ```
 
-![Screenshot of the POST call in Postman](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-postman-logger-post.png)
+![Screenshot of the POST call in Postman](./images/screenshot-postman-logger-post.png)
 
 This will immediately take effect, so new messages using a logging level of `INFO` or lower will no longer appear.
 
@@ -779,7 +779,7 @@ This file can then be imported within a tool like [VisualVM](https://visualvm.gi
 
 This can be a great tool to use when looking for memory leaks or other performance-related issues.
 
-![Screenshot of VisualVM](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-visualvm.png)
+![Screenshot of VisualVM](./images/screenshot-visualvm.png)
 
 ### Exposing the actuators over JMX
 
@@ -789,17 +789,17 @@ However, Spring boot Actuator also allows you to expose these endpoints over JMX
 One way to access these JMX endpoints is by using [VisualVM](https://visualvm.github.io/).
 VisualVM has a plugin called **VisualVM-MBeans** that allows you to call a JMX endpoint.
 
-![Screenshot of VisualVM plugins](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-visualvm-plugins.png)
+![Screenshot of VisualVM plugins](./images/screenshot-visualvm-plugins.png)
 
 Once installed, you can connect to any application that exposes JMX, and open the MBeans tab.
 
-![Screenshot of VisualVM MBeans tab](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-visualvm-mbeans.png)
+![Screenshot of VisualVM MBeans tab](./images/screenshot-visualvm-mbeans.png)
 
 Now you can open `org.springframework.boot` and explore any of the actuators within the **Endpoint** folder.
 
 For example, this is the output of the **Info** JMX MBean:
 
-![Screenshot of the Info MBean](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-visualvm-mbeans-info.png)
+![Screenshot of the Info MBean](./images/screenshot-visualvm-mbeans-info.png)
 
 Sadly, neither JConsole nor VisualVM supports complex parameters.
 That means that it's not possible to use these tools to explore a specific metric.
@@ -843,7 +843,7 @@ For example, in this case, we can call `/actuator/helloworld`, which will return
 
 The same can be achieved through JMX by calling the **Helloworld** MBean:
 
-![Screenshot of Helloworld actuator in VisualVM](content/posts/2020/2020-04-21-mastering-spring-boot-actuator/images/screenshot-visualvm-helloworld.png)
+![Screenshot of Helloworld actuator in VisualVM](./images/screenshot-visualvm-helloworld.png)
 
 If you only want to target either the web or JMX, you can do so by using `@WebEndpoint`  or `@JmxEndpoint`.
 

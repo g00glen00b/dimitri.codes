@@ -419,7 +419,7 @@ Basically, I configured the source directory, the name of the main document, the
 
 Now, if we run `mvn package`, we'll see that there is a folder being generated with the name **snippets** and **documentation** within **target/generated-sources**. The HTML file can now be opened in any browser to be able to see the result.
 
-![Screenshot of the generated HTML](content/posts/2018/2018-10-09-spring-rest-docs/images/Screenshot-2018-06-29-20.29.10.png)
+![Screenshot of the generated HTML](./images/Screenshot-2018-06-29-20.29.10.png)
 
 ### Using custom snippet templates
 
@@ -442,7 +442,7 @@ For example:
 
 If we build the application again, and we take a look at the generated HTML, you'll see that the request parameters now contain an additional column mentioning if the field is optional or not.
 
-![Screenshot of the generated HTML with the additional column](content/posts/2018/2018-10-09-spring-rest-docs/images/Screenshot-2018-06-29-20.30.55.png)
+![Screenshot of the generated HTML with the additional column](./images/Screenshot-2018-06-29-20.30.55.png)
 
 ### Adding constraints
 
@@ -515,7 +515,7 @@ However, to be able to see the constraint descriptions, we need a custom templat
 
 Now you can include the generated snippets in your documentation as well, and the result will be similar to the one in the screenshot below.
 
-![Screenshot of the constraints visualized with Spring REST Docs](content/posts/2018/2018-10-09-spring-rest-docs/images/workspaces-constraints-rest-docs2.png)
+![Screenshot of the constraints visualized with Spring REST Docs](./images/workspaces-constraints-rest-docs2.png)
 
 Be aware though, automatically adding constraint information is only supported for validation on properties within a bean. As far as I'm aware, this doesn't include direct constraints on request parameters like for the `@Positive` annotation on the `page` and `size` parameters within the `findAll()` method.
 

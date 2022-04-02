@@ -8,7 +8,7 @@ excerpt: "In this tutorial, you'll find out how we can use the Prometheus export
 
 A while ago, I wrote [a tutorial about deploying your static web project on nginx using Docker](/containerizing-your-static-web-project/). Today, we'll go a bit further, and see how we can monitor what's happening on [nginx](https://www.nginx.com/), by using [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).
 
-![nginx + Prometheus + Grafana](content/posts/2019/2019-04-16-monitoring-nginx-with-prometheus-and-grafana/images/nginx-prometheus-grafana.png)
+![nginx + Prometheus + Grafana](./images/nginx-prometheus-grafana.png)
 
 ### Enabling the status endpoint
 
@@ -71,7 +71,7 @@ In this example, I'm running the Prometheus exporter as a container within the s
 
 Once your containers are running, you should be able to see whether or not Prometheus is configured properly by visiting the **/targets** endpoint. This should show the status **UP** next to the **movie-quote-consumer** job.
 
-![Prometheus jobs](content/posts/2019/2019-04-16-monitoring-nginx-with-prometheus-and-grafana/images/movie-quote-consumer-prometheus.png)
+![Prometheus jobs](./images/movie-quote-consumer-prometheus.png)
 
 ### Configuring Grafana
 
@@ -85,6 +85,6 @@ delta(nginx_http_requests_total{job="movie-quote-consumer"}[2m])
 
 This will result in a graph like this:
 
-![Grafana chart](content/posts/2019/2019-04-16-monitoring-nginx-with-prometheus-and-grafana/images/grafana-nginx-requests.png)
+![Grafana chart](./images/grafana-nginx-requests.png)
 
 And there you have it, a nice dashboard for nginx. The great thing about this is that if you have **nginx plus**, the configuration barely changes. You only have to enable the Prometheus exporter to collect metrics for nginx plus by using the `-nginx.plus` flag. After that, you should be able to use the new metrics within Grafana.

@@ -20,7 +20,7 @@ There are no "rules" when creating folders/files for your application. But in th
 - **Stores**: In Dojo, when providing data, you will use [Dojo stores](http://dojotoolkit.org/reference-guide/1.9/dojo/store.html) in 9 out of 10 cases. This folder will be used to create a store with all model data.
 - **Views**: The HTML templates used for each view can be found here. There will be an HTML file for each controller that is created.
 
-![Diagram](content/posts/2013/2013-12-20-dojo-mobile-model/images/Diagram.png)
+![Diagram](./images/Diagram.png)
 
 It's actually a similar setup to a normal Model-View-Controller application. The user sees the view, but interacts with the controller (one at a time). The controller retrieves the model which is used to render the view (for example, when showing a tasklist, the list of task details is the model, while the user interface is the view). The model data comes from a Dojo store, which can be connected to a back-end service (RESTful webservice).
 
@@ -28,7 +28,7 @@ When another view should be displayed, the controller must call the router, whic
 
 Now, create the same directory structure (and files) as I did in the next screenshot:
 
-![Structure](content/posts/2013/2013-12-20-dojo-mobile-model/images/Structure.png)
+![Structure](./images/Structure.png)
 
 As you can see, they follow the structure I described earlier. A more detailed look about the files will follow.
 

@@ -89,7 +89,7 @@ This class has a custom `setQuantity` method to make sure that a given quantity 
 
 To write a test, we create a class called `MedicationAvailabilityEntityTest` within the same package as the entity, but within the **src/test/java** directory.
 
-![Screenshot of the project structure](content/posts/2022/2022-03-22-unit-testing-spring-boot/images/project-structure.png)
+![Screenshot of the project structure](./images/project-structure.png)
 
 Within IntelliJ, you can generate these classes by using the **Ctrl** + **Shift** + **T** shortcut on Windows or **Command** + **Shift** + **T** on macOS.
 
@@ -155,7 +155,7 @@ That's why equality by comparison is good enough for this example.
 
 To run the test, we can either build our project or run it from our IDE. Within IntelliJ this can be done by clicking the green arrow next to the test method or test class.
 
-![Screenshot of the green arrow in IntelliJ](content/posts/2022/2022-03-22-unit-testing-spring-boot/images/testmarker.png)
+![Screenshot of the green arrow in IntelliJ](./images/testmarker.png)
 
 ### Creating parameterized tests
 
@@ -212,7 +212,7 @@ void setQuantity_updatesQuantityIfAtLeastZeroAndLessThanInitialQuantity(String i
 
 If you run the test now, you'll see that it runs all examples:
 
-![Screenshot of the test results in IntelliJ](content/posts/2022/2022-03-22-unit-testing-spring-boot/images/parameterized-test-result.png)
+![Screenshot of the test results in IntelliJ](./images/parameterized-test-result.png)
 
 ### Testing exceptions
 
@@ -424,7 +424,7 @@ That means that you would have to find out why the assertion failed.
 
 On the other hand, if you use the `verify()` call, Mockito will provide a clear error message if the mock was called with different arguments.
 
-![Screenshot of the error message if the arguments do not match](content/posts/2022/2022-03-22-unit-testing-spring-boot/images/verify-failed.png)
+![Screenshot of the error message if the arguments do not match](./images/verify-failed.png)
 
 > **Be aware**: If you have a method with multiple arguments, either all arguments should be argumentcaptors or concrete arguments.
 > The following **will not work**:
@@ -655,12 +655,12 @@ The best thing to do is to discuss a testing goal with your team.
 
 If you're using IntelliJ, you can view your testing coverage by clicking the green arrow next to your test and choosing the third option called "**Run ... with Coverage**".
 
-![Screenshot of the options of running a test within IntelliJ](content/posts/2022/2022-03-22-unit-testing-spring-boot/images/run-options-intellij.png)
+![Screenshot of the options of running a test within IntelliJ](./images/run-options-intellij.png)
 
 After that, you get a report of the testing percentage of each package and class.
 In addition, if you browse your code now, lines that are tested will be marked green and lines that aren't tested will be marked in red.
 
-![Screenshot of code in IntelliJ that is covered 100%](content/posts/2022/2022-03-22-unit-testing-spring-boot/images/line-coverage-intellij.png)
+![Screenshot of code in IntelliJ that is covered 100%](./images/line-coverage-intellij.png)
 
 Keep in mind that your tests should **focus on behaviour** and not on implementation details.
 Writing unit tests for configuration classes isn't a good idea. 

@@ -8,7 +8,7 @@ excerpt: "If you want to use WordPress as a headless CMS with Gatsby, I'll demon
 
 Recently, I've moved over my blog to Gatsby, with Wordpress as a headless CMS. In this tutorial, I'll show how you can set up Gatsby in such way.
 
-![Gatsby + WordPress](content/posts/2019/2019-09-17-using-gatsby-with-wordpress-as-a-headless-cms/images/gatsby-wordpress.png)
+![Gatsby + WordPress](./images/gatsby-wordpress.png)
 
 ### Setting up a new project
 
@@ -42,7 +42,7 @@ Within a page, you can use smaller-scoped React components, which you should put
 
 Last but not least, there is the **src/templates** folder. You can use this folder for dynamic page components. For example, you can use it for a detail page that has different data depending on the context.
 
-![Project structure of a Gatsby project](content/posts/2019/2019-09-17-using-gatsby-with-wordpress-as-a-headless-cms/images/Screenshot-2019-08-26-18.39.23.png)
+![Project structure of a Gatsby project](./images/Screenshot-2019-08-26-18.39.23.png)
 
 ### Exploring the index page
 
@@ -204,6 +204,6 @@ return (
 
 Once you run this application, the result should be something like this:
 
-![Gatsby index page](content/posts/2019/2019-09-17-using-gatsby-with-wordpress-as-a-headless-cms/images/Screenshot-2019-08-26-18.08.14-e1566835753557.png)
+![Gatsby index page](./images/Screenshot-2019-08-26-18.08.14-e1566835753557.png)
 
 And there you have it, you properly integrated WordPress with Gatsby. Next time, we'll implement a proper detail page, and add some extra features. If you're interested in the code, you can check out the [source code of my blog on GitHub](https://github.com/g00glen00b/gatsby-blog).

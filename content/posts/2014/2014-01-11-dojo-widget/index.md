@@ -18,7 +18,7 @@ Dojo is a great framework, however, to get a proper introduction to Dojo you usu
 
 While most tutorials stop at writing a widget and templating, we go a little further to localize our widget. We also go into detail about the Dojo loader and what the difference is between defining modules and writing your main JavaScript file. I'll do all of this by writing a simple widget, a stopwatch.
 
-![stop](content/posts/2014/2014-01-11-dojo-widget/images/stop.png)
+![stop](./images/stop.png)
 
 1. [Application structure, templating and localization](/dojo-widget-resources/)
 2. [Modules, inheritance and object state](/dojo-widget-inheritance/)

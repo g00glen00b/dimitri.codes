@@ -14,12 +14,12 @@ In case you haven't heard about Docker yet, [Docker](https://www.docker.com/) is
 
 Thanks to Docker, problems like "it works on my machine" can belong to the past, since everyone will run their application in a similar environment, bootstrapped by Docker.
 
-![Spring boot + Docker](content/posts/2019/2019-02-05-docker-spring-boot/images/spring-boot-docker.png)
+![Spring boot + Docker](./images/spring-boot-docker.png)
 
 You might wonder, how all of this is any different to using virtual machines. Well, one difference is that Docker containers do not run on a separate operating system. In stead, they use the Docker engine to talk to the host operating system.  
 This is more convenient in terms of resources, as it does not require additional resources to set up an entire guest operating system.
 
-![Docker engine architecture](content/posts/2019/2019-02-05-docker-spring-boot/images/docker-engine.png)
+![Docker engine architecture](./images/docker-engine.png)
 
 ### The Dockerfile
 
@@ -31,7 +31,7 @@ The advantage of this layered system is that Docker only processes layers that c
 
 Using the `docker history` command, you can find out which layers a Docker image contains.
 
-![Docker history command output](content/posts/2019/2019-02-05-docker-spring-boot/images/docker-history.png)
+![Docker history command output](./images/docker-history.png)
 
 ### Unpack your JAR
 
@@ -135,7 +135,7 @@ This will, while packaging the application, generate a Docker image for your pro
 
 If you would make a change to your classes now, and rebuild the project using Maven, you can see that it only changed that specific layer within the Docker history:
 
-![Docker history](content/posts/2019/2019-02-05-docker-spring-boot/images/Screenshot-2019-02-06-09.46.02.png)
+![Docker history](./images/Screenshot-2019-02-06-09.46.02.png)
 
 In this screenshot, you can see that I've build the application twice. First I did an initial build, **3 minutes ago** and all layers had to be built.
 

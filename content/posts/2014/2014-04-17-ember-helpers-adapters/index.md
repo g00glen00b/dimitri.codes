@@ -28,7 +28,7 @@ return this.store.find('song');
 
 If we now open our app, add a new song and refresh the page, then the songs you added should still be there.
 
-![app-add-store](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-add-store.png)
+![app-add-store](./images/app-add-store.png)
 
 ### Improving the form
 
@@ -52,11 +52,11 @@ This is similar to how we defined the `isEmpty` complex property, so I'm not goi
 
 If we launch our app again, we will notice that the "Add" button is now disabled, making it impossible to submit the form.
 
-![app-disabled](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-disabled.png)
+![app-disabled](./images/app-disabled.png)
 
 As soon as we enter a value in both fields, the button is enabled again.
 
-![app-enabled](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-enabled.png)
+![app-enabled](./images/app-enabled.png)
 
 ### Deleting songs
 
@@ -90,17 +90,17 @@ As I told before, the current song is passed as a parameter to the deleteSong ac
 
 If we open our app once again, then we will see that there's a "delete" button at the right side of each song.
 
-![app-delete](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-delete.png)
+![app-delete](./images/app-delete.png)
 
 The moment we click on the button, the song is being removed from the list.
 
-![app-deleted](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-deleted.png)
+![app-deleted](./images/app-deleted.png)
 
 ### Custom helpers
 
 Handlebars is a very popular templating framework, used in other frameworks as well. In this part I will talk about how you can define your own custom helpers. I've added several songs to the list, but as you can see in the screenshot I (ab)used the Shift key a lot.
 
-![app-case](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-case.png)
+![app-case](./images/app-case.png)
 
 To solve that, I'm going to format the name of the artist and the song before showing them to the user. I'm going to "titleize" them, which means that all letters are converted to lowercase, except the first letter of each word which will be uppercase. This might not be the best solution (some artists really have capital letters or not), but for demonstration purposes I'm going to use it anyways!
 
@@ -116,7 +116,7 @@ This helper will use the `_.titleize()` function, which is part of the **undersc
 
 If we open our app again, we will notice that the weird capital letters are gone, which means our helper is applied pretty good.
 
-![app-titleize](content/posts/2014/2014-04-17-ember-helpers-adapters/images/app-titleize.png)
+![app-titleize](./images/app-titleize.png)
 
 But be aware, we defined this as a helper, which means that it is only executed when rendering the output, it is not applied to the actual data inside the store.
 

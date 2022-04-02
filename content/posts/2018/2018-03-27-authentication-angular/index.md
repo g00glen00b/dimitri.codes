@@ -12,7 +12,7 @@ When writing an application, eventually you may have to secure it. In this artic
 
 As mentioned in my last article, the authentication state is application-wide, and is easier to manage when you use a library as [@ngrx/store](https://github.com/ngrx/platform). This allows you to publish your state to all subscribers. Be sure to read [this article](/ngrx-store/) before starting with this one.
 
-![An example of ngrx used to keep the authentication state](content/posts/2018/2018-03-27-authentication-angular/images/ngrx-reducer.png)
+![An example of ngrx used to keep the authentication state](./images/ngrx-reducer.png)
 
 ### Showing/hiding elements
 

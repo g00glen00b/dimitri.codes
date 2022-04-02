@@ -12,7 +12,7 @@ When handling input of a user, validation is a common task. In fact, it's so com
 
 To set up a Spring project with bean validation, you don't really need anything specific except the core framework. But since I'll be using it in a web application/REST API, I'll add a few dependencies anyways, like **HSQLDB**, **JPA**, **Lombok** and **Web**. To do this, I'll use the [Spring Initializr](http://start.spring.io/) to get my project.
 
-![Screenshot of Spring Initializr](content/posts/2018/2018-06-08-validating-the-input-of-your-rest-api-with-spring/images/Screenshot-2018-06-07-14.45.33.png)
+![Screenshot of Spring Initializr](./images/Screenshot-2018-06-07-14.45.33.png)
 
 After that, you can start adding validation annotations to your model. I'll personally use the following model:
 
@@ -296,6 +296,6 @@ public List<String> handleValidationExceptions(MethodArgumentNotValidException e
 
 Writing an exception handler can be done by creating a new method within the controller using the `@ExceptionHandler` annotation. If you want to apply this logic to all controllers, you should create a new class annotated with the `@ControllerAdvice`. Other than that, the code is pretty self-explanatory, from the binding result we retrieve a list of all errors, which we'll use the Java 8 stream API with to obtain the error messages, and to return a new list.
 
-![Screenshot of Postman](content/posts/2018/2018-06-08-validating-the-input-of-your-rest-api-with-spring/images/Screenshot-2018-06-08-15.26.12.png)
+![Screenshot of Postman](./images/Screenshot-2018-06-08-15.26.12.png)
 
 With this, we've seen pretty much everything there is to tell about validating beans with Spring and the bean validation API. As usual, the complete code example can be found on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-validation).

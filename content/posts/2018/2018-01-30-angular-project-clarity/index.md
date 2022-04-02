@@ -8,7 +8,7 @@ excerpt: "Project Clarity is a neat UI library with a component-set that can be 
 
 When working at an Angular project, there are many choices for a UI kit. You have [Angular Material](https://material.angular.io/), [ng-bootstrap](https://ng-bootstrap.github.io/#/home) and a few more. My favourite UI kit is probably [Project Clarity](http://clarity.design), open sourced by VMWare.
 
-![Angular + Clarity](content/posts/2018/2018-01-30-angular-project-clarity/images/angular-clarity.png)
+![Angular + Clarity](./images/angular-clarity.png)
 
 ### Installing the dependencies
 
@@ -100,7 +100,7 @@ To test it out, open **app.component.html** and replace the generated content by
 
 If you run the application now, using the `ng serve` command, the page should look a bit like this:
 
-![Clarity hello world](content/posts/2018/2018-01-30-angular-project-clarity/images/Screenshot-2018-01-13-10.43.35.png)
+![Clarity hello world](./images/Screenshot-2018-01-13-10.43.35.png)
 
 If that's the case, then you are now ready to use Project Clarity!
 
@@ -120,6 +120,6 @@ Open **.angular-cli.json**, and replace the `styles` section by:
 
 After that, the application should look like this:
 
-![Clarity dark theme hello world](content/posts/2018/2018-01-30-angular-project-clarity/images/Screenshot-2018-01-13-10.48.28.png)
+![Clarity dark theme hello world](./images/Screenshot-2018-01-13-10.48.28.png)
 
 And there you have it, a nice looking application with Angular and Project Clarity!

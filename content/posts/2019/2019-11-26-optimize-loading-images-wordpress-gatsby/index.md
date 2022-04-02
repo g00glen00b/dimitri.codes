@@ -10,7 +10,7 @@ In [my previous tutorials](/tag/gatsby), we've explored how to use WordPress wit
 
 In this tutorial, I'll hack my way around it to show lazy images with Gatsby.
 
-![Gatsby + WordPress](content/posts/2019/2019-11-26-optimize-loading-images-wordpress-gatsby/images/gatsby-wordpress.png)
+![Gatsby + WordPress](./images/gatsby-wordpress.png)
 
 ### Installing dependencies
 
@@ -158,6 +158,6 @@ Be aware that replacing these images costs time, and your build-time might incre
 
 In fact, they'll notice that images below the fold are lazy-loaded. Images below the fold use a blurry version of the image, and load the image as soon as they're visible:
 
-![Screenshot of the blurry image being loaded](content/posts/2019/2019-11-26-optimize-loading-images-wordpress-gatsby/images/Screenshot-2019-09-04-15.51.58.png)
+![Screenshot of the blurry image being loaded](./images/Screenshot-2019-09-04-15.51.58.png)
 
 With that, we've properly implemented lazy-loading with Gatsby and WordPress for embedded images. If you're interested in a complete example, you can view the source code of this blog on [GitHub](https://github.com/g00glen00b/gatsby-blog).

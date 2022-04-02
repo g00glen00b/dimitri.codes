@@ -141,6 +141,6 @@ In this example, we're using the `PostTitle` component from last time. Additiona
 
 To take effect, we have to re-run the Gatsby application. This will create the new pages, and now you should be able to view them in action.
 
-![Gatsby detail page](content/posts/2019/2019-10-15-creating-pages-with-gatsby/images/Screenshot-2019-08-27-15.38.13.png)
+![Gatsby detail page](./images/Screenshot-2019-08-27-15.38.13.png)
 
 With that, we've created our first example of custom pages with Gatsby. Next time we'll explore how we can achieve pagination. If you're interested in the code, you can check out [the source of my blog on GitHub](https://github.com/g00glen00b/gatsby-blog).

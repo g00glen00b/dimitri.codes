@@ -8,7 +8,7 @@ excerpt: "GraphQL nowadays is often seen as an alternative to REST, each with it
 
 A while back, I wrote [a tutorial](/graphql-spring-boot/) about creating a GraphQL API using Java, followed by a web application using Angular and Apollo. Back then, I also mentioned that Apollo has a server-side part as well, which allows you to create GraphQL API's on Node.js. And today, we're going to explore that option!
 
-![GraphQL + Node.js + Apollo](content/posts/2018/2018-07-17-graphql-nodejs-express-apollo/images/nodejs-apollo-graphql.png)
+![GraphQL + Node.js + Apollo](./images/nodejs-apollo-graphql.png)
 
 ### Setting up a Node.js project
 
@@ -134,7 +134,7 @@ const typeDefs = `
 
 Visually, it means that my model looks like this:
 
-![Model schema of my GraphQL types](content/posts/2018/2018-07-17-graphql-nodejs-express-apollo/images/graphql-schema.png)
+![Model schema of my GraphQL types](./images/graphql-schema.png)
 
 Each question contains one or multiple posts. Each answer and question becomes a post, containing information about the author, the votes it had and the content itself. To group these posts per questions, there is also a question model, which contains both the `firstPost` property, which is a link to the actual question post, and a list of zero or many answer posts.
 
@@ -305,7 +305,7 @@ What happens here is that we pre-generate the object IDs for both the question a
 
 To test it out, you can run the application using the script that was provided earlier, and then we can go to [http://localhost:3000/graphiql](http://localhost:3000/graphiql). As explained before, this opens the tester for your GraphQL API, and provides useful information such as auto-completion of both type definitions and input variables.
 
-![Example of GraphiQL](content/posts/2018/2018-07-17-graphql-nodejs-express-apollo/images/Screenshot-2018-02-03-17.19.42.png)
+![Example of GraphiQL](./images/Screenshot-2018-02-03-17.19.42.png)
 
 Now that we have our tester, we can try to obtain a list of all questions containing just their title and their vote count. The GraphQL query I'll be using is:
 
@@ -329,7 +329,7 @@ To provide the pagination input, we define a `$query` variable of the `Paginatio
 
 This means we'll also have to provide the query variables, which can be done at the bottom of the GraphiQL tester:
 
-![GraphiQL autosuggestion of query variables](content/posts/2018/2018-07-17-graphql-nodejs-express-apollo/images/Screenshot-2018-05-01-22.11.44.png)
+![GraphiQL autosuggestion of query variables](./images/Screenshot-2018-05-01-22.11.44.png)
 
 In my case I'll be using the following query variables:
 

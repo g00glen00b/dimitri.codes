@@ -12,7 +12,7 @@ Monitoring is an essential aspect to the maintainability of applications, it's n
 
 Some products offer both combined (eg. Graphite, [Prometheus](https://prometheus.io/)), while other platforms either manage the database part (InfluxDB) and other platforms manage the visualization ([Grafana](https://grafana.com/)). In this example I'll be combining Prometheus and Grafana and use them to monitor an existing Spring boot application.
 
-![Spring boot + Prometheus + Grafana](content/posts/2018/2018-02-13-monitoring-spring-prometheus-grafana-original/images/spring-boot-prometheus-grafana.png)
+![Spring boot + Prometheus + Grafana](./images/spring-boot-prometheus-grafana.png)
 
 ### Setting up Prometheus and Grafana
 
@@ -167,7 +167,7 @@ jvm_memory_bytes_committed{area="nonheap",} 1.1075584E8
 
 If you have the Docker containers running, you should now be able to visit [http://localhost:9090/targets](http://localhost:9090/targets) to see if it's successfully scraping the Prometheus endpoints of your application. For example:
 
-![Example of the Prometheus target overview](content/posts/2018/2018-02-13-monitoring-spring-prometheus-grafana-original/images/Screenshot-2018-01-10-22.01.06.png)
+![Example of the Prometheus target overview](./images/Screenshot-2018-01-10-22.01.06.png)
 
 If there are some errors, check if the IP address or hostname within the Prometheus configuration is correct. In some cases, you may also have to disable the servos of Spring boot Actuator to prevent duplicate keys. To do this, you have to add the following property to **application.yml** (or application.properties):
 
@@ -186,23 +186,23 @@ The next step is to log on to Grafana. Grafana should be running on port 3000 if
 
 The first step after logging in is to create a datasource, which in our case will be Prometheus. The configuration wizard isn't too difficult, and for most things you should be able to use the defaults:
 
-![Grafana setup](content/posts/2018/2018-02-13-monitoring-spring-prometheus-grafana-original/images/Screenshot-2018-01-10-22.06.24.png)
+![Grafana setup](./images/Screenshot-2018-01-10-22.06.24.png)
 
 ### Creating your own dashboard
 
 After that, you can create a new dashboard and add a graph to it. If you selected Prometheus as the default datasource, you can now start adding metrics, such as `jvm_memory_bytes_used` and `jvm_memory_bytes_max`. This will add a few lines to your graph already, because those metrics have specific properties, such as the **job** and the **area**. If you want to retrieve the heap memory of a specific application, you can use `jvm_memory_bytes_used{job="uaa-service",area="heap"}`. This will allow you to configure things like:
 
-![Example for a graph configuration](content/posts/2018/2018-02-13-monitoring-spring-prometheus-grafana-original/images/Screenshot-2018-01-10-22.13.19.png)
+![Example for a graph configuration](./images/Screenshot-2018-01-10-22.13.19.png)
 
 If you save the graph and the dashboard, you can now see you beautiful graphs at work:
 
-![Example for a Grafana dashboard](content/posts/2018/2018-02-13-monitoring-spring-prometheus-grafana-original/images/Screenshot-2018-01-10-22.16.00.png)
+![Example for a Grafana dashboard](./images/Screenshot-2018-01-10-22.16.00.png)
 
 With Grafana, you can also configure alerts to be triggered when a metric reaches a certain threshold. This allows you to prevent disasters from happening in our wonderful world of Spring boot applications.
 
 Additionally to graphs, you can also configure single stats, which can be interesting for things like the uptime of the application:
 
-![Example of a single stat for uptime](content/posts/2018/2018-02-13-monitoring-spring-prometheus-grafana-original/images/Screenshot-2018-01-10-22.32.55.png)
+![Example of a single stat for uptime](./images/Screenshot-2018-01-10-22.32.55.png)
 
 And there you have it, the start of your own dashboard to monitor your own Spring boot applications.
 

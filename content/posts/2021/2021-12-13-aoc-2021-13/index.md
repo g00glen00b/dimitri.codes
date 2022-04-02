@@ -309,7 +309,7 @@ Once the final `TransparentPaper` is generated, I print it, and then call `calcu
 
 From the given sample, I manually counted the amount of marks that are left in the final folded paper, which is 16.
 
-![Console output of the second part, spelling "PFKLKCFP"](content/posts/2021/2021-12-13-aoc-2021-13/images/console-output.png)
+![Console output of the second part, spelling "PFKLKCFP"](./images/console-output.png)
 
 ### Conclusion
 

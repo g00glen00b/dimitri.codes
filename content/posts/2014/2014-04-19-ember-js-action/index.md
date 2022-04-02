@@ -18,7 +18,7 @@ In this tutorial series I will give you a small introduction to Ember.js. We're 
 
 If you complete this tutorial series, then you're ready to start developing your own apps, as the basics will always stay the same. The app we're going to build in this series is a small CRUD application where the user can add and delete songs to a list. He can also give a score to the song by using a selfmade rating widget. The list of songs will be sorted based on these scores. The best thing is that all data is persisted to the HTML5 LocalStorage, meaning that if you reload the page, the songs will still be there!
 
-![app-final](content/posts/2014/2014-04-19-ember-js-action/images/app-final.png)
+![app-final](./images/app-final.png)
 
 A demonstration of the app can be found on [Github](http://song-rate-mvc.github.io/ember-song-rate), as well as the [code](http://github.com/song-rate-mvc/ember-song-rate).
 

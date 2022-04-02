@@ -10,8 +10,8 @@ The entire web (and even the entire world) is changing. Today the world is more 
 
 As a developer, this means you need to adapt to this world, which means you will need to be able to write apps for these devices in a minimum of time. The Dojo Toolkit offers a solution to this problem, the Dojo mobile framework. With the Dojo you can write apps in some of the most common web languages of today: HTML, CSS and JavaScript. These languages work on all devices, and adapts to the size of your screen. Even more, the styling of the application will adapt to the type of device. If you view the app on an iPhone or an Android smartphone, you will notice differences in theming and styles.
 
-![Screenshot1](content/posts/2013/2013-12-24-dojo-mobile/images/Screenshot1.png)]
-![Screenshot5](content/posts/2013/2013-12-24-dojo-mobile/images/Screenshot5.png)
+![Screenshot1](./images/Screenshot1.png)]
+![Screenshot5](./images/Screenshot5.png)
 
 In this series I will start writing a mobile app from scratch using the Dojo Toolkit. We're not going to create a simple hello world example everybody could make, but we're going to develop an application following the most common design patterns like the Model-View-Controller pattern and the Observer/Observable pattern. Our application will contain:
 

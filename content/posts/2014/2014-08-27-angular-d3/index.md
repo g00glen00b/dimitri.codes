@@ -38,7 +38,7 @@ The structure of my app is going to be quite simple, I'm going to write a simple
 
 I'm not going to explain this into detail, but I created the following structure:
 
-![project-structure](content/posts/2014/2014-08-27-angular-d3/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Simple controller
 
@@ -524,15 +524,15 @@ Finally, we're also going to add some styling as well:
 
 When we launch our application now, we will see that the chart is already being drawn based on the default parameters:
 
-![initial-app](content/posts/2014/2014-08-27-angular-d3/images/initial-app.png)
+![initial-app](./images/initial-app.png)
 
 If we press the "Generate chart" button again, other random values will be used and the chart will smoothly animate to its new data:
 
-![generate-chart](content/posts/2014/2014-08-27-angular-d3/images/generate-chart1.png)
+![generate-chart](./images/generate-chart1.png)
 
 We can also toy around with the parameters and click the "Generate chart" button again:
 
-![new-params](content/posts/2014/2014-08-27-angular-d3/images/new-params.png)
+![new-params](./images/new-params.png)
 
 #### Achievement: Added D3 magic to AngularJS
 

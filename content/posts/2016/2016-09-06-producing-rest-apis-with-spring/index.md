@@ -286,7 +286,7 @@ If you did all that, you can now test the API. Run the application and open a RE
 
 Now, if you send a **GET** request to [http://localhost:8080/api/tasks](http://localhost:8080/api/tasks), you'll see that you get a list of two tasks. Which is correct, since we inserted two records in our database when we created **data.sql**.
 
-![postman-findall-tasks](content/posts/2016/2016-09-06-producing-rest-apis-with-spring/images/Screenshot-2016-05-01-23.21.49.png)
+![postman-findall-tasks](./images/Screenshot-2016-05-01-23.21.49.png)
 
 Now, change the method to **POST** and provide the details of a new task by writing some JSON inside the request body, for example:
 
@@ -298,7 +298,7 @@ Now, change the method to **POST** and provide the details of a new task by writ
 
 If you send that to the server, you'll see that you get an almost identically looking DTO as a response. Except this one has an ID (and a `"completed"` property, though we can provide that as well).
 
-![postman-add-task](content/posts/2016/2016-09-06-producing-rest-apis-with-spring/images/Screenshot-2016-05-01-23.23.21.png)
+![postman-add-task](./images/Screenshot-2016-05-01-23.23.21.png)
 
 Now, let's use that ID and change the HTTP method to **PUT** and put the ID after the current path, for example [http://localhost:8080/api/tasks/2](http://localhost:8080/api/tasks/2). If you would change the request body now, for example into:
 
@@ -311,11 +311,11 @@ Now, let's use that ID and change the HTTP method to **PUT** and put the ID afte
 
 You'll see that our task is now updated.
 
-![postman-update-task](content/posts/2016/2016-09-06-producing-rest-apis-with-spring/images/Screenshot-2016-05-01-23.27.28.png)
+![postman-update-task](./images/Screenshot-2016-05-01-23.27.28.png)
 
 The last request we can test is the **DELETE** request. Again, change the HTTP method and execute the request. We actually didn't return anything in our controller so the response is going to be blank. However, if we return to the first request we've sent to retrieve all tasks, you'll see that the task we had earlier is now gone.
 
-![postman-findall-after-delete](content/posts/2016/2016-09-06-producing-rest-apis-with-spring/images/Screenshot-2016-06-05-18.19.20.png)
+![postman-findall-after-delete](./images/Screenshot-2016-06-05-18.19.20.png)
 
 ### Input validation
 
@@ -353,7 +353,7 @@ The reason why I also configured the max length is because that's the maximum le
 
 Now, if you run the application again, and try to send an empty description again, you'll get a 400 Bad request, with a result like this:
 
-![postman-default-input-validation](content/posts/2016/2016-09-06-producing-rest-apis-with-spring/images/postman-default-input-validation.png)
+![postman-default-input-validation](./images/postman-default-input-validation.png)
 
 ### Exception handling
 
@@ -424,7 +424,7 @@ Size.taskDTO.description=The description should be between 1 and 64 characters.
 
 That should do it! Run the application again and test if the new exception handler does the job. If you run the same request, you'll now get a more interesting error message.
 
-![postman-input-validation](content/posts/2016/2016-09-06-producing-rest-apis-with-spring/images/postman-input-validation.png)
+![postman-input-validation](./images/postman-input-validation.png)
 
 With that, I'm going to end the first part of this tutorial. In [the next part](/consuming-rest-apis-with-spring/) we'll create a consumer for the REST API we just wrote.
 

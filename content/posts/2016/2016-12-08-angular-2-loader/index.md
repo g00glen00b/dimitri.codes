@@ -96,7 +96,7 @@ We have to remember that we have to set `loading` to `false` both when the reque
 
 If we take a look at the application now, we can see that our loader is there already, great!
 
-![preloader](content/posts/2016/2016-12-08-angular-2-loader/images/preloader.png)
+![preloader](./images/preloader.png)
 
 ### Implementing the loader on our detail page
 

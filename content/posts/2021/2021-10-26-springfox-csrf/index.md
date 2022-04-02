@@ -57,7 +57,7 @@ The client then has to pass this token back to the REST API for the following ca
 
 This prevents malicious requests to the REST API, since they don't know what the token will be.
 
-![Schematic flow of CSRF protection, see previous paragraphs for explanation](content/posts/2021/2021-10-26-springfox-csrf/images/schematic-flow-csrf.png)
+![Schematic flow of CSRF protection, see previous paragraphs for explanation](./images/schematic-flow-csrf.png)
 
 Spring Security has this mechanism built in, and it can be enabled by using the `.csrf()` configuration.
 For example:
@@ -236,7 +236,7 @@ This syntax is not supported in Internet Explorer nor early versions of Edge.
 
 If you refresh the blank Swagger UI page now, you should be able to see the Swagger UI in all of its glory.
 
-![Screenshot of Swagger UI with operations listed](content/posts/2021/2021-10-26-springfox-csrf/images/swagger-ui-screenshot.png)
+![Screenshot of Swagger UI with operations listed](./images/swagger-ui-screenshot.png)
 
 ### Configuring the requestInterceptor
 
@@ -287,7 +287,7 @@ window.ui = SwaggerUIBundle({
 
 If you refresh Swagger UI now, you should be able to send requests!
 
-![Screenshot of an API call within Swagger UI with the X-XSRF-TOKEN header highlighted](content/posts/2021/2021-10-26-springfox-csrf/images/screenshot-swagger-ui-csrf-token.png)
+![Screenshot of an API call within Swagger UI with the X-XSRF-TOKEN header highlighted](./images/screenshot-swagger-ui-csrf-token.png)
 
 Even subsequent calls should still work!
 

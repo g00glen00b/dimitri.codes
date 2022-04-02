@@ -15,7 +15,7 @@ This is how I started blogging.
 
 Looking back, I think blogging has made me a better developer, and here's why.
 
-![Photo of a person at a laptop writing text within a text editor](content/posts/2021/2021-08-24-five-reasons-blogging/images/glenn-carstens-peters-npxXWgQ33ZQ-unsplash.jpg)
+![Photo of a person at a laptop writing text within a text editor](./images/glenn-carstens-peters-npxXWgQ33ZQ-unsplash.jpg)
 
 ### 1. Breaking things into smaller pieces
 

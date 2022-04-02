@@ -107,7 +107,7 @@ The next part is that we're going to actually implement the template, so open *
 
 Nothing really new here. If we open our app we can now see that the directive is being loaded for each song. It's still pretty ugly, but hey, we just wrote our first directive!
 
-![app-1](content/posts/2014/2014-04-04-introduction-angularjs-directives/images/app-12.png)
+![app-1](./images/app-12.png)
 
 ### First directive, second version
 
@@ -196,7 +196,7 @@ So, we're going to show a star for each object inside the **stars** array, so w
 
 That's it for our updated directive, let's test everything out. If we're opening the app, we will see that this is pretty close to our end result, the only thing we want to do now is make it possible to update the score by clicking on a specific icon.
 
-![app-2](content/posts/2014/2014-04-04-introduction-angularjs-directives/images/app-22.png)
+![app-2](./images/app-22.png)
 
 ### Interaction
 
@@ -216,7 +216,7 @@ And let's also add the `ng-click="setRating($index)"` attribute to the `<a>` ele
 
 Right now when we hover over a star, the current star gets selected. However, it would be way more interesting if you hover over the third star, that the first three stars get a different color, not only the one you're hovering.
 
-![app-3](content/posts/2014/2014-04-04-introduction-angularjs-directives/images/app-32.png)
+![app-3](./images/app-32.png)
 
 To do that we're going to write two extra functions, one for when the user starts hovering a star and another one for when the user stops hovering. Inside this function we're going to store the current index of the star that is being hovered. For example by writing:
 
@@ -248,7 +248,7 @@ scope.starColor = function(idx) {
 
 Nothing special here, we're just determining the correct class based on the index of the star that it will applied to (`idx`) and the index of the star that is being hovered (`scope.hoverIdx`). If we test our app now, you will see that we're finished for 99% percent of the time. The only adjustment I want to make is that if we're hovering over an empty star, that star becomes full as well.
 
-![app-4](content/posts/2014/2014-04-04-introduction-angularjs-directives/images/app-42.png)
+![app-4](./images/app-42.png)
 
 To do that, we simply change the `if` statement from the `starClass()` function to:
 
@@ -268,7 +268,7 @@ ng-repeat="song in songs | orderBy:'-score'"
 
 In this example we're sorting the songs based on the score, and the minus sign in front of it means that it's in a **descending **order. If we now run our app again, we will see that they now appear sorted by their rating.
 
-![app-5](content/posts/2014/2014-04-04-introduction-angularjs-directives/images/app-52.png)
+![app-5](./images/app-52.png)
 
 There are only a few small bugs we need to fix before ending it. If we change the rating of a song, we will see that they get sorted immediately. However, because the <codeng-mouseleave event is never triggered, the stars will remain coloured, which we obviously don't want. To fix this kind of issue, we simply call the `scope.stopHover();` function from inside the `setRating()` function in our directive, for example:
 
@@ -294,7 +294,7 @@ $scope.deleteSong = function(/** Song */ song) {
 
 In this case we're going to look for the index in the original array and not the sorted array, which means everything should work fine now.
 
-![app-final](content/posts/2014/2014-04-04-introduction-angularjs-directives/images/app-final1.png)
+![app-final](./images/app-final1.png)
 
 ### Summary
 

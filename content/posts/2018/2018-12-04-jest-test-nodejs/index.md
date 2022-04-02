@@ -205,7 +205,7 @@ Additionally, if you want to run jest directly without having to install it glob
 npx jest
 ```
 
-![Jest CLI output](content/posts/2018/2018-12-04-jest-test-nodejs/images/workspaces-jest.png)
+![Jest CLI output](./images/workspaces-jest.png)
 
 Additionally, Jest comes with support for Istanbul.js out of the box, so we can get a coverage report as well when we pass the `--coverage` flag:
 
@@ -213,7 +213,7 @@ Additionally, Jest comes with support for Istanbul.js out of the box, so we can 
 npx jest --coverage
 ```
 
-![Jest coverage report](content/posts/2018/2018-12-04-jest-test-nodejs/images/Screenshot-2018-07-27-13.40.42.png)
+![Jest coverage report](./images/Screenshot-2018-07-27-13.40.42.png)
 
 ### Summarizing
 

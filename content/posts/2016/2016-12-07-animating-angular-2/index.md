@@ -30,7 +30,7 @@ And I guess we can already put this component in our **pokemon-info.component.ht
 
 If we look at the application now, we should see that the component is properly added to our detail page, easy peasy:
 
-![pokemon-description-initial](content/posts/2016/2016-12-07-animating-angular-2/images/pokemon-description-initial.png)
+![pokemon-description-initial](./images/pokemon-description-initial.png)
 
 ### Setting an active description
 
@@ -72,7 +72,7 @@ Now, for the template, I'm initially going to show just the description, like th
 
 With that template, we should already get a pretty looking component if we look at our application.
 
-![pokemon-description-only](content/posts/2016/2016-12-07-animating-angular-2/images/pokemon-description-only.png)
+![pokemon-description-only](./images/pokemon-description-only.png)
 
 ### Using `ngModel`
 
@@ -107,7 +107,7 @@ Compared to AngularJS 1.x, looping over options just happens with the `*ngFor` d
 
 If we look at the application again, we can see that there's now a dropdown below our description, that allows us to change game versions, so that's looking fine as well.
 
-![pokemon-description-form](content/posts/2016/2016-12-07-animating-angular-2/images/pokemon-description-form.png)
+![pokemon-description-form](./images/pokemon-description-form.png)
 
 ### Adding animations
 
@@ -251,7 +251,7 @@ I also applied the same `[@cardState]="description?.version"` to the `<select>` 
 
 If we take a look at our application now, we can see that the animation works fine. After selecting another game version, we can also see that the background changes, and when the background is too dark, that the text color will change as well.
 
-![complete-animation](content/posts/2016/2016-12-07-animating-angular-2/images/complete-animation.gif)
+![complete-animation](./images/complete-animation.gif)
 
 With this animation in place, I think we can call it a day. We've seen most of the basics of Angular now, we've set up a project with Angular CLI, wrote services, components and pipes and we were able to set up routing and animations.
 

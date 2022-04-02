@@ -14,7 +14,7 @@ The reasoning behind this is quite simple: WebSockets are still quite new and no
 
 Frameworks I'm going to use is the recently released **Spring 4** and of course the famous front-end MVC-framework **AngularJS**.
 
-![angular-orderby-class](content/posts/2014/2014-03-09-spring-websockets/images/angular-orderby-class.png)
+![angular-orderby-class](./images/angular-orderby-class.png)
 
 ### Writing real time applications using Spring, AngularJS and WebSockets
 

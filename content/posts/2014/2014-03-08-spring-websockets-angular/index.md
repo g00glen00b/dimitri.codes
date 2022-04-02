@@ -300,27 +300,27 @@ And the last one just prevents the margin of the description. By default it will
 
 Nowe we actually wrote our entire application so it's time to see what we actually made. If you run the application on a server and start your web browser, you should be able to see the following screen:
 
-![start-screen](content/posts/2014/2014-03-08-spring-websockets-angular/images/start-screen.png)
+![start-screen](./images/start-screen.png)
 
 This is what we actually expect to see. Our database is empty, so that means the default message pops up. If you open your console you should also be able to see that the WebSocket connection is established:
 
-![socket-connect](content/posts/2014/2014-03-08-spring-websockets-angular/images/socket-connect.png)
+![socket-connect](./images/socket-connect.png)
 
 We can also see that it already called our RESTful webservice to retrieve the ideas. If we add a new idea by entering the fields below, when we submit the form we will see it added immediately:
 
-![initial-idea](content/posts/2014/2014-03-08-spring-websockets-angular/images/initial-idea.png)
+![initial-idea](./images/initial-idea.png)
 
 As you can see the idea is added, the form fields are cleared (because we cleared the model) and the initial message has disappeared. If you look at the console you will also notice a few things:
 
-![rest-add](content/posts/2014/2014-03-08-spring-websockets-angular/images/rest-add.png)
+![rest-add](./images/rest-add.png)
 
 You can see that it posted the new idea on the server and a bit later that the WebSocket receives a message from the server indicating that the ideas have been changed. However, because the initiator flag was set to `true`, nothing really happens. When you open up a second browser window and start adding votes to the idea, you will notice the changes in the second browser window as well. If you go look at the console, you will be able to see that in the first window it will do a PUT-request for every change, while in the other browser it will do a GET-request after retrieving a WebSocket message (because he isn't the initiator).
 
-![rest-update](content/posts/2014/2014-03-08-spring-websockets-angular/images/rest-update.png)
+![rest-update](./images/rest-update.png)
 
 When a new idea is posted (or an idea is updated), you can also see that every PUT or POST request contains a **payload** which contains the idea that is altered in JSON format. If you add multiple ideas, you will see that the idea with the most votes is always on top (because we used the `orderBy` filter) and that when the votes go below zero, the vote count is red.
 
-![angular-orderby-class](content/posts/2014/2014-03-08-spring-websockets-angular/images/angular-orderby-class.png)
+![angular-orderby-class](./images/angular-orderby-class.png)
 
 #### Achievement: Tutorial finished
 

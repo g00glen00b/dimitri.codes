@@ -45,7 +45,7 @@ In this tutorial, we'll write a regular application/microservice. Another thing 
 mn create-app --list-features
 ```
 
-![Screenshot of the features list within the Micronaut CLI](content/posts/2020/2020-09-15-building-microservices-micronaut/images/micronaut-features.png)
+![Screenshot of the features list within the Micronaut CLI](./images/micronaut-features.png)
 
 For this example, I'll use the following features:
 
@@ -55,7 +55,7 @@ For this example, I'll use the following features:
 - **graalvm**: As mentioned before, GraalVM is an Ahead of Time compiler, and compiles our Java application into a native image, which allows us to start our application even faster than before.
 - **openapi**: As we'll be exposing an API within our microservice, some documentation would be great. With the OpenAPI specification, we can do that.
 
-![Micronaut + OpenAPI + GraalVM](content/posts/2020/2020-09-15-building-microservices-micronaut/images/micronaut-openapi-graalvm.png)
+![Micronaut + OpenAPI + GraalVM](./images/micronaut-openapi-graalvm.png)
 
 To generate the application with these features, we can use the following command:
 
@@ -274,7 +274,7 @@ One thing you'll notice if you run this is that the API returns the startdate of
 jackson.serialization.writeDatesAsTimestamps: false
 ```
 
-![Screenshot of the API response of the find all operation](content/posts/2020/2020-09-15-building-microservices-micronaut/images/api-response-findall.png)
+![Screenshot of the API response of the find all operation](./images/api-response-findall.png)
 
 Another problem I ran into is that due to the `Page` class implementing the `Iterable` interface, sometimes, the API returns the response as an array rather than an object containing content (like the screenshot above). To fix that, we could create a proper DTO ourselves:
 
@@ -395,7 +395,7 @@ In this case, we're returning the status **404 Not found** in addition to the re
 
 Swagger is an ecosystem consisting of various tools centered around the OpenAPI specification that documents an API. It is very interesting for other people to know how they can call your API.
 
-![Screenshot of Swagger ecosystem information of the official website](content/posts/2020/2020-09-15-building-microservices-micronaut/images/swagger-tools.png)
+![Screenshot of Swagger ecosystem information of the official website](./images/swagger-tools.png)
 
 With Micronaut, we can generate this YAML specification based on our controllers. The YAML specification also has a section for general information about your API. This section can be configured by changing the `@OpenAPIDefinition` annotation on your `Application` class. 
 
@@ -517,7 +517,7 @@ micronaut:
 
 If you run the application now, and visit http://localhost:8080/swagger/views/swagger-ui/, you'll see the user interface in action. Now you can start playing with it!
 
-![Screenshot of Swagger UI](content/posts/2020/2020-09-15-building-microservices-micronaut/images/swagger-ui.png)
+![Screenshot of Swagger UI](./images/swagger-ui.png)
 
 ### Using GraalVM
 

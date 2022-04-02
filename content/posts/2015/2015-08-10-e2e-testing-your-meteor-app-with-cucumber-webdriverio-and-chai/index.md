@@ -20,7 +20,7 @@ With Cucumber, anyone capable of reading/writing human language (English or any 
 
 Anyways, Cucumber is **not** a testing framework, you still have to implement the code by yourself, meaning that you may need additional frameworks. In this case I'm going to use [WebdriverIO](http://webdriver.io/), which is a Selenium based framework for Node.js and [Chai](http://chaijs.com/), a fluent BDD/TDD assertion library.
 
-![header](content/posts/2015/2015-08-10-e2e-testing-your-meteor-app-with-cucumber-webdriverio-and-chai/images/header.png)
+![header](./images/header.png)
 
 The combination of Cucumber, WebdriverIO and Chai is what Velocity offers when you choose for "Cucumber". They also separated this part from Velocity and called it [Chimp](https://chimp.readme.io/).
 
@@ -513,13 +513,13 @@ meteor
 
 After waiting a while, you'll see that a browser window pops up, executing all your steps. You'll see that it starts entering values in fields, clicking buttons, but it goes pretty fast. After everything is finished, you'll see the status of the executed tests.
 
-![velocity-results](content/posts/2015/2015-08-10-e2e-testing-your-meteor-app-with-cucumber-webdriverio-and-chai/images/velocity-results.png)
+![velocity-results](./images/velocity-results.png)
 
 Even though the tests went pretty fast, it's still significantly slower than unit tests, so be aware when running all E2E tests for bigger applications.
 
 If you scroll down a bit, you'll see that all features and scenarios are listed properly.
 
-![cucumber-results](content/posts/2015/2015-08-10-e2e-testing-your-meteor-app-with-cucumber-webdriverio-and-chai/images/cucumber-results.png)
+![cucumber-results](./images/cucumber-results.png)
 
 ### Conclusion
 

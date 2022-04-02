@@ -8,13 +8,13 @@ excerpt: "With Springfox, we can generate documentation for REST APIs written in
 
 [A while ago](/documenting-rest-api-swagger-springfox/), I used Springfox to include Swagger into our Spring projects. This allows us to use the Swagger UI tester to obtain some live documentation and testing for our REST APIs. However, sometimes you also want to have a static version of the documentation available, so that it can be printed, read without having your application running, ... . In this tutorial we'll see how we can do this.
 
-![Spring boot + Open API + AsciiDoctor](content/posts/2018/2018-09-25-generating-static-documentation-swagger/images/spring-boot-open-api-asciidoctor.png)
+![Spring boot + Open API + AsciiDoctor](./images/spring-boot-open-api-asciidoctor.png)
 
 ### Creating a REST API
 
 Before we can actually start documenting our REST API... we need a REST API. For this project, I'll use the same API as [my tutorial about validating your REST API with bean validation](/validating-the-input-of-your-rest-api-with-spring/). In order to create such a project, I'll add **Lombok**, **JPA**, **Web** and **HSQLDB** as my dependencies:
 
-![Spring Initializr with HSQLDB, JPA, Lombok and Web](content/posts/2018/2018-09-25-generating-static-documentation-swagger/images/Screenshot-2018-06-22-08.48.41.png)
+![Spring Initializr with HSQLDB, JPA, Lombok and Web](./images/Screenshot-2018-06-22-08.48.41.png)
 
 With our project set up, we can create a few model classes representing the API we want to define. In my case, I'm going to write a user API that will allow me to create and find users. That's why I created the following classes:
 
@@ -185,7 +185,7 @@ public UiConfiguration uiConfiguration() {
 
 Now that we have all of this, it's time to test it out by running the application and visiting [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). Normally, you should be able to see your API here now:
 
-![Screenshot of our API within Swagger UI](content/posts/2018/2018-09-25-generating-static-documentation-swagger/images/Screenshot-2018-06-22-17.35.19.png)
+![Screenshot of our API within Swagger UI](./images/Screenshot-2018-06-22-17.35.19.png)
 
 The only issue is that our API documentation isn't describing our API properly yet. Luckily, there's nothing we can't fix, so let's add some annotations to our controller to describe the API, for example:
 
@@ -215,7 +215,7 @@ By using annotations like `@ApiParam`, `@ApiResponses` and so on, we can provide
 
 If we run the application now, we can see those descriptions in action:
 
-![More descriptive screenshot of Swagger UI](content/posts/2018/2018-09-25-generating-static-documentation-swagger/images/workspaces_descriptive-swagger-screenshot.png)
+![More descriptive screenshot of Swagger UI](./images/workspaces_descriptive-swagger-screenshot.png)
 
 ### Obtaining the API specification
 
@@ -370,6 +370,6 @@ In this plugin, we're telling to process the AsciiDoc files as HTML, that it sho
 
 If you're running the Maven using the `mvn clean package` command, you'll be able to find your generated documentation within the **target/generated-sources/swagger-html** directory. You can now deploy this documentation somewhere, or share it, ... . If you prefer PDF, you can use the asciidoc Maven plugin to generate PDFs as well in stead of HTML.
 
-![Example of the generated documentation](content/posts/2018/2018-09-25-generating-static-documentation-swagger/images/workspaces-asciidoc-html-swagger.png)
+![Example of the generated documentation](./images/workspaces-asciidoc-html-swagger.png)
 
 In another project of mine, I used this approach combined with Travis CI to deploy the documentation to the **gh-pages** branch, which you can view on [GitHub](https://aquafinnv.github.io/biodiversity-api/). As usual, the code used in this example can be found on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-swagger-static-docs) as well.

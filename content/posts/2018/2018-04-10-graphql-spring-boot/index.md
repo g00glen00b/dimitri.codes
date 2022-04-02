@@ -14,7 +14,7 @@ When using REST, each resource usually has an endpoint. For example, when writin
 
 The issue is that, when you're retrieving the articles to show a list of articles, you need different data compared to when you're retrieving the full blown article with all of its details. This leads to a lot of **overfetching**, considering that you'll fetch too much data to build the article overview page if you use the same endpoints to handle both the article overview and the article detail page.
 
-![Traffic flow when using REST APIs](content/posts/2018/2018-04-10-graphql-spring-boot/images/rest-overfetch.png)
+![Traffic flow when using REST APIs](./images/rest-overfetch.png)
 
 A possible solution is to provide less information when someone calls `/api/article` compared to when someone is calling `/api/article/123`. This might solve the issue, but what if you want to write your application for both mobile devices and web browsers? Your mobile application might need even less data, so you could still be overfetching. A possible solution to this problem is to have multiple endpoints, for example `/api/article/mobile` and `/api/article/desktop`. This however, leads to a much **higher coupling** between the view and the REST APIs.
 
@@ -29,7 +29,7 @@ There are a few GraphQL libraries to start with though. Since Facebook came up w
 
 In this tutorial I'll talk about how to use GraphQL with Spring boot.
 
-![GraphQL + Spring boot](content/posts/2018/2018-04-10-graphql-spring-boot/images/graphql-spring-boot.png)
+![GraphQL + Spring boot](./images/graphql-spring-boot.png)
 
 ### Setting up project
 
@@ -56,7 +56,7 @@ I configured `${graphql-java.version}` to be **3.10.0**.
 
 In this article, I'll be using a "blog application" as an example. There will be three types, articles, comments and profiles. The link between them is shown below:
 
-![Relation between the types](content/posts/2018/2018-04-10-graphql-spring-boot/images/graphql-type-relation.png)
+![Relation between the types](./images/graphql-type-relation.png)
 
 To start off, create a file called **types.graphqls** in **src/main/resources**. The first type we have to define is the root/global type called `Query`:
 
@@ -287,7 +287,7 @@ public class DataProvider implements CommandLineRunner {
 
 And now, if we run the application and go to [http://localhost:8080/graphiql](http://localhost:8080/graphiql), we should be able to see our GraphQL tester.
 
-[![Example of GraphiQL](content/posts/2018/2018-04-10-graphql-spring-boot/images/Screenshot-2018-02-03-17.19.42.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/02/Screenshot-2018-02-03-17.19.42.png)
+[![Example of GraphiQL](./images/Screenshot-2018-02-03-17.19.42.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2018/02/Screenshot-2018-02-03-17.19.42.png)
 
 Now, let's say that we want to write a GraphQL query to show a list of articles, but we don't need the comments, nor the bio of the author. If we would like to do so, we could write the following query:
 
@@ -306,7 +306,7 @@ query AllArticles {
 
 As you can see, we're only retrieving the id and the title of the article, and the username of the author. If you would debug you code, you would see that it will never retrieve the comments in this case.
 
-![GraphiQL interface when retrieving all articles](content/posts/2018/2018-04-10-graphql-spring-boot/images/Screenshot-2018-02-03-19.22.46.png)
+![GraphiQL interface when retrieving all articles](./images/Screenshot-2018-02-03-19.22.46.png)
 
 The next interesting query would be to retrieve all information of the current article, including the bio of the author and the comments from the other users. This query would use the `article` property of `Query`, but that means we need to pass the article ID somehow. To do this, we need to write the following query:
 
@@ -342,6 +342,6 @@ To be able to test this in GraphiQL, you need to select **Query variables** at t
 
 Normally, GraphiQL will already initialize an empty object containing the `"articleId"` key as soon as you start to enter the ID.
 
-![GraphiQL interface using query variables](content/posts/2018/2018-04-10-graphql-spring-boot/images/Screenshot-2018-02-03-19.29.20.png)
+![GraphiQL interface using query variables](./images/Screenshot-2018-02-03-19.29.20.png)
 
 Next time, I'll show how you can use GraphQL with Angular, and how to modify data using GraphQL. If you're interested in the code of this tutorial, you can find it on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-graphql).

@@ -247,6 +247,6 @@ The next step is to add the button to our template:
 
 If you change the URL to something that doesn't exist, you'll see a button now, and if you click on it, you get back to the questions overview:
 
-![Example of the not found page](content/posts/2018/2018-08-28-routing-vue/images/workspaces_routing.png)
+![Example of the not found page](./images/workspaces_routing.png)
 
 With that, it's time to end this tutorial. As usual, you can find the code at [GitHub](https://github.com/g00glen00b/apollo-express-vue-example).

@@ -142,35 +142,35 @@ This command will load our dependencies from package.json (Express and Mongoose)
 
 node app.js
 
-![start-app](content/posts/2014/2014-05-18-mean-mvc/images/start-app.png)
+![start-app](./images/start-app.png)
 
 Now open your favourite REST client (I like the [Dev HTTP Client](https://chrome.google.com/webstore/detail/dev-http-client/aejoelaoggembcahagimdiliamlcdmfm) plugin for Google Chrome) and start playing with it. If we open the URL [http://localhost:3000/api/songs](http://localhost:3000/api/songs), we should get an empty array as response.
 
-![findAll](content/posts/2014/2014-05-18-mean-mvc/images/findAll.png)
+![findAll](./images/findAll.png)
 
 If we then add a new song, by changing the request method to POST and adding a post body to it, we get:
 
-![add](content/posts/2014/2014-05-18-mean-mvc/images/add.png)
+![add](./images/add.png)
 
 Don't forget to set the **Content-Type** header, otherwise your object won't be recognized as an object. If we now use the previous request again (to find all songs), we can now see that our song has been added to the list.
 
-![findAll-result](content/posts/2014/2014-05-18-mean-mvc/images/findAll-result.png)
+![findAll-result](./images/findAll-result.png)
 
 If we want to update the song, we can change the request method to PUT, add the ID to the URL and start adding the updated object as request body:
 
-![update](content/posts/2014/2014-05-18-mean-mvc/images/update.png)
+![update](./images/update.png)
 
 We now updated the score from 3 to 4. If we now use the same URL but change the request method to GET (retrieve a single object from MongoDB), we obviously get our updated object:
 
-![findOne](content/posts/2014/2014-05-18-mean-mvc/images/findOne.png)
+![findOne](./images/findOne.png)
 
 Deleting is simple as well, just change the method to DELETE and our object is gone.
 
-![remove](content/posts/2014/2014-05-18-mean-mvc/images/remove.png)
+![remove](./images/remove.png)
 
 If we take a look back to our console, we see that everything has been logged properly as well.
 
-![console-updated](content/posts/2014/2014-05-18-mean-mvc/images/console-updated.png)
+![console-updated](./images/console-updated.png)
 
 ### AngularJS factory
 
@@ -344,7 +344,7 @@ npm install -g bower
 
 This will install Bower and the `-g` parameter makes it globally available, so now you can execute the install-command.
 
-![bower-install](content/posts/2014/2014-05-18-mean-mvc/images/bower-install.png)
+![bower-install](./images/bower-install.png)
 
 If that's done, we can start our application again by using:
 
@@ -354,11 +354,11 @@ node app.js
 
 If you open your browser and go to [http://localhost:3000](http://localhost:3000) you should see our application in its full glory. Start adding, rating and deleting songs and if you open your console you should clearly see all the requests to our REST API as well:
 
-![add-song](content/posts/2014/2014-05-18-mean-mvc/images/add-song.png)
+![add-song](./images/add-song.png)
 
 If you look at your console more into detail you can see that it's using our RESTful webservice pretty well:
 
-![update-song](content/posts/2014/2014-05-18-mean-mvc/images/update-song.png)
+![update-song](./images/update-song.png)
 
 And obviously, if you refresh the page, the songs are still there!
 

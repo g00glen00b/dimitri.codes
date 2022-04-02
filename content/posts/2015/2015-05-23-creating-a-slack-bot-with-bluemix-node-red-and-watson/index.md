@@ -14,7 +14,7 @@ Let's start with an introduction first. In this tutorial I'm not going to write 
 
 The great part of Slack is that it has many possible ways of integrating existing tools in Slack, this is just a small part of the big list of integrations:
 
-![slack-integrations](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/slack-integrations.png)
+![slack-integrations](./images/slack-integrations.png)
 
 ### Watson
 
@@ -28,13 +28,13 @@ The way Node-RED works is that you can put together entire flows by just adding 
 
 The screenshot below is an example of how my Slack bot eventually looks like.
 
-![node-red](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/node-red.png)
+![node-red](./images/node-red.png)
 
 ### Bluemix
 
 The last five to ten years the cloud was one of the trending topics in the world of IT. IBM is very well aware of that and invested quite a lot in creating their own PaaS (Platform as a Service) and created [Bluemix](https://bluemix.net/). Nearly a year ago (30 june 2014) Bluemix went public with their first release. So in a month Bluemix will have its first anniversary.
 
-![bluemix-catalog](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/bluemix-catalog.png)
+![bluemix-catalog](./images/bluemix-catalog.png)
 
 ### Setting up your Node-RED application
 
@@ -43,14 +43,14 @@ So, after registering for Slack and Bluemix (you can get a free trial for 30 day
 - A [Cloudant](https://cloudant.com/) database
 - A tool for analytics and monitoring
 
-![bluemix-create](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/bluemix-create.png)
+![bluemix-create](./images/bluemix-create.png)
 
 In this example I'm not going to use that tool, so after creating the application I chose to unbind/delete the service and I added two other services in stead:
 
 - Watson: Personality insights
 - Watson: Question and Answer
 
-![bluemix-watson](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/bluemix-watson.png)
+![bluemix-watson](./images/bluemix-watson.png)
 
 Make sure you connect both of them to your application.
 
@@ -75,7 +75,7 @@ Fo the incoming webhook you will have to configure the channel as well (**#gener
 
 Now let's get back to Node-RED. Create a **HTTP request** node and double click on it. This will communicate with the incoming webhook of Slack, so paste the URL you copied earlier and set the method to POST.
 
-![http-request](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/http-request.png)
+![http-request](./images/http-request.png)
 
 Let's start of with a simple bot that allows you to throw a coin. The first node we're going to create is a **switch**. Just like the old IRC bots, we're going to create several commands like !coin, !travel, !personality and !sentiment, to split up our workflow based on those commands, we use a switch.
 
@@ -83,7 +83,7 @@ First of all you have to know that the HTTP node we created earlier, has a `msg.
 
 The first rule will check if any text matches the regular expression `^!coin`. This means that the text should start with !coin and can be followed by anything else.
 
-![switch-node](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/switch-node.png)
+![switch-node](./images/switch-node.png)
 
 The next part is to create a **function** node, with these functions we can write specific logic (in JavaScript) to create a new message payload. In our case we're going to use `Math.random()` to either display Tails or Heads. So double click the node and add the following function:
 
@@ -110,11 +110,11 @@ The `icon_url` property actually contains the Twitter profile picture of [@IBMWa
 
 Anyways, those are all the nodes we need, connect the last function to the **HTTP request** node and we're done.
 
-![nodered-coin-flow](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/nodered-coin-flow.png)
+![nodered-coin-flow](./images/nodered-coin-flow.png)
 
 Press the **Deploy** button on the top right corner of Node-RED, go back to Slack and enter **!coin** in the **#general** channel, which should already be working:
 
-![slack-coins](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/slack-coins.png)
+![slack-coins](./images/slack-coins.png)
 
 ### Adding Watson to the flow
 
@@ -131,11 +131,11 @@ return {
 
 So now our payload is ready to be used by the Watson Q&A service, so let's add a **Watson Q and A** node to the flow. Double click it and configure it to use the travel service (or the healthcare service if you prefer):
 
-![watson-qa-node](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/watson-qa-node.png)
+![watson-qa-node](./images/watson-qa-node.png)
 
 This node will output the highest scoring answer as payload, so connect it to the node that converts the payload to a Slack message (with the Watson username + profile picture). If you did that and redeployed the Node-RED flow, you can start by asking Watson some traveling questions:
 
-![slack-travel](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/slack-travel.png)
+![slack-travel](./images/slack-travel.png)
 
 ### Analyzing your personality
 
@@ -150,11 +150,11 @@ If you're done, there should be two additional connector dots. Now add the **Clo
 
 Now double click the Cloudant node and configure it like this:
 
-![cloudant-node](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/cloudant-node.png)
+![cloudant-node](./images/cloudant-node.png)
 
 It is possible that you may have to create the database manually (though if I remember correctly that happens automatically). Anyways, if you want to view the Cloudant database you can go to your Bluemix dashboard and click on the **Cloudant storage** service. This will open a new window with a Launch button on the top right corner.
 
-![cloudant-dashboard](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/cloudant-dashboard.png)
+![cloudant-dashboard](./images/cloudant-dashboard.png)
 
 Now open the Cloudant dashboard by pressing the Launch button and you can view the databases and add new ones as well.
 
@@ -170,7 +170,7 @@ return {
 
 Now connect that function to the third dot on the switch and create another **Cloudant** storage node, but this time use the one that has the dot on the left side and the right side. Connect it to the function we just made and double click on it to configure it so it uses the same database as we used for storing the messages.
 
-![cloudant-query-node](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/cloudant-query-node.png)
+![cloudant-query-node](./images/cloudant-query-node.png)
 
 The personality node takes one message, so we will have to create a **function** node that converts all these stored messages to a single string, for example:
 
@@ -229,13 +229,13 @@ That message is ready to be consumed by the function that converts the payload t
 
 To test your flows you actually have to enter some text first, so make sure you entered at least one hundred words before you call the !personality command.
 
-![personality-slack](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/personality-slack.png)
+![personality-slack](./images/personality-slack.png)
 
 At the first try I forgot to deploy my Node-RED flow, so obviously I didn't get a result. Anyways, we built a pretty cool bot using Slack, IBM Bluemix, Node-RED and IBM Watson.
 
 I even had so much fun (and it's quite easily), so I added some extra API's as well using [Mashape](https://www.mashape.com/dashboard) and the [Internet Chuck Norris Database API](http://www.icndb.com/api/):
 
-![slack-apis](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/slack-apis.png)
+![slack-apis](./images/slack-apis.png)
 
 It's probably not the most useful usecase of using Node-RED, Slack, IBM Watson and Bluemix, but I think it illustrates the power of their APIs/capabilities well enough.
 
@@ -247,7 +247,7 @@ First of all, we have to change the switch node a bit, create a new rule that li
 
 After altering the switch node, create a new **HTTP request** node, and make sure the URL points to [http://api.icndb.com/jokes/random](http://api.icndb.com/jokes/random).
 
-![chuck-norris-node](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/chuck-norris-node.png)
+![chuck-norris-node](./images/chuck-norris-node.png)
 
 After connecting the switch to the new HTTP request node, create a function node that will extract the random joke from the response, and serve it as payload:
 
@@ -272,7 +272,7 @@ return {
 
 After doing that, you can connect it to the Slack incoming webhook node and you're ready to test it. Hit the deploy button and enter the **!chuck **command.
 
-![chuck-slack](content/posts/2015/2015-05-23-creating-a-slack-bot-with-bluemix-node-red-and-watson/images/chuck-slack.png)
+![chuck-slack](./images/chuck-slack.png)
 
 And there you have it, your own Chuck Norris bot!
 

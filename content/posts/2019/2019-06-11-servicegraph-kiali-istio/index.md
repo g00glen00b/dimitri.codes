@@ -8,7 +8,7 @@ excerpt: "In this tutorial, we'll use Kiali to visualise our Istio service mesh 
 
 Last time, we've set up [Minikube with Istio](/setting-up-minikube-istio-macos/), and we've [deployed our application using Kubernetes](/spring-boot-kubernetes/). Today, we'll see how we can use [Kiali](https://www.kiali.io/) with Istio to visualise our service dependencies.
 
-![Kubernetes + Istio + Kiali](content/posts/2019/2019-06-11-servicegraph-kiali-istio/images/kubernetes-istio-kiali.png)
+![Kubernetes + Istio + Kiali](./images/kubernetes-istio-kiali.png)
 
 ### Enabling Grafana and Kiali
 
@@ -65,7 +65,7 @@ The next step is to redeploy our existing pods, this time containing the [Istio 
 
 These sidecars contain an [Envoy proxy](https://istio.io/docs/concepts/what-is-istio/#envoy), which proxies traffic so that proper metrics can be generated.
 
-![Pods communicating through Envoy proxy](content/posts/2019/2019-06-11-servicegraph-kiali-istio/images/istio-envoy-1.png)
+![Pods communicating through Envoy proxy](./images/istio-envoy-1.png)
 
 An example of two services communicating through Envoy proxies
 
@@ -92,7 +92,7 @@ After that, you should be able to open the Kiali console by going to [http://loc
 
 If you select **Graph** from the leftside menu, you can now visualise a graph. For example, this is a visualisation using the Graph type "Workload" of my application:
 
-![Servicegraph](content/posts/2019/2019-06-11-servicegraph-kiali-istio/images/kiali-servicegraph.png)
+![Servicegraph](./images/kiali-servicegraph.png)
 
 On the right side of the graph, you can also view some other interesting information, such as:
 
@@ -100,12 +100,12 @@ On the right side of the graph, you can also view some other interesting informa
 - The amount of requests for each HTTP status (2xx, 3xx, 4xx, 5xx).
 - The response times.
 
-![Sidebar information](content/posts/2019/2019-06-11-servicegraph-kiali-istio/images/kiali-node-pane.png)
+![Sidebar information](./images/kiali-node-pane.png)
 
 ### Obtaining more information
 
 Additionally to this overview of your service mesh, you can also get some detailed graphs for each pod. For example, if you go to **workloads**, select an existing workload and go to inbound or outbound metrics, you can see some detailed graphs:
 
-![Detailed graphs](content/posts/2019/2019-06-11-servicegraph-kiali-istio/images/kiali-detailed-graph.png)
+![Detailed graphs](./images/kiali-detailed-graph.png)
 
 And there you have it, a proper visualisation for your service mesh with Kubernetes, Istio and Kiali.

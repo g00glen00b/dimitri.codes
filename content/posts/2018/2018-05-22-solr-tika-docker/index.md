@@ -8,13 +8,13 @@ excerpt: "Indexing documents is quite easy with Apache Solr and Tika. In this tu
 
 When indexing documents, [Apache Solr](http://lucene.apache.org/solr/) is a possible solution. Combined with [Apache Tika](http://tika.apache.org/), you can also use Solr to index various types of documents, such as PDFs, Word documents, HTML files, ... . In this tutorial, I'll be setting up Solr with Tika using [Docker compose](https://docs.docker.com/compose/).
 
-![Docker + Solr](content/posts/2018/2018-05-22-solr-tika-docker/images/docker-solr.png)
+![Docker + Solr](./images/docker-solr.png)
 
 ### Project structure
 
 In my case, I want to run Solr inside a Docker container next to my Java application. That means I will have the following project structure:
 
-![Project structure of a Solr Docker project](content/posts/2018/2018-05-22-solr-tika-docker/images/workspaces.png)
+![Project structure of a Solr Docker project](./images/workspaces.png)
 
 In this case, **src/** is the code of my Java application, while the **solr/** folder will be used for binding certain folders in my Docker container.
 
@@ -231,7 +231,7 @@ services:
 
 To run the project, you can use the `docker-compose up` command. After a while, Solr should have been started. You can now take a look at the Solr dashboard at [http://localhost:8983/solr](http://localhost:8983/solr/) which should have loaded your core:
 
-![Example of a Solr dashboard](content/posts/2018/2018-05-22-solr-tika-docker/images/workspaces-1.png)
+![Example of a Solr dashboard](./images/workspaces-1.png)
 
 ### Configuring Tika
 

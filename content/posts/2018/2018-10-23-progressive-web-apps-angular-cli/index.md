@@ -93,11 +93,11 @@ Additionally to setting the theme color within the manifest, it's also a good id
 
 If you change this theme color, and you run the application on a mobile device, you'll see that the color of the address bar changes to the specific theme color.
 
-![Theme color applied on mobile](content/posts/2018/2018-10-23-progressive-web-apps-angular-cli/images/Screenshot_20180923-133833-e1538214550146.png)
+![Theme color applied on mobile](./images/Screenshot_20180923-133833-e1538214550146.png)
 
 Additionally, if you add the application to the home screen manually, you'll see that it shows the name of the application and the icon that are provided in the manifest. In Chrome you can do this by opening the menu and selecting **Add to Home screen**.
 
-![Adding to homescreen confirmation](content/posts/2018/2018-10-23-progressive-web-apps-angular-cli/images/Screenshot_20180923-134907-e1538214517221.png)
+![Adding to homescreen confirmation](./images/Screenshot_20180923-134907-e1538214517221.png)
 
 ### Service worker
 
@@ -221,7 +221,7 @@ notify(tasks: Task[]) {
 
 If you invoke this code, you'll see a proper notification pop up on your device:
 
-![Notification center containing our own notification](content/posts/2018/2018-10-23-progressive-web-apps-angular-cli/images/Screenshot_20181006-195725-e1538848766639.png)
+![Notification center containing our own notification](./images/Screenshot_20181006-195725-e1538848766639.png)
 
 ### Running without JavaScript
 
@@ -231,7 +231,7 @@ To solve that issue, you should add a proper message so your users are informed 
 
 By default, Angular CLI generates a `<noscript>` element within **src/index.html**, which can be customised as well. For example:
 
-![noscript element in action](content/posts/2018/2018-10-23-progressive-web-apps-angular-cli/images/Screenshot-2018-10-06-19.56.08.png)
+![noscript element in action](./images/Screenshot-2018-10-06-19.56.08.png)
 
 ### Loading screen
 
@@ -239,7 +239,7 @@ Initially when starting up your application, a splash screen will be shown, base
 
 This allows you to create loading screens like this:
 
-![Loading screen](content/posts/2018/2018-10-23-progressive-web-apps-angular-cli/images/Screenshot-2018-10-06-20.08.23.png)
+![Loading screen](./images/Screenshot-2018-10-06-20.08.23.png)
 
 Tobias Ahlin has [a neat collection of CSS-based spinners](http://tobiasahlin.com/spinkit/) you can use. Be sure to check them out.
 

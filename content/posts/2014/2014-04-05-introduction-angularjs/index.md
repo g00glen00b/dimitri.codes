@@ -14,7 +14,7 @@ The application I'm going to build in this tutorial series will contain a contro
 
 The code for the application is also available on [Github](https://github.com/song-rate-mvc/angular-song-rate/tree/0.0.2), together with the [full demo](http://song-rate-mvc.github.io/angular-song-rate).
 
-![app-final](content/posts/2014/2014-04-05-introduction-angularjs/images/app-final.png)
+![app-final](./images/app-final.png)
 
 ### Introduction to AngularJS series
 

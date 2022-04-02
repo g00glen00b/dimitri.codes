@@ -19,7 +19,7 @@ Enough summarizing, in this second tutorial I'm going to talk about filters and 
 
 Sorry for the weird title, but this actually explains what we're going to do today. If we enter an artist or song title, we can use uppercase letters, lowercase letters all together and make a really weird looking application.
 
-![app-1](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-11.png)
+![app-1](./images/app-11.png)
 
 So what I'm going to do now is **convert** the artist/title to a more appropriate form where every letter is in lower case except the first letter of each word which we will capitalize. So, if you didn't see it, I marked the word "convert" which may already ring a bell (and if it didn't, just read the title again). Yes! We're going to write a filter. But before we start writing a filter, we have to open up **app.js** again and just like the `myApp.controllers` package, we're also going to add the `myApp.filters` package, just like this:
 
@@ -58,11 +58,11 @@ So now we can open up our **index.html** page and use the filter where we want. 
 
 So let's test it out! If we enter a weird name again:
 
-![app-2](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-21.png)
+![app-2](./images/app-21.png)
 
 And we submit it, then we see that the filter is correctly applied, there are no longer random uppercase letters and only the first letter is being capitalized.
 
-![app-3](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-31.png)
+![app-3](./images/app-31.png)
 
 ### Built-in filters
 
@@ -75,15 +75,15 @@ AngularJS also comes with a some [extra filters](http://docs.angularjs.org/api/n
 
 Then it will show us how the `songs` array and `newSong` object are constructed. If we run our app, we will see the following:
 
-![app-4](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-41.png)
+![app-4](./images/app-41.png)
 
 Which makes sense, since we intialized our `songs` array with an empty array `[ ]` and our `newSong` object with an empty object `{ }`. However, the moment we start typing in our textbox we will see that the model also changes.
 
-![app-5](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-51.png)
+![app-5](./images/app-51.png)
 
 Finally, if we submit the form we will see that the `newSong` is empty again, but the song is being added to the `songs` array, just like we expected it to be.
 
-![app-6](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-6.png)
+![app-6](./images/app-6.png)
 
 Also notice that the **titleize** filter we just wrote is only applied to the output, the input does not contain the filtered value. If you want to filter the input, then you will have to do that before adding it to the `songs` array.
 
@@ -183,7 +183,7 @@ if (newValue !== oldValue) {
 
 That's all, with just 5 lines of extra code in our controller and a factory with two simple methods we made it possible to persist the songs. If we now open our app again and add a song, we will still see that song when we refresh it.
 
-![app-7](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-7.png)
+![app-7](./images/app-7.png)
 
 ### Deleting songs
 
@@ -211,7 +211,7 @@ $scope.deleteSong = function(/** Integer */ idx) {
 
 That's all we really have to do. If we go and test out our application we will notice that each song now has a delete button.
 
-![app-8](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-8.png)
+![app-8](./images/app-8.png)
 
 If we click on it, that song is being deleted, like it's supposed to do. Also, if we refresh our page the song is still deleted, so that means our local storage is also up to date without having to write extra code to do it. Just because we're watching the songs array we update the local storage on each change, so when we delete a song, the local storage is updated as well.
 
@@ -223,7 +223,7 @@ With the delete feature I'm going to end this tutorial about filters and factori
 
 As you can see in the screnshot below, we're coming close to the final app. In the next and final part of this tutorial series I'm going to write a directive to rate the songs. Directives are a great way to create custom components (like a rating widget). This is a bit more complex in usage, but if you're able to finish that tutorial as well, then you're ready to go and develop your own AngularJS apps without a problem.
 
-![app-final](content/posts/2014/2014-04-03-introduction-angularjs-filter-factory/images/app-final.png)
+![app-final](./images/app-final.png)
 
 ### The story continues...
 

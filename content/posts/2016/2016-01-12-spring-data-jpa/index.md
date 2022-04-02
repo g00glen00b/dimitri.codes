@@ -10,7 +10,7 @@ In [my previous tutorial](/spring-webapp/) I made a simple application to show s
 
 With [Spring Data](http://projects.spring.io/spring-data/) it's very easy to create a simple CRUD application without the hassle of creating your own DAO's. [Spring Boot](http://projects.spring.io/spring-boot/) makes it even easier for you so you don't even have to create an `EntityManager` by yourself, this was usually the stuff that made my head spin when I just started Java development, but no more!
 
-![boot-data](content/posts/2016/2016-01-12-spring-data-jpa/images/boot-data.png)
+![boot-data](./images/boot-data.png)
 
 ### Project setup
 
@@ -21,7 +21,7 @@ Like every Spring boot project we start at [start.spring.io](http://start.spring
 - **Web**: Dependency for creating web applications
 - **Thymeleaf**: Template engine
 
-![start-spring-io-jpa](content/posts/2016/2016-01-12-spring-data-jpa/images/start-spring-io-jpa.png)
+![start-spring-io-jpa](./images/start-spring-io-jpa.png)
 
 Press the big **Generate project** button, unzip the archive and open the project in your favourite IDE. You're now set to create some cool projects with Spring Boot!
 
@@ -245,7 +245,7 @@ If you run the application now, and you visit [http://localhost:8080/superhero](
 
 The entries we stored inside the database are displayed like they should be: 
 
-![results](content/posts/2016/2016-01-12-spring-data-jpa/images/results.png)
+![results](./images/results.png)
 
 With that we made a simple application that connects to a database and shows you the data in a simple table.
 

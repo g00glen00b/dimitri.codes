@@ -67,7 +67,7 @@ As you can see we're extending an `Ember.Component` here. The naming of the comp
 
 If we now run our app and delete the old songs and add some new ones in stead, you will notice that they all get a score 0/5 (because we initialized it that way).
 
-![app-component](content/posts/2014/2014-04-18-ember-components-views/images/app-component.png)
+![app-component](./images/app-component.png)
 
 ### Looking at the stars
 
@@ -123,11 +123,11 @@ Before we actually test the app, let's add some CSS as well. Edit **style.css**
 
 So now it's time to test out the application. If we open the app we will see that the songs now have some stars next to them.
 
-![app-stars](content/posts/2014/2014-04-18-ember-components-views/images/app-stars.png)
+![app-stars](./images/app-stars.png)
 
 Obviously, it's still not possible to edit the score and so all stars will be empty, but we can test it a bit by replacing the `score=score` attribute in the `{{rating-stars}}` component in our main template and replace it (for example) by `score=3`. If we then run our app again, we will notice that it already works pretty good:
 
-![app-stars-3](content/posts/2014/2014-04-18-ember-components-views/images/app-stars-3.png)
+![app-stars-3](./images/app-stars-3.png)
 
 Don't forget to restore the value afterwards.
 
@@ -189,15 +189,15 @@ Nothing spectacular here, we're just setting the `score` property and saving the
 
 So now it's time again to test our application. If we open our app and click on the score, you will see that the score is being updated. Even when reloading the page, the score is still there.
 
-![app-score-update](content/posts/2014/2014-04-18-ember-components-views/images/app-score-update.png)
+![app-score-update](./images/app-score-update.png)
 
 If we have multiple songs, we will also notice that they're being sorted based upon the score as we defined earlier in our controller. For example:
 
-![app-sort-before](content/posts/2014/2014-04-18-ember-components-views/images/app-sort-before.png)
+![app-sort-before](./images/app-sort-before.png)
 
 And after changing the score of the second song we get:
 
-![app-sort](content/posts/2014/2014-04-18-ember-components-views/images/app-sort.png)
+![app-sort](./images/app-sort.png)
 
 The songs are being sorted based upon their score, without having to refresh your page.
 
@@ -268,11 +268,11 @@ Then the only thing that rests us is to modify the `{{bind-attr}}star.highlight:
 
 That's all! If we run our app now, we will notice that the stars got a different color. THat's because the **rating-normal** class is now applied, which is a custom class I defined earlier in **style.css** which will make the stars look a bit black/greyish.
 
-![app-no-highlight](content/posts/2014/2014-04-18-ember-components-views/images/app-no-highlight.png)
+![app-no-highlight](./images/app-no-highlight.png)
 
 The moment we hover over a specific star, the highlighting class will take over:
 
-![app-highlight](content/posts/2014/2014-04-18-ember-components-views/images/app-highlight.png)
+![app-highlight](./images/app-highlight.png)
 
 ### Summarizing
 

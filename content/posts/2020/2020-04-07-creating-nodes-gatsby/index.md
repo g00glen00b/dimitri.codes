@@ -160,4 +160,4 @@ Now you can add some additional configuration to your Gatsby sourc plugin, and u
 
 If you're interested in a full example, you can check out the source code of my [`gatsby-source-license` plugin](https://github.com/g00glen00b/gatsby-source-license). This plugin allows you to make a list of all software licenses of dependencies you're using in your project, which allows you to come up with a page like this:
 
-![Screenshot of a page using `gatsby-source-license`](content/posts/2020/2020-04-07-creating-nodes-gatsby/images/gatsby-source-license-usage.png)
+![Screenshot of a page using `gatsby-source-license`](./images/gatsby-source-license-usage.png)

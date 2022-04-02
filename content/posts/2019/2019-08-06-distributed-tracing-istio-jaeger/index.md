@@ -10,7 +10,7 @@ So far, we've already explored some of the elements Istio provides, such as [vis
 
 [Jaeger](https://www.jaegertracing.io/) is a distributed tracing platform. The two keywords are "distributed" and "tracing". If you work with a **distributed system**, such as a microservices architecture, you may find out that it's a pain in the ass to know where an error comes from, certainly if microservices call each other and errors are being propagated. In this case, platforms like Jaeger help, as they provide **tracing** for those distributed systems.
 
-![Kubernetes + Istio + Jaeger](content/posts/2019/2019-08-06-distributed-tracing-istio-jaeger/images/kubernetes-istio-jaeger.png)
+![Kubernetes + Istio + Jaeger](./images/kubernetes-istio-jaeger.png)
 
 ### Enabling tracing
 
@@ -46,7 +46,7 @@ After that, you can visit `http://localhost:16686` to open the Jaeger dashboard.
 
 One way to find a correlation between multiple HTTP requests is through the use of a correlation ID. This ID should be passed to all requests, so that the tracing platform knows which requests belong together.
 
-![Demonstration of the correlation ID](content/posts/2019/2019-08-06-distributed-tracing-istio-jaeger/images/jaeger-correlation-id.png)
+![Demonstration of the correlation ID](./images/jaeger-correlation-id.png)
 
 For Istio to work properly, the following headers should be passed through:
 
@@ -83,10 +83,10 @@ So open the Jaeger dashboard again, and now you should be able to see two servic
 
 When you select your application and click the **Find traces** button, you should be able to see the sampled requests. Once you click on one of these, you can see how it correlates to other requests being made. For example:
 
-![Jaeger trace timeline](content/posts/2019/2019-08-06-distributed-tracing-istio-jaeger/images/jaeger-trace-timeline.png)
+![Jaeger trace timeline](./images/jaeger-trace-timeline.png)
 
 Additionally, if you click the **Trace Timeline** dropdown at the top right, and click the **Trace Graph** option, you can see a graph to how your services are connected.
 
-![Jaeger Trace Graph](content/posts/2019/2019-08-06-distributed-tracing-istio-jaeger/images/jaeger-trace-graph.png)
+![Jaeger Trace Graph](./images/jaeger-trace-graph.png)
 
 In my case, you can see that the movie-quote-consumer calls the movie-quote-service. But there you have it, you're now able to see which calls are being made under the hood, and how long each call takes. This allows you to detect failures or performance issues.

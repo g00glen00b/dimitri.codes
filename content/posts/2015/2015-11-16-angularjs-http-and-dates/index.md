@@ -175,7 +175,7 @@ For example:
 
 If you have an extension like [ng-inspector](https://chrome.google.com/webstore/detail/ng-inspector-for-angularj/aadgmnobpdmgmigaicncghmmoeflnamj?hl=en) or [Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en), you'll see that the `modified` property is not a string, but an object.
 
-![date-object](content/posts/2015/2015-11-16-angularjs-http-and-dates/images/date-object1.png)
+![date-object](./images/date-object1.png)
 
 #### Achievement: Master of `$http`
 

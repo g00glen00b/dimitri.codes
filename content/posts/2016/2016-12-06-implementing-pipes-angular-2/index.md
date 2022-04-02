@@ -82,11 +82,11 @@ Now we can open **pokemon-info.component.html** and use the component:
 
 If we open the application and look at the details of a pokémon, we can see that the component is working fine already.
 
-![ability-info-basic](content/posts/2016/2016-12-06-implementing-pipes-angular-2/images/ability-info-basic.png)
+![ability-info-basic](./images/ability-info-basic.png)
 
 However, I have one issue with this component right now. The height and weight are just some numbers, but what are they? Meters? Centimeters? Inches? Kilogram? Pound? After digging a bit further into the [PokéAPI](https://pokeapi.co/), I've found out that the correct units are **decimeter** for the height and **hectogram** for the weight. These are not our every day units, at least, I don't use them often. If I take a look at most Pokédexes, the height is usually expressed in feet and inches, while the weight is usually expressed in pounds. Even though I'm used to the metrics system, let's use it anyways!
 
-![proof](content/posts/2016/2016-12-06-implementing-pipes-angular-2/images/pikachu-pokedex.png)
+![proof](./images/pikachu-pokedex.png)
 
 ### Generating a pipe
 
@@ -162,7 +162,7 @@ Rather than just using `{{info?.height}}`, we're now applying the pipeline symbo
 
 If we look at our application now, we can see that the height looks a lot cleaner now:
 
-![ability-info-height-feet](content/posts/2016/2016-12-06-implementing-pipes-angular-2/images/ability-info-height-feet.png)
+![ability-info-height-feet](./images/ability-info-height-feet.png)
 
 ### Implementing a pipe to get the weight in pound
 
@@ -221,11 +221,11 @@ To apply this filter, we have to change the **pokemon-ability-info.component.htm
 
 If we take a look at our application now, we can see that the weight looks a lot better now as well:
 
-![screenshot-2016-11-20-20-08-59](content/posts/2016/2016-12-06-implementing-pipes-angular-2/images/Screenshot-2016-11-20-20.08.59.png)
+![screenshot-2016-11-20-20-08-59](./images/Screenshot-2016-11-20-20.08.59.png)
 
 To compare with the original pokédex I also took a look at Pikachu:
 
-![pikachu-ability-info](content/posts/2016/2016-12-06-implementing-pipes-angular-2/images/pikachu-ability-info.png)
+![pikachu-ability-info](./images/pikachu-ability-info.png)
 
 Looks like he still has the same height, but he gained 0.2 pounds in weight! Stop feeding him!
 

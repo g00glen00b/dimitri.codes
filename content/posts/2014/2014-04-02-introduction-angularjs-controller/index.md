@@ -8,7 +8,7 @@ excerpt: "In this introduction tutorial series to AngularJS I'm going to build a
 
 In this introduction tutorial series to [AngularJS](http://angularjs.org) I'm going to build a small webapp introducing several aspects of AngularJS like controllers, filters, services and directives. I'm going to explain all of that by creating an artist/song-rating app, which (in the end) will look like:
 
-![app-final](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/app-final.png)
+![app-final](./images/app-final.png)
 
 Awesome, don't you think?
 
@@ -59,7 +59,7 @@ If you're using Bower, make sure you change the destination directory to **libs
 
 Last but not least is the **assets** folder which, in my case, contains a folder called **css** with a file **style.css**. The entire project structure would become something like:
 
-![project-structure](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Index HTML page
 
@@ -173,7 +173,7 @@ $scope.songs = [{
 
 Right now we have a perfect example of a simple view + controller, so it's time to test everything out! Open up your app and you should be able to see something like the following screenshot.
 
-![app-1](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/app-1.png)
+![app-1](./images/app-1.png)
 
 ### Changing the model
 
@@ -226,7 +226,7 @@ So, what I'm doing here is that I'm adding a new song to the array and then I re
 
 So now it's time to test our app again! If we open our app we can see our form and we can now add new songs to the list.
 
-![app-2](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/app-2.png)
+![app-2](./images/app-2.png)
 
 ### Hiding and disabling
 
@@ -238,7 +238,7 @@ $scope.songs = [ ];
 
 However, this makes our initial screen look so empty and unattractive:
 
-![app-3](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/app-3.png)
+![app-3](./images/app-3.png)
 
 So let's make our app even better and show a small message if there are no songs yet in the songs array. With AngularJS this is quite easy, just open your **index.html** and add the following piece of HTML just above the table:
 
@@ -250,7 +250,7 @@ So let's make our app even better and show a small message if there are no songs
 
 This will show you a simple message, and thanks to the `ng-if` attribute, it is only being displayed if the songs array is empty.
 
-![app-4](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/app-4.png)
+![app-4](./images/app-4.png)
 
 So right now we're seeing the message, but the moment we add a song to the array, the message is gone.
 
@@ -279,7 +279,7 @@ This has nothing to do with AngularJS, so I'm not going to explain this into det
 
 So if we test our app again, we will notice that by default the submit button is disabled, making it impossible to submit the form. However, when we enter a value in both the artist and song field, the button is no longer disabled.
 
-![app-5](content/posts/2014/2014-04-02-introduction-angularjs-controller/images/app-5.png)
+![app-5](./images/app-5.png)
 
 With the disable-functionality finished, I'm going to end this tutorial. We now made a small application using AngularJS. The most important things to remember are:
 

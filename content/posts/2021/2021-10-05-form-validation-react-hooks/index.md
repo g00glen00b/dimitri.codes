@@ -482,7 +482,7 @@ Now, the nice thing is that the `useForm()` hook just provides a toolkit for you
 In no way you're being forced to apply form validation exactly in the same way as I did. 
 Even if you prefer to consolidate all error messages together or if you want to show the error messages immediately (or just after submitting), you can do so with this hook.
 
-![Screenshot of an invalid form containing error messages](content/posts/2021/2021-10-05-form-validation-react-hooks/images/invalid-form.png)
+![Screenshot of an invalid form containing error messages](./images/invalid-form.png)
 
 The nice part of React hooks is that they hide a lot of the asynchronous stuff.
 Thanks to that, this `useForm()` hook even works for asynchronous validations.

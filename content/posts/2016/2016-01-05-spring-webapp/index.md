@@ -12,11 +12,11 @@ Three years ago I wrote this tutorial. Things have changed in the Java and Sprin
 
 A while back you had to setup your own Maven project, import all the dependencies you need, set the correct Maven plugins, ... . With Spring Boot it's a lot easier. You go to [start.spring.io](http://start.spring.io) and you just select the dependencies you want, you import the project and you're done! Neat, don't you think? According to [Josh Long](https://youtu.be/SFDYdslOvu8?t=10m2s) it is the second greatest place on the web and you should keep it under your pillow!
 
-![start-spring-io](content/posts/2016/2016-01-05-spring-webapp/images/start-spring-io.png)
+![start-spring-io](./images/start-spring-io.png)
 
 Now, since I'm going to create a web project, all I need to do is to enter "Web" in the dependencies textbox and click the **Web** dependency to add it to your application. 
 
-![web-dependency](content/posts/2016/2016-01-05-spring-webapp/images/web-dependency.png)
+![web-dependency](./images/web-dependency.png)
 
 Do the same now for "Thymeleaf" and then you can generate the project, unzip it and import it in your IDE. You now have a completely working Spring application! You don't even have to download Maven, because it comes with a Maven wrapper (mvnw) that can be executed and will install Maven for you.
 
@@ -149,11 +149,11 @@ The bottom side uses `th:if` and `th:unless` to show a different icon for when t
 
 Running the `Application` class as a Java application, or executing the `mvn spring-boot:run` command will run the application. For several IDE's you can also download a plugin that allows you to run the application as a Spring boot app. 
 
-![run-spring-boot](content/posts/2016/2016-01-05-spring-webapp/images/run-spring-boot.png)
+![run-spring-boot](./images/run-spring-boot.png)
 
 If you go to [http://localhost:8080/superhero](http://localhost:8080/superhero), you'll see that the application already works.
 
-![demo-application](content/posts/2016/2016-01-05-spring-webapp/images/demo-application.png)
+![demo-application](./images/demo-application.png)
 
 ### Configuring Spring Boot
 

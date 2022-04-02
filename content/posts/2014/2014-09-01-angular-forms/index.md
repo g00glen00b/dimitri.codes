@@ -100,7 +100,7 @@ Next to that, we also have to bind the values of this form to a model, which we 
 
 So, if we run it in our browser now, and enter an invalid e-mail address, AngularJS will change a specific model in your controller, for example:
 
-![model-change](content/posts/2014/2014-09-01-angular-forms/images/model-change.png)
+![model-change](./images/model-change.png)
 
 **Heads up!** The weird symbols you see at the right end of the form fields are part of a browser plugin, I forgot to disable it and only noticed it afterwards.
 
@@ -170,11 +170,11 @@ Thanks to this, we can provide some individual error messages as well, for examp
 
 Just like before, we're also checking if the field is dirty, because we don't want to show all these error messages if the user didn't change the form yet. If you run it in your browser, and enter an invalid mail address, you will get the following message:
 
-![invalid-mail](content/posts/2014/2014-09-01-angular-forms/images/invalid-mail.png)
+![invalid-mail](./images/invalid-mail.png)
 
 While if you leave the mail address away, you will get another message:
 
-![required-mail](content/posts/2014/2014-09-01-angular-forms/images/required-mail.png)
+![required-mail](./images/required-mail.png)
 
 ### Angular validations
 
@@ -199,7 +199,7 @@ $scope.passwordPattern = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=
 
 If we enter an invalid password now, we will see that an error message will be displayed:
 
-![invalid-password](content/posts/2014/2014-09-01-angular-forms/images/invalid-password.png)
+![invalid-password](./images/invalid-password.png)
 
 ### Custom validations
 
@@ -261,7 +261,7 @@ We also made it so that the directive requires a parameter, the original value. 
 
 If we run our application now, and enter different passwords, you will see the error message:
 
-![invalid-password-equals](content/posts/2014/2014-09-01-angular-forms/images/invalid-password-equals.png)
+![invalid-password-equals](./images/invalid-password-equals.png)
 
 ### Deferreds
 
@@ -345,7 +345,7 @@ We can also set an error message, so that the HTML for the username becomes:
 
 If we run our web application now, and enter the username "g00glen00b", you will notice that about 1 second later it will show the error message. The reason should be clear by now, because we used the `setTimeout` function, it's delaying the validation a bit, but it works fine as you can see.
 
-![invalid-username](content/posts/2014/2014-09-01-angular-forms/images/invalid-username.png)
+![invalid-username](./images/invalid-username.png)
 
 ### Disabling the button
 
@@ -357,11 +357,11 @@ So, that's all for validations in this tutorial. But one issue remains, we wrote
 
 If we run the application now, you will see that the button is disabled as long as the form is not valid:
 
-![disabled-button](content/posts/2014/2014-09-01-angular-forms/images/disabled-button.png)
+![disabled-button](./images/disabled-button.png)
 
 But as soon the form is valid, the button is enabled as well:
 
-![valid-form](content/posts/2014/2014-09-01-angular-forms/images/valid-form.png)
+![valid-form](./images/valid-form.png)
 
 With this, I would like to end this tutorial about form validation. You're now ready to use form validation in any Angular-powered web application.
 

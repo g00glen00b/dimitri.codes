@@ -50,7 +50,7 @@ The client code is the most complex one (containing views, controllers and Handl
 - **client/app/views**: This folder contains all views. In Meteor you talk about Handlebars templates when you talk about views.
 - **client/assets**: This folder contains all our automatically loaded assets (like stylesheets). In this case I also made a folder called **css** inside of it.
 
-![project-structure](content/posts/2014/2014-03-22-meteor-twitter-streaming/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 So, make sure you have the same structure as in the screenshot above. Prepare by already creating the necessary files as well. For the **public** folder you need to download [Semantic UI](http://semantic-ui.com) and copy the **fonts** and **images** folder inside it. There is currently a bug in the Semantic UI smart package that doesn't allow it to find its resources (fonts/images). When deploying them seperately in the **public** folder the issue is resolved.
 
@@ -401,7 +401,7 @@ So now we made an awesome application in just **50 lines** of HTML code and **70
 
 If you open your browser now and go to [http://localhost:3000](http://localhost:3000) you will see our application in its full glory.
 
-![outcome](content/posts/2014/2014-03-22-meteor-twitter-streaming/images/outcome.png)
+![outcome](./images/outcome.png)
 
 You can also find the demo online on [meteor.com](http://mrt-twttr-stream.meteor.com/). Deployment to a subdomain of meteor.com is free and can be really great to collaborate and test how cool Meteor actually is.
 

@@ -12,7 +12,7 @@ In my [previous tutorial](/writing-a-chat-application-with-meteor/) I explained 
 
 Velocity is actually a set of tools, and currently supports several frameworks like [Jasmine](http://jasmine.github.io), [CasperJS](http://casperjs.org), [Cucumber](https://cucumber.io), [Mocha](http://mochajs.org), [Dredd](http://dredd.readthedocs.org/en/latest/) & [Robot](http://robotframework.org). So, what is Velocity? Velocity provides a mirror of your application with a separate database that can be used for testing. It also provides the possibility to add fixtures, which are small pieces of code that can be used within the mirrored application to make it easier to test. Velocity also comes with two test runners, a HTML test runner and a console test runner.
 
-![velocity-html-runner](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/velocity-html-runner.png)
+![velocity-html-runner](./images/velocity-html-runner.png)
 
 ### Preparing the project
 
@@ -35,7 +35,7 @@ Inside the folder create four files:
 - `meteor-stubs.js`: In this file I will create stubs of the Meteor API's using Sinon.js
 - `template-stubs.js`: In this file I will create stubs specifically for the templates using Sinon.js
 
-![project-structure](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Stubbing with Sinon.js
 
@@ -338,27 +338,27 @@ it('sets the message count to the form value length', function() {
 
 By now I think we've written enough tests for this tutorial, so let's check them out. Run your application like usual with the `meteor` command, and when you look at the application, you'll see a green circle at the top right corner of the application (or a red one if something failed).
 
-![velocity-app-status](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/velocity-app-status.png)
+![velocity-app-status](./images/velocity-app-status.png)
 
 You may also notice that an additional browser window pops up. The Jasmine package for Velocity uses the [Karma test runner](http://karma-runner.github.io/0.13/index.html) behind the screens and currently the default browser is still Google Chrome, but it can be changed to another browser (or PhantomJS).
 
-![karma-runner](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/karma-runner.png)
+![karma-runner](./images/karma-runner.png)
 
 Anyways, if you click on the green circle at the top right corner, you'll see that a sidebar pops up showing you the status of the tests. In my case I have 85 passed tests over 62 seconds, but this is mainly because I'm also running some E2E tests, which I'll explain in the next tutorial.
 
-![velocity-result](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/velocity-result.png)
+![velocity-result](./images/velocity-result.png)
 
 If you scroll down a bit you'll see a more detailed overview of the tests that were executed and their status.
 
-![velocity-test-results](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/velocity-test-results.png)
+![velocity-test-results](./images/velocity-test-results.png)
 
 So, if you would change the code now, for example change the `return` statement in the `createMessage()` function to `true`, then you'll see that the Velocity HTML reporter nicely reports it to us.
 
-![velocity-result-failed](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/velocity-result-failed.png)
+![velocity-result-failed](./images/velocity-result-failed.png)
 
 Sometimes you may have to refresh the Karma debugger to make it appear in the Velocity HTML reporter. Still, if you scroll down and look at the failed tests at the Velocity HTML reporter you see clearly which test failed. The title matches the titles used within the `describe()` blocks, while the name of the test (mentioned in the `it()` statement) is also displayed and the stack + expected value:
 
-![velocity-test-failed](content/posts/2015/2015-08-07-unit-testing-meteor-applications-with-velocity-jasmine-and-sinon-js/images/velocity-test-failed.png)
+![velocity-test-failed](./images/velocity-test-failed.png)
 
 The responsible developer may have made a mistake in his code, but these tests clearly show what failed and why it did, so always be clear in naming your tests. In my case, it expected a falsy value for preventing the default event, so now the developer knows, he changes his code and the test becomes green again.
 

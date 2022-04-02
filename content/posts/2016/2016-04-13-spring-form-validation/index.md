@@ -12,7 +12,7 @@ Up until now I've written several tutorials already about creating some readonly
 
 As I've told a few times already. The greatest place to start any Spring project is [start.spring.io](http://start.spring.io/). In this case I'm going to create a project with four dependencies: Web, HSQLDB, JPA and Thymeleaf.
 
-![spring-initializr](content/posts/2016/2016-04-13-spring-form-validation/images/spring-initializr-1.png)
+![spring-initializr](./images/spring-initializr-1.png)
 
 After creating, downloading, extracting and importing the project in your IDE, you're ready to start writing some code!
 
@@ -208,7 +208,7 @@ This uses the service to add the tasks to the model. Then create an HTML file ca
 
 If you run the application now, you'll see that the dummy tasks we created are already visible.
 
-![tasks-overview](content/posts/2016/2016-04-13-spring-form-validation/images/tasks-overview.png)
+![tasks-overview](./images/tasks-overview.png)
 
 ### Adding new tasks
 
@@ -286,13 +286,13 @@ Obviously, in proper web applications you would also validate the form on the cl
 
 So, let's test it out now by running the application. If you open the application, you'll see that the form is now appended correctly. After entering and submitting a value, you'll see that it properly gets appended to the list, which indicates that the application is behaving correctly, at least when following the "happy path".
 
-![before-add-task](content/posts/2016/2016-04-13-spring-form-validation/images/before-add-task.png)
+![before-add-task](./images/before-add-task.png)
 
-![after-add-task](content/posts/2016/2016-04-13-spring-form-validation/images/after-add-task.png)
+![after-add-task](./images/after-add-task.png)
 
 Now, when we don't enter a value and press the button, you'll see that a message is displayed below the input field, right where we added the `th:errors` attribute.
 
-![add-task-error](content/posts/2016/2016-04-13-spring-form-validation/images/add-task-error.png)
+![add-task-error](./images/add-task-error.png)
 
 ### Updating the tasks
 
@@ -325,7 +325,7 @@ While there is less "magic" involved here, compared to adding items, Spring does
 
 If you reload the application and check the checkbox next to one of the tasks, you'll see that the page gets reloaded, this means the form successfully got submitted and the task was updating. To guarantee that it works you can simply refresh the page, and you'll see that the checkbox is still checked (or unchecked if you unchecked one of the tasks), meaning that your change successfully got persisted.
 
-![update-task](content/posts/2016/2016-04-13-spring-form-validation/images/update-task.png)
+![update-task](./images/update-task.png)
 
 ### Deleting a task
 
@@ -352,7 +352,7 @@ public String delete(@RequestParam Long id) {
 
 So, if we test it out, you'll see that the page reloads as well and the item should properly be deleted.
 
-![delete-task](content/posts/2016/2016-04-13-spring-form-validation/images/delete-task.png)
+![delete-task](./images/delete-task.png)
 
 ### Conclusion
 

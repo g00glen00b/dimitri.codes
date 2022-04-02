@@ -18,7 +18,7 @@ Basically, the entire ecosystem around Swagger is in some ways comparable to the
 
 Once again we start our journey at the [Spring Initializr](http://start.spring.io/). Create a project and add the dependencies Web, JPA and HSQLDB (or any other database you like). Once you opened the project in your favourite editor, we're ready to go!
 
-![spring-boot-swagger](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/spring-boot-swagger.png)
+![spring-boot-swagger](./images/spring-boot-swagger.png)
 
 ### Repository
 
@@ -523,35 +523,35 @@ public class MessageDTO {
 
 After that, we can see for ourselves what the result is by running the application. After running the application, go to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html). If you see a blank screen, you might have to refresh once, but normally you'll see a screen like this:
 
-![swagger-overview](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/Screenshot-2016-06-11-22.54.50.png)
+![swagger-overview](./images/Screenshot-2016-06-11-22.54.50.png)
 
 As you can see, the title and description here already match the details we provided in the `SwaggerConfig` class, so far so good. Now, if we click on **List operations** at the right side, you'll see that that section expands and our operations are visible:
 
-![operations](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/operations.png)
+![operations](./images/operations.png)
 
 You can see here that the value property of the `@ApiOperation` annotation is already visible. Now if we click on one of those operations, we see a lot more detail:
 
-![swagger-findall](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/swagger-findall.png)
+![swagger-findall](./images/swagger-findall.png)
 
 You can see a lot of the things we did with the Swagger annotations here. You can see the model schema (`TaskDTO[]`), you can click on **Model** to see the description of the model and the properties, you can see the notes, ... .
 
-![swagger-create](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/swagger-create.png)
+![swagger-create](./images/swagger-create.png)
 
 For the create, update and delete operations you can also see what the input parameters should be and what the possible status codes are and what response they'll return. The cool thing about Swagger is that every operation also has a **Try it out!** button. If we press that button on the findAll operation, you'll see that the dummy tasks we inserted using the **data.sql** file are already there:
 
-![swagger-findall-tryout](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/swagger-findall-tryout.png)
+![swagger-findall-tryout](./images/swagger-findall-tryout.png)
 
 We can also use Swagger to create new tasks. Open the **create** operation and enter the **task** parameter. You can look at the model on the right to see what you have to send. You can even click on it and it will insert the model schema into the edit area. Make sure to delete the ID property since that's read only. I also left the completed property away since that is optional:
 
-![swagger-create-tryout](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/swagger-create-tryout.png)
+![swagger-create-tryout](./images/swagger-create-tryout.png)
 
 Now, for the update operation you have to look at the ID of the response of the create operation, since we need that ID (probably 2) to update the task. Similar to before, we can click on the right side to copy the model schema into the edit area:
 
-![swagger-update-tryout](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/swagger-update-tryout.png)
+![swagger-update-tryout](./images/swagger-update-tryout.png)
 
 Same can be done with the delete operation:
 
-![swagger-delete-tryout](content/posts/2016/2016-09-20-documenting-rest-api-swagger-springfox/images/swagger-delete-tryout.png)
+![swagger-delete-tryout](./images/swagger-delete-tryout.png)
 
 With Swagger and Springfox we made the REST API we wrote a lot more accessible. When you run the application, you might encounter a weird exception like this:
 

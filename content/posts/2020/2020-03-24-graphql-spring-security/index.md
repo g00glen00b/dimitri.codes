@@ -8,7 +8,7 @@ excerpt: "In this tutorial, I'll show how you can use Spring Security with Sprin
 
 [A while ago](/graphql-spring-boot/), I wrote a tutorial about developing a GraphQL API with Spring boot. In this tutorial, I'll show you how you can add security to your API.
 
-![GraphQL + Spring boot](content/posts/2020/2020-03-24-graphql-spring-security/images/graphql-spring-boot.png)
+![GraphQL + Spring boot](./images/graphql-spring-boot.png)
 
 ### Project setup
 

@@ -92,7 +92,7 @@ When we open the Graph_i_QL interface, we can see the actions we can invoke. In 
 
 Our JSON file is also present within the explorer. If you named your file **graveyard.json** as I did, then you'll find an `allGraveyardJson` and `graveyardJson` operation.
 
-![Screenshot of GraphiQL](content/posts/2020/2020-01-28-using-json-with-gatsby/images/Screenshot-2019-10-03-08.08.45.png)
+![Screenshot of GraphiQL](./images/Screenshot-2019-10-03-08.08.45.png)
 
 If we open `allGraveyardJson`, we can select `edges` and `node` to see all fields that were available within our JSON. For example, we can check `dateClose`, `dateOpen`, `name`, ... .
 
@@ -190,6 +190,6 @@ Finally, we can use the `GameGrid` component within the `IndexPage` component:
 
 If we apply some CSS and take a look at the other URL that we can find in the console, we can see the final result:
 
-![Screenshot of the index page](content/posts/2020/2020-01-28-using-json-with-gatsby/images/Screenshot-2019-10-03-08.31.57-1024x358.png)
+![Screenshot of the index page](./images/Screenshot-2019-10-03-08.31.57-1024x358.png)
 
 And there you have it, a simple clone of the Google Graveyard, made with Gatsby, GraphQL React and a JSON file.

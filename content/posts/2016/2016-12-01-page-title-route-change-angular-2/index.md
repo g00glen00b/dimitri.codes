@@ -96,11 +96,11 @@ import {Title} from '@angular/platform-browser';
 
 If we open the application now, you can see that the title is "Pokédex".
 
-![pokedex-title](content/posts/2016/2016-12-01-page-title-route-change-angular-2/images/pokedex-title.png)
+![pokedex-title](./images/pokedex-title.png)
 
 However, when we click the "View" link next to a Pokémon, we can see that the title changes for that specific Pokémon:
 
-![pokedex-title-info](content/posts/2016/2016-12-01-page-title-route-change-angular-2/images/pokedex-title-info.png)
+![pokedex-title-info](./images/pokedex-title-info.png)
 
 If you're wondering why it takes so long to show that title, well, that's because we first have to call the PokéAPI to retrieve the name of the pokémon before we can actually show it. If you don't want this delay, you should probably send that data with your route, or use a service to store that info temporarily.
 

@@ -162,7 +162,7 @@ To test it out, you can call the npm script:
 npm test
 ```
 
-![tape + faucet report](content/posts/2018/2018-11-20-testing-nodejs-tape/images/Screenshot-2018-07-25-11.23.21.png)
+![tape + faucet report](./images/Screenshot-2018-07-25-11.23.21.png)
 
 Additionally, if we want to see a coverage report, we can install tools like [**nyc**](https://github.com/istanbuljs/nyc):
 
@@ -176,7 +176,7 @@ And then we can run it like this:
 npx nyc npm test
 ```
 
-![Istanbul.js nyc coverage report](content/posts/2018/2018-11-20-testing-nodejs-tape/images/Screenshot-2018-07-23-15.48.46.png)
+![Istanbul.js nyc coverage report](./images/Screenshot-2018-07-23-15.48.46.png)
 
 ### Summarized
 

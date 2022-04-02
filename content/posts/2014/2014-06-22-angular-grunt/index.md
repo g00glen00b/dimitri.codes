@@ -576,15 +576,15 @@ grunt dev
 
 If you did everything well, you should see that the Bower task is executed, followed by the connect:server and watch:dev task which will in turn execute the jshint:all, karma:unit, html2js:dist, concat:dist and clean:temp task.
 
-![grunt-dev](content/posts/2014/2014-06-22-angular-grunt/images/grunt-dev.png)
+![grunt-dev](./images/grunt-dev.png)
 
 Now you should be able to go to [http://localhost:8080](http://localhost:8080) where you can see the application. If you make a small change to a file, you will see that the tasks defined in the watch:dev task are being executed again. In my case I adjusted the title of the **index.html** page a bit. Notice that the tasks are automatically being executed as well:
 
-![grunt-dev-watch](content/posts/2014/2014-06-22-angular-grunt/images/grunt-dev-watch.png)
+![grunt-dev-watch](./images/grunt-dev-watch.png)
 
 If you take a look at the application and refresh, your changes should be applied, for example:
 
-![grunt-dev-changes](content/posts/2014/2014-06-22-angular-grunt/images/grunt-dev-changes.png)
+![grunt-dev-changes](./images/grunt-dev-changes.png)
 
 You can do the same thing by using:
 
@@ -594,7 +594,7 @@ grunt minified
 
 The main difference is that it will now use the minified version of your JavaScript code:
 
-![grunt-min](content/posts/2014/2014-06-22-angular-grunt/images/grunt-min.png)
+![grunt-min](./images/grunt-min.png)
 
 So let's test our unit tests as well by using:
 
@@ -602,15 +602,15 @@ So let's test our unit tests as well by using:
 grunt test
 ```
 
-![grunt-test](content/posts/2014/2014-06-22-angular-grunt/images/grunt-test.png)
+![grunt-test](./images/grunt-test.png)
 
 You will see that it executes all tests properly and no failures are found. For testing purposes I edited **ratingDirectiveSpec.js** a bit and made a false statement. Because the karma:continuous task is executed, it will detect changes in my JavaScript file and automatically rerun my tests:
 
-![grunt-test-fail](content/posts/2014/2014-06-22-angular-grunt/images/grunt-test-fail.png)
+![grunt-test-fail](./images/grunt-test-fail.png)
 
 You can see that the tests are failing now, even by looking at the amount of red in the console. You can also open the link which you can see in your command prompt, in my case being [http://localhost:9876](http://localhost:9876/). If you do that, the tests will now get executed in both PhantomJS and your webbrowser.
 
-![grunt-test-chrome](content/posts/2014/2014-06-22-angular-grunt/images/grunt-test-chrome.png)
+![grunt-test-chrome](./images/grunt-test-chrome.png)
 
 However, this is way slower. As you can see in my screenshot it's still executing my tests and it's only at test 6 of 23.
 
@@ -622,7 +622,7 @@ grunt package
 
 Which will produce a ZIP file containing all your files inside the dist/ folder.
 
-![grunt-package](content/posts/2014/2014-06-22-angular-grunt/images/grunt-package.png)
+![grunt-package](./images/grunt-package.png)
 
 _Note: The command I used lists the contents of the archive file, but excluding all files in the libs folder._
 

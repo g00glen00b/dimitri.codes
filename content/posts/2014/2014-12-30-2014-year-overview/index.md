@@ -23,7 +23,7 @@ If you didn't check them out yet, make sure to read them.
 
 Of course, the most important thing is you! In 2014, the website gained a lot more attention than before. If I take a look at the analytics, I can see that the amount of traffic on this website is increasing every week.
 
-![analytics](content/posts/2014/2014-12-30-2014-year-overview/images/analytics.png)
+![analytics](./images/analytics.png)
 
 And with that, I would like to end this article and to say **THANK YOU!**
 

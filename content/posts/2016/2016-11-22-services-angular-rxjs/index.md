@@ -29,7 +29,7 @@ There's also a shorthand for generating files with Angular CLI, namely:
 ng g service shared/ervices/pokemon
 ```
 
-![ng-generate-service](content/posts/2016/2016-11-22-services-angular-rxjs/images/ng-generate-service.png)
+![ng-generate-service](./images/ng-generate-service.png)
 
 ### Using `Http` and observables
 
@@ -39,11 +39,11 @@ These observables come from [RxJS](https://github.com/Reactive-Extensions/RxJS),
 
 Now, an observable can actually be seen as a "flow", the operators convert that flow into another one. You can see this visually on the documentation, for example if we take the [`debounce`](http://reactivex.io/documentation/operators/debounce.html) operator, this operator will make sure that only the last item will come through if many items succeed quickly. As you can see on the documentation, several items are missing at the bottom:
 
-![debounce-original](content/posts/2016/2016-11-22-services-angular-rxjs/images/debounce-original.png)
+![debounce-original](./images/debounce-original.png)
 
 Items 2, 3, 4 and 5 are following quickly, so only 5 is passed through. Items 1 and 6 on the other hand didn't have quick successions, so they're passed through normally. If you drag item 2 a bit to the left, you'll see that eventually it appears on the bottom line as well.
 
-![debounce-after](content/posts/2016/2016-11-22-services-angular-rxjs/images/debounce-after.png)
+![debounce-after](./images/debounce-after.png)
 
 Every operator has an example like this, allowing you to understand pretty quickly what's going on. Another thing that should be mentioned is that operators can be chained. For example, you can first call a `filter` operation and then a `debounce` operation followed by a `map` operation, ... . Another thing worth mentioning is that all these operations only happen when someone subscribes to the observable. If nobody subscribes to the observable (= it's not used), none of the operations will be called.
 
@@ -277,7 +277,7 @@ service.findAll(0, 10).subscribe(pokemons => console.log(pokemons));
 
 If you look at your console now, you'll see that it works, it's showing a `PokemonList` containing several `PokemonEntry` objects:
 
-![findall-result-subscribe](content/posts/2016/2016-11-22-services-angular-rxjs/images/findall-result-subscribe.png)
+![findall-result-subscribe](./images/findall-result-subscribe.png)
 
 ### Zipping observables with RxJS
 
@@ -523,7 +523,7 @@ service.findOne(1).subscribe(pokemon => console.log(pokemon));
 
 If everything went well, you should see the following in your console now:
 
-![findone-subscribe-console](content/posts/2016/2016-11-22-services-angular-rxjs/images/findone-subscribe-console.png)
+![findone-subscribe-console](./images/findone-subscribe-console.png)
 
 For the Pokémon fans out there asking themself why I didn't include the evolutions of a Pokémon, well, that's because the API makes it really hard to do that, and would require multiple HTTP calls to implement, so I'm leaving that out for this application.
 

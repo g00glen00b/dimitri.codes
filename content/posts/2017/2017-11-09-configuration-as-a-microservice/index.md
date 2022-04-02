@@ -18,7 +18,7 @@ Also, if you start using containers like [Docker](https://www.docker.com/) for y
 
 Luckily of us, [Spring](https://cloud.spring.io/spring-cloud-config/) already has done quite a job to get this thing ready to use. All you need to do is to create a new Spring boot project. As usual, the best place to do that is by using the [Spring Initializr](https://start.spring.io/).
 
-![Spring Initializr](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/Screenshot-2017-09-10-18.23.33.png)
+![Spring Initializr](./images/Screenshot-2017-09-10-18.23.33.png)
 
 All you have to do is add the **Config Server** dependency. If you decide not to use the Spring Initialzr, you can just add the following dependency:
 
@@ -44,7 +44,7 @@ spring.cloud.config.server.git=git@github.com:g00glen00b/microservice-demo-confi
 
 The structure I chose is to have a folder for every application. And within each folder there will be an `application.yml` file (or `application.properties`) for every profile.
 
-![Project structure](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/config-folder-structure.png)
+![Project structure](./images/config-folder-structure.png)
 
 Every folder contains an `application.yml` file with the configuration for that specific application. The `application.yml` file in the root folder contains the global configuration that applies to all applications.
 
@@ -76,7 +76,7 @@ Next to that, there are also a few other placeholders you can use, which you can
 
 To test the configuration, you can run the application and call the REST API directly. The REST API has the following structure: `/{application}/{profiles}`. So, if we would retrieve the configuration for an application called **uaa-service** with the profile **dev**, we should call [http://localhost:8000/uaa-service/dev](http://localhost:8000/uaa-service/dev) (I'm using port 8000 here).
 
-![Postman](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/Screenshot-2017-09-10-18.42.15.png)
+![Postman](./images/Screenshot-2017-09-10-18.42.15.png)
 
 The result will be a list of property sources. In this case, it will retrieve the following property sources:
 
@@ -89,7 +89,7 @@ If you would run an application with multiple profiles and you want to see what 
 
 No worries, you don't have to call these APIs by yourself if you're using Spring boot. You just have to add the **Config client** dependency and you're ready.
 
-![Spring Initializr](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/Screenshot-2017-09-10-18.49.40.png)
+![Spring Initializr](./images/Screenshot-2017-09-10-18.49.40.png)
 
 Once you've set up your project, you need to create a file called `bootstrap.yml` (or `bootstrap.properties`) and add the `spring.application.name` property there. This name should be the same as the configuration folder you want to use. Additionally to that, you also need to configure the location of the config service, which can be done with the `spring.cloud.config.uri` property:
 
@@ -104,15 +104,15 @@ spring:
 
 If you run the application now, you'll see that it will fetch the configuration from the config service during startup. So make sure to run your config service before you run the other applications.
 
-![Logs](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/Screenshot-2017-09-11-21.17.25.png)
+![Logs](./images/Screenshot-2017-09-11-21.17.25.png)
 
 If you added the Actuator to your application, you can also view the result by going to the `/env` endpoint on your application.
 
-![Postman](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/postman-env.png)
+![Postman](./images/postman-env.png)
 
 With this, we've completely set up both the config service and we're able to set up applications using the config service. This allows us to get more control of what's happening, and you also don't need to deploy an external `application.properties` file with each application. Just let them refer to the config service!
 
-![git history](content/posts/2017/2017-11-09-configuration-as-a-microservice/images/git-history.png)
+![git history](./images/git-history.png)
 
 If something doesn't work, you simply reverse the commit, restart the applications (or use the `@RefreshScope` annotation) and you're done.
 

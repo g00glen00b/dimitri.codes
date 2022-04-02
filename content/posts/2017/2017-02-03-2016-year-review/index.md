@@ -83,6 +83,6 @@ We also want to explore progressive webapps, Aurelia and Vue.
 
 The website itself didn't chang much last year, the top navigation changed a bit after we learned that not many people clicked those other links anyways. We also introduced a new logo last year, which I'll probably keep using this year as well:
 
-![New logo](content/posts/2017/2017-02-03-2016-year-review/images/logo-1.png)
+![New logo](./images/logo-1.png)
 
 Since the start of **2017** we also introduced **HTTPS** using [Let's Encrypt](https://letsencrypt.org/). The reason for this is that the web is making the move to HTTPS, with search engines making websites over HTTPS score higher and browsers marking nonHTTPS websites as unsafe, it's time to make the switch as well. That's about it for now!

@@ -10,7 +10,7 @@ A few weeks ago, I've covered how you can properly [create Docker images for you
 
 ### Creating a deployment
 
-![Spring boot + Kubernetes](content/posts/2019/2019-05-28-spring-boot-kubernetes/images/spring-boot-kubebrnetes.png)
+![Spring boot + Kubernetes](./images/spring-boot-kubebrnetes.png)
 
 The first step, when trying to deploy an application with Kubernetes is to describe the [deployment/pods](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) itself within a YAML file. To do this, I'm going to use the following YAML configuration:
 
@@ -241,7 +241,7 @@ The "movie-quote-service" pod should have the status "Running", and the services
 
 Additionally, you could use the Minikube dashboard to see the status of your pods:
 
-![Screenshot of Minikube dashboard with Spring boot application deployed](content/posts/2019/2019-05-28-spring-boot-kubernetes/images/Screenshot-2019-04-05-09.37.20.png)
+![Screenshot of Minikube dashboard with Spring boot application deployed](./images/Screenshot-2019-04-05-09.37.20.png)
 
 ### Opening your application
 

@@ -12,14 +12,14 @@ Craft CMS is a flexible, feature-rich content management system. One of the majo
 In addition, it doesn't rely on certain templates like WordPress does, and thus, gives designers and developers more of a clean slate when it comes to customization.  
 Another nice thing is that it comes with [GraphQL](https://graphql.org/) support out of the box. That means we can easily integrate it with [Gatsby](https://www.gatsbyjs.org/).
 
-![Craft CMS + Gatsby](content/posts/2020/2020-03-10-gatsby-craft-cms/images/craft-cms-gatsby.png)
+![Craft CMS + Gatsby](./images/craft-cms-gatsby.png)
 
 ### Configuring the GraphQL schema
 
 By default, Craft CMS already exposes a public GraphQL schema to the public. This schema only exposes a "ping" endpoint, and wouldn't be useful for our purpose.  
 To configure what's exposed, you first have to go to the Craft CMS dashboard. Within the dashboard, you have to select **GraphQL** and then **Schemas**. In here, you can either select the **Public Schema**, or create a new one and apply authentication.
 
-![Craft CMS GraphQL schema configuration](content/posts/2020/2020-03-10-gatsby-craft-cms/images/graphql-schema-craftcms.png)
+![Craft CMS GraphQL schema configuration](./images/graphql-schema-craftcms.png)
 
 After selecting or creating a schema, you can change the exact scope of what's being exposed. In my case, I've exposed all blog entry types, and the assets.  
 Once changed, you can try writing a query by going to **GraphQL** and then selecting **Explore**.
@@ -44,7 +44,7 @@ query {
 
 Important to know is that the type `blog_blog_Entry` depends on what entry types you declared. Normally, Craft CMS will provide an autocomplete containing which types are available.
 
-![Autocomplete of GraphQL types](content/posts/2020/2020-03-10-gatsby-craft-cms/images/graphql-schema-autocomplete-craftcms.png)
+![Autocomplete of GraphQL types](./images/graphql-schema-autocomplete-craftcms.png)
 
 Now that you know how to change the schema and execute queries, it's time to get started with Gatsby.
 
@@ -336,6 +336,6 @@ const PostPage = ({data: {craftApi: {entries: [{title, postDate, fieldContent}]}
 
 If you run the application now, you'll see that clicking on a detail page results in the page properly being rendered:
 
-![Screenshot of the detail page built with Gatsby](content/posts/2020/2020-03-10-gatsby-craft-cms/images/gatsby-detail-page-craftcms.png)
+![Screenshot of the detail page built with Gatsby](./images/gatsby-detail-page-craftcms.png)
 
 And there you have it, you're now able to build a blazing fast static website on top of Craft CMS.

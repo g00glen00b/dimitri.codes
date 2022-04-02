@@ -77,7 +77,7 @@ As you can see here, we're using the `[routerLink]` directive and we're passing 
 
 If we take a look at the application now, you'll see that every pokémon now has a view link that can be clicked on:
 
-![routerlink-view](content/posts/2016/2016-11-30-routing-angular-2/images/routerlink-view.png)
+![routerlink-view](./images/routerlink-view.png)
 
 if you click these links, you'll see that we get to the pokemon info component waaay faster than we did before, so it appears to be working as it should. However, how can we go back to our list now?
 
@@ -125,7 +125,7 @@ If you're wondering why we're not using `[title]` here like we did in our previo
 
 If you take a look at the application now, you can see that it has a proper navigation bar now, so it looks like that's working as well.
 
-![navbar](content/posts/2016/2016-11-30-routing-angular-2/images/navbar.png)
+![navbar](./images/navbar.png)
 
 If you now click on the "View" link of any pokémon and you wish to return, you can now click the "Pokédex" title in the navigation bar and you will see the list of pokémons again.
 
@@ -234,7 +234,7 @@ Now all we have to do is to just add an `*ngIf` to the **pokemon-entry.component
 
 If we take a look at the application now, we can see that nothing changed at our pokémon overview, and if we take a look at the pokemon info of one of the pokémons, we can see that it shows the same component, but this time without a link to the view page. 
 
-![pokemon-entry-without-link](content/posts/2016/2016-11-30-routing-angular-2/images/pokemon-entry-without-link.png)
+![pokemon-entry-without-link](./images/pokemon-entry-without-link.png)
 
 That means that the routing is working fine and that we now have both an overview of all pokémons, and a more detailed page. [Next time](/page-title-route-change-angular-2/) we'll define a page title for every route using the `Title` service.
 

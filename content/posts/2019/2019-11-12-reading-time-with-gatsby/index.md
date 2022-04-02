@@ -8,7 +8,7 @@ excerpt: "Popular online blogging platforms like Medium add an estimated reading
 
 In [my latest tutorials](/tag/gatsby), I've explored how to create a blog with Gatsby using WordPress as a headless CMS. In this tutorial, I'll explain how you can implement a "reading time" feature with Gatsby.
 
-![Gatsby + WordPress](content/posts/2019/2019-11-12-reading-time-with-gatsby/images/gatsby-wordpress.png)
+![Gatsby + WordPress](./images/gatsby-wordpress.png)
 
 ### Reading time with Markdown
 
@@ -117,7 +117,7 @@ If we run the application now, we can use the following GraphQL query to retriev
 
 Like before, the reading time will be available within your data.
 
-![Screenshot of the reading time in action](content/posts/2019/2019-11-12-reading-time-with-gatsby/images/Screenshot-2019-09-04-14.22.52.png)
+![Screenshot of the reading time in action](./images/Screenshot-2019-09-04-14.22.52.png)
 
 #### Using `onCreateNode`
 

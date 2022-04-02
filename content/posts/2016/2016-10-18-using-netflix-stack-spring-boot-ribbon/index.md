@@ -12,7 +12,7 @@ In [my last article](/using-the-netflix-stack-with-spring-boot-eureka/) I gave a
 
 [Ribbon](https://github.com/Netflix/ribbon) is an interceptor that goes well with Eureka. It allows you to look up the hostname/IP of a service and does stuff like client-side load balancing for you as well. Now the only question is, what does [Spring](https://spring.io/) have to do with that? Well, if you followed [my article about consuming a REST service](/consuming-rest-apis-with-spring/), you should be familiar with [`RestTemplate`](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html) already. When using the **Eureka Discovery** dependency, you can use the `@LoadBalanced` annotation to set up a `RestTemplate` using the Ribbon interceptor.
 
-![netfix-spring-boot](content/posts/2016/2016-10-18-using-netflix-stack-spring-boot-ribbon/images/netfix-spring-boot.png)
+![netfix-spring-boot](./images/netfix-spring-boot.png)
 
 ### Setting up our application
 
@@ -20,7 +20,7 @@ In case you didn't follow my article about Eureka, I suggest you download the co
 
 Open the [Spring Initializr](http://start.spring.io/), and add both the **Web**, **Eureka Discovery**, **Thymeleaf** and **Actuator** dependencies.
 
-![Screenshot 2016-08-14 20.18.33](content/posts/2016/2016-10-18-using-netflix-stack-spring-boot-ribbon/images/Screenshot-2016-08-14-20.18.33.png)
+![Screenshot 2016-08-14 20.18.33](./images/Screenshot-2016-08-14-20.18.33.png)
 
 ### Configuring Eureka
 
@@ -239,15 +239,15 @@ Now you can run the application, but make sure you run the registry and the serv
 
 If you open your application (I hosted it on port 8082, so for me it's [http://localhost:8082](http://localhost:8082)), you'll see our task service is successfully being called:
 
-![Screenshot 2016-08-14 20.56.50](content/posts/2016/2016-10-18-using-netflix-stack-spring-boot-ribbon/images/Screenshot-2016-08-14-20.56.50.png)
+![Screenshot 2016-08-14 20.56.50](./images/Screenshot-2016-08-14-20.56.50.png)
 
 Now, to see if load balancing works fine, you could run the task service twice, but again, make sure they run on a different port. If you run the service twice and go to the [Eureka dashboard](http://localhost:8761), both instances should be listed:
 
-![Screenshot 2016-08-14 20.58.30](content/posts/2016/2016-10-18-using-netflix-stack-spring-boot-ribbon/images/Screenshot-2016-08-14-20.58.30.png)
+![Screenshot 2016-08-14 20.58.30](./images/Screenshot-2016-08-14-20.58.30.png)
 
 Now to make sure it's being load balanced, you could open up your service and add some logging. Now refresh the application a few times and you'll see that the log appears on both instances, ideally around 50% of the time.
 
-![Screenshot 2016-08-14 21.01.38](content/posts/2016/2016-10-18-using-netflix-stack-spring-boot-ribbon/images/Screenshot-2016-08-14-21.01.38.png)
+![Screenshot 2016-08-14 21.01.38](./images/Screenshot-2016-08-14-21.01.38.png)
 
 For me both instances showed the log statements the same amount of times, which means the client side load balancing is doing a fine job. This also demonstrate how easily horizontal scaling became with Eureka. Run a few more instances of your service and that should be it.
 

@@ -14,7 +14,7 @@ One of the most popular testing frameworks for JavaScript is [Jasmine](http://ja
 
 The setup is quite similar in this example, except that we're in a Java-project. First of all, create a folder called **src/test/javascript**. This will be the root folder of all our specs. Inside this folder, create a folder called **controllers** with our testfile inside, called **AppControllerSpec.js**.
 
-![project-setup](content/posts/2015/2015-02-07-jasmine-tests-maven/images/project-setup.png)
+![project-setup](./images/project-setup.png)
 
 To write a Jasmine test, you first start with declaring what you're going to test, for example:
 
@@ -215,7 +215,7 @@ mvn clean install
 
 You should see something like this:
 
-![build-maven](content/posts/2015/2015-02-07-jasmine-tests-maven/images/build-maven.png)
+![build-maven](./images/build-maven.png)
 
 You can also run the Jasmine test runner, by using the following command:
 
@@ -225,7 +225,7 @@ mvn jasmine:bdd
 
 After executing the command, you can go to [http://localhost:8234](http://localhost:8234) which will launc the Jasmine Spec Runner.
 
-![jasmine-bdd](content/posts/2015/2015-02-07-jasmine-tests-maven/images/jasmine-bdd.png)
+![jasmine-bdd](./images/jasmine-bdd.png)
 
 #### Achievement: Wrote Jasmine tests and used Maven to execute them
 

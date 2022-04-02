@@ -36,7 +36,7 @@ require(["dojo/_base/lang"], function(lang) {
 
 In this example I made a `reverse()` function and added it to the `str` object. The first `console.log` will obviously output **b00nelg00g**. However, when I create a new object, the `reverse()` function no longer works. The reason for this is that with the `mixin()` function the `reverse()` function is applied to the first object, but not to the second object.
 
-![lang mixin](content/posts/2013/2013-07-20-dojo-inheritance-overriding-extending/images/lang-mixin.png)
+![lang mixin](./images/lang-mixin.png)
 
 Let's try something similar with `lang.extend()`:
 
@@ -58,7 +58,7 @@ require(["dojo/_base/lang"], function(lang) {
 
 In contrary to the `mixin()` function, the `extend()` function applies it to a class. That's why we're using `String` as a paremter here. So now the `reverse()` function is applied to the `String` class itself, which means it will work for each String object and then it will work for all strings. Both `console.log();` statements will print the reversed string.
 
-![lang extend](content/posts/2013/2013-07-20-dojo-inheritance-overriding-extending/images/lang-extend.png)
+![lang extend](./images/lang-extend.png)
 
 So, because these functions are applied directly to the JavaScript object or prototype, means you can use them for all kind of things including Dojo widgets (Dijits). For example, if you want to extend `dijit/form/MultiSelect` with sorting capabilities, you could do it using the `lang.extend()` function:
 
@@ -105,7 +105,7 @@ ready(function() {
 });
 ```
 
-![multiselect-lang](content/posts/2013/2013-07-20-dojo-inheritance-overriding-extending/images/multiselect-lang.png)
+![multiselect-lang](./images/multiselect-lang.png)
 
 So, with the **dojo/\_base/lang** module you can already extend modules on a simple way. What you can't do is inheriting from a module or create submodules based upon it.
 
@@ -144,7 +144,7 @@ If we go back to the previous code example and use the sortable, `MultiSelect`, 
 
 In this example, the MultiSelect will no longer be sortable, but we did create a custom widget with the name `dijit/form/SortableMultiSelect` that is sortable. The only thing that rests us to do is change the `data-dojo-type` attribute because we're now working with another widget.
 
-![mutliselect-declare](content/posts/2013/2013-07-20-dojo-inheritance-overriding-extending/images/mutliselect-declare.png)
+![mutliselect-declare](./images/mutliselect-declare.png)
 
 The advantage is that we can still keep the current MultiSelect as the SortableMultiSelect.
 
@@ -175,7 +175,7 @@ require(["dojo/_base/declare", "dijit/form/DateTextBox", "dojo/parser"], functio
 
 As you can see we're overriding the `postCreate()` function, but the first thing we do is call `this.inherited(arguments);`. If we don't do that, then the widget will not work because then we would miss the initialization of the widget (which is happening in the original `postCreate()` function but not in ours).
 
-![future-date-textbox](content/posts/2013/2013-07-20-dojo-inheritance-overriding-extending/images/future-date-textbox.png)
+![future-date-textbox](./images/future-date-textbox.png)
 
 ### Summarized
 

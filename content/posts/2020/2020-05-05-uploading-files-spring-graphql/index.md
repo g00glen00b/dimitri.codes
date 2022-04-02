@@ -11,7 +11,7 @@ One of the things I haven't covered yet though is the possibility to upload file
 
 While not officially part of the GraphQL specification, several vendors, including [Apollo](https://www.apollographql.com/) and the [Spring boot starter for GraphQL](https://github.com/graphql-java-kickstart/graphql-spring-boot) allow file uploads.
 
-![GraphQL + Spring boot](content/posts/2020/2020-05-05-uploading-files-spring-graphql/images/graphql-spring-boot.png)
+![GraphQL + Spring boot](./images/graphql-spring-boot.png)
 
 ### Project setup
 

@@ -16,7 +16,7 @@ If you think about it, some cross-cutting concerns also apply to microservices. 
 
 Zuul is a gateway service, which means that it forwards requests to other microservices. This is interesting, because if you use Zuul as an edge service to forward all requests, it could be used to manage these cross-cutting concerns. For example, you can add logging, monitoring, security and things like CORS headers to the gateway service, and that will do the trick.
 
-![Zuul as a gateway schema](content/posts/2018/2018-01-16-spring-boot-netflix-zuul/images/zuul.png)
+![Zuul as a gateway schema](./images/zuul.png)
 
 If you use Zuul with Spring boot and Eureka, things become even better since you won't have to configure anything else except the location of Eureka. All routes will be configured for you!
 
@@ -24,7 +24,7 @@ If you use Zuul with Spring boot and Eureka, things become even better since you
 
 To get started with Zuul and Spring boot, you head over to the [Spring Initializr](https://start.spring.io/) (shame on you if you didn't bookmark it yet!), and generate a new project with both **Zuul** and **Eureka Discovery** as dependencies. The Eureka Discovery dependency is optional, but if you don't use it, you'll have to manually define your routes. If you don't know how to set up Eureka, you can view [my article about Eureka](/using-the-netflix-stack-with-spring-boot-eureka/).
 
-![Spring Initializr](content/posts/2018/2018-01-16-spring-boot-netflix-zuul/images/spring-initialzr-gateway-eureka.png)
+![Spring Initializr](./images/spring-initialzr-gateway-eureka.png)
 
 Once you're set up, you should add both the `@EnableZuulProxy` and `@EnableEurekaClient` annotations to the main class. For example:
 
@@ -49,9 +49,9 @@ In this example, I'm running Eureka on port 8001.
 
 Now, by default all applications registered with Eureka will be able to be used on the gateway service by using the same path, but prepending it with the name of the application. For example, if I have an endpoint called `/api/profile` on my service called **profile-service**, then I'll be able to use `/profile-service/api/profile` on the gateway service.
 
-![Original request through Postman](content/posts/2018/2018-01-16-spring-boot-netflix-zuul/images/postman-original-api-profile.png)
+![Original request through Postman](./images/postman-original-api-profile.png)
 
-![Same request, through gateway with Postman](content/posts/2018/2018-01-16-spring-boot-netflix-zuul/images/postman-gateway-request.png)
+![Same request, through gateway with Postman](./images/postman-gateway-request.png)
 
 ### Getting started without Eureka
 
@@ -59,7 +59,7 @@ If you're not planning to use any service discovery like Eureka, well, good news
 
 First of all, create a project like we just did, but this time without the **Eureka Discovery** dependency.
 
-![Spring initializr](content/posts/2018/2018-01-16-spring-boot-netflix-zuul/images/spring-initializr-gatewya.png)
+![Spring initializr](./images/spring-initializr-gatewya.png)
 
 After that, you have to add the `@EnableZuulProxy`:
 
@@ -102,7 +102,7 @@ public CorsFilter corsFilter() {
 
 After that, you can restart the application and you can now send requests from within your webbrowser to the gateway! To verify this, you can call the same endpoint as before, but this time change the HTTP method to `OPTIONS`. When you do that, you should see that there is a header called `Access-Control-Allow-Credentials` and `Access-Control-Allow-Origin` even though they're not there on the original response.
 
-![CORS header request with Postman](content/posts/2018/2018-01-16-spring-boot-netflix-zuul/images/postman-gateway-cors.png)
+![CORS header request with Postman](./images/postman-gateway-cors.png)
 
 ### Sensitive headers
 

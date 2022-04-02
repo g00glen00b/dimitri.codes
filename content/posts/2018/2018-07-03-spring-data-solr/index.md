@@ -25,7 +25,7 @@ If you're using [Spring Initializr](http://start.spring.io/), this is equivalent
 spring.data.solr.host=http://localhost:8983/solr
 ```
 
-![Spring boot + Spring Data + Apache Solr](content/posts/2018/2018-07-03-spring-data-solr/images/spring-boot-data-solr.png)
+![Spring boot + Spring Data + Apache Solr](./images/spring-boot-data-solr.png)
 
 ### Writing custom queries
 

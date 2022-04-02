@@ -8,7 +8,7 @@ excerpt: "So far, I've written several tutorials about using Gatsby.  What they 
 
 So far, I've [written several tutorials](/tag/gatsby/) about using Gatsby. What they have in common, is that they all depend on certain Gatsby plugins. In this tutorial, I'll explore the options you have when creating your own Gatsby plugin.
 
-![Example of a Gatsby plugin](content/posts/2020/2020-01-14-writing-gatsby-plugin/images/Screenshot-2019-09-08-11.36.36.png)
+![Example of a Gatsby plugin](./images/Screenshot-2019-09-08-11.36.36.png)
 
 ### Setting up a project
 
@@ -24,7 +24,7 @@ This is also suggested within the [official guidelines](https://www.gatsbyjs.org
 
 #### Setting up Babel
 
-![Babel logo](content/posts/2020/2020-01-14-writing-gatsby-plugin/images/babel.png)
+![Babel logo](./images/babel.png)
 
 Additionally, I suggest using [Babel](https://babeljs.io/) to transpile your source code. This allows you to use the newest ECMAScript features, while still making sure that everything works on Node.js.
 
@@ -121,7 +121,7 @@ To check the code style, I added another npm script to my **package.json**:
 
 #### Working with prettier
 
-![Prettier logo](content/posts/2020/2020-01-14-writing-gatsby-plugin/images/Screenshot-2019-09-08-11.48.41.png)
+![Prettier logo](./images/Screenshot-2019-09-08-11.48.41.png)
 
 Not only do I want to guarantee that the code is written properly, but I also want to make sure that everyone uses the same code formatting. To enforce this, I installed [Prettier](https://prettier.io/):
 
@@ -308,7 +308,7 @@ npm run test
 
 Normally, all tests should pass and you should have a coverage of 100%, as seen in the screenshot below.
 
-![Screenshot of test output](content/posts/2020/2020-01-14-writing-gatsby-plugin/images/Screenshot-2019-09-08-11.13.52.png)
+![Screenshot of test output](./images/Screenshot-2019-09-08-11.13.52.png)
 
 Once done, you can build your code:
 

@@ -10,7 +10,7 @@ Monitoring is an essential aspect to the maintainability of applications, it’s
 
 Some products offer both combined (eg. Graphite, [Prometheus](https://prometheus.io/)), while other platforms either manage the database part (InfluxDB) and other platforms manage the visualization ([Grafana](https://grafana.com/)). In this example I’ll be combining Prometheus and Grafana and use them to monitor an existing Spring boot application.
 
-![Micrometer + Prometheus + Grafana](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/micrometer-prometheus-grafana.png)
+![Micrometer + Prometheus + Grafana](./images/micrometer-prometheus-grafana.png)
 
 ### Configuring Spring boot
 
@@ -37,7 +37,7 @@ management.endpoints.web.exposure.include=prometheus
 
 If you run your application now, and you visit [http://localhost:8080/actuator](http://localhost:8080/actuator), you'll see that it exposes a Prometheus endpoint:
 
-![JSON output of the actuator endpoint](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/Screenshot-2019-02-10-22.03.32.png)
+![JSON output of the actuator endpoint](./images/Screenshot-2019-02-10-22.03.32.png)
 
 If you click that link, you'll see a lot of metrics being exposed in a format that can be easily read by Prometheus.
 
@@ -135,7 +135,7 @@ This configuration will scrape all **/prometheus** endpoints every minute, and a
 
 If you have the Docker containers running, you should now be able to visit [http://localhost:9090/targets](http://localhost:9090/targets) to see if it's successfully scraping the Prometheus endpoints of your application. For example:
 
-![Prometheus targets](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/Screenshot-2019-02-10-22.10.38.png)
+![Prometheus targets](./images/Screenshot-2019-02-10-22.10.38.png)
 
 ### Setting up Grafana
 
@@ -143,7 +143,7 @@ The next step is to log on to Grafana. Grafana should be running on port 3000 if
 
 The first step after logging in is to create a datasource, which in our case will be Prometheus. All you have to do is to configure the URL to be **http://prometheus:9090**, for example:
 
-![Grafana setup for Prometheus](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/Screenshot-2019-02-10-22.13.22.png)
+![Grafana setup for Prometheus](./images/Screenshot-2019-02-10-22.13.22.png)
 
 ### Creating your own dashboard
 
@@ -153,16 +153,16 @@ If you add this within your query, you'll notice that you get multiple graphs. T
 
 If you want to make a graph for all heap memory usage, you could do something like this:
 
-![Prometheus query within Grafana](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/Screenshot-2019-02-10-22.19.06.png)
+![Prometheus query within Grafana](./images/Screenshot-2019-02-10-22.19.06.png)
 
 As you can see, you can use a dynamic legend (in this case by using the ID tag) byb using `{{id}}`.
 
 If you save the graph and the dashboard, you can now see your beautiful graphs at work:
 
-![Graph on Grafana](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/Screenshot-2019-02-10-22.21.31.png)
+![Graph on Grafana](./images/Screenshot-2019-02-10-22.21.31.png)
 
 Additionally to graphs, you can also configure single stats, which can be interesting for metrics like the uptime of your application:
 
-![Single stat on Grafana](content/posts/2019/2019-02-19-monitoring-spring-prometheus-grafana/images/Screenshot-2019-02-10-22.25.37.png)
+![Single stat on Grafana](./images/Screenshot-2019-02-10-22.25.37.png)
 
 And there you have it, the start of your own dashboard to monitor your own Spring boot applications.

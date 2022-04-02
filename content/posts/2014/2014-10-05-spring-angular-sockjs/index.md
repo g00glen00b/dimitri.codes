@@ -10,7 +10,7 @@ A while ago I wrote a tutorial about writing a web application using Spring, Ang
 
 The application we're going to write will look like this:
 
-![app-example](content/posts/2014/2014-10-05-spring-angular-sockjs/images/app-example.png)
+![app-example](./images/app-example.png)
 
 ### Why WebSockets
 
@@ -598,31 +598,31 @@ Before running our application on a webserver, check some things first. First of
 
 Second, if you're running this application from an embedded Tomcat in Eclipse, you may have to add your Maven dependencies to your deployment assembly. You can do this by going to your project properties, clicking on Deployment assembly and by adding the library.
 
-![deployment-assembly](content/posts/2014/2014-10-05-spring-angular-sockjs/images/deployment-assembly.png)
+![deployment-assembly](./images/deployment-assembly.png)
 
 Finally, make sure that the web container you're using, supports the WebSockets Java API. If this isn't the case, you will probably have to update your web container.
 
 If all of that is ready, then you can start running your application, which should look like this:
 
-![initial-app](content/posts/2014/2014-10-05-spring-angular-sockjs/images/initial-app.png)
+![initial-app](./images/initial-app.png)
 
 If you start writing your message, you will see that the button is now enabled and that the counter is running:
 
-![app-message](content/posts/2014/2014-10-05-spring-angular-sockjs/images/app-message.png)
+![app-message](./images/app-message.png)
 
 If you go too far, you will see that the button is now disabled again, and the counter is now showing a negative value in a red color:
 
-![message-limit](content/posts/2014/2014-10-05-spring-angular-sockjs/images/message-limit.png)
+![message-limit](./images/message-limit.png)
 
 Once you enter a message and send it, you will see that it appears in the message list as a bold message (because you sent it). You will also see that your current message is reset to an empty string in the text box:
 
-![message-sent](content/posts/2014/2014-10-05-spring-angular-sockjs/images/message-sent.png)
+![message-sent](./images/message-sent.png)
 
 If you open the application in a new window, you should see that it is empty now. WebSockets are real time, so only messages that are received at a given time, will be listed, there is no history.
 
 If you send a message in the other window, you will see that the message appears in both screens. One will have it in bold, while the other one will see it as regular text.
 
-![multiple-messages](content/posts/2014/2014-10-05-spring-angular-sockjs/images/multiple-messages.png)
+![multiple-messages](./images/multiple-messages.png)
 
 As you can see, the WebSockets are working properly and you will see the messages appear real time because the client sends the message to the server, which will in turn send the message to all clients.
 

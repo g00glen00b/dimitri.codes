@@ -8,7 +8,7 @@ excerpt: "Building JavaScript applications has evolved over time, and in this tu
 
 When starting a new web project, you often use some libraries. Nowadays, these libraries usually come with tools to scaffold your project. However, in certain cases you don't want to rely on these libraries. For that reason, we'll demonstrate how you can set up your own project with [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/).
 
-![Babel + Webpack](content/posts/2019/2019-03-05-web-project-webpack-babel/images/babel-webpack.png)
+![Babel + Webpack](./images/babel-webpack.png)
 
 ### Getting started
 

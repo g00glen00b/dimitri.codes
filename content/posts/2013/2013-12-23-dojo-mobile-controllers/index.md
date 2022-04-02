@@ -212,11 +212,11 @@ Next to the controllers it also imports the parsing module, which is used to par
 
 We did it, we finally wrote a mobile app using Dojo mobile. If we open our browser now and go to the mobile app (by opening the index HTML page), we can see the application in its full glory.
 
-![Screenshot1](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot1.png)
+![Screenshot1](./images/Screenshot1.png)
 
 If you click on a movie, you will see that it transitions properly to the detailed view and that there's a back button visible in the header. If we click the back button, we're back where we left (and the animation direction should also be different).
 
-![Screenshot2](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot2.png)
+![Screenshot2](./images/Screenshot2.png)
 
 If you're using your desktop browser and you want to test the application using different themes, you can add the <code>theme</code> parameter to your URL and give it one of the following values:
 
@@ -229,13 +229,13 @@ If you're using your desktop browser and you want to test the application using 
 
 The results are quite amazing: 
 
-![Screenshot3](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot3.png)
+![Screenshot3](./images/Screenshot3.png)
 
-![Screenshot4](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot4.png)
-![Screenshot5](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot5.png)
-![Screenshot1](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot1.png)
-![Screenshot6](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot6.png)
-![Screenshot7](content/posts/2013/2013-12-23-dojo-mobile-controllers/images/Screenshot7.png)
+![Screenshot4](./images/Screenshot4.png)
+![Screenshot5](./images/Screenshot5.png)
+![Screenshot1](./images/Screenshot1.png)
+![Screenshot6](./images/Screenshot6.png)
+![Screenshot7](./images/Screenshot7.png)
 
 Or we can of course test the same application on our device, where the theme will automatically be detected.
 

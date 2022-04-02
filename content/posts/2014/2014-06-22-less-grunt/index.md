@@ -317,7 +317,7 @@ grunt dev
 
 Now open the application in your web browser and you will see that the Less code is rendered well:
 
-![less-compiled](content/posts/2014/2014-06-22-less-grunt/images/less-compiled.png)
+![less-compiled](./images/less-compiled.png)
 
 Using the command:
 
@@ -327,7 +327,7 @@ grunt minified
 
 will result in the minified version.
 
-![less-compiled-minified](content/posts/2014/2014-06-22-less-grunt/images/less-compiled-minified.png)
+![less-compiled-minified](./images/less-compiled-minified.png)
 
 So that means everything is working fine.
 

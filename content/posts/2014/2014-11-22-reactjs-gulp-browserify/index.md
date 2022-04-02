@@ -16,11 +16,11 @@ Like I said before, React.js allows you to write components that work both in th
 
 So, my initial project structure is the following:
 
-![project-structure](content/posts/2014/2014-11-22-reactjs-gulp-browserify/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 I made two main folders called **app** and **assets**. The **assets **folder is the easiest, as it only contains a folder called **less** and inside are two Less stylesheets called **general.less** and **style.less**. The **app **folder on the other hand is a bit more complex, as it represents the core of our application. It contains three folders called **components**, **models** and **services**. The application I'm going to build is a song rate application, where a user can enter a song (by artist and title) and vote/delete them later on.
 
-[![application-result](content/posts/2014/2014-11-22-reactjs-gulp-browserify/images/application-result.png)
+[![application-result](./images/application-result.png)
 
 There are several user interface components recognizable in this application:
 
@@ -251,14 +251,14 @@ gulp serve
 
 If you followed every step properly, your webapplication should pop-up in your favourite browser, for example:
 
-![hello-world](content/posts/2014/2014-11-22-reactjs-gulp-browserify/images/hello-world.png)
+![hello-world](./images/hello-world.png)
 
 It certainly looks ugly as hell, but hey, we can now a lot faster. For example, if you change your HTML structure and look back at your browser, it should instantly change.
 
-![changes-instantly](content/posts/2014/2014-11-22-reactjs-gulp-browserify/images/changes-instantly.png)
+![changes-instantly](./images/changes-instantly.png)
 
 If you don't believe me, you can always look back at your terminal/console, which should look a bit similar to this:
 
-![gulp-log](content/posts/2014/2014-11-22-reactjs-gulp-browserify/images/gulp-log.png)
+![gulp-log](./images/gulp-log.png)
 
 You've set up your entire application structure and build environment, so let's start coding! Read [my next tutorial](/reactjs-jsx/) to read everything you need to know to write your own React.js application.

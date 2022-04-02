@@ -28,7 +28,7 @@ If you want to know how to write your own application using Ember.js I suggest r
 
 If you're done, your project structure should look like:
 
-![project-structure](content/posts/2014/2014-05-24-nodember/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Changing the REST API
 
@@ -128,19 +128,19 @@ node app.js
 
 If you now open up your browser and go to [http://localhost:3000](http://localhost:3000), you should see the app in its full glory. So let's try it out by adding a song. If we do that and open our console, you will see that a network request has been sent to our REST API, including the JSON structure of the song.
 
-![add-song](content/posts/2014/2014-05-24-nodember/images/add-song1.png)
+![add-song](./images/add-song1.png)
 
 If you change the score of the song, you can see that another request has been sent (this time it has PUT as request method) and that the updated object has been sent as request payload.
 
-![update-song](content/posts/2014/2014-05-24-nodember/images/update-song1.png)
+![update-song](./images/update-song1.png)
 
 If we refresh the page, you can see that (among the other requests) a request has been sent to the REST API to retrieve all existing songs.
 
-![get-songs](content/posts/2014/2014-05-24-nodember/images/get-songs.png)
+![get-songs](./images/get-songs.png)
 
 And finally, if we remove the song, you can see that it sends the DELETE request with the ID of the song to the RESTful webservice.
 
-![delete-song](content/posts/2014/2014-05-24-nodember/images/delete-song.png)
+![delete-song](./images/delete-song.png)
 
 #### Achievement: Worked with Nodember
 

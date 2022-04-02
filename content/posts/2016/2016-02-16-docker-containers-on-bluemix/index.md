@@ -6,7 +6,7 @@ tags: ["IBM Cloud", "Docker", "Spring boot"]
 excerpt: "The Bluemix PaaS allows you to take your own Docker containers to the cloud. In this example I will be deploying some containers to Bluemix."
 ---
 
-A few weeks ago I wrote [an article](http://wordpress.g00glen00b.be/docker-spring-boot/) about creating [Docker](http://docker.io/) images containing a [Spring boot](http://projects.spring.io/spring-boot/) application, introducing both Docker, Docker Machine and Docker Compose. Today I'm going to take those images (both the application image and the [MySQL](https://www.mysql.com/) image) to the cloud, using [Bluemix](http://bluemix.net/). [![bluemix-docker](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/bluemix-docker.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/02/bluemix-docker.png)
+A few weeks ago I wrote [an article](http://wordpress.g00glen00b.be/docker-spring-boot/) about creating [Docker](http://docker.io/) images containing a [Spring boot](http://projects.spring.io/spring-boot/) application, introducing both Docker, Docker Machine and Docker Compose. Today I'm going to take those images (both the application image and the [MySQL](https://www.mysql.com/) image) to the cloud, using [Bluemix](http://bluemix.net/). [![bluemix-docker](./images/bluemix-docker.png)](https://wordpress.g00glen00b.be/wp-content/uploads/2016/02/bluemix-docker.png)
 
 ### Summarizing what we did so far
 
@@ -207,7 +207,7 @@ The `cf ic` commands work kinda like a Docker "proxy" CLI. From now on, every Do
 
 In fact, if you want to use the Docker CLI you even can, you just have to configure different environment variables.
 
-![Screenshot 2016-02-16 21.21.58](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.21.58-1.png)
+![Screenshot 2016-02-16 21.21.58](./images/Screenshot-2016-02-16-21.21.58-1.png)
 
 ### Uploading the Docker images
 
@@ -220,7 +220,7 @@ docker tag mysql registry.eu-gb.bluemix.net/g00glen00b/mysql:latest
 
 You'll have to replace `registry.eu-gb.bluemix.net/g00glen00b` by the name of your private repository. You can see which URL you have to point to when you logged in with the `cf ic login` command:
 
-![Screenshot 2016-02-16 21.29.11](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.29.11.png)
+![Screenshot 2016-02-16 21.29.11](./images/Screenshot-2016-02-16-21.29.11.png)
 
 Then you can push both images to Bluemix using the following command:
 
@@ -233,15 +233,15 @@ This may actually take a while, because your images are now uploaded to the Blue
 
 Anyhow, if you use the `cf ic images` command afterwards, you'll see that your images are now available on Bluemix:
 
-![Screenshot 2016-02-16 21.34.23](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.34.23.png)
+![Screenshot 2016-02-16 21.34.23](./images/Screenshot-2016-02-16-21.34.23.png)
 
 Another way to verify that your images are uploaded is to go to the [Bluemix dashboard](https://console.ng.bluemix.net/) and to click on **Start containers**.
 
-![Screenshot 2016-02-16 21.36.14](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.36.14.png)
+![Screenshot 2016-02-16 21.36.14](./images/Screenshot-2016-02-16-21.36.14.png)
 
 Normally, you'll see a list of all available images, containing the images you just uploaded to the repository.
 
-![Screenshot 2016-02-16 21.37.42](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.37.42.png)
+![Screenshot 2016-02-16 21.37.42](./images/Screenshot-2016-02-16-21.37.42.png)
 
 If you can't see the images, you're probably looking at the wrong region. Click on the icon at the top right corner, normally a pane will slide open on the right side. Click on **Region** and select the proper region.
 
@@ -282,17 +282,17 @@ cf ic logs --follow demo-app
 
 At the first few seconds, you'll see the following logs pop up:
 
-![Screenshot 2016-02-16 21.46.29](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.46.29.png)
+![Screenshot 2016-02-16 21.46.29](./images/Screenshot-2016-02-16-21.46.29.png)
 
 Like I mentioned before, networking isn't available directly, so if there's one thing you should remember from this article it is that you have to build some kind of polling mechanism first before starting your application, if it relies on another container.
 
 Anyhow, if you look back at the Bluemix dashboard, you'll see that both containers are now up and running:
 
-![Screenshot 2016-02-16 21.54.41](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.54.41.png)
+![Screenshot 2016-02-16 21.54.41](./images/Screenshot-2016-02-16-21.54.41.png)
 
 You can even click on them and view some more detailed information and monitoring:
 
-![Screenshot 2016-02-16 21.56.13](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.56.13.png)
+![Screenshot 2016-02-16 21.56.13](./images/Screenshot-2016-02-16-21.56.13.png)
 
 ### Assigning a public IP to your container
 
@@ -300,13 +300,13 @@ Now, to assign a public IP to your application container, go back to the Bluemix
 
 At the top of the page you will be able to assign one of the few public IPs you can use to your container:
 
-![Screenshot 2016-02-16 21.58.53](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/Screenshot-2016-02-16-21.58.53.png)
+![Screenshot 2016-02-16 21.58.53](./images/Screenshot-2016-02-16-21.58.53.png)
 
 When it's done, the port number should be clickable now, allowing you to go to your application. Don't forget to append `/superhero` to the path, otherwise it won't work. If your public IP is 10.10.10.10, then you should be visiting `http://10.10.10.10:8080/superhero`.
 
 If everything works, you should see the following:
 
-![results](content/posts/2016/2016-02-16-docker-containers-on-bluemix/images/results.png)
+![results](./images/results.png)
 
 Congratulations, you now have your application running on Bluemix, using a Docker container and linking it to another container containing your database.
 

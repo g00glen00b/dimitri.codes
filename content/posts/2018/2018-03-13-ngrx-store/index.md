@@ -12,7 +12,7 @@ One of the major differences between AngularJS 1.x and Angular 2 and beyond is t
 
 Let's say you have a component-based application, where data is given to child components, and events bubble up to the parent component.
 
-![Overview of a component-based architecture](content/posts/2018/2018-03-13-ngrx-store/images/component-architecture.png)
+![Overview of a component-based architecture](./images/component-architecture.png)
 
 Things work fine, until you start to handle authentication and autorisation. The impact it has on all these components is gigantic, such as:
 
@@ -32,7 +32,7 @@ State management libraries like ngrx are the answer to this problem. Basically, 
 
 In functional programming, such a mechanism, where you have an old state and an accumulator to provide a new state, is called a **reduce** operation. I'll explain in a bit what this reducer does and how it works.
 
-![Angular + ngrx](content/posts/2018/2018-03-13-ngrx-store/images/angular-ngrx.png)
+![Angular + ngrx](./images/angular-ngrx.png)
 
 ### Getting started
 
@@ -92,19 +92,19 @@ Now that we have our state, we have to act upon it. This action happens within a
 
 A sum operation is a good example of a reducer to get the total value of an array of data. Let's say you have 2, 8, 9 and 3 as the incoming data, an accumulator starting with 0 as its initial value, and a reducer that does a + b. The first step is that it adds the first element (2) to the accumulator (0) and produces a new value for the accumulator (2). After that, it repeats the same process with the current value of the processed data and the accumulator. In this case, the next step would be 2 + 8, which would produce 10, and so on and so on.
 
-![A reduce operation in functional programming](content/posts/2018/2018-03-13-ngrx-store/images/reduce-operation.png)
+![A reduce operation in functional programming](./images/reduce-operation.png)
 
 A reducer with ngrx does the same, you start with your initial state (eg. not logged in) and on each action (login being processed, logging out, entering the wrong password, ...) you update the state using a reducer.
 
-![An example of how a reducer generates a new state](content/posts/2018/2018-03-13-ngrx-store/images/ngrx-reducer.png)
+![An example of how a reducer generates a new state](./images/ngrx-reducer.png)
 
 For example, in the situation above, a `LOGIN_COMPLETE` action is processed, the token is decoded and the reducer sees it's about a user called "g00glen00b", so he produces a new `AppState` with the given user and token. Then, the next time the user visits the application, his token could be expired, so the reducer does the following:
 
-![An example of how a reducer generates a state for a login_expired action](content/posts/2018/2018-03-13-ngrx-store/images/ngrx-reducer-2.png)
+![An example of how a reducer generates a state for a login_expired action](./images/ngrx-reducer-2.png)
 
 If a user tries to log in again, but uses the wrong password, the following could happen:
 
-![An example of how a reducer generates a new state for a login_failed action](content/posts/2018/2018-03-13-ngrx-store/images/ngrx-reducer-3.png)
+![An example of how a reducer generates a new state for a login_failed action](./images/ngrx-reducer-3.png)
 
 ### Preparation
 

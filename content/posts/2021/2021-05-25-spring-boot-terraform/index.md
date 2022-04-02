@@ -22,7 +22,7 @@ These tools allow you to describe your infrastructure as code. In addition, they
 
 In this tutorial, I'll deploy a simple Spring boot application on AWS Elastic Beanstalk with Terraform.
 
-![Terraform + Elastic Beanstalk + Spring boot logos](content/posts/2021/2021-05-25-spring-boot-terraform/images/terraform-beanstalk-springboot.png)
+![Terraform + Elastic Beanstalk + Spring boot logos](./images/terraform-beanstalk-springboot.png)
 
 ### Terraform providers
  

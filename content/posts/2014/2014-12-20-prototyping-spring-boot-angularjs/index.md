@@ -106,7 +106,7 @@ bower install
 
 When it's finished loading, you should see a new folder called bower\_components in your resources, containing the libraries we need.
 
-![project-structure](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/project-structure.png)
+![project-structure](./images/project-structure.png)
 
 ### Working with Spring Data JPA
 
@@ -219,19 +219,19 @@ cd target/
 java -jar ng-spring-boot-1.0.0.jar
 ```
 
-![spring-boot-run](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/spring-boot-run.png)
+![spring-boot-run](./images/spring-boot-run.png)
 
 By sending a GET request to [http://localhost:8080/items](http://localhost:8080/items), you will see an empty array, which makes sense because we didn't add an item yet.
 
-![first-get](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/first-get.png)
+![first-get](./images/first-get.png)
 
 Now, to add an item, you will have to set the method to POST and pass a JSON body like in the image below.
 
-![post-item](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/post-item.png)
+![post-item](./images/post-item.png)
 
 If you execute the same GET request now as before, you should see that the list is no longer empty now.
 
-![get-with-item](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/get-with-item.png)
+![get-with-item](./images/get-with-item.png)
 
 In the next part we're going to create a small web application using these REST services.
 
@@ -389,19 +389,19 @@ By finishing our controller we completed the entire application. If you look at 
 
 If you run the application now, and go to [http://localhost:8080](http://localhost:8080), you should see your application now. If you're running the application from the previous time when we checked the REST service, then you should be able to see the item we added before:
 
-![checklist-first-run](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/checklist-first-run.png)
+![checklist-first-run](./images/checklist-first-run.png)
 
 Checking and unchecking the item will result in a PUT request on the REST service, meaning that the item should be updated.
 
-![checklist-update](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/checklist-update.png)
+![checklist-update](./images/checklist-update.png)
 
 You can also add new items. This will execute the same POST request we used earlier in this tutorial.
 
-![checklist-add](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/checklist-add.png)
+![checklist-add](./images/checklist-add.png)
 
 And finally, after removing the item, a DELETE request will be sent to our REST service.
 
-![delete-item](content/posts/2014/2014-12-20-prototyping-spring-boot-angularjs/images/delete-item.png)
+![delete-item](./images/delete-item.png)
 
 #### Achievement: Rapid prototyping with Spring Boot and AngularJS
 

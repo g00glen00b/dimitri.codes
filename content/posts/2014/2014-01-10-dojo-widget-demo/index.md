@@ -163,21 +163,21 @@ The next thing we need is the **dojo/parser** module. This module is actually re
 
 We finally finished our application and we can go and test it out. Just open your browser and open your **index.html** file and you should see something similar as in the screenshot below.
 
-![stopwatches](content/posts/2014/2014-01-10-dojo-widget-demo/images/stopwatches.png)
+![stopwatches](./images/stopwatches.png)
 
 As you can see, they're both on the same line thanks to the **dijitInline** class. If you open up your inspector or develoer tools (usually **F12**), you will see that it replaced `${baseClass}` and gave your widget an `id` and `widgetid` attribute similar to your `declaredClass`.
 
-![inspector](content/posts/2014/2014-01-10-dojo-widget-demo/images/inspector.png)
+![inspector](./images/inspector.png)
 
 Finally we can start playing around with our widgets. You will notice that the second one only updates every second as we defined. But be aware, because our operations take time as well, you will see that it takes a bit longer than 1 second. it will actually try to run the code as soon as the interval is over. If you clicked the start button, you will see that the label of our button changed to **Stop** and that it looks pressed now (it's toggled on). If we click on the **Stop** button, you will notice that it enables the **Reset** button, giving you the option to resume or to reset and start over.
 
-![stop](content/posts/2014/2014-01-10-dojo-widget-demo/images/stop.png)
+![stop](./images/stop.png)
 
  
 
 If you change the locale/language of your browser, you can see that in other languages the widget will show other labels thanks to the **dojo/i18n** plugin.
 
-![i18n](content/posts/2014/2014-01-10-dojo-widget-demo/images/i18n.png)
+![i18n](./images/i18n.png)
 
 #### Achievement: Tutorial finished
 

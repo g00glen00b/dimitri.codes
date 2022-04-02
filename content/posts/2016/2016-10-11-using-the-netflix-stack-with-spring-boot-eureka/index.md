@@ -46,11 +46,11 @@ Now, most of the questions we introduced at the start of this article are solved
 
 Now that we know what Eureka is, it's time to combine the powers of Spring and Netflix!
 
-![netfix-spring-boot](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/netfix-spring-boot.png)
+![netfix-spring-boot](./images/netfix-spring-boot.png)
 
 Let's open the [Spring Initializr](http://start.spring.io/) and create a project with the **Eureka Server** dependency and import it in your IDE.
 
-![Screenshot 2016-08-13 15.12.56](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/Screenshot-2016-08-13-15.12.56.png)
+![Screenshot 2016-08-13 15.12.56](./images/Screenshot-2016-08-13-15.12.56.png)
 
 Open the main class and add the `@EnableEurekaServer` annotation to it, like this:
 
@@ -91,7 +91,7 @@ eureka:
 
 Now, if we run this application now and go to [http://localhost:8761](http://localhost:8761), you'll see there's something there already.
 
-![Screenshot 2016-08-13 15.26.49](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/Screenshot-2016-08-13-15.26.49.png)
+![Screenshot 2016-08-13 15.26.49](./images/Screenshot-2016-08-13-15.26.49.png)
 
 Well, that is our service registry dashboard, up & running, without much trouble.
 
@@ -99,7 +99,7 @@ Well, that is our service registry dashboard, up & running, without much trouble
 
 Now, a service registry without a service is obviously not really useful at all. So, let's create another project with the [Spring Initializr](http://start.spring.io/), but this time add the dependencies **Web**, **Eureka Discovery**, **JPA**, **MySQL** and **Actuator**. Did I already tell you how much I like the Spring Initializr? It feels like I'm shopping in a developer world "Let's have this, and that, and that as well..".
 
-![Screenshot 2016-08-13 15.46.57](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/Screenshot-2016-08-13-15.46.57.png)
+![Screenshot 2016-08-13 15.46.57](./images/Screenshot-2016-08-13-15.46.57.png)
 
 Now, import this project in your IDE as well, and let's get started!
 
@@ -285,7 +285,7 @@ INSERT INTO task (task, completed) VALUES
 
 Now that we have that, it's time to run our application. If you go to [http://localhost:8080/api/tasks](http://localhost:8080/api/tasks), you'll see that your REST API is working fine.
 
-![Screenshot 2016-08-13 16.05.58](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/Screenshot-2016-08-13-16.05.58.png)
+![Screenshot 2016-08-13 16.05.58](./images/Screenshot-2016-08-13-16.05.58.png)
 
 ### Registering your service with Eureka
 
@@ -333,13 +333,13 @@ As you can see, we gave the application a name (task-service) and provided detai
 
 Now, if you run the application again and go back to the Eureka dashboard ([http://localhost:8761/](http://localhost:8761/)), you'll see that our new REST service is now registered:
 
-![Screenshot 2016-08-13 16.19.05](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/Screenshot-2016-08-13-16.19.05.png)
+![Screenshot 2016-08-13 16.19.05](./images/Screenshot-2016-08-13-16.19.05.png)
 
 Now, if we stop the service, you'll see that the task service is unregistered, so any client using Eureka will not use a service that is no longer existing.
 
 If you run the application twice, but using a different port you'll see that Eureka registers both instances.
 
-![Screenshot 2016-08-13 16.21.35](content/posts/2016/2016-10-11-using-the-netflix-stack-with-spring-boot-eureka/images/Screenshot-2016-08-13-16.21.35.png)
+![Screenshot 2016-08-13 16.21.35](./images/Screenshot-2016-08-13-16.21.35.png)
 
 This is already quite nice, since we now have a single dashboard showing what microservices there are and where they are running. You can also provide additional metadata with your application, which can be useful if you're using Swagger for example and you want to add the location to the Swagger tester to the metadata of your microservice.
 

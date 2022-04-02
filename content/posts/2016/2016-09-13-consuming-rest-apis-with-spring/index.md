@@ -231,11 +231,11 @@ server:
 
 Now run both applications and go to [http://localhost:8081](http://localhost:8081). You'll see that both our dummy tasks are visible:
 
-![tasks-overview](content/posts/2016/2016-09-13-consuming-rest-apis-with-spring/images/tasks-overview.png)
+![tasks-overview](./images/tasks-overview.png)
 
 Now, if you enter a description and add a task you'll see that the application will reload and that the new task is now visible:
 
-![after-add-task](content/posts/2016/2016-09-13-consuming-rest-apis-with-spring/images/after-add-task.png)
+![after-add-task](./images/after-add-task.png)
 
 Similarly, we can update a task by checking its checkbox. The application will reload as well and you'll see that the checkbox remains checked. If you're not convinced, try closing and opening the tab again. The checkbox should stay in the same state as you left it.
 
@@ -245,7 +245,7 @@ Deleting the task should work properly as well, which should remove the task fro
 
 However, what we didn't do is to handle input validation. If you remember our previous tutorial, we used some input validation on the description field. The question is, what will happen now since we didn't implement it?
 
-![Screenshot 2016-06-05 19.29.56](content/posts/2016/2016-09-13-consuming-rest-apis-with-spring/images/Screenshot-2016-06-05-19.29.56.png)
+![Screenshot 2016-06-05 19.29.56](./images/Screenshot-2016-06-05-19.29.56.png)
 
 We get the default error page of Spring boot (Whitelabel error page). The reason for this is that when the REST call fails, the `RestTemplate` will throw a `HttpClientErrorException`, which we didn't handle yet. To do that, we have to go back to the `TaskController` and add an exception handler by using the `@ExceptionHandler` annotation:
 
@@ -316,7 +316,7 @@ Now all we have to do is to do something when the error model is not null. To do
 
 Now, if we run the application again and don't enter a description, you'll see that the error message from the backend is successfully forwarded to the end user.
 
-![Screenshot 2016-06-05 20.26.45](content/posts/2016/2016-09-13-consuming-rest-apis-with-spring/images/Screenshot-2016-06-05-20.26.45.png)
+![Screenshot 2016-06-05 20.26.45](./images/Screenshot-2016-06-05-20.26.45.png)
 
 ### Conclusion
 

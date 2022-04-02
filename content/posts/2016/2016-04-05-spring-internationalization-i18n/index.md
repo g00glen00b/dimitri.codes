@@ -12,7 +12,7 @@ When developing applications, it can be interesting to put labels in a separate 
 
 I'm going to start with a simple Spring boot project, so open [start.spring.io](http://start.spring.io). Enter the project metadata, and as dependencies you choose **Web** and **Thymeleaf**. Once done, press the big **Generate project** button, unzip the archive and import it in your IDE. Well done, your project is set up!
 
-![spring-initializr](content/posts/2016/2016-04-05-spring-internationalization-i18n/images/spring-initializr.png)
+![spring-initializr](./images/spring-initializr.png)
 
 ### Creating a simple webpage
 
@@ -79,7 +79,7 @@ As you can see here, we're using the Thymeleaf `th:text` attribute, containing a
 
 Now, if we run the application, we should see something like this:
 
-![first-demo](content/posts/2016/2016-04-05-spring-internationalization-i18n/images/first-demo.png)
+![first-demo](./images/first-demo.png)
 
 ### Internationalization
 
@@ -133,13 +133,13 @@ label.mostAwesomeWebsite=De beste website
 
 If you now run the application again, and you make sure that you're using the correct language settings in your browser to see the different language, you'll see that it is now translated.
 
-![language-settings](content/posts/2016/2016-04-05-spring-internationalization-i18n/images/language-settings.png)
+![language-settings](./images/language-settings.png)
 
 ### Using internationalization in your code
 
 There is one issue though, the programmatically defined message is still not translated.
 
-![demo-nl](content/posts/2016/2016-04-05-spring-internationalization-i18n/images/demo-nl.png)
+![demo-nl](./images/demo-nl.png)
 
 Obviously, the most easy way to fix that is to move the message (except the website) to the HTML template as well. However, sometimes you need to provide translated messages programmatically as well, for example when showing error messages. So, let's see how you could fix that as well.
 
@@ -174,7 +174,7 @@ Now, the next part is that we use the `messageSource` to obtain the message with
 
 If you run the example again, you'll see that it is now properly translated.
 
-![demo-full-nl](content/posts/2016/2016-04-05-spring-internationalization-i18n/images/demo-full-nl.png)
+![demo-full-nl](./images/demo-full-nl.png)
 
 ### Using parameters in Thymeleaf
 

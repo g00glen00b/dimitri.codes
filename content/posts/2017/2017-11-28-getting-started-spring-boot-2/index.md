@@ -16,7 +16,7 @@ Just like last year, Josh Long's second favourite place on the internet is still
 - **Reactive MongoDB**: According to Josh Long, it's the best way to lose your data in a reactive way, but this is one of the few options if you want to utilize reactive programming at the persistence layer (the alternatives being Cassandra and Redis)
 - **Lombok**: You don't need this, but this allows you to get more done with less boilerplate code (think about constructors, getters, setters, ...).
 
-![Spring initializr](content/posts/2017/2017-11-28-getting-started-spring-boot-2/images/Screenshot-2017-11-25-21.02.12.png)
+![Spring initializr](./images/Screenshot-2017-11-25-21.02.12.png)
 
 In this article, I'll be writing a web crawler (because why not?), so I'll also manually add the [**JSoup** library](https://jsoup.org/) afterwards to be able to parse webpages:
 
@@ -42,7 +42,7 @@ There are various reactive programming libraries, such as [Vert.X](http://vertx.
 - **Subscriber**: A subscriber can subscribe to a `Publisher`, which allows it to receive the data.
 - **Operator**: If you could only publish/subscribe, the world would be quite boring. Additionally to that, you can also apply operators to a publisher, such as `map()`, `filter()`, ... . Most of these should be familiar if you're into functional programming.
 
-![Overview of the reactive concepts](content/posts/2017/2017-11-28-getting-started-spring-boot-2/images/pubsub.png)
+![Overview of the reactive concepts](./images/pubsub.png)
 
 #### What is the difference between Java 8 streams and publishers/subscribers
 
@@ -126,7 +126,7 @@ Obviously it doesn't stop here, your entire codebase could benefit from working 
 
 Basically, the web crawler will start by retrieving the content of an initial webpage (the seed), it will store the content, and then it will crawl again, using the hyperlinks on the page.
 
-![Architecture schema](content/posts/2017/2017-11-28-getting-started-spring-boot-2/images/crawler.png)
+![Architecture schema](./images/crawler.png)
 
 You may realize that this is likely going to end up to be an infinite loop, considering that webpages are often links to several other webpages, which in turn are also linked... . That's why we also need to limit it somehow by providing a maximum depth and also keeping track of the depth when we crawl. To keep track of the depth I'll be using a class called `CrawlerCommand`:
 
@@ -259,7 +259,7 @@ Using the `repository.saveAll()` function we can save the results we retrieved. 
 
 Finally, we subscribe to the `repository.saveAll()` function, because reactive code will only work as soon as a subscriber is registered. With that, our flow is complete and we can start to run our application. But first, here's an overview of the flow:
 
-![Complete schema](content/posts/2017/2017-11-28-getting-started-spring-boot-2/images/Untitled-Diagram.png)
+![Complete schema](./images/Untitled-Diagram.png)
 
 ### Running the application
 
@@ -279,11 +279,11 @@ If we run the application now, we can start to see it shine:
 
 From the logs, you can see that every step is running in its own thread. If you look at the threads in a tool like JVisualVM, you can see that every tasks runs on a thread and is only running for a while until it is parked again. This means that we aren't waiting for a proper response, we're just parking the thread and picking it up once we have the result.
 
-![Thread diagram](content/posts/2017/2017-11-28-getting-started-spring-boot-2/images/Screenshot-2017-11-27-11.17.21.png)
+![Thread diagram](./images/Screenshot-2017-11-27-11.17.21.png)
 
 If we make a call to the endpoint we defined, for example: [http://localhost:8080/api/webpage?search=angular](http://localhost:8080/api/webpage?search=angular), we can see that we have a working application:
 
-![JSON response](content/posts/2017/2017-11-28-getting-started-spring-boot-2/images/Screenshot-2017-11-27-11.43.48.png)
+![JSON response](./images/Screenshot-2017-11-27-11.43.48.png)
 
 And there you have it, a reactive application with Spring boot 2.0!
 

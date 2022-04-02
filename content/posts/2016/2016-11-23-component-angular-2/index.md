@@ -166,7 +166,7 @@ Replace your previous template with the following:
 
 If we run the application now, you'll see that it shows the first twenty pokémons now in a list:
 
-![pokemon-ul-li](content/posts/2016/2016-11-23-component-angular-2/images/pokemon-ul-li.png)
+![pokemon-ul-li](./images/pokemon-ul-li.png)
 
 If you're wondering why I'm adding a question mark between `pokemon?.name`, well, that's because this will make sure that if `pokemon` is `null` or `undefined` that it will not throw any errors because it can't find the `name` property. This is what we call the **elvis operator**, so if you need to google it one day, there you go! The reason behind this name is that if you looks closely, it looks a bit like Elvis' haircut.
 
@@ -188,7 +188,7 @@ Now change the **pokemon-list.component.html** template to this:
 
 If you open the application now, you'll see that it looks completely different now:
 
-![pokemon-list-material](content/posts/2016/2016-11-23-component-angular-2/images/pokemon-list-material.png)
+![pokemon-list-material](./images/pokemon-list-material.png)
 
 ### Property binding
 
@@ -230,7 +230,7 @@ However, because it's overkill to have only one card on every row, I'm also goin
 
 Except adding the grid I also had to move the `*ngFor` from my card to a grid column, because we will be repeating the column rather than the card itself. If you run the application now, you get something that's looking pretty good already:
 
-![pokemon-list-card-grid](content/posts/2016/2016-11-23-component-angular-2/images/pokemon-list-card-grid.png)
+![pokemon-list-card-grid](./images/pokemon-list-card-grid.png)
 
 ### Creating smaller components
 

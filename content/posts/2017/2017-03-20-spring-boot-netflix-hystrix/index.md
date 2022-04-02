@@ -16,7 +16,7 @@ Hystrix does more than that though. It allows you to configure many things, such
 
 In this project I will work upon the [Eureka example](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-eureka) I made earlier. I'll re-use both the service registry and the service itself. However, for the client project I will use a complete new project with several dependencies such as **Web**, **Eureka Discovery**, **Thymeleaf**, **Hystrix**, **Hystrix Dashboard**, **Cache** and **Actuator**.
 
-![spring-initializr-hystrix](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/spring-initializr-hystrix.png)
+![spring-initializr-hystrix](./images/spring-initializr-hystrix.png)
 
 After opening the project it's time to create a basic application up and running.
 
@@ -199,7 +199,7 @@ public class TaskController {
 
 So, if we run the application now (and the Eureka registry and the task service as well), you'll see that it properly works.
 
-![example-application](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/example-application.png)
+![example-application](./images/example-application.png)
 
 However, what happens when the REST API becomes unresponsive? To test this behaviour out by yourself add a breakpoint in your service and keep it there for a while. Currently, the application will keep loading, however we can fix that by configuring some timeouts to the `RestTemplate`:
 
@@ -221,7 +221,7 @@ public ClientHttpRequestFactory clientHttpRequestFactory() {
 
 If we would run the application now and wait 5 seconds, we get the default error page:
 
-![connection-timeout](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/connection-timeout.png)
+![connection-timeout](./images/connection-timeout.png)
 
 However, it's not really a nice solution. Users visiting your application will have to wait 5 seconds to get served an error page. But what if we could improve that by using Hystrix?
 
@@ -258,7 +258,7 @@ public TaskDTO[] findAllFallback() {
 
 So, if we run the application again and make it time out again, we'll see a completely different result. The application shows us our dummy task now, rather than showing us an error page.
 
-![dummy-result](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/dummy-result.png)
+![dummy-result](./images/dummy-result.png)
 
 So, this means the Hystrix fallback is executed quite nicely, but it's very hard to see what's happening under the hood, so it's time to add the Hystrix dashboard to the application and finetune the Hystrix command a bit.
 
@@ -296,19 +296,19 @@ Now, restart the application and next to opening the application, open the Hystr
 
 Once opened, you should see something like this:
 
-![hystrix-monitor](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/hystrix-monitor.png)
+![hystrix-monitor](./images/hystrix-monitor.png)
 
 Now, let's see what happens if we open the application again without setting any breakpoints. If we refresh a few times we see that the Hystrix monitor shows us that there were a few successfully loaded requests.
 
-![hystrix-dashboard-success](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/hystrix-dashboard-success.png)
+![hystrix-dashboard-success](./images/hystrix-dashboard-success.png)
 
 The important thing to notice here is that the error count is still zero and that the circuit itself is closed. Now, if we make the requests fail (by either adding a breakpoint or by completely turning off the REST service), you'll see the error count go up:
 
-![hystrix-dashboard-fail](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/hystrix-dashboard-fail.png)
+![hystrix-dashboard-fail](./images/hystrix-dashboard-fail.png)
 
 Even though we received an error, we can see that the circuit is still closed. However, when we send a few more failed requests, you'll see that the circuit goes open.
 
-![hystrix-dashboard-error-open](content/posts/2017/2017-03-20-spring-boot-netflix-hystrix/images/hystrix-dashboard-error-open.png)
+![hystrix-dashboard-error-open](./images/hystrix-dashboard-error-open.png)
 
 When the circuit goes open, it means that by default all traffic will directly go to the fallback method rather than trying on the original method first. This allows the REST service to restore itself if it was getting too much traffic. You can notice this by taking a look at the log when the circuit is open. Normally you should see a log entry for each call, but when the circuit is open this will not happen.
 

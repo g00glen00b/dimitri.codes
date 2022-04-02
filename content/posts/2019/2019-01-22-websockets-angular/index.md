@@ -289,7 +289,7 @@ export class PostListingPageComponent implements OnInit {
 
 That's all you really need to make this work. All that's left is to properly render them within the template, and to apply some routing and CSS. The result could eventually look like the one in the screenshot below.
 
-![Screenshot of the post list component](content/posts/2019/2019-01-22-websockets-angular/images/Screenshot-2018-08-26-10.42.52.png)
+![Screenshot of the post list component](./images/Screenshot-2018-08-26-10.42.52.png)
 
 ### Creating new posts
 
@@ -381,7 +381,7 @@ Within this component we're using reactive forms to provide some validations, an
 
 After this, we can now successfully create new posts using WebSockets.
 
-![Screenshot of the new post page](content/posts/2019/2019-01-22-websockets-angular/images/Screenshot-2018-08-26-10.53.07.png)
+![Screenshot of the new post page](./images/Screenshot-2018-08-26-10.53.07.png)
 
 ### Unlocking the full power of WebSockets
 
@@ -520,6 +520,6 @@ And the template:
 
 Now, that's all you need. To test it out, you could change the author ID within the `CreatePostPageComponent` to a value that doesn't exist (anything except 1 or 2). If you add the component to your application, and apply some CSS, it could look like this when you're trying to add a new post:
 
-![Screenshot of the error message](content/posts/2019/2019-01-22-websockets-angular/images/Screenshot-2018-08-26-11.47.54.png)
+![Screenshot of the error message](./images/Screenshot-2018-08-26-11.47.54.png)
 
 And with this, I'm going to wrap up this tutorial. As usual, the full code can be found on [GitHub](https://github.com/g00glen00b/spring-boot-angular-websockets/tree/master/angular-websockets-client).

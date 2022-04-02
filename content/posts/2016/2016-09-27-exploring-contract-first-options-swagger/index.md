@@ -265,11 +265,11 @@ public void apiMatchesDefinition() throws IOException {
 
 If you run this test, it will launch the application, compare the Swagger definitions and that's it. Normally, this test should already succeed:
 
-![test-success](content/posts/2016/2016-09-27-exploring-contract-first-options-swagger/images/test-success.png)
+![test-success](./images/test-success.png)
 
 However, if we change the code a bit, for example by adding another property to `TaskDTO`, you'll see that the test fails:
 
-![test-fail](content/posts/2016/2016-09-27-exploring-contract-first-options-swagger/images/test-fail.png)
+![test-fail](./images/test-fail.png)
 
 It should throw the following error:
 

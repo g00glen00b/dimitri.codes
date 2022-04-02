@@ -40,7 +40,7 @@ aws configure
 
 When doing so, the CLI will ask for your access key and secret. If you don't have an access key yet, then log in onto [AWS](https://console.aws.amazon.com/console/home), go to IAM, select your user and go to **Security credentials**. Over there, you can generate a new access key and secret (or revoke the ones you don't need).
 
-![AWS Access keys](content/posts/2021/2021-08-03-setting-up-kubernetes-aws/images/aws-iam-security-credentials.png)
+![AWS Access keys](./images/aws-iam-security-credentials.png)
 
 After completing the `aws configure` prompt, you'll be able to find a folder called **.aws** within your home directory, which contains a **credentials** file.
 
@@ -184,7 +184,7 @@ kubectl proxy
 
 By doing so, you can now connect to the cluster by going to localhost. For example, the Kubernetes dashboard can be accessed from [this link](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login). However, when you do so, you will be presented with a login screen:
 
-![Login screen on Kubernetes dashboard](content/posts/2021/2021-08-03-setting-up-kubernetes-aws/images/dashboard-login.png)
+![Login screen on Kubernetes dashboard](./images/dashboard-login.png)
 
 To log in, we have to obtain a token for our "dashboard-admin" user. This can be done by executing the following command:
 
@@ -194,7 +194,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 Now you can go back to the login screen, select token and paste the bearer token. Once signed in, you should be presented with the Kubernetes dashboard.
 
-![Overview of the Kubernetes dashboard](content/posts/2021/2021-08-03-setting-up-kubernetes-aws/images/dashboard-overview.png)
+![Overview of the Kubernetes dashboard](./images/dashboard-overview.png)
 
 ### Giving others access to kubectl
 
