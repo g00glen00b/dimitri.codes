@@ -15,10 +15,10 @@ exports.feedItemQuery = `{
       excerpt(format: PLAIN)
       fields {
         slug
+        postDate
       }
       frontmatter {
         title
-        date
       }
     }
   }
@@ -29,7 +29,7 @@ exports.feedItemQuery = `{
 exports.getFeedItem = (site, node) => ({
   description: node.excerpt,
   title: node.frontmatter.title,
-  date: node.frontmatter.date,
+  date: node.fields.postDate,
   url: `${site.siteMetadata.siteUrl}/${node.fields.slug}`,
   guid: `${site.siteMetadata.siteUrl}/${node.fields.slug}`
 });
