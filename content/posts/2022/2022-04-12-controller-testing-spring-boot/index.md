@@ -30,8 +30,6 @@ class UserController {
 We could write a unit test like this:
 
 ```java
-import jdk.jfr.StackTrace;
-
 @ExtendsWith(MockitoExtension.class)
 class UserControllerTest {
     @InjectMocks
@@ -45,7 +43,13 @@ class UserControllerTest {
         var request = new CreateUserRequestDTO('me@example.org', 'Dimitri', 'password123');
         when(facade.createUser(any())).thenReturn(dto);
         
-        
+        var result = controller.createUser(request);
+        assertThat(result).isSameAs(dto);
+        verify(facade).createUser(request);
     }
 }
 ```
+
+While a test like this would be better than having no test at all, there is one problem with this test.
+These tests do not verify whether the right HTTP method is used, whether the parameters are correctly passed and whether the correct HTTP status is returned.
+
