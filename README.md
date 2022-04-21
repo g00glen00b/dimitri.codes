@@ -10,7 +10,6 @@ To get started with this project, you have to configure an `.env.development` fi
 
 ```env
 SITE_URL=
-GOOGLE_TRACKING_ID=
 REPO_URL=
 ```
 
@@ -18,7 +17,6 @@ For example:
 
 ```env
 SITE_URL=https://my-gatsby-site.com
-GOOGLE_TRACKING_ID=UA-123456-78
 REPO_URL=g00glen00b/dimitr.im
 ```
 
