@@ -127,11 +127,15 @@ public interface MarvelCharacterRepository extends JpaRepository<MarvelCharacter
 Once that's done, we'll implement our service method:
 
 ```java
+// Create a Specification<MarvelCharacter>
 Specification<MarvelCharacter> specification = Specification
     // firstName from parameter
     .where(firstName == null ? null : firstNameContains(firstName))
     // lastName from parameter
     .and(lastName == null ? null : lastNameContains(lastName));
+    
+// Call repository.findAll()
+List<MarvelCharacter> characters = repository.findAll(specification);
 ```
 
 The nice thing with the Specification API is that we can properly chain these specifications using the `and()` and `or()` method. Additionally, `null` values are filtered out, so if we return `null` in stead of our actual specification, we can properly filter these depending on the input values. This means that if `firstName` is `null`, we won't filter by `firstNameContains()`.
