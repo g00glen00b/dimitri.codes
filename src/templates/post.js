@@ -28,6 +28,9 @@ const Post = ({data: {markdownRemark}}) => {
           featuredImage={markdownRemark.frontmatter.featuredImage}
           tags={markdownRemark.fields.tags}/>
         }
+        <!-- Ezoic - under_page_title - under_page_title -->
+        <div id="ezoic-pub-ad-placeholder-101"> </div>
+        <!-- End Ezoic - under_page_title - under_page_title -->
         {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
         <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
         {isCommentsDisabled || <Comments/>}
