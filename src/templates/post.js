@@ -33,6 +33,9 @@ const Post = ({data: {markdownRemark}}) => {
         <!-- End Ezoic - under_page_title - under_page_title -->
         {isPage && <h1>{markdownRemark.frontmatter.title}</h1>}
         <div dangerouslySetInnerHTML={{__html: markdownRemark.html}}/>
+        <!-- Ezoic - bottom_of_page - bottom_of_page -->
+        <div id="ezoic-pub-ad-placeholder-102"> </div>
+        <!-- End Ezoic - bottom_of_page - bottom_of_page -->
         {isCommentsDisabled || <Comments/>}
       </Layout>
     );
