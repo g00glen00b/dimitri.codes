@@ -139,7 +139,7 @@ This method will scale a `BufferedImage` to a proper maximum width and height (i
 
 ### Determining the location on the filesystem
 
-Since we're going to write to the filesystme, we also need to provide a proper location.
+Since we're going to write to the filesystem, we also need to provide a proper location.
 In this case, I want to write files to a folder relative to the application.
 To do that, I'm going to autowire the `ResourceLoader` into our resolver:
 
