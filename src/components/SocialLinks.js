@@ -14,6 +14,14 @@ export const SocialLinks = ({socialNetworks}) => (
       title="Twitter">
       <FaTwitter size={24}/>
     </OutboundLink>}
+    {socialNetworks.mastodon && <OutboundLink
+      className="social-link"
+      href={`https://mastodon.cloud/@${socialNetworks.mastodon}`}
+      target="_blank"
+      rel="me noopener noreferrer"
+      title="Mastodon">
+      <FaMastodon size={24}/>
+    </OutboundLink>}
     {socialNetworks.github && <OutboundLink
       className="social-link"
       href={`https://github.com/${socialNetworks.github}`}
@@ -44,6 +52,7 @@ export const SocialLinks = ({socialNetworks}) => (
 SocialLinks.propTypes = {
   socialNetworks: PropTypes.shape({
     twitter: PropTypes.string,
+    mastodon: PropTypes.string,
     github: PropTypes.string,
     speakerdeck: PropTypes.string,
     codepen: PropTypes.string
