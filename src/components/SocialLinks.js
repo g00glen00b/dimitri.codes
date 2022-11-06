@@ -1,5 +1,5 @@
 import {OutboundLink} from 'gatsby-plugin-google-analytics';
-import {FaCodepen, FaGithub, FaSpeakerDeck, FaTwitter} from 'react-icons/fa';
+import {FaCodepen, FaGithub, FaSpeakerDeck, FaTwitter, FaMastodon} from 'react-icons/fa';
 import React from 'react';
 import './SocialLinks.css';
 import PropTypes from 'prop-types';
