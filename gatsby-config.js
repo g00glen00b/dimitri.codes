@@ -30,6 +30,7 @@ module.exports = {
     ],
     socialNetworks: {
       github: 'g00glen00b',
+      mastodon: 'g00glen00b',
       codepen: 'g00glen00b',
       twitter: 'g00glen00b',
       speakerdeck: 'g00glen00b'
