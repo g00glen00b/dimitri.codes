@@ -17,6 +17,7 @@ const footerLinksQuery = graphql`
         }
         socialNetworks {
           twitter
+          mastodon
           codepen
           speakerdeck
           github
