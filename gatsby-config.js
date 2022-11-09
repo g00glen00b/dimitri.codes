@@ -142,7 +142,6 @@ module.exports = {
         include_favicon: false
       }
     },
-    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-robots-txt`,
   ],
 };
