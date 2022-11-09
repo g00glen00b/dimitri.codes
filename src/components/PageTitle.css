@@ -9,11 +9,6 @@
   box-shadow: 1rem 1rem 0 0 var(--primary-color);
 }
 
-:root[data-theme=dark] .page-title {
-  border-color: var(--primary-color-lightest);
-  box-shadow: 1rem 1rem 0 0 var(--primary-color-lightest);
-}
-
 .page-title__title {
   font-size: 2rem;
   font-weight: 400;
@@ -37,10 +32,6 @@
   height: 24px;
   margin: 0 0 1rem;
   color: var(--primary-color);
-}
-
-:root[data-theme=dark] .page-title__info dt {
-  color: var(--primary-color-lightest);
 }
 
 .page-title__info dd {

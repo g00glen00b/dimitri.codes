@@ -8,7 +8,7 @@ import {VisitBlogBanner} from '../components/VisitBlogBanner';
 
 const allPostsQuery = graphql`
   query {
-    allMarkdownRemark(sort: {fields: fields___postDate, order: DESC}, limit: 10) {
+    allMarkdownRemark(sort: {fields: {postDate: DESC}}, limit: 10) {
       nodes {
         excerpt(format: PLAIN)
         frontmatter {

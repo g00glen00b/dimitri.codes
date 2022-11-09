@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto 4rem;
+  margin: 1em auto 4rem;
   max-width: var(--container-width);
   padding: 0 1rem;
 }
 
 .header-logo > svg {
-  width: 100px;
+  width: 64px;
   height: auto;
   fill: var(--text-color);
 }
@@ -39,11 +39,5 @@
 
   .header-navigation {
     margin-top: 1.5rem;
-  }
-
-  .header .theme-switch {
-    position: absolute;
-    top: 0.7rem;
-    right: 1.5rem;
   }
 }

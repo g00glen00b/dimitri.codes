@@ -18,16 +18,6 @@ a.excerpt:hover {
   box-shadow: 0 0.3rem 0.8rem 0 #00000020;
 }
 
-:root[data-theme=dark] a.excerpt {
-  box-shadow: 0 0.3rem 0.3rem 0 #00000080;
-  color: var(--text-color);
-}
-
-:root[data-theme=dark] a.excerpt:hover {
-  box-shadow: 0 0.3rem 0.8rem 0 #00000080;
-  color: var(--text-color);
-}
-
 .excerpt-header {
   background-color: var(--primary-color);
   color: var(--text-color-inverse);
@@ -78,8 +68,4 @@ a.excerpt:hover {
   color: var(--tertiary-color-darker);
   display: flex;
   align-items: center;
-}
-
-:root[data-theme=dark] .excerpt-read-more {
-  color: var(--tertiary-color-lighter);
 }

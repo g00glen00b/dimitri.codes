@@ -14,13 +14,6 @@ export default function HTML(props) {
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
-      <script dangerouslySetInnerHTML={{__html: `
-        (function() {
-          var theme = localStorage.getItem('theme');
-          var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', theme || systemTheme);
-        }());
-      `}}/>
         {props.preBodyComponents}
         <div
           key={`body`}

@@ -22,7 +22,7 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $fieldValue: String!) {
-    allMarkdownRemark(sort: {fields: fields___postDate, order: DESC}, skip: $skip, limit: $limit, filter: {frontmatter: {tags: {eq: $fieldValue}}}) {
+    allMarkdownRemark(sort: {fields: {postDate: DESC}}, skip: $skip, limit: $limit, filter: {frontmatter: {tags: {eq: $fieldValue}}}) {
       nodes {
         excerpt(format: PLAIN)
         frontmatter {
