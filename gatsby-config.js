@@ -145,7 +145,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
-        sitemap: `${process.env.SITE_URL}/sitemap.xml`
+        sitemap: `${process.env.SITE_URL}/sitemap-index.xml`
       }
     }
   ],
