@@ -25,7 +25,7 @@ exports.generateImage = async (title, publishDate, minutesRead, tags) => {
     await showImage(context, join('src', 'node', 'social-card', 'assets', 'tag.png'), 80, 420, 48, 48);
     showText(context, tags.join(', '), 150, 458, 680, 30);
   }
-  await showImage(context, join('src', 'node', 'social-card', 'assets', 'logo.png'), 850, 415, 250, 125);
+  await showImage(context, join('src', 'node', 'social-card', 'assets', 'logo-square.png'), 975, 415, 125, 125);
   return canvas.toBuffer('image/png');
 }
 
