@@ -198,13 +198,14 @@ In this case we're using `run build` arguments.
 Now, with those executions implemented, we basically completed the **pom.xml** of our frontend project.
 If we execute `mvn package` within our frontend module, we'll see that a build-folder is being generated.
 
-### Copying the resources
+### Generating a frontend JAR
 
-Now that we generated our build-folder, we can copy those files over to our Spring boot project.
-With Spring boot, we can easily serve any static resource that is put within `classpath:static/` or `classpath:public/`.
-To automate this, we can use the [`maven-resources-plugin`](https://maven.apache.org/plugins/maven-resources-plugin/).
+Now that we have generated the build-folder, we have to somehow serve them by our backend application.
+Spring boot automatically serves files within the `classpath:static/` or `classpath:public/` directory.
 
-So, open **pom.xml** of the backend project, and add the following plugin before the `spring-boot-maven-plugin`:
+To automate this, we can move the resources of the build-folder to a static-folder in our frontend project, and include the frontend-project as a Maven dependency in our backend-project.
+
+To move the resources to the static-folder, I added the following to the **pom.xml** of the **frontend** project:
 
 ```xml
 <plugin>
@@ -213,15 +214,15 @@ So, open **pom.xml** of the backend project, and add the following plugin before
     <executions>
         <execution>
             <id>copy-resources</id>
-            <phase>generate-resources</phase>
+            <phase>process-classes</phase>
             <goals>
                 <goal>copy-resources</goal>
             </goals>
             <configuration>
-                <outputDirectory>${basedir}/target/classes/static</outputDirectory>
+                <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                 <resources>
                     <resource>
-                        <directory>${basedir}/../my-project-frontend/build</directory>
+                        <directory>${basedir}/build/</directory>
                         <filtering>false</filtering>
                     </resource>
                 </resources>
@@ -231,33 +232,76 @@ So, open **pom.xml** of the backend project, and add the following plugin before
 </plugin>
 ```
 
-What's important to notice here, is that we're not copying to **src/main/resources/static** as you would do for resources that you created by yourself.
-In stead of that, we're copying the files to the **target/classes/static** folder. 
-This has the same effect, but doesn't affect your source code.
+If we generate our JAR now, there should be a "static" folder in the **target/classes** folder of our frontend-project.
+
+![Project structure with target/classes containing a static-folder](./images/copied-resources.png)
+
+Now we only have to add the frontend-module as a dependency to our backend-project.
+This can be done by opening the **pom.xml** of our backend-project and adding:
+
+````xml
+<dependency>
+    <groupId>be.g00glen00b.apps</groupId>
+    <artifactId>my-project-frontend</artifactId>
+    <version>${project.version}</version>
+</dependency>
+````
 
 ### Fixing routing
 
 With the `maven-resources-plugin` configured, we are basically done with bundling our backend and frontend together.
 One thing you still want to configure is to redirect all calls back to `/index.html`. 
-This is necessary to make history pushstate routing work when refreshing the page.
+This is necessary to make [history pushstate routing](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) work when refreshing the page.
 
 There are several ways to implement this, as mentioned on [this Stack Overflow post](https://stackoverflow.com/questions/44692781/configure-spring-boot-to-redirect-404-to-a-single-page-app).
 
-I personally chose to add custom view controllers for all paths, excluding `/api/**` calls since they have to end up within their respective backend controller.
-
-To do that, I added the following configuration:
+Personally, I prefer writing a filter like this:
 
 ```java
-@Configuration
-public class WebConfig implements WebMvcConfigurer {
+@Component
+public class NotFoundIndexFilter extends OncePerRequestFilter {
+    private final String contextPath;
+
+    public NotFoundIndexFilter(@Value("${server.servlet.context-path:}") String contextPath) {
+        this.contextPath = contextPath;
+    }
+
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/index.html");
-        registry.addViewController("/{x:[\\w\\-]+}").setViewName("forward:/index.html");
-        registry.addViewController("/{x:^(?!api$).*$}/**/{y:[\\w\\-]+}").setViewName("forward:/index.html");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (isHtmlRequest(request) && !isAPI(request)) {
+            HttpServletRequestWrapper wrapper = new HttpServletRequestWrapper(request) {
+                @Override
+                public String getRequestURI() {
+                    return contextPath + "/index.html";
+                }
+            };
+            filterChain.doFilter(wrapper, response);
+        } else {
+            filterChain.doFilter(request, response);
+        }
+    }
+
+    private boolean isHtmlRequest(HttpServletRequest request) {
+        String acceptHeader = request.getHeader("Accept");
+        return acceptHeader != null && acceptHeader.contains(MediaType.TEXT_HTML_VALUE);
+    }
+
+    private boolean isAPI(HttpServletRequest request) {
+        return request.getRequestURI().startsWith(contextPath + "/api");
     }
 }
 ```
+
+The way this works is that on each request, this filter is invoked.
+
+If the request contains text/html as a mediatype (see `isHtmlRequest()`), we know that it likely is a request for our frontend.
+In that case, I wrap the original request and override the `getRequestURI()` method to return **index.html**.
+By doing so, Spring will now "think" that it should handle a request to index.html, and returns the proper HTML page.
+
+If the request isn't an HTML-request, the request isn't mutated and the original flow is followed.
+
+I also included an `isAPI()` check so that if we have any HTML-related API, the request isn't rerouted either.
+You can expand this further (for example if you use Spring Boot Actuator you may want to include an `isActuator()` method as well).
 
 ### Conclusion
 
@@ -286,3 +330,5 @@ On the other hand, we do win a lot of time by not having to worry about how to b
 And finally, even if our approach doesn't end up to be the right solution, refactoring it won't be difficult.
 
 If you're interested in a complete example, you can find one on [GitHub](https://github.com/g00glen00b/medication-assistant).
+This project was originally written with Spring Boot + React but I later refactored it to Spring Boot + Angular.
+The principles behind it are still the same though.
