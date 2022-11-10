@@ -9,6 +9,24 @@ excerpt: "I recently upgraded my project to Spring Boot 3.0, here's my experienc
 I recently upgraded my [latest project](https://github.com/g00glen00b/medication-assistant) to Spring Boot 3.0 (RC1).
 In this tutorial I will cover the changes I made to my application.
 
+## Contents
+
+1. [General changes](#general-changes)
+   1. [Upgrade to Java 17](#upgrade-to-java-17)
+   2. [Upgrade to Jakarta EE 9](#upgrade-to-jakarta-ee-9)
+   3. [Changes in application properties processing](#changes-in-application-properties-processing)
+2. [Changes to Spring Web](#changes-to-spring-web)
+   1. [Removal of `AntPathMatcher`](#removal-of-antpathmatcher)
+3. [Changes to Spring Security](#changes-to-spring-security)
+   1. [Removal of `WebSecurityConfigurerAdapter`](#removal-of-websecurityconfigureradapter)
+   2. [Use `requestMatchers`  instead of `antMatchers](#use-requestmatchers-in-stead-of-antmatchers)
+   3. [Use `@EnableMethodSecurity` in stead of `@EnableGlobalMethodSecurity`](#use-enablemethodsecurity-in-stead-of-enableglobalmethodsecurity)
+4. [Changes to Spring Batch](#changes-to-spring-batch)
+   1. [Deprecation of factories](#deprecation-of-factories)
+   2. [Changes in `chunk()` builder](#changes-in-chunk-builder)
+   3. [Changes in `ItemWriter`](#changes-in-itemwriter)
+5. [Conclusion](#conclusion)
+
 ## General changes
 
 ### Upgrade to Java 17
@@ -230,3 +248,12 @@ public class MedicationAvailabilityNotificationWriter<T> implements ItemWriter<T
     }
 }
 ```
+
+## Conclusion
+
+If your project is already on Spring Boot 2.7 and Java 17 and you're not using deprecated or legacy features, the upgrade to Spring Boot 3.0 should be fairly simple.
+In that case, the major difference is to rename all imports, which can be done with a global find-and-replace.
+
+The only two API changes I encountered were the change in Spring Batch's `ItemWriter` and Spring Security's `antMatcher`.
+The complete changes can be found in [this commit](https://github.com/g00glen00b/medication-assistant/commit/88a8e0d8b182e7629fd2de1ebbb9946bd288168a).
+Sidenote: I also replaced the Moduliths library by the new experimental Spring Modulith library (later more about that).
