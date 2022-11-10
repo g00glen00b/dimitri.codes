@@ -1,14 +1,13 @@
 import React from "react"
 import {graphql} from "gatsby"
-import {Seo} from '../components/Seo';
 import {Layout} from '../components/Layout';
 import {Pagination} from '../components/Pagination';
 import {PostCardContainer} from '../components/PostCardContainer';
 import PropTypes from 'prop-types';
+import {Seo} from "../components/Seo";
 
 const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
   <Layout>
-    <Seo title={pageContext.fieldValue}/>
     <h1 className="page__title">
       Posts within the <strong>{pageContext.fieldValue}</strong> category
     </h1>
@@ -22,6 +21,17 @@ const Posts = ({data: {allMarkdownRemark}, pageContext}) => (
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $fieldValue: String!) {
+    file(relativePath: {eq: "logo-square.png"}) {
+      publicURL
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        siteUrl
+      }
+    }
     allMarkdownRemark(sort: {fields: {postDate: DESC}}, skip: $skip, limit: $limit, filter: {frontmatter: {categories: {eq: $fieldValue}}}) {
       nodes {
         excerpt(format: PLAIN)
@@ -78,3 +88,15 @@ Posts.propTypes = {
 };
 
 export default Posts;
+
+export const Head = ({location: {pathname}, data: {file, site}, pageContext}) => (
+  <Seo
+    siteUrl={site.siteMetadata.siteUrl}
+    description={site.siteMetadata.description}
+    imageUrl={file.publicURL}
+    author={site.siteMetadata.author}
+    iconUrl={file.publicURL}
+    title={pageContext.fieldValue}
+    siteTitle={site.siteMetadata.title}
+    path={pathname} />
+);

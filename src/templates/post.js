@@ -1,26 +1,16 @@
 import React from 'react';
 import {graphql} from 'gatsby';
-import {Seo} from '../components/Seo';
 import {Layout} from '../components/Layout';
-import {getSectionMetadata, getTagMetadata, getTimeMetadata} from '../helpers/metadataHelpers';
 import PropTypes from 'prop-types';
 import {PageTitle} from '../components/PageTitle';
 import {Comments} from '../components/Comments';
+import {Seo} from "../components/Seo";
 
 const Post = ({data: {markdownRemark}}) => {
     const isPage = markdownRemark.frontmatter.categories.includes('Pages');
     const isCommentsDisabled = markdownRemark.frontmatter.disableComments || false;
     return (
       <Layout>
-        <Seo
-          title={markdownRemark.frontmatter.title}
-          description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
-          image={markdownRemark.socialCard}
-          meta={[
-              ...getTimeMetadata(markdownRemark.fields.iso),
-              ...getTagMetadata(markdownRemark.fields.tags),
-              ...getSectionMetadata(markdownRemark.fields.categories)
-          ]}/>
         {!isPage && <PageTitle
           title={markdownRemark.frontmatter.title}
           timeToRead={!isPage && markdownRemark.timeToRead}
@@ -39,6 +29,17 @@ const Post = ({data: {markdownRemark}}) => {
 
 export const query = graphql`
   query ($id: String!) {
+    file(relativePath: {eq: "logo-square.png"}) {
+      publicURL
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        siteUrl
+      }
+    }
     markdownRemark(id: {eq: $id}) {
       frontmatter {
         title
@@ -75,6 +76,21 @@ export const query = graphql`
 `;
 
 export default Post;
+
+export const Head = ({location: {pathname}, data: {markdownRemark, site, file}}) => (
+  <Seo
+    siteUrl={site.siteMetadata.siteUrl}
+    description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
+    imageUrl={file.publicURL}
+    author={site.siteMetadata.author}
+    iconUrl={file.publicURL}
+    title={markdownRemark.frontmatter.title}
+    siteTitle={site.siteMetadata.title}
+    path={pathname}
+    tags={markdownRemark.fields.tags}
+    categories={markdownRemark.fields.categories}
+    publishedDate={markdownRemark.fields.iso} />
+);
 
 Post.propTypes = {
   data: PropTypes.shape({

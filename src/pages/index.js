@@ -1,13 +1,24 @@
 import React from 'react';
-import {graphql, useStaticQuery} from 'gatsby';
-import {Seo} from '../components/Seo';
+import {graphql} from 'gatsby';
 import {Layout} from '../components/Layout';
 import {AboutHeadline} from '../components/AboutHeadline';
 import {PostCardContainer} from '../components/PostCardContainer';
 import {VisitBlogBanner} from '../components/VisitBlogBanner';
+import {Seo} from "../components/Seo";
 
-const allPostsQuery = graphql`
+export const query = graphql`
   query {
+    file(relativePath: {eq: "logo-square.png"}) {
+      publicURL
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        siteUrl
+      }
+    }
     allMarkdownRemark(sort: {fields: {postDate: DESC}}, limit: 10) {
       nodes {
         excerpt(format: PLAIN)
@@ -33,18 +44,25 @@ const allPostsQuery = graphql`
   }
 `;
 
-const IndexPage = () => {
-  const {allMarkdownRemark} = useStaticQuery(allPostsQuery);
-
-  return (
-    <Layout>
-      <Seo title="Home"/>
-      <AboutHeadline/>
-      <h1>Latest posts</h1>
-      <PostCardContainer posts={allMarkdownRemark.nodes}/>
-      <VisitBlogBanner/>
-    </Layout>
-  );
-};
+const IndexPage = ({data: {allMarkdownRemark: {nodes}}}) => (
+  <Layout>
+    <AboutHeadline/>
+    <h1>Latest posts</h1>
+    <PostCardContainer posts={nodes}/>
+    <VisitBlogBanner/>
+  </Layout>
+);
 
 export default IndexPage;
+
+export const Head = ({location: {pathname}, data: {file, site}}) => (
+  <Seo
+    siteUrl={site.siteMetadata.siteUrl}
+    description={site.siteMetadata.description}
+    imageUrl={file.publicURL}
+    author={site.siteMetadata.author}
+    iconUrl={file.publicURL}
+    title="Home"
+    siteTitle={site.siteMetadata.title}
+    path={pathname} />
+);
