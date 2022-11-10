@@ -12,7 +12,7 @@ module.exports = {
     siteUrl: process.env.SITE_URL,
     utterances: {
       repoUrl: process.env.REPO_URL,
-      theme: 'preferred-color-scheme',
+      theme: 'github-light',
       issueTerm: 'url',
       label: 'type: comments'
     },
