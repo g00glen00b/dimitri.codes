@@ -343,7 +343,7 @@ public class NotFoundIndexFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (isHtmlRequest(request) && isAPI(request)) {
+        if (isHtmlRequest(request) && !isAPI(request)) {
             HttpServletRequest mutatedRequest = mutateRequestToIndexPage(request);
             filterChain.doFilter(mutatedRequest, response);
         } else {
