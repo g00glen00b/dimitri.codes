@@ -236,7 +236,7 @@ If we generate our JAR now, there should be a "static" folder in the **target/cl
 
 ![Project structure with target/classes containing a static-folder](./images/copied-resources.png)
 
-Now we only have to add the frontend-module as a dependency to our backend-project.
+Now we only have to add the frontend-module as a dependency to our backend-module.
 This can be done by opening the **pom.xml** of our backend-project and adding:
 
 ````xml
@@ -255,7 +255,10 @@ This is necessary to make [history pushstate routing](https://developer.mozilla.
 
 There are several ways to implement this, as mentioned on [this Stack Overflow post](https://stackoverflow.com/questions/44692781/configure-spring-boot-to-redirect-404-to-a-single-page-app).
 
-Personally, I prefer writing a filter like this:
+Personally, I prefer writing a filter that sends all webpage requests back to `index.html`.
+
+To do so, we first need to create a new filter. 
+Since some projects might use a context path, I'm also including the context path property and default it to an empty string if not given. 
 
 ```java
 @Component
@@ -268,14 +271,24 @@ public class NotFoundIndexFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (isHtmlRequest(request) && !isAPI(request)) {
-            HttpServletRequestWrapper wrapper = new HttpServletRequestWrapper(request) {
-                @Override
-                public String getRequestURI() {
-                    return contextPath + "/index.html";
-                }
-            };
-            filterChain.doFilter(wrapper, response);
+        // TODO: Implement
+    }
+
+}
+```
+
+The next step is to differentiate between webpage-requests (HTML pages) and other requests (JavaScript, CSS, API-calls, ...).
+To do this, I wrote an `isHtmlRequest()` method that checks the `Accept` header for `text/html`:
+
+```java
+@Component
+public class NotFoundIndexFilter extends OncePerRequestFilter {
+    // ...
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (isHtmlRequest(request)) {
+            // TODO: Implement
         } else {
             filterChain.doFilter(request, response);
         }
@@ -285,23 +298,66 @@ public class NotFoundIndexFilter extends OncePerRequestFilter {
         String acceptHeader = request.getHeader("Accept");
         return acceptHeader != null && acceptHeader.contains(MediaType.TEXT_HTML_VALUE);
     }
+}
+```
+
+The next step is to forward our request. Since `HttpServletRequest`is immutable, we create a copy of the original request and override the `getRequestURI()` method:
+
+```java
+@Component
+public class NotFoundIndexFilter extends OncePerRequestFilter {
+    // ...
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (isHtmlRequest(request)) {
+            HttpServletRequest mutatedRequest = mutateRequestToIndexPage(request);
+            filterChain.doFilter(mutatedRequest, response);
+        } else {
+            filterChain.doFilter(request, response);
+        }
+    }
+    
+    private HttpServletRequest mutateRequestToIndexPage(HttpServletRequest request) {
+        return new HttpServletRequestWrapper(request) {
+            @Override
+            public String getRequestURI() {
+                return contextPath + "/index.html";
+            }
+        };
+    }
+
+    // ...
+}
+```
+
+We can also further expand the conditions to include other constraints.
+For example, let's say our API also has an HTML-page, then we don't want to forward these to the index.html page of our frontend.
+
+To solve that, we can include an `isAPI()` method:
+
+```java
+@Component
+public class NotFoundIndexFilter extends OncePerRequestFilter {
+    // ...
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (isHtmlRequest(request) && isAPI(request)) {
+            HttpServletRequest mutatedRequest = mutateRequestToIndexPage(request);
+            filterChain.doFilter(mutatedRequest, response);
+        } else {
+            filterChain.doFilter(request, response);
+        }
+    }
+    
+    // ...
 
     private boolean isAPI(HttpServletRequest request) {
         return request.getRequestURI().startsWith(contextPath + "/api");
     }
 }
 ```
-
-The way this works is that on each request, this filter is invoked.
-
-If the request contains text/html as a mediatype (see `isHtmlRequest()`), we know that it likely is a request for our frontend.
-In that case, I wrap the original request and override the `getRequestURI()` method to return **index.html**.
-By doing so, Spring will now "think" that it should handle a request to index.html, and returns the proper HTML page.
-
-If the request isn't an HTML-request, the request isn't mutated and the original flow is followed.
-
-I also included an `isAPI()` check so that if we have any HTML-related API, the request isn't rerouted either.
-You can expand this further (for example if you use Spring Boot Actuator you may want to include an `isActuator()` method as well).
 
 ### Conclusion
 
