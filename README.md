@@ -33,7 +33,6 @@ This will run a local web server on [http://localhost:8080](http://localhost:808
 
 - Markdown for page content using [remark](https://github.com/remarkjs/remark) as a processor.
 - Syntax highlighting using [Prism](https://prismjs.com/) with the [One Dark UI theme](https://atom.io/themes/one-dark-ui).
-- Dark mode.
 - Support for categories and tags.
 - Following [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/) for color contrasts.
 - Support for featured images.
