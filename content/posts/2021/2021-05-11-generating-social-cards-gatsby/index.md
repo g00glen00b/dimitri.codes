@@ -360,7 +360,7 @@ If you run your Gatsby site in develop-mode now, you'll see that the `socialCard
 
 That means you can now use queries like this:
 
-```gql
+```graphql
 {
   allMarkdownRemark {
     edges {
