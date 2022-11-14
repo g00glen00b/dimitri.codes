@@ -1,6 +1,6 @@
 ---
-title: "Checking out Spring Moduliths"
-featuredImage: "../../../images/logos/spring-boot.png"
+title: "Checking out Spring Modulith"
+featuredImage: "../../../images/logos/modulith.jpeg"
 categories: ["Tutorials"]
 tags: ["Spring", "Spring boot", "Modulith"]
 excerpt: "Recently the Spring Modulith experimental project was announced and in this blogpost I'll cover the basics of this new library."
@@ -11,7 +11,7 @@ Recently, it was announced that the Moduliths library would become a Spring Expe
 
 In this blog post I'll cover the basics of the Spring Modulith library.
 
-### Once upon a time
+## Once upon a time
 
 Before we get started with moduliths, we first have to talk about what a modulith exactly is.
 To illustrate what it is, I'm going to talk about the fairy tale of a growing application.
@@ -40,7 +40,7 @@ Happiness returned across the developers, and they lived happily ever after with
 
 The end.
 
-### High coupling is evil
+## High coupling is evil
 
 From this fairy tale, we learned one important lesson: **High coupling between domains is evil**!
 To reduce this high coupling, there are two solutions:
@@ -57,7 +57,7 @@ The question is, can we go back to a modulithic application, but apply these two
 The answer is yes, with Spring Boot we can work with **Spring Data Events** to introduce events within our monolith.
 In addition, we can enforce well-isolated domains by using the **Spring Modulith** library.
 
-### Getting started
+## Getting started
 
 To get started, we first have to upgrade our project to **Spring Boot 3**.
 
@@ -98,7 +98,7 @@ Once done, we can import the Spring Modulith **Bill of Materials (BOM)**:
 </dependency>
 ```
 
-Once done, we can add one of the [various starters as a dependency](https://docs.spring.io/spring-modulith/docs/0.1.0-M1/reference/html/#appendix.artifacts).
+After that, we can add one of the [various starters as a dependency](https://docs.spring.io/spring-modulith/docs/0.1.0-M1/reference/html/#appendix.artifacts).
 To get only the basics, we can add the following dependencies:
 
 ```xml
@@ -117,7 +117,7 @@ To get only the basics, we can add the following dependencies:
 </dependency>
 ```
 
-### Changing your project structure
+## Changing your project structure
 
 Once all dependencies are installed, the next step is to properly structure your code.
 Structuring your code consists out of three steps.
@@ -134,7 +134,7 @@ Examples of classes that go here are entities, repositories, service implementat
 
 ![Project structure](./images/project-structure.png)
 
-### Write a test
+## Write a test
 
 The final step is to write a test to verify that each module is isolated.
 For example, you can change the default generated test by Spring Boot to something like:
@@ -155,9 +155,72 @@ Otherwise, you get an error like this:
 
 This error message tells you directly which line within which class uses an internal implementation detail of another module.
 
-### Additional benefits
+## Writing better tests
 
-TODO: document test annotation
+Spring Modulith also has a few additional benefits, one of them is writing better tests.
+In the past, you may have used the `@SpringBootTest` annotation. 
+If not, this annotation can be used to run your Spring Boot application before a test starts, so you can write integration and end-to-end tests.
+While this annotation is very powerful, starting an entire application might be overkill.
+This is why there are test slice annotations such as `@WebMvcTest`, `@DataJpaTest` and so on.
 
-TODO: document UML documentation
+With Spring Modulith, there's also an `@ApplicationModuleTest` annotation which still starts up your Spring Boot application, but only loads the beans of the current module.
+This means you can write isolated tests for each module, and your application will start up faster.
 
+For example, in one of my projects I'm using the validation API (`@NotNull`, `@Email`, ...).
+Since I'm using these annotations within my service, I have to start up a Spring Boot application with my service.
+In the past I used the `@SpringBootTest` annotation, but now I use `@ApplicationModuleTest`:
+
+```java
+@ApplicationModuleTest
+@Import(UserServiceValidationTest.DummyConfiguration.class)
+class UserServiceValidationTest {
+    @Autowired
+    private UserService service;
+    @MockBean
+    private UserEntityRepository repository;
+
+    @Test
+    void create_validatesEmailNotNull() {
+        CreateUserRequestDTO request = new CreateUserRequestDTO(null, "Alicia Williams", "password", ZoneId.of("Europe/Brussels"));
+        assertThatExceptionOfType(ConstraintViolationException.class)
+            .isThrownBy(() -> service.create(request))
+            .withMessageEndingWith("The e-mail is required");
+    }
+}
+```
+
+## Documenting your module dependencies
+
+Another benefit of Spring Modulith is that you can generate a UML diagram of your module dependencies.
+
+To do this, change your test to:
+
+```java
+@Test
+void verifyModularity() {
+    ApplicationModules modules = ApplicationModules.of(MediminderApplication.class);
+    modules.verify();
+    new Documenter(modules)
+        .writeModulesAsPlantUml()
+        .writeIndividualModulesAsPlantUml();
+}
+```
+
+If you run this test now, and you use Maven, a new folder called **spring-modulith-docs** will be created in the **target** folder.
+This folder will contain the UML diagram for each individual module, and a global overview of all modules.
+
+To open this, you need a PlantUML viewer. For example, for IntelliJ you can use [PlantUML integration](https://plugins.jetbrains.com/plugin/7017-plantuml-integration).
+The PlantUML integration plugin relies on [GraphViz](https://graphviz.org/download/), so make sure to install that as well.
+
+Note for macOS users, if you install GraphViz through Homebrew, you have to change the Graphviz executable in the IntelliJ settings to `/opt/homebrew/bin/dot`.
+
+Once installed, you can see a UML diagram like this:
+
+![UML diagram](./images/uml-diagram.png)
+
+## Conclusion
+
+While Spring Modulith is still in early stages (only a milestone-release available when this article was written), it's already very promising.
+Using Spring Modulith leads to better separation of modules, better tests and better documentation.
+
+If you're interested in seeing this code in action, you can check [this repository](https://github.com/g00glen00b/medication-assistant). 
