@@ -81,7 +81,7 @@ export const Head = ({location: {pathname}, data: {markdownRemark, site, file}})
   <Seo
     siteUrl={site.siteMetadata.siteUrl}
     description={markdownRemark.frontmatter.excerpt || markdownRemark.excerpt}
-    imageUrl={file.publicURL}
+    imageUrl={markdownRemark.socialCard.publicURL}
     author={site.siteMetadata.author}
     iconUrl={file.publicURL}
     title={markdownRemark.frontmatter.title}
