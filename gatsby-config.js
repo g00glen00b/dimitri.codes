@@ -141,11 +141,6 @@ module.exports = {
         include_favicon: false
       }
     },
-    {
-      resolve: `gatsby-plugin-robots-txt`,
-      options: {
-        sitemap: `${process.env.SITE_URL}/sitemap-index.xml`
-      }
-    }
+    `gatsby-plugin-robots-txt`,
   ],
 };
