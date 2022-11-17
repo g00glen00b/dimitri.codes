@@ -156,6 +156,39 @@ public class SecurityConfiguration {
 }
 ```
 
+### Deferred loading of CSRF token
+
+The biggest changes I encountered with Spring Security is the way the CSRF protection works.
+One of the changes is that CSRF tokens are no longer passed by default with each request.
+
+From now on, CSRF tokens are only automatically generated as soon as a POST/PUT/DELETE-request is made.
+However, that means that the first request to such an endpoint will always fail.
+
+The solution to this is to manually trigger the generation of a CSRF token.
+This can be done by obtaining the current `HttpServletRequest` and executing the followin code:
+
+```java
+CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+csrfToken.getToken();
+```
+
+You can put this in a `Filter`, controller, ... .
+Depending on the use case I would either put it in an API that is often invoked (eg. an API to retrieve the current user) or put it within an `AuthenticationSuccessHandler`.
+
+### CSRF protection against BREACH attack
+
+Another big change towards the CSRF tokens is that a mechanism is built-in to prevent [BREACH attacks](https://breachattack.com/).
+The way this works is that XOR-logic is applied to the tokens so that they aren't always the same for each request.
+
+However, I couldn't get this to work (see [Stack Overflow question](https://stackoverflow.com/q/74447118/1915448)), so I currently disabled this feature.
+Disabling can be done by using the original `CsrfTokenRequestAttributeHandler` in stead of the new `XorCsrfTokenRequestAttributeHandler`:
+
+```java
+.csrf(csrf -> csrf
+    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+    .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
+```
+
 ## Changes to Spring Batch
 
 ### Deprecation of factories
@@ -249,11 +282,30 @@ public class MedicationAvailabilityNotificationWriter<T> implements ItemWriter<T
 }
 ```
 
+### Changes to `JobLauncherTestUtils`
+
+If you're using Spring Batch and you wrote a test using `JobLauncherTestUtils`, you may also encounter some issues.
+One change I noticed is that the `JobLauncherTestUtils` throws an exception because the `Job` is `null`.
+
+Apparantly the `Job` is no longer automatically injected, so in my tests I had to add the following logic:
+
+```java
+@Autowired
+private JobLauncherTestUtils jobLauncherTestUtils;
+@Autowired
+private Job job;
+
+@BeforeEach
+void setUp() {
+    jobLauncherTestUtils.setJob(job);
+}
+```
+
 ## Conclusion
 
 If your project is already on Spring Boot 2.7 and Java 17 and you're not using deprecated or legacy features, the upgrade to Spring Boot 3.0 should be fairly simple.
-In that case, the major difference is to rename all imports, which can be done with a global find-and-replace.
+The only struggles I had was with the changes to CSRF.
+If you're not using CSRF protection, the major difference is to rename all imports, which can be done with a global find-and-replace.
 
-The only two API changes I encountered were the change in Spring Batch's `ItemWriter` and Spring Security's `antMatcher`.
 The complete changes can be found in [this commit](https://github.com/g00glen00b/medication-assistant/commit/88a8e0d8b182e7629fd2de1ebbb9946bd288168a).
 Sidenote: I also replaced the Moduliths library by the new experimental Spring Modulith library (later more about that).
