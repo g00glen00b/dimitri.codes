@@ -21,10 +21,13 @@ In this tutorial I will cover the changes I made to my application.
    1. [Removal of `WebSecurityConfigurerAdapter`](#removal-of-websecurityconfigureradapter)
    2. [Use `requestMatchers`  instead of `antMatchers](#use-requestmatchers-in-stead-of-antmatchers)
    3. [Use `@EnableMethodSecurity` in stead of `@EnableGlobalMethodSecurity`](#use-enablemethodsecurity-in-stead-of-enableglobalmethodsecurity)
+   4. [Deferred loading of CSRF token](#deferred-loading-of-csrf-token)
+   5. [CSRF protection against BREACH attack](#csrf-protection-against-breach-attack)
 4. [Changes to Spring Batch](#changes-to-spring-batch)
    1. [Deprecation of factories](#deprecation-of-factories)
    2. [Changes in `chunk()` builder](#changes-in-chunk-builder)
    3. [Changes in `ItemWriter`](#changes-in-itemwriter)
+   4. [Changes to `JobLauncherTestUtils`](#changes-to-joblaunchertestutils)
 5. [Conclusion](#conclusion)
 
 ## General changes
