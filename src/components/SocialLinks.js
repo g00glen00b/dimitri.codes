@@ -15,7 +15,7 @@ export const SocialLinks = ({socialNetworks}) => (
     </a>}
     {socialNetworks.mastodon && <a
       className="social-link"
-      href={`https://mastodon.cloud/@${socialNetworks.mastodon}`}
+      href={`https://https://hachyderm.io/@${socialNetworks.mastodon}`}
       target="_blank"
       rel="me noopener noreferrer"
       title="Mastodon">
