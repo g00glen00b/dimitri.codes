@@ -26,7 +26,7 @@ This will create two files, a file called **pokemon.service.ts** and another one
 There's also a shorthand for generating files with Angular CLI, namely:
 
 ```
-ng g service shared/ervices/pokemon
+ng g service shared/services/pokemon
 ```
 
 ![ng-generate-service](./images/ng-generate-service.png)
