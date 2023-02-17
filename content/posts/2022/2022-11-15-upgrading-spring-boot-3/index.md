@@ -1,7 +1,7 @@
 ---
 title: "Upgrading to Spring Boot 3"
 featuredImage: "../../../images/logos/spring-boot.png"
-categories: ["Tutorials"]
+categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot"]
 excerpt: "I recently upgraded my project to Spring Boot 3.0, here's my experience with it"
 ---
