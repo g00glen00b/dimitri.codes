@@ -1,6 +1,6 @@
 # dimitr.im
 
-This is the source code of my personal blog at [https://dimitr.im](https://dimitr.im).
+This is the source code of my personal blog at [https://dimitri.codes](https://dimitri.codes).
 This project uses [Gatsby](https://www.gatsbyjs.org/), using [`gatsby-transformer-remark`](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/) to source Markdown blogposts.
 
 The syntax highlighting theme is based on the [One Dark UI theme for Atom](https://atom.io/themes/one-dark-ui), which has been [ported to Prism.js](https://github.com/AGMStudio/prism-theme-one-dark). 
@@ -40,5 +40,5 @@ This will run a local web server on [http://localhost:8080](http://localhost:808
 
 ## License
 
-The blogposts written for [dimitr.im](https://dimitr.im/) are copyrighted.
+The blogposts written for [dimitri.codes](https://dimitri.codes/) are copyrighted.
 Code snippets within the blogposts and the code used for generating this website are licensed as [MIT](https://opensource.org/licenses/MIT).  
