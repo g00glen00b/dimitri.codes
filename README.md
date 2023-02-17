@@ -1,4 +1,4 @@
-# dimitr.im
+# dimitri.codes
 
 This is the source code of my personal blog at [https://dimitri.codes](https://dimitri.codes).
 This project uses [Gatsby](https://www.gatsbyjs.org/), using [`gatsby-transformer-remark`](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/) to source Markdown blogposts.
