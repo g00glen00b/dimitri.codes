@@ -4,7 +4,7 @@ categories: ["Pages"]
 disableComments: true
 ---
 
-My name is Dimitri “g00glen00b” Mestdagh. I’m a 32 year old full-stack developer from Antwerp, Belgium.
+My name is Dimitri “g00glen00b” Mestdagh. I’m a 33 year old full-stack developer from Antwerp, Belgium.
 I was fascinated with technology quite early when I got my first computer running Windows Me with 64Mb of RAM.
 I spent a large potion of my youth on [IRC](https://en.wikipedia.org/wiki/Internet_Relay_Chat), eventually getting introduced to programming by writing scripts for [mIRC](https://en.wikipedia.org/wiki/MIRC) and by spending various hours while programming my graphing calculator.
 
