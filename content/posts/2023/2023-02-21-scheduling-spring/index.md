@@ -76,7 +76,7 @@ Some examples:
 Spring also supports some macros such as `@yearly`, `@monthly`, `@weekly`, `@daily` and `@hourly`.
 More information can be found in [the API docs of the `CronExpression` class](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronExpression.html).
 
-So of we replace our earlier example with a cron expression, we could write:
+So if we want to replace our earlier example to run a method every hour, we could write:
 
 ```java
 @Scheduled(cron = "0 0 * * * *")
