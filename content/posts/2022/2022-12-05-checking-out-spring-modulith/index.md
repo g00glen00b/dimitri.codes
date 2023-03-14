@@ -1,7 +1,7 @@
 ---
 title: "Checking out Spring Modulith"
 featuredImage: "../../../images/logos/modulith.jpeg"
-categories: ["Tutorials"]
+categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Modulith"]
 excerpt: "Recently the Spring Modulith experimental project was announced and in this blogpost I'll cover the basics of this new library."
 ---
