@@ -22,6 +22,10 @@ This allows you to build more interactive webpages, but comes at the cost of per
 Astro does support **partial hydration**, something they call "Astro Islands".
 To enable this, you need to add an attribute to your component (`client:load`).
 
+In this tutorial I will create a new Astro project and use the PokéAPI to create a working Pokédex.
+
+![Final result](./images/final-result.png)
+
 ## Creating a new project
 
 To create a new project, we can use the following command:
@@ -42,15 +46,19 @@ This will launch your application at `http://localhost:3000`.
 
 ## Creating a dynamic page
 
-Our pokédex application will contain two pages:
+With Astro, all Markdown, MDX and Astro components under the **src/pages** folder will be rendered as individual pages.
+The naming of the file and the folder structure will remain the same.
 
-1. A paginated overview of all pokémons (`/page/{pageNumber}`)
-2. A detail page about a single pokémon (`/pokemon/{pokemonNumber}`)
+For example, **src/pages/index.astro** will be available as the root index-page. 
+**src/pages/about.md** on the other hand will be accessible through `/about/`.
 
-To create these pages with a dynamic variable in the name of the page, we use square brackets.
-For example, to create the overview of all pokémon, create a file called **src/pages/page/\[page\].astro**.
+For this tutorial, I will create a Pokédex with a paginated overview of all Pokémon.
+For example, on page 1 you'll see the first 10 Pokémon, on page 2 the next 10 and so on.
 
-Within this page, we put the following code:
+To create these dynamic pages, we use square brackets in the name of the file.
+For example, if we create a file called **src/pages/page/\[page\].astro**, then the pages will be available as `/page/1`, `/page/2`, ... .
+
+To access the `[page]` parameter, we write the following code:
 
 ```typescript jsx
 ---
