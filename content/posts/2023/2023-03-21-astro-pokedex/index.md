@@ -769,7 +769,7 @@ Personally I really like the simplicity of Astro.
 I also think the Astro-team did a good job at making the development experience as good as possible.
 For example:
 
-- Upgrading an Astro v1 to Astro v2 project went easily unlike some other frameworks where major version updated break everything.
+- Upgrading an Astro v1 to Astro v2 project went easily unlike some other frameworks where major version updates break everything.
 - The wizards when setting up a project or adding an integration are very clear.
   For example, the integration wizard shows step by step which changes will be made to the code and configuration.
 - The error messages (such as the missing `getStaticPaths()` function) are very clear.
