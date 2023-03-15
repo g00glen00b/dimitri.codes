@@ -60,7 +60,7 @@ For example, if we create a file called **src/pages/page/\[page\].astro**, then 
 
 To access the `[page]` parameter, we write the following code:
 
-```typescript jsx
+```jsx
 ---
 const {page} = Astro.params;
 ---
@@ -82,7 +82,7 @@ To tell Astro which pages you want to generate, you export a `getStaticPaths()` 
 
 For example:
 
-```typescript jsx
+```jsx
 ---
 export function getStaticPaths() {
   return [
@@ -370,7 +370,7 @@ By using the `<slot />` element, we tell Astro that we want to embed the content
 
 Now we can change **src/pages/page/\[page\].astro** to:
 
-```typescript jsx
+```jsx
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 // ...
@@ -381,7 +381,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 </BaseLayout>
 ```
 
-other than applying the right character encoding, we now also have some shared styling.
+Other than applying the right character encoding, we now also have some shared styling.
+
+Astro also allows you to configure the layout for Markdown-pages by setting the `layout` property in the frontmatter.
+For example:
+
+```markdown
+---
+layout: ../../layouts/BaseLayout.astro
+---
+
+# This is a Markdown page
+
+This is some Markdown text.
+```
 
 ## Creating custom components
 
@@ -389,7 +402,7 @@ One of the first things I want to change is to create a custom pagination compon
 To do so, create a file called **src/components/Pagination.astro**.
 This component will get two props: `currentPage` and `totalPages`:
 
-```typescript jsx
+```jsx
 ---
 const {currentPage, totalPages} = Astro.props;
 ---
@@ -408,7 +421,7 @@ const isLast = pageNumber == totalPages;
 
 With that, we can now create our markup:
 
-```typescript jsx
+```jsx
 <section class="pagination">
   {isFirst ? <span></span> : <a href="/page/1">&larr; First</a>}
   {isFirst ? <span></span> : <a href={`/page/${pageNumber - 1}`}>&larr; Previous</a>}
@@ -425,7 +438,7 @@ The reason why I'm showing an empty `<span>` element is because I want to style 
 
 The CSS code I'm using for that is:
 
-```typescript jsx
+```jsx
 <section class="pagination">
   {isFirst ? <span></span> : <a href="/page/1">&larr; First</a>}
   {isFirst ? <span></span> : <a href={`/page/${pageNumber - 1}`}>&larr; Previous</a>}
@@ -465,7 +478,7 @@ The CSS code I'm using for that is:
 
 After that, we can add the `<Pagination />` component to **src/pages/page/\[page\].astro**:
 
-```typescript jsx
+```jsx
 ---
 import Pagination from "../../components/Pagination.astro";
 // ...
@@ -502,7 +515,7 @@ First of all, I want to give each pokémon type a unique label that looks simila
 
 To implement this, I'm going to create a component called **src/components/PokemonTypeLabel.astro** and retrieve both the unique name of the type as the localized name:
 
-```typescript jsx
+```jsx
 ---
 import type { PokemonTypeWrapper } from "../models/PokemonSpecie";
 const {type} = Astro.props as {type: PokemonTypeWrapper};
@@ -632,7 +645,7 @@ In here, I'm going to pass the specie as a prop, and retrieve the ID, name and t
 
 For example:
 
-```typescript jsx
+```jsx
 ---
 import type { PokemonSpecie } from "../models/PokemonSpecie";
 import PokemonTypeLabel from "./PokemonTypeLabel.astro";
@@ -646,7 +659,7 @@ const types = specie.pokemon_v2_pokemons![0].pokemon_v2_pokemontypes!;
 
 After that, I'm going to add the following markup:
 
-```typescript jsx
+```jsx
 <a class="card" href={`/pokemon/${id}`}>
   <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
   <span class="number">#{id.toString().padStart(4, '0')}</span>
@@ -691,7 +704,7 @@ After that, I added some styling to add a border to the card and to align the el
 
 And finally, in **src/pages/page/\[page\].astro** I changed the markup to:
 
-```typescript jsx
+```jsx
 <BaseLayout>
   <h1>Pokédex</h1>
   <section class="cards">
@@ -760,6 +773,11 @@ For example:
 - The wizards when setting up a project or adding an integration are very clear.
   For example, the integration wizard shows step by step which changes will be made to the code and configuration.
 - The error messages (such as the missing `getStaticPaths()` function) are very clear.
+
+One downside of Astro is that due to the custom language, it requires IDE support.
+IDE support however is still limited to VSCode.
+Jetbrains IDE's (IntelliJ, WebStorm, ...) are also integrating Astro support, but this is only available in their Early Access or Beta releases at the moment of writing.
+Support in these Jetbrains IDE's is not complete yet, for example, template literals are only working since the latest release and importing React-components marks the imports as unused.
 
 If you're interested in the complete code example, including the detail page which I didn't cover (essentially it's the same thing), you can find it on [GitHub](https://github.com/g00glen00b/astro-pokedex).
 
