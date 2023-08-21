@@ -1,4 +1,5 @@
 import React from "react";
+import { Script } from "gatsby";
 
 export const Seo = ({title, siteTitle, author, description, siteUrl, imageUrl, iconUrl, path, publishedDate = null, tags = [], categories = []}) => (
   <>
@@ -30,5 +31,6 @@ export const Seo = ({title, siteTitle, author, description, siteUrl, imageUrl, i
     ))}
     <link rel="alternate" type="application/rss+xml" title="Feed" href={`${siteUrl}/rss.xml`} />
     <link rel="icon" href={`${siteUrl}${iconUrl}`} />
+    <Script async data-id="101423246" src="//static.getclicky.com/js" />
   </>
 );
