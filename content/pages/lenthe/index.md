@@ -1,5 +1,5 @@
 ---
-title: "Geheieme pagina voor Lenthe"
+title: "Geheime pagina voor Lenthe"
 categories: ["Pages"]
 disableComments: true
 ---
