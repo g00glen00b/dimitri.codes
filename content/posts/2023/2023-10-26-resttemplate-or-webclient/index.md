@@ -12,6 +12,34 @@ Recently, I've seen a few discussions where people were talking about whether th
 One of their arguments is that you should use `WebClient` because `RestTemplate` is deprecated (spoiler alert: it's not!).
 In this blogpost I'll talk about the options you have within the Spring framework to make REST calls.
 
+## Contents
+
+1. [RestTemplate](#resttemplate)
+   1. [Setup](#setup)
+   2. [Retrieving data](#retrieving-data)
+   3. [Sending data](#sending-data)
+   4. [Error handling](#error-handling)
+   5. [Testing](#testing)
+   6. [Pros](#pros)
+   7. [Cons](#cons)
+2. [WebClient](#webclient)
+   1. [Setup](#setup-1)
+   2. [Retrieving data](#retrieving-data-1)
+   3. [Sending data](#sending-data-1)
+   4. [Error handling](#error-handling-1)
+   5. [Testing](#testing-1)
+   6. [Pros](#pros-1)
+   7. [Cons](#cons-1)
+3. [RestClient](#restclient)
+   1. [Setup](#setup-2)
+   2. [Retrieving data](#retrieving-data-2)
+   3. [Sending data](#sending-data-2)
+   4. [Error handling](#error-handling-2)
+   5. [Pros](#pros-2)
+   6. [Cons](#cons-2)
+4. [Deprecation?](#deprecation)
+5. [Conclusion](#conclusion)
+
 ## RestTemplate
 
 ### Setup
