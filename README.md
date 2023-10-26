@@ -17,7 +17,7 @@ For example:
 
 ```env
 SITE_URL=https://my-gatsby-site.com
-REPO_URL=g00glen00b/dimitr.im
+REPO_URL=g00glen00b/dimitri.codes
 ```
 
 After that, you can use the following commands to run the project:
