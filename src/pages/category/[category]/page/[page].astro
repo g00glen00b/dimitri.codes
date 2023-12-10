@@ -1,0 +1,46 @@
+---
+import {getCollection} from 'astro:content';
+import {type Category} from '../../../../models/Category';
+import {type CollectionPage} from '../../../../models/CollectionPage';
+import {type Post} from '../../../../models/Post';
+import {mapToCollectionPosts} from '../../../../utils/post';
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import PostCardContainer from '../../../../components/PostCardContainer.astro';
+import Pagination from '../../../../components/Pagination.astro';
+import {CONFIG} from '../../../../config/config';
+
+export interface Props {
+  category: Category;
+  page: CollectionPage<Post>
+}
+
+export async function getStaticPaths() {
+  const entries = await getCollection('posts');
+  const groups = mapToCollectionPosts(entries, post => post.categories, CONFIG.site.pageSize);
+  return groups.flatMap(({group: category, results}) => {
+    return results.map(page => ({
+      params: {category: category.path, page: page.page},
+      props: {category, page},
+    }));
+  });
+}
+
+const {category, page} = Astro.props;
+---
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={true}
+  title={category.name}
+  description={category.name}
+  path={`/category/${category.path}/page/${page.page}`}>
+  <h1 class="page__title">
+    Posts within the <strong>{category.name}</strong> category
+  </h1>
+  <PostCardContainer
+    posts={page.results}>
+  </PostCardContainer>
+  <Pagination
+    pageCount={page.totalPages}
+    currentPage={page.page}
+    base={`/category/${category.path}`}/>
+</SiteLayout>

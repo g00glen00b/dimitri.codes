@@ -1,0 +1,13 @@
+---
+import SiteLayout from './SiteLayout.astro';
+const {frontmatter, url} = Astro.props;
+---
+
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={frontmatter.disableComments || false}
+  title={frontmatter.title}
+  description={frontmatter.title}
+  path={url}>
+  <slot />
+</SiteLayout>

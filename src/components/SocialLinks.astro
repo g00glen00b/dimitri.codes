@@ -1,0 +1,75 @@
+---
+import {type SocialNetworks} from '../models/SocialNetworks';
+import {Icon} from 'astro-icon';
+
+export interface Props {
+  socialNetworks: SocialNetworks
+}
+
+const {socialNetworks} = Astro.props;
+---
+
+<nav class="social-links">
+  {socialNetworks.linkedin && <a
+    class="social-link"
+    href={`https://linkedin.com/in/${socialNetworks.linkedin}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="LinkedIn">
+    <Icon name="ri:linkedin-fill" />
+  </a>}
+  {socialNetworks.github && <a
+    class="social-link"
+    href={`https://github.com/${socialNetworks.github}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="GitHub">
+    <Icon name="ri:github-fill" />
+  </a>}
+  {socialNetworks.speakerdeck && <a
+    class="social-link"
+    href={`https://speakerdeck.com/${socialNetworks.speakerdeck}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Speaker Deck">
+    <Icon name="simple-icons:speakerdeck" />
+  </a>}
+  {socialNetworks.codepen && <a
+    class="social-link"
+    href={`https://codepen.io/${socialNetworks.codepen}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="CodePen">
+    <Icon name="ri:codepen-fill" />
+  </a>}
+</nav>
+
+<style>
+    .social-links {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+        place-items: center;
+    }
+
+    .social-link {
+        margin-right: 2rem;
+    }
+
+    .social-links .social-link:last-child {
+        margin-right: 0;
+    }
+
+    .social-link svg {
+        fill: var(--text-color-lighter);
+        color: var(--text-color-lighter);
+        transition: fill .3s, color .3s;
+        width: 24px;
+    }
+
+    .social-link:hover svg {
+        fill: var(--secondary-color);
+        color: var(--secondary-color);
+    }
+</style>

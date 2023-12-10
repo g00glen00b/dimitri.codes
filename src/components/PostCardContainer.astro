@@ -1,0 +1,30 @@
+---
+
+import PostCard from './PostCard.astro';
+import {type Post} from '../models/Post';
+
+export interface Props {
+  posts: Post[];
+}
+
+const {posts} = Astro.props;
+
+---
+<section class="posts">
+  {posts.map(post => <PostCard post={post}/>)}
+</section>
+
+<style>
+    .posts {
+        display: flex;
+        flex-flow: row wrap;
+        margin: -1rem;
+    }
+
+    @media (max-width: 640px) {
+        .posts {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+</style>

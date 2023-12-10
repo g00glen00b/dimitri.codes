@@ -1,0 +1,72 @@
+---
+import {Icon} from 'astro-icon';
+import ContentLinks from './ContentLinks.astro';
+import SocialLinks from './SocialLinks.astro';
+import {CONFIG} from '../config/config';
+
+const {socialNetworks, author: {name: authorName}, footerLinks} = CONFIG;
+---
+<footer class="footer">
+  <div class="footer-content">
+    <SocialLinks socialNetworks={socialNetworks}/>
+    <ContentLinks links={footerLinks}/>
+    <p class="copyright">
+      Made with <Icon name="ri:heart-fill" /> by {authorName}
+    </p>
+  </div>
+</footer>
+
+<style>
+    .footer {
+        margin-top: 5rem;
+        border-top: solid 0.5rem var(--primary-color);
+        background-color: var(--background-color);
+    }
+
+    .footer-content {
+        max-width: var(--container-width);
+        display: grid;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .footer-content > .social-links {
+        grid-row: 1;
+        grid-column: 1;
+        align-self: center;
+    }
+
+    .footer-content > .content-links {
+        grid-row: 1;
+        grid-column: 2;
+        align-self: center;
+    }
+
+    .footer-content > .copyright {
+        grid-row: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        justify-self: end;
+        color: var(--text-color-lightest);
+    }
+
+    .footer-content > .copyright > svg {
+        fill: deeppink;
+        color: deeppink;
+        width: 1em;
+    }
+
+    @media (max-width: 640px) {
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-content > .social-links {
+            margin-bottom: 1.2rem;
+        }
+    }
+</style>

@@ -1,0 +1,36 @@
+---
+import {getCollection} from 'astro:content';
+import {mapToSortedPosts} from '../../utils/post';
+import {sliceIntoPages} from '../../utils/array';
+import {type CollectionPage, emptyPage} from '../../models/CollectionPage';
+import {type Post} from '../../models/Post';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PostCardContainer from '../../components/PostCardContainer.astro';
+import Pagination from '../../components/Pagination.astro';
+import {CONFIG} from '../../config/config';
+
+export interface Props {
+  page: CollectionPage<Post>
+}
+
+const entries = await getCollection('posts');
+const pages = sliceIntoPages(mapToSortedPosts(entries), CONFIG.site.pageSize);
+const page = pages.find(page => page.first) || emptyPage<Post>();
+---
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={true}
+  title="Posts"
+  description="Posts"
+  path="/posts">
+  <h1 class="page__title">
+    Posts
+  </h1>
+  <PostCardContainer
+    posts={page.results}>
+  </PostCardContainer>
+  <Pagination
+    pageCount={page.totalPages}
+    currentPage={page.page}
+    base="/posts" />
+</SiteLayout>

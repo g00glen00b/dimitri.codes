@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://dimitri.codes/sitemap-index.xml
+Host: https://dimitri.codes

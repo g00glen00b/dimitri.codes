@@ -1,0 +1,177 @@
+---
+---
+<main class="container-content">
+  <slot />
+</main>
+
+<style is:global>
+    .container-content pre {
+        border-radius: .5rem;
+        font-size: 1.1rem;
+    }
+
+
+    .container-content table *,
+    .container-content p,
+    .container-content li,
+    .container-content .alert,
+    .container-content blockquote {
+        line-height: 2.1rem;
+        font-size: 1.1rem;
+    }
+
+    .container-content p {
+        margin: 1.5rem 0;
+    }
+
+    .container-content li > p {
+        margin: 0;
+    }
+
+    .container-content h1 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .container-content h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.025rem;
+    }
+
+    .container-content h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: -0.025rem;
+        margin: 3rem 0 1rem;
+    }
+
+    .container-content h4 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: -0.025rem;
+    }
+
+    .container-content p > code,
+    .container-content li > code,
+    .container-content a > code,
+    .container-content td > code,
+    .container-content blockquote > code {
+        background-color: var(--background-color-darkest);
+        padding: 2px 5px;
+        font-family: 'Roboto Mono', monospace;
+        border-radius: 0.1rem;
+    }
+
+    .container-content p > strong,
+    .container-content li > strong {
+        font-weight: 500;
+    }
+
+    .container-content a.gatsby-resp-image-link {
+        color: transparent;
+        border: none;
+    }
+
+    .container-content table {
+        border-spacing: 0 0.5rem;
+    }
+
+    .container-content table > thead > tr > th {
+        font-weight: 500;
+        color: var(--text-color-lighter);
+    }
+
+    .container-content table > tbody > tr {
+        background-color: var(--background-color);
+    }
+
+    .container-content table > tbody > tr > td:first-child {
+        border-radius: 0.5rem 0 0 0.5rem;
+    }
+
+    .container-content table > tbody > tr > td:last-child {
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .container-content table > tbody > tr > td {
+        padding: .8rem;
+    }
+
+    .container-content table > thead > tr > th {
+        padding: .8rem .8rem 0;
+    }
+
+    .container-content table > tbody > tr > td,
+    .container-content table > thead > tr > th {
+        text-align: left;
+        border: none;
+    }
+
+    .container-content h1 > a,
+    .container-content h2 > a,
+    .container-content h3 > a,
+    .container-content h4 > a,
+    .container-content h5 > a,
+    .container-content h6 > a {
+        border: none;
+        background: transparent;
+        margin-left: 0.5rem;
+        fill: var(--secondary-color);
+        color: var(--secondary-color);
+    }
+
+    .container-content h1 > a > svg,
+    .container-content h2 > a > svg,
+    .container-content h3 > a > svg,
+    .container-content h4 > a > svg,
+    .container-content h5 > a > svg,
+    .container-content h6 > a > svg {
+        margin-bottom: -3px;
+    }
+
+    .container-content blockquote {
+        border-left: solid 0.5rem var(--secondary-color-lighter);
+        padding: 0.5rem 0 0.5rem 2rem;
+        margin: 0;
+    }
+
+    .container-content a {
+        color: var(--tertiary-color-darker);
+        text-decoration: none;
+        transition: color .1s;
+    }
+
+    .container-content a:hover,
+    .container-content a:active {
+        color: var(--tertiary-color-darkest);
+    }
+
+    .container-content a.button-primary,
+    .container-content button.button-primary {
+        padding: 1rem;
+        border: solid 0.1rem var(--primary-color);
+        color: var(--primary-color);
+        box-shadow: var(--primary-color) 1px 1px 0,
+        var(--primary-color) 2px 2px 0,
+        var(--primary-color) 3px 3px 0,
+        var(--primary-color) 4px 4px 0,
+        var(--primary-color) 5px 5px 0,
+        var(--primary-color) 6px 6px 0,
+        var(--primary-color) 7px 7px 0,
+        var(--primary-color) 8px 8px 0;
+        transition: box-shadow .3s, margin .3s, background .3s;
+        transition-timing-function: ease-in-out;
+        font-weight: 500;
+    }
+
+    .container-content a.button-primary:hover,
+    .container-content button.button-primary:hover,
+    .container-content a.button-primary:active,
+    .container-content button.button-primary:active {
+        color: inherit;
+        box-shadow: none;
+        margin: 8px -8px -8px 8px;
+        background-color: var(--primary-color-lightest);
+    }
+</style>

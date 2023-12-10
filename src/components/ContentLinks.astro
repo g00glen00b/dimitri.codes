@@ -1,0 +1,47 @@
+---
+import {type ContentLink} from '../models/ContentLink';
+
+interface Props {
+  links: ContentLink[]
+}
+
+const {links} = Astro.props;
+---
+<nav class="content-links">
+  {links.map(({name, to, external}) =>
+  external ? (
+    <a
+      href={to}
+      target="_blank"
+      rel="noopener noreferrer">
+      {name}
+    </a>
+  ) : (
+    <a
+      href={to}>
+      {name}
+    </a>
+  ))}
+</nav>
+
+<style>
+    .content-links {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .content-links > a {
+        text-decoration: none;
+        color: var(--text-color-lighter);
+        margin-left: 1rem;
+        transition: color .3s;
+    }
+
+    .content-links > a:first-child {
+        margin-left: 0;
+    }
+
+    .content-links > a:hover {
+        color: var(--secondary-color);
+    }
+</style>

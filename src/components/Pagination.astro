@@ -1,0 +1,38 @@
+---
+export interface Props {
+  currentPage: number;
+  pageCount: number;
+  base: string;
+}
+
+const {currentPage, pageCount, base} = Astro.props;
+---
+
+<nav class="pagination">
+  {currentPage > 1 ? (
+      <a
+        class="button-primary"
+        title="Go to previous page"
+        href={`${base}/page/${currentPage - 1}`}>
+        ← newer posts
+      </a>) :
+    <span />}
+  page {currentPage} of {pageCount}
+  {currentPage < pageCount ? (
+      <a
+        class="button-primary"
+        title="Go to next page"
+        href={`${base}/page/${currentPage + 1}`}>
+        older posts →
+      </a>) :
+    <span />}
+</nav>
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 3.8rem 0;
+    }
+</style>

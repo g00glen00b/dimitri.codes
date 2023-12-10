@@ -1,0 +1,36 @@
+---
+import {getCollection} from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import {mapToSortedPosts} from '../utils/post';
+import {type Post} from '../models/Post';
+
+export interface Props {
+  post: Post;
+}
+
+export async function getStaticPaths() {
+  const entries = await getCollection('posts');
+  return mapToSortedPosts(entries).map(post => ({
+    params: {post: post.slug},
+    props: {post},
+  }));
+}
+
+const {post} = Astro.props;
+const {Content} = await post.entry.render();
+---
+
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={false}
+  title={post.title}
+  description={post.excerpt}
+  path={post.slug}
+  publishedDate={post.publishedDate}
+  tags={post.tags}
+  categories={post.categories}
+  featuredImage={post.featuredImage}
+  metaImage={`/social/${post.slug}.png`}
+  readingTime={post.readingTime}>
+  <Content />
+</SiteLayout>

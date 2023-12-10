@@ -1,0 +1,26 @@
+---
+import {getCollection} from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import {CONFIG} from '../config/config';
+import AboutHeadline from '../components/AboutHeadline.astro';
+import {type Post} from '../models/Post';
+import {mapToSortedPosts} from '../utils/post';
+import PostCardContainer from '../components/PostCardContainer.astro';
+import VisitBlogBanner from '../components/VisitBlogBanner.astro';
+
+const entries = await getCollection('posts');
+const posts: Post[] = mapToSortedPosts(entries).slice(0, CONFIG.site.homePageSize);
+---
+
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={true}
+  title="Home"
+  description={CONFIG.site.description}
+  path="">
+  <AboutHeadline />
+  <PostCardContainer
+    posts={posts}>
+  </PostCardContainer>
+  <VisitBlogBanner/>
+</SiteLayout>

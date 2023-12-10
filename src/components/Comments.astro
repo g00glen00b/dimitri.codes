@@ -1,0 +1,14 @@
+---
+import {CONFIG} from '../config/config';
+const {repository, theme, label, issueTerm} = CONFIG.utterances;
+---
+<script
+  is:inline
+  src="https://utteranc.es/client.js"
+  repo={repository}
+  issue-term={issueTerm}
+  theme={theme}
+  label={label}
+  crossorigin="anonymous"
+  async>
+</script>

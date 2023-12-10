@@ -1,0 +1,58 @@
+---
+import Header from '../components/Header.astro';
+import ContainerContent from '../components/ContainerContent.astro';
+import Footer from '../components/Footer.astro';
+import Head from '../components/Head.astro';
+import {type Tag} from '../models/Tag';
+import {type Category} from '../models/Category';
+import "../styles/global.css";
+import "../styles/OneDark.css";
+import PageTitle from '../components/PageTitle.astro';
+import Comments from '../components/Comments.astro';
+import {type ReadTimeResults} from 'reading-time';
+import {CONFIG} from '../config/config';
+
+export interface Props {
+  showHeaderFooter: boolean;
+  disableComments: boolean;
+  title: string;
+  description: string;
+  path: string;
+  publishedDate?: Date;
+  tags?: Tag[];
+  categories?: Category[];
+  featuredImage?: string;
+  metaImage?: string;
+  readingTime?: ReadTimeResults;
+}
+
+const {showHeaderFooter, disableComments, title, description, path, publishedDate, tags, categories, featuredImage, readingTime, metaImage} = Astro.props;
+---
+
+<html lang="en">
+  <Head
+    title={title}
+    description={description}
+    path={path}
+    publishedDate={publishedDate}
+    tags={tags}
+    categories={categories}
+    metaImage={metaImage || featuredImage || CONFIG.site.logo}
+  />
+  <body>
+    <div class="container">
+      {showHeaderFooter && <Header />}
+      <ContainerContent>
+        {publishedDate && featuredImage && readingTime && tags && <PageTitle
+          title={title}
+          readingTime={readingTime}
+          date={publishedDate}
+          featuredImage={featuredImage}
+          tags={tags}/>}
+        <slot />
+        {!disableComments && <Comments/>}
+      </ContainerContent>
+      {showHeaderFooter && <Footer />}
+    </div>
+  </body>
+</html>
