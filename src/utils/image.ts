@@ -21,7 +21,7 @@ export async function generateImage(post: Post) {
     showText(context, format(post.publishedDate, 'MMMM do, yyyy'), 150, 318, 680, 30);
   }
   await showImage(context, 'src/utils/assets/stopwatch.png', 80, 350, 48, 48);
-  showText(context, `${Math.round(post.readingTime.minutes)} minute(s) read`, 150, 388, 680, 30);
+  showText(context, `${Math.round(post.readingTime.minutes)} minute read`, 150, 388, 680, 30);
   if (post.tags != null && post.tags.length > 0) {
     await showImage(context, 'src/utils/assets/tag.png', 80, 420, 48, 48);
     showText(context, post.tags.map(({name}) => name).join(', '), 150, 458, 680, 30);
