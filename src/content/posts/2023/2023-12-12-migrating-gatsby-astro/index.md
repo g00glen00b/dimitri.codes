@@ -6,57 +6,67 @@ tags: ["Gatsby", "Astro"]
 excerpt: "In this blogpost I talk about why I migrated from Gatsby to Astro and what the pros and cons are."
 ---
 
-### The timeline
+### Why I started with Gatsby
 
-Right before COVID-19 hit, I decided to use Gatsby in combination with WordPress.
-This allowed me to use React to customize the website rather than using PHP and the WordPress ecosystem, which I'm less familiar with.
+I've been blogging for a while now, on several platforms.
+Originally, I started on a small shared webhost with WordPress on it.
 
-In addition, due to prebuilding the webpages statically, I could host them on a Content Delivery Network (CDN) to reduce the page load times.
+One of the problems with using WordPress as the frontend was that I was tied into the WordPress ecosystem and PHP.
+So after a few years, I decided to still use WordPress as the backend, with Gatsby to statically generate the webpages.
+This allowed me to utilize a Content Delivery Network (CDN), which decreased page load times drastically. 
 
-After a year, I decided to export my WordPress blogposts to Markdown.
-This allowed me to reduce costs by shutting down the WordPress instance and to improve build speeds.
+After a year, I decided to export my blogposts to Markdown, and refactored my website to use Markdown as the datasource in stead of WordPress.
+This allowed me to shut down the WordPress instance and reduce costs.
 
 ### The advantages of using Gatsby
 
-The main advantage of using Gatsby was being able to use an ecosystem I knew more about, such as React and GraphQL.
+One of the major advantages of Gatsby is that it uses technologies I'm more familiar with in comparison with WordPress.
+Before Gatsby, I already worked with React and GraphQL, so designing the website and query'ing the blogposts was pretty easy.
 
-The **unified datalayer** also made it easy to use different datasources or move between them.
-This made the switch from WordPress to Markdown really smooth.
+What I also liked is that Gatsby came with a rich ecosystem of plugins, including source plugins.
+There's support for most Content Management Systems (CMS), including WordPress.
+
+Retrieving data from these sources is very consistent thanks to the unified datalayer that utilizes GraphQL.
+This made the switch from WordPress as a backend to Markdown very smooth.
 
 ### The painpoints with Gatsby
 
-While the unified datalayer had several advantages, it also made some things a bit more annoying.
+While the unified datalayer had several advantages, it also made some things more complex by times.
 For example, for each blogpost, I wanted to dynamically generate an image for social networks.
-To implement such a thing, you have to use a hook to listen for Gatsby post nodes, convert the Markdown to HTML by yourself (because at that point Gatsby didn't create the HTML yet), create an image node, and link it to the original postn ode.
+To implement such a thing, you have to use a hook to listen for Gatsby post nodes, convert the Markdown to HTML by yourself (because at that point Gatsby didn't create the HTML yet), create an image node, and link it to the original post node.
 
-Another thing I noticed is that while upgrading from v2 to v3 and from v3 to v4, there were several API changes, which made it quite time-consuming to upgrade.
+Another difficulty I had with Gatsby is that the upgrade process wasn't really smooth.
+APIs became deprecated very rapidly, and during the upgrade from Gatsby v2 to v3 and from v3 to v4, I had to spend several hours to make everything work again.
 
 In the later releases, the Gatsby process also required more and more memory, up to the point that build platforms like Netlify would unexpectedly exit, even for a small blog.
 Luckily this no longer seems to be a problem.
 
-And finally, since the acquisition by Netlify early in 2023, there has been less activity.
+A final issue is that, since the acquisition by Netlify early in 2023, there has been less activity.
 Most of the original staff also left ([source](https://twitter.com/wardpeet/status/1693014604694061194)) or were layed off ([source](https://twitter.com/calcsam/status/1679913751397683202)).
 The future doesn't look bright.
 
 ### Why I switched to Astro
 
 In search for something simpler, I stumbled upon Astro.
-Astro has its own language that is inspired heavily upon Markdown.
+Astro has its own language that is inspired upon Markdown and React.
+This made the language quite familiar from the start.
+It also allows you to use React, Vue and Svelte and even combine them in the same project.
+This allows you to bring any UI library you prefer.
+
 Another nice thing is that by default, it generates a full static website without any client-side JavaScript.
 
-Build times are also way faster. For my personal website, it takes 25% less time to deploy.
+A final advantage I noticed with Astro is that build times are about 25% faster than with Gatsby.
 
 ### The painpoints with Astro
 
-One of the painpoints of Astro is that it's a completely new language.
-Luckily, most of the language features are similar to React.
-However, due to it being a new language, it requires IDE support, and so far there isn't much support.
-You can use other languages within Astro (such as React, Svelte or Vue), but I decided to use the default Astro components in my project.
+Due to Astro having its own language, there's specific IDE support needed for things to work.
+So far, Astro is only supported in VS Code and the JetBrains IDE's as far as I'm aware.
+On top of that, support within the JetBrains IDE's is a bit flaky, with imports breaking once in a while.
 
 Another painpoint is that it seems to be pretty difficult to use the same webpage for multiple routes.
 For example, for my blog I want to `/posts` and `/posts/page/1` to refer to the same webpage.
 The only solution I found was by relying on meta-tags to redirect to the other page. 
-This made development kind of difficult though, because those redirects are cached, and if you make one mistake, you have to clear your cache before trying again. 
+This made development kind of difficult though, because those redirects are cached by the webbrowser, and if you make one mistake, you have to clear your cache before trying again. 
 
 ### How I migrated
 
