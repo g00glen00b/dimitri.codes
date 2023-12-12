@@ -1,6 +1,5 @@
 ---
 title: "Post an idea"
-categories: ["Pages"]
 layout: ../layouts/MarkdownWrapperLayout.astro
 ---
 

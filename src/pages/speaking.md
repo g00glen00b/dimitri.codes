@@ -1,6 +1,5 @@
 ---
 title: "Speaking"
-categories: ["Pages"]
 disableComments: true
 layout: ../layouts/MarkdownWrapperLayout.astro
 ---

@@ -22,7 +22,7 @@ export function mapToPost(entry: CollectionEntry<"posts">): Post {
   const matches = pathRegex.exec(entry.slug as string);
   if (matches == null) throw 'Could not map';
   const [, year, month, day, slug] = matches;
-  const publishedDate: Date = new Date(parseInt(year), parseInt(month), parseInt(day));
+  const publishedDate: Date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
   const time = readingTime(entry.body);
   const categories: Category[] = (entry.data.categories || []).map((name: string) => ({name, path: kebabCase(name)}));
   const tags: Tag[] = (entry.data.tags || []).map((name: string) => ({name, path: kebabCase(name)}));

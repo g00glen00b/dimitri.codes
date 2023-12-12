@@ -1,6 +1,5 @@
 ---
 title: "About me"
-categories: ["Pages"]
 disableComments: true
 layout: ../layouts/MarkdownWrapperLayout.astro
 ---

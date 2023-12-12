@@ -17,10 +17,8 @@ const readableDate = format(publishedDate, 'MMMM do, yyyy');
   title="View post">
   <div class="excerpt-header">
     {featuredImage && <div class="excerpt-header-image">
-      <Image
+      <img
         src={featuredImage}
-        width="80"
-        height="80"
         alt={`Featured image for "${title}"`}/>
     </div>}
     <span
@@ -86,6 +84,10 @@ const readableDate = format(publishedDate, 'MMMM do, yyyy');
         margin-left: -2rem;
         width: 5rem;
         height: 5rem;
+    }
+
+    .excerpt-header-image > img {
+        width: 80px;
     }
 
     .excerpt-header > h2 {

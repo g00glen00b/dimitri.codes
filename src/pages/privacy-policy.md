@@ -1,6 +1,5 @@
 ---
 title: "Your privacy matters"
-categories: ["Pages"]
 disableComments: true
 layout: ../layouts/MarkdownWrapperLayout.astro
 ---

@@ -1,6 +1,5 @@
 ---
 title: "Contact"
-categories: ["Pages"]
 layout: ../layouts/MarkdownWrapperLayout.astro
 disableComments: false
 ---
