@@ -77,8 +77,27 @@ Astro also comes with a concept called [content collections](https://docs.astro.
 
 One thing I had to override is the way the slugs are generated.
 This was necessary because I prefer using separate folders for each year, but I didn't want to include those in the slug.
+I did this by using a regular expression to parse the original slug and pass the new slug within the `getStaticPaths()` parameters:
 
-The code that generates the images for the social networks, could be used again with Asto.
+```typescript
+export async function getStaticPaths() {
+  const entries = await getCollection('posts');
+  // Regular expression for /[year]/[year]-[month]-[day]-[slug]
+  const pathRegex: RegExp = /^\d{4}\/(\d{4})-(\d{2})-(\d{2})-(.+?)$/;
+  return entries.map(entry => {
+    const matches = pathRegex.exec(entry.slug as string);
+    if (matches == null) throw 'Could not map';
+    const [, year, month, day, slug] = matches;
+    // ...
+    return {
+      params: {slug}, // Pass slug as parameter
+      props: {entry},
+    };
+  });
+}
+```
+
+The code that generates the images for the social networks, could be used again with Astro.
 The major difference is that instead of linking it with some framework-feature, I exposed them using [endpoints](https://docs.astro.build/en/core-concepts/endpoints/), and included them myself in the `<head>`.
 
 An example of the endpoint would be:
