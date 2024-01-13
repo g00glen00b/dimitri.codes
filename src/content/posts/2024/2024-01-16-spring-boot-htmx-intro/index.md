@@ -576,7 +576,7 @@ Alternatively, we could add a button to our error fragment:
   class="danger alert"
   role="alert"
   hx-swap-oob="true">
-  <span th:text="${error"></span>
+  <span th:text="${error}"></span>
   <button type="button">
     &times;
   </button>
