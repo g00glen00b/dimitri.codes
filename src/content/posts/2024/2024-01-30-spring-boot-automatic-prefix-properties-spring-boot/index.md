@@ -152,6 +152,7 @@ Constructing a `PropertiesPropertySource` requires two parameters, a name and th
 
 In contrary to the `name` element of the `@PropertySource` annotation, this name is required.
 One way to fix this is to write some similar code as Spring does within the [`getNameForResource()`](https://github.com/spring-projects/spring-framework/blob/f1a335708a0ced4fc97cb2e1969a9887e734a70a/spring-core/src/main/java/org/springframework/core/io/support/ResourcePropertySource.java#L178-L184) method within `ResourcePropertySource`.
+This method generates a unique name based on the description of the resource or the classname itself.
 
 So for now, let's write something similar:
 
