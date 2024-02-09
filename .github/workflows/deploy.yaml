@@ -1,0 +1,12 @@
+name: "Daily deploy"
+on:
+  schedule:
+    - cron: "0 15 * * 1-5"
+jobs:
+  deploy:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Netlify build"
+        run: curl --silent --show-error -X POST -d {} "$NETLIFY_BUILD_HOOK"
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
