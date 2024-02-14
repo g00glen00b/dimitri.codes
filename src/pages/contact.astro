@@ -13,8 +13,10 @@ import SiteLayout from "../layouts/SiteLayout.astro"
     Feel free to reach out in case you have some suggestions to my website or new ideas I could try out for my next blogpost.
     If you're having a question about a blog post, please use the comment section under each blogpost, which is powered by <a href="https://utteranc.es/" target="_blank" rel="noopener noreferrer">utteranc.es</a> and GitHub.
   </p>
-  <!--suppress HtmlUnknownAttribute -->
-  <form data-netlify="true">
+  <form
+    name="contact"
+    method="post"
+    data-netlify="true">
     <label for="name">Your name</label>
     <input
       type="text"
