@@ -9,7 +9,6 @@ export const CONFIG: Config = {
   },
   footerLinks: [
     {name: 'Privacy policy', to: '/privacy-policy', external: false},
-    {name: 'Post an idea', to: '/post-ideas', external: false},
     {name: 'Contact', to: '/contact', external: false},
     {name: 'RSS', to: '/rss.xml', external: true},
   ],

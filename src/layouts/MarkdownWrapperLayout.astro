@@ -9,5 +9,6 @@ const {frontmatter, url} = Astro.props;
   title={frontmatter.title}
   description={frontmatter.title}
   path={url}>
+  <h1>{frontmatter.title}</h1>
   <slot />
 </SiteLayout>

@@ -1,0 +1,78 @@
+---
+import { CONFIG } from "../config/config"
+import SiteLayout from "../layouts/SiteLayout.astro"
+---
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={true}
+  title="Contact"
+  description={CONFIG.site.description}
+  path="contact">
+  <h1>Contact</h1>
+  <p>
+    Feel free to reach out in case you have some suggestions to my website or new ideas I could try out for my next blogpost.
+    If you're having a question about a blog post, please use the comment section under each blogpost, which is powered by <a href="https://utteranc.es/" target="_blank" rel="noopener noreferrer">utteranc.es</a> and GitHub.
+  </p>
+  <!--suppress HtmlUnknownAttribute -->
+  <form netlify>
+    <label for="name">Your name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="ex. Optimus Prime" />
+    <label for="email">Your e-mail <sup class="required">*</sup></label>
+    <input
+      type="email"
+      id="email"
+      required
+      name="email"
+      placeholder="ex. optimus@transformers.net" />
+    <label for="title">Title</label>
+    <input
+      type="text"
+      id="title"
+      name="title"
+      placeholder="A short description of your message" />
+    <label for="message">Your Message <sup class="required">*</sup></label>
+    <textarea
+      rows="10"
+      id="message"
+      name="message"
+      placeholder="Leave your message here"></textarea>
+    <p class="info"><sup>*</sup> Field marked with an asterisk are required.</p>
+    <div>
+      <button
+        type="submit"
+        class="button-primary">
+        Contact me
+      </button>
+    </div>
+  </form>
+</SiteLayout>
+
+<style>
+  form {
+      display: flex;
+      flex-direction: column;
+  }
+
+  input, textarea {
+      border: 1px solid #e1e4e8;
+      border-radius: 0.5em;
+      padding: 0.8em;
+      margin: 0 0 1em;
+      font-size: 1em;
+      font-family: 'Roboto', sans-serif;
+      outline-color: var(--secondary-color);
+  }
+
+  label {
+      margin-bottom: 0.3em;
+  }
+
+  .info {
+      margin-top: 0;
+      font-size: 0.8em;
+  }
+</style>

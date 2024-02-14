@@ -6,12 +6,28 @@ layout: ../layouts/MarkdownWrapperLayout.astro
 
 ### Upcoming
 
-**From WordPress to Gatsby** A talk about Gatsby, and how and why I transitioned from WordPress to Gatsby. 
-The talk will be given for the [WordCamp Antwerp conference](https://2020.antwerp.wordcamp.org/).<br />
-~~(March 27th, 2020)~~ (Postphoned due to COVID-19)
 
+### Past
 
-### Past 
+**Intro to ArchUnit**, An introduction to ArchUnit.
+Talk will be given during an Optis team meeting for colleagues.<br />
+Presentation contained 100% live coding.<br />
+(November 17th, 2023)
+
+**Intro to Astro**, An introduction to Astro.
+Talk will be given during an Optis team meeting for colleagues.<br />
+Slides can be found on [Speacker Deck](https://speakerdeck.com/g00glen00b/intro-to-astro).<br />
+(March 24th, 2023)
+
+**Intro to Astro**, An introduction to Astro.
+Talk will be given during the [JSValley meetup](https://www.meetup.com/jsvalley/events/291771600/).<br />
+Slides can be found on [Speacker Deck](https://speakerdeck.com/g00glen00b/intro-to-astro).<br />
+(March 22th, 2023)
+
+**Spring Boot Moduliths**, An introduction to modular monoliths (Moduliths) with Spring Boot. 
+Talk will be given during an Optis team meeting for colleagues.<br />
+Slides can be found on [Speaker Deck](https://speakerdeck.com/g00glen00b/moduliths).
+(October 21th, 2022)
 
 **Better monitoring with Spring boot Actuator**, An overview of what's possible with Spring boot Actuator and Micrometer.
 Talk will be given to employees of Aquafin.<br />

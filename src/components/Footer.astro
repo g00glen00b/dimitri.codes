@@ -1,4 +1,5 @@
 ---
+// noinspection ES6UnusedImports
 import {Icon} from 'astro-icon';
 import ContentLinks from './ContentLinks.astro';
 import SocialLinks from './SocialLinks.astro';
@@ -28,7 +29,7 @@ const {socialNetworks, author: {name: authorName}, footerLinks} = CONFIG;
         display: grid;
         margin: 0 auto;
         padding: 2rem 1rem;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
         grid-template-rows: auto auto;
     }
 
