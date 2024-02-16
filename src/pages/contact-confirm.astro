@@ -1,0 +1,15 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ConfirmBox from "../components/ConfirmBox.astro"
+import { CONFIG } from "../config/config"
+---
+<SiteLayout
+  showHeaderFooter={true}
+  disableComments={true}
+  title="Contact"
+  description={CONFIG.site.description}
+  path="contact-confirm">
+  <ConfirmBox
+    title="Thank you!"
+    subtitle="Thank you for contacting me. I'll respond to your message as soon as I can."  />
+</SiteLayout>

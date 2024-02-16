@@ -16,13 +16,23 @@ import SiteLayout from "../layouts/SiteLayout.astro"
   <form
     name="contact"
     method="post"
-    data-netlify="true">
+    data-netlify="true"
+    data-netlify-honeypot="special"
+    data-netlify-recaptcha="true"
+    action="/contact-confirm">
     <label for="name">Your name</label>
     <input
       type="text"
       id="name"
       name="name"
       placeholder="ex. Optimus Prime" />
+    <div class="special">
+      <label for="special">Special</label>
+      <input
+        type="text"
+        id="special"
+        name="special" />
+    </div>
     <label for="email">Your e-mail <sup class="required">*</sup></label>
     <input
       type="email"
@@ -76,5 +86,9 @@ import SiteLayout from "../layouts/SiteLayout.astro"
   .info {
       margin-top: 0;
       font-size: 0.8em;
+  }
+
+  .special {
+      display: none;
   }
 </style>

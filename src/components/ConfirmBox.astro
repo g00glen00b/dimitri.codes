@@ -1,0 +1,42 @@
+---
+const {title, subtitle} = Astro.props;
+---
+<div class="confirm">
+  <h1
+    class="confirm__title">
+    {title}
+  </h1>
+  <h2
+    class="confirm__subtitle">
+    {subtitle}
+  </h2>
+  <a
+    href="/"
+    class="confirm__link">
+    Take me to the homepage &rarr;
+  </a>
+</div>
+
+<style>
+    .confirm {
+        padding: 8vw;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .confirm > .confirm__title {
+        font-size: 3rem;
+        line-height: 6rem;
+        margin-bottom: 0;
+        color: var(--text-color-lightest);
+    }
+
+    .confirm > .confirm__subtitle {
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-align: center;
+        margin-top: 0;
+    }
+</style>
