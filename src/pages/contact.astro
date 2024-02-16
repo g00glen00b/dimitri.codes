@@ -52,8 +52,8 @@ import SiteLayout from "../layouts/SiteLayout.astro"
       id="message"
       name="message"
       placeholder="Leave your message here"></textarea>
+    <div data-netlify-recaptcha="true" class="recaptcha"></div>
     <p class="info"><sup>*</sup> Field marked with an asterisk are required.</p>
-    <div data-netlify-recaptcha="true"></div>
     <div>
       <button
         type="submit"
@@ -91,5 +91,9 @@ import SiteLayout from "../layouts/SiteLayout.astro"
 
   .special {
       display: none;
+  }
+
+  .recaptcha {
+      margin-bottom: 1em;
   }
 </style>
