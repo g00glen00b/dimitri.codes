@@ -104,23 +104,27 @@ class SecurityUserDetailsService implements UserDetailsService {
 }
 ```
 
-Within this `UserDetailsService` we have to implement a single method called `loadUserByUsername()`.
-In our case, the e-mail address will be the username, so we use Spring Data to retrieve the user entity by their e-mail address.
+Within this [`UserDetailsService`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetailsService.html) we have to implement a single method called `loadUserByUsername()`.
+This method expects us to return an object of type [`UserDetails`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html), which has several fields, including:
 
-The `UserDetails` interface has several fields, but we will only be using three of them:
+- The username,
+- The hashed password,
+- An indication of whether the account is enabled,
+- An indication of whether the account is expired,
+- An indication of whether the account is locked,
+- An indication of whether the credentials of the account are expired.
 
-1. The username or e-mail address.
-2. The bcrypt hashed password.
-3. An indication of whether our user is enabled or not. A user will be disabled as long as their e-mail address isn't verified.
-
-The way Spring Security will invoke this is the following:
+The way Spring Security will invoke this is by doing the following:
 
 1. First it will hash the password that was used during login.
-2. Then it will retrieve the `UserDetails` from the `UserDetailsService` using the given e-mail.
-3. After that, it will match the given hashd password with the one within the `UserDetails`.
-4. Finally, it will also check whether the `UserDetails` is enabled, non-expired, non-locked etc. 
+2. Then it will retrieve the `UserDetails` from the `UserDetailsService` using the given username.
+3. After that, it will match the given hashed password with the one within the `UserDetails`.
+4. Finally, it will also check whether the `UserDetails` is enabled, non-expired, non-locked etc.
 
 ![Spring Security flow](./images/spring-security-flow.png)
+
+In our example, we will use three of those fields, being the username (which will be our e-mail address), the password and the enabled flag, which we'll toggle as soon as the user verifies their e-mail address.
+Since `UserDetails` is an interface, we need to create our own class, or use Spring's [`User`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/User.html) class.
 
 ### The registration process
 
@@ -168,7 +172,7 @@ UserEntity entity = repository.save(UserEntity.builder()
 
 The next part of our registration process is to send the e-mail to the user.
 To do this, we first need to configure our SMTP server.
-This configuration depends on your SMTP provider, but in my case I will be using Mailhog for development purposes:
+This configuration depends on your SMTP provider, but in my case I will be using [MailHog](https://github.com/mailhog/MailHog) Docker container for development purposes:
 
 ```properties
 spring.mail.host=localhost
@@ -200,6 +204,9 @@ class UserMailService {
     private final SpringTemplateEngine templateEngine;
 }
 ```
+
+The `JavaMailSender` is automatically created as soon as we provide the right properties, and is a wrapper around the [Jakarta Mail](https://jakarta.ee/specifications/mail/) specification.
+`SpringTemplateEngine` on the other hand is Thymeleaf's templating engine with certain Spring features enabled.
 
 Within this class, we first need to write a method to render the HTML with Thymeleaf:
 
@@ -259,6 +266,10 @@ public void register(RegisterRequestDTO request) {
     userMailService.sendVerificationMail(entity); // Add this
 }
 ```
+
+If we now register a new user, we'll get an e-mail that looks like this:
+
+![Example of e-mail within MailHog](./images/mailhog-mail-example.png)
 
 ### Verifying the user
 
