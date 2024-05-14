@@ -35,7 +35,6 @@ export const CONFIG: Config = {
     logo: '/logo-square.png',
     pageSize: 10,
     homePageSize: 10,
-    clickyId: 101423246,
   },
   manifest: {
     backgroundColor: '#FFFFFF',
