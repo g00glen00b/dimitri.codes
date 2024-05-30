@@ -24,7 +24,6 @@ export interface SiteConfig {
   logo: string;
   pageSize: number;
   homePageSize: number;
-  clickyId: number;
 }
 
 export interface ManifestConfig {
