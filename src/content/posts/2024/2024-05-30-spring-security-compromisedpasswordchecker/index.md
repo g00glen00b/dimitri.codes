@@ -43,6 +43,24 @@ public CompromisedPasswordChecker haveIBeenPwnedPasswordChecker() {
 
 If you authenticate now, your application will return a 401 Unauthorized status code if the password has been compromised.
 
+```shell
+# Returns 401 Unauthorized
+curl \
+  -X GET \
+  --location "http://localhost:8080/api/user/current" \
+  -H "Content-Type: application/json" \
+  --basic --user user:password
+```
+
+```shell
+# Returns 200 OK
+curl \
+  -X GET \
+  --location "http://localhost:8080/api/user/current" \
+  -H "Content-Type: application/json" \
+  --basic --user user2:A-Password-That-Is-Not-Common-Or-Shared
+```
+
 ### Creating your own `CompromisedPasswordChecker`
 
 While the default implementation works great, it has a few drawbacks, such as:
