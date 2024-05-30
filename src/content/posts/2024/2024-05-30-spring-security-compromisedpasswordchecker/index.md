@@ -175,6 +175,7 @@ public NbvcxzPasswordChecker nbvcxzPasswordChecker() {
 ### Conclusion
 
 In this blog post, we explored Spring Security's `CompromisedPasswordChecker` and how it can be used to check if a password has been compromised in a data breach.
-While the default implementation uses the Have I Been Pwned API, you can easily create your own implementation to address specific concerns.
+We also discussed how you can create your own `CompromisedPasswordChecker` implementation to check if a password is in a list of common passwords or to verify its entropy.
+This can be useful if you need some offline alternative to the default implementation, which uses the Have I Been Pwned API.
 
 As usual, a full code example can be found on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-security-compromisedpasswordchecker).
