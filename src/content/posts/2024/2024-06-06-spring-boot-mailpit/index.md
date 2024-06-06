@@ -48,7 +48,7 @@ public void send() {
 }
 ```
 
-### Setting up Mailpit with Docker Compose
+### Option 1: Setting up Mailpit with Docker Compose
 
 In this tutorial I'll cover a few options to set up Mailpit.
 The first option is to use [Docker Compose](https://docs.docker.com/compose/).
@@ -89,7 +89,7 @@ spring.mail.host=localhost
 spring.mail.port=1025
 ```
 
-### Setting up Mailpit with Testcontainers in development
+### Option 2: Setting up Mailpit with Testcontainers in development
 
 Since Spring Boot 3.1, you can use [Testcontainers](https://www.testcontainers.com/) during development.
 To do this, add the following dependency to your `pom.xml` file:
@@ -201,7 +201,7 @@ As soon as you open one of the emails, you get to see a screen like this:
 
 Mailpit contains some nice features, such as viewing the email on different devices, and check whether the HTML markup you used is properly supported by various email clients.
 
-### Using Mailpit for integration testing
+### Extra: Using Mailpit for integration testing
 
 In addition to helping you test your email sending functionality, Mailpit can also be used for integration testing.
 For example, you can use Mailpit to verify that your application sends the correct emails under certain conditions.
