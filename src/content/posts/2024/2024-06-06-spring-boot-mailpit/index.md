@@ -131,24 +131,39 @@ GenericContainer<?> mailpitContainer() {
 This code will start a Mailpit container with the `axllent/mailpit:v1.15` image.
 The `withExposedPorts` method exposes the SMTP and web interface ports, and the `waitingFor` method waits for the log message "accessible via" to appear in the logs.
 
-The benefit of using Testcontainers is that Spring can automatically derive connection details from the container, so oftenen you don't need to configure anything in your `application.properties` file.
+The benefit of using Testcontainers is that Spring can automatically derive connection details from the container, so oftene you don't need to configure anything in your `application.properties` file.
 For example, if you create a Postgres testcontainer, Spring will automatically configure the `spring.datasource.*` properties.
+This is thanks to the `@ServiceConnection` annotation.
 
 Sadly, for Mailpit, you still need to configure the `spring.mail.*` properties.
-However, since Testcontainers runs the container on a dynamic port, you need to use the `DynamicPropertyRegistry` as described within [the documentation](https://docs.spring.io/spring-boot/reference/features/dev-services.html#features.dev-services.testcontainers.at-development-time.dynamic-properties).
-To do this, modify the `mailpitContainer()` method as follows:
+However, since Testcontainers runs the container on a dynamic port, you need to create a `DynamicPropertyRegistrar` bean as described within [the documentation](https://docs.spring.io/spring-boot/reference/features/dev-services.html#features.dev-services.testcontainers.at-development-time.dynamic-properties).
+To do this, add the following bean:
 
 ```java
 @Bean
-GenericContainer<?> mailpitContainer(DynamicPropertyRegistry properties) {
-    var container = new GenericContainer<>("axllent/mailpit:v1.15")
-        .withExposedPorts(1025, 8025)
-        .waitingFor(Wait.forLogMessage(".*accessible via.*", 1));
-    properties.add("spring.mail.host", container::getHost);
-    properties.add("spring.mail.port", container::getFirstMappedPort);
-    return container;
+public DynamicPropertyRegistrar mailpitRegistrar(GenericContainer<?> mailpitContainer) {
+    return registry -> {
+        registry.add("spring.mail.host", mailpitContainer::getHost);
+        registry.add("spring.mail.port", mailpitContainer::getFirstMappedPort);
+    };
 }
 ```
+
+> **Important**: The `DynamicPropertyRegistrar` is new since **Spring Boot 3.4**.
+> Before that, you had to inject the `DynamicPropertyRegistry` and add the properties to it.
+> For example:
+> 
+> ```java
+> @Bean
+> GenericContainer<?> mailpitContainer(DynamicPropertyRegistry properties) {
+>    var container = new GenericContainer<>("axllent/mailpit:v1.15")
+>        .withExposedPorts(1025, 8025)
+>        .waitingFor(Wait.forLogMessage(".*accessible via.*", 1));
+>    properties.add("spring.mail.host", container::getHost);
+>    properties.add("spring.mail.port", container::getFirstMappedPort);
+>    return container;
+> }
+>```
 
 Another thing I noticed is that the container-related properties are not immediately available.
 Due to this, Spring's `MailSenderAutoConfiguration` isn't bootstrapped since it requires the `spring.mail.host` property to be present.
@@ -163,14 +178,12 @@ To solve that problem, you can map another dynamic property containing the mappe
 
 ```java
 @Bean
-GenericContainer<?> mailpitContainer(DynamicPropertyRegistry properties) {
-    var container = new GenericContainer<>("axllent/mailpit:v1.15")
-        .withExposedPorts(1025, 8025)
-        .waitingFor(Wait.forLogMessage(".*accessible via.*", 1));
-    properties.add("spring.mail.host", container::getHost);
-    properties.add("spring.mail.port", container::getFirstMappedPort);
-    properties.add("mailpit.web.port", () -> container.getMappedPort(8025)); // Add this
-    return container;
+public DynamicPropertyRegistrar mailpitRegistrar(GenericContainer<?> mailpitContainer) {
+    return registry -> {
+        registry.add("spring.mail.host", mailpitContainer::getHost);
+        registry.add("spring.mail.port", mailpitContainer::getFirstMappedPort);
+        registry.add("mailpit.web.port", () -> mailpitContainer.getMappedPort(8025));
+    };
 }
 ```
 
