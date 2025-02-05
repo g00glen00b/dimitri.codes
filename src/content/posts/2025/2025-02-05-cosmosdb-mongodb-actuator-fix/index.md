@@ -2,7 +2,7 @@
 title: "Fixing Spring Boot's MongoDB Healthcheck for Cosmos DB"
 featuredImage: "/logos/cosmosdb.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "Azure", "MonngoDB"]
+tags: ["Spring", "Spring boot", "Azure", "MongoDB"]
 excerpt: "In this tutorial, we will fix Spring Boot's health actuator for MongoDB if you're using CosmosDB."
 ---
 
