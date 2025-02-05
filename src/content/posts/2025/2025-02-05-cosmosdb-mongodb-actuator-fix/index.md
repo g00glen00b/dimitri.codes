@@ -1,5 +1,5 @@
 ---
-title: "Fixing Spring Boot's MongoDB Healthcheck for Cosmos DB"
+title: "Fixing Spring Boot's MongoDB healthcheck for Cosmos DB"
 featuredImage: "/logos/cosmosdb.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Azure", "MongoDB"]
