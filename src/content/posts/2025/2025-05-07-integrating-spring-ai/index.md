@@ -780,6 +780,7 @@ MyResponse response = converter.convert(jsonResponse);
 Be aware, you're normally able to configure the JSON schema through properties by setting `spring.ai.openai.chat.options.response-format.schema`.
 This property is however bugged (see [issue](https://github.com/spring-projects/spring-ai/issues/2969)).
 A solution will be available in 1.0.0 RC1.
+For that reason, I recommend setting the JSON schema through the `OpenAiChatOptions` class as I've done in this example.
 
 ## Conclusion
 
