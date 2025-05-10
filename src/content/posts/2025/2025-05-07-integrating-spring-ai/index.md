@@ -37,7 +37,8 @@ In this blogpost I'll primarily focus on the chat capabilities, since these prov
     1. [Safeguard](#response-technique-1-safeguard)
     2. [Structured response](#response-technique-2-structured-response)
         1. [By prompting](#structured-response-by-prompting)
-        2. [Response format](#structured-response-by-response-format) 
+        2. [Response format](#structured-response-by-response-format)
+4. [Conclusion](#conclusion)
 
 ## How do you integrate with a chat model
 
