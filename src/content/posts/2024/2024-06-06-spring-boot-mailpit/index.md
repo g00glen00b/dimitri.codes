@@ -131,7 +131,7 @@ GenericContainer<?> mailpitContainer() {
 This code will start a Mailpit container with the `axllent/mailpit:v1.15` image.
 The `withExposedPorts` method exposes the SMTP and web interface ports, and the `waitingFor` method waits for the log message "accessible via" to appear in the logs.
 
-The benefit of using Testcontainers is that Spring can automatically derive connection details from the container, so oftene you don't need to configure anything in your `application.properties` file.
+The benefit of using Testcontainers is that Spring can automatically derive connection details from the container, so often you don't need to configure anything in your `application.properties` file.
 For example, if you create a Postgres testcontainer, Spring will automatically configure the `spring.datasource.*` properties.
 This is thanks to the `@ServiceConnection` annotation.
 
