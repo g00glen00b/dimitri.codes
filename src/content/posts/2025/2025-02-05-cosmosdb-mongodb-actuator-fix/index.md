@@ -20,13 +20,13 @@ The error you'll see is something like this:
 }
 ```
 
-In addition, you'll see a a stacktrace containing a message lik this:
+In addition, you'll see a stacktrace containing a message like this:
 
 ```
 Caused by: com.mongodb.MongoCommandException: Command failed with error 115 (CommandNotSupported): 'Command hello not supported.' on server my-cosmosdb.mongo.cosmos.azure.com:10255. The full response is {"ok": 0.0, "errmsg": "Command hello not supported.", "code": 115, "codeName": "CommandNotSupported"}
 ```
 
-The reason you're suddenly see this exception is because in Spring Boot 3.2.7, the command to check the MongoDB health has been changed.
+The reason you're suddenly seeing this exception is because in Spring Boot 3.2.7, the command to check the MongoDB health has been changed.
 Previously, it used the `db.runCommand({isMaster: 1})` command ([documentation](https://www.mongodb.com/docs/v4.4/reference/command/isMaster/)).
 
 However, this check was proven to be flaky, because the `isMaster` command is not a part of the stable API and was deprecated in MongoDB 4.4.2 ([documentation](https://www.mongodb.com/docs/v5.0/reference/stable-api-changelog/)).
