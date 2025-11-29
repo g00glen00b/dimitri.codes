@@ -4,7 +4,7 @@ disableComments: true
 layout: ../layouts/MarkdownWrapperLayout.astro
 ---
 
-My name is Dimitri “g00glen00b” Mestdagh. I’m a 34 year old full-stack developer from Antwerp, Belgium.
+My name is Dimitri “g00glen00b” Mestdagh. I’m a 35 year old full-stack developer from Antwerp, Belgium.
 I was fascinated with technology quite early when I got my first computer running Windows Me with 64Mb of RAM.
 I spent a large potion of my youth on [IRC](https://en.wikipedia.org/wiki/Internet_Relay_Chat), eventually getting introduced to programming by writing scripts for [mIRC](https://en.wikipedia.org/wiki/MIRC) and by spending various hours while programming my graphing calculator.
 
@@ -12,7 +12,7 @@ Currently I'm:
 
 - A full-stack developer for [Cronos](https://cronos-groep.be/en/),
 - Author of [dimitri.codes](https://dimitri.codes) and guest poster on a few other sites,
-- Technical lead at Aquafin,
+- Full-stack developer at Aquafin,
 - Starting with speaking at some events
 - Volunteering at CoderDojo Belgium
 
