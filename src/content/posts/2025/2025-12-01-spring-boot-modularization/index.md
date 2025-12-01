@@ -78,7 +78,7 @@ Spring Boot always had a very extensive list of starter libraries, but in some c
 For example, if you had a CLI project that had to call a REST API, then you had to include `spring-boot-starter-web`.
 However, since `spring-boot-starter-web` included everything web-related, including setting up your own web server, your project would be too bloated and you had to disable certain things you didn't need.
 
-With Spring Boot 4 on the other hand, `spring-boot-starter-web` has been deprecated. If you need a web server with Spring Web MVC, then you include `spring-boot-starter-web`.
+With Spring Boot 4 on the other hand, `spring-boot-starter-web` has been deprecated. If you need a web server with Spring Web MVC, then you include `spring-boot-starter-webmvc`.
 Do you need a REST client? Then you include `spring-boot-starter-restclient`.
 
 ## Testing starters
