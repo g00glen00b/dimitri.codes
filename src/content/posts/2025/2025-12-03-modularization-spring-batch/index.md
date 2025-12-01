@@ -65,4 +65,4 @@ Pick the one matching the starting library you chose.
 Spring Batch now uses a resourceless job repository by default. This behavior can be overriden by using the new `spring-boot-starter-batch-jdbc` starter.
 Also be aware that your testing approach might change if you work with `ResourcelessJobRepository`.
 
-This blogpost is a part of the [Advent of Spring Boot 2025 series](/tag/advent-of-spring).
+This blogpost is a part of the [Advent of Spring Boot 2025 series](/advent-of-spring).

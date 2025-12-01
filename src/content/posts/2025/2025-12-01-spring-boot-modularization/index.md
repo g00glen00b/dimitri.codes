@@ -97,4 +97,4 @@ In addition, it will also make certain tasks a lot easier as there will be more 
 For migrating, I suggest reading the [official migration guide](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide#starters) as this documents which starters have been deprecated and which ones have been replaced.
 For new projects, I suggest starting with [Spring Initializr](https://start.spring.io/#!type=maven-project) as this will configure the starters and testing libraries you need for you.
 
-This blogpost is a part of the [Advent of Spring Boot 2025 series](/tag/advent-of-spring).
+This blogpost is a part of the [Advent of Spring Boot 2025 series](/advent-of-spring).

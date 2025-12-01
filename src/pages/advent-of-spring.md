@@ -13,3 +13,4 @@ It will be an **advent of Spring Boot 4 related tips**!
 Posts that were published as part of this collection:
 
 1. [Spring Boot's Modularization](../spring-boot-modularization)
+2. [Improvements to HTTP interfaces](../restclient)

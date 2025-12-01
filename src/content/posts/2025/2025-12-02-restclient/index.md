@@ -97,4 +97,4 @@ RestClientHttpServiceGroupConfigurer groupConfigurer() {
 
 Spring Boot's improvements to the HTTP exchange interfaces turn it into a very handy feature that makes me wonder how we survived this long without!
 
-This blogpost is a part of the [Advent of Spring Boot 2025 series](/tag/advent-of-spring).
+This blogpost is a part of the [Advent of Spring Boot 2025 series](/advent-of-spring).

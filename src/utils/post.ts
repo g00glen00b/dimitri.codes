@@ -49,5 +49,7 @@ export function kebabCase(name: string) {
 }
 
 export function isPublished(post: Post): boolean {
-  return import.meta.env.DEV || !isFuture(post.publishedDate);
+  return true;
+  // TODO: Temporarily disabled during Advent of Spring to avoid having to rebuild every day
+  // return import.meta.env.DEV || !isFuture(post.publishedDate);
 }
