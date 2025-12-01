@@ -97,7 +97,7 @@ class DoseTypeConverter implements AttributeConverter<DoseType, String> {
     }
 
     @Override
-    public ZoneId convertToEntityAttribute(String dbData) {
+    public DoseType convertToEntityAttribute(String dbData) {
         return Arrays
             .stream(DoseType.values())
             .filter(doseType -> doseType.getLabel().equals(dbData))

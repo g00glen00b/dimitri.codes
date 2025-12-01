@@ -15,7 +15,7 @@ It will be an advent of Spring Boot 4 related tips!
 A few days ago, I talked about the [modularization of Spring Boot](./spring-boot-modularization).
 This changed several things within Spring Boot, including within Spring Batch.
 
-## Two starters in stead of one
+## Two starters instead of one
 
 Originally, Spring Batch had just a single Spring Boot starter called `spring-boot-starter-batch`.
 By default, this persisted the batch state within database tables.
@@ -62,7 +62,7 @@ Pick the one matching the starting library you chose.
 
 ## Conclusion
 
-Spring Batch now uses a resourceless job repository by default. This behavior can be overriden by using the new `spring-boot-starter-batch-jdbc` starter.
+Spring Batch now uses a resourceless job repository by default. This behavior can be overridden by using the new `spring-boot-starter-batch-jdbc` starter.
 Also be aware that your testing approach might change if you work with `ResourcelessJobRepository`.
 
 This blogpost is a part of the [Advent of Spring Boot 2025 series](/advent-of-spring).
