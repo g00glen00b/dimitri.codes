@@ -62,7 +62,7 @@ Up until Spring Boot 4, all these autoconfigurations sat within a library called
 So regardless of whether you used Hazelcast, Cassandra or whatever other technology Spring Boot supports, those autoconfigurations were present in your project.
 
 However, since Spring Boot 4, this is no longer the case.
-Many of the autoconfiguratiosn have been moved to the many starters Spring Boot has.
+Many of the autoconfigurations have been moved to the many starters Spring Boot has.
 
 The result is that the condition evaluation report within Spring Boot 4 reports a lot less autoconfigurations!
 For example, a Spring Boot 3 project with `spring-boot-starter-web` included **245 autoconfigurations**.
