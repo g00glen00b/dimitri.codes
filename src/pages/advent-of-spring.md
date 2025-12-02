@@ -14,3 +14,4 @@ Posts that were published as part of this collection:
 
 1. [Spring Boot's Modularization](../spring-boot-modularization)
 2. [Improvements to HTTP interfaces](../restclient)
+3. [Modularization of Spring Batch](../modularization-spring-batch)
