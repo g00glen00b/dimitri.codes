@@ -52,14 +52,14 @@ var jobExecutions = jobExplorer.findRunningJobExecutions(jobName);
 jobExplorer.stop(jobExecutions.getFirst().getId());
 ```
 
-To simplify this, `JobLauncher` extends the `JobOperator` interface.
+To simplify this, `JobOperator` now extends the `JobLauncher` interface.
 This means you now have a single interface you can use to both start and stop Spring Batch jobs.
 
 ```java
 // Starting with Spring Boot 4
-jobLauncher.run(job, jobParameters);
+jobOperator.run(job, jobParameters);
 var jobExecutions = jobRepository.findRunningJobExecutions(jobName);
-jobLauncher.stop(jobExecutions.getFirst().getId());
+jobOperator.stop(jobExecutions.getFirst().getId());
 ```
 
 ## Conclusion
