@@ -25,28 +25,29 @@ For example, starting with Spring Boot 4 and Spring Framework 7, Spring's Expres
 
 One of the new features is that you can now safely unwrap `Optional`.
 For example, imagine we have a `ProfileService` that returns the current user their profile (eg. if you're authenticated).
-Whenever the user isn't authenticated, we would return `Optional.empty()` and whenever the user is authenticated, we would return an `Optional<Profile>`.
+Whenever the user isn't authenticated, we would return `null` and whenever the user is authenticated, we would return a `Profile`.
 
 To simplify this, I'm using `Math.random()`:
 
 ```java
 @Service
 public class ProfileService {
-    public Optional<Profile> getCurrentUserProfile() {
+    @Nullable
+    public Profile getCurrentUserProfile() {
         if (Math.random() < 0.5d) {
-            return Optional.of(new Profile("Bob"));
+            return new Profile("Bob");
         } else {
-            return Optional.empty();
+            return null;
         }
     }
 }
 ```
 
-If you would like to retrieve the name of the current profile within an `@Value`, prior to Spring Boot 4 you would have to write this:
+If you would like to retrieve the name of the current profile within a `@Value`, you could do something like this:
 
 ```java
 @Bean
-ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile.orElse(null)?.name}") String profileName) {
+ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile?.name}") String profileName) {
     var log = LoggerFactory.getLogger(getClass());
     return _ -> log.info("Current profile name: {}", profileName);
 }
@@ -57,11 +58,34 @@ ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProf
 > To test this example, you need to run the application a few times for the `Math.random()` to work.
 
 By using the `#{}` expression, we can refer to any bean, which is why `#{profileService}` would return the `ProfileService` bean.
-To unwrap the `Optional` that's being returned from `getCurrentuserProfile()` though, we have to call `orElse(null)` and then use the **safe navigation operator** (`?`) to obtain `name` in case the object is non-null.
-
-Starting with Spring Boot 4 however, the safe navigation operator also works with `Optional`, and thus you could simplify the above code to:
+However, our `ProfileService.getCurrentUserProfile()` should ideally work with `Optional<Profile>`, so we could refactor it like this:
 
 ```java
+public Optional<Profile> getCurrentUserProfile() {
+    if (Math.random() < 0.5d) {
+        return Optional.of(new Profile("Bob"));
+    } else {
+        return Optional.empty();
+    }
+}
+```
+
+Sadly, the unwrapping of `Optional` wasn't possible prior to Spring Boot 4. 
+So in Spring Boot 3.x and before, you had to first turn the `Optional` into a nullable value, which results in ugly code like this where we use the `orElse(null)` method:
+
+```java
+@Bean
+// <= Spring Boot 3.x
+ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile.orElse(null)?.name}") String profileName) {
+    var log = LoggerFactory.getLogger(getClass());
+    return _ -> log.info("Current profile name: {}", profileName);
+}
+```
+
+Starting with Spring Boot 4 however, the safe navigation operator also works with `Optional`, and thus you could use the same code as we did for the nullable example:
+
+```java
+// >= Spring Boot 4.x
 @Bean
 ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile?.name}") String profileName) {
     var log = LoggerFactory.getLogger(getClass());
@@ -74,9 +98,20 @@ ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProf
 Another operator that has changed is the **elvis operator**.
 This operator allows you to return a default value in case the left-hand expression is null-like.
 
-For example, if we take a look at the previous example, we could use the elvis operator to return "n/a" in case the `Optional` is empty:
+Just like before, if our example returned a `Profile` or `null`, we could write something like this:
 
 ```java
+@Bean
+ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile?.name ?: 'n/a'}") String profileName) {
+    var log = LoggerFactory.getLogger(getClass());
+    return _ -> log.info("Current profile name: {}", profileName);
+}
+```
+
+But again, this wasn't possible with `Optional`. So just like last time, we had to use `orElse(null)` in Spring Boot 3.x and before:
+
+```java
+// <= Spring Boot 3.x
 @Bean
 ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile.orElse(null)?.name ?: 'n/a'}") String profileName) {
     var log = LoggerFactory.getLogger(getClass());
@@ -84,12 +119,13 @@ ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProf
 }
 ```
 
-As you can see, using `Optional` was kind of a pain with versions prior to Spring Boot 4.
-In this case, it would probably even be better to use the `Optional.orElse()` method and not use the elvis operator at all.
+As you can see, handling `Optional` was kind of a pain prior to Spring Boot 4.
+In this case, it probably would be better not to use the Elvis operator at all.
 
-However, starting with Spring Boot 4, `Optional.empty()` is also treated as a null-like value, which means you can simplify above code to:
+Starting with Spring Boot 4, we can do the same thing as with nullable values:
 
 ```java
+// >= Spring Boot 4.x
 @Bean
 ApplicationRunner logCurrentUserProfile(@Value("#{profileService.currentUserProfile?.name ?: 'n/a'}") String profileName) {
     var log = LoggerFactory.getLogger(getClass());
