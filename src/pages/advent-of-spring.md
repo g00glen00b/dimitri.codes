@@ -16,3 +16,4 @@ Posts that were published as part of this collection:
 2. [Improvements to HTTP interfaces](../restclient)
 3. [Modularization of Spring Batch](../modularization-spring-batch)
 4. [New way to map enums with Spring Boot 4 and Hibernate 7](.../spring-boot-enumeratedvalue)
+5. [Null safety in Spring Boot 4 with JSpecify](../null-safety-spring-boot)
