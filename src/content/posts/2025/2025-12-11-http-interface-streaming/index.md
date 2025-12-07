@@ -1,6 +1,6 @@
 ---
 title: "Streaming your request and response bodies with Spring's HTTP interfaces"
-featuredImage: "/logos/spring-security.png"
+featuredImage: "/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring"]
 excerpt: "If you're handling large request or response bodies, streaming them could be useful. Starting with Spring Boot 4, using InputStream and OutputStream is now directly supported within the HTTP interface clients."
