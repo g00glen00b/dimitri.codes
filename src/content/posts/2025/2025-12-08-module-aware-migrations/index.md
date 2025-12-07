@@ -1,6 +1,6 @@
 ---
 title: "Module-aware database migrations with Modulith"
-featuredImage: "/logos/spring-boot.png"
+featuredImage: "/logos/modulith.jpeg"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Modulith", "Advent of Spring"]
 excerpt: "Together with Spring framework v7 and Spring Boot v4, Spring Modulith v2 was also released. One of its new killer-features is its module-aware database migrations when using Flyway."

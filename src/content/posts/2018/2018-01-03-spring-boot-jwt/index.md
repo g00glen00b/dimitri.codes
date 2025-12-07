@@ -2,7 +2,7 @@
 title: "Securing Spring boot applications with JWT"
 featuredImage: "/logos/spring-security.png"
 categories: ["Java", "Tutorials"]
-tags: ["JWT", "Microservices", "Spring", "Spring boot", "Spring security"]
+tags: ["JWT", "Microservices", "Spring", "Spring boot", "Spring Security"]
 excerpt: "JWT is a popular type of token. In this tutorial I'll show you how to integrate a JWT authentication mechanism with Spring, and within a microservice oriented architecture."
 ---
 

@@ -2,7 +2,7 @@
 title: "Running a Spring batch at a schedule"
 featuredImage: "/logos/spring-batch.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring batch", "Spring boot"]
+tags: ["Spring Batch", "Spring boot"]
 excerpt: "Writing a RESTful webservice with Spring is easy, even easier with Spring Boot. But did you also know that validation is quite easy as well with Spring?"
 ---
 

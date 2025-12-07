@@ -19,3 +19,4 @@ Posts that were published as part of this collection:
 5. [Null safety in Spring Boot 4 with JSpecify](/null-safety-spring-boot)
 6. [Support for `Optional` in Spring's Expression Language](/optional-support-spel)
 7. [Simplification of the Spring Batch API](/simplification-spring-batch-api)
+8. [Module-aware database migrations with Modulith](/module-aware-migrations)

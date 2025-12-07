@@ -2,7 +2,7 @@
 title: "Securing your REST API with Spring Security"
 featuredImage: "/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "Spring security"]
+tags: ["Spring", "Spring boot", "Spring Security"]
 excerpt: "In this tutorial I'm going to write a small REST API with Spring Boot and Spring Web MVC. Securing the application will be done with Spring Security."
 ---
 

@@ -2,7 +2,7 @@
 title: "Securing your GraphQL API with Spring Security"
 featuredImage: "/logos/graphql.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "GraphQL", "Spring security"]
+tags: ["Spring", "Spring boot", "GraphQL", "Spring Security"]
 excerpt: "In this tutorial, I'll show how you can use Spring Security with Spring boot and GraphQL."
 ---
 

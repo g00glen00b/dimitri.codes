@@ -1,6 +1,6 @@
 ---
 title: "Simplification of the Spring Batch API"
-featuredImage: "/logos/spring-boot.png"
+featuredImage: "/logos/spring-batch.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring Batch", "Advent of Spring"]
 excerpt: "Spring Batch not only became modularized, but also simplified its API. API's like JobExplorer and JobOperator now got merged into other API's, simplifying your applications!"

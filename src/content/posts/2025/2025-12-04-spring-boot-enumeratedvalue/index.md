@@ -1,8 +1,8 @@
 ---
 title: "New way to map enums with Spring Boot 4 and Hibernate 7"
-featuredImage: "/logos/spring-boot.png"
+featuredImage: "/logos/spring-data.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "Advent of Spring", "Hibernate"]
+tags: ["Spring", "Spring boot", "Advent of Spring", "Hibernate", "JPA", "Spring Data"]
 excerpt: "Custom enum mappings in your entities became a lot easier in Spring Boot 4 thanks to some changes within Hibernate 7 and JPA 3.2. Check out this blogpost to learn more!"
 ---
 

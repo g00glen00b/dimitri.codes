@@ -1,6 +1,6 @@
 ---
 title: "Modularization of Spring Batch"
-featuredImage: "/logos/spring-boot.png"
+featuredImage: "/logos/spring-batch.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring", "Spring Batch"]
 excerpt: "Spring Boot 4 introduces a new default for Spring Batch, no longer requiring any database table. In this blogpost I'll talk more about the impact this has on your code."
