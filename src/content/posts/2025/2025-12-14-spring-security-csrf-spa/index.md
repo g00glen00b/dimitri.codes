@@ -1,9 +1,9 @@
 ---
 title: "Configuring CSRF for Single Page Applications with Spring Security"
-featuredImage: "/logos/micrometer.png"
+featuredImage: "/logos/spring-security.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring Security", "Advent of Spring"]
-excerpt: ""
+excerpt: "Spring Security v7 made configuring CSRF protection for Single Page Applications a lot easier. In this blogpost I'll talk about the history and the improvements!"
 ---
 
 ## Introduction

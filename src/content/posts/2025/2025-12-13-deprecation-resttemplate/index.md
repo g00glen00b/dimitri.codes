@@ -1,6 +1,6 @@
 ---
 title: "Deprecation of RestTemplate"
-featuredImage: "/logos/micrometer.png"
+featuredImage: "/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring"]
 excerpt: "RestTemplate has been considered feature-complete for a while now, but what's the state of it in Spring Boot 4?"
