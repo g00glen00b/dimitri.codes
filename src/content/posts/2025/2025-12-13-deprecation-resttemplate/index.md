@@ -50,3 +50,5 @@ That brings us to Spring framework v7 (Spring Boot v4), where `RestTemplate` is 
 
 After a bumpy parcours, `RestTemplate` will officially be deprecated next year.
 Using it in new Spring Boot v4 projects probably isn't a great idea, and you should consider switching to `RestClient` (I assume that if you switched over to the reactive stack already, you probably already use the other alternative being `WebClient`).
+
+This blogpost is a part of the [Advent of Spring Boot 2025 series](/advent-of-spring).

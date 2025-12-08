@@ -20,3 +20,4 @@ Posts that were published as part of this collection:
 6. [Support for `Optional` in Spring's Expression Language](/optional-support-spel)
 7. [Simplification of the Spring Batch API](/simplification-spring-batch-api)
 8. [Module-aware database migrations with Modulith](/module-aware-migrations)
+9. [`HttpSecurity` customizer in Spring Boot 4](/httpsecurity-customizer)

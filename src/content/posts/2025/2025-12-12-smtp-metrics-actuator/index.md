@@ -171,6 +171,18 @@ In addition, there are also tags to identify certain SMTP server.
 These tags can be used in case you're using multiple SMTP servers.
 For example, you could target an SMTP server by its host by visiting `http://localhost:8080/actuator/metrics/mail.send?tag=server.address:localhost`.
 
+## Traces
+
+In addition to metrics, Micrometer also exposes traces.
+With the SMTP instrumentation available, you can now see SMTP-related traces as well.
+We can expose these to platforms like Jaeger or Zipkin through OpenTelemetry.
+
+For example, this is what it looks like in Jaeger:
+
+![Jaeger traces](./images/jaeger-traces.png)
+
+As you can see, there's now a separate "mail send" span that exposes some tags such as `smtp.message.to`, `smtp.message.subject`, ... .
+
 ## Conclusion
 
 While it's not yet documented and not yet autoconfigured, using the new `InstrumentedTransport` is a great way of monitoring SMTP performance issues within your Spirng Boot application.
