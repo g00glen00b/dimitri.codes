@@ -21,3 +21,5 @@ Posts that were published as part of this collection:
 7. [Simplification of the Spring Batch API](/simplification-spring-batch-api)
 8. [Module-aware database migrations with Modulith](/module-aware-migrations)
 9. [`HttpSecurity` customizer in Spring Boot 4](/httpsecurity-customizer)
+10. [OAuth2 Client support for HTTP interfaces](/http-interface-oauth)
+11. [Streaming your request and response bodies with Spring's HTTP interfaces](/http-interface-streaming)
