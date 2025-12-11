@@ -23,3 +23,4 @@ Posts that were published as part of this collection:
 9. [`HttpSecurity` customizer in Spring Boot 4](/httpsecurity-customizer)
 10. [OAuth2 Client support for HTTP interfaces](/http-interface-oauth)
 11. [Streaming your request and response bodies with Spring's HTTP interfaces](/http-interface-streaming)
+12. [Monitoring your SMTP metrics with Spring Boot 4 and Micrometer](/smtp-metrics-actuator)
