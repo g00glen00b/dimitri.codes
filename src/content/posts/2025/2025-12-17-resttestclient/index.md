@@ -12,13 +12,13 @@ Spring Boot 4 has been released last month!
 Considering all the new features it has, I decided to write about these features throughout the month of December.
 It will be an advent of Spring Boot 4 related tips!
 
-When `WebClient` was added to the Spring framework, the Spring team also included a `WebTestClient`.
-`WebTestClient` is a testing utility class that works on top of `WebClient` to make it easy to test your API's (eg. Spring controllers).
+When `WebClient` was added to the Spring Framework, the Spring team also included a `WebTestClient`.
+`WebTestClient` is a testing utility class that works on top of `WebClient` to make it easy to test your APIs (e.g., Spring controllers).
 
-With the release of Spring framework 7 and Spring Boot 4, the same can now also be said for `RestClient`.
-In this blogpost I'll show the possibilities with the new `RestTestClient`.
+With the release of Spring Framework 7 and Spring Boot 4, the same can now also be said for `RestClient`.
+In this blog post, I'll show the possibilities with the new `RestTestClient`.
 
-## Set up
+## Setup
 
 If you want to test your Spring controllers with the new `RestTestClient`, you first need to make sure you import the proper module.
 With Spring's new modular architecture, this can be found within **spring-boot-starter-webmvc-test**:
@@ -31,7 +31,7 @@ With Spring's new modular architecture, this can be found within **spring-boot-s
 </dependency>
 ```
 
-In addition, imagine a `TeskController` with the following endpoint for creating a task:
+In addition, imagine a `TaskController` with the following endpoint for creating a task:
 
 ```java
 @RestController
@@ -48,12 +48,12 @@ public class TaskController {
 }
 ```
 
-> **Note**: The way that `TaskService` works is not relevant for this blogpost.
-> Just keep in mind that it just contains some simple CRUD-operations.
+> **Note**: The way that `TaskService` works is not relevant for this blog post.
+> Just keep in mind that it just contains some simple CRUD operations.
 
 This method will accept a `CreateTaskDTO` request body, which has a `description` and `dueAt` field.
 Since tasks will be user-bound, I'm also injecting Spring Security's `UserDetails` into my controller, or at least my own implementation called `CustomUserDetails`.
-This class looks pretty basic, but simply has a `UserId` next to the username + password:
+This class looks pretty basic, but simply has a `UserId` next to the username and password:
 
 ```java
 public record CustomUserDetails(UserId userId, String username, String password) implements UserDetails {
@@ -61,8 +61,8 @@ public record CustomUserDetails(UserId userId, String username, String password)
 }
 ```
 
-> **Note**: The way that this `CustomUserDetails` works is not relevant for the rest of this blogpost.
-> Just know that I'm using it to obtain the currently authenticated user their ID.
+> **Note**: The way that this `CustomUserDetails` works is not relevant for the rest of this blog post.
+> Just know that I'm using it to obtain the currently authenticated user's ID.
 
 Then to persist the task, I wrote some logic that uses a random UUID as its ID, and I initially set the `completed` flag of a task to `false`.
 For that purpose, I'm using the following DDL:
@@ -82,15 +82,15 @@ create table task (
 
 ## Testing modes
 
-The nice thing about `RestTestClient` is that you can write both unit tests, integration tests and end-to-end tests without having to change how you call your API within your test.
+The nice thing about `RestTestClient` is that you can write both unit tests, integration tests, and end-to-end tests without having to change how you call your API within your test.
 The way this works is that `RestTestClient` can be bound to four types of context:
 
-1. You can **bind** it to a **controller**, which would allow you to write **unit tests**
+1. You can **bind** it to a **controller**, which allows you to write **unit tests**.
 2. You can **bind** it to `MockMvc`, which allows you to write **unit tests including validation and security**.
 3. You can **bind** it to a `WebApplicationContext`, which allows you to write **integration tests**.
 4. You can **bind** it to a running server, which allows you to write **end-to-end tests**.
 
-In this blogpost I'll cover all four binding modes.
+In this blog post, I'll cover all four binding modes.
 
 ## Binding `RestTestClient` to a controller
 
@@ -111,8 +111,8 @@ class TaskControllerTest {
 ```
 
 In this mode, you are responsible for creating the controller instance as the Spring container is not set up during these tests.
-This also means that if your controller has any dependencies, you need to mock and inject them by yourself.
-For example, using Mockito that would be:
+This also means that if your controller has any dependencies, you need to mock and inject them yourself.
+For example, using Mockito, that would be:
 
 ```java
 @ExtendWith(MockitoExtension.class)
@@ -136,7 +136,7 @@ class TaskControllerTest {
 So, as there is no context, this means that you can only test the basic implementation of your controller.
 You cannot test anything security-related, nor can you test things like bean validations within your DTOs.
 
-So for example, you could now write a test like this to see whether the `TaskService.create()` was correctly invoked:
+So, for example, you could now write a test like this to see whether the `TaskService.create()` was correctly invoked:
 
 ```java
 @Test
@@ -172,7 +172,7 @@ void createTask() {
 }
 ```
 
-In this test I'm doing two things:
+In this test, I'm doing two things:
 
 1. I'm calling the API and verifying that the response matches the values within the `result` object.
 2. I'm checking whether the parameters passed to `TaskService` match the request body.
@@ -254,7 +254,7 @@ public class TaskControllerMockMvcTest {
 ```
 
 Now that we're using the Spring container, we can do things a bit differently.
-First of all, to inject mocks we now need to use Spring's wrapper for Mockito, for example:
+First of all, to inject mocks, we now need to use Spring's wrapper for Mockito, for example:
 
 ```java
 @WebMvcTest(TaskController.class)
@@ -268,7 +268,7 @@ public class TaskControllerMockMvcTest {
     // ...
 ```
 
-Also, since we're using `MockMvc` we can also test both bean validations and security-related code.
+Also, since we're using `MockMvc`, we can also test both bean validations and security-related code.
 To do this, I'm also going to import my security configuration and mock my `CustomUserDetailsService`:
 
 ```java
@@ -282,7 +282,7 @@ public class TaskControllerMockMvcTest {
 }
 ```
 
-Now, we can write a similar test like before:
+Now, we can write a similar test as before:
 
 ```java
 @Test
@@ -324,14 +324,14 @@ void createTask() {
 
 The major difference is that we no longer need to use any workaround for our `@AuthenticationPrincipal` since we're now capable of authenticating.
 This is why I'm setting basic authentication headers in my test.
-For the `CustomUserDetailsServie.loadByUsername()` method I'm using the same `USER` field as before.
-Now the hash is important though as Spring Security will actually match it against the given password.
+For the `CustomUserDetailsService.loadByUsername()` method, I'm using the same `USER` field as before.
+Now the hash is important, though, as Spring Security will actually match it against the given password.
 
 > **IMPORTANT**: If you test with `MockMvc`, then **no actual requests are being sent**. The "HTTP layer" is completely mocked!
 
 ## Binding `RestTestClient` to `WebApplicationContext`
 
-The third way to test with `RestTestClient` is to bind it to your Spring's application context.
+The third way to test with `RestTestClient` is to bind it to your Spring application context.
 This means that you no longer have to rely on a partial slice of your application, but on the entire Spring context.
 The easiest way to obtain this application context is by testing with `@SpringBootTest`:
 
@@ -352,7 +352,7 @@ public class TaskControllerContextTest {
 }
 ```
 
-Now that we're running tests against the actual Spring context, we have to do things a bit different again.
+Now that we're running tests against the actual Spring context, we have to do things a bit differently again.
 The first thing we need to realize is that we're now fully constructing all beans, so no more mocks.
 This means that we also need to work against a real database.
 The easiest way of setting up a database is by using **Testcontainers**.
@@ -383,7 +383,7 @@ public class TaskControllerContextTest {
 ```
 
 Another important change is that I now also need to make sure my schema is properly initialized.
-To do this, you can do this in several ways, but the easiest way is by relying on a framework such as **Flyway** to execute your datbaase migrations for you. 
+To do this, you can do this in several ways, but the easiest way is by relying on a framework such as **Flyway** to execute your database migrations for you.
 
 And then finally, we also need to make sure that before each test, all data is certainly cleared and that there is a test user present.
 The easiest way to provide this is by creating a SQL file:
@@ -395,7 +395,7 @@ insert into "user" (id, username, password)
 values ('11111111-1111-1111-1111-111111111111', 'user1', '{bcrypt}$2a$12$3reNTTIFP4ho5SLimvGoJeSJkoKAVSo2nJb.cUhrxHf4nArAbJu46');
 ```
 
-Then we change our test so that SQL file is exeucted before every test:
+Then we change our test so that SQL file is executed before every test:
 
 ```java
 @SpringBootTest
@@ -428,7 +428,7 @@ public class TaskControllerContextTest {
 }
 ```
 
-After doing all that, we can finally write out `createTask()` test again:
+After doing all that, we can finally write our `createTask()` test again:
 
 ```java
 @Test
@@ -457,7 +457,7 @@ void createTask() {
 }
 ```
 
-In this test there are two major differences. First of all, I'm no longer relying on `Mockito.verify()` like I mentioned.
+In this test, there are two major differences. First of all, I'm no longer relying on `Mockito.verify()` like I mentioned.
 The other big change is that I'm not setting any basic authentication header anymore.
 This is an **important difference**, because if you bind `RestTestClient` to your application context, then the security filter chain is bypassed ([see relevant issue](https://github.com/spring-projects/spring-framework/issues/35646)).
 So in order to use my `CustomUserDetails`, I am now relying on the `@WithUserDetails()` annotation.
@@ -465,7 +465,7 @@ So in order to use my `CustomUserDetails`, I am now relying on the `@WithUserDet
 ## Binding `RestTestClient` to an actual server
 
 The final mode to test with `RestTestClient` is to run it against an actual server.
-To do this, I'm going to re-use a lot of the setup of my previous example because I'll need to use `@SpringBootTest` again and set up some test data:
+To do this, I'm going to reuse a lot of the setup of my previous example because I'll need to use `@SpringBootTest` again and set up some test data:
 
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -496,7 +496,7 @@ Instead, I'm running my Spring Boot application on a random port (see the `webEn
 
 Then finally, I'm using `bindToServer()` and configuring the base URL to contain `http://localhost:{port}/api/task`.
 
-Now for the testing, I can re-use a lot of things from the previous two examples combined.
+Now for the testing, I can reuse a lot of things from the previous two examples combined.
 This is because I'll now test using the `TaskRepository` again, but now I'll also be able to use authentication like within my test using `MockMvc`:
 
 ```java
@@ -529,16 +529,16 @@ void createTask() {
 ## Conclusion
 
 With `RestTestClient` we can easily use the same API for multiple types of tests.
-Personally, I have mixed feelings with this approach.
-On first sight, it looks very interesting, but when you start testing actual code, you'll notice that various differences "creep" in such as the way you need to authenticate.
+Personally, I have mixed feelings about this approach.
+On first sight, it looks very interesting, but when you start testing actual code, you'll notice that various differences "creep" in, such as the way you need to authenticate.
 
 Another thing I noticed is that if you bind `RestTestClient` to `MockMvc`, you cannot access the full capabilities of `MockMvc`.
 For example, it does not seem to be possible to register a `RequestPostProcessor`.
-These are commonly used when writing `MockMvc` tests with Spring Security, as they allow you to easily set up authentication, OAuth2 tokens, CSRF tokens and so on (take a look at [the documentation](https://docs.spring.io/spring-security/reference/servlet/test/mockmvc/request-post-processors.html)).
-So if you're writing tests with `MockMvc` I would personally avoid `RestTestClient` and keep using either `MockMvc` or the recently introduced `MockMvcTester`.
+These are commonly used when writing `MockMvc` tests with Spring Security, as they allow you to easily set up authentication, OAuth2 tokens, CSRF tokens, and so on (take a look at [the documentation](https://docs.spring.io/spring-security/reference/servlet/test/mockmvc/request-post-processors.html)).
+So if you're writing tests with `MockMvc`, I would personally avoid `RestTestClient` and keep using either `MockMvc` or the recently introduced `MockMvcTester`.
 
 Personally, I would mostly use `RestTestClient` with its capability of binding to an application context.
-This allows you to write full integration tests with the exception of testing the filterchain of Spring Security.
+This allows you to write full integration tests with the exception of testing the filter chain of Spring Security.
 This means you don't have to worry about things like CSRF, and if you want to test as various users you can use the various Spring Security annotations such as `@WithUserDetails` and `@WithAnonymousUser`.
 If you use a library like [**spring-addons**](https://github.com/ch4mpy/spring-addons), you can also use additional annotations such as `@WithJwt` and `WithMockAuthentication`.
 
