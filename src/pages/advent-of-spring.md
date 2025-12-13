@@ -24,3 +24,5 @@ Posts that were published as part of this collection:
 10. [OAuth2 Client support for HTTP interfaces](/http-interface-oauth)
 11. [Streaming your request and response bodies with Spring's HTTP interfaces](/http-interface-streaming)
 12. [Monitoring your SMTP metrics with Spring Boot 4 and Micrometer](/smtp-metrics-actuator)
+13. [Deprecation of `RestTemplate`](/deprecation-resttemplate)
+14. [Configuring CSRF for Single Page Applications with Spring Security](/spring-security-csrf-spa)
