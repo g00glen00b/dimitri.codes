@@ -3,7 +3,7 @@ title: "Using Spring Boot's new RestTestClient"
 featuredImage: "/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring"]
-excerpt: ""
+excerpt: "Spring Boot 4 introduces us to a new testing utility called RestTestClient. RestTestClient provides a uniform experience when testing your API's regardless of whether you want to write a unit test, integration test or end-to-end test."
 ---
 
 ## Introduction
