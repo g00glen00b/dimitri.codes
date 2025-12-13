@@ -28,6 +28,17 @@ jmsClient
     .send("Hello World");
 ```
 
+You can also set additional parameters such as:
+
+```java
+jmsClient
+    .destination(Application.TOPIC)
+    .withDeliveryDelay(1_000)
+    .withPriority(1)
+    .withTimeToLive(10_000)
+    .send("Hello World");
+```
+
 In theory, you can also use it to receive messages, for example:
 
 ```java
