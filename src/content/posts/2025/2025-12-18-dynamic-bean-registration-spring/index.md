@@ -3,7 +3,7 @@ title: "Dynamically register your beans with Spring's new BeanRegistrar"
 featuredImage: "/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring"]
-excerpt: ""
+excerpt: "Spring has a new way of registering beans programmatically called the BeanRegistrar. In this tutorial I'll talk about how and when to use it."
 ---
 
 ## Introduction
