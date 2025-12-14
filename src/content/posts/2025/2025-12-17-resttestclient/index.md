@@ -264,8 +264,9 @@ public class TaskControllerMockMvcTest {
     @MockitoBean
     private TaskService service;
     private RestTestClient client;
-    
+
     // ...
+}
 ```
 
 Also, since we're using `MockMvc`, we can also test both bean validations and security-related code.

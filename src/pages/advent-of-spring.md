@@ -26,3 +26,4 @@ Posts that were published as part of this collection:
 12. [Monitoring your SMTP metrics with Spring Boot 4 and Micrometer](/smtp-metrics-actuator)
 13. [Deprecation of `RestTemplate`](/deprecation-resttemplate)
 14. [Configuring CSRF for Single Page Applications with Spring Security](/spring-security-csrf-spa)
+15. [New JMS Client in Spring Boot 4](/jmsclient)
