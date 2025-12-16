@@ -102,7 +102,7 @@ Once you authenticate with username + password, it will only show the OTT authen
 It's also indicated in the URL that this authentication factor is missing, since the following query parameters are appended: `factor.type=ott` and `factor.reason=missing`.
 After authenticating with the OTT as well, you are finally redirected to the homepage.
 
-## Finetuning the Multi-Factor Authentication
+## Fine-tuning the Multi-Factor Authentication
 
 Spring Security also allows you to fine-tune the MFA process.
 For example, let's say we only want to enable Multi-Factor Authentication on certain endpoints?

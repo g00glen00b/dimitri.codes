@@ -27,3 +27,5 @@ Posts that were published as part of this collection:
 13. [Deprecation of `RestTemplate`](/deprecation-resttemplate)
 14. [Configuring CSRF for Single Page Applications with Spring Security](/spring-security-csrf-spa)
 15. [New JMS Client in Spring Boot 4](/jmsclient)
+16. [API versioning with Spring 7](/api-versioning-spring-boot)
+17. [Using Spring Boot's new RestTestClient](/resttestclient)
