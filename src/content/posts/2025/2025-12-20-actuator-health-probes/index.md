@@ -2,7 +2,7 @@
 title: "Liveness and readiness probes are enabled by default in Spring Boot 4"
 featuredImage: "/logos/spring-boot.png"
 categories: ["Java", "Tutorials"]
-tags: ["Spring", "Spring boot", "Spring Security", "Advent of Spring"]
+tags: ["Spring", "Spring boot", "Advent of Spring"]
 excerpt: "Spring Boot Actuator's liveness and readiness probes have been enabled by default since Spring Boot 4. What better time could there be to explore the possibilities of these probes?"
 ---
 
