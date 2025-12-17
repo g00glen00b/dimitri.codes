@@ -113,8 +113,8 @@ For example, you could add the `RandomHealthIndicator` to the liveness group lik
 
 ```properties
 # application.properties
-management.endpoint.health.group.foo.include[0]=livenessState
-management.endpoint.health.group.foo.include[1]=random
+management.endpoint.health.group.liveness.include[0]=livenessState
+management.endpoint.health.group.liveness.include[1]=random
 ```
 
 This can be useful to add certain things to the liveness/readiness probe such as the built-in `DiskSpaceHealthIndicator`, the `DataSourceHealthIndicator`, and so on.
