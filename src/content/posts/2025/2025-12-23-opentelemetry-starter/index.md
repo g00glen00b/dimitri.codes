@@ -3,7 +3,7 @@ title: "Spring's own OpenTelemetry starter"
 featuredImage: "/logos/micrometer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring"]
-excerpt: ""
+excerpt: "Spring Boot introduced its own starter for OpenTelemetry in Spring Boot v4.0.0. This makes it easier to send logs, metrics and traces to any OpenTelemetry-backend. In this blogpost, we'll explore how to use this new starter."
 ---
 
 ## Introduction
