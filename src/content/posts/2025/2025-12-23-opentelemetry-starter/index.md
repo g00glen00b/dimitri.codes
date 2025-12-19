@@ -1,6 +1,6 @@
 ---
 title: "Spring's own OpenTelemetry starter"
-featuredImage: "/logos/spring-boot.png"
+featuredImage: "/logos/micrometer.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Advent of Spring"]
 excerpt: ""
