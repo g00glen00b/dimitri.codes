@@ -29,3 +29,6 @@ Posts that were published as part of this collection:
 15. [New JMS Client in Spring Boot 4](/jmsclient)
 16. [API versioning with Spring 7](/api-versioning-spring-boot)
 17. [Using Spring Boot's new RestTestClient](/resttestclient)
+18. [Dynamically register your beans with Spring's new BeanRegistrar](/dynamic-bean-registration-spring)
+19. [Implementing Multi-Factor Authentication with Spring Security 7](/multi-factor-authentication-spring-security)
+20. [Liveness and readiness probes are enabled by default in Spring Boot 4](/actuator-health-probes)
