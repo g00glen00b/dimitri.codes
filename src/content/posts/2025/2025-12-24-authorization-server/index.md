@@ -60,7 +60,7 @@ InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEn
 So far, nothing new here as this is some standard Spring Security configuration.
 After that, we can configure the authorization server itself.
 
-You can do this in two ways, either by defining the required beans by yourself, or by using certain properties and use the default autoconfiguration.
+You can do this in two ways, either by defining the required beans by yourself, or by using certain properties and using the default autoconfiguration.
 Initially, I will rely on the autoconfiguration to keep things simple.
 
 The properties I will be using are:
@@ -87,20 +87,21 @@ In return, the identity provider usually gives you a client ID and a client secr
 
 So in this example, I created a client with the name `app`.
 For simplicity, I also used the same name as the client ID, but this is not required.
-The client secret can be any password encoded string.
-I chose to use a bcrypt encoded string (the actual value is `my-not-so-hidden-client-secret`).
+The client secret can be any password-encoded string.
+I chose to use a bcrypt-encoded string (the actual value is `my-not-so-hidden-client-secret`).
 
 Then I configured which grant types this client can use.
 These are basically the OAuth flows that your client/application can use.
-In this case, I'm allowing the **Authorization Code** and **Client Credentials** flow.
+In this case, I'm allowing the **Authorization Code** and **Client Credentials** flows.
 The Authorization Code flow is the most common flow used by web applications, where you authenticate as a user.
-The Client Credentials flow on the other hand is used for machine-to-machine communication, where no user is involved.
+The Client Credentials flow, on the other hand, is used for machine-to-machine communication, where no user is involved.
 
 Finally, I also configured the redirect URI, but I won't be using it in this example.
 
 The scopes are a list of things a user can give access to.
 In this case, I configured the `openid` and `profile` scopes, which are standard OpenID Connect scopes.
-You can however define other scopes. Typically these follow a naming convention such as `user.read` or `orders.write`.
+You can, however, define other scopes.
+Typically these follow a naming convention such as `user.read` or `orders.write`.
 
 The final property I configured is that the user must explicitly grant consent to the client.
 This means that when the user authenticates, they will see a consent screen where they can approve or deny the scopes requested by the client.
@@ -150,7 +151,7 @@ This makes sense, since we're using the **Authorization Code** flow, which means
 
 ![Authentication screen](./images/authentication-screen.png)
 
-Within this window, we can log in as any of the users we defiend earlier (eg. `user1:password1`).
+Within this window, we can log in as any of the users we defined earlier (e.g. `user1:password1`).
 After logging in, we will be presented with a consent screen, asking us to approve the scopes requested by the client.
 The OpenID scope is always implicit, so you don't have to explicitly grant consent for it.
 
@@ -204,7 +205,7 @@ This is the URL of the authorization server.
 
 The next flow we can test is the **Client Credentials** flow.
 As mentioned before, this flow is used for machine-to-machine communication, where no user is involved.
-This means that we need to alter out configuration slightly.
+This means that we need to alter our configuration slightly.
 For example:
 
 ```json
@@ -242,12 +243,12 @@ If we inspect the claims of this token, we get something like:
 }
 ```
 
-Most of the claims are the same, however, withhin the Client Credentials flow we don't request any scopes.
+Most of the claims are the same, however, within the Client Credentials flow we don't request any scopes.
 In addition, the **subject claim** (`sub`) is now the client ID of the client that requested the token and no longer the user.
 
 ## Customizing the Authorization Server
 
-Many aspect of the authorization server can be customized by setting up your own beans.
+Many aspects of the authorization server can be customized by setting up your own beans.
 To do this, I recommend that you check out the [configuration model](https://docs.spring.io/spring-authorization-server/reference/configuration-model.html) and [core model](https://docs.spring.io/spring-authorization-server/reference/core-model-components.html) pages of the documentation.
 
 For example, if you want to customize the claims of the JWT tokens that are issued, you can create your own `OAuth2TokenCustomizer`:
@@ -270,12 +271,12 @@ public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer() {
 The reason that this requires a generic of type `JwtEncodingContext` is because you can issue both JWT tokens and opaque tokens.
 Opaque tokens are just random strings that have no meaning by themselves.
 To access information about the token, you need to introspect it at the authorization server.
-When you use JWT tokens on the other hand, you can directly read the claims from the token itself.
+When you use JWT tokens, on the other hand, you can directly read the claims from the token itself.
 
 So in this example, I added a custom claim called `aut`, which contains the list of granted authorities of the authenticated principal.
-I'm adding this claim to both access tokens and ID tokens, but I could finetune this if I want.
+I'm adding this claim to both access tokens and ID tokens, but I could fine-tune this if I want.
 
-To configure this customize, we also need to set up a token generator bean.
+To configure this customizer, we also need to set up a token generator bean.
 This could look like this:
 
 ```java
