@@ -73,7 +73,7 @@ spring.security.oauth2.authorizationserver.client.app.registration.authorization
 spring.security.oauth2.authorizationserver.client.app.registration.authorization-grant-types[1]=refresh_token
 spring.security.oauth2.authorizationserver.client.app.registration.authorization-grant-types[2]=client_credentials
 spring.security.oauth2.authorizationserver.client.app.registration.redirect-uris[0]=https://example.org
-spring.security.oauth2.authorizationserver.client.app.registration.post-logout-redirect-uris[0]=http://localhost:8080/
+spring.security.oauth2.authorizationserver.client.app.registration.post-logout-redirect-uris[0]=https://example.org
 spring.security.oauth2.authorizationserver.client.app.registration.scopes[0]=openid
 spring.security.oauth2.authorizationserver.client.app.registration.scopes[1]=profile
 spring.security.oauth2.authorizationserver.client.app.require-authorization-consent=true
