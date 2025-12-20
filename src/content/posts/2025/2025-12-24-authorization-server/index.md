@@ -3,7 +3,7 @@ title: "Spring's Authorization Server becoming a part of Spring Security 7"
 featuredImage: "/logos/spring-security.png"
 categories: ["Java", "Tutorials"]
 tags: ["Spring", "Spring boot", "Spring Security", "Advent of Spring"]
-excerpt: ""
+excerpt: "Spring Authorization Server became a part of Spring Security 7. In this blogpost, we will explore what it is and how to use it."
 ---
 
 ## Introduction
