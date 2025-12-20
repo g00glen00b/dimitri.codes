@@ -33,4 +33,7 @@ Posts that were published as part of this collection:
 19. [Implementing Multi-Factor Authentication with Spring Security 7](/multi-factor-authentication-spring-security)
 20. [Liveness and readiness probes are enabled by default in Spring Boot 4](/actuator-health-probes)
 21. [Upgrading to Jackson 3 with Spring Boot 4](/jsonmapper)
+22. [Spring Retry became a part of Spring Core in Spring framework 7](/spring-retry-core)
+23. [Spring's own OpenTelemetry starter](/opentelemetry-starter)
+24. [Spring's Authorization Server becoming a part of Spring Security 7](/authorization-server)
 
