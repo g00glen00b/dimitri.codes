@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.1",
-    "@astrojs/markdown-remark": "^4.3.2",
-    "@astrojs/prism": "^3.0.0",
-    "@astrojs/rss": "^4.0.15",
-    "@astrojs/sitemap": "^3.0.3",
-    "astro": "^5.16.11",
+    "@astrojs/check": "^0.9.7",
+    "@astrojs/markdown-remark": "^7.0.0",
+    "@astrojs/prism": "^4.0.0",
+    "@astrojs/rss": "^4.0.17",
+    "@astrojs/sitemap": "^3.7.1",
+    "astro": "^6.0.4",
     "astro-icon": "^0.8.2",
     "canvas": "^3.2.1",
     "date-fns": "^2.30.0",

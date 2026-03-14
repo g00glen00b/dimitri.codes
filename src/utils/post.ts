@@ -24,8 +24,8 @@ export function mapToCollectionPosts<G>(entries: CollectionEntry<"posts">[], map
 }
 
 export function mapToPost(entry: CollectionEntry<"posts">): Post {
-  const matches = pathRegex.exec(entry.slug as string);
-  if (matches == null) throw 'Could not map';
+  const matches = pathRegex.exec(entry.id as string);
+  if (matches == null) throw new Error(`Could not map ${entry.id}`);
   const [, year, month, day, slug] = matches;
   const publishedDate: Date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
   const time = readingTime(entry.body);
@@ -49,7 +49,5 @@ export function kebabCase(name: string) {
 }
 
 export function isPublished(post: Post): boolean {
-  return true;
-  // TODO: Temporarily disabled during Advent of Spring to avoid having to rebuild every day
-  // return import.meta.env.DEV || !isFuture(post.publishedDate);
+  return import.meta.env.DEV || !isFuture(post.publishedDate);
 }

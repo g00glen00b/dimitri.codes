@@ -14,7 +14,7 @@ export interface Props {
   metaImage: string;
 }
 
-const {site: {url: siteUrl, title: siteTitle, logo}, author: {handle: author}} = CONFIG;
+const {site: {url: siteUrl, title: siteTitle, logo}, author: {handle: author}, analytics: {umami}} = CONFIG;
 const {title, description, path, publishedDate, tags, categories, metaImage} = Astro.props;
 const publishedDateString = publishedDate == null ? null : format(publishedDate, 'yyyy-MM-dd');
 ---
@@ -55,4 +55,5 @@ const publishedDateString = publishedDate == null ? null : format(publishedDate,
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="preload" as="style" />
+  {umami && <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id={umami}></script>}
 </head>

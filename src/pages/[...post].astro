@@ -1,5 +1,5 @@
 ---
-import {getCollection} from 'astro:content';
+import {getCollection, render} from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import {mapToSortedPosts} from '../utils/post';
 import {type Post} from '../models/Post';
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const {post} = Astro.props;
-const {Content} = await post.entry.render();
+const {Content} = await render(post.entry);
 ---
 
 <SiteLayout

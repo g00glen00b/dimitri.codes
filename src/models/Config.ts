@@ -10,6 +10,7 @@ export interface Config {
   author: AuthorConfig;
   site: SiteConfig;
   manifest: ManifestConfig;
+  analytics: AnalyticsConfig;
 }
 
 export interface AuthorConfig {
@@ -32,4 +33,8 @@ export interface ManifestConfig {
   display: string;
   iconSizes: number[];
   icon: string;
+}
+
+export interface AnalyticsConfig {
+  umami?: string;
 }
