@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   const groups = mapToCollectionPosts(entries, post => post.tags, CONFIG.site.pageSize);
   return groups.flatMap(({group: tag, results}) => {
     return results.map(page => ({
-      params: {tag: tag.path, page: page.page},
+      params: {tag: tag.path, page: page.page.toString()},
       props: {tag, page},
     }));
   });

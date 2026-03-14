@@ -14,5 +14,7 @@ export async function GET(context: APIContext) {
 }
 
 export async function getStaticPaths() {
-  return CONFIG.manifest.iconSizes.map(size => ({params: {size}}));
+  return CONFIG.manifest.iconSizes
+    .map(size => size.toString())
+    .map(size => ({params: {size}}));
 }

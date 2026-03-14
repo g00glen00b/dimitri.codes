@@ -1,14 +1,14 @@
 ---
-title: "Using EhCache 3 with Spring boot"
+title: "Using Ehcache 3 with Spring boot"
 featuredImage: "/logos/ehcache.png"
 categories: ["Java", "Tutorials"]
-tags: ["EHCache", "Spring", "Spring boot"]
+tags: ["Ehcache", "Spring", "Spring boot"]
 excerpt: "Caching is a common operation when developing appllications. Spring provides an abstraction on top of all different caching libraries to make this even easier."
 ---
 
 Caching is a common operation when developing appllications. Spring provides [an abstraction on top of all different caching libraries](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache) to make this even easier.
 
-![Spring boot + EhCache](./images/spring-boot-ehcache.png)
+![Spring boot + Ehcache](./images/spring-boot-ehcache.png)
 
 ### Project setup
 
@@ -345,4 +345,4 @@ To fix this issue, you have to configure the maximum object graph size. This can
 
 In addition to configuring the object graph size, you can also limit the size of each cached value by setting `<max-object-size>`.
 
-With that, we've covered most things about caching with EhCache and Spring. If you're interested in the full code, you can find it on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-ehcache).
+With that, we've covered most things about caching with Ehcache and Spring. If you're interested in the full code, you can find it on [GitHub](https://github.com/g00glen00b/spring-samples/tree/master/spring-boot-ehcache).

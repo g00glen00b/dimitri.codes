@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   const entries = await getCollection('posts');
   const pages = sliceIntoPages(mapToSortedPosts(entries), CONFIG.site.pageSize);
   return pages.map(page => ({
-    params: {page: page.page},
+    params: {page: page.page.toString()},
     props: {page},
   }));
 }

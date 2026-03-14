@@ -2,7 +2,7 @@
 title: "Setting up Minikube and Istio on macOS"
 featuredImage: "/logos/kubernetes.png"
 categories: ["Tutorials"]
-tags: ["Docker", "Homebrew", "Istio", "kubernetes", "macOS", "Minikube"]
+tags: ["Docker", "Homebrew", "Istio", "Kubernetes", "macOS", "Minikube"]
 excerpt: "When developing cloud-native applications, using tools like Kubernetes and Istio are a must. In this tutorial we'll use Minikube to install these locally."
 ---
 

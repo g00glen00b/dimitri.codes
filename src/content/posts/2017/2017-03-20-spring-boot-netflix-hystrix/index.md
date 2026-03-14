@@ -2,7 +2,7 @@
 title: "Using the Netflix stack with Spring boot: Hystrix"
 featuredImage: "/logos/netflix-oss.png"
 categories: ["Java", "Tutorials"]
-tags: ["EhCache", "Hystrix", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
+tags: ["Ehcache", "Hystrix", "Netflix", "REST", "Spring", "Spring boot", "Spring cloud"]
 excerpt: "What happens when something fails in an application and it keeps failing? In this article I'll show you how you can have more control using Hystrix."
 ---
 
@@ -393,7 +393,7 @@ The fallback method is a bit trickier since there is no annotation that simply r
 private CacheManager cacheManager;
 ```
 
-Make sure you're importing the one from Spring and not the one from EhCache. After that we should reimplement the fallback method like this:
+Make sure you're importing the one from Spring and not the one from Ehcache. After that we should reimplement the fallback method like this:
 
 ```java
 public TaskDTO[] findAllFallback() {
