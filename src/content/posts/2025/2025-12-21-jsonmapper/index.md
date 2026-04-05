@@ -64,7 +64,7 @@ Some of the defaults have also changed in Jackson 3.
 For example:
 
 - `DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES` is now `true` by default
-- `SerializationFeature.WRITE_DATES_AS_TIMESTAMPS` is now `true` by default, meaning that you no longer get these Unix timestamps when serializing dates
+- `SerializationFeature.WRITE_DATES_AS_TIMESTAMPS` is now `false` by default, meaning that you no longer get these Unix timestamps when serializing dates
 - `MapperFeature.SORT_PROPERTIES_ALPHABETICALLY` is now `true` by default. This could impact some tests that rely on the order of JSON properties as they're now alphabetically sorted.
 - ...
 
