@@ -15,7 +15,7 @@
     "@astrojs/prism": "^4.0.0",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.1",
-    "astro": "^6.1.6",
+    "astro": "^6.1.10",
     "astro-icon": "^0.8.2",
     "canvas": "^3.2.1",
     "date-fns": "^2.30.0",
