@@ -6,42 +6,14 @@ interface Props {
 }
 
 const {links} = Astro.props;
+
+const linkClass = "font-heading font-bold text-xs uppercase tracking-widest text-ink no-underline border-b-2 border-transparent pb-0.5 transition-colors duration-100 hover:text-accent hover:border-accent";
 ---
-<nav class="content-links">
+<nav class="flex items-center gap-6">
   {links.map(({name, to, external}) =>
   external ? (
-    <a
-      href={to}
-      target="_blank"
-      rel="noopener noreferrer">
-      {name}
-    </a>
+    <a class={linkClass} href={to} target="_blank" rel="noopener noreferrer">{name}</a>
   ) : (
-    <a
-      href={to}>
-      {name}
-    </a>
+    <a class={linkClass} href={to}>{name}</a>
   ))}
 </nav>
-
-<style>
-    .content-links {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .content-links > a {
-        text-decoration: none;
-        color: var(--text-color-lighter);
-        margin-left: 1rem;
-        transition: color .3s;
-    }
-
-    .content-links > a:first-child {
-        margin-left: 0;
-    }
-
-    .content-links > a:hover {
-        color: var(--secondary-color);
-    }
-</style>
