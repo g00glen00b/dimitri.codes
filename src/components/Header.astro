@@ -5,14 +5,12 @@ import {Icon} from 'astro-icon';
 const {headerLinks} = CONFIG;
 ---
 <div class="bg-accent-light w-full">
-  <div class="max-w-[950px] mx-auto px-4 pt-5">
-    <header
-      class="flex justify-between items-center bg-bg border-2 border-ink shadow-brut-sm px-6 py-3"
-      aria-label="Primary navigation">
-      <a href="/" class="font-heading font-black text-xl tracking-tight text-primary no-underline" title="Home">
-        <Icon name="logo" aria-label="Website logo" class="w-16 h-auto fill-primary" />
+  <div class="max-w-[950px] mx-auto px-4 pt-5 pb-2">
+    <header class="flex flex-wrap justify-between items-center bg-bg border-2 border-ink shadow-brut-sm px-6 py-3 gap-y-3">
+      <a href="/" aria-label="Home" title="Home" class="font-heading font-black text-xl tracking-tight text-primary no-underline">
+        <Icon name="logo" aria-hidden="true" class="w-16 h-auto fill-primary" />
       </a>
-      <nav class="flex items-center gap-7">
+      <nav class="flex items-center gap-7 flex-wrap" aria-label="Primary navigation">
         {headerLinks.map(({name, to}) => (
           <a
             href={to}
