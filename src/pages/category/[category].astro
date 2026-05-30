@@ -35,12 +35,10 @@ const {category, page} = Astro.props;
   title={category.name}
   description={category.name}
   path={`/category/${category.path}`}>
-  <h1 class="page__title">
-    Posts within the <strong>{category.name}</strong> category
-  </h1>
-  <PostCardContainer
-    posts={page.results}>
-  </PostCardContainer>
+  <h2 class="font-heading font-extrabold text-[2rem] text-ink mt-10 mb-6">
+    Posts within the <strong class="bg-accent-light border-b-[3px] border-accent px-1 font-extrabold">{category.name}</strong> category
+  </h2>
+  <PostCardContainer posts={page.results} />
   <Pagination
     pageCount={page.totalPages}
     currentPage={page.page}

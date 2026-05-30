@@ -23,12 +23,8 @@ const page = pages.find(page => page.first) || emptyPage<Post>();
   title="Posts"
   description="Posts"
   path="/posts">
-  <h1 class="page__title">
-    Posts
-  </h1>
-  <PostCardContainer
-    posts={page.results}>
-  </PostCardContainer>
+  <h2 class="font-heading font-extrabold text-[2rem] text-ink mt-10 mb-6">All posts</h2>
+  <PostCardContainer posts={page.results} />
   <Pagination
     pageCount={page.totalPages}
     currentPage={page.page}

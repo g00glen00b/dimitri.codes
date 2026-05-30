@@ -35,12 +35,10 @@ const {tag, page} = Astro.props;
   title={`${tag.name} posts`}
   description={`${tag.name} posts`}
   path={`/tag/${tag.path}`}>
-  <h1 class="page__title">
-    Posts tagged with <strong>{tag.name}</strong>
-  </h1>
-  <PostCardContainer
-    posts={page.results}>
-  </PostCardContainer>
+  <h2 class="font-heading font-extrabold text-[2rem] text-ink mt-10 mb-6">
+    Posts tagged with <strong class="bg-accent-light border-b-[3px] border-accent px-1 font-extrabold">{tag.name}</strong>
+  </h2>
+  <PostCardContainer posts={page.results} />
   <Pagination
     pageCount={page.totalPages}
     currentPage={page.page}
