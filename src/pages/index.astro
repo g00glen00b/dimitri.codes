@@ -18,9 +18,16 @@ const posts: Post[] = mapToSortedPosts(entries).slice(0, CONFIG.site.homePageSiz
   title="Home"
   description={CONFIG.site.description}
   path="">
-  <AboutHeadline />
-  <PostCardContainer
-    posts={posts}>
-  </PostCardContainer>
-  <VisitBlogBanner/>
+  <Fragment slot="hero-band">
+    <div class="bg-accent-light w-full">
+      <div class="max-w-[950px] mx-auto px-4">
+        <AboutHeadline />
+        <VisitBlogBanner />
+      </div>
+    </div>
+    <hr class="border-0 border-t-[3px] border-ink m-0 w-full" />
+  </Fragment>
+
+  <h2 class="font-heading font-extrabold text-[2rem] text-ink mt-10 mb-6">Recent posts</h2>
+  <PostCardContainer posts={posts} />
 </SiteLayout>
