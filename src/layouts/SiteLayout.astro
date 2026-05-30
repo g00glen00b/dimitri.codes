@@ -5,12 +5,11 @@ import Footer from '../components/Footer.astro';
 import Head from '../components/Head.astro';
 import {type Tag} from '../models/Tag';
 import {type Category} from '../models/Category';
-import "../styles/global.css";
-import "../styles/OneDark.css";
 import PageTitle from '../components/PageTitle.astro';
 import Comments from '../components/Comments.astro';
 import {type ReadTimeResults} from 'reading-time';
 import {CONFIG} from '../config/config';
+import '../styles/global.css';
 
 export interface Props {
   showHeaderFooter: boolean;
@@ -40,19 +39,18 @@ const {showHeaderFooter, disableComments, title, description, path, publishedDat
     metaImage={metaImage || featuredImage || CONFIG.site.logo}
   />
   <body>
-    <div class="container">
-      {showHeaderFooter && <Header />}
-      <ContainerContent>
-        {publishedDate && featuredImage && readingTime && tags && <PageTitle
-          title={title}
-          readingTime={readingTime}
-          date={publishedDate}
-          featuredImage={featuredImage}
-          tags={tags}/>}
-        <slot />
-        {!disableComments && <Comments/>}
-      </ContainerContent>
-      {showHeaderFooter && <Footer />}
-    </div>
+    {showHeaderFooter && <Header />}
+    <slot name="hero-band" />
+    <ContainerContent>
+      {publishedDate && featuredImage && readingTime && tags && <PageTitle
+        title={title}
+        readingTime={readingTime}
+        date={publishedDate}
+        featuredImage={featuredImage}
+        tags={tags}/>}
+      <slot />
+      {!disableComments && <Comments/>}
+    </ContainerContent>
+    {showHeaderFooter && <Footer />}
   </body>
 </html>
