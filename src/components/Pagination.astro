@@ -6,33 +6,30 @@ export interface Props {
 }
 
 const {currentPage, pageCount, base} = Astro.props;
+
+const btnClass = "inline-block px-4 py-1.5 font-heading font-bold text-xs uppercase tracking-widest text-ink bg-bg border-2 border-ink shadow-brut-sm no-underline transition-[box-shadow,transform] duration-100 hover:shadow-none hover:translate-x-1 hover:translate-y-1";
 ---
 
-<nav class="pagination">
+<nav class="flex justify-between items-center my-8">
   {currentPage > 1 ? (
-      <a
-        class="button-primary"
-        title="Go to previous page"
-        href={`${base}/page/${currentPage - 1}`}>
-        ← newer posts
-      </a>) :
-    <span />}
-  page {currentPage} of {pageCount}
-  {currentPage < pageCount ? (
-      <a
-        class="button-primary"
-        title="Go to next page"
-        href={`${base}/page/${currentPage + 1}`}>
-        older posts →
-      </a>) :
-    <span />}
-</nav>
+    <a
+      class={btnClass}
+      title="Go to previous page"
+      href={`${base}/page/${currentPage - 1}`}>
+      ← newer posts
+    </a>
+  ) : <span />}
 
-<style>
-    .pagination {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 3.8rem 0;
-    }
-</style>
+  <span class="font-heading font-bold text-xs uppercase tracking-widest text-ink bg-bg border-2 border-ink px-3 py-1.5">
+    page {currentPage} of {pageCount}
+  </span>
+
+  {currentPage < pageCount ? (
+    <a
+      class={btnClass}
+      title="Go to next page"
+      href={`${base}/page/${currentPage + 1}`}>
+      older posts →
+    </a>
+  ) : <span />}
+</nav>
