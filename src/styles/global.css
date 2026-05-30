@@ -2,16 +2,16 @@
 @import "./OneDark.css";
 
 @theme {
-  --color-primary:       #2d3452;
+  --color-primary: #2d3452;
   --color-primary-light: #9c9fbd;
-  --color-accent:        #f0803c;
-  --color-accent-light:  #facdb3;
-  --color-secondary:     #60a5b4;
-  --color-ink:           #051923;
-  --color-bg:            #ffffff;
-  --color-bg-muted:      #f3f3f9;
+  --color-accent: #f0803c;
+  --color-accent-light: #facdb3;
+  --color-secondary: #60a5b4;
+  --color-ink: #051923;
+  --color-bg: #ffffff;
+  --color-bg-muted: #f3f3f9;
 
-  --font-sans:    'Roboto', sans-serif;
+  --font-sans: 'Roboto', sans-serif;
   --font-heading: 'Montserrat', sans-serif;
 
   --shadow-brut-xs: 2px 2px 0 0 var(--color-ink);
@@ -28,7 +28,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--color-bg-muted);
   color: var(--color-ink);
 }
