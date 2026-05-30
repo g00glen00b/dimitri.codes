@@ -27,18 +27,18 @@ const minutesRead = Math.round(readingTime.minutes);
     <h1 class="font-heading font-extrabold text-[2rem] text-ink m-0 mb-4 leading-tight">{title}</h1>
     <dl class="flex flex-wrap gap-x-4 gap-y-2 pb-4 m-0">
       <dt class="flex items-center text-primary w-6 h-6 m-0">
-        <Icon name="mdi:calendar-blank-outline" aria-label="Calendar icon" class="w-6 h-6 fill-current" />
+        <Icon name="mdi:calendar-blank-outline" aria-hidden="true" class="w-6 h-6 fill-current" />
       </dt>
       <dd class="m-0 text-base leading-6" aria-label={`Posted at ${readableDate}`}>{readableDate}</dd>
 
       <dt class="flex items-center text-primary w-6 h-6 m-0">
-        <Icon name="mdi:stopwatch-outline" aria-label="Stopwatch icon" class="w-6 h-6 fill-current" />
+        <Icon name="mdi:stopwatch-outline" aria-hidden="true" class="w-6 h-6 fill-current" />
       </dt>
       <dd class="m-0 text-base leading-6">{minutesRead} minute read</dd>
 
       {tags != null && <>
         <dt class="flex items-center text-primary w-6 h-6 m-0">
-          <Icon name="mdi:tag-outline" aria-label="Tag icon" class="w-6 h-6 fill-current" />
+          <Icon name="mdi:tag-outline" aria-hidden="true" class="w-6 h-6 fill-current" />
         </dt>
         <dd class="m-0 flex flex-wrap gap-1.5 items-center">
           {tags.map(({name, path}) => (

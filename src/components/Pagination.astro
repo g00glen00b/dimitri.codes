@@ -10,7 +10,7 @@ const {currentPage, pageCount, base} = Astro.props;
 const btnClass = "inline-block px-4 py-1.5 font-heading font-bold text-xs uppercase tracking-widest text-ink bg-bg border-2 border-ink shadow-brut-sm no-underline transition-[box-shadow,transform] duration-100 hover:shadow-none hover:translate-x-1 hover:translate-y-1";
 ---
 
-<nav class="flex justify-between items-center my-8">
+<nav class="flex justify-between items-center my-8" aria-label="Page navigation">
   {currentPage > 1 ? (
     <a
       class={btnClass}
