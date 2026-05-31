@@ -1,0 +1,11 @@
+---
+interface Props {
+  innerClass?: string;
+}
+const {innerClass = ''} = Astro.props;
+---
+<div class="bg-accent-light w-full">
+  <div class={`max-w-content mx-auto px-4 ${innerClass}`.trim()}>
+    <slot />
+  </div>
+</div>

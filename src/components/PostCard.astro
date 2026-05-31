@@ -1,126 +1,48 @@
 ---
 import {format} from 'date-fns';
-import {Image} from 'astro:assets';
 import {type Post} from '../models/Post';
 
 export interface Props {
   post: Post;
+  eager?: boolean;
 }
 
-const {categories, slug, title, excerpt, publishedDate, featuredImage} = Astro.props.post;
+const {post, eager = false} = Astro.props;
+const {categories, slug, title, excerpt, publishedDate, featuredImage} = post;
 const [firstCategory] = categories;
 const readableDate = format(publishedDate, 'MMMM do, yyyy');
 ---
 <a
-  class="excerpt"
+  class="flex flex-col bg-bg border-2 border-ink shadow-brut-lg no-underline text-ink transition-[box-shadow,transform] duration-100 hover:shadow-brut-sm hover:translate-x-1 hover:translate-y-1"
   href={`/${slug}`}
   title="View post">
-  <div class="excerpt-header">
-    {featuredImage && <div class="excerpt-header-image">
-      <img
-        src={featuredImage}
-        alt={`Featured image for "${title}"`}/>
-    </div>}
+  <div class="bg-primary border-b-2 border-ink px-4 pt-5 pb-4">
+    {featuredImage && <img
+      src={featuredImage}
+      alt=""
+      loading={eager ? 'eager' : 'lazy'}
+      class="w-20 mb-3"
+    />}
     <span
       aria-label={`Category ${firstCategory.name}`}
-      class="excerpt-header-category">
-          {firstCategory.name}
-        </span>
-    <h2>
+      class="inline-block font-heading font-bold text-[0.6rem] uppercase tracking-widest text-ink bg-accent border-[1.5px] border-ink px-2 py-0.5 mb-2">
+      {firstCategory.name}
+    </span>
+    <h2 class="font-heading font-extrabold text-[1.05rem] leading-snug text-bg m-0 mb-1">
       {title}
     </h2>
     <time
       aria-label={`Posted at ${readableDate}`}
-      class="excerpt-header-date">
+      class="text-primary-light text-xs font-medium">
       {readableDate}
     </time>
   </div>
-  <div class="excerpt-body">
-    <p>
-      {excerpt}
-    </p>
+  <div class="px-4 py-3 flex-1 text-sm leading-relaxed text-[#404c5a]">
+    <p class="m-0">{excerpt}</p>
     <span
-      aria-hidden
-      class="excerpt-read-more">
-          Read more →
-        </span>
+      aria-hidden="true"
+      class="inline-block mt-2 text-xs font-bold uppercase tracking-wide text-ink border-b-2 border-accent">
+      Read more →
+    </span>
   </div>
 </a>
-
-<style>
-    a.excerpt {
-        overflow: hidden;
-        max-width: 100%;
-        display: flex;
-        flex: 0 0 calc(50% - 2rem);
-        margin: 1rem;
-        border-radius: 0.3rem;
-        box-shadow: 0 0.3rem 0.3rem 0 #00000020;
-        flex-direction: column;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        transition: transform .3s, box-shadow .3s;
-    }
-
-    a.excerpt:hover {
-        color: inherit;
-        transform: scale(1.05);
-        box-shadow: 0 0.3rem 0.8rem 0 #00000020;
-    }
-
-    .excerpt-header {
-        background-color: var(--primary-color);
-        color: var(--text-color-inverse);
-        padding: 1.5rem 1rem 1rem;
-        display: grid;
-        grid-template-columns: 4rem auto;
-        grid-template-rows: 1.2rem auto auto;
-    }
-
-    .excerpt-header-image {
-        grid-column: 1;
-        grid-row-start: 1;
-        grid-row-end: 3;
-        margin-left: -2rem;
-        width: 5rem;
-        height: 5rem;
-    }
-
-    .excerpt-header-image > img {
-        width: 80px;
-    }
-
-    .excerpt-header > h2 {
-        font-size: 1.5rem;
-        margin-top: 0;
-        grid-row: 2;
-        grid-column: 2;
-    }
-
-    .excerpt-header-category {
-        color: var(--secondary-color);
-        grid-column: 2;
-        grid-row: 1;
-    }
-
-    .excerpt-header-date {
-        grid-column: 2;
-        grid-row: 3;
-        color: var(--text-color-inverse-darker);
-    }
-
-    .excerpt-body {
-        padding: 1rem;
-        flex-grow: 1;
-        border-radius: 0 0 0.3rem 0.3rem;
-        border-left: solid 2px var(--primary-color);
-        border-bottom: solid 2px var(--primary-color);
-        border-right: solid 2px var(--primary-color);
-    }
-
-    .excerpt-read-more {
-        color: var(--tertiary-color-darker);
-        display: flex;
-        align-items: center;
-    }
-</style>

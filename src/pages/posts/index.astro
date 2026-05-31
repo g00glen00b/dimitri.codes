@@ -7,6 +7,7 @@ import {type Post} from '../../models/Post';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostCardContainer from '../../components/PostCardContainer.astro';
 import Pagination from '../../components/Pagination.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import {CONFIG} from '../../config/config';
 
 export interface Props {
@@ -23,12 +24,10 @@ const page = pages.find(page => page.first) || emptyPage<Post>();
   title="Posts"
   description="Posts"
   path="/posts">
-  <h1 class="page__title">
-    Posts
-  </h1>
-  <PostCardContainer
-    posts={page.results}>
-  </PostCardContainer>
+  <Fragment slot="hero-band">
+    <PageBanner>All posts</PageBanner>
+  </Fragment>
+  <PostCardContainer posts={page.results} />
   <Pagination
     pageCount={page.totalPages}
     currentPage={page.page}

@@ -7,69 +7,41 @@ export interface Props {
 }
 
 const {socialNetworks} = Astro.props;
+
+const iconClass = "w-8 h-8 flex items-center justify-center bg-bg border-2 border-ink shadow-brut-xs text-ink no-underline transition-[box-shadow,transform,background-color] duration-100 hover:bg-accent hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]";
 ---
 
-<nav class="social-links">
+<nav class="flex items-center gap-3">
   {socialNetworks.linkedin && <a
-    class="social-link"
+    class={iconClass}
     href={`https://linkedin.com/in/${socialNetworks.linkedin}`}
     target="_blank"
     rel="noopener noreferrer"
-    title="LinkedIn">
-    <Icon name="ri:linkedin-fill" />
+    aria-label="LinkedIn">
+    <Icon name="ri:linkedin-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
   </a>}
   {socialNetworks.github && <a
-    class="social-link"
+    class={iconClass}
     href={`https://github.com/${socialNetworks.github}`}
     target="_blank"
     rel="noopener noreferrer"
-    title="GitHub">
-    <Icon name="ri:github-fill" />
+    aria-label="GitHub">
+    <Icon name="ri:github-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
   </a>}
   {socialNetworks.speakerdeck && <a
-    class="social-link"
+    class={iconClass}
     href={`https://speakerdeck.com/${socialNetworks.speakerdeck}`}
     target="_blank"
     rel="noopener noreferrer"
-    title="Speaker Deck">
-    <Icon name="simple-icons:speakerdeck" />
+    aria-label="Speaker Deck">
+    <Icon name="simple-icons:speakerdeck" class="w-4 h-4 fill-current" aria-hidden="true" />
   </a>}
   {socialNetworks.codepen && <a
-    class="social-link"
+    class={iconClass}
     href={`https://codepen.io/${socialNetworks.codepen}`}
     target="_blank"
     rel="noopener noreferrer"
-    title="CodePen">
-    <Icon name="ri:codepen-fill" />
+    aria-label="CodePen">
+    <Icon name="ri:codepen-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
   </a>}
 </nav>
-
-<style>
-    .social-links {
-        margin: 0 0 1em 0;
-        padding: 0;
-        list-style-type: none;
-        display: flex;
-        place-items: center;
-    }
-
-    .social-link {
-        margin-right: 2rem;
-    }
-
-    .social-links .social-link:last-child {
-        margin-right: 0;
-    }
-
-    .social-link svg {
-        fill: var(--text-color-lighter);
-        color: var(--text-color-lighter);
-        transition: fill .3s, color .3s;
-        width: 24px;
-    }
-
-    .social-link:hover svg {
-        fill: var(--secondary-color);
-        color: var(--secondary-color);
-    }
-</style>

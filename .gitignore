@@ -22,3 +22,6 @@ pnpm-debug.log*
 # IDE specific
 *.iml
 .idea/
+
+# brainstorming sessions
+.superpowers/
