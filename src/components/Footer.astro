@@ -7,12 +7,12 @@ import {CONFIG} from '../config/config';
 const {socialNetworks, author: {name: authorName}, footerLinks} = CONFIG;
 ---
 <footer class="bg-bg border-t-[3px] border-ink mt-4">
-  <div class="max-w-[950px] mx-auto px-4 py-6 flex justify-between items-center">
+  <div class="max-w-content mx-auto px-4 py-6 flex justify-between items-center">
     <SocialLinks socialNetworks={socialNetworks}/>
     <ContentLinks links={footerLinks}/>
   </div>
   <hr class="border-0 border-t-[3px] border-ink m-0" />
-  <div class="max-w-[950px] mx-auto px-4 py-3 flex justify-end items-center gap-1.5 font-heading font-bold text-[0.7rem] uppercase tracking-widest text-[#888]">
+  <div class="max-w-content mx-auto px-4 py-3 flex justify-end items-center gap-1.5 font-heading font-bold text-[0.7rem] uppercase tracking-widest text-[#888]">
     Made with <Icon name="ri:heart-fill" class="w-3.5 h-3.5 text-accent fill-current" /> by {authorName}
   </div>
 </footer>

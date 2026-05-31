@@ -1,23 +1,22 @@
 ---
 import {CONFIG} from '../config/config';
 import {Icon} from 'astro-icon';
+import BandContainer from './BandContainer.astro';
 
 const {headerLinks} = CONFIG;
 ---
-<div class="bg-accent-light w-full">
-  <div class="max-w-[950px] mx-auto px-4 pt-5 pb-2">
-    <header class="flex flex-wrap justify-between items-center bg-bg border-2 border-ink shadow-brut-sm px-6 py-3 gap-y-3">
-      <a href="/" aria-label="Home" title="Home" class="font-heading font-black text-xl tracking-tight text-primary no-underline">
-        <Icon name="logo" aria-hidden="true" class="w-16 h-auto fill-primary" />
-      </a>
-      <nav class="flex items-center gap-7 flex-wrap" aria-label="Primary navigation">
-        {headerLinks.map(({name, to}) => (
-          <a
-            href={to}
-            class="font-heading font-bold text-sm lowercase text-ink no-underline border-b-2 border-transparent pb-0.5 transition-colors duration-100 hover:text-accent hover:border-accent"
-          >{name}</a>
-        ))}
-      </nav>
-    </header>
-  </div>
-</div>
+<BandContainer innerClass="pt-5 pb-2">
+  <header class="flex flex-wrap justify-between items-center bg-bg border-2 border-ink shadow-brut-sm px-6 py-3 gap-y-3">
+    <a href="/" aria-label="Home" title="Home" class="font-heading font-black text-xl tracking-tight text-primary no-underline">
+      <Icon name="logo" aria-hidden="true" class="w-16 h-auto fill-primary" />
+    </a>
+    <nav class="flex items-center gap-7 flex-wrap" aria-label="Primary navigation">
+      {headerLinks.map(({name, to}) => (
+        <a
+          href={to}
+          class="font-heading font-bold text-sm lowercase text-ink no-underline border-b-2 border-transparent pb-0.5 transition-colors duration-100 hover:text-accent hover:border-accent"
+        >{name}</a>
+      ))}
+    </nav>
+  </header>
+</BandContainer>

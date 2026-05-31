@@ -3,6 +3,7 @@ import {type Tag} from '../models/Tag';
 import {Icon} from 'astro-icon';
 import {format} from 'date-fns';
 import {type ReadTimeResults} from 'reading-time';
+import BandContainer from './BandContainer.astro';
 
 export interface Props {
   readingTime: ReadTimeResults;
@@ -15,42 +16,51 @@ const {readingTime, tags, date, title, featuredImage} = Astro.props;
 const readableDate = format(date, 'MMMM do, yyyy');
 const minutesRead = Math.round(readingTime.minutes);
 ---
-<div class="flex gap-6 items-start bg-bg border-2 border-ink shadow-brut-lg px-6 pt-6 pb-0 mb-10 max-sm:flex-col">
-  {featuredImage && <div class="shrink-0">
-    <img
-      src={featuredImage}
-      alt={`Featured image for "${title}"`}
-      class="w-20"
-    />
-  </div>}
-  <div class="flex-1 min-w-0">
-    <h1 class="font-heading font-extrabold text-[2rem] text-ink m-0 mb-4 leading-tight">{title}</h1>
-    <dl class="flex flex-wrap gap-x-4 gap-y-2 pb-4 m-0">
-      <dt class="flex items-center text-primary w-6 h-6 m-0">
-        <Icon name="mdi:calendar-blank-outline" aria-hidden="true" class="w-6 h-6 fill-current" />
-      </dt>
-      <dd class="m-0 text-base leading-6" aria-label={`Posted at ${readableDate}`}>{readableDate}</dd>
-
-      <dt class="flex items-center text-primary w-6 h-6 m-0">
-        <Icon name="mdi:stopwatch-outline" aria-hidden="true" class="w-6 h-6 fill-current" />
-      </dt>
-      <dd class="m-0 text-base leading-6">{minutesRead} minute read</dd>
-
-      {tags != null && <>
-        <dt class="flex items-center text-primary w-6 h-6 m-0">
-          <Icon name="mdi:tag-outline" aria-hidden="true" class="w-6 h-6 fill-current" />
-        </dt>
-        <dd class="m-0 flex flex-wrap gap-1.5 items-center">
-          {tags.map(({name, path}) => (
-            <a
-              href={`/tag/${path}`}
-              title={`View all posts tagged with ${name}`}
-              class="inline-block font-heading font-bold text-[0.6rem] uppercase tracking-widest text-bg bg-primary border-[1.5px] border-ink px-2 py-0.5 no-underline hover:bg-primary-light transition-colors duration-100">
-              {name}
-            </a>
-          ))}
-        </dd>
-      </>}
-    </dl>
+<BandContainer innerClass="pt-10 pb-8">
+  <div class="bg-bg border-2 border-ink shadow-brut-sm px-6 pt-5 pb-4 flex gap-6 items-start max-sm:flex-col">
+    {featuredImage && (
+      <div class="shrink-0">
+        <img
+          src={featuredImage}
+          alt=""
+          class="w-20 h-auto"
+        />
+      </div>
+    )}
+    <div class="flex-1 min-w-0">
+      <h1 class="font-heading font-extrabold text-[2rem] text-ink m-0 mb-4 leading-tight">{title}</h1>
+      <dl class="flex flex-col gap-2 m-0">
+        <div class="flex items-center gap-2">
+          <dt class="m-0 flex items-center text-primary">
+            <Icon name="mdi:calendar-blank-outline" aria-hidden="true" class="w-5 h-5 fill-current" />
+          </dt>
+          <dd class="m-0 text-sm" aria-label={`Posted at ${readableDate}`}>{readableDate}</dd>
+        </div>
+        <div class="flex items-center gap-2">
+          <dt class="m-0 flex items-center text-primary">
+            <Icon name="mdi:stopwatch-outline" aria-hidden="true" class="w-5 h-5 fill-current" />
+          </dt>
+          <dd class="m-0 text-sm">{minutesRead} minute read</dd>
+        </div>
+        {tags != null && (
+          <div class="flex items-start gap-2">
+            <dt class="m-0 flex items-center text-primary mt-0.5">
+              <Icon name="mdi:tag-outline" aria-hidden="true" class="w-5 h-5 fill-current" />
+            </dt>
+            <dd class="m-0 flex flex-wrap gap-1.5">
+              {tags.map(({name, path}) => (
+                <a
+                  href={`/tag/${path}`}
+                  title={`View all posts tagged with ${name}`}
+                  class="inline-block font-heading font-bold text-[0.6rem] uppercase tracking-widest text-ink bg-accent border-[1.5px] border-ink px-2 py-0.5 no-underline hover:bg-accent-light transition-colors duration-100">
+                  {name}
+                </a>
+              ))}
+            </dd>
+          </div>
+        )}
+      </dl>
+    </div>
   </div>
-</div>
+</BandContainer>
+<hr class="border-0 border-t-[3px] border-ink m-0" />

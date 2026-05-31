@@ -7,6 +7,7 @@ import {type Post} from '../models/Post';
 import {mapToSortedPosts} from '../utils/post';
 import PostCardContainer from '../components/PostCardContainer.astro';
 import VisitBlogBanner from '../components/VisitBlogBanner.astro';
+import BandContainer from '../components/BandContainer.astro';
 
 const entries = await getCollection('posts');
 const posts: Post[] = mapToSortedPosts(entries).slice(0, CONFIG.site.homePageSize);
@@ -19,15 +20,14 @@ const posts: Post[] = mapToSortedPosts(entries).slice(0, CONFIG.site.homePageSiz
   description={CONFIG.site.description}
   path="">
   <Fragment slot="hero-band">
-    <div class="bg-accent-light w-full">
-      <div class="max-w-[950px] mx-auto px-4">
-        <AboutHeadline />
-        <VisitBlogBanner />
-      </div>
-    </div>
-    <hr class="border-0 border-t-[3px] border-ink m-0 w-full" />
+    <BandContainer>
+      <AboutHeadline />
+      <VisitBlogBanner />
+    </BandContainer>
+    <hr class="border-0 border-t-[3px] border-ink m-0" />
   </Fragment>
 
-  <h2 class="font-heading font-extrabold text-[2rem] text-ink mt-10 mb-6">Recent posts</h2>
+  <h2 class="font-heading font-extrabold text-[2rem] text-ink mt-0 mb-6">Recent posts</h2>
   <PostCardContainer posts={posts} />
+  <VisitBlogBanner />
 </SiteLayout>

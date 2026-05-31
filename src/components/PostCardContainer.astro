@@ -9,5 +9,5 @@ export interface Props {
 const {posts} = Astro.props;
 ---
 <section class="grid grid-cols-2 gap-6 mb-8 max-sm:grid-cols-1">
-  {posts.map(post => <PostCard post={post}/>)}
+  {posts.map((post, i) => <PostCard post={post} eager={i < 2}/>)}
 </section>

@@ -4,9 +4,11 @@ import {type Post} from '../models/Post';
 
 export interface Props {
   post: Post;
+  eager?: boolean;
 }
 
-const {categories, slug, title, excerpt, publishedDate, featuredImage} = Astro.props.post;
+const {post, eager = false} = Astro.props;
+const {categories, slug, title, excerpt, publishedDate, featuredImage} = post;
 const [firstCategory] = categories;
 const readableDate = format(publishedDate, 'MMMM do, yyyy');
 ---
@@ -17,7 +19,8 @@ const readableDate = format(publishedDate, 'MMMM do, yyyy');
   <div class="bg-primary border-b-2 border-ink px-4 pt-5 pb-4">
     {featuredImage && <img
       src={featuredImage}
-      alt={`Featured image for "${title}"`}
+      alt=""
+      loading={eager ? 'eager' : 'lazy'}
       class="w-20 mb-3"
     />}
     <span
@@ -37,7 +40,7 @@ const readableDate = format(publishedDate, 'MMMM do, yyyy');
   <div class="px-4 py-3 flex-1 text-sm leading-relaxed text-[#404c5a]">
     <p class="m-0">{excerpt}</p>
     <span
-      aria-hidden
+      aria-hidden="true"
       class="inline-block mt-2 text-xs font-bold uppercase tracking-wide text-ink border-b-2 border-accent">
       Read more →
     </span>

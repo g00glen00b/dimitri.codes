@@ -6,6 +6,7 @@ import Head from '../components/Head.astro';
 import {type Tag} from '../models/Tag';
 import {type Category} from '../models/Category';
 import PageTitle from '../components/PageTitle.astro';
+import PageBanner from '../components/PageBanner.astro';
 import Comments from '../components/Comments.astro';
 import {type ReadTimeResults} from 'reading-time';
 import {CONFIG} from '../config/config';
@@ -41,13 +42,14 @@ const {showHeaderFooter, disableComments, title, description, path, publishedDat
   <body>
     {showHeaderFooter && <Header />}
     <slot name="hero-band" />
+    {!Astro.slots.has('hero-band') && publishedDate && readingTime && tags && <PageTitle
+      title={title}
+      readingTime={readingTime}
+      date={publishedDate}
+      featuredImage={featuredImage}
+      tags={tags}/>}
+    {!Astro.slots.has('hero-band') && !(publishedDate && readingTime && tags) && showHeaderFooter && <PageBanner>{title}</PageBanner>}
     <ContainerContent>
-      {publishedDate && featuredImage && readingTime && tags && <PageTitle
-        title={title}
-        readingTime={readingTime}
-        date={publishedDate}
-        featuredImage={featuredImage}
-        tags={tags}/>}
       <slot />
       {!disableComments && <Comments/>}
     </ContainerContent>

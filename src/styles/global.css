@@ -11,6 +11,8 @@
   --color-bg: #ffffff;
   --color-bg-muted: #f3f3f9;
 
+  --width-content: 950px;
+
   --font-sans: 'Roboto', sans-serif;
   --font-heading: 'Montserrat', sans-serif;
 
@@ -25,6 +27,12 @@
   box-sizing: border-box;
 }
 
+@layer utilities {
+  .max-w-content {
+    max-width: var(--width-content);
+  }
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -33,8 +41,152 @@ html, body {
   color: var(--color-ink);
 }
 
-main {
-  max-width: 950px;
-  padding: 0 1rem;
+.container-content {
+  font-size: 16px;
+}
+
+.container-content pre {
+  font-size: 1.1rem;
+  border: 2px solid var(--color-ink);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.container-content table *,
+.container-content p,
+.container-content li,
+.container-content .alert,
+.container-content blockquote {
+  line-height: 2.1rem;
+  font-size: 1.1rem;
+}
+
+.container-content p {
+  margin: 1.5rem 0;
+}
+
+.container-content li > p {
+  margin: 0;
+}
+
+.container-content h1 { font-size: 2rem; font-weight: 800; font-family: 'Montserrat', sans-serif; }
+.container-content h2 { font-size: 1.8rem; font-weight: 700; font-family: 'Montserrat', sans-serif; letter-spacing: -0.025rem; }
+.container-content h3 { font-size: 1.6rem; font-weight: 700; font-family: 'Montserrat', sans-serif; letter-spacing: -0.025rem; }
+.container-content h4 { font-size: 1.4rem; font-weight: 500; font-family: 'Montserrat', sans-serif; letter-spacing: -0.025rem; }
+
+.container-content p > code,
+.container-content li > code,
+.container-content a > code,
+.container-content td > code,
+.container-content blockquote > code {
+  background-color: var(--color-bg-muted);
+  border: 1.5px solid var(--color-ink);
+  padding: 2px 5px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.container-content ul,
+.container-content ol {
+  list-style-type: initial;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.container-content p > strong,
+.container-content li > strong {
+  font-weight: 500;
+}
+
+.container-content a.gatsby-resp-image-link {
+  color: transparent;
+  border: none;
+}
+
+.container-content table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.container-content table > thead > tr > th {
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.container-content table > tbody > tr {
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+
+.container-content table > tbody > tr > td {
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.container-content h1 > a,
+.container-content h2 > a,
+.container-content h3 > a,
+.container-content h4 > a,
+.container-content h5 > a,
+.container-content h6 > a {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  margin-left: 0.5rem;
+  color: var(--color-accent);
+  fill: var(--color-accent);
+}
+
+.container-content h1 > a > svg,
+.container-content h2 > a > svg,
+.container-content h3 > a > svg,
+.container-content h4 > a > svg,
+.container-content h5 > a > svg,
+.container-content h6 > a > svg {
+  display: inline;
+}
+
+.container-content blockquote {
+  border-left: 6px solid var(--color-accent);
+  border-top: 2px solid var(--color-ink);
+  border-right: 2px solid var(--color-ink);
+  border-bottom: 2px solid var(--color-ink);
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+  padding: 0.5rem 0 0.5rem 2rem;
+  margin: 1.5rem 0;
+}
+
+.container-content p > a,
+.container-content li > a,
+.container-content td > a,
+.container-content blockquote > a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.1s;
+}
+
+.container-content p > a:hover,
+.container-content p > a:active,
+.container-content li > a:hover,
+.container-content li > a:active,
+.container-content td > a:hover,
+.container-content td > a:active,
+.container-content blockquote > a:hover,
+.container-content blockquote > a:active {
+  border-bottom-color: var(--color-secondary);
+}
+
+.container-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
   margin: 0 auto;
 }
