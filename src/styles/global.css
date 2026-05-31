@@ -48,8 +48,10 @@ html, body {
 .container-content pre {
   font-size: 1.1rem;
   border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-brut-md);
   padding: 1rem;
   overflow-x: auto;
+  margin-bottom: calc(6px + 1em);
 }
 
 .container-content table *,
@@ -184,9 +186,12 @@ html, body {
   border-bottom-color: var(--color-secondary);
 }
 
-.container-content img {
+.container-content p > img {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-brut-lg);
+  margin-bottom: calc(8px + 0.5em);
 }
