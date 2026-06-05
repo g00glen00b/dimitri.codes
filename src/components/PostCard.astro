@@ -12,37 +12,40 @@ const {categories, slug, title, excerpt, publishedDate, featuredImage} = post;
 const [firstCategory] = categories;
 const readableDate = format(publishedDate, 'MMMM do, yyyy');
 ---
-<a
-  class="flex flex-col bg-bg border-2 border-ink shadow-brut-lg no-underline text-ink transition-[box-shadow,transform] duration-100 hover:shadow-brut-sm hover:translate-x-1 hover:translate-y-1"
-  href={`/${slug}`}
-  title="View post">
-  <div class="bg-primary border-b-2 border-ink px-4 pt-5 pb-4">
-    {featuredImage && <img
-      src={featuredImage}
-      alt=""
-      loading={eager ? 'eager' : 'lazy'}
-      class="w-20 mb-3"
-    />}
-    <span
-      aria-label={`Category ${firstCategory.name}`}
-      class="inline-block font-heading font-bold text-[0.6rem] uppercase tracking-widest text-ink bg-accent border-[1.5px] border-ink px-2 py-0.5 mb-2">
-      {firstCategory.name}
-    </span>
-    <h2 class="font-heading font-extrabold text-[1.05rem] leading-snug text-bg m-0 mb-1">
-      {title}
-    </h2>
-    <time
-      aria-label={`Posted at ${readableDate}`}
-      class="text-primary-light text-xs font-medium">
-      {readableDate}
-    </time>
-  </div>
-  <div class="px-4 py-3 flex-1 text-sm leading-relaxed text-[#404c5a]">
-    <p class="m-0">{excerpt}</p>
-    <span
-      aria-hidden="true"
-      class="inline-block mt-2 text-xs font-bold uppercase tracking-wide text-ink border-b-2 border-accent">
-      Read more →
-    </span>
-  </div>
-</a>
+<div class="relative">
+  <div class="absolute inset-0 translate-x-2 translate-y-2 bg-ink" aria-hidden="true"></div>
+  <a
+    class="flex flex-col h-full bg-bg border-2 border-ink no-underline text-ink transition-transform duration-150 hover:translate-x-1 hover:translate-y-1 relative"
+    href={`/${slug}`}
+    title="View post">
+    <div class="bg-primary border-b-2 border-ink px-4 pt-5 pb-4">
+      {featuredImage && <img
+        src={featuredImage}
+        alt=""
+        loading={eager ? 'eager' : 'lazy'}
+        class="w-20 mb-3"
+      />}
+      <span
+        aria-label={`Category ${firstCategory.name}`}
+        class="inline-block font-heading font-bold text-[0.6rem] uppercase tracking-widest text-ink bg-accent border-[1.5px] border-ink px-2 py-0.5 mb-2">
+        {firstCategory.name}
+      </span>
+      <h2 class="font-heading font-extrabold text-[1.05rem] leading-snug text-bg m-0 mb-1">
+        {title}
+      </h2>
+      <time
+        aria-label={`Posted at ${readableDate}`}
+        class="text-primary-light text-xs font-medium">
+        {readableDate}
+      </time>
+    </div>
+    <div class="px-4 py-3 flex-1 text-sm leading-relaxed text-[#404c5a]">
+      <p class="m-0">{excerpt}</p>
+      <span
+        aria-hidden="true"
+        class="inline-block mt-2 text-xs font-bold uppercase tracking-wide text-ink border-b-2 border-accent">
+        Read more →
+      </span>
+    </div>
+  </a>
+</div>

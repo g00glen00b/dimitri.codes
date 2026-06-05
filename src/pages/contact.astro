@@ -58,11 +58,14 @@ const fieldClass = "border-2 border-ink bg-bg px-3 py-2 w-full font-sans text-ba
     <p class="text-xs text-primary-light m-0"><sup>*</sup> Fields marked with an asterisk are required.</p>
 
     <div>
-      <button
-        type="submit"
-        class="inline-block px-5 py-3 font-heading font-bold text-sm uppercase tracking-widest text-ink bg-bg border-2 border-ink shadow-brut-sm transition-[box-shadow,transform] duration-100 hover:shadow-none hover:translate-x-1 hover:translate-y-1">
-        Contact me
-      </button>
+      <div class="relative inline-block">
+        <div class="absolute inset-0 translate-x-1 translate-y-1 bg-ink" aria-hidden="true"></div>
+        <button
+          type="submit"
+          class="inline-block px-5 py-3 font-heading font-bold text-sm uppercase tracking-widest text-ink bg-bg border-2 border-ink transition-transform duration-150 hover:translate-x-1 hover:translate-y-1 relative">
+          Contact me
+        </button>
+      </div>
     </div>
   </form>
 </SiteLayout>

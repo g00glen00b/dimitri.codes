@@ -8,40 +8,60 @@ export interface Props {
 
 const {socialNetworks} = Astro.props;
 
-const iconClass = "w-8 h-8 flex items-center justify-center bg-bg border-2 border-ink shadow-brut-xs text-ink no-underline transition-[box-shadow,transform,background-color] duration-100 hover:bg-accent hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]";
+const iconClass = "w-8 h-8 flex items-center justify-center bg-bg border-2 border-ink text-ink no-underline transition-[transform,background-color] duration-150 hover:bg-accent hover:translate-x-0.5 hover:translate-y-0.5 relative";
 ---
 
 <nav class="flex items-center gap-3">
-  {socialNetworks.linkedin && <a
-    class={iconClass}
-    href={`https://linkedin.com/in/${socialNetworks.linkedin}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="LinkedIn">
-    <Icon name="ri:linkedin-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
-  </a>}
-  {socialNetworks.github && <a
-    class={iconClass}
-    href={`https://github.com/${socialNetworks.github}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="GitHub">
-    <Icon name="ri:github-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
-  </a>}
-  {socialNetworks.speakerdeck && <a
-    class={iconClass}
-    href={`https://speakerdeck.com/${socialNetworks.speakerdeck}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Speaker Deck">
-    <Icon name="simple-icons:speakerdeck" class="w-4 h-4 fill-current" aria-hidden="true" />
-  </a>}
-  {socialNetworks.codepen && <a
-    class={iconClass}
-    href={`https://codepen.io/${socialNetworks.codepen}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="CodePen">
-    <Icon name="ri:codepen-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
-  </a>}
+  {socialNetworks.linkedin && (
+    <div class="relative">
+      <div class="absolute inset-0 translate-x-0.5 translate-y-0.5 bg-ink" aria-hidden="true"></div>
+      <a
+        class={iconClass}
+        href={`https://linkedin.com/in/${socialNetworks.linkedin}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn">
+        <Icon name="ri:linkedin-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
+      </a>
+    </div>
+  )}
+  {socialNetworks.github && (
+    <div class="relative">
+      <div class="absolute inset-0 translate-x-0.5 translate-y-0.5 bg-ink" aria-hidden="true"></div>
+      <a
+        class={iconClass}
+        href={`https://github.com/${socialNetworks.github}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub">
+        <Icon name="ri:github-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
+      </a>
+    </div>
+  )}
+  {socialNetworks.speakerdeck && (
+    <div class="relative">
+      <div class="absolute inset-0 translate-x-0.5 translate-y-0.5 bg-ink" aria-hidden="true"></div>
+      <a
+        class={iconClass}
+        href={`https://speakerdeck.com/${socialNetworks.speakerdeck}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Speaker Deck">
+        <Icon name="simple-icons:speakerdeck" class="w-4 h-4 fill-current" aria-hidden="true" />
+      </a>
+    </div>
+  )}
+  {socialNetworks.codepen && (
+    <div class="relative">
+      <div class="absolute inset-0 translate-x-0.5 translate-y-0.5 bg-ink" aria-hidden="true"></div>
+      <a
+        class={iconClass}
+        href={`https://codepen.io/${socialNetworks.codepen}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="CodePen">
+        <Icon name="ri:codepen-fill" class="w-4 h-4 fill-current" aria-hidden="true" />
+      </a>
+    </div>
+  )}
 </nav>
