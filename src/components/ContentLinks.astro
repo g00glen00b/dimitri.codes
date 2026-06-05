@@ -7,7 +7,7 @@ interface Props {
 
 const {links} = Astro.props;
 
-const linkClass = "font-heading font-bold text-xs uppercase tracking-widest text-ink no-underline border-b-2 border-transparent pb-0.5 transition-colors duration-100 hover:text-accent hover:border-accent";
+const linkClass = "font-heading font-bold text-xs uppercase tracking-widest text-ink no-underline border-b-2 border-transparent pb-0.5 transition-colors duration-100 hover:text-secondary hover:border-secondary";
 ---
 <nav class="flex items-center gap-6">
   {links.map(({name, to, external}) =>

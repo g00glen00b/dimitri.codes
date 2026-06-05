@@ -37,7 +37,7 @@ const {tag, page} = Astro.props;
   description={`${tag.name} posts`}
   path={`/tag/${tag.path}`}>
   <Fragment slot="hero-band">
-    <PageBanner>Posts tagged with <strong class="bg-accent-light border-b-[3px] border-accent px-1 font-extrabold">{tag.name}</strong></PageBanner>
+    <PageBanner>Posts tagged with <strong class="bg-secondary-light border-b-[3px] border-secondary px-1 font-extrabold">{tag.name}</strong></PageBanner>
   </Fragment>
   <PostCardContainer posts={page.results} />
   <Pagination
