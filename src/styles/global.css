@@ -4,9 +4,9 @@
 @theme {
   --color-primary: #2d3452;
   --color-primary-light: #9c9fbd;
-  --color-accent: #f0803c;
-  --color-accent-light: #facdb3;
-  --color-secondary: #60a5b4;
+  --color-secondary: #f0803c;
+  --color-secondary-light: #facdb3;
+  --color-accent: #ffdb33;
   --color-ink: #051923;
   --color-bg: #ffffff;
   --color-bg-muted: #f3f3f9;
@@ -142,8 +142,8 @@ html, body {
   border: none;
   background: transparent;
   margin-left: 0.5rem;
-  color: var(--color-accent);
-  fill: var(--color-accent);
+  color: var(--color-secondary);
+  fill: var(--color-secondary);
 }
 
 .container-content h1 > a > svg,
@@ -156,7 +156,7 @@ html, body {
 }
 
 .container-content blockquote {
-  border-left: 6px solid var(--color-accent);
+  border-left: 6px solid var(--color-secondary);
   border-top: 2px solid var(--color-ink);
   border-right: 2px solid var(--color-ink);
   border-bottom: 2px solid var(--color-ink);
@@ -169,10 +169,10 @@ html, body {
 .container-content li > a,
 .container-content td > a,
 .container-content blockquote > a {
-  color: var(--color-secondary);
+  color: var(--color-ink);
   text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.1s;
+  border-bottom: 2px solid var(--color-ink);
+  transition: background-color 0.15s;
 }
 
 .container-content p > a:hover,
@@ -183,7 +183,7 @@ html, body {
 .container-content td > a:active,
 .container-content blockquote > a:hover,
 .container-content blockquote > a:active {
-  border-bottom-color: var(--color-secondary);
+  background-color: var(--color-accent);
 }
 
 .container-content p > img {

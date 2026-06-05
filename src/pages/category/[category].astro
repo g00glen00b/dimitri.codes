@@ -37,7 +37,7 @@ const {category, page} = Astro.props;
   description={category.name}
   path={`/category/${category.path}`}>
   <Fragment slot="hero-band">
-    <PageBanner>Posts within the <strong class="bg-accent-light border-b-[3px] border-accent px-1 font-extrabold">{category.name}</strong> category</PageBanner>
+    <PageBanner>Posts within the <strong class="bg-secondary-light border-b-[3px] border-secondary px-1 font-extrabold">{category.name}</strong> category</PageBanner>
   </Fragment>
   <PostCardContainer posts={page.results} />
   <Pagination

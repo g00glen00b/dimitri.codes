@@ -3,7 +3,7 @@ import { CONFIG } from "../config/config"
 import SiteLayout from "../layouts/SiteLayout.astro"
 
 const labelClass = "font-heading font-bold text-xs uppercase tracking-widest text-ink";
-const fieldClass = "border-2 border-ink bg-bg px-3 py-2 w-full font-sans text-base text-ink placeholder:text-primary-light focus:outline-none focus:border-accent transition-colors duration-100";
+const fieldClass = "border-2 border-ink bg-bg px-3 py-2 w-full font-sans text-base text-ink placeholder:text-primary-light focus:outline-none focus:border-secondary transition-colors duration-100";
 ---
 <SiteLayout
   showHeaderFooter={true}
@@ -36,7 +36,7 @@ const fieldClass = "border-2 border-ink bg-bg px-3 py-2 w-full font-sans text-ba
 
     <div class="flex flex-col gap-1.5">
       <label class={labelClass} for="email">
-        Your e-mail <sup class="text-accent font-bold">*</sup>
+        Your e-mail <sup class="text-secondary font-bold">*</sup>
       </label>
       <input class={fieldClass} type="email" id="email" required name="email" placeholder="ex. optimus@transformers.net" />
     </div>
@@ -48,7 +48,7 @@ const fieldClass = "border-2 border-ink bg-bg px-3 py-2 w-full font-sans text-ba
 
     <div class="flex flex-col gap-1.5">
       <label class={labelClass} for="message">
-        Your message <sup class="text-accent font-bold">*</sup>
+        Your message <sup class="text-secondary font-bold">*</sup>
       </label>
       <textarea class={fieldClass} rows="10" id="message" name="message" placeholder="Leave your message here"></textarea>
     </div>
@@ -58,11 +58,14 @@ const fieldClass = "border-2 border-ink bg-bg px-3 py-2 w-full font-sans text-ba
     <p class="text-xs text-primary-light m-0"><sup>*</sup> Fields marked with an asterisk are required.</p>
 
     <div>
-      <button
-        type="submit"
-        class="inline-block px-5 py-3 font-heading font-bold text-sm uppercase tracking-widest text-ink bg-bg border-2 border-ink shadow-brut-sm transition-[box-shadow,transform] duration-100 hover:shadow-none hover:translate-x-1 hover:translate-y-1">
-        Contact me
-      </button>
+      <div class="relative inline-block">
+        <div class="absolute inset-0 translate-x-1 translate-y-1 bg-ink" aria-hidden="true"></div>
+        <button
+          type="submit"
+          class="inline-block px-5 py-3 font-heading font-bold text-sm uppercase tracking-widest text-ink bg-bg border-2 border-ink transition-[transform,background-color] duration-150 hover:bg-accent hover:translate-x-1 hover:translate-y-1 relative">
+          Contact me
+        </button>
+      </div>
     </div>
   </form>
 </SiteLayout>
