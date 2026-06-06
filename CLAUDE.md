@@ -2,7 +2,7 @@
 
 For coding tasks (components, pages, utilities, bug fixes), load the `astro-dev` skill. Use `add-component` when creating a new Astro component.
 
-For content tasks, use the dedicated skills: `new-post`, `check-post`, `tag-cleanup`, or `social-card-preview`.
+For content tasks, use the dedicated skills: `new-post`, `check-post`, or `tag-cleanup`.
 
 ## Content model
 
