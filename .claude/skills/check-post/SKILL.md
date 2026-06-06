@@ -26,7 +26,8 @@ npx astro check
   ```bash
   node .claude/skills/check-post/scripts/validate.js
   ```
-- If `validate.js` exits with code 1 → ask: "Which post should I check?"
+  If multiple posts were modified (or none), auto-detect fails and the script exits 1 — then ask: "Which post should I check?"
+- If `validate.js` exits with code 1 for any other reason (slug not found, multiple matches) → show the error and ask the user to be more specific
 
 ### 2. Present the validation report
 
@@ -36,7 +37,7 @@ Parse the JSON output and format it as:
 Validating src/content/posts/2025/2025-02-05-foo/index.md
 
 ✗ Errors (must fix before committing):
-  - categories: unknown value "Jva" (allowed: General, Java, JavaScript, Other, Tutorials, Cloud)
+  - categories: unknown value "java" (allowed: General, Java, JavaScript, Other, Tutorials, Cloud)
 
 ⚠ Warnings (non-blocking):
   - tags: "spring boot" should be Title Case (e.g. "Spring Boot")
