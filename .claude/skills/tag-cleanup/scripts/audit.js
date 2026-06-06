@@ -58,6 +58,7 @@ const inCaseGroups = new Set(
 // Step 3: near-duplicates — same after stripping non-alphanumeric, but lowercase forms differ
 const nearMap = {}
 for (const [tag, count] of allTags) {
+  if (inCaseGroups.has(tag)) continue
   const key = tag.toLowerCase().replace(/[^a-z0-9]/g, '')
   if (!nearMap[key]) nearMap[key] = []
   nearMap[key].push([tag, count])
