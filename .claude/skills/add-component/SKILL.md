@@ -13,7 +13,7 @@ Create `src/components/{ComponentName}.astro`. PascalCase filename. Check `src/c
 
 - `export interface Props` with explicit TypeScript types — no `any`
 - Optional props: `?` suffix + default via destructuring
-- Prettier: no semicolons, single quotes, trailing commas
+- Prettier: no semicolons, double quotes, trailing commas
 - **Never use `<style>`** — not even scoped. Tailwind is the only styling mechanism.
 
 ```astro
@@ -23,7 +23,7 @@ export interface Props {
   href?: string
 }
 
-const { label, href = '#' } = Astro.props
+const { label, href = "#" } = Astro.props
 ---
 
 <div class="...">
@@ -87,11 +87,12 @@ Use `translate-x-1 translate-y-1` for small elements (buttons), `translate-x-2 t
 
 ### Hover press-in
 
-Clickable elements animate toward their shadow on hover. The translate values must match the shadow div:
+Clickable elements animate toward their shadow on hover. The convention differs by element size:
 
-```
-transition-transform duration-150 hover:translate-x-2 hover:translate-y-2 relative
-```
+- **Buttons** (1px shadow): `hover:translate-x-1 hover:translate-y-1` — presses fully into the shadow
+- **Cards** (2px shadow): `hover:translate-x-1 hover:translate-y-1` — slides halfway in, shadow remains visible
+
+Always pair with `transition-transform duration-150 relative`. Combine with the offset-shadow pattern above.
 
 ### Borders
 
