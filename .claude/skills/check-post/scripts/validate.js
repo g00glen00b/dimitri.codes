@@ -1,5 +1,4 @@
-import { readFileSync, existsSync } from 'fs'
-import { readdirSync } from 'fs'
+import { readFileSync, existsSync, readdirSync } from 'fs'
 import { join, relative } from 'path'
 import { execSync } from 'child_process'
 
@@ -40,7 +39,7 @@ function parseFrontmatter(content) {
 }
 
 function isTitleCase(tag) {
-  return tag === tag.split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')
+  return tag === tag.split(' ').map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(' ')
 }
 
 function findBySlug(slug) {
@@ -70,7 +69,7 @@ function autoDetect() {
 
 function resolvePost(arg) {
   if (!arg) return autoDetect()
-  if (arg.endsWith('.md') || arg.endsWith('index.md')) {
+  if (arg.endsWith('.md')) {
     const abs = arg.startsWith('/') ? arg : join(root, arg)
     return { path: abs, error: null }
   }
@@ -111,7 +110,7 @@ if (!fields.title || String(fields.title).trim() === '') {
 }
 
 // categories
-if (!fields.categories || fields.categories.length === 0) {
+if (!Array.isArray(fields.categories) || fields.categories.length === 0) {
   errors.push('categories: field is missing or empty')
 } else {
   for (const cat of fields.categories) {
@@ -125,7 +124,7 @@ if (!fields.categories || fields.categories.length === 0) {
 if (fields.tags && Array.isArray(fields.tags)) {
   for (const tag of fields.tags) {
     if (!isTitleCase(tag)) {
-      const suggested = tag.split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')
+      const suggested = tag.split(' ').map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(' ')
       warnings.push(`tags: "${tag}" should be Title Case (e.g. "${suggested}")`)
     }
   }
@@ -135,7 +134,7 @@ if (fields.tags && Array.isArray(fields.tags)) {
 if (fields.featuredImage) {
   const imgPath = join(publicDir, fields.featuredImage.replace(/^\//, ''))
   if (!existsSync(imgPath)) {
-    warnings.push(`featuredImage: file not found at public${fields.featuredImage}`)
+    warnings.push(`featuredImage: file not found at public/${fields.featuredImage.replace(/^\//, '')}`)
   }
 }
 
