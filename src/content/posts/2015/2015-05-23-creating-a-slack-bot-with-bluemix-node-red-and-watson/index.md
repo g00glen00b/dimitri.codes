@@ -2,7 +2,7 @@
 title: "Creating a Slack bot with Bluemix, Node-RED and Watson"
 featuredImage: "/logos/bluemix.png"
 categories: ["Other", "Tutorials"]
-tags: ["Bluemix", "Node-RED", "Slack", "Watson"]
+tags: ["IBM Cloud", "Node-RED", "Slack", "Watson"]
 excerpt: "Bluemix, IBM's cloud platform brings the awesome stuff like Watson really close to you. Combine it with Node-RED and Slack and you can create a cool bot."
 ---
 

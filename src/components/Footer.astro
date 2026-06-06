@@ -1,6 +1,7 @@
 ---
 import {Icon} from 'astro-icon';
 import ContentLinks from './ContentLinks.astro';
+import ExternalLink from './ExternalLink.astro';
 import SocialLinks from './SocialLinks.astro';
 import {CONFIG} from '../config/config';
 
@@ -12,7 +13,15 @@ const {socialNetworks, author: {name: authorName}, footerLinks} = CONFIG;
     <ContentLinks links={footerLinks}/>
   </div>
   <hr class="border-0 border-t-[3px] border-ink m-0" />
-  <div class="max-w-content mx-auto px-4 py-3 flex justify-end items-center gap-1.5 font-heading font-bold text-[0.7rem] uppercase tracking-widest text-[#888]">
-    Made with <Icon name="ri:heart-fill" class="w-3.5 h-3.5 text-secondary fill-current" /> by {authorName}
+  <div class="max-w-content mx-auto px-4 py-3 font-heading text-[0.7rem] tracking-tighter text-right">
+    <strong>Made with <Icon name="ri:heart-fill" class="w-3.5 h-3.5 text-secondary fill-current inline" /> by {authorName}.</strong><br />
+    Content is licensed under a
+    <ExternalLink href="https://creativecommons.org/licenses/by/4.0/">
+      Creative Commons Attribution 4.0 International license
+    </ExternalLink>.
+    Code snippets are dedicated to the
+    <ExternalLink href="http://creativecommons.org/publicdomain/zero/1.0/">
+      public domain
+    </ExternalLink>.
   </div>
 </footer>
