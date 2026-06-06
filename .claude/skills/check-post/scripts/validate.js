@@ -47,7 +47,8 @@ function findBySlug(slug) {
   const allMds = walkDir(postsDir).filter(f => f.endsWith('index.md'))
   return allMds.filter(f => {
     const dir = f.replace(/[/\\]index\.md$/, '')
-    return dir.toLowerCase().includes(slug.toLowerCase())
+    const dirName = dir.split(/[/\\]/).pop()
+    return dirName.toLowerCase().includes(slug.toLowerCase())
   })
 }
 
