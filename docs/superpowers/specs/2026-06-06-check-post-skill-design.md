@@ -23,8 +23,10 @@ Called with no argument:
 
 Called with an argument:
 1. If argument is an absolute or relative path ending in `.md` or `index.md`: use it directly
-2. If argument looks like a slug (`YYYY-MM-DD-slug` or just `slug`): find the matching directory under `src/content/posts/`
-3. If the resolved path does not exist: exit with code 1 and a message
+2. Otherwise: treat as a partial slug and search for directories under `src/content/posts/` whose name contains the argument (case-insensitive substring match)
+   - If exactly one directory matches: use its `index.md`
+   - If multiple match: print the list and exit with code 1 — Claude will show the list and ask the user to be more specific
+3. If nothing resolves: exit with code 1 and a message
 
 ### Frontmatter parsing
 
