@@ -1,9 +1,18 @@
-import { readFileSync, readdirSync } from 'fs'
+import { readFileSync, readdirSync, existsSync } from 'fs'
 import { join } from 'path'
 
 const root = process.cwd()
 const postsDir = join(root, 'src/content/posts')
 const logosDir = join(root, 'public/logos')
+
+if (!existsSync(postsDir)) {
+  console.error(`Posts directory not found: ${postsDir}`)
+  process.exit(1)
+}
+if (!existsSync(logosDir)) {
+  console.error(`Logos directory not found: ${logosDir}`)
+  process.exit(1)
+}
 
 function walkDir(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
@@ -21,7 +30,8 @@ function parseInlineArray(str) {
 }
 
 function extractField(content, field) {
-  const match = content.match(new RegExp(`^${field}:\\s*(\\[.+?\\])`, 'm'))
+  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const match = content.match(new RegExp(`^${escaped}:\\s*(\\[.+?\\])`, 'ms'))
   return match ? parseInlineArray(match[1]) : []
 }
 
