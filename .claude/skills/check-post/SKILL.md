@@ -7,31 +7,66 @@ description: Validate a blog post's frontmatter, resolve asset paths, and run as
 
 ## Quick start
 
-Given a post path (or "the current post"), validate it end-to-end before committing.
+Run the validation script, then `astro check`:
 
-## Workflow
+```bash
+node .claude/skills/check-post/scripts/validate.js [path-or-slug]
+npx astro check
+```
 
-1. **Read the post file** — parse frontmatter fields
-2. **Frontmatter checks**:
-   - `title` is present and non-empty (required)
-   - `excerpt` is present and is a single sentence (warn if missing)
-   - `categories` entries use Title Case
-   - `tags` entries use kebab-case (lowercase, hyphens)
-   - `featuredImage` path resolves relative to the post folder (warn if declared but file missing)
-3. **Path check** — confirm the file is under `src/content/posts/YYYY/YYYY-MM-DD-slug/index.md`; warn if the date prefix is future-dated (post will be hidden in production)
-4. **Type check** — run `npm run build` (which runs `astro check && astro build`) or just `npx astro check` if the user wants a faster check
+## Conversation flow
+
+### 1. Determine which post to check
+
+- If the user mentioned a path, slug, or title → pass it to `validate.js`:
+  ```bash
+  node .claude/skills/check-post/scripts/validate.js 2025-02-05-cosmosdb
+  ```
+- If nothing was mentioned → call with no argument (git auto-detect):
+  ```bash
+  node .claude/skills/check-post/scripts/validate.js
+  ```
+- If `validate.js` exits with code 1 → ask: "Which post should I check?"
+
+### 2. Present the validation report
+
+Parse the JSON output and format it as:
+
+```
+Validating src/content/posts/2025/2025-02-05-foo/index.md
+
+✗ Errors (must fix before committing):
+  - categories: unknown value "Jva" (allowed: General, Java, JavaScript, Other, Tutorials, Cloud)
+
+⚠ Warnings (non-blocking):
+  - tags: "spring boot" should be Title Case (e.g. "Spring Boot")
+  - excerpt: field is missing
+
+ℹ Info:
+  - post is future-dated (2026-12-01) — it will be hidden in production
+```
+
+If all three arrays are empty: "Frontmatter looks good."
+
+Skip any section whose array is empty.
+
+### 3. Run astro check
+
+Always run — regardless of `validate.js` results:
 
 ```bash
 npx astro check
 ```
 
-5. **Report** — summarise: ✓ passed checks, ⚠ warnings (non-blocking), ✗ errors (blocking)
+- Exit 0: "Type check passed."
+- Exit non-zero: show the error output verbatim
 
-## Common issues
+## Tag convention
 
-| Issue | Fix |
-|---|---|
-| `featuredImage` points to missing file | Add the image or remove the field |
-| Tags in Title Case | Lowercase and hyphenate |
-| Post not appearing in dev | Check date — future dates are hidden |
-| `astro check` type error | Read the error and fix the offending `.astro` or `.ts` file |
+Tags use **Title Case** matching the technology name: `"Spring Boot"`, `"Node.js"`, `"AngularJS"`. Not kebab-case.
+
+## What this skill does NOT do
+
+- Apply any fixes (reports only — the user decides what to fix)
+- Validate post body content
+- Detect semantic tag duplicates (use `/tag-cleanup` for that)
