@@ -1,7 +1,7 @@
 # dimitri.codes
 
 This is the source code of my personal blog at [https://dimitri.codes](https://dimitri.codes).
-This project uses [https://astro.build/](https://www.gatsbyjs.org/).
+This project uses [Astro](https://astro.build/).
 
 The syntax highlighting theme is based on the [One Dark UI theme for Atom](https://atom.io/themes/one-dark-ui), which has been [ported to Prism.js](https://github.com/AGMStudio/prism-theme-one-dark).
 
@@ -29,5 +29,8 @@ This will run a local web server on [http://localhost:4321](http://localhost:432
 
 ## License
 
-The blogposts written for [dimitri.codes](https://dimitri.codes/) are copyrighted.
-Code snippets within the blogposts and the code used for generating this website are licensed as [MIT](https://opensource.org/licenses/MIT).  
+| What | License |
+|---|---|
+| Site source code | [MIT](LICENSE) |
+| Code snippets in blog posts | [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) — use freely, no attribution required |
+| Blog post content | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — share with attribution, non-commercial only |

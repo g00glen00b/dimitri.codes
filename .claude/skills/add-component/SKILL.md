@@ -7,7 +7,7 @@ description: Create a new Astro component for the dimitri.codes blog with TypeSc
 
 ## Quick start
 
-Create `src/components/{ComponentName}.astro`. PascalCase filename. Check `src/components/` for existing patterns before inventing new ones.
+Create `src/components/{ComponentName}.astro`. PascalCase filename. The conventions below are self-contained — no need to inspect existing components before creating a new one.
 
 ## Code conventions
 
