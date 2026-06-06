@@ -38,12 +38,14 @@ if (!fmMatch) {
 const escaped = excerpt.replace(/"/g, '\\"')
 const excerptLine = `excerpt: "${escaped}"`
 
-let newContent
+let newFrontmatter
 if (/^excerpt:/m.test(fmMatch[1])) {
-  newContent = content.replace(/^excerpt:.*$/m, excerptLine)
+  newFrontmatter = fmMatch[1].replace(/^excerpt:.*$/m, excerptLine)
 } else {
-  newContent = content.replace(/^(title:.*$)/m, `$1\n${excerptLine}`)
+  newFrontmatter = fmMatch[1].replace(/^(title:.*$)/m, `$1\n${excerptLine}`)
 }
+
+const newContent = content.slice(0, fmMatch.index) + '---\n' + newFrontmatter + '\n---' + content.slice(fmMatch.index + fmMatch[0].length)
 
 writeFileSync(absPath, newContent)
 console.log(`Excerpt written to ${absPath}`)

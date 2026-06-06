@@ -13,7 +13,7 @@ Run the audit script immediately when the skill is invoked — no preamble:
 node .claude/skills/tag-cleanup/scripts/audit.js
 ```
 
-Parse the JSON output. Three keys: `caseInconsistencies`, `nearDuplicates`, `lowFrequency`. Skip any section that is an empty array.
+Parse the JSON output. Three keys: `caseInconsistencies`, `nearDuplicates`, `lowFrequency`. Skip any section that is an empty array. If all three arrays are empty, tell the user no issues were found and end.
 
 ## Conversation flow
 
@@ -21,7 +21,7 @@ Parse the JSON output. Three keys: `caseInconsistencies`, `nearDuplicates`, `low
 
 Present each group one at a time. Suggest the canonical using Title Case judgment — highest count is the tiebreaker when multiple forms are equally correct, but prefer the form that matches the technology's canonical name:
 
-> "`Spring Boot` (12) vs `Spring boot` (87) — suggested canonical: `Spring Boot` (Title Case). Confirm or pick a different form?"
+> "`Spring boot` (87) vs `Spring Boot` (12) — suggested canonical: `Spring Boot` (Title Case). Confirm or pick a different form?"
 
 Wait for confirmation before moving to the next group. Collect all decisions.
 
@@ -41,7 +41,7 @@ The `lowFrequency` array contains `[name, count]` tuples — use index 0 for the
 
 ### 4. Rename commands
 
-After collecting all confirmed canonicals, output one `find`/`sed` command per rename. Do NOT run these commands — hand them to the user to copy and run:
+After collecting all confirmed canonicals, output one `find`/`sed` command per rename. Do NOT run these commands — hand them to the user to copy and run. Always include the surrounding double quotes in the sed pattern — tags are stored as `["Tag1", "Tag2"]` inline arrays, so each tag is individually quoted.
 
 ```bash
 # Spring boot → Spring Boot
