@@ -41,13 +41,13 @@ Lives at `.claude/skills/tag-cleanup/scripts/audit.js`. Run at skill invocation 
 }
 ```
 
-Each `variants` array is sorted highest-count first. The first entry is the suggested canonical.
+Each `variants` array is sorted highest-count first. Claude selects the suggested canonical — preferring the form that matches Title Case convention; highest count is the tiebreaker when multiple forms are equally correct. (e.g. `Spring boot` × 87 vs `Spring Boot` × 12 → suggest `Spring Boot` despite lower count.)
 
 ## Conversation flow
 
 1. **Run `audit.js`** immediately when the skill is invoked — no preamble
 2. **Present case inconsistencies** one group at a time:
-   > "`Spring Boot` (12) vs `Spring boot` (87) — suggested canonical: `Spring boot`. Confirm or pick a different form?"
+   > "`Spring Boot` (12) vs `Spring boot` (87) — suggested canonical: `Spring Boot` (Title Case). Confirm or pick a different form?"
    Wait for confirmation before moving to the next group. Collect all decisions.
 3. **Present near-duplicates** the same way, noting forms differ beyond casing:
    > "`Node.js` (8) vs `NodeJS` (1) — suggested canonical: `Node.js`. Confirm or pick a different form?"
