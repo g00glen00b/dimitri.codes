@@ -6,7 +6,7 @@ const root = process.cwd()
 const postsDir = join(root, 'src/content/posts')
 const publicDir = join(root, 'public')
 
-const ALLOWED_CATEGORIES = new Set(['General', 'Java', 'JavaScript', 'Other', 'Tutorials', 'Cloud'])
+const ALLOWED_CATEGORIES = new Set(['General', 'Java', 'JavaScript', 'Other', 'Tutorials', 'Cloud', 'AI'])
 
 function walkDir(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
