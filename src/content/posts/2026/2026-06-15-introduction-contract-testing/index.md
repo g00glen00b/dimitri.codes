@@ -9,7 +9,7 @@ tags: ["Spring Boot", "Spring", "Testing", "REST", "OpenAPI", "Pact"]
 ## What is contract testing?
 
 Imagine you wrote a REST API with actual consumers.
-After a while, you upgrade some libraries, deploy a new version and... poof... your consumers no longer work.
+After a while, you upgrade some libraries, deploy a new version and ... poof... your consumers no longer work.
 This is one of the few examples of an API breaking its contract with its consumers.
 
 Library updates (eg. Jackson), configuration changes, new features, ... . This can happen in several ways, some more obvious than others.
@@ -477,6 +477,8 @@ class PactOrderVerificationTest {
 This does a few things.
 First of all, we turn this test into a Spring Web MVC test using MockMVC so that we can properly test our controllers.
 We also tell Pact where our broker (and thus our contract) is located, and which provider this is.
+
+![Schematic of "Pact Spring library" between "Provider" and "Contract" and "Pact test library" between "Consumer" and "Contract"](./images/api-contract-pact.png)
 
 We also integrate Pact with MockMVC so that Pact can call the right endpoints.
 This is done by setting up `Spring7MockMvcTestTarget` and using `verifyInteraction()` for every test.
