@@ -7,8 +7,8 @@ export interface Props {
   eager?: boolean;
 }
 
-const {post, eager = false} = Astro.props;
-const {categories, slug, title, excerpt, publishedDate, featuredImage} = post;
+const {post} = Astro.props;
+const {categories, slug, title, excerpt, publishedDate} = post;
 const [firstCategory] = categories;
 const readableDate = format(publishedDate, 'MMMM do, yyyy');
 ---
@@ -19,12 +19,6 @@ const readableDate = format(publishedDate, 'MMMM do, yyyy');
     href={`/${slug}`}
     title="View post">
     <div class="bg-primary border-b-2 border-ink px-4 pt-5 pb-4">
-      {featuredImage && <img
-        src={featuredImage}
-        alt=""
-        loading={eager ? 'eager' : 'lazy'}
-        class="w-20 mb-3"
-      />}
       <span
         aria-label={`Category ${firstCategory.name}`}
         class="inline-block font-heading font-bold text-[0.6rem] uppercase tracking-widest text-ink bg-secondary border-[1.5px] border-ink px-2 py-0.5 mb-2">
