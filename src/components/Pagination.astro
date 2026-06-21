@@ -7,7 +7,7 @@ export interface Props {
 
 const {currentPage, pageCount, base} = Astro.props;
 
-const btnClass = "inline-block px-4 py-1.5 font-heading font-bold text-xs uppercase tracking-widest text-ink bg-bg border-2 border-ink no-underline transition-transform duration-150 hover:translate-x-1 hover:translate-y-1 relative";
+const btnClass = "inline-block px-4 py-1.5 font-heading font-bold text-xs uppercase tracking-widest text-ink bg-bg border-2 border-ink no-underline transition-[transform,background-color] duration-150 hover:bg-accent hover:translate-x-1 hover:translate-y-1 relative";
 ---
 
 <nav class="grid grid-cols-3 items-center my-8" aria-label="Page navigation">

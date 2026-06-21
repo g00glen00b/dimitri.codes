@@ -94,14 +94,13 @@ html, body {
   margin-bottom: 1em;
 }
 
+.container-content ol {
+  list-style-type: decimal;
+}
+
 .container-content p > strong,
 .container-content li > strong {
   font-weight: 500;
-}
-
-.container-content a.gatsby-resp-image-link {
-  color: transparent;
-  border: none;
 }
 
 .container-content table {
@@ -191,6 +190,7 @@ html, body {
   height: auto;
   display: block;
   margin: 0 auto;
+  padding: 1em;
   border: 2px solid var(--color-ink);
   box-shadow: var(--shadow-brut-lg);
   margin-bottom: calc(8px + 0.5em);
