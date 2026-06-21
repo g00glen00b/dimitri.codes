@@ -1,5 +1,5 @@
 ---
-title: "Prevent silently breaking your API contracts with contract testing"
+title: "Prevent silently breaking your API's with contract testing"
 excerpt: "Library upgrades can silently break your API contracts. Here's how to catch that with OpenAPI-Diff, Spring Cloud Contract, and Pact."
 featuredImage: "/logos/open-api.png"
 categories: ["Java", "Tutorials"]
