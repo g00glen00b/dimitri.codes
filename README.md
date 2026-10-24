@@ -1,36 +1,5 @@
 # dimitri.codes
 
-This is the source code of my personal blog at [https://dimitri.codes](https://dimitri.codes).
-This project uses [Astro](https://astro.build/).
+The source code of [dimitri.codes](https://dimitri.codes) has moved to Codeberg: [codeberg.org/g00glen00b/dimitri.codes](https://codeberg.org/g00glen00b/dimitri.codes).
 
-The syntax highlighting theme is based on the [One Dark UI theme for Atom](https://atom.io/themes/one-dark-ui), which has been [ported to Prism.js](https://github.com/AGMStudio/prism-theme-one-dark).
-
-## Set up
-
-The configuration of this project resides in `src/config/config.ts`.
-Make modifications to run your own local site.
-
-After that, you can use the following commands to run the project:
-
-```shell
-npm install
-npm start
-```
-
-This will run a local web server on [http://localhost:4321](http://localhost:4321).
-
-## Features
-
-- Support for categories and tags.
-- Support for featured images.
-- Support for manual excerpts.
-- Support for comments with [Utteranc.es](https://utteranc.es/).
-- [Web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) generation.
-
-## License
-
-| What | License |
-|---|---|
-| Site source code | [MIT](LICENSE) |
-| Code snippets in blog posts | [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) — use freely, no attribution required |
-| Blog post content | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — share with attribution, non-commercial only |
+This repository is only kept for the blog's comments. Each comment thread below a blog post is stored as an issue in this repository through [utterances](https://utteranc.es/), so please don't archive or delete it.
